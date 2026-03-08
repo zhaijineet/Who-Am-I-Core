@@ -1,0 +1,8 @@
+// 1.21.1	2026-03-08T18:32:55.1572897	Tags for minecraft:item mod id who_am_i_core
+d0d428ce0a5cc66dc1149be486629eac531bf4b6 data/chestcavitybeyond/tags/item/organs.json
+c1e793e55c2c391a64d272d8e779e19d6d538f77 data/chestcavitybeyond/tags/item/organs/heart.json
+9041b417361dda405ae7199b1b7e1621283c9aea data/chestcavitybeyond/tags/item/organs/special.json
+28da850c919c88a7c48861b2544145ca2fea05d9 data/who_am_i_core/tags/item/legend.json
+c1e793e55c2c391a64d272d8e779e19d6d538f77 data/who_am_i_core/tags/item/magic.json
+9041b417361dda405ae7199b1b7e1621283c9aea data/who_am_i_core/tags/item/mechanical.json
+c1e793e55c2c391a64d272d8e779e19d6d538f77 data/who_am_i_core/tags/item/summon.json

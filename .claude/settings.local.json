@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash"
+    ],
+    "additionalDirectories": [
+      "E:\\Mod Project\\neoforge-21.1.219-merged",
+      "E:\\Mod Project\\Chest Cavity Beyond",
+      "E:\\Mod Project\\MowziesMobs-Public",
+      "E:\\Mod Project\\IceAndFire-CE"
+    ]
+  }
+}

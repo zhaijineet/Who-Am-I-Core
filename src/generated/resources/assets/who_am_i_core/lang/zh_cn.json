@@ -1,0 +1,17 @@
+{
+  "item.who_am_i_core.chest_nova": "胸中新星",
+  "item.who_am_i_core.control_rod": "制御棒",
+  "item.who_am_i_core.ferrous_wroughtnaut_heart_mirror": "钢铁守护者护心镜",
+  "itemGroup.who_am_i_core": "我非我",
+  "organ.who_am_i_core.chest_nova.description": "它像心脏一样跳动着",
+  "organ.who_am_i_core.chest_nova.skill.0": "当胸腔关闭时，烧毁3x3范围内的器官（机械系和魔法系器官除外）",
+  "organ.who_am_i_core.chest_nova.skill.1": "3x3范围内的乌姆塔纳面具会召唤对应的追随者，追随者死亡30秒后重新召唤",
+  "organ.who_am_i_core.chest_nova.skill.2": "面具同时会为主人和追随者提供其药水效果",
+  "organ.who_am_i_core.control_rod.description": "这他妈是哪个太阳鸟？",
+  "organ.who_am_i_core.control_rod.skill.0": "当制御棒在胸中新星的3x3范围内时：",
+  "organ.who_am_i_core.control_rod.skill.1": "  -乌姆塔纳仆从重新召唤冷却时间从30秒缩短为10秒",
+  "organ.who_am_i_core.control_rod.skill.2": "  -仆从受到伤害转化为太阳祝福时长",
+  "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.0": "移除FOV修改",
+  "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.1": "抵挡来自正面的实体的攻击",
+  "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.2": "攻击后3秒内不能移动"
+}

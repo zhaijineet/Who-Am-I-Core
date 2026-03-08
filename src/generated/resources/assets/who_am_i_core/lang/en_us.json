@@ -1,0 +1,17 @@
+{
+  "item.who_am_i_core.chest_nova": "Chest Nova",
+  "item.who_am_i_core.control_rod": "Control Rod",
+  "item.who_am_i_core.ferrous_wroughtnaut_heart_mirror": "Ferrous Wroughtnaut Heart Mirror",
+  "itemGroup.who_am_i_core": "Who Am I",
+  "organ.who_am_i_core.chest_nova.description": "It beats like a heart",
+  "organ.who_am_i_core.chest_nova.skill.0": "When chest cavity is closed, burns organs in 3x3 area (except mechanical and magical organs)",
+  "organ.who_am_i_core.chest_nova.skill.1": "Umvuthana masks in 3x3 area summon corresponding followers, respawning 30 seconds after death",
+  "organ.who_am_i_core.chest_nova.skill.2": "Masks also provide their potion effects to owner and followers",
+  "organ.who_am_i_core.control_rod.description": "Which sun bird is this?",
+  "organ.who_am_i_core.control_rod.skill.0": "When Control Rod is in 3x3 range of Chest Nova:",
+  "organ.who_am_i_core.control_rod.skill.1": "  - Reduces Umvuthana follower respawn cooldown from 30s to 10s",
+  "organ.who_am_i_core.control_rod.skill.2": "  - Follower damage is converted to Sun's Blessing duration",
+  "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.0": "Removes FOV modification",
+  "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.1": "Blocks entity attacks from the front",
+  "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.2": "Cannot move for 3 seconds after attacking"
+}
