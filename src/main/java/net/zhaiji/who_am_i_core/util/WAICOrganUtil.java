@@ -1,12 +1,15 @@
 package net.zhaiji.who_am_i_core.util;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.zhaiji.chestcavitybeyond.api.capability.IOrgan;
+import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.builder.OrganBuilder;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 
-public class HAICOrganUtil {
+public class WAICOrganUtil {
     /**
      * 检查物品是否为器官
      */
@@ -40,5 +43,27 @@ public class HAICOrganUtil {
                 // 斜下右
                 row < 2 && posInRow < 8 ? slotIndex + 10 : -1
         };
+    }
+
+    public static int countOrgan(ChestCavityData data, Item organ) {
+        int count = 0;
+        for (int i = 0; i < 27; i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.is(organ)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int countOrgan(ChestCavityData data, TagKey<Item> tagKey) {
+        int count = 0;
+        for (int i = 0; i < 27; i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.is(tagKey)) {
+                count++;
+            }
+        }
+        return count;
     }
 }

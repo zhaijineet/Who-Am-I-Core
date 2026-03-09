@@ -23,7 +23,7 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.mixinapi.IEntityUmvuthanaFollowerToPlayer;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
-import net.zhaiji.who_am_i_core.util.HAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,7 +90,7 @@ public class ChestNovaTask implements ISerializableTask {
     public ChestNovaTask(ChestCavityData data, int novaSlot) {
         this.data = data;
         this.novaSlot = novaSlot;
-        adjacentSlots = HAICOrganUtil.getAdjacentSlots(novaSlot);
+        adjacentSlots = WAICOrganUtil.getAdjacentSlots(novaSlot);
     }
 
     /**
@@ -104,7 +104,7 @@ public class ChestNovaTask implements ISerializableTask {
     public ChestNovaTask(ChestCavityData data, HolderLookup.Provider provider, CompoundTag nbt) {
         this.data = data;
         this.novaSlot = nbt.getInt("novaSlot");
-        this.adjacentSlots = HAICOrganUtil.getAdjacentSlots(novaSlot);
+        this.adjacentSlots = WAICOrganUtil.getAdjacentSlots(novaSlot);
         // 反序列化 cooldowns
         CompoundTag cooldownsTag = nbt.getCompound("cooldowns");
         for (String key : cooldownsTag.getAllKeys()) {

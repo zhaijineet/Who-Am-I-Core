@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 
-public class HAICTooltipUtil {
+public class WAICTooltipUtil {
     public static Component organSkill(Item item) {
         return Component.translatable("organ." + WhoAmICore.MOD_ID + "." + BuiltInRegistries.ITEM.getKey(item).getPath() + ".skill");
     }

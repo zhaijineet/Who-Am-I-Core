@@ -33,5 +33,54 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(WAICItemTagManager.MECHANICAL).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(WAICItemTagManager.LEGEND).add(MowziesMobOrgans.CONTROL_ROD.get());
+
+        tag(ItemTagManager.ORGANS).add(
+            MowziesMobOrgans.AGED_HEART.get(),
+            MowziesMobOrgans.AGED_LUNG.get(),
+            MowziesMobOrgans.AGED_SPINE.get(),
+            MowziesMobOrgans.AGED_STOMACH.get(),
+            MowziesMobOrgans.AGED_INTESTINE.get(),
+            MowziesMobOrgans.AGED_KIDNEY.get(),
+            MowziesMobOrgans.AGED_SPLEEN.get(),
+            MowziesMobOrgans.AGED_LIVER.get(),
+            MowziesMobOrgans.AGED_APPENDIX.get(),
+            MowziesMobOrgans.AGED_RIB.get(),
+            MowziesMobOrgans.AGED_MUSCLE.get()
+        );
+
+        // 为每个衰老器官添加对应的类型标签
+        tag(ItemTagManager.HEART).add(MowziesMobOrgans.AGED_HEART.get());
+        tag(ItemTagManager.LUNG).add(MowziesMobOrgans.AGED_LUNG.get());
+        tag(ItemTagManager.SPINE).add(MowziesMobOrgans.AGED_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(MowziesMobOrgans.AGED_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(MowziesMobOrgans.AGED_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(MowziesMobOrgans.AGED_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(MowziesMobOrgans.AGED_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(MowziesMobOrgans.AGED_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(MowziesMobOrgans.AGED_APPENDIX.get());
+        tag(ItemTagManager.RIB).add(MowziesMobOrgans.AGED_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(MowziesMobOrgans.AGED_MUSCLE.get());
+
+        // 禅心器官标签
+        tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.ZEN_HEART.get());
+        tag(ItemTagManager.HEART).add(MowziesMobOrgans.ZEN_HEART.get());
+
+        // 泥峭核心
+        tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.BLUFF_CORE.get());
+        tag(ItemTagManager.HEART).add(MowziesMobOrgans.BLUFF_CORE.get());
+        tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.BLUFF_CORE.get());
+        tag(WAICItemTagManager.BLUFF).add(MowziesMobOrgans.BLUFF_CORE.get());
+
+        // 泥峭铭文板
+        tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.BLUFF_TABLET.get());
+        tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.BLUFF_TABLET.get());
+        tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.BLUFF_TABLET.get());
+        tag(WAICItemTagManager.BLUFF).add(MowziesMobOrgans.BLUFF_TABLET.get());
+
+        // 活性泥峭棒
+        tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
+        tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
+        tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
+        tag(WAICItemTagManager.BLUFF).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
     }
 }

@@ -1,6 +1,21 @@
 {
   "values": [
     "who_am_i_core:chest_nova",
-    "who_am_i_core:control_rod"
+    "who_am_i_core:control_rod",
+    "who_am_i_core:aged_heart",
+    "who_am_i_core:aged_lung",
+    "who_am_i_core:aged_spine",
+    "who_am_i_core:aged_stomach",
+    "who_am_i_core:aged_intestine",
+    "who_am_i_core:aged_kidney",
+    "who_am_i_core:aged_spleen",
+    "who_am_i_core:aged_liver",
+    "who_am_i_core:aged_appendix",
+    "who_am_i_core:aged_rib",
+    "who_am_i_core:aged_muscle",
+    "who_am_i_core:zen_heart",
+    "who_am_i_core:bluff_core",
+    "who_am_i_core:bluff_tablet",
+    "who_am_i_core:active_bluff_rod"
   ]
 }

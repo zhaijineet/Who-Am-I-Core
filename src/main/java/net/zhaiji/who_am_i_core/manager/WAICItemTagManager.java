@@ -18,6 +18,9 @@ public class WAICItemTagManager {
     // 传说
     public static final TagKey<Item> LEGEND = create("legend");
 
+    // 泥峭
+    public static final TagKey<Item> BLUFF = create("bluff");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }

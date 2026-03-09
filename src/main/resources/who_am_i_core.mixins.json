@@ -3,7 +3,8 @@
   "package": "net.zhaiji.who_am_i_core.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EntityUmvuthanaFollowerToPlayerMixin"
+    "EntityUmvuthanaFollowerToPlayerMixin",
+    "ItemStackMixin"
   ],
   "injectors": {
     "defaultRequire": 1

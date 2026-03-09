@@ -45,8 +45,39 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(MowziesMobOrgans.CONTROL_ROD, "Control Rod");
         addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "Which sun bird is this?");
         addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 0, "When Control Rod is in 3x3 range of Chest Nova:");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " - Reduces Umvuthana follower respawn cooldown from 30s to 10s");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " - Masks also provide effects to followers");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " ·Reduces Umvuthana follower respawn cooldown from 30s to 10s");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " ·Masks also provide effects to followers");
+
+        // 衰老器官翻译
+        addItem(MowziesMobOrgans.AGED_HEART, "Aged Heart");
+        addItem(MowziesMobOrgans.AGED_LUNG, "Aged Lung");
+        addItem(MowziesMobOrgans.AGED_SPINE, "Aged Spine");
+        addItem(MowziesMobOrgans.AGED_STOMACH, "Aged Stomach");
+        addItem(MowziesMobOrgans.AGED_INTESTINE, "Aged Intestine");
+        addItem(MowziesMobOrgans.AGED_KIDNEY, "Aged Kidney");
+        addItem(MowziesMobOrgans.AGED_SPLEEN, "Aged Spleen");
+        addItem(MowziesMobOrgans.AGED_LIVER, "Aged Liver");
+        addItem(MowziesMobOrgans.AGED_APPENDIX, "Aged Appendix");
+        addItem(MowziesMobOrgans.AGED_RIB, "Aged Rib");
+        addItem(MowziesMobOrgans.AGED_MUSCLE, "Aged Muscle");
+        addItem(MowziesMobOrgans.ZEN_HEART, "Zen Heart");
+
+        // 泥峭器官翻译
+        addItem(MowziesMobOrgans.BLUFF_CORE, "Bluff Core");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 0, "Allows eating dirt blocks, restores 4 hunger");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 1, "Use skill to use dirt blocks");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 2, "Different dirt types grant different effects:");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 3, " ·Grass/Moss/Mycelium → Strength II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 4, " ·Coarse Dirt/Podzol/Mud → Haste II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 5, " ·Rooted Dirt/Muddy Mangrove Roots → Resistance II");
+
+        addItem(MowziesMobOrgans.BLUFF_TABLET, "Bluff Tablet");
+        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 0, "Allows eating dirt items, restores 4 hunger");
+        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 1, "Each tablet grants 2 absorption hearts (max: mud organs × 8)");
+
+        addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "Active Bluff Rod");
+        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 0, "Allows eating dirt items, restores 4 hunger");
+        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 1, "Each rod grants 4 saturation when eating dirt");
     }
 
     public void Chinese() {
@@ -67,8 +98,39 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(MowziesMobOrgans.CONTROL_ROD, "制御棒");
         addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "这他妈是哪个太阳鸟？");
         addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 0, "当制御棒在胸中新星的3x3范围内时：");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " - 乌姆塔纳追随者重新召唤冷却时间从30秒缩短为10秒");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " - 面具也会给追随者提供效果");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " ·乌姆塔纳追随者重新召唤冷却时间从30秒缩短为10秒");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " ·面具也会给追随者提供效果");
+
+        // 衰老器官翻译
+        addItem(MowziesMobOrgans.AGED_HEART, "衰老心脏");
+        addItem(MowziesMobOrgans.AGED_LUNG, "衰老肺脏");
+        addItem(MowziesMobOrgans.AGED_SPINE, "衰老脊柱");
+        addItem(MowziesMobOrgans.AGED_STOMACH, "衰老胃");
+        addItem(MowziesMobOrgans.AGED_INTESTINE, "衰老肠子");
+        addItem(MowziesMobOrgans.AGED_KIDNEY, "衰老肾脏");
+        addItem(MowziesMobOrgans.AGED_SPLEEN, "衰老脾脏");
+        addItem(MowziesMobOrgans.AGED_LIVER, "衰老肝脏");
+        addItem(MowziesMobOrgans.AGED_APPENDIX, "衰老阑尾");
+        addItem(MowziesMobOrgans.AGED_RIB, "衰老肋骨");
+        addItem(MowziesMobOrgans.AGED_MUSCLE, "衰老肌肉");
+        addItem(MowziesMobOrgans.ZEN_HEART, "禅心");
+
+        // 泥峭器官翻译
+        addItem(MowziesMobOrgans.BLUFF_CORE, "泥峭核心");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 0, "允许食用泥土方块，恢复4点饥饿值");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 1, "使用技能可使用泥土方块");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 2, "不同泥土类型提供不同效果：");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 3, " ·草方块/苔藓块/菌丝：力量II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 4, " ·砂土/灰化土/泥巴：急迫II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 5, " ·缠根泥土/含泥红树根：抗性提升II");
+
+        addItem(MowziesMobOrgans.BLUFF_TABLET, "泥峭铭文板");
+        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 0, "允许食用泥土物品，恢复4点饥饿值");
+        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 1, "每有一个铭文板，食用泥土时获得2点吸收生命值（上限为泥峭器官数量x8）");
+
+        addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "活性泥峭棒");
+        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 0, "允许食用泥土物品，恢复4点饥饿值");
+        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 1, "每有一个泥峭棒增加，食用泥土时增加4点饱和度");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {
