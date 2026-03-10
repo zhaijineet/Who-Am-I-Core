@@ -12,8 +12,8 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
-import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
+import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,12 +40,16 @@ public abstract class ItemStackMixin {
 
     @Unique
     private boolean isDirtItem() {
-        return MowziesMobOrgans.isDirtItem(self());
+        return MowziesMobOrganSkillUtil.isDirtItem(self());
     }
 
     @Unique
     private boolean hasBluffOrgan(LivingEntity entity) {
-        return ChestCavityUtil.getData(entity).hasOrgan(WAICItemTagManager.BLUFF);
+        return ChestCavityUtil.getData(entity).hasOrgan(
+            organ -> organ.is(MowziesMobOrgans.BLUFF_CORE.get()) ||
+                     organ.is(MowziesMobOrgans.BLUFF_TABLET.get()) ||
+                     organ.is(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
+        );
     }
 
     @Inject(
@@ -80,7 +84,7 @@ public abstract class ItemStackMixin {
                 1.0F,
                 1.0F + (level.random.nextFloat() - level.random.nextFloat()) * 0.4F
             );
-            MowziesMobOrgans.eatDirt(livingEntity, getItem());
+            MowziesMobOrganSkillUtil.eatDirt(livingEntity, getItem());
             consume(1, livingEntity);
             livingEntity.gameEvent(GameEvent.EAT);
             cir.setReturnValue(self());

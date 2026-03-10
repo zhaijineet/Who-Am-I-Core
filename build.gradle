@@ -155,7 +155,7 @@ dependencies {
     implementation "curse.maven:lionfish-api-1001614:6168249"
 
     // Chest Cavity Beyond
-    implementation "curse.maven:chest-cavity-beyond-1427715:7725248"
+    implementation "curse.maven:chest-cavity-beyond-1427715:7738836"
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物 (听说3月8号有新生物)

@@ -69,18 +69,15 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.BLUFF_CORE.get());
         tag(ItemTagManager.HEART).add(MowziesMobOrgans.BLUFF_CORE.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.BLUFF_CORE.get());
-        tag(WAICItemTagManager.BLUFF).add(MowziesMobOrgans.BLUFF_CORE.get());
 
         // 泥峭铭文板
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.BLUFF_TABLET.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.BLUFF_TABLET.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.BLUFF_TABLET.get());
-        tag(WAICItemTagManager.BLUFF).add(MowziesMobOrgans.BLUFF_TABLET.get());
 
         // 活性泥峭棒
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
-        tag(WAICItemTagManager.BLUFF).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
     }
 }
