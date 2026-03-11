@@ -2,6 +2,12 @@
   "values": [
     "who_am_i_core:control_rod",
     "who_am_i_core:bluff_tablet",
-    "who_am_i_core:active_bluff_rod"
+    "who_am_i_core:active_bluff_rod",
+    "who_am_i_core:fire_dragon_gem",
+    "who_am_i_core:fire_dragon_breath_sac",
+    "who_am_i_core:ice_dragon_gem",
+    "who_am_i_core:ice_dragon_breath_sac",
+    "who_am_i_core:lightning_dragon_gem",
+    "who_am_i_core:lightning_dragon_breath_sac"
   ]
 }

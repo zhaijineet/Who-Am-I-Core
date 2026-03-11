@@ -12,6 +12,7 @@ public class CommonEventManager {
 
     public static void modBusListener(IEventBus modBus) {
         modBus.addListener(CommonEventHandler::handlerRegisterChestCavityEvent);
+        modBus.addListener(CommonEventHandler::handlerFMLCommonSetupEvent);
     }
 
     public static void gameBusListener(IEventBus gameBus) {

@@ -4,6 +4,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.register.WAICCreativeModeTab;
 
@@ -45,8 +46,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(MowziesMobOrgans.CONTROL_ROD, "Control Rod");
         addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "Which sun bird is this?");
         addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 0, "When Control Rod is in 3x3 range of Chest Nova:");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " ·Reduces Umvuthana follower respawn cooldown from 30s to 10s");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " ·Masks also provide effects to followers");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " •Reduces Umvuthana follower respawn cooldown from 30s to 10s");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " •Masks also provide effects to followers");
 
         // 衰老器官翻译
         addItem(MowziesMobOrgans.AGED_HEART, "Aged Heart");
@@ -64,20 +65,60 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 泥峭器官翻译
         addItem(MowziesMobOrgans.BLUFF_CORE, "Bluff Core");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 0, "Allows eating dirt blocks, restores 4 hunger");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 0, "Allows eating dirt, restores 4 hunger");
         addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 1, "Use skill to use dirt blocks");
         addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 2, "Different dirt types grant different effects:");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 3, " ·Grass/Moss/Mycelium → Strength II");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 4, " ·Coarse Dirt/Podzol/Mud → Haste II");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 5, " ·Rooted Dirt/Muddy Mangrove Roots → Resistance II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 3, " •Grass/Moss/Mycelium → Strength II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 4, " •Coarse Dirt/Podzol/Mud → Haste II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 5, " •Rooted Dirt/Muddy Mangrove Roots → Resistance II");
 
         addItem(MowziesMobOrgans.BLUFF_TABLET, "Bluff Tablet");
-        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 0, "Allows eating dirt items, restores 4 hunger");
+        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 0, "Allows eating dirt, restores 4 hunger");
         addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 1, "Each tablet grants 2 absorption hearts (max: mud organs × 8)");
 
         addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "Active Bluff Rod");
-        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 0, "Allows eating dirt items, restores 4 hunger");
+        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 0, "Allows eating dirt, restores 4 hunger");
         addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 1, "Each rod grants 4 saturation when eating dirt");
+
+        // 龙类器官翻译
+        addItem(IceAndFireOrgans.FIRE_DRAGON_HEART, "Fire Dragon Heart");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LUNG, "Fire Dragon Lung");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPINE, "Fire Dragon Spine");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_STOMACH, "Fire Dragon Stomach");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_INTESTINE, "Fire Dragon Intestine");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_KIDNEY, "Fire Dragon Kidney");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPLEEN, "Fire Dragon Spleen");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "Fire Dragon Liver");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "Fire Dragon Gem");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Fire Dragon Breath Sac");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "Fire Dragon Rib");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "Fire Dragon Muscle");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_HEART, "Ice Dragon Heart");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LUNG, "Ice Dragon Lung");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPINE, "Ice Dragon Spine");
+        addItem(IceAndFireOrgans.ICE_DRAGON_STOMACH, "Ice Dragon Stomach");
+        addItem(IceAndFireOrgans.ICE_DRAGON_INTESTINE, "Ice Dragon Intestine");
+        addItem(IceAndFireOrgans.ICE_DRAGON_KIDNEY, "Ice Dragon Kidney");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPLEEN, "Ice Dragon Spleen");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "Ice Dragon Liver");
+        addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "Ice Dragon Gem");
+        addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Ice Dragon Breath Sac");
+        addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "Ice Dragon Rib");
+        addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "Ice Dragon Muscle");
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "Lightning Dragon Heart");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "Lightning Dragon Lung");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "Lightning Dragon Spine");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "Lightning Dragon Stomach");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "Lightning Dragon Intestine");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "Lightning Dragon Kidney");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "Lightning Dragon Spleen");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "Lightning Dragon Liver");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "Lightning Dragon Gem");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Lightning Dragon Breath Sac");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "Lightning Dragon Rib");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "Lightning Dragon Muscle");
     }
 
     public void Chinese() {
@@ -98,8 +139,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(MowziesMobOrgans.CONTROL_ROD, "制御棒");
         addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "这他妈是哪个太阳鸟？");
         addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 0, "当制御棒在胸中新星的3x3范围内时：");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " ·乌姆塔纳追随者重新召唤冷却时间从30秒缩短为10秒");
-        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " ·面具也会给追随者提供效果");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 1, " •乌姆塔纳追随者重新召唤冷却时间从30秒缩短为10秒");
+        addOrganSkill(MowziesMobOrgans.CONTROL_ROD, 2, " •面具也会给追随者提供效果");
 
         // 衰老器官翻译
         addItem(MowziesMobOrgans.AGED_HEART, "衰老心脏");
@@ -117,20 +158,60 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 泥峭器官翻译
         addItem(MowziesMobOrgans.BLUFF_CORE, "泥峭核心");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 0, "允许食用泥土方块，恢复4点饥饿值");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 1, "使用技能可使用泥土方块");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 0, "允许食用泥土，恢复4点饥饿值");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 1, "使用技能可食用泥土方块");
         addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 2, "不同泥土类型提供不同效果：");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 3, " ·草方块/苔藓块/菌丝：力量II");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 4, " ·砂土/灰化土/泥巴：急迫II");
-        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 5, " ·缠根泥土/含泥红树根：抗性提升II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 3, " •草方块/苔藓块/菌丝：力量II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 4, " •砂土/灰化土/泥巴：急迫II");
+        addOrganSkill(MowziesMobOrgans.BLUFF_CORE, 5, " •缠根泥土/含泥红树根：抗性提升II");
 
         addItem(MowziesMobOrgans.BLUFF_TABLET, "泥峭铭文板");
-        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 0, "允许食用泥土物品，恢复4点饥饿值");
+        addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 0, "允许食用泥土，恢复4点饥饿值");
         addOrganSkill(MowziesMobOrgans.BLUFF_TABLET, 1, "每有一个铭文板，食用泥土时获得2点吸收生命值（上限为泥峭器官数量x8）");
 
         addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "活性泥峭棒");
-        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 0, "允许食用泥土物品，恢复4点饥饿值");
+        addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 0, "允许食用泥土，恢复4点饥饿值");
         addOrganSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, 1, "每有一个泥峭棒增加，食用泥土时增加4点饱和度");
+
+        // 龙类器官翻译
+        addItem(IceAndFireOrgans.FIRE_DRAGON_HEART, "火龙心脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LUNG, "火龙肺脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPINE, "火龙脊柱");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_STOMACH, "火龙胃");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_INTESTINE, "火龙肠子");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_KIDNEY, "火龙肾脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPLEEN, "火龙脾脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "火龙肝脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "火龙宝玉");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "火龙吐息袋");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "火龙肋骨");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "火龙肌肉");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_HEART, "冰龙心脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LUNG, "冰龙肺脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPINE, "冰龙脊柱");
+        addItem(IceAndFireOrgans.ICE_DRAGON_STOMACH, "冰龙胃");
+        addItem(IceAndFireOrgans.ICE_DRAGON_INTESTINE, "冰龙肠子");
+        addItem(IceAndFireOrgans.ICE_DRAGON_KIDNEY, "冰龙肾脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPLEEN, "冰龙脾脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "冰龙肝脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "冰龙宝玉");
+        addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "冰龙吐息袋");
+        addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "冰龙肋骨");
+        addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "冰龙肌肉");
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "电龙心脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "电龙肺脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "电龙脊柱");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "电龙胃");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "电龙肠子");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "电龙肾脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "电龙脾脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "电龙肝脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "电龙宝玉");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "电龙吐息袋");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "电龙肋骨");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "电龙肌肉");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {

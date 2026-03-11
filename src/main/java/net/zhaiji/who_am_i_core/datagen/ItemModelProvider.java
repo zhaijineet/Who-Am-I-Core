@@ -14,6 +14,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     @Override
     protected void registerModels() {
-//        WAICItem.ITEM.getEntries().stream().map(Supplier::get).forEach(this::basicItem);
+        WAICItem.ITEM.getEntries().stream().map(Supplier::get).forEach(this::basicItem);
     }
 }

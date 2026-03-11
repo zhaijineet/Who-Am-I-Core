@@ -1,5 +1,8 @@
 {
   "values": [
-    "who_am_i_core:aged_spine"
+    "who_am_i_core:aged_spine",
+    "who_am_i_core:fire_dragon_spine",
+    "who_am_i_core:ice_dragon_spine",
+    "who_am_i_core:lightning_dragon_spine"
   ]
 }

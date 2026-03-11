@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,13 +27,15 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(MowziesMobOrgans.CHEST_NOVA.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.CHEST_NOVA.get());
         tag(WAICItemTagManager.SUMMON).add(MowziesMobOrgans.CHEST_NOVA.get());
-        tag(WAICItemTagManager.LEGEND).add(MowziesMobOrgans.CONTROL_ROD.get());
+        tag(WAICItemTagManager.LEGEND).add(MowziesMobOrgans.CHEST_NOVA.get());
+        tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.CHEST_NOVA.get());
 
         // 制御棒器官标签
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(WAICItemTagManager.MECHANICAL).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(WAICItemTagManager.LEGEND).add(MowziesMobOrgans.CONTROL_ROD.get());
+        tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.CONTROL_ROD.get());
 
         tag(ItemTagManager.ORGANS).add(
             MowziesMobOrgans.AGED_HEART.get(),
@@ -79,5 +82,92 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
+
+        // ==================== 火龙器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            IceAndFireOrgans.FIRE_DRAGON_HEART.get(),
+            IceAndFireOrgans.FIRE_DRAGON_LUNG.get(),
+            IceAndFireOrgans.FIRE_DRAGON_SPINE.get(),
+            IceAndFireOrgans.FIRE_DRAGON_STOMACH.get(),
+            IceAndFireOrgans.FIRE_DRAGON_INTESTINE.get(),
+            IceAndFireOrgans.FIRE_DRAGON_KIDNEY.get(),
+            IceAndFireOrgans.FIRE_DRAGON_SPLEEN.get(),
+            IceAndFireOrgans.FIRE_DRAGON_LIVER.get(),
+            IceAndFireOrgans.FIRE_DRAGON_GEM.get(),
+            IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC.get(),
+            IceAndFireOrgans.FIRE_DRAGON_RIB.get(),
+            IceAndFireOrgans.FIRE_DRAGON_MUSCLE.get()
+        );
+
+        tag(ItemTagManager.HEART).add(IceAndFireOrgans.FIRE_DRAGON_HEART.get());
+        tag(ItemTagManager.LUNG).add(IceAndFireOrgans.FIRE_DRAGON_LUNG.get());
+        tag(ItemTagManager.SPINE).add(IceAndFireOrgans.FIRE_DRAGON_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.FIRE_DRAGON_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.FIRE_DRAGON_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(IceAndFireOrgans.FIRE_DRAGON_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(IceAndFireOrgans.FIRE_DRAGON_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(IceAndFireOrgans.FIRE_DRAGON_LIVER.get());
+        tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.FIRE_DRAGON_GEM.get());
+        tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC.get());
+        tag(ItemTagManager.RIB).add(IceAndFireOrgans.FIRE_DRAGON_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.FIRE_DRAGON_MUSCLE.get());
+
+        // ==================== 冰龙器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            IceAndFireOrgans.ICE_DRAGON_HEART.get(),
+            IceAndFireOrgans.ICE_DRAGON_LUNG.get(),
+            IceAndFireOrgans.ICE_DRAGON_SPINE.get(),
+            IceAndFireOrgans.ICE_DRAGON_STOMACH.get(),
+            IceAndFireOrgans.ICE_DRAGON_INTESTINE.get(),
+            IceAndFireOrgans.ICE_DRAGON_KIDNEY.get(),
+            IceAndFireOrgans.ICE_DRAGON_SPLEEN.get(),
+            IceAndFireOrgans.ICE_DRAGON_LIVER.get(),
+            IceAndFireOrgans.ICE_DRAGON_GEM.get(),
+            IceAndFireOrgans.ICE_DRAGON_BREATH_SAC.get(),
+            IceAndFireOrgans.ICE_DRAGON_RIB.get(),
+            IceAndFireOrgans.ICE_DRAGON_MUSCLE.get()
+        );
+
+        tag(ItemTagManager.HEART).add(IceAndFireOrgans.ICE_DRAGON_HEART.get());
+        tag(ItemTagManager.LUNG).add(IceAndFireOrgans.ICE_DRAGON_LUNG.get());
+        tag(ItemTagManager.SPINE).add(IceAndFireOrgans.ICE_DRAGON_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.ICE_DRAGON_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.ICE_DRAGON_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(IceAndFireOrgans.ICE_DRAGON_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(IceAndFireOrgans.ICE_DRAGON_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(IceAndFireOrgans.ICE_DRAGON_LIVER.get());
+        tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.ICE_DRAGON_GEM.get());
+        tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC.get());
+        tag(ItemTagManager.RIB).add(IceAndFireOrgans.ICE_DRAGON_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.ICE_DRAGON_MUSCLE.get());
+
+        // ==================== 电龙器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            IceAndFireOrgans.LIGHTNING_DRAGON_HEART.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_LUNG.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_SPINE.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_LIVER.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_GEM.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_RIB.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE.get()
+        );
+
+        tag(ItemTagManager.HEART).add(IceAndFireOrgans.LIGHTNING_DRAGON_HEART.get());
+        tag(ItemTagManager.LUNG).add(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG.get());
+        tag(ItemTagManager.SPINE).add(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER.get());
+        tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.LIGHTNING_DRAGON_GEM.get());
+        tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC.get());
+        tag(ItemTagManager.RIB).add(IceAndFireOrgans.LIGHTNING_DRAGON_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE.get());
     }
 }
