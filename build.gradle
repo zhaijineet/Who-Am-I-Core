@@ -155,6 +155,8 @@ dependencies {
     implementation "curse.maven:lionfish-api-1001614:6168249"
     // architectury api
     implementation "curse.maven:architectury-api-419699:5786327"
+    // FD lib
+    implementation "curse.maven:fdlib-1271749:7653105"
 
     // Chest Cavity Beyond
     implementation "curse.maven:chest-cavity-beyond-1427715:7744231"
@@ -164,6 +166,8 @@ dependencies {
     implementation "curse.maven:mowzies-mobs-250498:7727111"
     // 灾变
     implementation "curse.maven:lendercataclysm-551586:7691675"
+    // 逆卡巴拉
+    implementation "curse.maven:qliphoth-awakening-1271707:7653113"
 
 
     // Example optional mod dependency with JEI

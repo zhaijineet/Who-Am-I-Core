@@ -291,6 +291,180 @@ public class IceAndFireOrgans {
             .build()
     );
 
+    // ==================== 悚恐怖官 ====================
+    // 苦寒血肉
+    public static final Supplier<Item> BITTER_FLESH = WAICItem.ITEM.register(
+        "bitter_flesh",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 冰魂残片
+    public static final Supplier<Item> ICE_SHARD = WAICItem.ITEM.register(
+        "ice_shard",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 冻结魂火
+    public static final Supplier<Item> FROSTBURN_SOUL = WAICItem.ITEM.register(
+        "frostburn_soul",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 悚恐怖匣
+    public static final Supplier<Item> DREAD_PHYLACTERY = WAICItem.ITEM.register(
+        "dread_phylactery",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 悚怖肋骨
+    public static final Supplier<Item> DREAD_RIB = WAICItem.ITEM.register(
+        "dread_rib",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 悚怖脊柱
+    public static final Supplier<Item> DREAD_SPINE = WAICItem.ITEM.register(
+        "dread_spine",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // ==================== 九头蛇器官 ====================
+    // 九头蛇心脏（器官注册在IceAndFireManager中）
+    public static final Supplier<Item> HYDRA_HEART = IafItems.HYDRA_HEART;
+
+    // 九头蛇肺脏
+    public static final Supplier<Item> HYDRA_LUNG = WAICItem.ITEM.register(
+        "hydra_lung",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 九头蛇脊柱
+    public static final Supplier<Item> HYDRA_SPINE = WAICItem.ITEM.register(
+        "hydra_spine",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 九头蛇胃
+    public static final Supplier<Item> HYDRA_STOMACH = WAICItem.ITEM.register(
+        "hydra_stomach",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 九头蛇肠子
+    public static final Supplier<Item> HYDRA_INTESTINE = WAICItem.ITEM.register(
+        "hydra_intestine",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 九头蛇脾脏
+    public static final Supplier<Item> HYDRA_SPLEEN = WAICItem.ITEM.register(
+        "hydra_spleen",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 九头蛇肋骨
+    public static final Supplier<Item> HYDRA_RIB = WAICItem.ITEM.register(
+        "hydra_rib",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 九头蛇肌肉
+    public static final Supplier<Item> HYDRA_MUSCLE = WAICItem.ITEM.register(
+        "hydra_muscle",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // ==================== 幻想种器官 ====================
+    // 幻想种心脏
+    public static final Supplier<Item> FANTASTICAL_HEART = WAICItem.ITEM.register(
+        "fantastical_heart",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种肺脏
+    public static final Supplier<Item> FANTASTICAL_LUNG = WAICItem.ITEM.register(
+        "fantastical_lung",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种脊柱
+    public static final Supplier<Item> FANTASTICAL_SPINE = WAICItem.ITEM.register(
+        "fantastical_spine",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种胃
+    public static final Supplier<Item> FANTASTICAL_STOMACH = WAICItem.ITEM.register(
+        "fantastical_stomach",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种肠子
+    public static final Supplier<Item> FANTASTICAL_INTESTINE = WAICItem.ITEM.register(
+        "fantastical_intestine",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种肾脏
+    public static final Supplier<Item> FANTASTICAL_KIDNEY = WAICItem.ITEM.register(
+        "fantastical_kidney",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种脾脏
+    public static final Supplier<Item> FANTASTICAL_SPLEEN = WAICItem.ITEM.register(
+        "fantastical_spleen",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种肝脏
+    public static final Supplier<Item> FANTASTICAL_LIVER = WAICItem.ITEM.register(
+        "fantastical_liver",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种阑尾
+    public static final Supplier<Item> FANTASTICAL_APPENDIX = WAICItem.ITEM.register(
+        "fantastical_appendix",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种肋骨
+    public static final Supplier<Item> FANTASTICAL_RIB = WAICItem.ITEM.register(
+        "fantastical_rib",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
+    // 幻想种肌肉
+    public static final Supplier<Item> FANTASTICAL_MUSCLE = WAICItem.ITEM.register(
+        "fantastical_muscle",
+        () -> OrganBuilder.builder()
+            .build()
+    );
+
     public static void register() {
     }
 }

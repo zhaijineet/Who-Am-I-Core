@@ -6,6 +6,18 @@
     "who_am_i_core:bluff_core",
     "iceandfire:fire_dragon_heart",
     "iceandfire:ice_dragon_heart",
-    "iceandfire:lightning_dragon_heart"
+    "iceandfire:lightning_dragon_heart",
+    "who_am_i_core:fire_malkuth_warrior_heart",
+    "who_am_i_core:ice_malkuth_warrior_heart",
+    "iceandfire:hydra_heart",
+    "who_am_i_core:fantastical_heart",
+    "who_am_i_core:frost_metal_heart",
+    "who_am_i_core:ink_heart",
+    "who_am_i_core:pigment_heart",
+    "who_am_i_core:wooden_heart",
+    "who_am_i_core:frankenstein_heart",
+    "who_am_i_core:tumor_heart",
+    "who_am_i_core:treason",
+    "who_am_i_core:mimic_heart"
   ]
 }

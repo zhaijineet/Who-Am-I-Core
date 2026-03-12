@@ -1,5 +1,13 @@
 {
   "values": [
-    "who_am_i_core:aged_appendix"
+    "who_am_i_core:aged_appendix",
+    "who_am_i_core:fantastical_appendix",
+    "who_am_i_core:frost_metal_appendix",
+    "who_am_i_core:ink_appendix",
+    "who_am_i_core:pigment_appendix",
+    "who_am_i_core:wooden_appendix",
+    "who_am_i_core:frankenstein_appendix",
+    "who_am_i_core:tumor_appendix",
+    "who_am_i_core:limbo"
   ]
 }

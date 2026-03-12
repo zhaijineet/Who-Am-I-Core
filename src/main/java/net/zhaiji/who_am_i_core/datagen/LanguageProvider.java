@@ -1,11 +1,17 @@
 package net.zhaiji.who_am_i_core.datagen;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
+import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
+import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICCreativeModeTab;
 
 import java.util.function.Supplier;
@@ -119,6 +125,153 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Lightning Dragon Breath Sac");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "Lightning Dragon Rib");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "Lightning Dragon Muscle");
+
+        addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Fire Malkuth Warrior Heart");
+        addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Ice Malkuth Warrior Heart");
+        addItem(FDBossesOrgans.MALKUTH, "Malkuth");
+        addItem(FDBossesOrgans.CHESED, "Chesed");
+        addItem(FDBossesOrgans.GEBURAH, "Geburah");
+
+        addItem(WAICOrgans.DIVINE_CORE, "Divine Core");
+        addItem(WAICOrgans.FROST_CORE, "Frost Core");
+        addItem(WAICOrgans.FLAME_CORE, "Flame Core");
+        addItem(WAICOrgans.NATURE_CORE, "Nature Core");
+
+        // 悚恐怖官翻译
+        addItem(IceAndFireOrgans.BITTER_FLESH, "Bitter Flesh");
+        addItem(IceAndFireOrgans.ICE_SHARD, "Ice Shard");
+        addItem(IceAndFireOrgans.FROSTBURN_SOUL, "Frostburn Soul");
+        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "Dread Phylactery");
+        addItem(IceAndFireOrgans.DREAD_RIB, "Dread Rib");
+        addItem(IceAndFireOrgans.DREAD_SPINE, "Dread Spine");
+
+        // 九头蛇器官翻译
+        addItem(IceAndFireOrgans.HYDRA_HEART, "Hydra Heart");
+        addItem(IceAndFireOrgans.HYDRA_LUNG, "Hydra Lung");
+        addItem(IceAndFireOrgans.HYDRA_SPINE, "Hydra Spine");
+        addItem(IceAndFireOrgans.HYDRA_STOMACH, "Hydra Stomach");
+        addItem(IceAndFireOrgans.HYDRA_INTESTINE, "Hydra Intestine");
+        addItem(IceAndFireOrgans.HYDRA_SPLEEN, "Hydra Spleen");
+        addItem(IceAndFireOrgans.HYDRA_RIB, "Hydra Rib");
+        addItem(IceAndFireOrgans.HYDRA_MUSCLE, "Hydra Muscle");
+
+        // 幻想种器官翻译
+        addItem(IceAndFireOrgans.FANTASTICAL_HEART, "Fantastical Heart");
+        addItem(IceAndFireOrgans.FANTASTICAL_LUNG, "Fantastical Lung");
+        addItem(IceAndFireOrgans.FANTASTICAL_SPINE, "Fantastical Spine");
+        addItem(IceAndFireOrgans.FANTASTICAL_STOMACH, "Fantastical Stomach");
+        addItem(IceAndFireOrgans.FANTASTICAL_INTESTINE, "Fantastical Intestine");
+        addItem(IceAndFireOrgans.FANTASTICAL_KIDNEY, "Fantastical Kidney");
+        addItem(IceAndFireOrgans.FANTASTICAL_SPLEEN, "Fantastical Spleen");
+        addItem(IceAndFireOrgans.FANTASTICAL_LIVER, "Fantastical Liver");
+        addItem(IceAndFireOrgans.FANTASTICAL_APPENDIX, "Fantastical Appendix");
+        addItem(IceAndFireOrgans.FANTASTICAL_RIB, "Fantastical Rib");
+        addItem(IceAndFireOrgans.FANTASTICAL_MUSCLE, "Fantastical Muscle");
+
+        // 浮霜器官翻译
+        addItem(AnvilCraftOrgans.FROST_METAL_HEART, "Frost Metal Heart");
+        addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "Frost Metal Lung");
+        addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "Frost Metal Spine");
+        addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "Frost Metal Stomach");
+        addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "Frost Metal Intestine");
+        addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "Frost Metal Kidney");
+        addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "Frost Metal Spleen");
+        addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "Frost Metal Liver");
+        addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "Frost Metal Appendix");
+        addItem(AnvilCraftOrgans.FROST_METAL_RIB, "Frost Metal Rib");
+        addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "Frost Metal Muscle");
+
+        // 墨水器官翻译
+        addItem(WAICOrgans.INK_HEART, "Ink Heart");
+        addItem(WAICOrgans.INK_LUNG, "Ink Lung");
+        addItem(WAICOrgans.INK_SPINE, "Ink Spine");
+        addItem(WAICOrgans.INK_STOMACH, "Ink Stomach");
+        addItem(WAICOrgans.INK_INTESTINE, "Ink Intestine");
+        addItem(WAICOrgans.INK_KIDNEY, "Ink Kidney");
+        addItem(WAICOrgans.INK_SPLEEN, "Ink Spleen");
+        addItem(WAICOrgans.INK_LIVER, "Ink Liver");
+        addItem(WAICOrgans.INK_APPENDIX, "Ink Appendix");
+        addItem(WAICOrgans.INK_RIB, "Ink Rib");
+        addItem(WAICOrgans.INK_MUSCLE, "Ink Muscle");
+        addItem(WAICOrgans.INK_BOTTLE, "Ink Bottle");
+        addItem(WAICOrgans.NIB, "Nib");
+
+        // 颜料器官翻译
+        addItem(WAICOrgans.PIGMENT_HEART, "Pigment Heart");
+        addItem(WAICOrgans.PIGMENT_LUNG, "Pigment Lung");
+        addItem(WAICOrgans.PIGMENT_SPINE, "Pigment Spine");
+        addItem(WAICOrgans.PIGMENT_STOMACH, "Pigment Stomach");
+        addItem(WAICOrgans.PIGMENT_INTESTINE, "Pigment Intestine");
+        addItem(WAICOrgans.PIGMENT_KIDNEY, "Pigment Kidney");
+        addItem(WAICOrgans.PIGMENT_SPLEEN, "Pigment Spleen");
+        addItem(WAICOrgans.PIGMENT_LIVER, "Pigment Liver");
+        addItem(WAICOrgans.PIGMENT_APPENDIX, "Pigment Appendix");
+        addItem(WAICOrgans.PIGMENT_RIB, "Pigment Rib");
+        addItem(WAICOrgans.PIGMENT_MUSCLE, "Pigment Muscle");
+        addItem(WAICOrgans.PALETTE, "Palette");
+
+        // 木质器官翻译
+        addItem(WAICOrgans.WOODEN_HEART, "Wooden Heart");
+        addItem(WAICOrgans.WOODEN_LUNG, "Wooden Lung");
+        addItem(WAICOrgans.WOODEN_STOMACH, "Wooden Stomach");
+        addItem(WAICOrgans.WOODEN_INTESTINE, "Wooden Intestine");
+        addItem(WAICOrgans.WOODEN_KIDNEY, "Wooden Kidney");
+        addItem(WAICOrgans.WOODEN_SPLEEN, "Wooden Spleen");
+        addItem(WAICOrgans.WOODEN_LIVER, "Wooden Liver");
+        addItem(WAICOrgans.WOODEN_APPENDIX, "Wooden Appendix");
+        addItem(WAICOrgans.WOODEN_MUSCLE, "Wooden Muscle");
+
+        // 弗兰肯斯坦器官翻译
+        addItem(WAICOrgans.FRANKENSTEIN_HEART, "Frankenstein Heart");
+        addItem(WAICOrgans.FRANKENSTEIN_LUNG, "Frankenstein Lung");
+        addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "Frankenstein Stomach");
+        addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "Frankenstein Intestine");
+        addItem(WAICOrgans.FRANKENSTEIN_KIDNEY, "Frankenstein Kidney");
+        addItem(WAICOrgans.FRANKENSTEIN_SPLEEN, "Frankenstein Spleen");
+        addItem(WAICOrgans.FRANKENSTEIN_LIVER, "Frankenstein Liver");
+        addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "Frankenstein Appendix");
+        addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "Frankenstein Muscle");
+
+        // 肿瘤器官翻译
+        addItem(WAICOrgans.TUMOR_HEART, "Tumor Heart");
+        addItem(WAICOrgans.TUMOR_LUNG, "Tumor Lung");
+        addItem(WAICOrgans.TUMOR_STOMACH, "Tumor Stomach");
+        addItem(WAICOrgans.TUMOR_INTESTINE, "Tumor Intestine");
+        addItem(WAICOrgans.TUMOR_KIDNEY, "Tumor Kidney");
+        addItem(WAICOrgans.TUMOR_SPLEEN, "Tumor Spleen");
+        addItem(WAICOrgans.TUMOR_LIVER, "Tumor Liver");
+        addItem(WAICOrgans.TUMOR_APPENDIX, "Tumor Appendix");
+        addItem(WAICOrgans.TUMOR_MUSCLE, "Tumor Muscle");
+
+        // 九狱器官翻译
+        addItem(WAICOrgans.LIMBO, "Limbo");
+        addItem(WAICOrgans.LUST, "Lust");
+        addItem(WAICOrgans.GLUTTONY, "Gluttony");
+        addItem(WAICOrgans.GREED, "Greed");
+        addItem(WAICOrgans.WRATH, "Wrath");
+        addItem(WAICOrgans.HERESY, "Heresy");
+        addItem(WAICOrgans.VIOLENCE, "Violence");
+        addItem(WAICOrgans.FRAUD, "Fraud");
+        addItem(WAICOrgans.TREASON, "Treason");
+
+        // 双子魔眼器官翻译
+        addItem(WAICOrgans.STRANGE_EYEBALL, "Strange Eyeball");
+        addItem(WAICOrgans.EERIE_EYEBALL, "Eerie Eyeball");
+        addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "Strange Mechanical Eyeball");
+        addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "Eerie Mechanical Eyeball");
+
+        // 拟态器官翻译
+        addItem(WAICOrgans.MIMIC_HEART, "Mimic Heart");
+        addItem(WAICOrgans.MIMIC_LIVER, "Mimic Liver");
+        addItem(WAICOrgans.MIMIC_LUNG, "Mimic Lung");
+
+        // 单个器官翻译
+        addItem(WAICOrgans.HAUNTED_BONE, "Haunted Bone");
+        addItem(WAICOrgans.SWORD_BONE, "Sword Bone");
+        addItem(WAICOrgans.STRAIGHT_INTESTINE, "Straight Intestine");
+        addItem(WAICOrgans.SQUASH, "Squash");
+
+        addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
     }
 
     public void Chinese() {
@@ -212,6 +365,153 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "电龙吐息袋");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "电龙肋骨");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "电龙肌肉");
+
+        addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "火焰王国战士之心");
+        addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "冰霜王国战士之心");
+        addItem(FDBossesOrgans.MALKUTH, "王国");
+        addItem(FDBossesOrgans.CHESED, "慈悲");
+        addItem(FDBossesOrgans.GEBURAH, "严厉");
+
+        addItem(WAICOrgans.DIVINE_CORE, "神圣核心");
+        addItem(WAICOrgans.FROST_CORE, "冰霜核心");
+        addItem(WAICOrgans.FLAME_CORE, "炽焰核心");
+        addItem(WAICOrgans.NATURE_CORE, "自然核心");
+
+        // 悚恐怖官翻译
+        addItem(IceAndFireOrgans.BITTER_FLESH, "苦寒血肉");
+        addItem(IceAndFireOrgans.ICE_SHARD, "冰魂残片");
+        addItem(IceAndFireOrgans.FROSTBURN_SOUL, "冻结魂火");
+        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "悚恐怖匣");
+        addItem(IceAndFireOrgans.DREAD_RIB, "悚怖肋骨");
+        addItem(IceAndFireOrgans.DREAD_SPINE, "悚怖脊柱");
+
+        // 九头蛇器官翻译
+        addItem(IceAndFireOrgans.HYDRA_HEART, "九头蛇心脏");
+        addItem(IceAndFireOrgans.HYDRA_LUNG, "九头蛇肺脏");
+        addItem(IceAndFireOrgans.HYDRA_SPINE, "九头蛇脊柱");
+        addItem(IceAndFireOrgans.HYDRA_STOMACH, "九头蛇胃");
+        addItem(IceAndFireOrgans.HYDRA_INTESTINE, "九头蛇肠子");
+        addItem(IceAndFireOrgans.HYDRA_SPLEEN, "九头蛇脾脏");
+        addItem(IceAndFireOrgans.HYDRA_RIB, "九头蛇肋骨");
+        addItem(IceAndFireOrgans.HYDRA_MUSCLE, "九头蛇肌肉");
+
+        // 幻想种器官翻译
+        addItem(IceAndFireOrgans.FANTASTICAL_HEART, "幻想种心脏");
+        addItem(IceAndFireOrgans.FANTASTICAL_LUNG, "幻想种肺脏");
+        addItem(IceAndFireOrgans.FANTASTICAL_SPINE, "幻想种脊柱");
+        addItem(IceAndFireOrgans.FANTASTICAL_STOMACH, "幻想种胃");
+        addItem(IceAndFireOrgans.FANTASTICAL_INTESTINE, "幻想种肠子");
+        addItem(IceAndFireOrgans.FANTASTICAL_KIDNEY, "幻想种肾脏");
+        addItem(IceAndFireOrgans.FANTASTICAL_SPLEEN, "幻想种脾脏");
+        addItem(IceAndFireOrgans.FANTASTICAL_LIVER, "幻想种肝脏");
+        addItem(IceAndFireOrgans.FANTASTICAL_APPENDIX, "幻想种阑尾");
+        addItem(IceAndFireOrgans.FANTASTICAL_RIB, "幻想种肋骨");
+        addItem(IceAndFireOrgans.FANTASTICAL_MUSCLE, "幻想种肌肉");
+
+        // 浮霜器官翻译
+        addItem(AnvilCraftOrgans.FROST_METAL_HEART, "浮霜金属心脏");
+        addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "浮霜金属肺脏");
+        addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "浮霜金属脊柱");
+        addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "浮霜金属胃");
+        addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "浮霜金属肠子");
+        addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "浮霜金属肾脏");
+        addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "浮霜金属脾脏");
+        addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "浮霜金属肝脏");
+        addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "浮霜金属阑尾");
+        addItem(AnvilCraftOrgans.FROST_METAL_RIB, "浮霜金属肋骨");
+        addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
+
+        // 墨水器官翻译
+        addItem(WAICOrgans.INK_HEART, "墨水心脏");
+        addItem(WAICOrgans.INK_LUNG, "墨水肺脏");
+        addItem(WAICOrgans.INK_SPINE, "墨水脊柱");
+        addItem(WAICOrgans.INK_STOMACH, "墨水胃");
+        addItem(WAICOrgans.INK_INTESTINE, "墨水肠子");
+        addItem(WAICOrgans.INK_KIDNEY, "墨水肾脏");
+        addItem(WAICOrgans.INK_SPLEEN, "墨水脾脏");
+        addItem(WAICOrgans.INK_LIVER, "墨水肝脏");
+        addItem(WAICOrgans.INK_APPENDIX, "墨水阑尾");
+        addItem(WAICOrgans.INK_RIB, "墨水肋骨");
+        addItem(WAICOrgans.INK_MUSCLE, "墨水肌肉");
+        addItem(WAICOrgans.INK_BOTTLE, "墨水瓶");
+        addItem(WAICOrgans.NIB, "钢笔尖");
+
+        // 颜料器官翻译
+        addItem(WAICOrgans.PIGMENT_HEART, "颜料心脏");
+        addItem(WAICOrgans.PIGMENT_LUNG, "颜料肺脏");
+        addItem(WAICOrgans.PIGMENT_SPINE, "颜料脊柱");
+        addItem(WAICOrgans.PIGMENT_STOMACH, "颜料胃");
+        addItem(WAICOrgans.PIGMENT_INTESTINE, "颜料肠子");
+        addItem(WAICOrgans.PIGMENT_KIDNEY, "颜料肾脏");
+        addItem(WAICOrgans.PIGMENT_SPLEEN, "颜料脾脏");
+        addItem(WAICOrgans.PIGMENT_LIVER, "颜料肝脏");
+        addItem(WAICOrgans.PIGMENT_APPENDIX, "颜料阑尾");
+        addItem(WAICOrgans.PIGMENT_RIB, "颜料肋骨");
+        addItem(WAICOrgans.PIGMENT_MUSCLE, "颜料肌肉");
+        addItem(WAICOrgans.PALETTE, "调色盘");
+
+        // 木质器官翻译
+        addItem(WAICOrgans.WOODEN_HEART, "木质心脏");
+        addItem(WAICOrgans.WOODEN_LUNG, "木质肺脏");
+        addItem(WAICOrgans.WOODEN_STOMACH, "木质胃");
+        addItem(WAICOrgans.WOODEN_INTESTINE, "木质肠子");
+        addItem(WAICOrgans.WOODEN_KIDNEY, "木质肾脏");
+        addItem(WAICOrgans.WOODEN_SPLEEN, "木质脾脏");
+        addItem(WAICOrgans.WOODEN_LIVER, "木质肝脏");
+        addItem(WAICOrgans.WOODEN_APPENDIX, "木质阑尾");
+        addItem(WAICOrgans.WOODEN_MUSCLE, "木质肌肉");
+
+        // 弗兰肯斯坦器官翻译
+        addItem(WAICOrgans.FRANKENSTEIN_HEART, "弗兰肯斯坦心脏");
+        addItem(WAICOrgans.FRANKENSTEIN_LUNG, "弗兰肯斯坦肺脏");
+        addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "弗兰肯斯坦胃");
+        addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "弗兰肯斯坦肠子");
+        addItem(WAICOrgans.FRANKENSTEIN_KIDNEY, "弗兰肯斯坦肾脏");
+        addItem(WAICOrgans.FRANKENSTEIN_SPLEEN, "弗兰肯斯坦脾脏");
+        addItem(WAICOrgans.FRANKENSTEIN_LIVER, "弗兰肯斯坦肝脏");
+        addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "弗兰肯斯坦阑尾");
+        addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "弗兰肯斯坦肌肉");
+
+        // 肿瘤器官翻译
+        addItem(WAICOrgans.TUMOR_HEART, "肿瘤心脏");
+        addItem(WAICOrgans.TUMOR_LUNG, "肿瘤肺脏");
+        addItem(WAICOrgans.TUMOR_STOMACH, "肿瘤胃");
+        addItem(WAICOrgans.TUMOR_INTESTINE, "肿瘤肠子");
+        addItem(WAICOrgans.TUMOR_KIDNEY, "肿瘤肾脏");
+        addItem(WAICOrgans.TUMOR_SPLEEN, "肿瘤脾脏");
+        addItem(WAICOrgans.TUMOR_LIVER, "肿瘤肝脏");
+        addItem(WAICOrgans.TUMOR_APPENDIX, "肿瘤阑尾");
+        addItem(WAICOrgans.TUMOR_MUSCLE, "肿瘤肌肉");
+
+        // 九狱器官翻译
+        addItem(WAICOrgans.LIMBO, "灵薄");
+        addItem(WAICOrgans.LUST, "色欲");
+        addItem(WAICOrgans.GLUTTONY, "暴食");
+        addItem(WAICOrgans.GREED, "贪婪");
+        addItem(WAICOrgans.WRATH, "愤怒");
+        addItem(WAICOrgans.HERESY, "异端");
+        addItem(WAICOrgans.VIOLENCE, "暴力");
+        addItem(WAICOrgans.FRAUD, "欺诈");
+        addItem(WAICOrgans.TREASON, "背叛");
+
+        // 双子魔眼器官翻译
+        addItem(WAICOrgans.STRANGE_EYEBALL, "奇怪的眼球");
+        addItem(WAICOrgans.EERIE_EYEBALL, "诡异的眼球");
+        addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "奇怪的机械眼球");
+        addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "诡异的机械眼球");
+
+        // 拟态器官翻译
+        addItem(WAICOrgans.MIMIC_HEART, "拟态心脏");
+        addItem(WAICOrgans.MIMIC_LIVER, "拟态肝脏");
+        addItem(WAICOrgans.MIMIC_LUNG, "拟态肺脏");
+
+        // 单个器官翻译
+        addItem(WAICOrgans.HAUNTED_BONE, "闹鬼的骨头");
+        addItem(WAICOrgans.SWORD_BONE, "剑骨头");
+        addItem(WAICOrgans.STRAIGHT_INTESTINE, "直肠子");
+        addItem(WAICOrgans.SQUASH, "窝瓜");
+
+        addAttribute(WAICAttribute.TEMPERATURE, "温度");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {
@@ -228,6 +528,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void addOrganDescription(Supplier<Item> item, int index, String value) {
         add("organ." + WhoAmICore.MOD_ID + "." + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + ".description." + index, value);
+    }
+
+    private void addAttribute(Holder<Attribute> attribute, String value) {
+        add(attribute.value().getDescriptionId(), value);
     }
 
     @Override
