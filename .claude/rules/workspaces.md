@@ -26,3 +26,6 @@
 
 - **AnvilCraft** (E:\Mod Project\AnvilCraft)
     - 次要前置，仅作为参考使用
+
+- **Iron's Spells 'n Spellbooks** (E:\Mod Project\irons-spells-n-spellbooks)
+    - 次要前置，仅作为参考使用

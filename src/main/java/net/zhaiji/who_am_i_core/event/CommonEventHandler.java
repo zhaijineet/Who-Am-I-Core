@@ -1,16 +1,19 @@
 package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
+import com.iafenvoy.iceandfire.registry.IafEntities;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
 import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
-import net.zhaiji.who_am_i_core.organ.IceAndFireManager;
+import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 
 public class CommonEventHandler {
     public static void handlerFMLCommonSetupEvent(FMLCommonSetupEvent event) {
-        IceAndFireManager.register();
+        IceAndFireOrgans.setupOrgans();
     }
 
     /**
@@ -18,6 +21,15 @@ public class CommonEventHandler {
      */
     public static void handlerRegisterChestCavityEvent(RegisterChestCavityEvent event) {
         event.registerTask(ChestNovaTask.TYPE, ChestNovaTask::new);
+
+        // 注册龙类胸腔
+        event.registerEntity(IafEntities.FIRE_DRAGON.get(), IceAndFireChestCavityTypeManager.FIRE_DRAGON);
+        event.registerEntity(IafEntities.ICE_DRAGON.get(), IceAndFireChestCavityTypeManager.ICE_DRAGON);
+        event.registerEntity(IafEntities.LIGHTNING_DRAGON.get(), IceAndFireChestCavityTypeManager.LIGHTNING_DRAGON);
+
+        // 注册幻想种和九头蛇胸腔
+        event.registerEntity(IafEntities.PIXIE.get(), WAICChestCavityTypeManager.FANTASTICAL);
+        event.registerEntity(IafEntities.HYDRA.get(), IceAndFireChestCavityTypeManager.HYDRA);
     }
 
     /**

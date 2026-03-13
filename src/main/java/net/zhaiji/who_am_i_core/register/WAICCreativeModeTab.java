@@ -39,6 +39,9 @@ public class WAICCreativeModeTab {
                     if (item == IceAndFireOrgans.LIGHTNING_DRAGON_GEM.get()) {
                         output.accept(IafItems.LIGHTNING_DRAGON_HEART.get());
                     }
+                    if (item == IceAndFireOrgans.HYDRA_SPINE.get()) {
+                        output.accept(IafItems.HYDRA_HEART.get());
+                    }
                 }
             })
             .build()
