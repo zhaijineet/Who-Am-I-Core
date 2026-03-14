@@ -181,6 +181,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.FROST_METAL_RIB, "Frost Metal Rib");
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "Frost Metal Muscle");
 
+        // 浮霜器官skill描述
+        add("organ.who_am_i_core.tooltips.frost_metal_merciless", "Merciless: convert all enchantments into organ attributes");
+
         // 墨水器官翻译
         addItem(WAICOrgans.INK_HEART, "Ink Heart");
         addItem(WAICOrgans.INK_LUNG, "Ink Lung");
@@ -267,7 +270,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 单个器官翻译
         addItem(WAICOrgans.HAUNTED_BONE, "Haunted Bone");
+        addOrganDescription(WAICOrgans.HAUNTED_BONE, "Dududa dududa");
         addItem(WAICOrgans.SWORD_BONE, "Sword Bone");
+        addOrganDescription(WAICOrgans.SWORD_BONE, "As sharp as a sword");
         addItem(WAICOrgans.STRAIGHT_INTESTINE, "Straight Intestine");
         addItem(WAICOrgans.SQUASH, "Squash");
 
@@ -421,6 +426,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.FROST_METAL_RIB, "浮霜金属肋骨");
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
 
+        // 浮霜器官skill描述
+        add("organ.who_am_i_core.tooltips.frost_metal_merciless", "无情：将所有魔咒转换为器官属性");
+
         // 墨水器官翻译
         addItem(WAICOrgans.INK_HEART, "墨水心脏");
         addItem(WAICOrgans.INK_LUNG, "墨水肺脏");
@@ -507,7 +515,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 单个器官翻译
         addItem(WAICOrgans.HAUNTED_BONE, "闹鬼的骨头");
+        addOrganDescription(WAICOrgans.HAUNTED_BONE, "嘟嘟哒嘟嘟哒");
         addItem(WAICOrgans.SWORD_BONE, "剑骨头");
+        addOrganDescription(WAICOrgans.SWORD_BONE, "剑一般锋利");
         addItem(WAICOrgans.STRAIGHT_INTESTINE, "直肠子");
         addItem(WAICOrgans.SQUASH, "窝瓜");
 

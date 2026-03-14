@@ -1,12 +1,16 @@
 package net.zhaiji.who_am_i_core.util;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.util.MathUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,5 +80,33 @@ public class WAICOrganUtil {
             // 斜下右
             row < 2 && posInRow < 8 ? slotIndex + 10 : -1
         };
+    }
+
+    /**
+     * 获取物品的总附魔等级
+     */
+    private static int getTotalEnchantmentLevels(ItemStack stack) {
+        if (stack.isEmpty()) return 0;
+        ItemEnchantments enchantments = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+        int total = 0;
+        for (Holder<Enchantment> ench : enchantments.keySet()) {
+            total += enchantments.getLevel(ench);
+        }
+        return total;
+    }
+
+    /**
+     * 计算附魔加成：√level
+     */
+    private static double calculateBonus(int levels) {
+        return Math.floor(Math.sqrt(levels));
+    }
+
+    /**
+     * 浮霜器官的附魔加成
+     * 参考铁砧工艺的无情属性计算方式
+     */
+    public static double frostMetalBonus(ChestCavitySlotContext context) {
+        return calculateBonus(getTotalEnchantmentLevels(context.stack()));
     }
 }

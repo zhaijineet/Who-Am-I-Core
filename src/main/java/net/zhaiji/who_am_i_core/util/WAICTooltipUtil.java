@@ -87,4 +87,18 @@ public class WAICTooltipUtil {
             );
         };
     }
+
+    /**
+     * 创建一个使用指定翻译键的skillTooltip consumer
+     *
+     * @param translationKey 翻译键，例如 "organ.who_am_i_core.tooltips.frost_metal_merciless"
+     */
+    public static OrganTooltipConsumer skillTooltip(String translationKey) {
+        return (data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+            TooltipUtil.simpleTooltipAdd(
+                tooltipComponents,
+                List.of(Component.translatable(translationKey))
+            );
+        };
+    }
 }

@@ -1,11 +1,14 @@
 package net.zhaiji.who_am_i_core.organ;
 
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.zhaiji.chestcavitybeyond.builder.OrganBuilder;
+import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -527,8 +530,11 @@ public class WAICOrgans {
     public static final Supplier<Item> HAUNTED_BONE = WAICItem.ITEM.register(
         "haunted_bone",
         () -> OrganBuilder.builder()
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .chestCavityOpen(WAICOrganUtil::hauntedBoneChestCavityOpen)
             .chestCavityClose(WAICOrganUtil::hauntedBoneChestCavityClose)
+            .addValueAttribute(InitAttribute.SPEED, 1)
+            .addValueAttribute(Attributes.LUCK, 1)
             .build()
     );
 
@@ -536,7 +542,10 @@ public class WAICOrgans {
     public static final Supplier<Item> SWORD_BONE = WAICItem.ITEM.register(
         "sword_bone",
         () -> OrganBuilder.builder()
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .properties(properties -> properties.attributes(SwordItem.createAttributes(Tiers.IRON, 3, -2.4F)))
+            .addValueAttribute(InitAttribute.NERVES, 1.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.75)
             .build()
     );
 

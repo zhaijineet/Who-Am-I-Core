@@ -1,17 +1,31 @@
 package net.zhaiji.who_am_i_core.organ;
 
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.builder.OrganBuilder;
+import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
 public class AnvilCraftOrgans {
+    // 浮霜器官skill描述翻译键
+    private static final String FROST_METAL_MERCILESS_SKILL = "organ." + WhoAmICore.MOD_ID + ".tooltips.frost_metal_merciless";
+
     // ==================== 浮霜器官 ====================
     // 浮霜心脏
     public static final Supplier<Item> FROST_METAL_HEART = WAICItem.ITEM.register(
         "frost_metal_heart",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -19,6 +33,13 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_LUNG = WAICItem.ITEM.register(
         "frost_metal_lung",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -26,6 +47,12 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_SPINE = WAICItem.ITEM.register(
         "frost_metal_spine",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double bonus = WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.NERVES, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0 + bonus));
+                modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), 0.5 + bonus));
+            })
             .build()
     );
 
@@ -33,6 +60,11 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_STOMACH = WAICItem.ITEM.register(
         "frost_metal_stomach",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -40,6 +72,11 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_INTESTINE = WAICItem.ITEM.register(
         "frost_metal_intestine",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.NUTRITION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -47,6 +84,11 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_KIDNEY = WAICItem.ITEM.register(
         "frost_metal_kidney",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.FILTRATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -54,6 +96,11 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_SPLEEN = WAICItem.ITEM.register(
         "frost_metal_spleen",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.METABOLISM, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -61,6 +108,11 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_LIVER = WAICItem.ITEM.register(
         "frost_metal_liver",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -68,6 +120,11 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_APPENDIX = WAICItem.ITEM.register(
         "frost_metal_appendix",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(Attributes.LUCK, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -75,6 +132,11 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_RIB = WAICItem.ITEM.register(
         "frost_metal_rib",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 
@@ -82,6 +144,12 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_MUSCLE = WAICItem.ITEM.register(
         "frost_metal_muscle",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip(FROST_METAL_MERCILESS_SKILL))
+            .modifier((context, modifiers) -> {
+                double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
+                modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+            })
             .build()
     );
 

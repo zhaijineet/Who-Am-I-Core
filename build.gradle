@@ -161,7 +161,7 @@ dependencies {
     implementation "curse.maven:playeranimator-658587:7389814"
 
     // Chest Cavity Beyond
-    implementation "curse.maven:chest-cavity-beyond-1427715:7744231"
+    implementation "curse.maven:chest-cavity-beyond-1427715:7755397"
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物
@@ -172,6 +172,8 @@ dependencies {
     implementation "curse.maven:qliphoth-awakening-1271707:7653113"
     // 铁魔法
     implementation "curse.maven:irons-spells-n-spellbooks-855414:7691161"
+    // AnvilCraft
+    implementation "curse.maven:anvilcraft-986251:7754185"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
