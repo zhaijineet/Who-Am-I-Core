@@ -17,5 +17,6 @@ public class CommonEventManager {
 
     public static void gameBusListener(IEventBus gameBus) {
         gameBus.addListener(CommonEventHandler::handlerOrganChangeEvent);
+        gameBus.addListener(CommonEventHandler::handlerLivingDeathEvent);
     }
 }

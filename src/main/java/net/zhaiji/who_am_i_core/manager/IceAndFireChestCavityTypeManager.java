@@ -101,10 +101,11 @@ public class IceAndFireChestCavityTypeManager {
         .setThirdRow(8, IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE.get())
         .setCanOpen(IceAndFireChestCavityTypeManager::canOpenDragonRibcage);
 
-    // 九头蛇胸腔（缺少 kidney, liver, appendix）
+    // 九头蛇胸腔
     public static final ChestCavityType HYDRA = ChestCavityTypeManager.register("hydra")
         .setFirstRow(0, IceAndFireOrgans.HYDRA_MUSCLE.get())
         .setFirstRow(1, IceAndFireOrgans.HYDRA_RIB.get())
+        .setFirstRow(2, IceAndFireOrgans.FANTASTICAL_APPENDIX.get())
         .setFirstRow(3, IceAndFireOrgans.HYDRA_LUNG.get())
         .setFirstRow(4, IceAndFireOrgans.HYDRA_HEART.get())
         .setFirstRow(5, IceAndFireOrgans.HYDRA_LUNG.get())
@@ -113,7 +114,10 @@ public class IceAndFireChestCavityTypeManager {
         .setSecondRow(0, IceAndFireOrgans.HYDRA_MUSCLE.get())
         .setSecondRow(1, IceAndFireOrgans.HYDRA_RIB.get())
         .setSecondRow(2, IceAndFireOrgans.HYDRA_SPLEEN.get())
+        .setSecondRow(3, IceAndFireOrgans.FANTASTICAL_KIDNEY.get())
         .setSecondRow(4, IceAndFireOrgans.HYDRA_SPINE.get())
+        .setSecondRow(5, IceAndFireOrgans.FANTASTICAL_KIDNEY.get())
+        .setSecondRow(6, IceAndFireOrgans.FANTASTICAL_LIVER.get())
         .setSecondRow(7, IceAndFireOrgans.HYDRA_RIB.get())
         .setSecondRow(8, IceAndFireOrgans.HYDRA_MUSCLE.get())
         .setThirdRow(0, IceAndFireOrgans.HYDRA_MUSCLE.get())

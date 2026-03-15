@@ -193,7 +193,10 @@
   "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.0": "移除FOV修改",
   "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.1": "抵挡来自正面的实体的攻击",
   "organ.who_am_i_core.ferrous_wroughtnaut_heart_mirror.skill.2": "攻击后3秒内不能移动",
+  "organ.who_am_i_core.fire_dragon_breath_sac.skill": "向前方喷射火焰",
   "organ.who_am_i_core.haunted_bone.description": "嘟嘟哒嘟嘟哒",
+  "organ.who_am_i_core.ice_dragon_breath_sac.skill": "向前方喷射冰霜",
+  "organ.who_am_i_core.lightning_dragon_breath_sac.skill": "向前方喷射闪电",
   "organ.who_am_i_core.sword_bone.description": "剑一般锋利",
   "organ.who_am_i_core.tooltips.frost_metal_merciless": "无情：将所有魔咒转换为器官属性"
 }

@@ -235,6 +235,69 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.HYDRA_RIB.get());
         tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.HYDRA_MUSCLE.get());
 
+        // 九头蛇器官聚合标签（用于统计器官种类）
+        tag(WAICItemTagManager.HYDRA).add(
+            IceAndFireOrgans.HYDRA_HEART.get(),
+            IceAndFireOrgans.HYDRA_LUNG.get(),
+            IceAndFireOrgans.HYDRA_SPINE.get(),
+            IceAndFireOrgans.HYDRA_STOMACH.get(),
+            IceAndFireOrgans.HYDRA_INTESTINE.get(),
+            IceAndFireOrgans.HYDRA_SPLEEN.get(),
+            IceAndFireOrgans.HYDRA_RIB.get(),
+            IceAndFireOrgans.HYDRA_MUSCLE.get(),
+            IceAndFireOrgans.FANTASTICAL_APPENDIX.get(),
+            IceAndFireOrgans.FANTASTICAL_KIDNEY.get(),
+            IceAndFireOrgans.FANTASTICAL_LIVER.get()
+        );
+
+        // 火龙器官聚合标签（用于计算火龙吐息阶段）
+        tag(WAICItemTagManager.FIRE_DRAGON).add(
+            IceAndFireOrgans.FIRE_DRAGON_HEART.get(),
+            IceAndFireOrgans.FIRE_DRAGON_LUNG.get(),
+            IceAndFireOrgans.FIRE_DRAGON_SPINE.get(),
+            IceAndFireOrgans.FIRE_DRAGON_STOMACH.get(),
+            IceAndFireOrgans.FIRE_DRAGON_INTESTINE.get(),
+            IceAndFireOrgans.FIRE_DRAGON_KIDNEY.get(),
+            IceAndFireOrgans.FIRE_DRAGON_SPLEEN.get(),
+            IceAndFireOrgans.FIRE_DRAGON_LIVER.get(),
+            IceAndFireOrgans.FIRE_DRAGON_GEM.get(),
+            IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC.get(),
+            IceAndFireOrgans.FIRE_DRAGON_RIB.get(),
+            IceAndFireOrgans.FIRE_DRAGON_MUSCLE.get()
+        );
+
+        // 冰龙器官聚合标签（用于计算冰龙吐息阶段）
+        tag(WAICItemTagManager.ICE_DRAGON).add(
+            IceAndFireOrgans.ICE_DRAGON_HEART.get(),
+            IceAndFireOrgans.ICE_DRAGON_LUNG.get(),
+            IceAndFireOrgans.ICE_DRAGON_SPINE.get(),
+            IceAndFireOrgans.ICE_DRAGON_STOMACH.get(),
+            IceAndFireOrgans.ICE_DRAGON_INTESTINE.get(),
+            IceAndFireOrgans.ICE_DRAGON_KIDNEY.get(),
+            IceAndFireOrgans.ICE_DRAGON_SPLEEN.get(),
+            IceAndFireOrgans.ICE_DRAGON_LIVER.get(),
+            IceAndFireOrgans.ICE_DRAGON_GEM.get(),
+            IceAndFireOrgans.ICE_DRAGON_BREATH_SAC.get(),
+            IceAndFireOrgans.ICE_DRAGON_RIB.get(),
+            IceAndFireOrgans.ICE_DRAGON_MUSCLE.get()
+        );
+
+        // 电龙器官聚合标签（用于计算电龙吐息阶段）
+        tag(WAICItemTagManager.LIGHTNING_DRAGON).add(
+            IceAndFireOrgans.LIGHTNING_DRAGON_HEART.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_LUNG.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_SPINE.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_LIVER.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_GEM.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_RIB.get(),
+            IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE.get()
+        );
+
         // ==================== 幻想种器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             IceAndFireOrgans.FANTASTICAL_HEART.get(),

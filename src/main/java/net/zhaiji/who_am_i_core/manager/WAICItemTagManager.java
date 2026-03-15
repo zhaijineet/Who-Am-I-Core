@@ -21,6 +21,18 @@ public class WAICItemTagManager {
     // 唯一
     public static final TagKey<Item> UNIQUE = create("unique");
 
+    // 九头蛇
+    public static final TagKey<Item> HYDRA = create("hydra");
+
+    // 火龙
+    public static final TagKey<Item> FIRE_DRAGON = create("fire_dragon");
+
+    // 冰龙
+    public static final TagKey<Item> ICE_DRAGON = create("ice_dragon");
+
+    // 电龙
+    public static final TagKey<Item> LIGHTNING_DRAGON = create("lightning_dragon");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }

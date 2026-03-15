@@ -1,16 +1,27 @@
 package net.zhaiji.who_am_i_core.organ;
 
 import com.iafenvoy.iceandfire.registry.IafItems;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.zhaiji.chestcavitybeyond.builder.OrganBuilder;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class IceAndFireOrgans {
     // ==================== 火龙器官 ====================
-    // 火龙心脏（器官注册在IceAndFireManager中）
+    // 火龙心脏
     public static final Supplier<Item> FIRE_DRAGON_HEART = IafItems.FIRE_DRAGON_HEART;
 
     // 火龙肺脏
@@ -83,6 +94,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_BREATH_SAC = WAICItem.ITEM.register(
         "fire_dragon_breath_sac",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .skill(IceAndFireOrganhUtil::fireDragonBreath)
+            .cooldown(10 * 20)
             .build()
     );
 
@@ -104,7 +118,7 @@ public class IceAndFireOrgans {
     );
 
     // ==================== 冰龙器官 ====================
-    // 冰龙心脏（器官注册在IceAndFireManager中）
+    // 冰龙心脏
     public static final Supplier<Item> ICE_DRAGON_HEART = IafItems.ICE_DRAGON_HEART;
 
     // 冰龙肺脏
@@ -177,6 +191,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_BREATH_SAC = WAICItem.ITEM.register(
         "ice_dragon_breath_sac",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .skill(IceAndFireOrganhUtil::iceDragonBreath)
+            .cooldown(10 * 20)
             .build()
     );
 
@@ -198,7 +215,7 @@ public class IceAndFireOrgans {
     );
 
     // ==================== 电龙器官 ====================
-    // 电龙心脏（器官注册在IceAndFireManager中）
+    // 电龙心脏
     public static final Supplier<Item> LIGHTNING_DRAGON_HEART = IafItems.LIGHTNING_DRAGON_HEART;
 
     // 电龙肺脏
@@ -271,6 +288,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_BREATH_SAC = WAICItem.ITEM.register(
         "lightning_dragon_breath_sac",
         () -> OrganBuilder.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .skill(IceAndFireOrganhUtil::lightningDragonBreath)
+            .cooldown(10 * 20)
             .build()
     );
 
@@ -335,13 +355,16 @@ public class IceAndFireOrgans {
     );
 
     // ==================== 九头蛇器官 ====================
-    // 九头蛇心脏（器官注册在IceAndFireManager中）
+    // 九头蛇心脏
     public static final Supplier<Item> HYDRA_HEART = IafItems.HYDRA_HEART;
 
     // 九头蛇肺脏
     public static final Supplier<Item> HYDRA_LUNG = WAICItem.ITEM.register(
         "hydra_lung",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
             .build()
     );
 
@@ -349,6 +372,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> HYDRA_SPINE = WAICItem.ITEM.register(
         "hydra_spine",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.NERVES, 1.75)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.875)
             .build()
     );
 
@@ -356,6 +381,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> HYDRA_STOMACH = WAICItem.ITEM.register(
         "hydra_stomach",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 1.5)
             .build()
     );
 
@@ -363,6 +389,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> HYDRA_INTESTINE = WAICItem.ITEM.register(
         "hydra_intestine",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 1.5)
             .build()
     );
 
@@ -370,6 +397,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> HYDRA_SPLEEN = WAICItem.ITEM.register(
         "hydra_spleen",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.METABOLISM, 1.5)
             .build()
     );
 
@@ -377,6 +405,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> HYDRA_RIB = WAICItem.ITEM.register(
         "hydra_rib",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 1.5)
             .build()
     );
 
@@ -384,6 +413,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> HYDRA_MUSCLE = WAICItem.ITEM.register(
         "hydra_muscle",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 1.5)
+            .addValueAttribute(InitAttribute.SPEED, 1.25)
             .build()
     );
 
@@ -392,6 +423,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_HEART = WAICItem.ITEM.register(
         "fantastical_heart",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1.25)
             .build()
     );
 
@@ -399,6 +431,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_LUNG = WAICItem.ITEM.register(
         "fantastical_lung",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.25)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.25)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.25)
             .build()
     );
 
@@ -406,6 +441,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_SPINE = WAICItem.ITEM.register(
         "fantastical_spine",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.NERVES, 1.25)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.625)
             .build()
     );
 
@@ -413,6 +450,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_STOMACH = WAICItem.ITEM.register(
         "fantastical_stomach",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 1.25)
             .build()
     );
 
@@ -420,6 +458,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_INTESTINE = WAICItem.ITEM.register(
         "fantastical_intestine",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 1.25)
             .build()
     );
 
@@ -427,6 +466,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_KIDNEY = WAICItem.ITEM.register(
         "fantastical_kidney",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.FILTRATION, 1.25)
             .build()
     );
 
@@ -434,6 +474,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_SPLEEN = WAICItem.ITEM.register(
         "fantastical_spleen",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.METABOLISM, 1.25)
             .build()
     );
 
@@ -441,6 +482,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_LIVER = WAICItem.ITEM.register(
         "fantastical_liver",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 1.25)
             .build()
     );
 
@@ -448,6 +490,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_APPENDIX = WAICItem.ITEM.register(
         "fantastical_appendix",
         () -> OrganBuilder.builder()
+            .addValueAttribute(Attributes.LUCK, 1.25)
             .build()
     );
 
@@ -455,6 +498,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_RIB = WAICItem.ITEM.register(
         "fantastical_rib",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 1.25)
             .build()
     );
 
@@ -462,6 +506,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FANTASTICAL_MUSCLE = WAICItem.ITEM.register(
         "fantastical_muscle",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 1.25)
+            .addValueAttribute(InitAttribute.SPEED, 1.25)
             .build()
     );
 
@@ -485,6 +531,31 @@ public class IceAndFireOrgans {
         OrganBuilder.builder(IafItems.HYDRA_HEART.get())
             .addValueAttribute(InitAttribute.HEALTH, 1.5)
             .addValueAttribute(InitAttribute.METABOLISM, 10)
+            .tick(context -> {
+                LivingEntity entity = context.entity();
+                // 每 50 ticks（2.5秒）更新再生效果
+                if (entity.tickCount % 60 == 0) {
+                    // 统计未冷却的九头蛇器官种类数量
+                    Set<Item> uniqueOrgans = new HashSet<>();
+                    for (ItemStack organ : context.data().getOrgans()) {
+                        if (!organ.is(WAICItemTagManager.HYDRA)) continue;
+                        Item item = organ.getItem();
+                        if (entity instanceof Player player && !player.getCooldowns().isOnCooldown(item)) {
+                            uniqueOrgans.add(item);
+                        }
+                    }
+                    int regenLevel = Math.max(0, uniqueOrgans.size() / 2 - 1);
+                    if (regenLevel > 0) {
+                        entity.addEffect(new MobEffectInstance(
+                            MobEffects.REGENERATION,
+                            80,
+                            regenLevel,
+                            false,
+                            false
+                        ));
+                    }
+                }
+            })
             .build();
     }
 }

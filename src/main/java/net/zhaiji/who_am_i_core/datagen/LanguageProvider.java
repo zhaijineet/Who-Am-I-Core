@@ -97,6 +97,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "Fire Dragon Liver");
         addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "Fire Dragon Gem");
         addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Fire Dragon Breath Sac");
+        addOrganSkill(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Sprays fire forward");
         addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "Fire Dragon Rib");
         addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "Fire Dragon Muscle");
 
@@ -110,6 +111,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "Ice Dragon Liver");
         addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "Ice Dragon Gem");
         addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Ice Dragon Breath Sac");
+        addOrganSkill(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Sprays ice forward");
         addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "Ice Dragon Rib");
         addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "Ice Dragon Muscle");
 
@@ -123,6 +125,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "Lightning Dragon Liver");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "Lightning Dragon Gem");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Lightning Dragon Breath Sac");
+        addOrganSkill(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Sprays lightning forward");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "Lightning Dragon Rib");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "Lightning Dragon Muscle");
 
@@ -342,6 +345,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "火龙肝脏");
         addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "火龙宝玉");
         addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "火龙吐息袋");
+        addOrganSkill(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "向前方喷射火焰");
         addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "火龙肋骨");
         addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "火龙肌肉");
 
@@ -355,6 +359,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "冰龙肝脏");
         addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "冰龙宝玉");
         addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "冰龙吐息袋");
+        addOrganSkill(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "向前方喷射冰霜");
         addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "冰龙肋骨");
         addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "冰龙肌肉");
 
@@ -368,6 +373,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "电龙肝脏");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "电龙宝玉");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "电龙吐息袋");
+        addOrganSkill(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "向前方喷射闪电");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "电龙肋骨");
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "电龙肌肉");
 
