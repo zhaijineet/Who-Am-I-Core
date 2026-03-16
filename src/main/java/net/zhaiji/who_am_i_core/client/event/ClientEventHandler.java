@@ -1,12 +1,15 @@
 package net.zhaiji.who_am_i_core.client.event;
 
 import net.minecraft.client.player.Input;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
+import net.zhaiji.who_am_i_core.register.WAICEntity;
 
 public class ClientEventHandler {
     /**
@@ -33,7 +36,8 @@ public class ClientEventHandler {
     public static void handlerMovementInputUpdateEvent(MovementInputUpdateEvent event) {
         Player player = event.getEntity();
         // 只影响非乘坐情况
-        if (player.getCooldowns().isOnCooldown(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get()) && !event.getEntity().isPassenger()) {
+        if (player.getCooldowns().isOnCooldown(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get()) && !event.getEntity()
+            .isPassenger()) {
             Input input = event.getInput();
             input.up = false;
             input.down = false;
@@ -43,5 +47,9 @@ public class ClientEventHandler {
             input.forwardImpulse = 0;
             input.leftImpulse = 0;
         }
+    }
+
+    public static void handlerEntityRenderersEvent$RegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(WAICEntity.HYDRA_VENOM_BREATH.get(), NoopRenderer::new);
     }
 }

@@ -15,14 +15,8 @@ public class WAICItemTagManager {
     // 召唤
     public static final TagKey<Item> SUMMON = create("summon");
 
-    // 传说
-    public static final TagKey<Item> LEGEND = create("legend");
-
     // 唯一
     public static final TagKey<Item> UNIQUE = create("unique");
-
-    // 九头蛇
-    public static final TagKey<Item> HYDRA = create("hydra");
 
     // 火龙
     public static final TagKey<Item> FIRE_DRAGON = create("fire_dragon");

@@ -30,14 +30,12 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(MowziesMobOrgans.CHEST_NOVA.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.CHEST_NOVA.get());
         tag(WAICItemTagManager.SUMMON).add(MowziesMobOrgans.CHEST_NOVA.get());
-        tag(WAICItemTagManager.LEGEND).add(MowziesMobOrgans.CHEST_NOVA.get());
         tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.CHEST_NOVA.get());
 
         // 制御棒器官标签
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(WAICItemTagManager.MECHANICAL).add(MowziesMobOrgans.CONTROL_ROD.get());
-        tag(WAICItemTagManager.LEGEND).add(MowziesMobOrgans.CONTROL_ROD.get());
         tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.CONTROL_ROD.get());
 
         tag(ItemTagManager.ORGANS).add(
@@ -234,21 +232,6 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPLEEN).add(IceAndFireOrgans.HYDRA_SPLEEN.get());
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.HYDRA_RIB.get());
         tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.HYDRA_MUSCLE.get());
-
-        // 九头蛇器官聚合标签（用于统计器官种类）
-        tag(WAICItemTagManager.HYDRA).add(
-            IceAndFireOrgans.HYDRA_HEART.get(),
-            IceAndFireOrgans.HYDRA_LUNG.get(),
-            IceAndFireOrgans.HYDRA_SPINE.get(),
-            IceAndFireOrgans.HYDRA_STOMACH.get(),
-            IceAndFireOrgans.HYDRA_INTESTINE.get(),
-            IceAndFireOrgans.HYDRA_SPLEEN.get(),
-            IceAndFireOrgans.HYDRA_RIB.get(),
-            IceAndFireOrgans.HYDRA_MUSCLE.get(),
-            IceAndFireOrgans.FANTASTICAL_APPENDIX.get(),
-            IceAndFireOrgans.FANTASTICAL_KIDNEY.get(),
-            IceAndFireOrgans.FANTASTICAL_LIVER.get()
-        );
 
         // 火龙器官聚合标签（用于计算火龙吐息阶段）
         tag(WAICItemTagManager.FIRE_DRAGON).add(

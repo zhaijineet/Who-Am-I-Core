@@ -151,12 +151,52 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // 九头蛇器官翻译
         addItem(IceAndFireOrgans.HYDRA_HEART, "Hydra Heart");
         addItem(IceAndFireOrgans.HYDRA_LUNG, "Hydra Lung");
+        addOrganDescription(IceAndFireOrgans.HYDRA_LUNG, "Consumes poison effect to release hydra venom breath");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 0, "Consumes current poison effect on the player");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 1, "Breath duration = log10(poison duration) seconds");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 2, "Deals damage every 4 ticks (damage = poison level + 1)");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 3, "Hit enemies receive original poison effect");
         addItem(IceAndFireOrgans.HYDRA_SPINE, "Hydra Spine");
         addItem(IceAndFireOrgans.HYDRA_STOMACH, "Hydra Stomach");
         addItem(IceAndFireOrgans.HYDRA_INTESTINE, "Hydra Intestine");
         addItem(IceAndFireOrgans.HYDRA_SPLEEN, "Hydra Spleen");
+        addOrganDescription(IceAndFireOrgans.HYDRA_SPLEEN, "Unique organ");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 0, "Converts poison to healing when health is below 50%");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 1, "Each second, consume poison duration to heal (heal amount = poison level × multiplier)");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 2, "Multiplier: 10 (≤10% HP), 5 (≤20% HP), 3 (≤50% HP)");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 3, "1 healing = 1 tick of poison duration consumed");
         addItem(IceAndFireOrgans.HYDRA_RIB, "Hydra Rib");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 0, "When taking damage, transfers 5s of poison to attacker");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 1, "Poison effect stacks on the attacker");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 2, "Reduces damage taken by poison level");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 3, "Example: Poison II reduces incoming damage by 2");
+
         addItem(IceAndFireOrgans.HYDRA_MUSCLE, "Hydra Muscle");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 0, "On melee attack, transfers 5s of poison to target");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 1, "Poison effect stacks on the target");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 2, "Deals extra damage equal to poison level");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 3, "Example: Poison II deals 2 extra damage");
+
+        // 九头蛇心脏
+        addOrganDescription(IceAndFireOrgans.HYDRA_HEART, "Converts poison into regeneration");
+        addOrganSkill(IceAndFireOrgans.HYDRA_HEART, 0, "Every 10 ticks, converts current poison to regeneration (1s, same level)");
+        addOrganSkill(IceAndFireOrgans.HYDRA_HEART, 1, "Immune to poison damage");
+
+        // 九头蛇脊柱
+        addOrganDescription(IceAndFireOrgans.HYDRA_SPINE, "Cheats death through poison");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 0, "When dying with >10s of poison, recover to 10% HP");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 1, "Increases poison level and halves remaining duration");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 2, "Cancels death event");
+
+        // 九头蛇胃
+        addOrganDescription(IceAndFireOrgans.HYDRA_STOMACH, "Converts food negative effects into poison");
+        addOrganSkill(IceAndFireOrgans.HYDRA_STOMACH, 0, "When eating, converts harmful food effects to poison");
+        addOrganSkill(IceAndFireOrgans.HYDRA_STOMACH, 1, "Duration = harmful effects duration × stomach count");
+        addOrganSkill(IceAndFireOrgans.HYDRA_STOMACH, 2, "Adds existing poison duration and takes max amplifier");
+
+        // 九头蛇肠子
+        addOrganDescription(IceAndFireOrgans.HYDRA_INTESTINE, "Amplifies food effects");
+        addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, 0, "Increases duration of food effects by 50% per organ");
 
         // 幻想种器官翻译
         addItem(IceAndFireOrgans.FANTASTICAL_HEART, "Fantastical Heart");
@@ -280,6 +320,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.SQUASH, "Squash");
 
         addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
+        addAttribute(WAICAttribute.BLOCK, "Block");
     }
 
     public void Chinese() {
@@ -399,12 +440,51 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // 九头蛇器官翻译
         addItem(IceAndFireOrgans.HYDRA_HEART, "九头蛇心脏");
         addItem(IceAndFireOrgans.HYDRA_LUNG, "九头蛇肺脏");
+        addOrganDescription(IceAndFireOrgans.HYDRA_LUNG, "消耗中毒效果释放九头蛇毒物吐息");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 0, "消耗玩家身上的中毒效果");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 1, "吐息持续时长 = log10(中毒时长) 秒");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 2, "每4 tick造成一次伤害（伤害 = 中毒等级 + 1）");
+        addOrganSkill(IceAndFireOrgans.HYDRA_LUNG, 3, "被击中的敌人获得原始中毒效果");
         addItem(IceAndFireOrgans.HYDRA_SPINE, "九头蛇脊柱");
         addItem(IceAndFireOrgans.HYDRA_STOMACH, "九头蛇胃");
         addItem(IceAndFireOrgans.HYDRA_INTESTINE, "九头蛇肠子");
         addItem(IceAndFireOrgans.HYDRA_SPLEEN, "九头蛇脾脏");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 0, "血量低于50%时，将中毒效果转化为治疗");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 1, "每秒消耗中毒时长来治疗（治疗量 = 中毒等级 × 系数）");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 2, "系数：≤10%血量时为10，≤20%时为5，≤50%时为3");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 3, "1点治疗 = 消耗1 tick中毒时长");
         addItem(IceAndFireOrgans.HYDRA_RIB, "九头蛇肋骨");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 0, "受伤时，将自身5秒中毒效果转移给攻击者");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 1, "中毒效果可在攻击者身上叠加");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 2, "减少等同于中毒等级的伤害");
+        addOrganSkill(IceAndFireOrgans.HYDRA_RIB, 3, "例如：中毒II减少2点受到的伤害");
+
         addItem(IceAndFireOrgans.HYDRA_MUSCLE, "九头蛇肌肉");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 0, "近战攻击时，将自身5秒中毒效果转移给目标");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 1, "中毒效果可在目标身上叠加");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 2, "造成等同于中毒等级的额外伤害");
+        addOrganSkill(IceAndFireOrgans.HYDRA_MUSCLE, 3, "例如：中毒II造成2点额外伤害");
+
+        // 九头蛇心脏
+        addOrganDescription(IceAndFireOrgans.HYDRA_HEART, "将中毒转化为再生");
+        addOrganSkill(IceAndFireOrgans.HYDRA_HEART, 0, "每10 tick将当前中毒效果转化为再生效果（持续1秒，等级相同）");
+        addOrganSkill(IceAndFireOrgans.HYDRA_HEART, 1, "免疫中毒类型伤害");
+
+        // 九头蛇脊柱
+        addOrganDescription(IceAndFireOrgans.HYDRA_SPINE, "通过中毒欺骗死亡");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 0, "死亡时若有超过10秒的中毒效果，恢复至10%血量");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 1, "提升中毒等级并将剩余时长折半");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 2, "取消死亡事件");
+
+        // 九头蛇胃
+        addOrganDescription(IceAndFireOrgans.HYDRA_STOMACH, "将食物负面效果转化为中毒");
+        addOrganSkill(IceAndFireOrgans.HYDRA_STOMACH, 0, "进食时，将有害食物效果转化为中毒效果");
+        addOrganSkill(IceAndFireOrgans.HYDRA_STOMACH, 1, "中毒时长 = 有害效果时长 × 胃数量");
+        addOrganSkill(IceAndFireOrgans.HYDRA_STOMACH, 2, "加上已有中毒时长，并取最高等级");
+
+        // 九头蛇肠子
+        addOrganDescription(IceAndFireOrgans.HYDRA_INTESTINE, "放大食物效果");
+        addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, 0, "每个器官增加50%的食物效果时长");
 
         // 幻想种器官翻译
         addItem(IceAndFireOrgans.FANTASTICAL_HEART, "幻想种心脏");
@@ -528,6 +608,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.SQUASH, "窝瓜");
 
         addAttribute(WAICAttribute.TEMPERATURE, "温度");
+        addAttribute(WAICAttribute.BLOCK, "格挡");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {

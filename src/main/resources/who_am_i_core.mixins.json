@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EntityUmvuthanaFollowerToPlayerMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "LivingEntityMixin",
+    "PoisonMobEffectMixin"
   ],
   "injectors": {
     "defaultRequire": 1

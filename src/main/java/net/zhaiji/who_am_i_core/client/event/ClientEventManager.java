@@ -10,6 +10,7 @@ public class ClientEventManager {
     }
 
     public static void modBusListener(IEventBus modBus) {
+        modBus.addListener(ClientEventHandler::handlerEntityRenderersEvent$RegisterRenderers);
     }
 
 

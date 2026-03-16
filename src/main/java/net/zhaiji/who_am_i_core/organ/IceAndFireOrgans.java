@@ -5,18 +5,13 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.zhaiji.chestcavitybeyond.builder.OrganBuilder;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
-import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Supplier;
 
 public class IceAndFireOrgans {
@@ -365,6 +360,10 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
             .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(3))
+            .skill(IceAndFireOrganhUtil::hydraLungBreath)
+            .cooldown(20)
             .build()
     );
 
@@ -374,6 +373,8 @@ public class IceAndFireOrgans {
         () -> OrganBuilder.builder()
             .addValueAttribute(InitAttribute.NERVES, 1.75)
             .addValueAttribute(InitAttribute.DEFENSE, 0.875)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
@@ -382,6 +383,8 @@ public class IceAndFireOrgans {
         "hydra_stomach",
         () -> OrganBuilder.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 1.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
@@ -390,6 +393,8 @@ public class IceAndFireOrgans {
         "hydra_intestine",
         () -> OrganBuilder.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 1.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
             .build()
     );
 
@@ -398,6 +403,8 @@ public class IceAndFireOrgans {
         "hydra_spleen",
         () -> OrganBuilder.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 1.5)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(3))
+            .added(IceAndFireOrganhUtil::hydraSpleenAdded)
             .build()
     );
 
@@ -406,6 +413,7 @@ public class IceAndFireOrgans {
         "hydra_rib",
         () -> OrganBuilder.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(3))
             .build()
     );
 
@@ -415,6 +423,7 @@ public class IceAndFireOrgans {
         () -> OrganBuilder.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 1.5)
             .addValueAttribute(InitAttribute.SPEED, 1.25)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(3))
             .build()
     );
 
@@ -531,29 +540,19 @@ public class IceAndFireOrgans {
         OrganBuilder.builder(IafItems.HYDRA_HEART.get())
             .addValueAttribute(InitAttribute.HEALTH, 1.5)
             .addValueAttribute(InitAttribute.METABOLISM, 10)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .tick(context -> {
                 LivingEntity entity = context.entity();
-                // 每 50 ticks（2.5秒）更新再生效果
-                if (entity.tickCount % 60 == 0) {
-                    // 统计未冷却的九头蛇器官种类数量
-                    Set<Item> uniqueOrgans = new HashSet<>();
-                    for (ItemStack organ : context.data().getOrgans()) {
-                        if (!organ.is(WAICItemTagManager.HYDRA)) continue;
-                        Item item = organ.getItem();
-                        if (entity instanceof Player player && !player.getCooldowns().isOnCooldown(item)) {
-                            uniqueOrgans.add(item);
-                        }
-                    }
-                    int regenLevel = Math.max(0, uniqueOrgans.size() / 2 - 1);
-                    if (regenLevel > 0) {
-                        entity.addEffect(new MobEffectInstance(
-                            MobEffects.REGENERATION,
-                            80,
-                            regenLevel,
-                            false,
-                            false
-                        ));
-                    }
+                if (entity.isOnFire() || entity.tickCount % 10 != 0) return;
+                MobEffectInstance poisonEffect = entity.getEffect(MobEffects.POISON);
+                if (poisonEffect != null) {
+                    int amplifier = poisonEffect.getAmplifier();
+                    entity.addEffect(new MobEffectInstance(
+                        MobEffects.REGENERATION,
+                        20,
+                        amplifier
+                    ));
                 }
             })
             .build();
