@@ -2,59 +2,19 @@ package net.zhaiji.who_am_i_core.util;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
+import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
-import net.zhaiji.chestcavitybeyond.util.MathUtil;
+import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class WAICOrganUtil {
-    /**
-     * 闹鬼的骨头：胸腔打开时设置可以移动的标记
-     */
-    public static void hauntedBoneChestCavityOpen(ChestCavitySlotContext context) {
-        ChestCavityData data = context.data();
-        if (data == null) return;
-        Level level = data.getOwner().level();
-        if (level.isClientSide()) return;
-        ItemStack stack = context.stack();
-        CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        tag.putBoolean("canChange", true);
-        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-    }
-
-    /**
-     * 闹鬼的骨头：胸腔打开时随机移动到一个空槽位
-     */
-    public static void hauntedBoneChestCavityClose(ChestCavitySlotContext context) {
-        ChestCavityData data = context.data();
-        if (data == null) return;
-        Level level = data.getOwner().level();
-        if (level.isClientSide()) return;
-        List<Integer> emptySlots = new ArrayList<>();
-        for (int i = 0; i < 27; i++) {
-            if (data.getStackInSlot(i).isEmpty()) {
-                emptySlots.add(i);
-            }
-        }
-        if (emptySlots.isEmpty()) return;
-        ItemStack stack = context.stack();
-        CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        if (tag.contains("canChange") && !tag.getBoolean("canChange")) return;
-        tag.putBoolean("canChange", false);
-        data.setStackInSlot(context.index(), ItemStack.EMPTY);
-        int targetSlot = emptySlots.get(level.random.nextInt(emptySlots.size()));
-        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-        data.setStackInSlot(targetSlot, stack);
-    }
-
     /**
      * 计算周围8个位置的槽位索引
      */
@@ -96,17 +56,9 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 计算附魔加成：√level
-     */
-    private static double calculateBonus(int levels) {
-        return Math.floor(Math.sqrt(levels));
-    }
-
-    /**
      * 浮霜器官的附魔加成
-     * 参考铁砧工艺的无情属性计算方式
      */
     public static double frostMetalBonus(ChestCavitySlotContext context) {
-        return calculateBonus(getTotalEnchantmentLevels(context.stack()));
+        return Math.floor(Math.sqrt(getTotalEnchantmentLevels(context.stack())));
     }
 }

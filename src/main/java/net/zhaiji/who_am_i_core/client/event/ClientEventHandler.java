@@ -49,6 +49,9 @@ public class ClientEventHandler {
         }
     }
 
+    /**
+     * @param event 实体渲染注册
+     */
     public static void handlerEntityRenderersEvent$RegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(WAICEntity.HYDRA_VENOM_BREATH.get(), NoopRenderer::new);
     }

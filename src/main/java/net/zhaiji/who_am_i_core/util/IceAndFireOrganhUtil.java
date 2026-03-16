@@ -5,135 +5,71 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
 import net.zhaiji.who_am_i_core.task.HydraLungBreathTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 
-/**
- * 龙吐息工具类
- * 使用自定义 Task 系统实现持续性施法
- * <p>
- * 实现说明：
- * - 使用 Task 系统管理持续性施法，不触发施法动作和音效
- * - 不添加移速限制
- * - 直接复用 ISNB 的投射物类进行伤害检测
- * - 客户端/服务器端分离，避免重复调用
- */
 public class IceAndFireOrganhUtil {
     /**
-     * 最高10级法术
+     * 计算吐息等级
      */
-    private static final int MAX_SPELL_LEVEL = 10;
-    /**
-     * 默认持续时间（5秒 = 100 ticks）
-     */
-    private static final int DEFAULT_DURATION_TICKS = 100;
-
-    /**
-     * 计算法术等级（每1个器官提升1级，最高10级）
-     * 1个器官=1级，2个器官=2级，...10个器官=10级
-     * 0个器官则无法施法（返回0，低于最小有效等级1）
-     */
-    private static int getSpellLevel(ChestCavityData data, TagKey<Item> organTag) {
-        return Math.min(data.getOrganCount(organTag), MAX_SPELL_LEVEL);
+    private static int getBreathLevel(ChestCavityData data, TagKey<Item> organTag) {
+        return Math.min(data.getOrganCount(organTag), 10);
     }
 
     /**
-     * 火龙吐息 - 释放火焰吐息
+     * 火龙吐息
      */
-    public static void fireDragonBreath(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        Level level = entity.level();
-
-        if (level.isClientSide) {
-            return;  // 客户端不处理
-        }
-
+    public static void fireDragonBreathSacSkill(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
-        int spellLevel = getSpellLevel(data, WAICItemTagManager.FIRE_DRAGON);
-
-        if (spellLevel < 1) {
-            return;  // 0级无法施法
-        }
-
-        // 创建持续性施法任务（持续3秒 = 60 ticks）
-        DragonBreathCastingTask task = new DragonBreathCastingTask(
-            data,
-            DragonBreathCastingTask.BreathType.FIRE_BREATH,
-            spellLevel,
-            DEFAULT_DURATION_TICKS
+        data.addTask(
+            new DragonBreathCastingTask(
+                data,
+                DragonBreathCastingTask.BreathType.FIRE_BREATH,
+                getBreathLevel(data, WAICItemTagManager.FIRE_DRAGON)
+            )
         );
-        data.addTask(task);
     }
 
     /**
-     * 冰龙吐息 - 释放寒冰锥
+     * 冰龙吐息
      */
-    public static void iceDragonBreath(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        Level level = entity.level();
-
-        if (level.isClientSide) {
-            return;  // 客户端不处理
-        }
-
+    public static void iceDragonBreathSacSkill(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
-        int spellLevel = getSpellLevel(data, WAICItemTagManager.ICE_DRAGON);
-
-        if (spellLevel < 1) {
-            return;  // 0级无法施法
-        }
-
-        // 创建持续性施法任务（持续3秒 = 60 ticks）
-        DragonBreathCastingTask task = new DragonBreathCastingTask(
-            data,
-            DragonBreathCastingTask.BreathType.ICE_BREATH,
-            spellLevel,
-            DEFAULT_DURATION_TICKS
+        data.addTask(
+            new DragonBreathCastingTask(
+                data,
+                DragonBreathCastingTask.BreathType.ICE_BREATH,
+                getBreathLevel(data, WAICItemTagManager.ICE_DRAGON)
+            )
         );
-        data.addTask(task);
     }
 
     /**
-     * 电龙吐息 - 释放电刑
+     * 电龙吐息
      */
-    public static void lightningDragonBreath(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        Level level = entity.level();
-
-        if (level.isClientSide) {
-            return;  // 客户端不处理
-        }
-
+    public static void lightningDragonBreathSacSkill(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
-        int spellLevel = getSpellLevel(data, WAICItemTagManager.LIGHTNING_DRAGON);
-
-        if (spellLevel < 1) {
-            return;  // 0级无法施法
-        }
-
-        // 创建持续性施法任务（持续3秒 = 60 ticks）
-        DragonBreathCastingTask task = new DragonBreathCastingTask(
-            data,
-            DragonBreathCastingTask.BreathType.LIGHTNING_BREATH,
-            spellLevel,
-            DEFAULT_DURATION_TICKS
+        data.addTask(
+            new DragonBreathCastingTask(
+                data,
+                DragonBreathCastingTask.BreathType.LIGHTNING_BREATH,
+                getBreathLevel(data, WAICItemTagManager.LIGHTNING_DRAGON)
+            )
         );
-        data.addTask(task);
     }
 
     /**
-     * 九头蛇脾脏添加回调
-     * 唯一效果器官，检查是否已存在Task，避免重复创建
+     * 九头蛇脾脏
      */
     public static void hydraSpleenAdded(ChestCavitySlotContext slotContext) {
         ChestCavityData data = slotContext.data();
-        // 检查是否已存在Task
         for (IChestCavityTask task : data.getTasks()) {
             if (task instanceof HydraSpleenTask && !task.canRemove(slotContext.entity())) {
                 return;
@@ -143,34 +79,130 @@ public class IceAndFireOrganhUtil {
     }
 
     /**
-     * 九头蛇肺毒物吐息 - 消耗中毒效果释放毒物吐息
+     * 九头蛇吐息
      * <p>
-     * 技能效果：
-     * 1. 获取玩家当前的中毒效果（时长和等级）
-     * 2. 移除玩家的中毒效果
-     * 3. 吐息持续时间 = log10(中毒时长) 秒（转换为tick）
-     * 4. 伤害频率 = 每4 tick一次
-     * 5. 单次伤害 = 中毒等级 + 1
-     * 6. 受影响的敌人施加原始中毒效果（时长 = 原始时长，等级 = 原始等级）
+     * 消耗中毒效果，释放吐息
      * </p>
-     *
-     * @param context 胸腔槽位上下文
      */
-    public static void hydraLungBreath(ChestCavitySlotContext context) {
+    public static void hydraLungSkill(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        Level level = entity.level();
-        if (level.isClientSide()) return;
-        // 获取玩家当前的中毒效果
         MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
         if (poison == null || poison.getDuration() <= 0) return;
-
-        ChestCavityData data = context.data();
-        int poisonDuration = poison.getDuration();
-        int poisonAmplifier = poison.getAmplifier();
-        // 移除玩家的中毒效果
         entity.removeEffect(MobEffects.POISON);
-        // 创建毒物吐息任务
-        HydraLungBreathTask task = new HydraLungBreathTask(poisonAmplifier, poisonDuration);
-        data.addTask(task);
+        context.data().addTask(
+            new HydraLungBreathTask(
+                poison.getAmplifier(),
+                poison.getDuration()
+            )
+        );
+    }
+
+    /**
+     * 九头蛇脊柱复活效果
+     *
+     * @return 是否取消事件
+     */
+    public static boolean hydraSpineSkill(LivingEntity entity, ChestCavityData data) {
+        if (!data.hasOrgan(IceAndFireOrgans.HYDRA_SPINE.get())) return false;
+        MobEffectInstance poisonEffect = entity.getEffect(MobEffects.POISON);
+        if (poisonEffect == null || poisonEffect.getDuration() < 200) return false;
+        // 回复10%血量
+        entity.setHealth(entity.getMaxHealth() * 0.1F);
+        int currentAmplifier = poisonEffect.getAmplifier();
+        // 移除旧中毒效果，添加新效果
+        // 必须先移除，否则当新效果结束后会恢复旧效果
+        entity.removeEffect(MobEffects.POISON);
+        entity.addEffect(new MobEffectInstance(
+            MobEffects.POISON,
+            // 减半时间
+            poisonEffect.getDuration() / 2,
+            // 提升中毒等级（最高5级）
+            // 如果等级本身大于5级，就保留原等级
+            Math.min(currentAmplifier + 1, Math.max(currentAmplifier, 4))
+        ));
+        return true;
+    }
+
+    /**
+     * 从实体转移部分中毒效果到另一个实体
+     *
+     * @param from   效果来源实体
+     * @param to     效果目标实体
+     * @param amount 转移的时长
+     * @return 转移的中毒等级+1（用于伤害计算)
+     */
+    private static float transferPoison(LivingEntity from, LivingEntity to, int amount) {
+        MobEffectInstance fromPoison = from.getEffect(MobEffects.POISON);
+        if (fromPoison == null) return 0;
+        int duration = fromPoison.getDuration();
+        if (duration == 0) return 0;
+
+        int amplifier = fromPoison.getAmplifier();
+        int durationToTransfer = fromPoison.isInfiniteDuration() ? amount : Math.min(amount, duration);
+        int newDuration = fromPoison.isInfiniteDuration() ? -1 : duration - durationToTransfer;
+
+        // 更新来源实体的中毒效果
+        if (!fromPoison.isInfiniteDuration()) {
+            from.removeEffect(MobEffects.POISON);
+        }
+        if (newDuration != 0) {
+            from.addEffect(
+                new MobEffectInstance(
+                    MobEffects.POISON,
+                    newDuration,
+                    amplifier,
+                    fromPoison.isAmbient(),
+                    fromPoison.isVisible(),
+                    fromPoison.showIcon()
+                )
+            );
+        }
+        // 将中毒效果施加到目标实体
+        // to可能为null
+        if (to != null) {
+            MobEffectInstance toPoison = to.getEffect(MobEffects.POISON);
+            if (toPoison != null) {
+                to.removeEffect(MobEffects.POISON);
+                to.addEffect(
+                    new MobEffectInstance(
+                        MobEffects.POISON,
+                        toPoison.mapDuration(toDuration -> toDuration + durationToTransfer),
+                        Math.max(toPoison.getAmplifier(), amplifier),
+                        toPoison.isAmbient(),
+                        toPoison.isVisible(),
+                        toPoison.showIcon()
+                    )
+                );
+            } else {
+                to.addEffect(
+                    new MobEffectInstance(
+                        MobEffects.POISON,
+                        durationToTransfer,
+                        amplifier
+                    )
+                );
+            }
+        }
+        return amplifier + 1;
+    }
+
+    /**
+     * 九头蛇肋骨技能
+     * 从目标转移中毒效果到攻击者，抵消伤害
+     */
+    public static float hydraRibSkill(LivingEntity target, LivingEntity attacker) {
+        ChestCavityData data = ChestCavityUtil.getData(target);
+        if (!data.hasOrgan(IceAndFireOrgans.HYDRA_RIB.get())) return 0;
+        return transferPoison(target, attacker, 100);
+    }
+
+    /**
+     * 九头蛇肌肉技能
+     * 从攻击者转移中毒效果到目标，造成额外伤害
+     */
+    public static float hydraMuscleSkill(LivingEntity attacker, LivingEntity target) {
+        ChestCavityData data = ChestCavityUtil.getData(attacker);
+        if (!data.hasOrgan(IceAndFireOrgans.HYDRA_MUSCLE.get())) return 0;
+        return transferPoison(attacker, target, 100);
     }
 }

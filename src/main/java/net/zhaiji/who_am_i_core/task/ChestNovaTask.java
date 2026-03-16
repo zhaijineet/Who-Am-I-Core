@@ -31,28 +31,14 @@ import java.util.UUID;
 
 /**
  * 胸中新星任务
- * <p>
- * 管理胸腔中多个面具的追随者召唤、冷却和重生
- * </P>
  * TODO 目前只有玩家可以召唤，后续考虑让其他实体也能召唤
+ * TODO AI写的，待审查、待优化
  */
 public class ChestNovaTask implements ISerializableTask {
     /**
      * 任务类型标识
      */
     public static final ResourceLocation TYPE = WhoAmICore.of("chest_nova");
-    /**
-     * 30秒冷却时间
-     */
-    private static final int LONG_COOLDOWN_TICKS = 20 * 30;
-    /**
-     * 10秒冷却时间
-     */
-    private static final int COOLDOWN_TICKS = 20 * 10;
-    /**
-     * 最大恢复尝试次数
-     */
-    private static final int MAX_RECOVERY_ATTEMPTS = 100;
     /**
      * 面具槽位 -> 追随者生物的映射
      */
@@ -244,7 +230,8 @@ public class ChestNovaTask implements ISerializableTask {
                 int attempts = recoveryAttempts.get(maskSlot) + 1;
                 recoveryAttempts.put(maskSlot, attempts);
 
-                if (attempts >= MAX_RECOVERY_ATTEMPTS) {
+                // 最大尝试100次
+                if (attempts >= 100) {
                     recoveryAttempts.remove(maskSlot);
                     cooldowns.put(maskSlot, getCooldownTicks());
                     return true;
@@ -390,9 +377,9 @@ public class ChestNovaTask implements ISerializableTask {
      */
     private int getCooldownTicks() {
         if (isControlRodNearby()) {
-            return COOLDOWN_TICKS; // 10秒冷却
+            return 20 * 10; // 10秒冷却
         } else {
-            return LONG_COOLDOWN_TICKS; // 30秒冷却
+            return 20 * 30; // 30秒冷却
         }
     }
 

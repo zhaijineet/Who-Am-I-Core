@@ -7,7 +7,7 @@ import net.minecraft.world.item.Tiers;
 import net.zhaiji.chestcavitybeyond.builder.OrganBuilder;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -531,8 +531,8 @@ public class WAICOrgans {
         "haunted_bone",
         () -> OrganBuilder.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .chestCavityOpen(WAICOrganUtil::hauntedBoneChestCavityOpen)
-            .chestCavityClose(WAICOrganUtil::hauntedBoneChestCavityClose)
+            .chestCavityOpen(WAICOrganSkillUtil::hauntedBoneChestCavityOpen)
+            .chestCavityClose(WAICOrganSkillUtil::hauntedBoneChestCavityClose)
             .addValueAttribute(InitAttribute.SPEED, 1)
             .addValueAttribute(Attributes.LUCK, 1)
             .build()

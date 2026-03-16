@@ -90,7 +90,7 @@ public class IceAndFireOrgans {
         "fire_dragon_breath_sac",
         () -> OrganBuilder.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(IceAndFireOrganhUtil::fireDragonBreath)
+            .skill(IceAndFireOrganhUtil::fireDragonBreathSacSkill)
             .cooldown(10 * 20)
             .build()
     );
@@ -187,7 +187,7 @@ public class IceAndFireOrgans {
         "ice_dragon_breath_sac",
         () -> OrganBuilder.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(IceAndFireOrganhUtil::iceDragonBreath)
+            .skill(IceAndFireOrganhUtil::iceDragonBreathSacSkill)
             .cooldown(10 * 20)
             .build()
     );
@@ -284,7 +284,7 @@ public class IceAndFireOrgans {
         "lightning_dragon_breath_sac",
         () -> OrganBuilder.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(IceAndFireOrganhUtil::lightningDragonBreath)
+            .skill(IceAndFireOrganhUtil::lightningDragonBreathSacSkill)
             .cooldown(10 * 20)
             .build()
     );
@@ -362,7 +362,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip(3))
-            .skill(IceAndFireOrganhUtil::hydraLungBreath)
+            .skill(IceAndFireOrganhUtil::hydraLungSkill)
             .cooldown(20)
             .build()
     );
@@ -545,14 +545,15 @@ public class IceAndFireOrgans {
             .tick(context -> {
                 LivingEntity entity = context.entity();
                 if (entity.isOnFire() || entity.tickCount % 10 != 0) return;
-                MobEffectInstance poisonEffect = entity.getEffect(MobEffects.POISON);
-                if (poisonEffect != null) {
-                    int amplifier = poisonEffect.getAmplifier();
-                    entity.addEffect(new MobEffectInstance(
-                        MobEffects.REGENERATION,
-                        20,
-                        amplifier
-                    ));
+                MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
+                if (poison != null) {
+                    entity.addEffect(
+                        new MobEffectInstance(
+                            MobEffects.REGENERATION,
+                            20,
+                            poison.getAmplifier()
+                        )
+                    );
                 }
             })
             .build();
