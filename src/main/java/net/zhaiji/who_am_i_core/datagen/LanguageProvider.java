@@ -6,6 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
@@ -162,7 +164,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.HYDRA_SPLEEN, "Hydra Spleen");
         addOrganDescription(IceAndFireOrgans.HYDRA_SPLEEN, "Unique organ");
         addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 0, "Converts poison to healing when health is below 50%");
-        addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 1, "Each second, consume poison duration to heal (heal amount = poison level × multiplier)");
+        addOrganSkill(
+            IceAndFireOrgans.HYDRA_SPLEEN,
+            1,
+            "Each second, consume poison duration to heal (heal amount = poison level × multiplier)"
+        );
         addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 2, "Multiplier: 10 (≤10% HP), 5 (≤20% HP), 3 (≤50% HP)");
         addOrganSkill(IceAndFireOrgans.HYDRA_SPLEEN, 3, "1 healing = 1 tick of poison duration consumed");
         addItem(IceAndFireOrgans.HYDRA_RIB, "Hydra Rib");
@@ -321,6 +327,26 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
         addAttribute(WAICAttribute.BLOCK, "Block");
+        addAttribute(WAICAttribute.COUNTER_ATTACK, "Counter Attack");
+        addAttribute(WAICAttribute.HEAL, "Heal");
+        addAttribute(WAICAttribute.MELEE_DAMAGE, "Melee Damage");
+        addAttribute(WAICAttribute.RANGED_DAMAGE, "Ranged Damage");
+        addAttribute(WAICAttribute.MAGIC_DAMAGE, "Magic Damage");
+        addAttribute(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, "Melee Damage Percentage");
+        addAttribute(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, "Ranged Damage Percentage");
+        addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "Magic Damage Percentage");
+
+        // 伤害类型标签翻译
+        add(WAICDamageTagManager.IS_MELEE, "Melee");
+
+        // 物品标签翻译
+        add(WAICItemTagManager.MAGIC, "Magic");
+        add(WAICItemTagManager.MECHANICAL, "Mechanical");
+        add(WAICItemTagManager.SUMMON, "Summon");
+        add(WAICItemTagManager.UNIQUE, "Unique");
+        add(WAICItemTagManager.FIRE_DRAGON, "Fire Dragon");
+        add(WAICItemTagManager.ICE_DRAGON, "Ice Dragon");
+        add(WAICItemTagManager.LIGHTNING_DRAGON, "Lightning Dragon");
     }
 
     public void Chinese() {
@@ -609,6 +635,26 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addAttribute(WAICAttribute.TEMPERATURE, "温度");
         addAttribute(WAICAttribute.BLOCK, "格挡");
+        addAttribute(WAICAttribute.COUNTER_ATTACK, "反击");
+        addAttribute(WAICAttribute.HEAL, "治疗");
+        addAttribute(WAICAttribute.MELEE_DAMAGE, "近战伤害");
+        addAttribute(WAICAttribute.RANGED_DAMAGE, "远程伤害");
+        addAttribute(WAICAttribute.MAGIC_DAMAGE, "魔法伤害");
+        addAttribute(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, "近战伤害百分比");
+        addAttribute(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, "远程伤害百分比");
+        addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "魔法伤害百分比");
+
+        // 伤害类型标签翻译
+        add(WAICDamageTagManager.IS_MELEE, "近战");
+
+        // 物品标签翻译
+        add(WAICItemTagManager.MAGIC, "魔法");
+        add(WAICItemTagManager.MECHANICAL, "机械");
+        add(WAICItemTagManager.SUMMON, "召唤");
+        add(WAICItemTagManager.UNIQUE, "唯一");
+        add(WAICItemTagManager.FIRE_DRAGON, "火龙");
+        add(WAICItemTagManager.ICE_DRAGON, "冰龙");
+        add(WAICItemTagManager.LIGHTNING_DRAGON, "电龙");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {

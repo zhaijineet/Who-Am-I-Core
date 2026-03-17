@@ -1,5 +1,13 @@
 {
   "attribute.who_am_i_core.block": "Block",
+  "attribute.who_am_i_core.counter_attack": "Counter Attack",
+  "attribute.who_am_i_core.heal": "Heal",
+  "attribute.who_am_i_core.magic_damage": "Magic Damage",
+  "attribute.who_am_i_core.magic_damage_percentage": "Magic Damage Percentage",
+  "attribute.who_am_i_core.melee_damage": "Melee Damage",
+  "attribute.who_am_i_core.melee_damage_percentage": "Melee Damage Percentage",
+  "attribute.who_am_i_core.ranged_damage": "Ranged Damage",
+  "attribute.who_am_i_core.ranged_damage_percentage": "Ranged Damage Percentage",
   "attribute.who_am_i_core.temperature": "Temperature",
   "item.iceandfire.fire_dragon_heart": "Fire Dragon Heart",
   "item.iceandfire.hydra_heart": "Hydra Heart",
@@ -230,5 +238,13 @@
   "organ.who_am_i_core.ice_dragon_breath_sac.skill": "Sprays ice forward",
   "organ.who_am_i_core.lightning_dragon_breath_sac.skill": "Sprays lightning forward",
   "organ.who_am_i_core.sword_bone.description": "As sharp as a sword",
-  "organ.who_am_i_core.tooltips.frost_metal_merciless": "Merciless: convert all enchantments into organ attributes"
+  "organ.who_am_i_core.tooltips.frost_metal_merciless": "Merciless: convert all enchantments into organ attributes",
+  "tag.damage_type.who_am_i_core.is_melee": "Melee",
+  "tag.item.who_am_i_core.fire_dragon": "Fire Dragon",
+  "tag.item.who_am_i_core.ice_dragon": "Ice Dragon",
+  "tag.item.who_am_i_core.lightning_dragon": "Lightning Dragon",
+  "tag.item.who_am_i_core.magic": "Magic",
+  "tag.item.who_am_i_core.mechanical": "Mechanical",
+  "tag.item.who_am_i_core.summon": "Summon",
+  "tag.item.who_am_i_core.unique": "Unique"
 }

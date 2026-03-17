@@ -1,5 +1,13 @@
 {
   "attribute.who_am_i_core.block": "格挡",
+  "attribute.who_am_i_core.counter_attack": "反击",
+  "attribute.who_am_i_core.heal": "治疗",
+  "attribute.who_am_i_core.magic_damage": "魔法伤害",
+  "attribute.who_am_i_core.magic_damage_percentage": "魔法伤害百分比",
+  "attribute.who_am_i_core.melee_damage": "近战伤害",
+  "attribute.who_am_i_core.melee_damage_percentage": "近战伤害百分比",
+  "attribute.who_am_i_core.ranged_damage": "远程伤害",
+  "attribute.who_am_i_core.ranged_damage_percentage": "远程伤害百分比",
   "attribute.who_am_i_core.temperature": "温度",
   "item.iceandfire.fire_dragon_heart": "火龙心脏",
   "item.iceandfire.hydra_heart": "九头蛇心脏",
@@ -229,5 +237,13 @@
   "organ.who_am_i_core.ice_dragon_breath_sac.skill": "向前方喷射冰霜",
   "organ.who_am_i_core.lightning_dragon_breath_sac.skill": "向前方喷射闪电",
   "organ.who_am_i_core.sword_bone.description": "剑一般锋利",
-  "organ.who_am_i_core.tooltips.frost_metal_merciless": "无情：将所有魔咒转换为器官属性"
+  "organ.who_am_i_core.tooltips.frost_metal_merciless": "无情：将所有魔咒转换为器官属性",
+  "tag.damage_type.who_am_i_core.is_melee": "近战",
+  "tag.item.who_am_i_core.fire_dragon": "火龙",
+  "tag.item.who_am_i_core.ice_dragon": "冰龙",
+  "tag.item.who_am_i_core.lightning_dragon": "电龙",
+  "tag.item.who_am_i_core.magic": "魔法",
+  "tag.item.who_am_i_core.mechanical": "机械",
+  "tag.item.who_am_i_core.summon": "召唤",
+  "tag.item.who_am_i_core.unique": "唯一"
 }

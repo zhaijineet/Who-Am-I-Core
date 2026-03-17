@@ -132,6 +132,7 @@ public class IceAndFireOrganhUtil {
      * @return 转移的中毒等级+1（用于伤害计算)
      */
     private static float transferPoison(LivingEntity from, LivingEntity to, int amount) {
+        if(from == to) return 0;
         MobEffectInstance fromPoison = from.getEffect(MobEffects.POISON);
         if (fromPoison == null) return 0;
         int duration = fromPoison.getDuration();

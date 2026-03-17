@@ -2,10 +2,13 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.iafenvoy.iceandfire.registry.IafEntities;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -17,12 +20,13 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
-import org.jetbrains.annotations.Nullable;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 public class CommonEventHandler {
     public static void handlerFMLCommonSetupEvent(FMLCommonSetupEvent event) {
@@ -114,29 +118,47 @@ public class CommonEventHandler {
     public static void handlerLivingDamageEvent$Pre(LivingDamageEvent.Pre event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide()) return;
-        double blockValue = entity.getAttributeValue(WAICAttribute.BLOCK);
-        // 应用格挡属性减伤
-        if (blockValue > 0) {
-            // 计算减伤后的伤害
-            float reducedDamage = Math.max(0, event.getNewDamage() - (float) blockValue);
-            event.setNewDamage(reducedDamage);
-        }
-        DamageSource damageSource = event.getSource();
-        LivingEntity attacker = damageSource.getDirectEntity() instanceof LivingEntity attackerEntity
-                                          ? attackerEntity
-                                          : null;
-        // 九头蛇肋骨效果
-        float damageToReduce = IceAndFireOrganhUtil.hydraRibSkill(entity, attacker);
-        if (damageToReduce > 0) {
-            event.setNewDamage(Math.max(0, event.getNewDamage() - damageToReduce));
-        }
-
-        // 九头蛇肌肉效果
-        if (attacker != null) {
-            float extraDamage = IceAndFireOrganhUtil.hydraMuscleSkill(attacker, entity);
-            if (extraDamage > 0) {
-                event.setNewDamage(event.getNewDamage() + extraDamage);
+        double block = entity.getAttributeValue(WAICAttribute.BLOCK);
+        double extraDamage = 0;
+        float damage = event.getNewDamage();
+        DamageSource source = event.getSource();
+        LivingEntity attacker = source.getEntity() instanceof LivingEntity attackerEntity
+                                ? attackerEntity
+                                : source.getDirectEntity() instanceof LivingEntity directEntity
+                                  ? directEntity
+                                  : null;
+        // 反击属性处理
+        double counterAttack = entity.getAttributeValue(WAICAttribute.COUNTER_ATTACK);
+        if (counterAttack > 0 && attacker != null) {
+            // 防止我反击你反击我的反击
+            if (!source.is(DamageTypes.THORNS)) {
+                // 对攻击者造成荆棘类型的反击伤害
+                attacker.hurt(
+                    attacker.level().damageSources().thorns(entity),
+                    (float) counterAttack
+                );
             }
         }
+        // 最终倍率乘数
+        double finalMultiplier = 1;
+        if (source.is(WAICDamageTagManager.IS_MELEE)) {
+            // 近战伤害加伤
+            extraDamage += entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE) * WAICOrganUtil.getWeaponDamageMultiplier(entity);
+            finalMultiplier = entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE_PERCENTAGE);
+        } else if (source.is(Tags.DamageTypes.IS_MAGIC)) {
+            // 魔法伤害加伤
+            extraDamage += entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE) * WAICOrganUtil.getWeaponDamageMultiplier(entity);
+            finalMultiplier = entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE);
+        } else if (source.is(DamageTypeTags.IS_PROJECTILE)) {
+            // 远程伤害加伤
+            extraDamage += entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE) * WAICOrganUtil.getWeaponDamageMultiplier(entity);
+            finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
+        }
+        // 九头蛇肋骨效果（唯一）
+        block += IceAndFireOrganhUtil.hydraRibSkill(entity, attacker);
+        // 九头蛇肌肉效果（唯一）
+        if (attacker != null) extraDamage += IceAndFireOrganhUtil.hydraMuscleSkill(attacker, entity);
+        // 应用格挡属性减伤（可为负）,以及加伤
+        event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
     }
 }
