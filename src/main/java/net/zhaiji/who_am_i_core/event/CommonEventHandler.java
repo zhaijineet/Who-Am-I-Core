@@ -6,12 +6,15 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
@@ -25,7 +28,9 @@ import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
+import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 public class CommonEventHandler {
@@ -52,6 +57,7 @@ public class CommonEventHandler {
     public static void handlerRegisterChestCavityEvent(RegisterChestCavityEvent event) {
         event.registerTask(ChestNovaTask.TYPE, ChestNovaTask::new);
         event.registerTask(HydraSpleenTask.TYPE, HydraSpleenTask::new);
+        event.registerTask(StraightIntestineTask.TYPE, StraightIntestineTask::new);
 
         // 注册龙类胸腔
         event.registerEntity(IafEntities.FIRE_DRAGON.get(), IceAndFireChestCavityTypeManager.FIRE_DRAGON);
@@ -160,5 +166,21 @@ public class CommonEventHandler {
         if (attacker != null) extraDamage += IceAndFireOrganhUtil.hydraMuscleSkill(attacker, entity);
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
+    }
+
+    /**
+     * 直肠子器官效果
+     * 食用食物完成后，30%几率添加延迟掉落任务（3秒后掉落1个食物）
+     */
+    public static void handlerLivingEntityUseItemEvent$Finish(LivingEntityUseItemEvent.Finish event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide()) return;
+        ItemStack itemStack = event.getItem();
+        FoodProperties foodProperties = itemStack.getFoodProperties(entity);
+        // 检查是否是食物
+        if (foodProperties == null) return;
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        // 调用技能方法
+        WAICOrganSkillUtil.straightIntestineSkill(entity, data, itemStack);
     }
 }

@@ -323,6 +323,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.SWORD_BONE, "Sword Bone");
         addOrganDescription(WAICOrgans.SWORD_BONE, "As sharp as a sword");
         addItem(WAICOrgans.STRAIGHT_INTESTINE, "Straight Intestine");
+        addOrganDescription(WAICOrgans.STRAIGHT_INTESTINE, "30% chance to drop consumed food after 3 seconds");
         addItem(WAICOrgans.SQUASH, "Squash");
 
         addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
@@ -631,6 +632,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.SWORD_BONE, "剑骨头");
         addOrganDescription(WAICOrgans.SWORD_BONE, "剑一般锋利");
         addItem(WAICOrgans.STRAIGHT_INTESTINE, "直肠子");
+        addOrganDescription(WAICOrgans.STRAIGHT_INTESTINE, "食用食物后30%几率在3秒后掉落该食物");
         addItem(WAICOrgans.SQUASH, "窝瓜");
 
         addAttribute(WAICAttribute.TEMPERATURE, "温度");

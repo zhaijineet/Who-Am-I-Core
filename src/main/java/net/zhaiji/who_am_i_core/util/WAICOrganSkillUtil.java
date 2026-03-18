@@ -2,11 +2,14 @@ package net.zhaiji.who_am_i_core.util;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +52,25 @@ public class WAICOrganSkillUtil {
         int targetSlot = emptySlots.get(level.random.nextInt(emptySlots.size()));
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         data.setStackInSlot(targetSlot, stack);
+    }
+
+    /**
+     * 直肠子器官技能
+     * <p>
+     * 食用食物后，30%几率添加延迟掉落任务（3秒后掉落1个食物）
+     * </p>
+     *
+     * @param entity 食用食物的实体
+     * @param data   实体的胸腔数据
+     * @param food   被食用的食物物品
+     */
+    public static void straightIntestineSkill(LivingEntity entity, ChestCavityData data, ItemStack food) {
+        // 检查是否拥有直肠子器官
+        if (!data.hasOrgan(WAICOrgans.STRAIGHT_INTESTINE.get())) return;
+        // 30%几率触发
+        if (WAICOrganUtil.rollResult(entity, 0.3F)) {
+            // 添加延迟任务（3秒后掉落1个食物）
+            data.addTask(new StraightIntestineTask(data, food.copyWithCount(1)));
+        }
     }
 }

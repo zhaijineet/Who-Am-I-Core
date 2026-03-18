@@ -1,8 +1,6 @@
 package net.zhaiji.who_am_i_core.event;
 
 import net.neoforged.bus.api.IEventBus;
-import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
-import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 
 public class CommonEventManager {
     public static void init(IEventBus modBus, IEventBus gameBus) {
@@ -21,5 +19,6 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerLivingDeathEvent);
         gameBus.addListener(CommonEventHandler::handlerLivingIncomingDamageEvent);
         gameBus.addListener(CommonEventHandler::handlerLivingDamageEvent$Pre);
+        gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
     }
 }

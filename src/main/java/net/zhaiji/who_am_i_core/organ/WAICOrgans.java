@@ -553,7 +553,8 @@ public class WAICOrgans {
     public static final Supplier<Item> STRAIGHT_INTESTINE = WAICItem.ITEM.register(
         "straight_intestine",
         () -> OrganBuilder.builder()
-        .build()
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
     );
 
     // 窝瓜

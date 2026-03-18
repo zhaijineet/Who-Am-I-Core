@@ -1,10 +1,8 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.item.Item;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 
 public class WAICDamageTagManager {
