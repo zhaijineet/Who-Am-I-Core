@@ -554,6 +554,7 @@ public class WAICOrgans {
         "straight_intestine",
         () -> OrganBuilder.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .addValueAttribute(InitAttribute.NUTRITION, 1)
             .build()
     );
 

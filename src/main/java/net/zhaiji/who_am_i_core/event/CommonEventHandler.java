@@ -21,6 +21,8 @@ import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
 import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.who_am_i_core.edible.BluffEdibleCondition;
+import net.zhaiji.who_am_i_core.manager.EdibleConditionManager;
 import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
@@ -58,6 +60,9 @@ public class CommonEventHandler {
         event.registerTask(ChestNovaTask.TYPE, ChestNovaTask::new);
         event.registerTask(HydraSpleenTask.TYPE, HydraSpleenTask::new);
         event.registerTask(StraightIntestineTask.TYPE, StraightIntestineTask::new);
+
+        // 注册可食用条件
+        EdibleConditionManager.register(BluffEdibleCondition.INSTANCE);
 
         // 注册龙类胸腔
         event.registerEntity(IafEntities.FIRE_DRAGON.get(), IceAndFireChestCavityTypeManager.FIRE_DRAGON);

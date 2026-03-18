@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -202,20 +201,5 @@ public class MowziesMobOrganSkillUtil {
                block == Blocks.MUD ||
                block == Blocks.ROOTED_DIRT ||
                block == Blocks.MUDDY_MANGROVE_ROOTS;
-    }
-
-    /**
-     * 检查是否为泥土物品
-     */
-    public static boolean isDirtItem(ItemStack stack) {
-        return stack.is(Items.DIRT) ||
-               stack.is(Items.GRASS_BLOCK) ||
-               stack.is(Items.MOSS_BLOCK) ||
-               stack.is(Items.MYCELIUM) ||
-               stack.is(Items.COARSE_DIRT) ||
-               stack.is(Items.PODZOL) ||
-               stack.is(Items.MUD) ||
-               stack.is(Items.ROOTED_DIRT) ||
-               stack.is(Items.MUDDY_MANGROVE_ROOTS);
     }
 }
