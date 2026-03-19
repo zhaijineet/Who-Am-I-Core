@@ -3,7 +3,7 @@ package net.zhaiji.who_am_i_core.manager;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
-import net.zhaiji.who_am_i_core.api.IEdibleCondition;
+import net.zhaiji.who_am_i_core.api.EdibleCondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,14 @@ import java.util.Optional;
  * </p>
  */
 public class EdibleConditionManager {
-    private static final List<IEdibleCondition> CONDITIONS = new ArrayList<>();
+    private static final List<EdibleCondition> CONDITIONS = new ArrayList<>();
 
     /**
      * 注册一个可食用条件
      *
      * @param condition 要注册的条件
      */
-    public static void register(IEdibleCondition condition) {
+    public static void register(EdibleCondition condition) {
         CONDITIONS.add(condition);
     }
 
@@ -37,8 +37,8 @@ public class EdibleConditionManager {
      * @param stack  要食用的物品
      * @return 匹配的条件，如果没有匹配则返回空
      */
-    public static Optional<IEdibleCondition> getMatchingCondition(LivingEntity entity, ItemStack stack) {
-        for (IEdibleCondition condition : CONDITIONS) {
+    public static Optional<EdibleCondition> getMatchingCondition(LivingEntity entity, ItemStack stack) {
+        for (EdibleCondition condition : CONDITIONS) {
             if (condition.canEat(entity, stack)) {
                 return Optional.of(condition);
             }
@@ -63,9 +63,9 @@ public class EdibleConditionManager {
      * @param stack 要检查的物品
      * @return 是否可能被接受
      */
-    public static boolean isTargetItem(ItemStack stack) {
-        for (IEdibleCondition condition : CONDITIONS) {
-            if (condition.isTargetItem(stack)) {
+    public static boolean checkItem(ItemStack stack) {
+        for (EdibleCondition condition : CONDITIONS) {
+            if (condition.checkItem(stack)) {
                 return true;
             }
         }
@@ -79,8 +79,8 @@ public class EdibleConditionManager {
      * @return 食用动画，如果没有匹配则返回空
      */
     public static Optional<UseAnim> getUseAnimation(ItemStack stack) {
-        for (IEdibleCondition condition : CONDITIONS) {
-            if (condition.isTargetItem(stack)) {
+        for (EdibleCondition condition : CONDITIONS) {
+            if (condition.checkItem(stack)) {
                 return Optional.of(condition.getUseAnimation());
             }
         }

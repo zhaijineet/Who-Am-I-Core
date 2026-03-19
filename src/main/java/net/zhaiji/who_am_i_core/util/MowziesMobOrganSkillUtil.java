@@ -9,15 +9,16 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -146,17 +147,20 @@ public class MowziesMobOrganSkillUtil {
         if (!isDirtBlock(block)) return;
         // 播放音效和粒子效果
         eatDirt(entity, block.asItem());
-        entity.gameEvent(GameEvent.EAT);
         level.levelEvent(2001, pos, Block.getId(blockState));
         level.removeBlock(pos, false);
     }
 
     /**
      * 食用泥土
+     * <p>
+     * 通过构造 FoodProperties 并调用 {@link LivingEntity#eat} 走标准食物消化流程，
+     * 使九头蛇器肠的效果时长加成、CCB 的 NUTRITION/DIGESTION 属性等注入能够正常生效。
+     * </p>
      */
     public static void eatDirt(LivingEntity entity, Item dirt) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        // 铭文板吸收效果
+        // 铭文板吸收效果（非食物效果，保持直接设置）
         int tabletCount = data.getOrganCount(MowziesMobOrgans.BLUFF_TABLET.get());
         if (tabletCount > 0) {
             int bluffOrganCount = data.getOrganCount(
@@ -169,23 +173,53 @@ public class MowziesMobOrganSkillUtil {
             float newAbsorption = Math.min(currentAbsorption + tabletCount * 2, maxAbsorption);
             entity.setAbsorptionAmount(newAbsorption);
         }
-        if (entity instanceof Player player) {
-            // 泥峭棒
-            int rodCount = data.getOrganCount(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
-            player.getFoodData().eat(4, (float) rodCount / 2);
-        }
 
+        // 构造 FoodProperties，走标准食物路径
+        int rodCount = data.getOrganCount(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
+        FoodProperties.Builder builder = new FoodProperties.Builder()
+            .nutrition(4)
+            .saturationModifier((float) rodCount / 2)
+            .alwaysEdible();
+
+        // 泥峭核心 buff 效果作为 FoodProperties 的 effects
         if (data.hasOrgan(MowziesMobOrgans.BLUFF_CORE.get()) && dirt instanceof BlockItem item) {
             Block block = item.getBlock();
-            // 根据方块类型应用buff
             if (block == Blocks.GRASS_BLOCK || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM) {
-                entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 30, 1));
+                builder.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 30, 1), 1.0F);
             } else if (block == Blocks.COARSE_DIRT || block == Blocks.PODZOL || block == Blocks.MUD) {
-                entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 30, 1));
+                builder.effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 30, 1), 1.0F);
             } else if (block == Blocks.ROOTED_DIRT || block == Blocks.MUDDY_MANGROVE_ROOTS) {
-                entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 30, 1));
+                builder.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 30, 1), 1.0F);
             }
         }
+
+        entity.eat(entity.level(), dirt.getDefaultInstance(), builder.build());
+    }
+
+    /**
+     * 检查是否拥有泥峭器官
+     */
+    public static boolean hasBluffOrgan(LivingEntity entity) {
+        return ChestCavityUtil.getData(entity).hasOrgan(
+            organ -> organ.is(MowziesMobOrgans.BLUFF_CORE.get()) ||
+                     organ.is(MowziesMobOrgans.BLUFF_TABLET.get()) ||
+                     organ.is(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
+        );
+    }
+
+    /**
+     * 检查是否为泥土物品
+     */
+    public static boolean isDirtItem(ItemStack stack) {
+        return stack.is(Items.DIRT) ||
+               stack.is(Items.GRASS_BLOCK) ||
+               stack.is(Items.MOSS_BLOCK) ||
+               stack.is(Items.MYCELIUM) ||
+               stack.is(Items.COARSE_DIRT) ||
+               stack.is(Items.PODZOL) ||
+               stack.is(Items.MUD) ||
+               stack.is(Items.ROOTED_DIRT) ||
+               stack.is(Items.MUDDY_MANGROVE_ROOTS);
     }
 
     /**

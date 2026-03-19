@@ -21,8 +21,7 @@ import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
 import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
-import net.zhaiji.who_am_i_core.edible.BluffEdibleCondition;
-import net.zhaiji.who_am_i_core.manager.EdibleConditionManager;
+import net.zhaiji.who_am_i_core.api.EdibleCondition;
 import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
@@ -32,6 +31,7 @@ import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
+import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
@@ -62,7 +62,12 @@ public class CommonEventHandler {
         event.registerTask(StraightIntestineTask.TYPE, StraightIntestineTask::new);
 
         // 注册可食用条件
-        EdibleConditionManager.register(BluffEdibleCondition.INSTANCE);
+        // 泥峭器官可食用泥土
+        EdibleCondition.builder()
+            .itemCheck(MowziesMobOrganSkillUtil::isDirtItem)
+            .entityCheck(MowziesMobOrganSkillUtil::hasBluffOrgan)
+            .onEat((entity, stack) -> MowziesMobOrganSkillUtil.eatDirt(entity, stack.getItem()))
+            .build();
 
         // 注册龙类胸腔
         event.registerEntity(IafEntities.FIRE_DRAGON.get(), IceAndFireChestCavityTypeManager.FIRE_DRAGON);
