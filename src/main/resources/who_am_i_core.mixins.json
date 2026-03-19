@@ -3,7 +3,9 @@
   "package": "net.zhaiji.who_am_i_core.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ApplyBonusCountMixin",
     "ChestCavityDataMixin",
+    "EnchantedCountIncreaseFunctionMixin",
     "EntityUmvuthanaFollowerToPlayerMixin",
     "ItemStackMixin",
     "LivingEntityMixin",

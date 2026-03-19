@@ -336,6 +336,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, "Melee Damage Percentage");
         addAttribute(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, "Ranged Damage Percentage");
         addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "Magic Damage Percentage");
+        addAttribute(WAICAttribute.LOOTING, "Looting");
+        addAttribute(WAICAttribute.FORTUNE, "Fortune");
 
         // 伤害类型标签翻译
         add(WAICDamageTagManager.IS_MELEE, "Melee");
@@ -645,6 +647,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, "近战伤害百分比");
         addAttribute(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, "远程伤害百分比");
         addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "魔法伤害百分比");
+        addAttribute(WAICAttribute.LOOTING, "抢夺");
+        addAttribute(WAICAttribute.FORTUNE, "时运");
 
         // 伤害类型标签翻译
         add(WAICDamageTagManager.IS_MELEE, "近战");

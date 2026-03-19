@@ -42,6 +42,12 @@ public class WAICAttribute {
     // 魔法伤害百分比
     public static final Holder<Attribute> MAGIC_DAMAGE_PERCENTAGE = registerPercentageAttribute("magic_damage_percentage");
 
+    // 抢夺
+    public static final Holder<Attribute> LOOTING = registerRangedAttribute("looting");
+
+    // 时运
+    public static final Holder<Attribute> FORTUNE = registerRangedAttribute("fortune");
+
 
     public static Holder<Attribute> registerRangedAttribute(String name) {
         return ATTRIBUTE.register(
