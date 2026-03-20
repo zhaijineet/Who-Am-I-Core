@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.organ;
 
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
@@ -17,6 +18,8 @@ public class WAICOrgans {
     public static final Supplier<Item> DIVINE_CORE = WAICItem.ITEM.register(
         "divine_core",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(AttributeRegistry.HOLY_SPELL_POWER, 1)
             .build()
     );
 
@@ -24,6 +27,8 @@ public class WAICOrgans {
     public static final Supplier<Item> FROST_CORE = WAICItem.ITEM.register(
         "frost_core",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(AttributeRegistry.ICE_SPELL_POWER, 1)
             .build()
     );
 
@@ -31,6 +36,8 @@ public class WAICOrgans {
     public static final Supplier<Item> FLAME_CORE = WAICItem.ITEM.register(
         "flame_core",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(AttributeRegistry.FIRE_SPELL_POWER, 1)
             .build()
     );
 
@@ -38,6 +45,8 @@ public class WAICOrgans {
     public static final Supplier<Item> NATURE_CORE = WAICItem.ITEM.register(
         "nature_core",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(AttributeRegistry.NATURE_SPELL_POWER, 1)
             .build()
     );
 
@@ -223,6 +232,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_HEART = WAICItem.ITEM.register(
         "wooden_heart",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -230,6 +241,10 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_LUNG = WAICItem.ITEM.register(
         "wooden_lung",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 0.75)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 0.75)
+            .addValueAttribute(InitAttribute.ENDURANCE, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -237,6 +252,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_STOMACH = WAICItem.ITEM.register(
         "wooden_stomach",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -244,6 +261,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_INTESTINE = WAICItem.ITEM.register(
         "wooden_intestine",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -251,6 +270,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_KIDNEY = WAICItem.ITEM.register(
         "wooden_kidney",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.FILTRATION, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -258,6 +279,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_SPLEEN = WAICItem.ITEM.register(
         "wooden_spleen",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.METABOLISM, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -265,6 +288,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_LIVER = WAICItem.ITEM.register(
         "wooden_liver",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -272,6 +297,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_APPENDIX = WAICItem.ITEM.register(
         "wooden_appendix",
         () -> OrganBuilder.builder()
+            .addValueAttribute(Attributes.LUCK, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
@@ -279,6 +306,9 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_MUSCLE = WAICItem.ITEM.register(
         "wooden_muscle",
         () -> OrganBuilder.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 0.75)
+            .addValueAttribute(InitAttribute.SPEED, 0.75)
+            .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
 
