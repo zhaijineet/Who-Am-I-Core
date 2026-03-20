@@ -27,7 +27,7 @@ public abstract class ChestCavityDataMixin {
     )
     public void whoAmICore$tick(CallbackInfo ci) {
         if (getOwner().level().isClientSide() && getOwner().tickCount % 20 == 0) {
-            // 应用治愈属性效果
+            // 应用治愈属性效果，每秒回复治愈等量的生命值
             double heal = getCurrentValue(WAICAttribute.HEAL);
             if (heal > 0) {
                 getOwner().heal((float) heal);

@@ -176,6 +176,8 @@ dependencies {
     implementation "curse.maven:anvilcraft-986251:7754185"
     // 车万女仆
     implementation "curse.maven:touhou-little-maid-355044:7510722"
+    // 生活调味料：胡萝卜版
+    implementation "curse.maven:spice-of-life-carrot-edition-277616:7374098"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

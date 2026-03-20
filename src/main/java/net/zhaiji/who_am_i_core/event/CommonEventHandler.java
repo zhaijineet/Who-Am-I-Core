@@ -2,6 +2,7 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.iafenvoy.iceandfire.registry.IafEntities;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -26,6 +27,7 @@ import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
@@ -64,9 +66,17 @@ public class CommonEventHandler {
         // 注册可食用条件
         // 泥峭器官可食用泥土
         EdibleCondition.builder()
-            .itemCheck(MowziesMobOrganSkillUtil::isDirtItem)
-            .entityCheck(MowziesMobOrganSkillUtil::hasBluffOrgan)
-            .onEat((entity, stack) -> MowziesMobOrganSkillUtil.eatDirt(entity, stack.getItem()))
+            .matchesItem(MowziesMobOrganSkillUtil::isDirtItem)
+            .matchesEntity(MowziesMobOrganSkillUtil::hasBluffOrgan)
+            .onEat(MowziesMobOrganSkillUtil::eatDirt)
+            .build();
+
+        // 暴食可以食用任何食物，且食用速度减半
+        EdibleCondition.builder()
+            .matchesItem(stack -> stack.has(DataComponents.FOOD))
+            .matchesEntity(entity -> ChestCavityUtil.getData(entity).hasOrgan(WAICOrgans.GLUTTONY.get()))
+            // 不能直接使用stack的getUseDuration，会无限循环
+            .useDuration((entity, stack) -> stack.getItem().getUseDuration(stack, entity) / 2)
             .build();
 
         // 注册龙类胸腔

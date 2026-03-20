@@ -1,11 +1,10 @@
 package net.zhaiji.who_am_i_core.mixin;
 
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
@@ -23,9 +22,7 @@ import java.util.Optional;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     @Shadow
-    public abstract void consume(int amount, @org.jetbrains.annotations.Nullable LivingEntity entity);
-
-    @Shadow public abstract SoundEvent getEatingSound();
+    public abstract Item getItem();
 
     @Unique
     private ItemStack self() {
@@ -58,7 +55,6 @@ public abstract class ItemStackMixin {
         Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(livingEntity, self());
         if (condition.isPresent()) {
             condition.get().onEat(livingEntity, self());
-            consume(1, livingEntity);
             cir.setReturnValue(self());
         }
     }
@@ -69,7 +65,9 @@ public abstract class ItemStackMixin {
         cancellable = true
     )
     public void whoAmICore$getUseAnimation(CallbackInfoReturnable<UseAnim> cir) {
-        EdibleConditionManager.getUseAnimation(self()).ifPresent(cir::setReturnValue);
+        if (getItem().getUseAnimation(self()) == UseAnim.NONE) {
+            EdibleConditionManager.getUseAnimation(self()).ifPresent(cir::setReturnValue);
+        }
     }
 
     @Inject(
@@ -79,6 +77,6 @@ public abstract class ItemStackMixin {
     )
     public void whoAmICore$getUseDuration(LivingEntity entity, CallbackInfoReturnable<Integer> cir) {
         Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(entity, self());
-        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.getUseDuration()));
+        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.getUseDuration(entity, self())));
     }
 }

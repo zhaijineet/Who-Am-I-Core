@@ -63,9 +63,9 @@ public class EdibleConditionManager {
      * @param stack 要检查的物品
      * @return 是否可能被接受
      */
-    public static boolean checkItem(ItemStack stack) {
+    public static boolean matchesItem(ItemStack stack) {
         for (EdibleCondition condition : CONDITIONS) {
-            if (condition.checkItem(stack)) {
+            if (condition.matchesItem(stack)) {
                 return true;
             }
         }
@@ -80,8 +80,8 @@ public class EdibleConditionManager {
      */
     public static Optional<UseAnim> getUseAnimation(ItemStack stack) {
         for (EdibleCondition condition : CONDITIONS) {
-            if (condition.checkItem(stack)) {
-                return Optional.of(condition.getUseAnimation());
+            if (condition.matchesItem(stack)) {
+                return Optional.of(condition.getUseAnimation(stack));
             }
         }
         return Optional.empty();

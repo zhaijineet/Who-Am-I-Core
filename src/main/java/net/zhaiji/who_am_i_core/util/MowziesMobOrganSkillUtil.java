@@ -11,7 +11,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
@@ -146,7 +145,7 @@ public class MowziesMobOrganSkillUtil {
         // 检查是否为泥土方块
         if (!isDirtBlock(block)) return;
         // 播放音效和粒子效果
-        eatDirt(entity, block.asItem());
+        eatDirt(entity, block.asItem().getDefaultInstance());
         level.levelEvent(2001, pos, Block.getId(blockState));
         level.removeBlock(pos, false);
     }
@@ -158,7 +157,7 @@ public class MowziesMobOrganSkillUtil {
      * 使九头蛇器肠的效果时长加成、CCB 的 NUTRITION/DIGESTION 属性等注入能够正常生效。
      * </p>
      */
-    public static void eatDirt(LivingEntity entity, Item dirt) {
+    public static void eatDirt(LivingEntity entity, ItemStack dirt) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         // 铭文板吸收效果（非食物效果，保持直接设置）
         int tabletCount = data.getOrganCount(MowziesMobOrgans.BLUFF_TABLET.get());
@@ -182,7 +181,7 @@ public class MowziesMobOrganSkillUtil {
             .alwaysEdible();
 
         // 泥峭核心 buff 效果作为 FoodProperties 的 effects
-        if (data.hasOrgan(MowziesMobOrgans.BLUFF_CORE.get()) && dirt instanceof BlockItem item) {
+        if (data.hasOrgan(MowziesMobOrgans.BLUFF_CORE.get()) && dirt.getItem() instanceof BlockItem item) {
             Block block = item.getBlock();
             if (block == Blocks.GRASS_BLOCK || block == Blocks.MOSS_BLOCK || block == Blocks.MYCELIUM) {
                 builder.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 30, 1), 1.0F);
@@ -193,7 +192,9 @@ public class MowziesMobOrganSkillUtil {
             }
         }
 
-        entity.eat(entity.level(), dirt.getDefaultInstance(), builder.build());
+        entity.eat(entity.level(), dirt.copyWithCount(1), builder.build());
+        // 在最后执行物品消耗
+        dirt.consume(1, entity);
     }
 
     /**
