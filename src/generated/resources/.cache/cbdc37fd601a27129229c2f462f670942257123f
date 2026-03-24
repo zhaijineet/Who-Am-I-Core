@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-13T02:31:11.8480191	Item Models: who_am_i_core
+// 1.21.1	2026-03-23T03:41:32.9313571	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -144,7 +144,7 @@ c2edfe1f041d81625585f5573e1275b91d3e3e68 assets/who_am_i_core/models/item/squash
 6c0b521555db321f3a02ea7bc5b4a23b120d3425 assets/who_am_i_core/models/item/strange_eyeball.json
 c8685a4e13bcb5cf3bcfb6f734f33c046cae86b3 assets/who_am_i_core/models/item/strange_mechanical_eyeball.json
 03e2b704c119aa6f33cfbbc747b1dae4a081d1c9 assets/who_am_i_core/models/item/sword_bone.json
-d3c76ed461b773221dfc5086bc75bb93ac2a863f assets/who_am_i_core/models/item/treason.json
+e9838d184b7c26c287a8bded58908765ce3493eb assets/who_am_i_core/models/item/treachery.json
 ca2259d2d315f1a0e7269300fb4a273f5d66a1ff assets/who_am_i_core/models/item/tumor_appendix.json
 5c21cd694d6be1c8af5d0f98217bc6b145a9b9e1 assets/who_am_i_core/models/item/tumor_heart.json
 9a380bd0b6931799583430c90d11b51d2724c8a3 assets/who_am_i_core/models/item/tumor_intestine.json

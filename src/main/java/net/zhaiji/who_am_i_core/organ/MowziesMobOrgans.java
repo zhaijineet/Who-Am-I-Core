@@ -2,7 +2,7 @@ package net.zhaiji.who_am_i_core.organ;
 
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.zhaiji.chestcavitybeyond.builder.OrganBuilder;
+import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
@@ -25,7 +25,7 @@ public class MowziesMobOrgans {
      */
     public static final Supplier<Item> FERROUS_WROUGHTNAUT_HEART_MIRROR = WAICItem.ITEM.register(
         "ferrous_wroughtnaut_heart_mirror",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             // -80%最终移动速度
             .totalMultipliedAttribute(Attributes.MOVEMENT_SPEED, -0.8)
@@ -45,7 +45,7 @@ public class MowziesMobOrgans {
      */
     public static final Supplier<Item> CHEST_NOVA = WAICItem.ITEM.register(
         "chest_nova",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .addValueAttribute(InitAttribute.HEALTH, 2)
@@ -69,7 +69,7 @@ public class MowziesMobOrgans {
      */
     public static final Supplier<Item> CONTROL_ROD = WAICItem.ITEM.register(
         "control_rod",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
@@ -78,7 +78,7 @@ public class MowziesMobOrgans {
     // 衰老心脏
     public static final Supplier<Item> AGED_HEART = WAICItem.ITEM.register(
         "aged_heart",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 0.5)
             .build()
     );
@@ -86,7 +86,7 @@ public class MowziesMobOrgans {
     // 衰老肺脏
     public static final Supplier<Item> AGED_LUNG = WAICItem.ITEM.register(
         "aged_lung",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 0.5)
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 0.5)
             .addValueAttribute(InitAttribute.ENDURANCE, 0.5)
@@ -96,7 +96,7 @@ public class MowziesMobOrgans {
     // 衰老脊柱
     public static final Supplier<Item> AGED_SPINE = WAICItem.ITEM.register(
         "aged_spine",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 0.5)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
@@ -105,7 +105,7 @@ public class MowziesMobOrgans {
     // 衰老胃
     public static final Supplier<Item> AGED_STOMACH = WAICItem.ITEM.register(
         "aged_stomach",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 0.5)
             .build()
     );
@@ -113,7 +113,7 @@ public class MowziesMobOrgans {
     // 衰老肠子
     public static final Supplier<Item> AGED_INTESTINE = WAICItem.ITEM.register(
         "aged_intestine",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 0.5)
             .build()
     );
@@ -121,7 +121,7 @@ public class MowziesMobOrgans {
     // 衰老肾脏
     public static final Supplier<Item> AGED_KIDNEY = WAICItem.ITEM.register(
         "aged_kidney",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 0.5)
             .build()
     );
@@ -129,7 +129,7 @@ public class MowziesMobOrgans {
     //衰老脾脏
     public static final Supplier<Item> AGED_SPLEEN = WAICItem.ITEM.register(
         "aged_spleen",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 0.5)
             .build()
     );
@@ -137,7 +137,7 @@ public class MowziesMobOrgans {
     // 衰老肝脏
     public static final Supplier<Item> AGED_LIVER = WAICItem.ITEM.register(
         "aged_liver",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 0.5)
             .build()
     );
@@ -145,7 +145,7 @@ public class MowziesMobOrgans {
     // 衰老阑尾
     public static final Supplier<Item> AGED_APPENDIX = WAICItem.ITEM.register(
         "aged_appendix",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 0.5)
             .build()
     );
@@ -153,7 +153,7 @@ public class MowziesMobOrgans {
     // 衰老肋骨
     public static final Supplier<Item> AGED_RIB = WAICItem.ITEM.register(
         "aged_rib",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 0.5)
             .build()
     );
@@ -161,7 +161,7 @@ public class MowziesMobOrgans {
     // 衰老肌肉
     public static final Supplier<Item> AGED_MUSCLE = WAICItem.ITEM.register(
         "aged_muscle",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 0.5)
             .addValueAttribute(InitAttribute.SPEED, 0.5)
             .build()
@@ -173,7 +173,7 @@ public class MowziesMobOrgans {
      */
     public static final Supplier<Item> ZEN_HEART = WAICItem.ITEM.register(
         "zen_heart",
-        () -> OrganBuilder.builder().build()
+        () -> Organ.builder().build()
     );
 
 
@@ -186,7 +186,7 @@ public class MowziesMobOrgans {
      */
     public static final Supplier<Item> BLUFF_TABLET = WAICItem.ITEM.register(
         "bluff_tablet",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
@@ -200,12 +200,13 @@ public class MowziesMobOrgans {
      */
     public static final Supplier<Item> ACTIVE_BLUFF_ROD = WAICItem.ITEM.register(
         "active_bluff_rod",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
-    /**
+    public static void register() {
+    }    /**
      * 泥峭核心
      * <pre>
      * #魔法
@@ -214,12 +215,11 @@ public class MowziesMobOrgans {
      */
     public static final Supplier<Item> BLUFF_CORE = WAICItem.ITEM.register(
         "bluff_core",
-        () -> OrganBuilder.builder()
+        () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip(5))
             .skill(MowziesMobOrganSkillUtil::bluffCoreSkill)
             .build()
     );
 
-    public static void register() {
-    }
+
 }

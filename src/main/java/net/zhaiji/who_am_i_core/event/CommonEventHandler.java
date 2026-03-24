@@ -2,6 +2,7 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.iafenvoy.iceandfire.registry.IafEntities;
+import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -79,6 +80,15 @@ public class CommonEventHandler {
             .useDuration((entity, stack) -> stack.getItem().getUseDuration(stack, entity) / 2)
             .build();
 
+        // 墨水瓶器官可以饮用铁魔法的墨水
+        EdibleCondition.builder()
+            .matchesItem(stack -> stack.getItem() instanceof InkItem)
+            .matchesEntity(entity -> ChestCavityUtil.getData(entity).hasOrgan(WAICOrgans.INK_BOTTLE.get()))
+            .onEat(WAICOrganSkillUtil::drinkInk)
+            .drinkAnimation()
+            .fastEat()
+            .build();
+
         // 注册龙类胸腔
         event.registerEntity(IafEntities.FIRE_DRAGON.get(), IceAndFireChestCavityTypeManager.FIRE_DRAGON);
         event.registerEntity(IafEntities.ICE_DRAGON.get(), IceAndFireChestCavityTypeManager.ICE_DRAGON);
@@ -98,13 +108,8 @@ public class CommonEventHandler {
         // 检查被移除的是否是乌姆塔纳面具
         if (!(event.getOldStack().getItem() instanceof ItemUmvuthanaMask)) return;
         // 通知 ChestNovaTask 移除对应槽位的生物
-        for (IChestCavityTask task : event.getData().getTasks()) {
-            if (task instanceof ChestNovaTask umvuthanaTask) {
-                umvuthanaTask.onMaskRemoved(event.getIndex());
-                // 应当有且只有一个task，提前返回
-                break;
-            }
-        }
+        event.getData().getFirstTask(task -> task instanceof ChestNovaTask)
+            .ifPresent(task -> ((ChestNovaTask) task).onMaskRemoved(event.getIndex()));
     }
 
     /**

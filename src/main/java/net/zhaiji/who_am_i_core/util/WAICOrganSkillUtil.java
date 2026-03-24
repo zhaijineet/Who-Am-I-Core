@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.util;
 
+import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,11 +9,13 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class WAICOrganSkillUtil {
     /**
@@ -71,6 +74,16 @@ public class WAICOrganSkillUtil {
         if (WAICOrganUtil.rollResult(entity, 0.3F)) {
             // 添加延迟任务（3秒后掉落1个食物）
             data.addTask(new StraightIntestineTask(data, food.copyWithCount(1)));
+        }
+    }
+
+    /**
+     * 饮用墨水
+     */
+    public static void drinkInk(LivingEntity entity, ItemStack stack) {
+        Optional<ItemStack> inkBottle = ChestCavityUtil.getData(entity).getFirstOrgan(WAICOrgans.INK_BOTTLE.get());
+        if (inkBottle.isPresent() && stack.getItem() instanceof InkItem ink) {
+//            ink.getRarity()
         }
     }
 }

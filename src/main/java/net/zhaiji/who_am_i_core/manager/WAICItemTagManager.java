@@ -27,6 +27,12 @@ public class WAICItemTagManager {
     // 电龙
     public static final TagKey<Item> LIGHTNING_DRAGON = create("lightning_dragon");
 
+    // 冰霜
+    public static final TagKey<Item> ICE = create("ice");
+
+    // 炽焰
+    public static final TagKey<Item> FIRE = create("fire");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }

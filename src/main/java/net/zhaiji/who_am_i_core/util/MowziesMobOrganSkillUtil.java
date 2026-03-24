@@ -96,10 +96,8 @@ public class MowziesMobOrganSkillUtil {
             data.setStackInSlot(slot, ItemStack.EMPTY);
         }
         // 检查是否已有 ChestNovaTask,并且task不会被不会被删除
-        for (var task : data.getTasks()) {
-            if (task instanceof ChestNovaTask && !task.canRemove(slotContext.entity())) {
-                return;
-            }
+        if (data.hasTask(task -> task instanceof ChestNovaTask && !task.canRemove(slotContext.entity()))) {
+            return;
         }
         // 创建并添加任务
         data.addTask(new ChestNovaTask(data, slotContext.index()));
@@ -109,15 +107,15 @@ public class MowziesMobOrganSkillUtil {
      * 胸中新星 - 移除
      */
     public static void chestNovaRemoved(ChestCavitySlotContext slotContext) {
-        for (IChestCavityTask task : slotContext.data().getTasks()) {
-            if (task instanceof ChestNovaTask followerTask && followerTask.isSlotEquals(slotContext.index())) {
-                followerTask.setRemove();
-                if (slotContext.entity() instanceof Player player) {
-                    // 添加30秒
-                    player.getCooldowns().addCooldown(slotContext.stack().getItem(), 20 * 30);
-                }
+        slotContext.data().getFirstTask(task ->
+            task instanceof ChestNovaTask novaTask && novaTask.isSlotEquals(slotContext.index())
+        ).ifPresent(task -> {
+            ((ChestNovaTask) task).setRemove();
+            if (slotContext.entity() instanceof Player player) {
+                // 添加30秒
+                player.getCooldowns().addCooldown(slotContext.stack().getItem(), 20 * 30);
             }
-        }
+        });
     }
 
     /**

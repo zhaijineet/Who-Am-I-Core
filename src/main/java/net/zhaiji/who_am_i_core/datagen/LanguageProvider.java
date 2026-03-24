@@ -304,7 +304,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.HERESY, "Heresy");
         addItem(WAICOrgans.VIOLENCE, "Violence");
         addItem(WAICOrgans.FRAUD, "Fraud");
-        addItem(WAICOrgans.TREASON, "Treason");
+        addItem(WAICOrgans.TREACHERY, "Treason");
 
         // 双子魔眼器官翻译
         addItem(WAICOrgans.STRANGE_EYEBALL, "Strange Eyeball");
@@ -542,7 +542,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
 
         // 浮霜器官skill描述
-        add("organ.who_am_i_core.tooltips.frost_metal_merciless", "无情：将所有魔咒转换为器官属性");
+        add("organ.who_am_i_core.tooltips.frost_metal_merciless", "无情：将所有附魔转换为器官属性");
 
         // 墨水器官翻译
         addItem(WAICOrgans.INK_HEART, "墨水心脏");
@@ -615,7 +615,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.HERESY, "异端");
         addItem(WAICOrgans.VIOLENCE, "暴力");
         addItem(WAICOrgans.FRAUD, "欺诈");
-        addItem(WAICOrgans.TREASON, "背叛");
+        addItem(WAICOrgans.TREACHERY, "背叛");
 
         // 双子魔眼器官翻译
         addItem(WAICOrgans.STRANGE_EYEBALL, "奇怪的眼球");

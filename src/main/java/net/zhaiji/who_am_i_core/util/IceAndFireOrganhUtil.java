@@ -70,10 +70,8 @@ public class IceAndFireOrganhUtil {
      */
     public static void hydraSpleenAdded(ChestCavitySlotContext slotContext) {
         ChestCavityData data = slotContext.data();
-        for (IChestCavityTask task : data.getTasks()) {
-            if (task instanceof HydraSpleenTask && !task.canRemove(slotContext.entity())) {
-                return;
-            }
+        if (data.hasTask(task -> task instanceof HydraSpleenTask && !task.canRemove(slotContext.entity()))) {
+            return;
         }
         data.addTask(new HydraSpleenTask(data));
     }
