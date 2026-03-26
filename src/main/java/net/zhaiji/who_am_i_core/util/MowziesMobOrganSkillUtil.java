@@ -25,7 +25,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
-import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
@@ -155,7 +154,7 @@ public class MowziesMobOrganSkillUtil {
      * 使九头蛇器肠的效果时长加成、CCB 的 NUTRITION/DIGESTION 属性等注入能够正常生效。
      * </p>
      */
-    public static void eatDirt(LivingEntity entity, ItemStack dirt) {
+    public static ItemStack eatDirt(LivingEntity entity, ItemStack dirt) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         // 铭文板吸收效果（非食物效果，保持直接设置）
         int tabletCount = data.getOrganCount(MowziesMobOrgans.BLUFF_TABLET.get());
@@ -193,6 +192,7 @@ public class MowziesMobOrganSkillUtil {
         entity.eat(entity.level(), dirt.copyWithCount(1), builder.build());
         // 在最后执行物品消耗
         dirt.consume(1, entity);
+        return dirt;
     }
 
     /**

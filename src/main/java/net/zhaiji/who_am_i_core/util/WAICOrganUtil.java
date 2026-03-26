@@ -1,10 +1,15 @@
 package net.zhaiji.who_am_i_core.util;
 
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
+import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
@@ -106,5 +111,25 @@ public class WAICOrganUtil {
      */
     public static float getWeaponDamageMultiplier(LivingEntity entity) {
         return 1;
+    }
+
+    /**
+     * 根据法术流派获取对应的染料物品
+     *
+     * @param schoolType 法术流派
+     * @return 对应的染料物品，如果没有对应染料则返回null
+     */
+    public static Item getDyeItemForSchool(SchoolType schoolType) {
+        ResourceLocation id = schoolType.getId();
+        if (id.equals(SchoolRegistry.BLOOD_RESOURCE)) return Items.RED_DYE;
+        if (id.equals(SchoolRegistry.FIRE_RESOURCE)) return Items.ORANGE_DYE;
+        if (id.equals(SchoolRegistry.HOLY_RESOURCE)) return Items.YELLOW_DYE;
+        if (id.equals(SchoolRegistry.ICE_RESOURCE)) return Items.LIGHT_BLUE_DYE;
+        if (id.equals(SchoolRegistry.LIGHTNING_RESOURCE)) return Items.BLUE_DYE;
+        if (id.equals(SchoolRegistry.NATURE_RESOURCE)) return Items.GREEN_DYE;
+        if (id.equals(SchoolRegistry.ELDRITCH_RESOURCE)) return Items.CYAN_DYE;
+        if (id.equals(SchoolRegistry.ENDER_RESOURCE)) return Items.PURPLE_DYE;
+        if (id.equals(SchoolRegistry.EVOCATION_RESOURCE)) return Items.GRAY_DYE;
+        return Items.AIR;
     }
 }

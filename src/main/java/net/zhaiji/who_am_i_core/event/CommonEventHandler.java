@@ -2,6 +2,7 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.iafenvoy.iceandfire.registry.IafEntities;
+import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.DamageTypeTags;
@@ -20,7 +21,6 @@ import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
-import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.api.EdibleCondition;
@@ -86,7 +86,6 @@ public class CommonEventHandler {
             .matchesEntity(entity -> ChestCavityUtil.getData(entity).hasOrgan(WAICOrgans.INK_BOTTLE.get()))
             .onEat(WAICOrganSkillUtil::drinkInk)
             .drinkAnimation()
-            .fastEat()
             .build();
 
         // 注册龙类胸腔
@@ -207,5 +206,18 @@ public class CommonEventHandler {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         // 调用技能方法
         WAICOrganSkillUtil.straightIntestineSkill(entity, data, itemStack);
+    }
+
+    /**
+     * 调色盘器官：施法时消耗对应颜色染料，增加法术等级
+     */
+    public static void handlerSpellOnCastEvent(SpellOnCastEvent event) {
+        LivingEntity entity = event.getEntity();
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!data.hasOrgan(WAICOrgans.PALETTE.get())) return;
+        if (WAICOrganSkillUtil.consumeDyeForSchool(entity, event.getSchoolType())) {
+            // 成功消耗染料，增加1级法术等级
+            event.setSpellLevel(event.getSpellLevel() + 1);
+        }
     }
 }

@@ -53,10 +53,7 @@ public abstract class ItemStackMixin {
     )
     public void whoAmICore$finishUsingItem(Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
         Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(livingEntity, self());
-        if (condition.isPresent()) {
-            condition.get().onEat(livingEntity, self());
-            cir.setReturnValue(self());
-        }
+        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.onEat(livingEntity, self())));
     }
 
     @Inject(

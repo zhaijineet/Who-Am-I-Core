@@ -43,15 +43,17 @@ import java.util.function.Predicate;
 public class EdibleCondition {
     private static final Predicate<ItemStack> DEFAULT_ITEM_CHECK = stack -> false;
     private static final Predicate<LivingEntity> DEFAULT_ENTITY_CHECK = entity -> true;
-    private static final BiConsumer<LivingEntity, ItemStack> DEFAULT_ON_EAT = (entity, stack) -> {
+    private static final BiFunction<LivingEntity, ItemStack, ItemStack> DEFAULT_ON_EAT = (entity, stack) ->
         stack.getItem().finishUsingItem(stack, entity.level(), entity);
-    };
     private static final Function<ItemStack, UseAnim> DEFAULT_USE_ANIMATION = stack -> stack.getItem().getUseAnimation(stack);
-    private static final BiFunction<LivingEntity, ItemStack, Integer> DEFAULT_USE_DURATION = (entity, stack) ->
-        stack.getItem().getUseDuration(stack, entity);
+    private static final BiFunction<LivingEntity, ItemStack, Integer> DEFAULT_USE_DURATION = (entity, stack) -> {
+        int duration = stack.getItem().getUseDuration(stack, entity);
+        return duration > 0 ? duration : 32;
+    };
+
     private final Predicate<ItemStack> itemCheck;
     private final Predicate<LivingEntity> entityCheck;
-    private final BiConsumer<LivingEntity, ItemStack> onEat;
+    private final BiFunction<LivingEntity, ItemStack, ItemStack> onEat;
     private final Function<ItemStack, UseAnim> useAnimation;
     private final BiFunction<LivingEntity, ItemStack, Integer> useDuration;
 
@@ -82,8 +84,8 @@ public class EdibleCondition {
         return matchesEntity(entity) && matchesItem(stack);
     }
 
-    public void onEat(LivingEntity entity, ItemStack stack) {
-        onEat.accept(entity, stack);
+    public ItemStack onEat(LivingEntity entity, ItemStack stack) {
+        return onEat.apply(entity, stack);
     }
 
     public UseAnim getUseAnimation(ItemStack stack) {
@@ -97,7 +99,7 @@ public class EdibleCondition {
     public static class Builder {
         private Predicate<ItemStack> itemCheck = DEFAULT_ITEM_CHECK;
         private Predicate<LivingEntity> entityCheck = DEFAULT_ENTITY_CHECK;
-        private BiConsumer<LivingEntity, ItemStack> onEat = DEFAULT_ON_EAT;
+        private BiFunction<LivingEntity, ItemStack, ItemStack> onEat = DEFAULT_ON_EAT;
         private Function<ItemStack, UseAnim> useAnimation = DEFAULT_USE_ANIMATION;
         private BiFunction<LivingEntity, ItemStack, Integer> useDuration = DEFAULT_USE_DURATION;
 
@@ -127,7 +129,7 @@ public class EdibleCondition {
         /**
          * 设置食用完成后的回调
          * <p>
-         * 默认调用 {@link Item#finishUsingItem}
+         * 默认调用 {@link Item#finishUsingItem} 并返回结果
          * </p>
          * 禁止使用ItemStack的finishUsingItem，会导致无限循环
          * <pre>
@@ -137,9 +139,9 @@ public class EdibleCondition {
          *     要么在执行完效果之后自己播放食用音效，以及物品消耗
          * </pre>
          *
-         * @param onEat 食用回调
+         * @param onEat 食用回调，返回处理后的 ItemStack
          */
-        public Builder onEat(BiConsumer<LivingEntity, ItemStack> onEat) {
+        public Builder onEat(BiFunction<LivingEntity, ItemStack, ItemStack> onEat) {
             this.onEat = onEat;
             return this;
         }
