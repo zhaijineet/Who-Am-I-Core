@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-23T03:41:32.9422126	Tags for minecraft:item mod id who_am_i_core
+// 1.21.1	2026-03-26T17:36:31.8246273	Tags for minecraft:item mod id who_am_i_core
 547f0686fb44313a356a95dd055d9e8b3c1b0c3c data/chestcavitybeyond/tags/item/organs.json
 4e424e7e70a3bd93d5ec9c050213848bc8d0a0ee data/chestcavitybeyond/tags/item/organs/appendix.json
 426078f1ceca85bc7cae4f6d9f7bfd6df68ac7db data/chestcavitybeyond/tags/item/organs/heart.json
@@ -12,7 +12,9 @@ da3dd0598eca9951541aaea73c816b26d146208c data/chestcavitybeyond/tags/item/organs
 76cf772b96129f5ff491a0a251a783c162f01afc data/chestcavitybeyond/tags/item/organs/spine.json
 7336c917dcae2b31063ec3ab63e00238bb8a680f data/chestcavitybeyond/tags/item/organs/spleen.json
 dc8503457c1a964ba5e190ea4b7c882bf3c9e206 data/chestcavitybeyond/tags/item/organs/stomach.json
+1c76f5f60a683e9eee6e20035b1e16e3d366be29 data/who_am_i_core/tags/item/fire.json
 6c66b2e63efb93ea3f728d284a4e2aac251c1870 data/who_am_i_core/tags/item/fire_dragon.json
+91966d2c6c13204b3877d82c6225b822462d620c data/who_am_i_core/tags/item/ice.json
 037474d4e6d328bfe54a10e52940d00546ee3060 data/who_am_i_core/tags/item/ice_dragon.json
 bbbdafc91bf753f51db26c93e4c6d8768f3abadf data/who_am_i_core/tags/item/lightning_dragon.json
 465231791ddd3f9357bff439536a04f9625bc6e1 data/who_am_i_core/tags/item/magic.json

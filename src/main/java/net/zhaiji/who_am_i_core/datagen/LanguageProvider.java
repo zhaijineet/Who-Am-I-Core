@@ -245,6 +245,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_APPENDIX, "Ink Appendix");
         addItem(WAICOrgans.INK_RIB, "Ink Rib");
         addItem(WAICOrgans.INK_MUSCLE, "Ink Muscle");
+        addOrganSkill(WAICOrgans.INK_MUSCLE, 0, "Adds ink equal to damage taken to ink bottle");
         addItem(WAICOrgans.INK_BOTTLE, "Ink Bottle");
         addItem(WAICOrgans.NIB, "Nib");
 
@@ -314,8 +315,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 拟态器官翻译
         addItem(WAICOrgans.MIMIC_HEART, "Mimic Heart");
+        addOrganDescription(WAICOrgans.MIMIC_HEART, "Mimicry: Health regeneration +50%");
         addItem(WAICOrgans.MIMIC_LIVER, "Mimic Liver");
+        addOrganDescription(WAICOrgans.MIMIC_LIVER, "Mimicry: Health regeneration +50%");
         addItem(WAICOrgans.MIMIC_LUNG, "Mimic Lung");
+        addOrganDescription(WAICOrgans.MIMIC_LUNG, "Mimicry: Health regeneration +50%");
 
         // 单个器官翻译
         addItem(WAICOrgans.HAUNTED_BONE, "Haunted Bone");
@@ -556,6 +560,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_APPENDIX, "墨水阑尾");
         addItem(WAICOrgans.INK_RIB, "墨水肋骨");
         addItem(WAICOrgans.INK_MUSCLE, "墨水肌肉");
+        addOrganSkill(WAICOrgans.INK_MUSCLE, 0, "受到伤害时为墨水瓶添加等同于伤害值的墨水");
         addItem(WAICOrgans.INK_BOTTLE, "墨水瓶");
         addItem(WAICOrgans.NIB, "钢笔尖");
 
@@ -625,8 +630,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 拟态器官翻译
         addItem(WAICOrgans.MIMIC_HEART, "拟态心脏");
+        addOrganDescription(WAICOrgans.MIMIC_HEART, "拟态：生命恢复效果提升50%");
         addItem(WAICOrgans.MIMIC_LIVER, "拟态肝脏");
+        addOrganDescription(WAICOrgans.MIMIC_LIVER, "拟态：生命恢复效果提升50%");
         addItem(WAICOrgans.MIMIC_LUNG, "拟态肺脏");
+        addOrganDescription(WAICOrgans.MIMIC_LUNG, "拟态：生命恢复效果提升50%");
 
         // 单个器官翻译
         addItem(WAICOrgans.HAUNTED_BONE, "闹鬼的骨头");

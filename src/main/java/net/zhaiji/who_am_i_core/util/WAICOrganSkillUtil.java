@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -16,6 +17,8 @@ import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
+import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
@@ -87,16 +90,70 @@ public class WAICOrganSkillUtil {
     }
 
     /**
-     * 饮用墨水，最高存储1000点
+     * 添加或减少墨水瓶中的墨水量
+     *
+     * @param data     胸腔数据
+     * @param amount   要添加（正数）或减少（负数）的墨水量
+     * @param capacity 墨水瓶容量
+     * @return 返回值为正数时表示溢出量（添加过多），为负数时表示还差多少量（减少过多）
      */
-    public static ItemStack drinkInk(LivingEntity entity, ItemStack stack) {
+    public static int addInkToBottle(ChestCavityData data, int amount, int capacity) {
+        if (amount == 0) return 0;
+        // 收集所有墨水瓶
         List<ItemStack> inkBottles = new ArrayList<>();
-        for (ItemStack organ : ChestCavityUtil.getData(entity).getOrgans()) {
+        for (ItemStack organ : data.getOrgans()) {
             if (organ.is(WAICOrgans.INK_BOTTLE.get())) {
                 inkBottles.add(organ);
             }
         }
-        if (inkBottles.isEmpty() || !(stack.getItem() instanceof InkItem inkItem)) return stack;
+        if (inkBottles.isEmpty()) return amount;
+        // 处理正数：添加墨水
+        if (amount > 0) {
+            for (ItemStack inkBottle : inkBottles) {
+                CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+                CompoundTag tag = customData.copyTag();
+                int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+                int space = capacity - currentInk;
+                int addAmount = Math.min(space, amount);
+                tag.putInt("ink", currentInk + addAmount);
+                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+                amount -= addAmount;
+                if (amount <= 0) break;
+            }
+        } else {
+            // 处理负数：减少墨水
+            for (ItemStack inkBottle : inkBottles) {
+                CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+                CompoundTag tag = customData.copyTag();
+                int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+                int removeAmount = Math.min(currentInk, -amount);
+                tag.putInt("ink", currentInk - removeAmount);
+                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+                amount += removeAmount;
+                if (amount >= 0) break;
+            }
+        }
+        return amount; // 正数表示溢出, 负数表示还差多少，零表示正好装满
+    }
+
+    /**
+     * 添加或减少墨水瓶中的墨水量
+     *
+     * @param data   胸腔数据
+     * @param amount 要添加（正数）或减少（负数）的墨水量
+     * @return 返回值为正数时表示溢出量（添加过多），为负数时表示还差多少量（减少过多）
+     */
+    public static int addInkToBottle(ChestCavityData data, int amount) {
+        return addInkToBottle(data, amount, 1000);
+    }
+
+    /**
+     * 饮用墨水，最高存储1000点
+     */
+    public static ItemStack drinkInk(LivingEntity entity, ItemStack stack) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!(stack.getItem() instanceof InkItem inkItem)) return stack;
+
         int value = switch (inkItem.getRarity()) {
             case COMMON -> 1;
             case UNCOMMON -> 5;
@@ -104,18 +161,7 @@ public class WAICOrganSkillUtil {
             case EPIC -> 125;
             case LEGENDARY -> 625;
         };
-        for (ItemStack inkBottle : inkBottles) {
-            CompoundTag tag = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-            int ink = tag.contains("ink") ? tag.getInt("ink") : 0;
-            int space = 1000 - ink;
-            if (space > 0) {
-                int addAmount = Math.min(space, value);
-                tag.putInt("ink", ink + addAmount);
-                value -= addAmount;
-                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-            }
-            if (value <= 0) break;
-        }
+        addInkToBottle(data, value);
         if (entity instanceof ServerPlayer player) {
             CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);
         }
@@ -159,26 +205,33 @@ public class WAICOrganSkillUtil {
                 }
                 if (targetIndex >= 0) {
                     contents.getItemUnsafe(targetIndex).consume(1, entity);
-//                    // 消耗染料并重新构建 BundleContents
-//                    BundleContents.Mutable mutable = new BundleContents.Mutable(contents);
-//                    ItemStack dyeStack = contents.getItemUnsafe(targetIndex);
-//                    ItemStack consumed = dyeStack.copyWithCount(dyeStack.getCount() - 1);
-//                    // 清空并重新插入所有物品
-//                    mutable.clearItems();
-//                    for (int i = 0; i < contents.size(); i++) {
-//                        if (i == targetIndex) {
-//                            if (!consumed.isEmpty()) {
-//                                mutable.tryInsert(consumed);
-//                            }
-//                        } else {
-//                            mutable.tryInsert(contents.getItemUnsafe(i));
-//                        }
-//                    }
-//                    organ.set(DataComponents.BUNDLE_CONTENTS, mutable.toImmutable());
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * 墨水肌肉技能：挨打时为墨水瓶添加墨水
+     *
+     * @param context         胸腔槽位上下文
+     * @param source          伤害源
+     * @param damageContainer 伤害容器（用于获取伤害值）
+     */
+    public static void inkMuscleSkill(ChestCavitySlotContext context, DamageSource source, DamageContainer damageContainer) {
+        float damage = damageContainer.getNewDamage();
+        if (damage <= 0) return;
+        addInkToBottle(context.data(), (int) damage);
+    }
+
+    /**
+     * 拟态器官共效果：生命恢复效果提升50%
+     *
+     * @param context 胸腔槽位上下文
+     * @param event   治疗事件
+     */
+    public static void mimicHealBoost(ChestCavitySlotContext context, LivingHealEvent event) {
+        event.setAmount(event.getAmount() * 1.5F);
     }
 }

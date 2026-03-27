@@ -18,6 +18,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
@@ -140,6 +141,10 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_MUSCLE = WAICItem.ITEM.register(
         "ink_muscle",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 1)
+            .addValueAttribute(InitAttribute.SPEED, 1)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .hurt(WAICOrganSkillUtil::inkMuscleSkill)
             .build()
     );
 
@@ -647,6 +652,8 @@ public class WAICOrgans {
     public static final Supplier<Item> MIMIC_HEART = WAICItem.ITEM.register(
         "mimic_heart",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .heal(WAICOrganSkillUtil::mimicHealBoost)
             .build()
     );
 
@@ -654,6 +661,8 @@ public class WAICOrgans {
     public static final Supplier<Item> MIMIC_LIVER = WAICItem.ITEM.register(
         "mimic_liver",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 3)
+            .heal(WAICOrganSkillUtil::mimicHealBoost)
             .build()
     );
 
@@ -661,6 +670,11 @@ public class WAICOrgans {
     public static final Supplier<Item> MIMIC_LUNG = WAICItem.ITEM.register(
         "mimic_lung",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 3)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
+            .addValueAttribute(InitAttribute.ENDURANCE, 3)
+            .addValueAttribute(InitAttribute.WATER_BREATH, 3)
+            .heal(WAICOrganSkillUtil::mimicHealBoost)
             .build()
     );
 
