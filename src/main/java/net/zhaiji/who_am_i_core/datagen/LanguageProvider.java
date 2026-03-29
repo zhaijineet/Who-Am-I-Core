@@ -15,6 +15,8 @@ import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICCreativeModeTab;
+import net.zhaiji.who_am_i_core.register.WAICEffect;
+import net.zhaiji.who_am_i_core.register.WAICItem;
 
 import java.util.function.Supplier;
 
@@ -202,7 +204,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 九头蛇肠子
         addOrganDescription(IceAndFireOrgans.HYDRA_INTESTINE, "Amplifies food effects");
-        addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, 0, "Increases duration of food effects by 50% per organ");
+        addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, "Increases duration of food effects by 50% per organ");
 
         // 幻想种器官翻译
         addItem(IceAndFireOrgans.FANTASTICAL_HEART, "Fantastical Heart");
@@ -243,9 +245,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_SPLEEN, "Ink Spleen");
         addItem(WAICOrgans.INK_LIVER, "Ink Liver");
         addItem(WAICOrgans.INK_APPENDIX, "Ink Appendix");
+        addOrganSkill(WAICOrgans.INK_APPENDIX, "Consumes ink to restore equivalent mana");
         addItem(WAICOrgans.INK_RIB, "Ink Rib");
         addItem(WAICOrgans.INK_MUSCLE, "Ink Muscle");
-        addOrganSkill(WAICOrgans.INK_MUSCLE, 0, "Adds ink equal to damage taken to ink bottle");
+        addOrganSkill(WAICOrgans.INK_MUSCLE, "Adds ink equal to damage taken to ink bottle");
         addItem(WAICOrgans.INK_BOTTLE, "Ink Bottle");
         addItem(WAICOrgans.NIB, "Nib");
 
@@ -276,6 +279,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 弗兰肯斯坦器官翻译
         addItem(WAICOrgans.FRANKENSTEIN_HEART, "Frankenstein Heart");
+        addOrganDescription(WAICOrgans.FRANKENSTEIN_HEART, "A stitched-together heart. Inherits attributes from stored hearts.");
         addItem(WAICOrgans.FRANKENSTEIN_LUNG, "Frankenstein Lung");
         addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "Frankenstein Stomach");
         addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "Frankenstein Intestine");
@@ -315,11 +319,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 拟态器官翻译
         addItem(WAICOrgans.MIMIC_HEART, "Mimic Heart");
-        addOrganDescription(WAICOrgans.MIMIC_HEART, "Mimicry: Health regeneration +50%");
+        addOrganSkill(WAICOrgans.MIMIC_HEART, "Mimicry: Health regeneration +50%");
         addItem(WAICOrgans.MIMIC_LIVER, "Mimic Liver");
-        addOrganDescription(WAICOrgans.MIMIC_LIVER, "Mimicry: Health regeneration +50%");
+        addOrganSkill(WAICOrgans.MIMIC_LIVER, "Mimicry: Health regeneration +50%");
         addItem(WAICOrgans.MIMIC_LUNG, "Mimic Lung");
-        addOrganDescription(WAICOrgans.MIMIC_LUNG, "Mimicry: Health regeneration +50%");
+        addOrganSkill(WAICOrgans.MIMIC_LUNG, "Mimicry: Health regeneration +50%");
 
         // 单个器官翻译
         addItem(WAICOrgans.HAUNTED_BONE, "Haunted Bone");
@@ -354,6 +358,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.FIRE_DRAGON, "Fire Dragon");
         add(WAICItemTagManager.ICE_DRAGON, "Ice Dragon");
         add(WAICItemTagManager.LIGHTNING_DRAGON, "Lightning Dragon");
+
+        // 龙血药剂翻译
+        addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "Fire Dragon Blood Preparation");
+        addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "Ice Dragon Blood Preparation");
+        addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "Lightning Dragon Blood Preparation");
+        addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "Dragon Blood Preparation");
+
+        // 龙之力效果翻译
+        addEffect(WAICEffect.FIRE_DRAGON_POWER::value, "Fire Dragon Power");
+        addEffect(WAICEffect.ICE_DRAGON_POWER::value, "Ice Dragon Power");
+        addEffect(WAICEffect.LIGHTNING_DRAGON_POWER::value, "Lightning Dragon Power");
+        addEffect(WAICEffect.DRAGON_POWER::value, "Dragon Power");
     }
 
     public void Chinese() {
@@ -517,7 +533,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 九头蛇肠子
         addOrganDescription(IceAndFireOrgans.HYDRA_INTESTINE, "放大食物效果");
-        addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, 0, "每个器官增加50%的食物效果时长");
+        addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, "每个器官增加50%的食物效果时长");
 
         // 幻想种器官翻译
         addItem(IceAndFireOrgans.FANTASTICAL_HEART, "幻想种心脏");
@@ -558,9 +574,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_SPLEEN, "墨水脾脏");
         addItem(WAICOrgans.INK_LIVER, "墨水肝脏");
         addItem(WAICOrgans.INK_APPENDIX, "墨水阑尾");
+        addOrganSkill(WAICOrgans.INK_APPENDIX, "消耗墨水回复等量法力");
         addItem(WAICOrgans.INK_RIB, "墨水肋骨");
         addItem(WAICOrgans.INK_MUSCLE, "墨水肌肉");
-        addOrganSkill(WAICOrgans.INK_MUSCLE, 0, "受到伤害时为墨水瓶添加等同于伤害值的墨水");
+        addOrganSkill(WAICOrgans.INK_MUSCLE, "受到伤害时为墨水瓶添加等同于伤害值的墨水");
         addItem(WAICOrgans.INK_BOTTLE, "墨水瓶");
         addItem(WAICOrgans.NIB, "钢笔尖");
 
@@ -591,6 +608,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 弗兰肯斯坦器官翻译
         addItem(WAICOrgans.FRANKENSTEIN_HEART, "弗兰肯斯坦心脏");
+        addOrganDescription(WAICOrgans.FRANKENSTEIN_HEART, "缝合心脏。继承存储心脏的属性加成。");
         addItem(WAICOrgans.FRANKENSTEIN_LUNG, "弗兰肯斯坦肺脏");
         addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "弗兰肯斯坦胃");
         addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "弗兰肯斯坦肠子");
@@ -630,11 +648,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 拟态器官翻译
         addItem(WAICOrgans.MIMIC_HEART, "拟态心脏");
-        addOrganDescription(WAICOrgans.MIMIC_HEART, "拟态：生命恢复效果提升50%");
+        addOrganSkill(WAICOrgans.MIMIC_HEART, "拟态：生命恢复效果提升50%");
         addItem(WAICOrgans.MIMIC_LIVER, "拟态肝脏");
-        addOrganDescription(WAICOrgans.MIMIC_LIVER, "拟态：生命恢复效果提升50%");
+        addOrganSkill(WAICOrgans.MIMIC_LIVER, "拟态：生命恢复效果提升50%");
         addItem(WAICOrgans.MIMIC_LUNG, "拟态肺脏");
-        addOrganDescription(WAICOrgans.MIMIC_LUNG, "拟态：生命恢复效果提升50%");
+        addOrganSkill(WAICOrgans.MIMIC_LUNG, "拟态：生命恢复效果提升50%");
 
         // 单个器官翻译
         addItem(WAICOrgans.HAUNTED_BONE, "闹鬼的骨头");
@@ -669,6 +687,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.FIRE_DRAGON, "火龙");
         add(WAICItemTagManager.ICE_DRAGON, "冰龙");
         add(WAICItemTagManager.LIGHTNING_DRAGON, "电龙");
+
+        // 龙血药剂翻译
+        addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "火龙血药剂");
+        addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "冰龙血药剂");
+        addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "电龙血药剂");
+        addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "龙血药剂组");
+
+        // 龙之力效果翻译
+        addEffect(WAICEffect.FIRE_DRAGON_POWER::value, "火龙之力");
+        addEffect(WAICEffect.ICE_DRAGON_POWER::value, "冰龙之力");
+        addEffect(WAICEffect.LIGHTNING_DRAGON_POWER::value, "电龙之力");
+        addEffect(WAICEffect.DRAGON_POWER::value, "龙之力");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {

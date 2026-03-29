@@ -1,18 +1,29 @@
 package net.zhaiji.who_am_i_core.util;
 
+import com.google.common.collect.Multimap;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
+import net.zhaiji.chestcavitybeyond.api.capability.IOrgan;
+import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.manager.OrganManager;
+import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class WAICOrganUtil {
     /**
@@ -131,5 +142,62 @@ public class WAICOrganUtil {
         if (id.equals(SchoolRegistry.ENDER_RESOURCE)) return Items.PURPLE_DYE;
         if (id.equals(SchoolRegistry.EVOCATION_RESOURCE)) return Items.GRAY_DYE;
         return Items.AIR;
+    }
+
+    /**
+     * 从弗兰肯斯坦心脏的 BundleContents 中聚合所有内部心脏器官的属性修饰符
+     * <p>
+     * 遍历收纳袋中存储的所有心脏物品，获取每个心脏的 IOrgan 属性修饰符，
+     * 将相同属性+相同操作类型的修饰符合并为一个，值相加。
+     * </p>
+     *
+     * @param context   当前弗兰肯斯坦心脏的槽位上下文
+     * @param modifiers 需要填充的属性修饰符集合
+     */
+    public static void aggregateFrankensteinHeartAttributes(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers
+    ) {
+        BundleContents contents = context.stack().getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        // 使用 Map 按 (属性, 操作类型) 分组合并值
+        Map<Map.Entry<Holder<Attribute>, AttributeModifier.Operation>, Double> merged = new LinkedHashMap<>();
+        for (ItemStack stack : contents.itemsCopy()) {
+            IOrgan organ = ChestCavityUtil.getOrganCap(stack);
+            if (organ != OrganManager.EMPTY_ORGAN) {
+                ChestCavitySlotContext organContext = new ChestCavitySlotContext(
+                    context.data(),
+                    context.entity(),
+                    context.id(),
+                    context.index(),
+                    stack
+                );
+                organ.getAttributeModifiers(organContext).forEach((attribute, modifier) ->
+                    merged.merge(Map.entry(attribute, modifier.operation()), modifier.amount(), Double::sum)
+                );
+            }
+        }
+        merged.forEach((key, amount) ->
+            modifiers.put(key.getKey(), new AttributeModifier(context.id(), amount, key.getValue()))
+        );
+    }
+
+    /**
+     * 检查指定物品是否是实体胸腔中的器官（通过引用比较）
+     * <p>
+     * 仅当渲染传入的 stack 与胸腔 handler 中存储的是同一个 Java 对象引用时返回 true。
+     * </p>
+     *
+     * @param entity 实体
+     * @param stack  待检查的物品
+     * @return 该 stack 是否是胸腔内的原始器官引用
+     */
+    public static boolean isInChest(LivingEntity entity, ItemStack stack) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        for (ItemStack organ : data.getOrgans()) {
+            if (organ == stack) {
+                return true;
+            }
+        }
+        return false;
     }
 }

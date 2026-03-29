@@ -18,10 +18,11 @@ import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
-import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
+import net.zhaiji.who_am_i_core.item.FrankensteinHeartItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.HashMap;
@@ -123,17 +124,35 @@ public class WAICOrgans {
             .build()
     );
 
-    // 墨水阑尾
-    public static final Supplier<Item> INK_APPENDIX = WAICItem.ITEM.register(
-        "ink_appendix",
-        () -> Organ.builder()
-            .build()
-    );
-
     // 墨水肋骨
     public static final Supplier<Item> INK_RIB = WAICItem.ITEM.register(
         "ink_rib",
         () -> Organ.builder()
+            .build()
+    );
+
+    // 墨水瓶
+    public static final Supplier<Item> INK_BOTTLE = WAICItem.ITEM.register(
+        "ink_bottle",
+        () -> Organ.builder()
+            .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+                CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+                int value = tag.contains("ink") ? tag.getInt("ink") : 0;
+                List<Component> add = List.of(
+                    // TODO 应该写入语言键
+                    Component.translatable("墨水:%1$s", value)
+                );
+                TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
+            })
+            .build()
+    );
+
+    // 墨水阑尾
+    public static final Supplier<Item> INK_APPENDIX = WAICItem.ITEM.register(
+        "ink_appendix",
+        () -> Organ.builder()
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .skill(WAICOrganSkillUtil::inkAppendixSkill)
             .build()
     );
 
@@ -145,22 +164,6 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.SPEED, 1)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
             .hurt(WAICOrganSkillUtil::inkMuscleSkill)
-            .build()
-    );
-
-    // 墨水瓶
-    public static final Supplier<Item> INK_BOTTLE = WAICItem.ITEM.register(
-        "ink_bottle",
-        () -> Organ.builder()
-            .skillTooltip((data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-                CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-                int value = tag.contains("ink") ? tag.getInt("ink") : 0;
-                List<Component> add = List.of(
-                    // TODO 应该写入语言键
-                    Component.translatable("墨水:%1$s", value)
-                );
-                TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
-            })
             .build()
     );
 
@@ -252,15 +255,10 @@ public class WAICOrgans {
     // 调色盘
     public static final Supplier<Item> PALETTE = WAICItem.ITEM.register(
         "palette",
-        () -> Organ.builder(
-                new PaletteItem(
-                    new Item.Properties()
-                        .stacksTo(1)
-                        .component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)
-                )
-            )
+        () -> Organ.builder(PaletteItem::new)
+            .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
             // TODO 应该简化
-            .skillTooltip((data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+            .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
                 BundleContents contents = stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
                 Map<SchoolType, Integer> dyeCount = new HashMap<>();
                 // 统计各流派对应的染料数量
@@ -427,10 +425,13 @@ public class WAICOrgans {
     );
 
     // ==================== 弗兰肯斯坦器官 ====================
-    // 弗兰肯斯坦心脏
+    // 弗兰肯斯坦心脏（收纳袋式 - 继承内部心脏器官的属性）
     public static final Supplier<Item> FRANKENSTEIN_HEART = WAICItem.ITEM.register(
         "frankenstein_heart",
-        () -> Organ.builder()
+        () -> Organ.builder(FrankensteinHeartItem::new)
+            .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
+            .modifier(WAICOrganUtil::aggregateFrankensteinHeartAttributes)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -653,6 +654,7 @@ public class WAICOrgans {
         "mimic_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .heal(WAICOrganSkillUtil::mimicHealBoost)
             .build()
     );
@@ -662,6 +664,7 @@ public class WAICOrgans {
         "mimic_liver",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 3)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .heal(WAICOrganSkillUtil::mimicHealBoost)
             .build()
     );
@@ -674,6 +677,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
             .addValueAttribute(InitAttribute.ENDURANCE, 3)
             .addValueAttribute(InitAttribute.WATER_BREATH, 3)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .heal(WAICOrganSkillUtil::mimicHealBoost)
             .build()
     );

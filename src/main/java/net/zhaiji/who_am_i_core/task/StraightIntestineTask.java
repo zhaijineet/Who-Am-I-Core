@@ -27,6 +27,7 @@ public class StraightIntestineTask implements ISerializableTask {
 
     /**
      * 构造函数
+     *
      * @param data 胸腔数据
      * @param food 被食用的食物物品
      */
@@ -51,10 +52,11 @@ public class StraightIntestineTask implements ISerializableTask {
 
     @Override
     public void tick(LivingEntity entity) {
-        if (delayTicks > 0) {
-            delayTicks--;
-            return;
-        }
+        delayTicks--;
+    }
+
+    @Override
+    public void onRemoved(LivingEntity entity) {
         // 延迟结束，掉落物品
         if (!entity.level().isClientSide()) {
             entity.spawnAtLocation(food);

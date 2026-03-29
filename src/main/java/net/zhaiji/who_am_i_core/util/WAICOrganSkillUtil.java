@@ -1,5 +1,7 @@
 package net.zhaiji.who_am_i_core.util;
 
+import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -22,6 +24,7 @@ import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
@@ -223,6 +226,37 @@ public class WAICOrganSkillUtil {
         float damage = damageContainer.getNewDamage();
         if (damage <= 0) return;
         addInkToBottle(context.data(), (int) damage);
+    }
+
+    /**
+     * 墨水阑尾技能：消耗墨水瓶中的墨水回复法力
+     * 消耗的墨水量等于回复的法力量（1:1），尽可能填补法力差值
+     * 墨水不足时有墨水就全耗，只回复实际消耗掉的墨水量
+     * 没有墨水或法力已满时不触发也不冷却
+     */
+    public static void inkAppendixSkill(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+
+        // 计算需要回复的法力量
+        MagicData magicData = MagicData.getPlayerMagicData(entity);
+        float currentMana = magicData.getMana();
+        float maxMana = (float) entity.getAttributeValue(AttributeRegistry.MAX_MANA);
+        float manaToRestore = maxMana - currentMana;
+
+        if (manaToRestore <= 0) return; // 法力已满，不触发
+
+        // 消耗墨水（传入负数），返回值为负表示墨水不足还差多少
+        // 实际消耗 = manaToRestore + remaining（remaining <= 0）
+        int remaining = addInkToBottle(data, (int) -manaToRestore);
+        float actualRestored = manaToRestore + remaining;
+        if (actualRestored <= 0) return;
+
+        // 回复法力
+        magicData.addMana(actualRestored);
+
+        // 手动设置冷却（仅在成功消耗墨水后才冷却）
+        OrganSkillUtil.addCooldown(entity, context.stack(), 200);
     }
 
     /**

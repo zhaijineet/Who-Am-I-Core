@@ -32,7 +32,7 @@ public class WAICTooltipUtil {
      * 创建一个 descriptionTooltip consumer，添加器官描述
      */
     public static OrganTooltipConsumer descriptionTooltip() {
-        return (data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+        return (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
             TooltipUtil.simpleTooltipAdd(
                 tooltipComponents,
                 List.of(organDescription(stack.getItem()))
@@ -46,7 +46,7 @@ public class WAICTooltipUtil {
      * @param to 0 ~ to 索引
      */
     public static OrganTooltipConsumer descriptionTooltip(int to) {
-        return (data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+        return (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
             Component[] components = new Component[to + 1];
             for (int i = 0; i <= to; i++) {
                 components[i] = organDescription(stack.getItem(), i);
@@ -62,7 +62,7 @@ public class WAICTooltipUtil {
      * 创建一个 skillTooltip consumer，添加单个技能描述
      */
     public static OrganTooltipConsumer skillTooltip() {
-        return (data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+        return (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
             TooltipUtil.simpleTooltipAdd(
                 tooltipComponents,
                 List.of(organSkill(stack.getItem()))
@@ -76,7 +76,7 @@ public class WAICTooltipUtil {
      * @param to 0 ~ to 索引
      */
     public static OrganTooltipConsumer skillTooltip(int to) {
-        return (data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+        return (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
             Component[] components = new Component[to + 1];
             for (int i = 0; i <= to; i++) {
                 components[i] = organSkill(stack.getItem(), i);
@@ -94,7 +94,7 @@ public class WAICTooltipUtil {
      * @param translationKey 翻译键，例如 "organ.who_am_i_core.tooltips.frost_metal_merciless"
      */
     public static OrganTooltipConsumer skillTooltip(String translationKey) {
-        return (data, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+        return (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
             TooltipUtil.simpleTooltipAdd(
                 tooltipComponents,
                 List.of(Component.translatable(translationKey))

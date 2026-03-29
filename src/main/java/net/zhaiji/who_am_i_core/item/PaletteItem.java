@@ -20,6 +20,7 @@ import net.neoforged.neoforge.common.Tags;
  * <p>
  * 继承自BundleItem，但限制只能放入染料
  * </p>
+ * TODO 增加容量
  */
 public class PaletteItem extends BundleItem {
     public PaletteItem(Properties properties) {

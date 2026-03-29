@@ -11,6 +11,8 @@ public class ClientEventManager {
 
     public static void modBusListener(IEventBus modBus) {
         modBus.addListener(ClientEventHandler::handlerEntityRenderersEvent$RegisterRenderers);
+        modBus.addListener(ClientEventHandler::handlerRegisterClientTooltipComponentFactoriesEvent);
+        modBus.addListener(ClientEventHandler::handlerFMLClientSetupEvent);
     }
 
 

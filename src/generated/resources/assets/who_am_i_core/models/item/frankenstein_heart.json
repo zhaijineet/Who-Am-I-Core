@@ -1,5 +1,19 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "who_am_i_core:item/frankenstein_heart_active",
+      "predicate": {
+        "who_am_i_core:frankenstein_heart_active": 1.0
+      }
+    },
+    {
+      "model": "who_am_i_core:item/frankenstein_heart_super_active",
+      "predicate": {
+        "who_am_i_core:frankenstein_heart_super_active": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "who_am_i_core:item/frankenstein_heart"
   }

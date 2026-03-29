@@ -192,20 +192,8 @@ public class CommonEventHandler {
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
     }
 
-    /**
-     * 直肠子器官效果
-     * 食用食物完成后，30%几率添加延迟掉落任务（3秒后掉落1个食物）
-     */
     public static void handlerLivingEntityUseItemEvent$Finish(LivingEntityUseItemEvent.Finish event) {
-        LivingEntity entity = event.getEntity();
-        if (entity.level().isClientSide()) return;
-        ItemStack itemStack = event.getItem();
-        FoodProperties foodProperties = itemStack.getFoodProperties(entity);
-        // 检查是否是食物
-        if (foodProperties == null) return;
-        ChestCavityData data = ChestCavityUtil.getData(entity);
-        // 调用技能方法
-        WAICOrganSkillUtil.straightIntestineSkill(entity, data, itemStack);
+        // TODO 待删除/更改
     }
 
     /**
