@@ -6,7 +6,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
-import net.zhaiji.chestcavitybeyond.api.task.IChestCavityTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
@@ -17,9 +16,33 @@ import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 
 public class IceAndFireOrganhUtil {
     /**
+     * 取消指定类型的吐息任务
+     */
+    public static void cancelBreathTask(ChestCavityData data, DragonBreathCastingTask.BreathType breathType) {
+        data.removeTaskIf(
+            task -> task instanceof DragonBreathCastingTask breathTask
+                    && breathTask.getBreathType() == breathType
+                    && !breathTask.canRemove(data.getOwner())
+        );
+    }
+
+    /**
+     * 添加指定类型的吐息任务
+     */
+    public static void addBreathTask(ChestCavityData data, DragonBreathCastingTask.BreathType breathType, TagKey<Item> organTag) {
+        data.addTask(
+            new DragonBreathCastingTask(
+                data,
+                breathType,
+                getBreathLevel(data, organTag)
+            )
+        );
+    }
+
+    /**
      * 计算吐息等级
      */
-    private static int getBreathLevel(ChestCavityData data, TagKey<Item> organTag) {
+    public static int getBreathLevel(ChestCavityData data, TagKey<Item> organTag) {
         return Math.min(data.getOrganCount(organTag), 10);
     }
 
@@ -27,42 +50,21 @@ public class IceAndFireOrganhUtil {
      * 火龙吐息
      */
     public static void fireDragonBreathSacSkill(ChestCavitySlotContext context) {
-        ChestCavityData data = context.data();
-        data.addTask(
-            new DragonBreathCastingTask(
-                data,
-                DragonBreathCastingTask.BreathType.FIRE_BREATH,
-                getBreathLevel(data, WAICItemTagManager.FIRE_DRAGON)
-            )
-        );
+        addBreathTask(context.data(), DragonBreathCastingTask.BreathType.FIRE_BREATH, WAICItemTagManager.FIRE_DRAGON);
     }
 
     /**
      * 冰龙吐息
      */
     public static void iceDragonBreathSacSkill(ChestCavitySlotContext context) {
-        ChestCavityData data = context.data();
-        data.addTask(
-            new DragonBreathCastingTask(
-                data,
-                DragonBreathCastingTask.BreathType.ICE_BREATH,
-                getBreathLevel(data, WAICItemTagManager.ICE_DRAGON)
-            )
-        );
+        addBreathTask(context.data(), DragonBreathCastingTask.BreathType.ICE_BREATH, WAICItemTagManager.ICE_DRAGON);
     }
 
     /**
      * 电龙吐息
      */
     public static void lightningDragonBreathSacSkill(ChestCavitySlotContext context) {
-        ChestCavityData data = context.data();
-        data.addTask(
-            new DragonBreathCastingTask(
-                data,
-                DragonBreathCastingTask.BreathType.LIGHTNING_BREATH,
-                getBreathLevel(data, WAICItemTagManager.LIGHTNING_DRAGON)
-            )
-        );
+        addBreathTask(context.data(), DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON);
     }
 
     /**
@@ -70,9 +72,7 @@ public class IceAndFireOrganhUtil {
      */
     public static void hydraSpleenAdded(ChestCavitySlotContext slotContext) {
         ChestCavityData data = slotContext.data();
-        if (data.hasTask(task -> task instanceof HydraSpleenTask && !task.canRemove(slotContext.entity()))) {
-            return;
-        }
+        if (data.hasTaskIf(task -> task instanceof HydraSpleenTask && !task.canRemove(slotContext.entity()))) return;
         data.addTask(new HydraSpleenTask(data));
     }
 
@@ -129,8 +129,8 @@ public class IceAndFireOrganhUtil {
      * @param amount 转移的时长
      * @return 转移的中毒等级+1（用于伤害计算)
      */
-    private static float transferPoison(LivingEntity from, LivingEntity to, int amount) {
-        if(from == to) return 0;
+    public static float transferPoison(LivingEntity from, LivingEntity to, int amount) {
+        if (from == to) return 0;
         MobEffectInstance fromPoison = from.getEffect(MobEffects.POISON);
         if (fromPoison == null) return 0;
         int duration = fromPoison.getDuration();
@@ -203,5 +203,47 @@ public class IceAndFireOrganhUtil {
         ChestCavityData data = ChestCavityUtil.getData(attacker);
         if (!data.hasOrgan(IceAndFireOrgans.HYDRA_MUSCLE.get())) return 0;
         return transferPoison(attacker, target, 100);
+    }
+
+    /**
+     * 九头蛇心脏 tick - 中毒时获得再生效果
+     * <p>
+     * 每10tick检测一次，当实体未着火且持有中毒效果时，给予与中毒等级相同的再生效果
+     * </p>
+     */
+    public static void hydraHeartTick(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.isOnFire() || entity.tickCount % 10 != 0) return;
+        MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
+        if (poison != null) {
+            entity.addEffect(
+                new MobEffectInstance(
+                    MobEffects.REGENERATION,
+                    20,
+                    poison.getAmplifier()
+                )
+            );
+        }
+    }
+
+    /**
+     * 火龙吐息袋冷却回调 - 取消吐息中
+     */
+    public static void fireDragonBreathSacOnCooldown(ChestCavitySlotContext context) {
+        cancelBreathTask(context.data(), DragonBreathCastingTask.BreathType.FIRE_BREATH);
+    }
+
+    /**
+     * 冰龙吐息袋冷却回调 - 取消吐息中
+     */
+    public static void iceDragonBreathSacOnCooldown(ChestCavitySlotContext context) {
+        cancelBreathTask(context.data(), DragonBreathCastingTask.BreathType.ICE_BREATH);
+    }
+
+    /**
+     * 电龙吐息袋冷却回调 - 取消吐息中
+     */
+    public static void lightningDragonBreathSacOnCooldown(ChestCavitySlotContext context) {
+        cancelBreathTask(context.data(), DragonBreathCastingTask.BreathType.LIGHTNING_BREATH);
     }
 }

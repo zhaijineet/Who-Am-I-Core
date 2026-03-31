@@ -117,6 +117,13 @@ public class DragonBreathCastingTask implements IChestCavityTask {
     }
 
     /**
+     * 获取吐息类型
+     */
+    public BreathType getBreathType() {
+        return breathType;
+    }
+
+    /**
      * 吐息类型枚举
      */
     public enum BreathType {

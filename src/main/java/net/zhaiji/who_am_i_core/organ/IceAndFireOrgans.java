@@ -1,13 +1,17 @@
 package net.zhaiji.who_am_i_core.organ;
 
 import com.iafenvoy.iceandfire.registry.IafItems;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
@@ -90,6 +94,19 @@ public class IceAndFireOrgans {
         "fire_dragon_gem",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .modifier((context, modifiers) -> modifiers.put(
+                AttributeRegistry.FIRE_SPELL_POWER,
+                new AttributeModifier(
+                    context.id(),
+                    context.data().getOrganCount(WAICItemTagManager.FIRE_DRAGON) * 0.05,
+                    AttributeModifier.Operation.ADD_VALUE
+                )
+            ))
+            .otherChange((context, changedIndex, oldStack, newStack) -> {
+                if (newStack.is(WAICItemTagManager.FIRE_DRAGON) || oldStack.is(WAICItemTagManager.FIRE_DRAGON)) {
+                    OrganAttributeUtil.updateSlotOrganAttribute(context);
+                }
+            })
             .build()
     );
 
@@ -99,6 +116,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
             .skill(IceAndFireOrganhUtil::fireDragonBreathSacSkill)
+            .skillOnCooldown(IceAndFireOrganhUtil::fireDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
@@ -196,6 +214,19 @@ public class IceAndFireOrgans {
         "ice_dragon_gem",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .modifier((context, modifiers) -> modifiers.put(
+                AttributeRegistry.ICE_SPELL_POWER,
+                new AttributeModifier(
+                    context.id(),
+                    context.data().getOrganCount(WAICItemTagManager.ICE_DRAGON) * 0.05,
+                    AttributeModifier.Operation.ADD_VALUE
+                )
+            ))
+            .otherChange((context, changedIndex, oldStack, newStack) -> {
+                if (newStack.is(WAICItemTagManager.ICE_DRAGON) || oldStack.is(WAICItemTagManager.ICE_DRAGON)) {
+                    OrganAttributeUtil.updateSlotOrganAttribute(context);
+                }
+            })
             .build()
     );
 
@@ -205,6 +236,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
             .skill(IceAndFireOrganhUtil::iceDragonBreathSacSkill)
+            .skillOnCooldown(IceAndFireOrganhUtil::iceDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
@@ -303,6 +335,19 @@ public class IceAndFireOrgans {
         "lightning_dragon_gem",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .modifier((context, modifiers) -> modifiers.put(
+                AttributeRegistry.LIGHTNING_SPELL_POWER,
+                new AttributeModifier(
+                    context.id(),
+                    context.data().getOrganCount(WAICItemTagManager.LIGHTNING_DRAGON) * 0.05,
+                    AttributeModifier.Operation.ADD_VALUE
+                )
+            ))
+            .otherChange((context, changedIndex, oldStack, newStack) -> {
+                if (newStack.is(WAICItemTagManager.LIGHTNING_DRAGON) || oldStack.is(WAICItemTagManager.LIGHTNING_DRAGON)) {
+                    OrganAttributeUtil.updateSlotOrganAttribute(context);
+                }
+            })
             .build()
     );
 
@@ -312,6 +357,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
             .skill(IceAndFireOrganhUtil::lightningDragonBreathSacSkill)
+            .skillOnCooldown(IceAndFireOrganhUtil::lightningDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .build()
@@ -574,20 +620,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.METABOLISM, 10)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip(1))
-            .tick(context -> {
-                LivingEntity entity = context.entity();
-                if (entity.isOnFire() || entity.tickCount % 10 != 0) return;
-                MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
-                if (poison != null) {
-                    entity.addEffect(
-                        new MobEffectInstance(
-                            MobEffects.REGENERATION,
-                            20,
-                            poison.getAmplifier()
-                        )
-                    );
-                }
-            })
+            .tick(IceAndFireOrganhUtil::hydraHeartTick)
             .build();
     }
 }

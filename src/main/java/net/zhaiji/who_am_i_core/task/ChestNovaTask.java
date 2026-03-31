@@ -26,6 +26,7 @@ import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -66,7 +67,7 @@ public class ChestNovaTask implements ISerializableTask {
      */
     private final int novaSlot;
 
-    private final int[] adjacentSlots;
+    private final List<Integer> adjacentSlots;
 
     /**
      * 是否应该被移除
@@ -249,7 +250,6 @@ public class ChestNovaTask implements ISerializableTask {
         if (player.getCooldowns().isOnCooldown(MowziesMobOrgans.CHEST_NOVA.get())) return;
         // 周围8个位置的槽位索引
         for (int slot : adjacentSlots) {
-            if (slot < 0 || slot >= 27) continue;
             ItemStack stack = data.getStackInSlot(slot);
             // 检查是否为乌姆塔纳面具
             if (stack.getItem() instanceof ItemUmvuthanaMask maskItem) {

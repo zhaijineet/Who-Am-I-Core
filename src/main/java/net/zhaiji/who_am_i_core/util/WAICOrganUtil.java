@@ -21,36 +21,32 @@ import net.zhaiji.chestcavitybeyond.api.capability.IOrgan;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.manager.OrganManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WAICOrganUtil {
     /**
-     * 计算周围8个位置的槽位索引
+     * 计算周围8个位置的槽位索引，越界槽位自动排除
      */
-    public static int[] getAdjacentSlots(int slotIndex) {
-        int posInRow = slotIndex % 9;
+    public static List<Integer> getAdjacentSlots(int slotIndex) {
+        List<Integer> result = new ArrayList<>();
+        int col = slotIndex % 9;
         int row = slotIndex / 9;
-
-        return new int[]{
-            // 左
-            posInRow > 0 ? slotIndex - 1 : -1,
-            // 右
-            posInRow < 8 ? slotIndex + 1 : -1,
-            // 上排对应位置
-            row > 0 ? slotIndex - 9 : -1,
-            // 下排对应位置
-            row < 2 ? slotIndex + 9 : -1,
-            // 斜上左
-            row > 0 && posInRow > 0 ? slotIndex - 10 : -1,
-            // 斜上右
-            row > 0 && posInRow < 8 ? slotIndex - 8 : -1,
-            // 斜下左
-            row < 2 && posInRow > 0 ? slotIndex + 8 : -1,
-            // 斜下右
-            row < 2 && posInRow < 8 ? slotIndex + 10 : -1
-        };
+        for (int dr = -1; dr <= 1; dr++) {
+            for (int dc = -1; dc <= 1; dc++) {
+                if (dr == 0 && dc == 0) continue;
+                int r = row + dr;
+                int c = col + dc;
+                if (r < 0 || r > 2 || c < 0 || c > 8) continue;
+                result.add(r * 9 + c);
+            }
+        }
+        return result;
     }
 
     /**
@@ -199,5 +195,73 @@ public class WAICOrganUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取实体的原始全局温度
+     *
+     * @param entity 实体
+     * @return 实体的温度属性值，无任何修改
+     */
+    public static double getOriginalTemperature(LivingEntity entity) {
+        return entity.getAttributeValue(WAICAttribute.TEMPERATURE);
+    }
+
+    /**
+     * 获取实体的有效全局温度
+     * <p>
+     * 若实体拥有王国器官，温度强制为 0；否则返回原始温度。
+     * </p>
+     *
+     * @param entity 实体
+     * @return 经过器官修正后的有效温度
+     */
+    public static double getEffectiveTemperature(LivingEntity entity) {
+        if (ChestCavityUtil.getData(entity).hasOrgan(FDBossesOrgans.MALKUTH.get())) {
+            return 0;
+        }
+        return getOriginalTemperature(entity);
+    }
+
+    /**
+     * 获取以指定槽位为中心的九宫格内局部温度
+     * <p>
+     * 遍历中心槽位及相邻 8 格，累加每个有效槽位中器官通过属性修饰符贡献的温度值。
+     * 空槽位视为温度 0，跳过不计。
+     * </p>
+     *
+     * @param context 当前槽位上下文
+     * @return 九宫格内器官贡献的局部温度总和
+     */
+    public static double getLocalTemperature(ChestCavitySlotContext context) {
+        int center = context.index();
+        List<Integer> adjacent = getAdjacentSlots(center);
+        double total = 0;
+        // 中心 + 遍历相邻 8 格
+        total += collectTemperatureFromSlot(context, center);
+        for (int slot : adjacent) {
+            total += collectTemperatureFromSlot(context, slot);
+        }
+        return total;
+    }
+
+    private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {
+        ItemStack stack = context.data().getOrgans().get(slot);
+        if (stack.isEmpty()) return 0;
+        IOrgan organ = ChestCavityUtil.getOrganCap(stack);
+        if (organ == OrganManager.EMPTY_ORGAN) return 0;
+        ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
+            context.data(),
+            context.entity(),
+            context.id(),
+            slot,
+            stack
+        );
+        for (Map.Entry<Holder<Attribute>, AttributeModifier> entry : organ.getAttributeModifiers(slotContext).entries()) {
+            if (entry.getKey().equals(WAICAttribute.TEMPERATURE)) {
+                return entry.getValue().amount();
+            }
+        }
+        return 0;
     }
 }

@@ -9,8 +9,6 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
@@ -107,7 +105,7 @@ public class CommonEventHandler {
         // 检查被移除的是否是乌姆塔纳面具
         if (!(event.getOldStack().getItem() instanceof ItemUmvuthanaMask)) return;
         // 通知 ChestNovaTask 移除对应槽位的生物
-        event.getData().getFirstTask(task -> task instanceof ChestNovaTask)
+        event.getData().getFirstTaskIf(task -> task instanceof ChestNovaTask)
             .ifPresent(task -> ((ChestNovaTask) task).onMaskRemoved(event.getIndex()));
     }
 

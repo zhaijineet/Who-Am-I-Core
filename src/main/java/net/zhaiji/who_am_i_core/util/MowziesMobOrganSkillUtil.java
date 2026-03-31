@@ -31,6 +31,8 @@ import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 
+import java.util.List;
+
 public class MowziesMobOrganSkillUtil {
     /**
      * 钢铁守护者护心镜 - 受到伤害前
@@ -49,8 +51,14 @@ public class MowziesMobOrganSkillUtil {
             // 当点积小于0时，伤害来自前方
             if (damageDirection.dot(viewVector) < 0) {
                 // 播放钢铁守护者的抵挡音效
-                entity.level()
-                    .playSound(null, entity.getOnPos(), MMSounds.ENTITY_WROUGHT_UNDAMAGED.get(), SoundSource.PLAYERS, 0.4F, 2.0F);
+                entity.level().playSound(
+                    null,
+                    entity.getOnPos(),
+                    MMSounds.ENTITY_WROUGHT_UNDAMAGED.get(),
+                    SoundSource.PLAYERS,
+                    0.4F,
+                    2.0F
+                );
                 // 取消伤害
                 event.setCanceled(true);
             }
@@ -80,9 +88,8 @@ public class MowziesMobOrganSkillUtil {
      */
     public static void chestNovaChestCavityClose(ChestCavitySlotContext slotContext) {
         ChestCavityData data = slotContext.data();
-        int[] adjacentSlots = WAICOrganUtil.getAdjacentSlots(slotContext.index());
+        List<Integer> adjacentSlots = WAICOrganUtil.getAdjacentSlots(slotContext.index());
         for (int slot : adjacentSlots) {
-            if (slot < 0 || slot >= 27) continue;
             ItemStack adjacentStack = data.getStackInSlot(slot);
             if (adjacentStack.isEmpty()) continue;
             // 检查是否为器官
@@ -95,7 +102,7 @@ public class MowziesMobOrganSkillUtil {
             data.setStackInSlot(slot, ItemStack.EMPTY);
         }
         // 检查是否已有 ChestNovaTask,并且task不会被不会被删除
-        if (data.hasTask(task -> task instanceof ChestNovaTask && !task.canRemove(slotContext.entity()))) {
+        if (data.hasTaskIf(task -> task instanceof ChestNovaTask && !task.canRemove(slotContext.entity()))) {
             return;
         }
         // 创建并添加任务
@@ -106,7 +113,7 @@ public class MowziesMobOrganSkillUtil {
      * 胸中新星 - 移除
      */
     public static void chestNovaRemoved(ChestCavitySlotContext slotContext) {
-        slotContext.data().getFirstTask(task ->
+        slotContext.data().getFirstTaskIf(task ->
             task instanceof ChestNovaTask novaTask && novaTask.isSlotEquals(slotContext.index())
         ).ifPresent(task -> {
             ((ChestNovaTask) task).setRemove();

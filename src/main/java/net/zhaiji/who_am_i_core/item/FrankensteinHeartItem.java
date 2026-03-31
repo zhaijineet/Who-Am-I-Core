@@ -13,7 +13,6 @@ import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BundleContents;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
@@ -24,7 +23,6 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * 弗兰肯斯坦心脏物品
@@ -122,7 +120,7 @@ public class FrankensteinHeartItem extends BundleItem {
         } else if (canInsert(other) && hasFreeSlot(contents)) {
             // 放入一个器官
             ArrayList<ItemStack> newItems = new ArrayList<>();
-            newItems.add(other);
+            newItems.add(other.split(1));
             contents.itemsCopy().forEach(newItems::add);
             playInsertSound(player);
             stack.set(DataComponents.BUNDLE_CONTENTS, new BundleContents(newItems));

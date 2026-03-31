@@ -8,8 +8,6 @@ import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 
-import java.util.function.Supplier;
-
 public class ItemModelProvider extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
     public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, WhoAmICore.MOD_ID, existingFileHelper);
@@ -28,10 +26,12 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
                 getBuilder("frankenstein_heart")
                     .parent(new ModelFile.UncheckedModelFile("item/generated"))
                     .texture("layer0", modLoc("item/frankenstein_heart"))
+                    // 激活
                     .override()
-                        .predicate(WhoAmICore.of("frankenstein_heart_active"), 1.0F)
-                        .model(getExistingFile(modLoc("item/frankenstein_heart_active")))
-                        .end()
+                    .predicate(WhoAmICore.of("frankenstein_heart_active"), 1.0F)
+                    .model(getExistingFile(modLoc("item/frankenstein_heart_active")))
+                    .end()
+                    // 超级激活
                     .override()
                     .predicate(WhoAmICore.of("frankenstein_heart_super_active"), 1.0F)
                     .model(getExistingFile(modLoc("item/frankenstein_heart_super_active")))

@@ -161,7 +161,7 @@ dependencies {
     implementation "curse.maven:playeranimator-658587:7389814"
 
     // Chest Cavity Beyond
-    implementation "curse.maven:chest-cavity-beyond-1427715:7831687"
+    implementation "curse.maven:chest-cavity-beyond-1427715:7851734"
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物
