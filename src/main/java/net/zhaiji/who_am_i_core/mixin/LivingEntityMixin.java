@@ -39,7 +39,7 @@ public abstract class LivingEntityMixin extends Entity {
     public abstract boolean addEffect(MobEffectInstance effectInstance);
 
     @Unique
-    private LivingEntity self() {
+    public LivingEntity whoAmICore$self() {
         return (LivingEntity) (Object) this;
     }
 
@@ -56,9 +56,9 @@ public abstract class LivingEntityMixin extends Entity {
     )
     public void whoAmICore$eat(Level level, ItemStack food, FoodProperties foodProperties, CallbackInfoReturnable<ItemStack> cir) {
         if (level().isClientSide()) return;
-        ChestCavityData data = ChestCavityUtil.getData(self());
+        ChestCavityData data = ChestCavityUtil.getData(whoAmICore$self());
         // 调用直肠子技能方法
-        WAICOrganSkillUtil.straightIntestineSkill(self(), data, food);
+        WAICOrganSkillUtil.straightIntestineSkill(whoAmICore$self(), data, food);
 
         int hydraStomachCount = data.getOrganCount(IceAndFireOrgans.HYDRA_STOMACH.get());
         if (hydraStomachCount <= 0) return;
@@ -100,7 +100,7 @@ public abstract class LivingEntityMixin extends Entity {
         )
     )
     public MobEffectInstance whoAmICore$addEatEffect(MobEffectInstance effectInstance) {
-        ChestCavityData data = ChestCavityUtil.getData(self());
+        ChestCavityData data = ChestCavityUtil.getData(whoAmICore$self());
         int hydraIntestineCount = data.getOrganCount(IceAndFireOrgans.HYDRA_INTESTINE.get());
         if (hydraIntestineCount > 0) {
             ((IMobEffectInstance) effectInstance).setDuration(duration -> (int) (duration * (1 + (0.5 * hydraIntestineCount))));

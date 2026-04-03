@@ -21,6 +21,7 @@ import net.zhaiji.chestcavitybeyond.api.capability.IOrgan;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.manager.OrganManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 
@@ -234,6 +235,9 @@ public class WAICOrganUtil {
      * @return 九宫格内器官贡献的局部温度总和
      */
     public static double getLocalTemperature(ChestCavitySlotContext context) {
+        if (context.data().hasOrgan(FDBossesOrgans.MALKUTH.get())) {
+            return getMalkuthLocalTemperature(context);
+        }
         int center = context.index();
         List<Integer> adjacent = getAdjacentSlots(center);
         double total = 0;
@@ -243,6 +247,52 @@ public class WAICOrganUtil {
             total += collectTemperatureFromSlot(context, slot);
         }
         return total;
+    }
+
+    /**
+     * 王国器官的局部温度聚合
+     * <p>
+     * 遍历胸腔内所有器官，根据物品标签判断温度方向：
+     * </p>
+     * <pre>
+     *   仅有 ICE 标签 → 取负温度（温度 < 0 的部分）
+     *   仅有 FIRE 标签 → 取正温度（温度 > 0 的部分）
+     *   同时拥有 ICE 和 FIRE → 取绝对值最高的温度值
+     *   两者皆无 → 返回原始胸腔温度
+     * </pre>
+     */
+    private static double getMalkuthLocalTemperature(ChestCavitySlotContext context) {
+        ItemStack caller = context.stack();
+        boolean isIce = caller.is(WAICItemTagManager.ICE);
+        boolean isFire = caller.is(WAICItemTagManager.FIRE);
+        if (!isIce && !isFire) return getOriginalTemperature(context.entity());
+        double iceTotal = 0;
+        double fireTotal = 0;
+        List<ItemStack> organs = context.data().getOrgans();
+        for (int slot = 0; slot < organs.size(); slot++) {
+            ItemStack stack = organs.get(slot);
+            IOrgan organ = ChestCavityUtil.getOrganCap(stack);
+            if (organ == OrganManager.EMPTY_ORGAN) continue;
+            ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
+                context.data(), context.entity(), context.id(), slot, stack
+            );
+            double temperature = 0;
+            for (Map.Entry<Holder<Attribute>, AttributeModifier> entry : organ.getAttributeModifiers(slotContext).entries()) {
+                if (entry.getKey().equals(WAICAttribute.TEMPERATURE)) {
+                    temperature = entry.getValue().amount();
+                    break;
+                }
+            }
+            if (temperature < 0) iceTotal += temperature;
+            if (temperature > 0) fireTotal += temperature;
+        }
+        if (isIce && isFire) {
+            return Math.abs(iceTotal) >= fireTotal ? iceTotal : fireTotal;
+        } else if (isIce) {
+            return iceTotal;
+        } else {
+            return fireTotal;
+        }
     }
 
     private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {

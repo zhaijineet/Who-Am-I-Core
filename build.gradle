@@ -161,14 +161,14 @@ dependencies {
     implementation "curse.maven:playeranimator-658587:7389814"
 
     // Chest Cavity Beyond
-    implementation "curse.maven:chest-cavity-beyond-1427715:7851734"
+    implementation "curse.maven:chest-cavity-beyond-1427715:7865778"
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物
     implementation "curse.maven:mowzies-mobs-250498:7727111"
     // 灾变
     implementation "curse.maven:lendercataclysm-551586:7691675"
-    // 逆卡巴拉
+    // 逆卡巴拉(FDBosses)
     implementation "curse.maven:qliphoth-awakening-1271707:7653113"
     // 铁魔法
     implementation "curse.maven:irons-spells-n-spellbooks-855414:7691161"

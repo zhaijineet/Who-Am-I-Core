@@ -469,7 +469,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 1.5)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 

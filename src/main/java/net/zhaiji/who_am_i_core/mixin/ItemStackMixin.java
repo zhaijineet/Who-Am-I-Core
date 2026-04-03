@@ -25,7 +25,7 @@ public abstract class ItemStackMixin {
     public abstract Item getItem();
 
     @Unique
-    private ItemStack self() {
+    public ItemStack whoAmICore$self() {
         return (ItemStack) (Object) this;
     }
 
@@ -40,9 +40,9 @@ public abstract class ItemStackMixin {
         InteractionHand usedHand,
         CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir
     ) {
-        if (EdibleConditionManager.canEat(player, self())) {
+        if (EdibleConditionManager.canEat(player, whoAmICore$self())) {
             player.startUsingItem(usedHand);
-            cir.setReturnValue(InteractionResultHolder.consume(self()));
+            cir.setReturnValue(InteractionResultHolder.consume(whoAmICore$self()));
         }
     }
 
@@ -52,8 +52,8 @@ public abstract class ItemStackMixin {
         cancellable = true
     )
     public void whoAmICore$finishUsingItem(Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
-        Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(livingEntity, self());
-        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.onEat(livingEntity, self())));
+        Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(livingEntity, whoAmICore$self());
+        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.onEat(livingEntity, whoAmICore$self())));
     }
 
     @Inject(
@@ -62,8 +62,8 @@ public abstract class ItemStackMixin {
         cancellable = true
     )
     public void whoAmICore$getUseAnimation(CallbackInfoReturnable<UseAnim> cir) {
-        if (getItem().getUseAnimation(self()) == UseAnim.NONE) {
-            EdibleConditionManager.getUseAnimation(self()).ifPresent(cir::setReturnValue);
+        if (getItem().getUseAnimation(whoAmICore$self()) == UseAnim.NONE) {
+            EdibleConditionManager.getUseAnimation(whoAmICore$self()).ifPresent(cir::setReturnValue);
         }
     }
 
@@ -73,7 +73,7 @@ public abstract class ItemStackMixin {
         cancellable = true
     )
     public void whoAmICore$getUseDuration(LivingEntity entity, CallbackInfoReturnable<Integer> cir) {
-        Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(entity, self());
-        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.getUseDuration(entity, self())));
+        Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(entity, whoAmICore$self());
+        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.getUseDuration(entity, whoAmICore$self())));
     }
 }

@@ -16,9 +16,10 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
+import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
-import net.zhaiji.who_am_i_core.item.FrankensteinHeartItem;
+import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
@@ -428,7 +429,7 @@ public class WAICOrgans {
     // 弗兰肯斯坦心脏（收纳袋式 - 继承内部心脏器官的属性）
     public static final Supplier<Item> FRANKENSTEIN_HEART = WAICItem.ITEM.register(
         "frankenstein_heart",
-        () -> Organ.builder(FrankensteinHeartItem::new)
+        () -> Organ.builder(properties -> new FrankensteinItem(properties, ItemTagManager.HEART))
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
             .modifier(WAICOrganUtil::aggregateFrankensteinHeartAttributes)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())

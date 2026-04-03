@@ -4,6 +4,7 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -12,7 +13,9 @@ public class FDBossesOrgans {
     public static final Supplier<Item> FIRE_MALKUTH_WARRIOR_HEART = WAICItem.ITEM.register(
         "fire_malkuth_warrior_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1.5)
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 2)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -20,7 +23,9 @@ public class FDBossesOrgans {
     public static final Supplier<Item> ICE_MALKUTH_WARRIOR_HEART = WAICItem.ITEM.register(
         "ice_malkuth_warrior_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1.5)
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 2)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -28,6 +33,10 @@ public class FDBossesOrgans {
     public static final Supplier<Item> MALKUTH = WAICItem.ITEM.register(
         "malkuth",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 5)
+            .descriptionTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 

@@ -134,8 +134,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "Lightning Dragon Muscle");
 
         addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Fire Malkuth Warrior Heart");
+        addOrganSkill(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Immune to fire attacks when fighting Malkuth");
         addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Ice Malkuth Warrior Heart");
+        addOrganSkill(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Immune to ice attacks when fighting Malkuth");
         addItem(FDBossesOrgans.MALKUTH, "Malkuth");
+        addOrganDescription(FDBossesOrgans.MALKUTH, "Global temperature is always 0; local temperature uses the full positive/negative temperature from all organs");
         addItem(FDBossesOrgans.CHESED, "Chesed");
         addItem(FDBossesOrgans.GEBURAH, "Geburah");
 
@@ -468,8 +471,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "电龙肌肉");
 
         addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "火焰王国战士之心");
+        addOrganSkill(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "对战王国时，免疫火焰攻击");
         addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "冰霜王国战士之心");
+        addOrganSkill(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "对战王国时，免疫冰霜攻击");
         addItem(FDBossesOrgans.MALKUTH, "王国");
+        addOrganSkill(FDBossesOrgans.MALKUTH, "全局温度始终为0；获取局部温度时，使用所有器官的全局正/负温度");
         addItem(FDBossesOrgans.CHESED, "慈悲");
         addItem(FDBossesOrgans.GEBURAH, "严厉");
 

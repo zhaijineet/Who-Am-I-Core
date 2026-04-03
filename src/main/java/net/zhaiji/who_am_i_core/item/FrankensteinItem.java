@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.item;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
@@ -10,41 +11,35 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BundleItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BundleContents;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
-import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.inventory.tooltip.FrankensteinHeartTooltip;
-import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * 弗兰肯斯坦心脏物品
+ * 弗兰肯斯坦物品
  * <p>
- * 继承自 BundleItem，限制只能放入心脏标签的器官。
- * 不允许放入弗兰肯斯坦心脏自身（防止嵌套）。
+ * 继承自 BundleItem，限制放入器官的标签。
+ * 不允许放入自身（防止嵌套）。
  * 最多只能放入 2 个器官（按槽位数计算，不受堆叠数影响）。
  * </p>
  * TODO 自己写一个BundleContents
  */
-public class FrankensteinHeartItem extends BundleItem {
+public class FrankensteinItem extends BundleItem {
     public static final int MAX_ORGANS = 2;
+    private final TagKey<Item> allowedTag;
 
-    public FrankensteinHeartItem(Properties properties) {
+    public FrankensteinItem(Properties properties, TagKey<Item> allowedTag) {
         super(properties);
-    }
-
-    /**
-     * 判断物品是否可以放入弗兰肯斯坦心脏
-     */
-    private static boolean canInsert(ItemStack stack) {
-        return stack.is(ItemTagManager.HEART) && !stack.is(WAICOrgans.FRANKENSTEIN_HEART.get());
+        this.allowedTag = allowedTag;
     }
 
     private static boolean hasFreeSlot(BundleContents contents) {
@@ -57,6 +52,13 @@ public class FrankensteinHeartItem extends BundleItem {
 
     private static void playInsertSound(Entity entity) {
         entity.playSound(SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
+    }
+
+    /**
+     * 判断物品是否可以放入弗兰肯斯坦物品
+     */
+    private boolean canInsert(ItemStack stack) {
+        return stack.is(allowedTag) && stack.getItem() != this;
     }
 
     @Override

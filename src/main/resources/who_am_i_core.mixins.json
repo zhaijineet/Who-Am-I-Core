@@ -9,6 +9,9 @@
     "EntityUmvuthanaFollowerToPlayerMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
+    "MalkuthCannonEntityMixin",
+    "MalkuthWeaknessHandlerMixin",
+    "MalkuthWeaknessOverlayMixin",
     "PoisonMobEffectMixin"
   ],
   "injectors": {
