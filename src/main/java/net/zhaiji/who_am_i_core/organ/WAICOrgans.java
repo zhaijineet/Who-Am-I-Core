@@ -18,9 +18,11 @@ import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
@@ -141,7 +143,7 @@ public class WAICOrgans {
                 int value = tag.contains("ink") ? tag.getInt("ink") : 0;
                 List<Component> add = List.of(
                     // TODO 应该写入语言键
-                    Component.translatable("墨水:%1$s", value)
+                    Component.translatable("墨水:%1$s/1000", value)
                 );
                 TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
             })
@@ -492,67 +494,75 @@ public class WAICOrgans {
             .build()
     );
 
-    // ==================== 肿瘤器官 ====================
-    // 肿瘤心脏
-    public static final Supplier<Item> TUMOR_HEART = WAICItem.ITEM.register(
-        "tumor_heart",
+    // ==================== 病变器官 ====================
+    // 病变心脏
+    public static final Supplier<Item> LESION_HEART = WAICItem.ITEM.register(
+        "lesion_heart",
+        () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::lesionHeartModifier)
+            .skill(WAICOrganSkillUtil::lesionHeartSkill)
+            .cooldown(10 * 20)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .build()
+    );
+
+    // 病变肺脏
+    public static final Supplier<Item> LESION_LUNG = WAICItem.ITEM.register(
+        "lesion_lung",
         () -> Organ.builder()
             .build()
     );
 
-    // 肿瘤肺脏
-    public static final Supplier<Item> TUMOR_LUNG = WAICItem.ITEM.register(
-        "tumor_lung",
+    // 病变胃
+    public static final Supplier<Item> LESION_STOMACH = WAICItem.ITEM.register(
+        "lesion_stomach",
         () -> Organ.builder()
             .build()
     );
 
-    // 肿瘤胃
-    public static final Supplier<Item> TUMOR_STOMACH = WAICItem.ITEM.register(
-        "tumor_stomach",
+    // 病变肠子
+    public static final Supplier<Item> LESION_INTESTINE = WAICItem.ITEM.register(
+        "lesion_intestine",
         () -> Organ.builder()
             .build()
     );
 
-    // 肿瘤肠子
-    public static final Supplier<Item> TUMOR_INTESTINE = WAICItem.ITEM.register(
-        "tumor_intestine",
+    // 病变肾脏
+    public static final Supplier<Item> LESION_KIDNEY = WAICItem.ITEM.register(
+        "lesion_kidney",
         () -> Organ.builder()
             .build()
     );
 
-    // 肿瘤肾脏
-    public static final Supplier<Item> TUMOR_KIDNEY = WAICItem.ITEM.register(
-        "tumor_kidney",
+    // 病变脾脏
+    public static final Supplier<Item> LESION_SPLEEN = WAICItem.ITEM.register(
+        "lesion_spleen",
         () -> Organ.builder()
             .build()
     );
 
-    // 肿瘤脾脏
-    public static final Supplier<Item> TUMOR_SPLEEN = WAICItem.ITEM.register(
-        "tumor_spleen",
+    // 病变肝脏
+    public static final Supplier<Item> LESION_LIVER = WAICItem.ITEM.register(
+        "lesion_liver",
         () -> Organ.builder()
             .build()
     );
 
-    // 肿瘤肝脏
-    public static final Supplier<Item> TUMOR_LIVER = WAICItem.ITEM.register(
-        "tumor_liver",
+    // 病变阑尾
+    public static final Supplier<Item> LESION_APPENDIX = WAICItem.ITEM.register(
+        "lesion_appendix",
         () -> Organ.builder()
             .build()
     );
 
-    // 肿瘤阑尾
-    public static final Supplier<Item> TUMOR_APPENDIX = WAICItem.ITEM.register(
-        "tumor_appendix",
+    // 病变肌肉
+    public static final Supplier<Item> LESION_MUSCLE = WAICItem.ITEM.register(
+        "lesion_muscle",
         () -> Organ.builder()
-            .build()
-    );
-
-    // 肿瘤肌肉
-    public static final Supplier<Item> TUMOR_MUSCLE = WAICItem.ITEM.register(
-        "tumor_muscle",
-        () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::lesionMuscleModifier)
+            .attack(WAICOrganSkillUtil::lesionMuscleAttack)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 

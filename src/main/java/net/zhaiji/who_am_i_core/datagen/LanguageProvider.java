@@ -155,6 +155,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.DREAD_RIB, "Dread Rib");
         addItem(IceAndFireOrgans.DREAD_SPINE, "Dread Spine");
 
+        // 冰魂残片效果描述
+        addOrganDescription(IceAndFireOrgans.ICE_SHARD, "Global temperature × -0.05 → bonus health (colder = more health)");
+        // 冻结魂火效果描述
+        addOrganDescription(IceAndFireOrgans.FROSTBURN_SOUL, "Global temperature × -0.15 → bonus health (colder = more health)");
+        // 悚恐怖匣效果描述
+        addOrganDescription(IceAndFireOrgans.DREAD_PHYLACTERY, "Global temperature × -0.25 → bonus health (colder = more health)");
+        addOrganSkill(IceAndFireOrgans.DREAD_PHYLACTERY, "Converts target's Slowness into freeze damage");
+        // 悚怖脊柱技能描述
+        addOrganSkill(IceAndFireOrgans.DREAD_SPINE, "On attack, applies Slowness based on local temperature (3 seconds)");
+
         // 九头蛇器官翻译
         addItem(IceAndFireOrgans.HYDRA_HEART, "Hydra Heart");
         addItem(IceAndFireOrgans.HYDRA_LUNG, "Hydra Lung");
@@ -292,16 +302,20 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "Frankenstein Appendix");
         addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "Frankenstein Muscle");
 
-        // 肿瘤器官翻译
-        addItem(WAICOrgans.TUMOR_HEART, "Tumor Heart");
-        addItem(WAICOrgans.TUMOR_LUNG, "Tumor Lung");
-        addItem(WAICOrgans.TUMOR_STOMACH, "Tumor Stomach");
-        addItem(WAICOrgans.TUMOR_INTESTINE, "Tumor Intestine");
-        addItem(WAICOrgans.TUMOR_KIDNEY, "Tumor Kidney");
-        addItem(WAICOrgans.TUMOR_SPLEEN, "Tumor Spleen");
-        addItem(WAICOrgans.TUMOR_LIVER, "Tumor Liver");
-        addItem(WAICOrgans.TUMOR_APPENDIX, "Tumor Appendix");
-        addItem(WAICOrgans.TUMOR_MUSCLE, "Tumor Muscle");
+        // 病变器官翻译
+        addItem(WAICOrgans.LESION_HEART, "Lesion Heart");
+        addOrganDescription(WAICOrgans.LESION_HEART, "A festering heart that thrives on corruption");
+        addOrganSkill(WAICOrgans.LESION_HEART, "Spread all your effects to living entities within 10 blocks");
+        addItem(WAICOrgans.LESION_LUNG, "Lesion Lung");
+        addItem(WAICOrgans.LESION_STOMACH, "Lesion Stomach");
+        addItem(WAICOrgans.LESION_INTESTINE, "Lesion Intestine");
+        addItem(WAICOrgans.LESION_KIDNEY, "Lesion Kidney");
+        addItem(WAICOrgans.LESION_SPLEEN, "Lesion Spleen");
+        addItem(WAICOrgans.LESION_LIVER, "Lesion Liver");
+        addItem(WAICOrgans.LESION_APPENDIX, "Lesion Appendix");
+        addItem(WAICOrgans.LESION_MUSCLE, "Lesion Muscle");
+        addOrganSkill(WAICOrgans.LESION_MUSCLE, 0, "+1 Strength and +1 Speed per harmful effect on yourself");
+        addOrganSkill(WAICOrgans.LESION_MUSCLE, 1, "+bonus damage equal to the sum of (amplifier + 1) of all harmful effects on the target");
 
         // 九狱器官翻译
         addItem(WAICOrgans.LIMBO, "Limbo");
@@ -492,6 +506,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.DREAD_RIB, "悚怖肋骨");
         addItem(IceAndFireOrgans.DREAD_SPINE, "悚怖脊柱");
 
+        // 冰魂残片效果描述
+        addOrganDescription(IceAndFireOrgans.ICE_SHARD, "全局温度 × -0.05 → 额外健康值（温度越低，健康值越高）");
+        // 冻结魂火效果描述
+        addOrganDescription(IceAndFireOrgans.FROSTBURN_SOUL, "全局温度 × -0.15 → 额外健康值（温度越低，健康值越高）");
+        // 悚恐怖匣效果描述
+        addOrganDescription(IceAndFireOrgans.DREAD_PHYLACTERY, "全局温度 × -0.25 → 额外健康值（温度越低，健康值越高）");
+        addOrganSkill(IceAndFireOrgans.DREAD_PHYLACTERY, "将目标身上的缓慢效果转化为冰霜伤害");
+        // 悚怖脊柱技能描述
+        addOrganSkill(IceAndFireOrgans.DREAD_SPINE, "攻击时，根据局部温度对目标施加缓慢效果（持续3秒）");
+
         // 九头蛇器官翻译
         addItem(IceAndFireOrgans.HYDRA_HEART, "九头蛇心脏");
         addItem(IceAndFireOrgans.HYDRA_LUNG, "九头蛇肺脏");
@@ -624,16 +648,20 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "弗兰肯斯坦阑尾");
         addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "弗兰肯斯坦肌肉");
 
-        // 肿瘤器官翻译
-        addItem(WAICOrgans.TUMOR_HEART, "肿瘤心脏");
-        addItem(WAICOrgans.TUMOR_LUNG, "肿瘤肺脏");
-        addItem(WAICOrgans.TUMOR_STOMACH, "肿瘤胃");
-        addItem(WAICOrgans.TUMOR_INTESTINE, "肿瘤肠子");
-        addItem(WAICOrgans.TUMOR_KIDNEY, "肿瘤肾脏");
-        addItem(WAICOrgans.TUMOR_SPLEEN, "肿瘤脾脏");
-        addItem(WAICOrgans.TUMOR_LIVER, "肿瘤肝脏");
-        addItem(WAICOrgans.TUMOR_APPENDIX, "肿瘤阑尾");
-        addItem(WAICOrgans.TUMOR_MUSCLE, "肿瘤肌肉");
+        // 病变器官翻译
+        addItem(WAICOrgans.LESION_HEART, "病变心脏");
+        addOrganDescription(WAICOrgans.LESION_HEART, "一颗在腐化中跳动的心脏");
+        addOrganSkill(WAICOrgans.LESION_HEART, "将自身所有效果传播给10格范围内的生物");
+        addItem(WAICOrgans.LESION_LUNG, "病变肺脏");
+        addItem(WAICOrgans.LESION_STOMACH, "病变胃");
+        addItem(WAICOrgans.LESION_INTESTINE, "病变肠子");
+        addItem(WAICOrgans.LESION_KIDNEY, "病变肾脏");
+        addItem(WAICOrgans.LESION_SPLEEN, "病变脾脏");
+        addItem(WAICOrgans.LESION_LIVER, "病变肝脏");
+        addItem(WAICOrgans.LESION_APPENDIX, "病变阑尾");
+        addItem(WAICOrgans.LESION_MUSCLE, "病变肌肉");
+        addOrganSkill(WAICOrgans.LESION_MUSCLE, 0, "每有一个负面效果，+1力量和+1速度");
+        addOrganSkill(WAICOrgans.LESION_MUSCLE, 1, "对目标额外造成等同于目标所有负面效果(等级+1)之和的伤害");
 
         // 九狱器官翻译
         addItem(WAICOrgans.LIMBO, "灵薄");

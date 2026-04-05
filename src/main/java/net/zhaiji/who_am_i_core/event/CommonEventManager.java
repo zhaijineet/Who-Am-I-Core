@@ -21,5 +21,8 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerLivingDamageEvent$Pre);
         gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
         gameBus.addListener(CommonEventHandler::handlerSpellOnCastEvent);
+        gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Added);
+        gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Remove);
+        gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Expired);
     }
 }

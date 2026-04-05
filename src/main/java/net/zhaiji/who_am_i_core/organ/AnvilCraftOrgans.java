@@ -7,6 +7,7 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
@@ -25,6 +26,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -39,6 +41,7 @@ public class AnvilCraftOrgans {
                 modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
                 modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
                 modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -52,6 +55,7 @@ public class AnvilCraftOrgans {
                 double bonus = WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.NERVES, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0 + bonus));
                 modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), 0.5 + bonus));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -(1.0 + bonus)));
             })
             .build()
     );
@@ -64,6 +68,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -76,6 +81,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.NUTRITION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -88,6 +94,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.FILTRATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -100,6 +107,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.METABOLISM, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -112,6 +120,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -124,6 +133,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(Attributes.LUCK, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -136,6 +146,7 @@ public class AnvilCraftOrgans {
             .modifier((context, modifiers) -> {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );
@@ -149,6 +160,7 @@ public class AnvilCraftOrgans {
                 double value = 1.0 + WAICOrganUtil.frostMetalBonus(context);
                 modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
                 modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), value));
+                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
             })
             .build()
     );

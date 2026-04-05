@@ -492,27 +492,38 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.APPENDIX).add(WAICOrgans.FRANKENSTEIN_APPENDIX.get());
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.FRANKENSTEIN_MUSCLE.get());
 
-        // ==================== 肿瘤器官标签 ====================
+        // ==================== 病变器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
-            WAICOrgans.TUMOR_HEART.get(),
-            WAICOrgans.TUMOR_LUNG.get(),
-            WAICOrgans.TUMOR_STOMACH.get(),
-            WAICOrgans.TUMOR_INTESTINE.get(),
-            WAICOrgans.TUMOR_KIDNEY.get(),
-            WAICOrgans.TUMOR_SPLEEN.get(),
-            WAICOrgans.TUMOR_LIVER.get(),
-            WAICOrgans.TUMOR_APPENDIX.get(),
-            WAICOrgans.TUMOR_MUSCLE.get()
+            WAICOrgans.LESION_HEART.get(),
+            WAICOrgans.LESION_LUNG.get(),
+            WAICOrgans.LESION_STOMACH.get(),
+            WAICOrgans.LESION_INTESTINE.get(),
+            WAICOrgans.LESION_KIDNEY.get(),
+            WAICOrgans.LESION_SPLEEN.get(),
+            WAICOrgans.LESION_LIVER.get(),
+            WAICOrgans.LESION_APPENDIX.get(),
+            WAICOrgans.LESION_MUSCLE.get()
         );
-        tag(ItemTagManager.HEART).add(WAICOrgans.TUMOR_HEART.get());
-        tag(ItemTagManager.LUNG).add(WAICOrgans.TUMOR_LUNG.get());
-        tag(ItemTagManager.STOMACH).add(WAICOrgans.TUMOR_STOMACH.get());
-        tag(ItemTagManager.INTESTINE).add(WAICOrgans.TUMOR_INTESTINE.get());
-        tag(ItemTagManager.KIDNEY).add(WAICOrgans.TUMOR_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(WAICOrgans.TUMOR_SPLEEN.get());
-        tag(ItemTagManager.LIVER).add(WAICOrgans.TUMOR_LIVER.get());
-        tag(ItemTagManager.APPENDIX).add(WAICOrgans.TUMOR_APPENDIX.get());
-        tag(ItemTagManager.MUSCLE).add(WAICOrgans.TUMOR_MUSCLE.get());
+        tag(ItemTagManager.HEART).add(WAICOrgans.LESION_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.LESION_LUNG.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.LESION_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.LESION_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.LESION_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.LESION_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.LESION_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.LESION_APPENDIX.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.LESION_MUSCLE.get());
+        tag(WAICItemTagManager.LESION).add(
+            WAICOrgans.LESION_HEART.get(),
+            WAICOrgans.LESION_LUNG.get(),
+            WAICOrgans.LESION_STOMACH.get(),
+            WAICOrgans.LESION_INTESTINE.get(),
+            WAICOrgans.LESION_KIDNEY.get(),
+            WAICOrgans.LESION_SPLEEN.get(),
+            WAICOrgans.LESION_LIVER.get(),
+            WAICOrgans.LESION_APPENDIX.get(),
+            WAICOrgans.LESION_MUSCLE.get()
+        );
 
         // ==================== 九狱器官标签 ====================
         tag(ItemTagManager.ORGANS).add(

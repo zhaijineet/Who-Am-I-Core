@@ -38,22 +38,22 @@ public class WAICItem {
         )
     );
 
-    // 龙之血（组合）
-    public static final Supplier<Item> DRAGON_BLOOD_PREPARATION_GROUP = ITEM.register(
-        "dragon_blood_preparation_group",
-        () -> new DragonBloodPreparationItem(
-            new Item.Properties().stacksTo(1),
-            WAICEffect.DRAGON_POWER,
-            1200, 0
-        )
-    );
-
     // 电龙之血
     public static final Supplier<Item> LIGHTNING_DRAGON_BLOOD_PREPARATION = ITEM.register(
         "lightning_dragon_blood_preparation",
         () -> new DragonBloodPreparationItem(
             new Item.Properties().stacksTo(1),
             WAICEffect.LIGHTNING_DRAGON_POWER,
+            1200, 0
+        )
+    );
+
+    // 龙之血（组合）
+    public static final Supplier<Item> DRAGON_BLOOD_PREPARATION_GROUP = ITEM.register(
+        "dragon_blood_preparation_group",
+        () -> new DragonBloodPreparationItem(
+            new Item.Properties().stacksTo(1),
+            WAICEffect.DRAGON_POWER,
             1200, 0
         )
     );
