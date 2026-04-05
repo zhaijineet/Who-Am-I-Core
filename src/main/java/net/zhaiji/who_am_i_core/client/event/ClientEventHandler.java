@@ -1,6 +1,5 @@
 package net.zhaiji.who_am_i_core.client.event;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -17,6 +16,7 @@ import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.client.tooltip.ClientFrankensteinHeartTooltip;
 import net.zhaiji.who_am_i_core.inventory.tooltip.FrankensteinHeartTooltip;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
+import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICEntity;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
