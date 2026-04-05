@@ -1,16 +1,24 @@
 package net.zhaiji.who_am_i_core.util;
 
+import com.google.common.collect.Multimap;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,16 +27,21 @@ import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class WAICOrganSkillUtil {
@@ -267,5 +280,88 @@ public class WAICOrganSkillUtil {
      */
     public static void mimicHealBoost(ChestCavitySlotContext context, LivingHealEvent event) {
         event.setAmount(event.getAmount() * 1.5F);
+    }
+
+    // ==================== 病变器官 ====================
+
+    /**
+     * 病变心脏 modifier：每有一个负面效果+1健康，每有一个正面效果-1健康
+     */
+    public static void lesionHeartModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers
+    ) {
+        LivingEntity entity = context.entity();
+        int beneficial = 0, harmful = 0;
+        for (MobEffectInstance instance : entity.getActiveEffects()) {
+            if (instance.getEffect().value().getCategory() == MobEffectCategory.BENEFICIAL) {
+                beneficial++;
+            } else if (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
+                harmful++;
+            }
+        }
+        modifiers.put(
+            InitAttribute.HEALTH,
+            OrganAttributeUtil.createAddValueModifier(context.id(), harmful - beneficial)
+        );
+    }
+
+    /**
+     * 病变心脏技能：将自身所有效果传播给10格范围内的所有LivingEntity
+     * 冷却时间10秒（200tick）
+     */
+    public static void lesionHeartSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        Collection<MobEffectInstance> effects = entity.getActiveEffects();
+        if (effects.isEmpty()) return;
+        AABB aabb = entity.getBoundingBox().inflate(10);
+        List<LivingEntity> targets = entity.level().getEntitiesOfClass(
+            LivingEntity.class, aabb, target -> target != entity
+        );
+        for (LivingEntity target : targets) {
+            for (MobEffectInstance instance : effects) {
+                target.addEffect(new MobEffectInstance(instance));
+            }
+        }
+    }
+
+    /**
+     * 病变肌肉 modifier：每有一个负面效果，+1速度+1力量
+     */
+    public static void lesionMuscleModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers
+    ) {
+        LivingEntity entity = context.entity();
+        int harmfulCount = 0;
+        for (MobEffectInstance instance : entity.getActiveEffects()) {
+            if (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) harmfulCount++;
+        }
+        modifiers.put(
+            InitAttribute.STRENGTH,
+            OrganAttributeUtil.createAddValueModifier(context.id(), harmfulCount)
+        );
+        modifiers.put(
+            InitAttribute.SPEED,
+            OrganAttributeUtil.createAddValueModifier(context.id(), harmfulCount)
+        );
+    }
+
+    /**
+     * 病变肌肉攻击：对持有负面效果的目标，额外伤害等于目标所有负面效果的(amplifier + 1)之和
+     */
+    public static void lesionMuscleAttack(
+        ChestCavitySlotContext context, LivingEntity target,
+        DamageSource source, DamageContainer damageContainer
+    ) {
+        int bonusDamage = 0;
+        for (MobEffectInstance instance : target.getActiveEffects()) {
+            if (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
+                bonusDamage += instance.getAmplifier() + 1;
+            }
+        }
+        if (bonusDamage > 0) {
+            damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
+        }
     }
 }

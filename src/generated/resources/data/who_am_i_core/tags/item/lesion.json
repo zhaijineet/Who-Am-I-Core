@@ -1,0 +1,13 @@
+{
+  "values": [
+    "who_am_i_core:lesion_heart",
+    "who_am_i_core:lesion_lung",
+    "who_am_i_core:lesion_stomach",
+    "who_am_i_core:lesion_intestine",
+    "who_am_i_core:lesion_kidney",
+    "who_am_i_core:lesion_spleen",
+    "who_am_i_core:lesion_liver",
+    "who_am_i_core:lesion_appendix",
+    "who_am_i_core:lesion_muscle"
+  ]
+}

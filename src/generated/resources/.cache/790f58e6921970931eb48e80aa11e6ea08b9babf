@@ -1,21 +1,22 @@
-// 1.21.1	2026-03-26T17:36:31.8246273	Tags for minecraft:item mod id who_am_i_core
-547f0686fb44313a356a95dd055d9e8b3c1b0c3c data/chestcavitybeyond/tags/item/organs.json
-4e424e7e70a3bd93d5ec9c050213848bc8d0a0ee data/chestcavitybeyond/tags/item/organs/appendix.json
-426078f1ceca85bc7cae4f6d9f7bfd6df68ac7db data/chestcavitybeyond/tags/item/organs/heart.json
-7b5ec5c8404c0193895abf6c02f3c21cea485e05 data/chestcavitybeyond/tags/item/organs/intestine.json
-7b6eedaad5ec597f55c4aa9a9826409b2e0d8689 data/chestcavitybeyond/tags/item/organs/kidney.json
-2ff33a0622fb2802d12a735f1439eb6774be82ab data/chestcavitybeyond/tags/item/organs/liver.json
-7d12d1348feeb05b4aa1d336e3b86fdd276699f5 data/chestcavitybeyond/tags/item/organs/lung.json
-69dc5b9d4e3a4dfeb8f37e00d3d875a3d7365955 data/chestcavitybeyond/tags/item/organs/muscle.json
+// 1.21.1	2026-04-04T12:24:20.8641406	Tags for minecraft:item mod id who_am_i_core
+725db5c16da9dcb6eba862de8d3deaedfaffbdb0 data/chestcavitybeyond/tags/item/organs.json
+6a03f4098f88f8c65cfd2651813672f1de1b48dc data/chestcavitybeyond/tags/item/organs/appendix.json
+d96a3a8826c3e14f39f8a836c0c9581d97751c00 data/chestcavitybeyond/tags/item/organs/heart.json
+760255aee88d2ad1fa0cd887b0676d03ead74a52 data/chestcavitybeyond/tags/item/organs/intestine.json
+9c0ae73b4e1899ff77634fb5df013710fe6867d7 data/chestcavitybeyond/tags/item/organs/kidney.json
+dcea7956b954e6739b1959d92b6814c41f357972 data/chestcavitybeyond/tags/item/organs/liver.json
+6544e302c256c7d7631f65975e2209449456be8a data/chestcavitybeyond/tags/item/organs/lung.json
+dee65c017d930713ef36835a276902763fe1c325 data/chestcavitybeyond/tags/item/organs/muscle.json
 da3dd0598eca9951541aaea73c816b26d146208c data/chestcavitybeyond/tags/item/organs/rib.json
 1adf236dff2dbdc9b075dc6d48f3f173a7259eac data/chestcavitybeyond/tags/item/organs/special.json
 76cf772b96129f5ff491a0a251a783c162f01afc data/chestcavitybeyond/tags/item/organs/spine.json
-7336c917dcae2b31063ec3ab63e00238bb8a680f data/chestcavitybeyond/tags/item/organs/spleen.json
-dc8503457c1a964ba5e190ea4b7c882bf3c9e206 data/chestcavitybeyond/tags/item/organs/stomach.json
+a055c6383cb53f940c882c5ea7eee1f2c2c019b7 data/chestcavitybeyond/tags/item/organs/spleen.json
+6b244db77fdf6021627ffb9529c44b28fe17551e data/chestcavitybeyond/tags/item/organs/stomach.json
 1c76f5f60a683e9eee6e20035b1e16e3d366be29 data/who_am_i_core/tags/item/fire.json
 6c66b2e63efb93ea3f728d284a4e2aac251c1870 data/who_am_i_core/tags/item/fire_dragon.json
 91966d2c6c13204b3877d82c6225b822462d620c data/who_am_i_core/tags/item/ice.json
 037474d4e6d328bfe54a10e52940d00546ee3060 data/who_am_i_core/tags/item/ice_dragon.json
+4470346b3c65a66522318aca29d2d07e774009e4 data/who_am_i_core/tags/item/lesion.json
 bbbdafc91bf753f51db26c93e4c6d8768f3abadf data/who_am_i_core/tags/item/lightning_dragon.json
 465231791ddd3f9357bff439536a04f9625bc6e1 data/who_am_i_core/tags/item/magic.json
 ce234f0cc2b4ddee7b727fc13f8a907dc85eb724 data/who_am_i_core/tags/item/mechanical.json

@@ -99,10 +99,15 @@ public class ClientEventHandler {
             WhoAmICore.of("frankenstein_heart_super_active"),
             (stack, level, entity, seed) -> {
                 if (entity instanceof LivingEntity living && WAICOrganUtil.isInChest(living, stack)) {
-                    return living.hasEffect(WAICEffect.DRAGON_POWER) ? 1.0F : 0.0F;
+                    return
+                        living.hasEffect(WAICEffect.FIRE_DRAGON_POWER) &&
+                        living.hasEffect(WAICEffect.ICE_DRAGON_POWER) &&
+                        living.hasEffect(WAICEffect.LIGHTNING_DRAGON_POWER) ||
+                        living.hasEffect(WAICEffect.DRAGON_POWER) ? 1.0F : 0.0F;
                 }
                 return 0.0F;
             }
         );
     }
+
 }

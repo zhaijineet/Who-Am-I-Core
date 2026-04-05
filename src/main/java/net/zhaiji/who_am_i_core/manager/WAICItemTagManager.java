@@ -33,6 +33,9 @@ public class WAICItemTagManager {
     // 炽焰
     public static final TagKey<Item> FIRE = create("fire");
 
+    // 病变
+    public static final TagKey<Item> LESION = create("lesion");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }

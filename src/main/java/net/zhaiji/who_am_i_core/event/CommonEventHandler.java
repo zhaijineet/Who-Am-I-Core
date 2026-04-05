@@ -9,6 +9,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
@@ -17,10 +18,12 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.api.EdibleCondition;
 import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
@@ -204,6 +207,67 @@ public class CommonEventHandler {
         if (WAICOrganSkillUtil.consumeDyeForSchool(entity, event.getSchoolType())) {
             // 成功消耗染料，增加1级法术等级
             event.setSpellLevel(event.getSpellLevel() + 1);
+        }
+    }
+
+    /**
+     * 病变心脏/肌肉：当效果添加或移除时，重新计算依赖效果的器官属性
+     *
+     * @param event 效果添加事件
+     */
+    public static void handlerMobEffectEvent$Added(MobEffectEvent.Added event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide()) return;
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        // 病变心脏依赖 effect 数量
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.isEmpty()) continue;
+            if (stack.is(WAICOrgans.LESION_HEART.get()) || stack.is(WAICOrgans.LESION_MUSCLE.get())) {
+                OrganAttributeUtil.updateSlotOrganAttribute(
+                    ChestCavityUtil.createContext(data, entity, i, stack)
+                );
+            }
+        }
+    }
+
+    /**
+     * 病变心脏/肌肉：当效果移除时，重新计算依赖效果的器官属性
+     *
+     * @param event 效果移除事件
+     */
+    public static void handlerMobEffectEvent$Remove(MobEffectEvent.Remove event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide()) return;
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.isEmpty()) continue;
+            if (stack.is(WAICOrgans.LESION_HEART.get()) || stack.is(WAICOrgans.LESION_MUSCLE.get())) {
+                OrganAttributeUtil.updateSlotOrganAttribute(
+                    ChestCavityUtil.createContext(data, entity, i, stack)
+                );
+            }
+        }
+    }
+
+    /**
+     * 病变心脏/肌肉：当效果过期时，重新计算依赖效果的器官属性
+     *
+     * @param event 效果过期事件
+     */
+    public static void handlerMobEffectEvent$Expired(MobEffectEvent.Expired event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide()) return;
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.isEmpty()) continue;
+            if (stack.is(WAICOrgans.LESION_HEART.get()) || stack.is(WAICOrgans.LESION_MUSCLE.get())) {
+                OrganAttributeUtil.updateSlotOrganAttribute(
+                    ChestCavityUtil.createContext(data, entity, i, stack)
+                );
+            }
         }
     }
 }

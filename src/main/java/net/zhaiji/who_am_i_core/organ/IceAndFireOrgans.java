@@ -5,13 +5,13 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
@@ -31,6 +31,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
             .addValueAttribute(InitAttribute.ENDURANCE, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -41,6 +42,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -50,6 +52,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -59,6 +62,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -68,6 +72,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -77,6 +82,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -86,6 +92,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -94,13 +101,12 @@ public class IceAndFireOrgans {
         "fire_dragon_gem",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
-            .modifier((context, modifiers) -> modifiers.put(
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
+            .modifier((context, modifiers) -> IceAndFireOrganhUtil.dragonGemModifier(
+                context,
+                modifiers,
                 AttributeRegistry.FIRE_SPELL_POWER,
-                new AttributeModifier(
-                    context.id(),
-                    context.data().getOrganCount(WAICItemTagManager.FIRE_DRAGON) * 0.05,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
+                WAICItemTagManager.FIRE_DRAGON
             ))
             .otherChange((context, changedIndex, oldStack, newStack) -> {
                 if (newStack.is(WAICItemTagManager.FIRE_DRAGON) || oldStack.is(WAICItemTagManager.FIRE_DRAGON)) {
@@ -119,6 +125,7 @@ public class IceAndFireOrgans {
             .skillOnCooldown(IceAndFireOrganhUtil::fireDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -128,6 +135,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -137,6 +145,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 2.25)
             .addValueAttribute(InitAttribute.SPEED, 2)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .build()
     );
 
@@ -152,6 +161,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
             .addValueAttribute(InitAttribute.ENDURANCE, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -161,6 +171,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -170,6 +181,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -179,6 +191,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -188,6 +201,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -197,6 +211,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -206,6 +221,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -214,13 +230,12 @@ public class IceAndFireOrgans {
         "ice_dragon_gem",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
-            .modifier((context, modifiers) -> modifiers.put(
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -3)
+            .modifier((context, modifiers) -> IceAndFireOrganhUtil.dragonGemModifier(
+                context,
+                modifiers,
                 AttributeRegistry.ICE_SPELL_POWER,
-                new AttributeModifier(
-                    context.id(),
-                    context.data().getOrganCount(WAICItemTagManager.ICE_DRAGON) * 0.05,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
+                WAICItemTagManager.ICE_DRAGON
             ))
             .otherChange((context, changedIndex, oldStack, newStack) -> {
                 if (newStack.is(WAICItemTagManager.ICE_DRAGON) || oldStack.is(WAICItemTagManager.ICE_DRAGON)) {
@@ -239,6 +254,7 @@ public class IceAndFireOrgans {
             .skillOnCooldown(IceAndFireOrganhUtil::iceDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -247,6 +263,7 @@ public class IceAndFireOrgans {
         "ice_dragon_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -257,6 +274,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.STRENGTH, 2)
             .addValueAttribute(InitAttribute.SPEED, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -335,13 +353,11 @@ public class IceAndFireOrgans {
         "lightning_dragon_gem",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.SPEED, 0.25)
-            .modifier((context, modifiers) -> modifiers.put(
+            .modifier((context, modifiers) -> IceAndFireOrganhUtil.dragonGemModifier(
+                context,
+                modifiers,
                 AttributeRegistry.LIGHTNING_SPELL_POWER,
-                new AttributeModifier(
-                    context.id(),
-                    context.data().getOrganCount(WAICItemTagManager.LIGHTNING_DRAGON) * 0.05,
-                    AttributeModifier.Operation.ADD_VALUE
-                )
+                WAICItemTagManager.LIGHTNING_DRAGON
             ))
             .otherChange((context, changedIndex, oldStack, newStack) -> {
                 if (newStack.is(WAICItemTagManager.LIGHTNING_DRAGON) || oldStack.is(WAICItemTagManager.LIGHTNING_DRAGON)) {
@@ -386,6 +402,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> BITTER_FLESH = WAICItem.ITEM.register(
         "bitter_flesh",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 0.5)
+            .addValueAttribute(InitAttribute.SPEED, 0.5)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -393,6 +412,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_SHARD = WAICItem.ITEM.register(
         "ice_shard",
         () -> Organ.builder()
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .modifier(IceAndFireOrganhUtil::iceShardModifier)
             .build()
     );
 
@@ -400,6 +422,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FROSTBURN_SOUL = WAICItem.ITEM.register(
         "frostburn_soul",
         () -> Organ.builder()
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .modifier(IceAndFireOrganhUtil::frostburnSoulModifier)
             .build()
     );
 
@@ -407,6 +432,11 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> DREAD_PHYLACTERY = WAICItem.ITEM.register(
         "dread_phylactery",
         () -> Organ.builder()
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -3)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .modifier(IceAndFireOrganhUtil::dreadPhylacteryModifier)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .attack(IceAndFireOrganhUtil::dreadPhylacteryAttack)
             .build()
     );
 
@@ -414,6 +444,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> DREAD_RIB = WAICItem.ITEM.register(
         "dread_rib",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 0.5)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .build()
     );
 
@@ -421,6 +453,11 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> DREAD_SPINE = WAICItem.ITEM.register(
         "dread_spine",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 0.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .attack(IceAndFireOrganhUtil::dreadSpineAttack)
             .build()
     );
 
@@ -603,11 +640,13 @@ public class IceAndFireOrgans {
         Organ.builder(IafItems.FIRE_DRAGON_HEART.get())
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
             .build();
         // 冰龙心脏
         Organ.builder(IafItems.ICE_DRAGON_HEART.get())
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
             .build();
         // 电龙心脏
         Organ.builder(IafItems.LIGHTNING_DRAGON_HEART.get())
