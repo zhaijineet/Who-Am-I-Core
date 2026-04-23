@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.manager.ChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 public class IceAndFireChestCavityTypeManager {
     // 火龙胸腔
@@ -105,7 +106,7 @@ public class IceAndFireChestCavityTypeManager {
     public static final ChestCavityType HYDRA = ChestCavityTypeManager.register("hydra")
         .setFirstRow(0, IceAndFireOrgans.HYDRA_MUSCLE.get())
         .setFirstRow(1, IceAndFireOrgans.HYDRA_RIB.get())
-        .setFirstRow(2, IceAndFireOrgans.FANTASTICAL_APPENDIX.get())
+        .setFirstRow(2, WAICOrgans.FANTASTICAL_APPENDIX.get())
         .setFirstRow(3, IceAndFireOrgans.HYDRA_LUNG.get())
         .setFirstRow(4, IceAndFireOrgans.HYDRA_HEART.get())
         .setFirstRow(5, IceAndFireOrgans.HYDRA_LUNG.get())
@@ -114,10 +115,10 @@ public class IceAndFireChestCavityTypeManager {
         .setSecondRow(0, IceAndFireOrgans.HYDRA_MUSCLE.get())
         .setSecondRow(1, IceAndFireOrgans.HYDRA_RIB.get())
         .setSecondRow(2, IceAndFireOrgans.HYDRA_SPLEEN.get())
-        .setSecondRow(3, IceAndFireOrgans.FANTASTICAL_KIDNEY.get())
+        .setSecondRow(3, WAICOrgans.FANTASTICAL_KIDNEY.get())
         .setSecondRow(4, IceAndFireOrgans.HYDRA_SPINE.get())
-        .setSecondRow(5, IceAndFireOrgans.FANTASTICAL_KIDNEY.get())
-        .setSecondRow(6, IceAndFireOrgans.FANTASTICAL_LIVER.get())
+        .setSecondRow(5, WAICOrgans.FANTASTICAL_KIDNEY.get())
+        .setSecondRow(6, WAICOrgans.FANTASTICAL_LIVER.get())
         .setSecondRow(7, IceAndFireOrgans.HYDRA_RIB.get())
         .setSecondRow(8, IceAndFireOrgans.HYDRA_MUSCLE.get())
         .setThirdRow(0, IceAndFireOrgans.HYDRA_MUSCLE.get())

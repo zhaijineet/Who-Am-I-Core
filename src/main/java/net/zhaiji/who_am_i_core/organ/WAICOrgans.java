@@ -18,11 +18,9 @@ import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
-import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
-import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
@@ -138,6 +136,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_BOTTLE = WAICItem.ITEM.register(
         "ink_bottle",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 1)
             .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
                 CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
                 int value = tag.contains("ink") ? tag.getInt("ink") : 0;
@@ -154,6 +153,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_APPENDIX = WAICItem.ITEM.register(
         "ink_appendix",
         () -> Organ.builder()
+            .addValueAttribute(Attributes.LUCK, 1)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
             .skill(WAICOrganSkillUtil::inkAppendixSkill)
             .build()
@@ -339,6 +339,7 @@ public class WAICOrgans {
                     TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
                 }
             })
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
             .build()
     );
 
@@ -693,7 +694,100 @@ public class WAICOrgans {
             .build()
     );
 
-    // ==================== 单个器官 ====================
+    // ==================== 幻想种器官 ====================
+    // 幻想种心脏
+    public static final Supplier<Item> FANTASTICAL_HEART = WAICItem.ITEM.register(
+        "fantastical_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1.25)
+            .build()
+    );
+
+    // 幻想种肺脏
+    public static final Supplier<Item> FANTASTICAL_LUNG = WAICItem.ITEM.register(
+        "fantastical_lung",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.25)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.25)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.25)
+            .build()
+    );
+
+    // 幻想种脊柱
+    public static final Supplier<Item> FANTASTICAL_SPINE = WAICItem.ITEM.register(
+        "fantastical_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 1.25)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.625)
+            .build()
+    );
+
+    // 幻想种胃
+    public static final Supplier<Item> FANTASTICAL_STOMACH = WAICItem.ITEM.register(
+        "fantastical_stomach",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 1.25)
+            .build()
+    );
+
+    // 幻想种肠子
+    public static final Supplier<Item> FANTASTICAL_INTESTINE = WAICItem.ITEM.register(
+        "fantastical_intestine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 1.25)
+            .build()
+    );
+
+    // 幻想种肾脏
+    public static final Supplier<Item> FANTASTICAL_KIDNEY = WAICItem.ITEM.register(
+        "fantastical_kidney",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.FILTRATION, 1.25)
+            .build()
+    );
+
+    // 幻想种脾脏
+    public static final Supplier<Item> FANTASTICAL_SPLEEN = WAICItem.ITEM.register(
+        "fantastical_spleen",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.METABOLISM, 1.25)
+            .build()
+    );
+
+    // 幻想种肝脏
+    public static final Supplier<Item> FANTASTICAL_LIVER = WAICItem.ITEM.register(
+        "fantastical_liver",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 1.25)
+            .build()
+    );
+
+    // 幻想种阑尾
+    public static final Supplier<Item> FANTASTICAL_APPENDIX = WAICItem.ITEM.register(
+        "fantastical_appendix",
+        () -> Organ.builder()
+            .addValueAttribute(Attributes.LUCK, 1.25)
+            .build()
+    );
+
+    // 幻想种肋骨
+    public static final Supplier<Item> FANTASTICAL_RIB = WAICItem.ITEM.register(
+        "fantastical_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 1.25)
+            .build()
+    );
+
+    // 幻想种肌肉
+    public static final Supplier<Item> FANTASTICAL_MUSCLE = WAICItem.ITEM.register(
+        "fantastical_muscle",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 1.25)
+            .addValueAttribute(InitAttribute.SPEED, 1.25)
+            .build()
+    );
+
+    // ==================== 独立器官 ====================
     // 闹鬼的骨头
     public static final Supplier<Item> HAUNTED_BONE = WAICItem.ITEM.register(
         "haunted_bone",
@@ -730,6 +824,15 @@ public class WAICOrgans {
     public static final Supplier<Item> SQUASH = WAICItem.ITEM.register(
         "squash",
         () -> Organ.builder()
+            .build()
+    );
+
+    // 经验之心
+    public static final Supplier<Item> EXPERIENCE_HEART = WAICItem.ITEM.register(
+        "experience_heart",
+        () -> Organ.builder()
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .modifier(WAICOrganSkillUtil::experienceHeartModifier)
             .build()
     );
 

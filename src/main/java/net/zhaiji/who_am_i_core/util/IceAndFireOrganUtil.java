@@ -22,7 +22,7 @@ import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
 import net.zhaiji.who_am_i_core.task.HydraLungBreathTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 
-public class IceAndFireOrganhUtil {
+public class IceAndFireOrganUtil {
     /**
      * 取消指定类型的吐息任务
      */
@@ -37,7 +37,7 @@ public class IceAndFireOrganhUtil {
     /**
      * 添加指定类型的吐息任务
      */
-    public static void addBreathTask(ChestCavityData data, DragonBreathCastingTask.BreathType breathType, TagKey<Item> organTag) {
+    public static boolean addBreathTask(ChestCavityData data, DragonBreathCastingTask.BreathType breathType, TagKey<Item> organTag) {
         data.addTask(
             new DragonBreathCastingTask(
                 data,
@@ -45,6 +45,7 @@ public class IceAndFireOrganhUtil {
                 getBreathLevel(data, organTag)
             )
         );
+        return true;
     }
 
     /**
@@ -57,22 +58,22 @@ public class IceAndFireOrganhUtil {
     /**
      * 火龙吐息
      */
-    public static void fireDragonBreathSacSkill(ChestCavitySlotContext context) {
-        addBreathTask(context.data(), DragonBreathCastingTask.BreathType.FIRE_BREATH, WAICItemTagManager.FIRE_DRAGON);
+    public static boolean fireDragonBreathSacSkill(ChestCavitySlotContext context) {
+        return addBreathTask(context.data(), DragonBreathCastingTask.BreathType.FIRE_BREATH, WAICItemTagManager.FIRE_DRAGON);
     }
 
     /**
      * 冰龙吐息
      */
-    public static void iceDragonBreathSacSkill(ChestCavitySlotContext context) {
-        addBreathTask(context.data(), DragonBreathCastingTask.BreathType.ICE_BREATH, WAICItemTagManager.ICE_DRAGON);
+    public static boolean iceDragonBreathSacSkill(ChestCavitySlotContext context) {
+        return addBreathTask(context.data(), DragonBreathCastingTask.BreathType.ICE_BREATH, WAICItemTagManager.ICE_DRAGON);
     }
 
     /**
      * 电龙吐息
      */
-    public static void lightningDragonBreathSacSkill(ChestCavitySlotContext context) {
-        addBreathTask(context.data(), DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON);
+    public static boolean lightningDragonBreathSacSkill(ChestCavitySlotContext context) {
+        return addBreathTask(context.data(), DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON);
     }
 
     /**
@@ -90,10 +91,10 @@ public class IceAndFireOrganhUtil {
      * 消耗中毒效果，释放吐息
      * </p>
      */
-    public static void hydraLungSkill(ChestCavitySlotContext context) {
+    public static boolean hydraLungSkill(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
-        if (poison == null || poison.getDuration() <= 0) return;
+        if (poison == null || poison.getDuration() <= 0) return false;
         entity.removeEffect(MobEffects.POISON);
         context.data().addTask(
             new HydraLungBreathTask(
@@ -101,6 +102,7 @@ public class IceAndFireOrganhUtil {
                 poison.getDuration()
             )
         );
+        return true;
     }
 
     /**

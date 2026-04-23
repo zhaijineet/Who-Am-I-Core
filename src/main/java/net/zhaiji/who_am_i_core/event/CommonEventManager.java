@@ -9,9 +9,9 @@ public class CommonEventManager {
     }
 
     public static void modBusListener(IEventBus modBus) {
-        modBus.addListener(CommonEventHandler::handlerFMLCommonSetupEvent);
         modBus.addListener(CommonEventHandler::handlerEntityAttributeModificationEvent);
-        modBus.addListener(CommonEventHandler::handlerRegisterChestCavityEvent);
+        modBus.addListener(CommonEventHandler::handlerOrganRegisterEvent);
+        modBus.addListener(CommonEventHandler::handlerChestCavityRegisterEvent);
     }
 
     public static void gameBusListener(IEventBus gameBus) {
@@ -19,10 +19,11 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerLivingDeathEvent);
         gameBus.addListener(CommonEventHandler::handlerLivingIncomingDamageEvent);
         gameBus.addListener(CommonEventHandler::handlerLivingDamageEvent$Pre);
-        gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
         gameBus.addListener(CommonEventHandler::handlerSpellOnCastEvent);
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Added);
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Remove);
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Expired);
+        gameBus.addListener(CommonEventHandler::handlerPlayerXpPickup);
+        gameBus.addListener(CommonEventHandler::handlerPlayerLevelChange);
     }
 }

@@ -326,29 +326,29 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
         // ==================== 幻想种器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
-            IceAndFireOrgans.FANTASTICAL_HEART.get(),
-            IceAndFireOrgans.FANTASTICAL_LUNG.get(),
-            IceAndFireOrgans.FANTASTICAL_SPINE.get(),
-            IceAndFireOrgans.FANTASTICAL_STOMACH.get(),
-            IceAndFireOrgans.FANTASTICAL_INTESTINE.get(),
-            IceAndFireOrgans.FANTASTICAL_KIDNEY.get(),
-            IceAndFireOrgans.FANTASTICAL_SPLEEN.get(),
-            IceAndFireOrgans.FANTASTICAL_LIVER.get(),
-            IceAndFireOrgans.FANTASTICAL_APPENDIX.get(),
-            IceAndFireOrgans.FANTASTICAL_RIB.get(),
-            IceAndFireOrgans.FANTASTICAL_MUSCLE.get()
+            WAICOrgans.FANTASTICAL_HEART.get(),
+            WAICOrgans.FANTASTICAL_LUNG.get(),
+            WAICOrgans.FANTASTICAL_SPINE.get(),
+            WAICOrgans.FANTASTICAL_STOMACH.get(),
+            WAICOrgans.FANTASTICAL_INTESTINE.get(),
+            WAICOrgans.FANTASTICAL_KIDNEY.get(),
+            WAICOrgans.FANTASTICAL_SPLEEN.get(),
+            WAICOrgans.FANTASTICAL_LIVER.get(),
+            WAICOrgans.FANTASTICAL_APPENDIX.get(),
+            WAICOrgans.FANTASTICAL_RIB.get(),
+            WAICOrgans.FANTASTICAL_MUSCLE.get()
         );
-        tag(ItemTagManager.HEART).add(IceAndFireOrgans.FANTASTICAL_HEART.get());
-        tag(ItemTagManager.LUNG).add(IceAndFireOrgans.FANTASTICAL_LUNG.get());
-        tag(ItemTagManager.SPINE).add(IceAndFireOrgans.FANTASTICAL_SPINE.get());
-        tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.FANTASTICAL_STOMACH.get());
-        tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.FANTASTICAL_INTESTINE.get());
-        tag(ItemTagManager.KIDNEY).add(IceAndFireOrgans.FANTASTICAL_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(IceAndFireOrgans.FANTASTICAL_SPLEEN.get());
-        tag(ItemTagManager.LIVER).add(IceAndFireOrgans.FANTASTICAL_LIVER.get());
-        tag(ItemTagManager.APPENDIX).add(IceAndFireOrgans.FANTASTICAL_APPENDIX.get());
-        tag(ItemTagManager.RIB).add(IceAndFireOrgans.FANTASTICAL_RIB.get());
-        tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.FANTASTICAL_MUSCLE.get());
+        tag(ItemTagManager.HEART).add(WAICOrgans.FANTASTICAL_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.FANTASTICAL_LUNG.get());
+        tag(ItemTagManager.SPINE).add(WAICOrgans.FANTASTICAL_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.FANTASTICAL_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.FANTASTICAL_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.FANTASTICAL_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.FANTASTICAL_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.FANTASTICAL_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.FANTASTICAL_APPENDIX.get());
+        tag(ItemTagManager.RIB).add(WAICOrgans.FANTASTICAL_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.FANTASTICAL_MUSCLE.get());
 
         // ==================== 浮霜器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
@@ -576,11 +576,14 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WAICOrgans.HAUNTED_BONE.get(),
             WAICOrgans.SWORD_BONE.get(),
             WAICOrgans.STRAIGHT_INTESTINE.get(),
-            WAICOrgans.SQUASH.get()
+            WAICOrgans.SQUASH.get(),
+            WAICOrgans.EXPERIENCE_HEART.get()
         );
         tag(ItemTagManager.RIB).add(WAICOrgans.HAUNTED_BONE.get());
         tag(ItemTagManager.SPINE).add(WAICOrgans.SWORD_BONE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.STRAIGHT_INTESTINE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.SQUASH.get());
+        tag(ItemTagManager.HEART).add(WAICOrgans.EXPERIENCE_HEART.get());
+        tag(WAICItemTagManager.MAGIC).add(WAICOrgans.EXPERIENCE_HEART.get());
     }
 }

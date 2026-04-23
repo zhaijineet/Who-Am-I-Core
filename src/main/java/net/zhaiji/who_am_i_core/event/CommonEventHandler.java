@@ -9,21 +9,24 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
-import net.zhaiji.chestcavitybeyond.api.event.RegisterChestCavityEvent;
+import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.api.EdibleCondition;
 import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
@@ -34,16 +37,12 @@ import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
-import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
+import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 public class CommonEventHandler {
-    public static void handlerFMLCommonSetupEvent(FMLCommonSetupEvent event) {
-        IceAndFireOrgans.setupOrgans();
-    }
-
     /**
      * 为所有实体添加默认初始化器官属性
      *
@@ -57,10 +56,12 @@ public class CommonEventHandler {
         });
     }
 
-    /**
-     * 注册可序列化的任务类型
-     */
-    public static void handlerRegisterChestCavityEvent(RegisterChestCavityEvent event) {
+    public static void handlerOrganRegisterEvent(OrganRegisterEvent event) {
+        // 设置冰与火心脏物品为器官
+        IceAndFireOrgans.setupOrgans();
+    }
+
+    public static void handlerChestCavityRegisterEvent(ChestCavityRegisterEvent event) {
         event.registerTask(ChestNovaTask.TYPE, ChestNovaTask::new);
         event.registerTask(HydraSpleenTask.TYPE, HydraSpleenTask::new);
         event.registerTask(StraightIntestineTask.TYPE, StraightIntestineTask::new);
@@ -123,7 +124,7 @@ public class CommonEventHandler {
         if (entity.level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(entity);
         // 九头蛇脊柱复活技能
-        if (IceAndFireOrganhUtil.hydraSpineSkill(entity, data)) {
+        if (IceAndFireOrganUtil.hydraSpineSkill(entity, data)) {
             event.setCanceled(true);
             return;
         }
@@ -186,15 +187,11 @@ public class CommonEventHandler {
             finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
         }
         // 九头蛇肋骨效果（唯一）
-        block += IceAndFireOrganhUtil.hydraRibSkill(entity, attacker);
+        block += IceAndFireOrganUtil.hydraRibSkill(entity, attacker);
         // 九头蛇肌肉效果（唯一）
-        if (attacker != null) extraDamage += IceAndFireOrganhUtil.hydraMuscleSkill(attacker, entity);
+        if (attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleSkill(attacker, entity);
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
-    }
-
-    public static void handlerLivingEntityUseItemEvent$Finish(LivingEntityUseItemEvent.Finish event) {
-        // TODO 待删除/更改
     }
 
     /**
@@ -267,6 +264,36 @@ public class CommonEventHandler {
                 OrganAttributeUtil.updateSlotOrganAttribute(
                     ChestCavityUtil.createContext(data, entity, i, stack)
                 );
+            }
+        }
+    }
+
+    /**
+     * 经验之心：从经验球获取的经验 ×（胸腔中魔法器官数量 + 1）倍率
+     */
+    public static void handlerPlayerXpPickup(PlayerXpEvent.PickupXp event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide()) return;
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        if (!data.hasOrgan(WAICOrgans.EXPERIENCE_HEART.get())) return;
+        int magicCount = data.getOrganCount(WAICItemTagManager.MAGIC);
+        int multiplier = magicCount + 1;
+        ExperienceOrb orb = event.getOrb();
+        orb.value = orb.value * multiplier;
+    }
+
+    /**
+     * 经验之心：当玩家等级变化时，更新经验之心的健康值属性
+     */
+    public static void handlerPlayerLevelChange(PlayerXpEvent.LevelChange event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide()) return;
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.isEmpty()) continue;
+            if (stack.is(WAICOrgans.EXPERIENCE_HEART.get())) {
+                OrganAttributeUtil.updateSlotOrganAttribute(ChestCavityUtil.createContext(data, player, i, stack));
             }
         }
     }

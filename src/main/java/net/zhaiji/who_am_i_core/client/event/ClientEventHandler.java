@@ -10,9 +10,12 @@ import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.client.overlay.HumoursOverlay;
 import net.zhaiji.who_am_i_core.client.tooltip.ClientFrankensteinHeartTooltip;
 import net.zhaiji.who_am_i_core.inventory.tooltip.FrankensteinHeartTooltip;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
@@ -73,6 +76,13 @@ public class ClientEventHandler {
         event.register(FrankensteinHeartTooltip.class, tooltip -> new ClientFrankensteinHeartTooltip(tooltip.contents()));
     }
 
+
+    /**
+     * 注册自定义 HUD 图层
+     */
+    public static void handlerRegisterGuiLayersEvent(RegisterGuiLayersEvent event) {
+        event.registerBelow(VanillaGuiLayers.HOTBAR, HumoursOverlay.HUMOURS_HUD, HumoursOverlay::render);
+    }
 
     /**
      * 在客户端设置阶段注册弗兰肯斯坦心脏的 ItemProperty（贴图切换）

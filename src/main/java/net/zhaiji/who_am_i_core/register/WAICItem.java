@@ -6,6 +6,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
+import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
@@ -64,5 +65,6 @@ public class WAICItem {
         IceAndFireOrgans.register();
         FDBossesOrgans.register();
         AnvilCraftOrgans.register();
+        CataclysmOrgans.register();
     }
 }

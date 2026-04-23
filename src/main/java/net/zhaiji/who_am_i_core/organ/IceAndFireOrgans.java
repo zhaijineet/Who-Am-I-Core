@@ -2,10 +2,6 @@ package net.zhaiji.who_am_i_core.organ;
 
 import com.iafenvoy.iceandfire.registry.IafItems;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
@@ -13,7 +9,7 @@ import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.IceAndFireOrganhUtil;
+import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -102,7 +98,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
-            .modifier((context, modifiers) -> IceAndFireOrganhUtil.dragonGemModifier(
+            .modifier((context, modifiers) -> IceAndFireOrganUtil.dragonGemModifier(
                 context,
                 modifiers,
                 AttributeRegistry.FIRE_SPELL_POWER,
@@ -121,8 +117,8 @@ public class IceAndFireOrgans {
         "fire_dragon_breath_sac",
         () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(IceAndFireOrganhUtil::fireDragonBreathSacSkill)
-            .skillOnCooldown(IceAndFireOrganhUtil::fireDragonBreathSacOnCooldown)
+            .skill(IceAndFireOrganUtil::fireDragonBreathSacSkill)
+            .skillOnCooldown(IceAndFireOrganUtil::fireDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
@@ -231,7 +227,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, -3)
-            .modifier((context, modifiers) -> IceAndFireOrganhUtil.dragonGemModifier(
+            .modifier((context, modifiers) -> IceAndFireOrganUtil.dragonGemModifier(
                 context,
                 modifiers,
                 AttributeRegistry.ICE_SPELL_POWER,
@@ -250,8 +246,8 @@ public class IceAndFireOrgans {
         "ice_dragon_breath_sac",
         () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(IceAndFireOrganhUtil::iceDragonBreathSacSkill)
-            .skillOnCooldown(IceAndFireOrganhUtil::iceDragonBreathSacOnCooldown)
+            .skill(IceAndFireOrganUtil::iceDragonBreathSacSkill)
+            .skillOnCooldown(IceAndFireOrganUtil::iceDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
@@ -353,7 +349,7 @@ public class IceAndFireOrgans {
         "lightning_dragon_gem",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.SPEED, 0.25)
-            .modifier((context, modifiers) -> IceAndFireOrganhUtil.dragonGemModifier(
+            .modifier((context, modifiers) -> IceAndFireOrganUtil.dragonGemModifier(
                 context,
                 modifiers,
                 AttributeRegistry.LIGHTNING_SPELL_POWER,
@@ -372,8 +368,8 @@ public class IceAndFireOrgans {
         "lightning_dragon_breath_sac",
         () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(IceAndFireOrganhUtil::lightningDragonBreathSacSkill)
-            .skillOnCooldown(IceAndFireOrganhUtil::lightningDragonBreathSacOnCooldown)
+            .skill(IceAndFireOrganUtil::lightningDragonBreathSacSkill)
+            .skillOnCooldown(IceAndFireOrganUtil::lightningDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .build()
@@ -414,7 +410,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier(IceAndFireOrganhUtil::iceShardModifier)
+            .modifier(IceAndFireOrganUtil::iceShardModifier)
             .build()
     );
 
@@ -424,7 +420,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier(IceAndFireOrganhUtil::frostburnSoulModifier)
+            .modifier(IceAndFireOrganUtil::frostburnSoulModifier)
             .build()
     );
 
@@ -434,9 +430,9 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(WAICAttribute.TEMPERATURE, -3)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier(IceAndFireOrganhUtil::dreadPhylacteryModifier)
+            .modifier(IceAndFireOrganUtil::dreadPhylacteryModifier)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .attack(IceAndFireOrganhUtil::dreadPhylacteryAttack)
+            .attack(IceAndFireOrganUtil::dreadPhylacteryAttack)
             .build()
     );
 
@@ -457,7 +453,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .attack(IceAndFireOrganhUtil::dreadSpineAttack)
+            .attack(IceAndFireOrganUtil::dreadSpineAttack)
             .build()
     );
 
@@ -474,7 +470,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip(3))
-            .skill(IceAndFireOrganhUtil::hydraLungSkill)
+            .skill(IceAndFireOrganUtil::hydraLungSkill)
             .cooldown(20)
             .build()
     );
@@ -516,7 +512,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 1.5)
             .skillTooltip(WAICTooltipUtil.skillTooltip(3))
-            .added(IceAndFireOrganhUtil::hydraSpleenAdded)
+            .added(IceAndFireOrganUtil::hydraSpleenAdded)
             .build()
     );
 
@@ -536,99 +532,6 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.STRENGTH, 1.5)
             .addValueAttribute(InitAttribute.SPEED, 1.25)
             .skillTooltip(WAICTooltipUtil.skillTooltip(3))
-            .build()
-    );
-
-    // ==================== 幻想种器官 ====================
-    // 幻想种心脏
-    public static final Supplier<Item> FANTASTICAL_HEART = WAICItem.ITEM.register(
-        "fantastical_heart",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1.25)
-            .build()
-    );
-
-    // 幻想种肺脏
-    public static final Supplier<Item> FANTASTICAL_LUNG = WAICItem.ITEM.register(
-        "fantastical_lung",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.25)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.25)
-            .addValueAttribute(InitAttribute.ENDURANCE, 1.25)
-            .build()
-    );
-
-    // 幻想种脊柱
-    public static final Supplier<Item> FANTASTICAL_SPINE = WAICItem.ITEM.register(
-        "fantastical_spine",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 1.25)
-            .addValueAttribute(InitAttribute.DEFENSE, 0.625)
-            .build()
-    );
-
-    // 幻想种胃
-    public static final Supplier<Item> FANTASTICAL_STOMACH = WAICItem.ITEM.register(
-        "fantastical_stomach",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 1.25)
-            .build()
-    );
-
-    // 幻想种肠子
-    public static final Supplier<Item> FANTASTICAL_INTESTINE = WAICItem.ITEM.register(
-        "fantastical_intestine",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 1.25)
-            .build()
-    );
-
-    // 幻想种肾脏
-    public static final Supplier<Item> FANTASTICAL_KIDNEY = WAICItem.ITEM.register(
-        "fantastical_kidney",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 1.25)
-            .build()
-    );
-
-    // 幻想种脾脏
-    public static final Supplier<Item> FANTASTICAL_SPLEEN = WAICItem.ITEM.register(
-        "fantastical_spleen",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 1.25)
-            .build()
-    );
-
-    // 幻想种肝脏
-    public static final Supplier<Item> FANTASTICAL_LIVER = WAICItem.ITEM.register(
-        "fantastical_liver",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 1.25)
-            .build()
-    );
-
-    // 幻想种阑尾
-    public static final Supplier<Item> FANTASTICAL_APPENDIX = WAICItem.ITEM.register(
-        "fantastical_appendix",
-        () -> Organ.builder()
-            .addValueAttribute(Attributes.LUCK, 1.25)
-            .build()
-    );
-
-    // 幻想种肋骨
-    public static final Supplier<Item> FANTASTICAL_RIB = WAICItem.ITEM.register(
-        "fantastical_rib",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 1.25)
-            .build()
-    );
-
-    // 幻想种肌肉
-    public static final Supplier<Item> FANTASTICAL_MUSCLE = WAICItem.ITEM.register(
-        "fantastical_muscle",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 1.25)
-            .addValueAttribute(InitAttribute.SPEED, 1.25)
             .build()
     );
 
@@ -659,7 +562,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.METABOLISM, 10)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip(1))
-            .tick(IceAndFireOrganhUtil::hydraHeartTick)
+            .tick(IceAndFireOrganUtil::hydraHeartTick)
             .build();
     }
 }

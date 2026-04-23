@@ -8,12 +8,10 @@ import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +34,6 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
-import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
@@ -247,7 +244,7 @@ public class WAICOrganSkillUtil {
      * 墨水不足时有墨水就全耗，只回复实际消耗掉的墨水量
      * 没有墨水或法力已满时不触发也不冷却
      */
-    public static void inkAppendixSkill(ChestCavitySlotContext context) {
+    public static boolean inkAppendixSkill(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
         LivingEntity entity = context.entity();
 
@@ -257,19 +254,20 @@ public class WAICOrganSkillUtil {
         float maxMana = (float) entity.getAttributeValue(AttributeRegistry.MAX_MANA);
         float manaToRestore = maxMana - currentMana;
 
-        if (manaToRestore <= 0) return; // 法力已满，不触发
+        if (manaToRestore <= 0) return false; // 法力已满，不触发
 
         // 消耗墨水（传入负数），返回值为负表示墨水不足还差多少
         // 实际消耗 = manaToRestore + remaining（remaining <= 0）
         int remaining = addInkToBottle(data, (int) -manaToRestore);
         float actualRestored = manaToRestore + remaining;
-        if (actualRestored <= 0) return;
+        if (actualRestored <= 0) return false;
 
         // 回复法力
         magicData.addMana(actualRestored);
 
         // 手动设置冷却（仅在成功消耗墨水后才冷却）
         OrganSkillUtil.addCooldown(entity, context.stack(), 200);
+        return true;
     }
 
     /**
@@ -280,6 +278,22 @@ public class WAICOrganSkillUtil {
      */
     public static void mimicHealBoost(ChestCavitySlotContext context, LivingHealEvent event) {
         event.setAmount(event.getAmount() * 1.5F);
+    }
+
+    /**
+     * 经验之心：每10级经验等级+1健康值
+     */
+    public static void experienceHeartModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers
+    ) {
+        LivingEntity entity = context.entity();
+        int level = 0;
+        if (entity instanceof Player player) {
+            level = player.experienceLevel;
+        }
+        double healthBonus = Math.floor(level / 10.0);
+        modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
     }
 
     // ==================== 病变器官 ====================
@@ -310,10 +324,10 @@ public class WAICOrganSkillUtil {
      * 病变心脏技能：将自身所有效果传播给10格范围内的所有LivingEntity
      * 冷却时间10秒（200tick）
      */
-    public static void lesionHeartSkill(ChestCavitySlotContext context) {
+    public static boolean lesionHeartSkill(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         Collection<MobEffectInstance> effects = entity.getActiveEffects();
-        if (effects.isEmpty()) return;
+        if (effects.isEmpty()) return false;
         AABB aabb = entity.getBoundingBox().inflate(10);
         List<LivingEntity> targets = entity.level().getEntitiesOfClass(
             LivingEntity.class, aabb, target -> target != entity
@@ -323,6 +337,7 @@ public class WAICOrganSkillUtil {
                 target.addEffect(new MobEffectInstance(instance));
             }
         }
+        return true;
     }
 
     /**

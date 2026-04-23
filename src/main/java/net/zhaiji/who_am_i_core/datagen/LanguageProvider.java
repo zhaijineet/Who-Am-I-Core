@@ -9,6 +9,7 @@ import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
+import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
@@ -142,6 +143,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.CHESED, "Chesed");
         addItem(FDBossesOrgans.GEBURAH, "Geburah");
 
+        // 利维坦器官翻译
+        addItem(CataclysmOrgans.LEVIATHAN_HEART, "Leviathan Heart");
+        addItem(CataclysmOrgans.LEVIATHAN_MUSCLE, "Leviathan Muscle");
+        addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "Leviathan Intestine");
+        addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "Leviathan Stomach");
+        addItem(CataclysmOrgans.LEVIATHAN_GILL, "Leviathan Gill");
+        addItem(CataclysmOrgans.LEVIATHAN_SPINE, "Leviathan Spine");
+        addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "Leviathan Fishbone");
+
         addItem(WAICOrgans.DIVINE_CORE, "Divine Core");
         addItem(WAICOrgans.FROST_CORE, "Frost Core");
         addItem(WAICOrgans.FLAME_CORE, "Flame Core");
@@ -220,17 +230,17 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, "Increases duration of food effects by 50% per organ");
 
         // 幻想种器官翻译
-        addItem(IceAndFireOrgans.FANTASTICAL_HEART, "Fantastical Heart");
-        addItem(IceAndFireOrgans.FANTASTICAL_LUNG, "Fantastical Lung");
-        addItem(IceAndFireOrgans.FANTASTICAL_SPINE, "Fantastical Spine");
-        addItem(IceAndFireOrgans.FANTASTICAL_STOMACH, "Fantastical Stomach");
-        addItem(IceAndFireOrgans.FANTASTICAL_INTESTINE, "Fantastical Intestine");
-        addItem(IceAndFireOrgans.FANTASTICAL_KIDNEY, "Fantastical Kidney");
-        addItem(IceAndFireOrgans.FANTASTICAL_SPLEEN, "Fantastical Spleen");
-        addItem(IceAndFireOrgans.FANTASTICAL_LIVER, "Fantastical Liver");
-        addItem(IceAndFireOrgans.FANTASTICAL_APPENDIX, "Fantastical Appendix");
-        addItem(IceAndFireOrgans.FANTASTICAL_RIB, "Fantastical Rib");
-        addItem(IceAndFireOrgans.FANTASTICAL_MUSCLE, "Fantastical Muscle");
+        addItem(WAICOrgans.FANTASTICAL_HEART, "Fantastical Heart");
+        addItem(WAICOrgans.FANTASTICAL_LUNG, "Fantastical Lung");
+        addItem(WAICOrgans.FANTASTICAL_SPINE, "Fantastical Spine");
+        addItem(WAICOrgans.FANTASTICAL_STOMACH, "Fantastical Stomach");
+        addItem(WAICOrgans.FANTASTICAL_INTESTINE, "Fantastical Intestine");
+        addItem(WAICOrgans.FANTASTICAL_KIDNEY, "Fantastical Kidney");
+        addItem(WAICOrgans.FANTASTICAL_SPLEEN, "Fantastical Spleen");
+        addItem(WAICOrgans.FANTASTICAL_LIVER, "Fantastical Liver");
+        addItem(WAICOrgans.FANTASTICAL_APPENDIX, "Fantastical Appendix");
+        addItem(WAICOrgans.FANTASTICAL_RIB, "Fantastical Rib");
+        addItem(WAICOrgans.FANTASTICAL_MUSCLE, "Fantastical Muscle");
 
         // 浮霜器官翻译
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "Frost Metal Heart");
@@ -350,6 +360,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.STRAIGHT_INTESTINE, "Straight Intestine");
         addOrganDescription(WAICOrgans.STRAIGHT_INTESTINE, "30% chance to drop consumed food after 3 seconds");
         addItem(WAICOrgans.SQUASH, "Squash");
+        addItem(WAICOrgans.EXPERIENCE_HEART, "Experience Heart");
+        addOrganDescription(WAICOrgans.EXPERIENCE_HEART, "A heart pulsating with accumulated experience");
+        addOrganDescription(WAICOrgans.EXPERIENCE_HEART, 0, "Every 10 experience levels grant +1 health");
+        addOrganDescription(WAICOrgans.EXPERIENCE_HEART, 1, "Experience from orbs × (magic organs + 1)");
 
         addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
         addAttribute(WAICAttribute.BLOCK, "Block");
@@ -493,6 +507,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.CHESED, "慈悲");
         addItem(FDBossesOrgans.GEBURAH, "严厉");
 
+        // 利维坦器官翻译
+        addItem(CataclysmOrgans.LEVIATHAN_HEART, "利维坦心脏");
+        addItem(CataclysmOrgans.LEVIATHAN_MUSCLE, "利维坦肌肉");
+        addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "利维坦肠子");
+        addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "利维坦胃");
+        addItem(CataclysmOrgans.LEVIATHAN_GILL, "利维坦鳃");
+        addItem(CataclysmOrgans.LEVIATHAN_SPINE, "利维坦脊柱");
+        addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "利维坦鱼骨");
+
         addItem(WAICOrgans.DIVINE_CORE, "神圣核心");
         addItem(WAICOrgans.FROST_CORE, "冰霜核心");
         addItem(WAICOrgans.FLAME_CORE, "炽焰核心");
@@ -566,17 +589,17 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganSkill(IceAndFireOrgans.HYDRA_INTESTINE, "每个器官增加50%的食物效果时长");
 
         // 幻想种器官翻译
-        addItem(IceAndFireOrgans.FANTASTICAL_HEART, "幻想种心脏");
-        addItem(IceAndFireOrgans.FANTASTICAL_LUNG, "幻想种肺脏");
-        addItem(IceAndFireOrgans.FANTASTICAL_SPINE, "幻想种脊柱");
-        addItem(IceAndFireOrgans.FANTASTICAL_STOMACH, "幻想种胃");
-        addItem(IceAndFireOrgans.FANTASTICAL_INTESTINE, "幻想种肠子");
-        addItem(IceAndFireOrgans.FANTASTICAL_KIDNEY, "幻想种肾脏");
-        addItem(IceAndFireOrgans.FANTASTICAL_SPLEEN, "幻想种脾脏");
-        addItem(IceAndFireOrgans.FANTASTICAL_LIVER, "幻想种肝脏");
-        addItem(IceAndFireOrgans.FANTASTICAL_APPENDIX, "幻想种阑尾");
-        addItem(IceAndFireOrgans.FANTASTICAL_RIB, "幻想种肋骨");
-        addItem(IceAndFireOrgans.FANTASTICAL_MUSCLE, "幻想种肌肉");
+        addItem(WAICOrgans.FANTASTICAL_HEART, "幻想种心脏");
+        addItem(WAICOrgans.FANTASTICAL_LUNG, "幻想种肺脏");
+        addItem(WAICOrgans.FANTASTICAL_SPINE, "幻想种脊柱");
+        addItem(WAICOrgans.FANTASTICAL_STOMACH, "幻想种胃");
+        addItem(WAICOrgans.FANTASTICAL_INTESTINE, "幻想种肠子");
+        addItem(WAICOrgans.FANTASTICAL_KIDNEY, "幻想种肾脏");
+        addItem(WAICOrgans.FANTASTICAL_SPLEEN, "幻想种脾脏");
+        addItem(WAICOrgans.FANTASTICAL_LIVER, "幻想种肝脏");
+        addItem(WAICOrgans.FANTASTICAL_APPENDIX, "幻想种阑尾");
+        addItem(WAICOrgans.FANTASTICAL_RIB, "幻想种肋骨");
+        addItem(WAICOrgans.FANTASTICAL_MUSCLE, "幻想种肌肉");
 
         // 浮霜器官翻译
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "浮霜金属心脏");
@@ -696,6 +719,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.STRAIGHT_INTESTINE, "直肠子");
         addOrganDescription(WAICOrgans.STRAIGHT_INTESTINE, "食用食物后30%几率在3秒后掉落该食物");
         addItem(WAICOrgans.SQUASH, "窝瓜");
+        addItem(WAICOrgans.EXPERIENCE_HEART, "经验之心");
+        addOrganDescription(WAICOrgans.EXPERIENCE_HEART, "一颗脉动着积累经验的心脏");
+        addOrganDescription(WAICOrgans.EXPERIENCE_HEART, 0, "每10级经验等级+1健康值");
+        addOrganDescription(WAICOrgans.EXPERIENCE_HEART, 1, "从经验球获取的经验×（魔法器官数量+1）倍率");
 
         addAttribute(WAICAttribute.TEMPERATURE, "温度");
         addAttribute(WAICAttribute.BLOCK, "格挡");

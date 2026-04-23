@@ -6,8 +6,8 @@ import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
-import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
+import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 

@@ -127,7 +127,7 @@ public class MowziesMobOrganSkillUtil {
     /**
      * 泥峭核心 - 技能
      */
-    public static void bluffCoreSkill(ChestCavitySlotContext slotContext) {
+    public static boolean bluffCoreSkill(ChestCavitySlotContext slotContext) {
         LivingEntity entity = slotContext.entity();
         // 射线检测泥土方块
         Vec3 from = entity.getEyePosition();
@@ -142,16 +142,17 @@ public class MowziesMobOrganSkillUtil {
         );
         Level level = entity.level();
         BlockHitResult hitResult = level.clip(clipContext);
-        if (hitResult.getType() != HitResult.Type.BLOCK) return;
+        if (hitResult.getType() != HitResult.Type.BLOCK) return false;
         BlockPos pos = hitResult.getBlockPos();
         BlockState blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
         // 检查是否为泥土方块
-        if (!isDirtBlock(block)) return;
+        if (!isDirtBlock(block)) return false;
         // 播放音效和粒子效果
         eatDirt(entity, block.asItem().getDefaultInstance());
         level.levelEvent(2001, pos, Block.getId(blockState));
         level.removeBlock(pos, false);
+        return true;
     }
 
     /**
