@@ -64,9 +64,9 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 浮霜器官的附魔加成
+     * 无情机制的附魔加成
      */
-    public static double frostMetalBonus(ChestCavitySlotContext context) {
+    public static double mercilessBonus(ChestCavitySlotContext context) {
         return Math.floor(Math.sqrt(getTotalEnchantmentLevels(context.stack())));
     }
 

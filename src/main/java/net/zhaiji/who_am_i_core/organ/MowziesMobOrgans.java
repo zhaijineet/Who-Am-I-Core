@@ -169,7 +169,6 @@ public class MowziesMobOrgans {
 
     /**
      * 禅心
-     * TODO
      */
     public static final Supplier<Item> ZEN_HEART = WAICItem.ITEM.register(
         "zen_heart",

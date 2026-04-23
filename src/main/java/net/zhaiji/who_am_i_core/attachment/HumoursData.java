@@ -97,6 +97,59 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return blood / maxBlood;
     }
 
+    public float getBloodSpace() {
+        return Math.max(0, maxBlood - blood);
+    }
+
+    public boolean isBloodEmpty() {
+        return blood <= 0;
+    }
+
+    public boolean isBloodFull() {
+        return maxBlood <= 0 || blood >= maxBlood;
+    }
+
+    public float insertBlood(float amount, boolean simulate) {
+        if (maxBlood <= 0 || amount <= 0) return 0;
+        float space = Math.max(0, maxBlood - blood);
+        float toInsert = Math.max(0, Math.min(amount, space));
+        if (!simulate) {
+            blood += toInsert;
+        }
+        return toInsert;
+    }
+
+    public float extractBlood(float amount, boolean simulate) {
+        if (amount <= 0 || blood <= 0) return 0;
+        float toExtract = Math.max(0, Math.min(amount, blood));
+        if (!simulate) {
+            blood -= toExtract;
+        }
+        return toExtract;
+    }
+
+    public float consumeBlood(float amount, boolean simulate) {
+        return extractBlood(amount, simulate);
+    }
+
+    public float fillBlood(boolean simulate) {
+        if (maxBlood <= 0) return 0;
+        float toFill = Math.max(0, maxBlood - blood);
+        if (!simulate) {
+            blood = maxBlood;
+        }
+        return toFill;
+    }
+
+    public float drainBlood(boolean simulate) {
+        if (blood <= 0) return 0;
+        float toDrain = blood;
+        if (!simulate) {
+            blood = 0;
+        }
+        return toDrain;
+    }
+
     // ===== 黄胆汁 =====
 
     public float getMaxYellowBile() {
@@ -123,6 +176,59 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     public float getYellowBileRatio() {
         if (maxYellowBile <= 0) return 0;
         return yellowBile / maxYellowBile;
+    }
+
+    public float getYellowBileSpace() {
+        return Math.max(0, maxYellowBile - yellowBile);
+    }
+
+    public boolean isYellowBileEmpty() {
+        return yellowBile <= 0;
+    }
+
+    public boolean isYellowBileFull() {
+        return maxYellowBile <= 0 || yellowBile >= maxYellowBile;
+    }
+
+    public float insertYellowBile(float amount, boolean simulate) {
+        if (maxYellowBile <= 0 || amount <= 0) return 0;
+        float space = Math.max(0, maxYellowBile - yellowBile);
+        float toInsert = Math.max(0, Math.min(amount, space));
+        if (!simulate) {
+            yellowBile += toInsert;
+        }
+        return toInsert;
+    }
+
+    public float extractYellowBile(float amount, boolean simulate) {
+        if (amount <= 0 || yellowBile <= 0) return 0;
+        float toExtract = Math.max(0, Math.min(amount, yellowBile));
+        if (!simulate) {
+            yellowBile -= toExtract;
+        }
+        return toExtract;
+    }
+
+    public float consumeYellowBile(float amount, boolean simulate) {
+        return extractYellowBile(amount, simulate);
+    }
+
+    public float fillYellowBile(boolean simulate) {
+        if (maxYellowBile <= 0) return 0;
+        float toFill = Math.max(0, maxYellowBile - yellowBile);
+        if (!simulate) {
+            yellowBile = maxYellowBile;
+        }
+        return toFill;
+    }
+
+    public float drainYellowBile(boolean simulate) {
+        if (yellowBile <= 0) return 0;
+        float toDrain = yellowBile;
+        if (!simulate) {
+            yellowBile = 0;
+        }
+        return toDrain;
     }
 
     // ===== 黑胆汁 =====
@@ -153,6 +259,59 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return blackBile / maxBlackBile;
     }
 
+    public float getBlackBileSpace() {
+        return Math.max(0, maxBlackBile - blackBile);
+    }
+
+    public boolean isBlackBileEmpty() {
+        return blackBile <= 0;
+    }
+
+    public boolean isBlackBileFull() {
+        return maxBlackBile <= 0 || blackBile >= maxBlackBile;
+    }
+
+    public float insertBlackBile(float amount, boolean simulate) {
+        if (maxBlackBile <= 0 || amount <= 0) return 0;
+        float space = Math.max(0, maxBlackBile - blackBile);
+        float toInsert = Math.max(0, Math.min(amount, space));
+        if (!simulate) {
+            blackBile += toInsert;
+        }
+        return toInsert;
+    }
+
+    public float extractBlackBile(float amount, boolean simulate) {
+        if (amount <= 0 || blackBile <= 0) return 0;
+        float toExtract = Math.max(0, Math.min(amount, blackBile));
+        if (!simulate) {
+            blackBile -= toExtract;
+        }
+        return toExtract;
+    }
+
+    public float consumeBlackBile(float amount, boolean simulate) {
+        return extractBlackBile(amount, simulate);
+    }
+
+    public float fillBlackBile(boolean simulate) {
+        if (maxBlackBile <= 0) return 0;
+        float toFill = Math.max(0, maxBlackBile - blackBile);
+        if (!simulate) {
+            blackBile = maxBlackBile;
+        }
+        return toFill;
+    }
+
+    public float drainBlackBile(boolean simulate) {
+        if (blackBile <= 0) return 0;
+        float toDrain = blackBile;
+        if (!simulate) {
+            blackBile = 0;
+        }
+        return toDrain;
+    }
+
     // ===== 粘液 =====
 
     public float getMaxPhlegm() {
@@ -179,6 +338,69 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     public float getPhlegmRatio() {
         if (maxPhlegm <= 0) return 0;
         return phlegm / maxPhlegm;
+    }
+
+    public float getPhlegmSpace() {
+        return Math.max(0, maxPhlegm - phlegm);
+    }
+
+    public boolean isPhlegmEmpty() {
+        return phlegm <= 0;
+    }
+
+    public boolean isPhlegmFull() {
+        return maxPhlegm <= 0 || phlegm >= maxPhlegm;
+    }
+
+    public float insertPhlegm(float amount, boolean simulate) {
+        if (maxPhlegm <= 0 || amount <= 0) return 0;
+        float space = Math.max(0, maxPhlegm - phlegm);
+        float toInsert = Math.max(0, Math.min(amount, space));
+        if (!simulate) {
+            phlegm += toInsert;
+        }
+        return toInsert;
+    }
+
+    public float extractPhlegm(float amount, boolean simulate) {
+        if (amount <= 0 || phlegm <= 0) return 0;
+        float toExtract = Math.max(0, Math.min(amount, phlegm));
+        if (!simulate) {
+            phlegm -= toExtract;
+        }
+        return toExtract;
+    }
+
+    public float consumePhlegm(float amount, boolean simulate) {
+        return extractPhlegm(amount, simulate);
+    }
+
+    public float fillPhlegm(boolean simulate) {
+        if (maxPhlegm <= 0) return 0;
+        float toFill = Math.max(0, maxPhlegm - phlegm);
+        if (!simulate) {
+            phlegm = maxPhlegm;
+        }
+        return toFill;
+    }
+
+    public float drainPhlegm(boolean simulate) {
+        if (phlegm <= 0) return 0;
+        float toDrain = phlegm;
+        if (!simulate) {
+            phlegm = 0;
+        }
+        return toDrain;
+    }
+
+    // ===== 汇总查询 =====
+
+    public boolean isAnyHumourEmpty() {
+        return blood <= 0 || yellowBile <= 0 || blackBile <= 0 || phlegm <= 0;
+    }
+
+    public boolean isAllHumourEmpty() {
+        return blood <= 0 && yellowBile <= 0 && blackBile <= 0 && phlegm <= 0;
     }
 
     @Override

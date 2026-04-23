@@ -103,61 +103,101 @@ public class WAICOrganSkillUtil {
     }
 
     /**
-     * 添加或减少墨水瓶中的墨水量
+     * 向墨水瓶插入墨水，多瓶依次填充
      *
      * @param data     胸腔数据
-     * @param amount   要添加（正数）或减少（负数）的墨水量
+     * @param amount   要插入的墨水量（必须 >= 0）
      * @param capacity 墨水瓶容量
-     * @return 返回值为正数时表示溢出量（添加过多），为负数时表示还差多少量（减少过多）
+     * @param simulate 是否模拟（true 时不修改数据）
+     * @return 实际插入量
      */
-    public static int addInkToBottle(ChestCavityData data, int amount, int capacity) {
-        if (amount == 0) return 0;
-        // 收集所有墨水瓶
+    public static int insertInkToBottle(ChestCavityData data, int amount, int capacity, boolean simulate) {
+        if (amount <= 0 || capacity <= 0) return 0;
+        List<ItemStack> inkBottles = collectInkBottles(data);
+        if (inkBottles.isEmpty()) return 0;
+        int inserted = 0;
+        for (ItemStack inkBottle : inkBottles) {
+            CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+            CompoundTag tag = customData.copyTag();
+            int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+            int space = Math.max(0, capacity - currentInk);
+            int toInsert = Math.max(0, Math.min(amount - inserted, space));
+            if (toInsert == 0) continue;
+            if (!simulate) {
+                tag.putInt("ink", currentInk + toInsert);
+                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            }
+            inserted += toInsert;
+            if (inserted >= amount) break;
+        }
+        return inserted;
+    }
+
+    /**
+     * 向墨水瓶插入墨水，默认容量 1000
+     *
+     * @param data     胸腔数据
+     * @param amount   要插入的墨水量（必须 >= 0）
+     * @param simulate 是否模拟
+     * @return 实际插入量
+     */
+    public static int insertInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+        return insertInkToBottle(data, amount, 1000, simulate);
+    }
+
+    /**
+     * 从墨水瓶抽取墨水，多瓶依次抽取
+     *
+     * @param data     胸腔数据
+     * @param amount   要抽取的墨水量（必须 >= 0）
+     * @param capacity 墨水瓶容量
+     * @param simulate 是否模拟（true 时不修改数据）
+     * @return 实际抽取量
+     */
+    public static int extractInkToBottle(ChestCavityData data, int amount, int capacity, boolean simulate) {
+        if (amount <= 0) return 0;
+        List<ItemStack> inkBottles = collectInkBottles(data);
+        if (inkBottles.isEmpty()) return 0;
+        int extracted = 0;
+        for (ItemStack inkBottle : inkBottles) {
+            CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+            CompoundTag tag = customData.copyTag();
+            int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+            int toExtract = Math.max(0, Math.min(amount - extracted, currentInk));
+            if (toExtract == 0) continue;
+            if (!simulate) {
+                tag.putInt("ink", currentInk - toExtract);
+                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            }
+            extracted += toExtract;
+            if (extracted >= amount) break;
+        }
+        return extracted;
+    }
+
+    /**
+     * 从墨水瓶抽取墨水，默认容量 1000
+     *
+     * @param data     胸腔数据
+     * @param amount   要抽取的墨水量（必须 >= 0）
+     * @param simulate 是否模拟
+     * @return 实际抽取量
+     */
+    public static int extractInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+        return extractInkToBottle(data, amount, 1000, simulate);
+    }
+
+    /**
+     * 收集胸腔中所有墨水瓶物品
+     */
+    private static List<ItemStack> collectInkBottles(ChestCavityData data) {
         List<ItemStack> inkBottles = new ArrayList<>();
         for (ItemStack organ : data.getOrgans()) {
             if (organ.is(WAICOrgans.INK_BOTTLE.get())) {
                 inkBottles.add(organ);
             }
         }
-        if (inkBottles.isEmpty()) return amount;
-        // 处理正数：添加墨水
-        if (amount > 0) {
-            for (ItemStack inkBottle : inkBottles) {
-                CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-                CompoundTag tag = customData.copyTag();
-                int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
-                int space = capacity - currentInk;
-                int addAmount = Math.min(space, amount);
-                tag.putInt("ink", currentInk + addAmount);
-                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-                amount -= addAmount;
-                if (amount <= 0) break;
-            }
-        } else {
-            // 处理负数：减少墨水
-            for (ItemStack inkBottle : inkBottles) {
-                CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-                CompoundTag tag = customData.copyTag();
-                int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
-                int removeAmount = Math.min(currentInk, -amount);
-                tag.putInt("ink", currentInk - removeAmount);
-                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-                amount += removeAmount;
-                if (amount >= 0) break;
-            }
-        }
-        return amount; // 正数表示溢出, 负数表示还差多少，零表示正好装满
-    }
-
-    /**
-     * 添加或减少墨水瓶中的墨水量
-     *
-     * @param data   胸腔数据
-     * @param amount 要添加（正数）或减少（负数）的墨水量
-     * @return 返回值为正数时表示溢出量（添加过多），为负数时表示还差多少量（减少过多）
-     */
-    public static int addInkToBottle(ChestCavityData data, int amount) {
-        return addInkToBottle(data, amount, 1000);
+        return inkBottles;
     }
 
     /**
@@ -174,7 +214,7 @@ public class WAICOrganSkillUtil {
             case EPIC -> 125;
             case LEGENDARY -> 625;
         };
-        addInkToBottle(data, value);
+        insertInkToBottle(data, value, false);
         if (entity instanceof ServerPlayer player) {
             CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);
         }
@@ -235,7 +275,7 @@ public class WAICOrganSkillUtil {
     public static void inkMuscleSkill(ChestCavitySlotContext context, DamageSource source, DamageContainer damageContainer) {
         float damage = damageContainer.getNewDamage();
         if (damage <= 0) return;
-        addInkToBottle(context.data(), (int) damage);
+        insertInkToBottle(context.data(), (int) damage, false);
     }
 
     /**
@@ -256,14 +296,12 @@ public class WAICOrganSkillUtil {
 
         if (manaToRestore <= 0) return false; // 法力已满，不触发
 
-        // 消耗墨水（传入负数），返回值为负表示墨水不足还差多少
-        // 实际消耗 = manaToRestore + remaining（remaining <= 0）
-        int remaining = addInkToBottle(data, (int) -manaToRestore);
-        float actualRestored = manaToRestore + remaining;
-        if (actualRestored <= 0) return false;
+        // 消耗墨水，返回实际抽取量
+        int actualExtracted = extractInkToBottle(data, (int) manaToRestore, false);
+        if (actualExtracted <= 0) return false;
 
         // 回复法力
-        magicData.addMana(actualRestored);
+        magicData.addMana(actualExtracted);
 
         // 手动设置冷却（仅在成功消耗墨水后才冷却）
         OrganSkillUtil.addCooldown(entity, context.stack(), 200);

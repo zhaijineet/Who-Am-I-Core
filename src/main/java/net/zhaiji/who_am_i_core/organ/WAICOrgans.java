@@ -1,16 +1,12 @@
 package net.zhaiji.who_am_i_core.organ;
 
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.component.BundleContents;
@@ -21,17 +17,19 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
+import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class WAICOrgans {
+    public static final String INK_BOTTLE_INK_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".ink_bottle.ink";
+    public static final String PALETTE_DYE_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".palette.dye";
+
     // 神圣核心
     public static final Supplier<Item> DIVINE_CORE = WAICItem.ITEM.register(
         "divine_core",
@@ -141,8 +139,7 @@ public class WAICOrgans {
                 CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
                 int value = tag.contains("ink") ? tag.getInt("ink") : 0;
                 List<Component> add = List.of(
-                    // TODO 应该写入语言键
-                    Component.translatable("墨水:%1$s/1000", value)
+                    Component.translatable(INK_BOTTLE_INK_TRANSLATION, value)
                 );
                 TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
             })
@@ -260,85 +257,7 @@ public class WAICOrgans {
         "palette",
         () -> Organ.builder(PaletteItem::new)
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
-            // TODO 应该简化
-            .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-                BundleContents contents = stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-                Map<SchoolType, Integer> dyeCount = new HashMap<>();
-                // 统计各流派对应的染料数量
-                for (ItemStack itemStack : contents.itemsCopy()) {
-                    if (itemStack.is(Items.RED_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.BLOOD.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.BLOOD.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.ORANGE_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.FIRE.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.FIRE.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.YELLOW_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.HOLY.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.HOLY.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.LIGHT_BLUE_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.ICE.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.ICE.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.BLUE_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.LIGHTNING.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.LIGHTNING.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.GREEN_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.NATURE.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.NATURE.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.CYAN_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.ELDRITCH.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.ELDRITCH.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.PURPLE_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.ENDER.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.ENDER.get(), 0) + itemStack.getCount()
-                        );
-                    } else if (itemStack.is(Items.GRAY_DYE)) {
-                        dyeCount.put(
-                            SchoolRegistry.EVOCATION.get(),
-                            dyeCount.getOrDefault(SchoolRegistry.EVOCATION.get(), 0) + itemStack.getCount()
-                        );
-                    }
-                }
-                // 构建工具提示
-                List<Component> add = new java.util.ArrayList<>();
-                for (var entry : dyeCount.entrySet()) {
-                    if (entry.getValue() > 0) {
-                        SchoolType school = entry.getKey();
-                        int count = entry.getValue();
-                        ResourceLocation id = school.getId();
-                        String schoolName = switch (id.getPath()) {
-                            case "blood" -> "猩红";
-                            case "fire" -> "炽焰";
-                            case "holy" -> "神圣";
-                            case "ice" -> "冰霜";
-                            case "lightning" -> "雷霆";
-                            case "nature" -> "自然";
-                            case "eldritch" -> "邪术";
-                            case "ender" -> "末影";
-                            case "evocation" -> "唤魔";
-                            default -> id.getPath();
-                        };
-                        add.add(Component.literal("%s:%s".formatted(schoolName, count)));
-                    }
-                }
-                if (!add.isEmpty()) {
-                    TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
-                }
-            })
+            .skillTooltip(WAICTooltipUtil.paletteDyeTooltip())
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .build()
     );

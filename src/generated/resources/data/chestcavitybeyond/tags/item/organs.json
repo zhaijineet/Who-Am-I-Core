@@ -98,6 +98,17 @@
     "who_am_i_core:frost_metal_appendix",
     "who_am_i_core:frost_metal_rib",
     "who_am_i_core:frost_metal_muscle",
+    "who_am_i_core:transcendium_heart",
+    "who_am_i_core:transcendium_lung",
+    "who_am_i_core:transcendium_spine",
+    "who_am_i_core:transcendium_stomach",
+    "who_am_i_core:transcendium_intestine",
+    "who_am_i_core:transcendium_kidney",
+    "who_am_i_core:transcendium_spleen",
+    "who_am_i_core:transcendium_liver",
+    "who_am_i_core:transcendium_appendix",
+    "who_am_i_core:transcendium_rib",
+    "who_am_i_core:transcendium_muscle",
     "who_am_i_core:ink_heart",
     "who_am_i_core:ink_lung",
     "who_am_i_core:ink_spine",
@@ -169,6 +180,7 @@
     "who_am_i_core:haunted_bone",
     "who_am_i_core:sword_bone",
     "who_am_i_core:straight_intestine",
-    "who_am_i_core:squash"
+    "who_am_i_core:squash",
+    "who_am_i_core:experience_heart"
   ]
 }

@@ -255,8 +255,24 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.FROST_METAL_RIB, "Frost Metal Rib");
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "Frost Metal Muscle");
 
-        // 浮霜器官skill描述
-        add("organ.who_am_i_core.tooltips.frost_metal_merciless", "Merciless: convert all enchantments into organ attributes");
+        // 浮霜器官description描述
+        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "Merciless: convert all enchantments into organ attributes");
+
+        // 超限合金器官翻译
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "Transcendence Heart");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "Transcendence Lung");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "Transcendence Spine");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "Transcendence Stomach");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "Transcendence Intestine");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "Transcendence Kidney");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "Transcendence Spleen");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "Transcendence Liver");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "Transcendence Appendix");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "Transcendence Rib");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "Transcendence Muscle");
+
+        // 超限合金器官description描述
+        add("organ.who_am_i_core.tooltips.looting_burst", "Loot Burst: +1 Looting and +1 Fortune");
 
         // 墨水器官翻译
         addItem(WAICOrgans.INK_HEART, "Ink Heart");
@@ -273,6 +289,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_MUSCLE, "Ink Muscle");
         addOrganSkill(WAICOrgans.INK_MUSCLE, "Adds ink equal to damage taken to ink bottle");
         addItem(WAICOrgans.INK_BOTTLE, "Ink Bottle");
+        add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "Ink: %s/1000");
         addItem(WAICOrgans.NIB, "Nib");
 
         // 颜料器官翻译
@@ -288,6 +305,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.PIGMENT_RIB, "Pigment Rib");
         addItem(WAICOrgans.PIGMENT_MUSCLE, "Pigment Muscle");
         addItem(WAICOrgans.PALETTE, "Palette");
+        add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
 
         // 木质器官翻译
         addItem(WAICOrgans.WOODEN_HEART, "Wooden Heart");
@@ -614,8 +632,24 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.FROST_METAL_RIB, "浮霜金属肋骨");
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
 
-        // 浮霜器官skill描述
-        add("organ.who_am_i_core.tooltips.frost_metal_merciless", "无情：将所有附魔转换为器官属性");
+        // 浮霜器官description描述
+        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "无情：将所有附魔转换为器官属性");
+
+        // 超限合金器官翻译
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "超限合金心脏");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "超限合金肺脏");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "超限合金脊柱");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "超限合金胃");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "超限合金肠子");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "超限合金肾脏");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "超限合金脾脏");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "超限合金肝脏");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "超限合金阑尾");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "超限合金肋骨");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "超限合金肌肉");
+
+        // 超限合金器官description描述
+        add(AnvilCraftOrgans.LOOTING_BURST_TRANSLATION, "战利品大爆发：+1抢夺和+1幸运");
 
         // 墨水器官翻译
         addItem(WAICOrgans.INK_HEART, "墨水心脏");
@@ -632,6 +666,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_MUSCLE, "墨水肌肉");
         addOrganSkill(WAICOrgans.INK_MUSCLE, "受到伤害时为墨水瓶添加等同于伤害值的墨水");
         addItem(WAICOrgans.INK_BOTTLE, "墨水瓶");
+        add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "墨水: %s/1000");
         addItem(WAICOrgans.NIB, "钢笔尖");
 
         // 颜料器官翻译
@@ -647,6 +682,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.PIGMENT_RIB, "颜料肋骨");
         addItem(WAICOrgans.PIGMENT_MUSCLE, "颜料肌肉");
         addItem(WAICOrgans.PALETTE, "调色盘");
+        add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
 
         // 木质器官翻译
         addItem(WAICOrgans.WOODEN_HEART, "木质心脏");

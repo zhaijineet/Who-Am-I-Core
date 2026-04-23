@@ -390,6 +390,32 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             AnvilCraftOrgans.FROST_METAL_MUSCLE.get()
         );
 
+        // ==================== 超限合金器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            AnvilCraftOrgans.TRANSCENDIUM_HEART.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_LUNG.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_SPINE.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_STOMACH.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_INTESTINE.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_KIDNEY.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_SPLEEN.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_LIVER.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_APPENDIX.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_RIB.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_MUSCLE.get()
+        );
+        tag(ItemTagManager.HEART).add(AnvilCraftOrgans.TRANSCENDIUM_HEART.get());
+        tag(ItemTagManager.LUNG).add(AnvilCraftOrgans.TRANSCENDIUM_LUNG.get());
+        tag(ItemTagManager.SPINE).add(AnvilCraftOrgans.TRANSCENDIUM_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(AnvilCraftOrgans.TRANSCENDIUM_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(AnvilCraftOrgans.TRANSCENDIUM_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX.get());
+        tag(ItemTagManager.RIB).add(AnvilCraftOrgans.TRANSCENDIUM_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE.get());
+
         // ==================== 墨水器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             WAICOrgans.INK_HEART.get(),

@@ -12,12 +12,14 @@
     "iceandfire:hydra_heart",
     "who_am_i_core:fantastical_heart",
     "who_am_i_core:frost_metal_heart",
+    "who_am_i_core:transcendium_heart",
     "who_am_i_core:ink_heart",
     "who_am_i_core:pigment_heart",
     "who_am_i_core:wooden_heart",
     "who_am_i_core:frankenstein_heart",
     "who_am_i_core:lesion_heart",
     "who_am_i_core:treachery",
-    "who_am_i_core:mimic_heart"
+    "who_am_i_core:mimic_heart",
+    "who_am_i_core:experience_heart"
   ]
 }
