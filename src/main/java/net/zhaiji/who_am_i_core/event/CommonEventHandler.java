@@ -142,6 +142,12 @@ public class CommonEventHandler {
             event.setCanceled(true);
             return;
         }
+        // 余烬金属器官火焰吸收：受到火焰伤害时取消伤害并回复等量生命值
+        if (data.hasOrgan(WAICItemTagManager.EMBER_METAL) && event.getSource().is(DamageTypeTags.IS_FIRE)) {
+            entity.heal(event.getAmount());
+            event.setCanceled(true);
+            return;
+        }
     }
 
     /**

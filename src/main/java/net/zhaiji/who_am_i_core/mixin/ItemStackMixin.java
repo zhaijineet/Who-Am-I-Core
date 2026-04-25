@@ -74,6 +74,12 @@ public abstract class ItemStackMixin {
     )
     public void whoAmICore$getUseDuration(LivingEntity entity, CallbackInfoReturnable<Integer> cir) {
         Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(entity, whoAmICore$self());
-        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.getUseDuration(entity, whoAmICore$self())));
+        condition.ifPresent(edibleCondition -> {
+            int original = getItem().getUseDuration(whoAmICore$self(), entity);
+            int duration = edibleCondition.getUseDuration(entity, whoAmICore$self());
+            if (duration != original) {
+                cir.setReturnValue(duration);
+            }
+        });
     }
 }

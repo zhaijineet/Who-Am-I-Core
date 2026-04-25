@@ -11,6 +11,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -34,6 +35,7 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
@@ -416,5 +418,90 @@ public class WAICOrganSkillUtil {
         if (bonusDamage > 0) {
             damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
         }
+    }
+
+    /**
+     * 布织泰迪熊技能：缝补
+     * <p>
+     * 消耗收纳袋中的羊毛或线回复生命值。
+     * 1根线 = 1点生命，1个羊毛 = 4点生命。
+     * 每有一个布织器官在胸腔中，额外 +1 治疗量。
+     * 自动计算最低消耗以尽可能恢复至满血。
+     * 5秒冷却（100 tick）。
+     * </p>
+     *
+     * @param context 胸腔槽位上下文
+     * @return true 触发冷却
+     */
+    public static boolean clothTeddyBearSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.level().isClientSide()) return false;
+
+        int missingHP = (int) (entity.getMaxHealth() - entity.getHealth());
+        if (missingHP <= 0) return false;
+
+        int clothCount = context.data().getOrganCount(WAICItemTagManager.CLOTH_ORGAN);
+
+        BundleContents contents = context.stack().getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        int totalWool = 0, totalString = 0;
+        for (int i = 0; i < contents.size(); i++) {
+            ItemStack stack = contents.getItemUnsafe(i);
+            if (stack.is(ItemTags.WOOL)) {
+                totalWool += stack.getCount();
+            } else if (stack.is(Items.STRING)) {
+                totalString += stack.getCount();
+            }
+        }
+
+        if (totalWool + totalString <= 0) return false;   // 无材料，直接失败
+        // 计算材料可提供的最大基础治疗量
+        int maxMaterialHeal = totalWool * 4 + totalString;
+
+        // 最终总治疗 = 材料治疗 + clothCount（不超过missingHP）
+        // 目标材料治疗 = missingHP - clothCount，但至少为 1（因为必须消耗材料）
+        int targetMaterialHeal = Math.max(1, missingHP - clothCount);
+
+        // 实际需要的材料治疗量（不超过材料上限）
+        int materialHeal = Math.min(targetMaterialHeal, maxMaterialHeal);
+
+        // 用最少材料提供至少 materialHeal 的治疗：羊毛优先（4HP/个），线补余数（1HP/个）
+        int woolToUse = Math.min(materialHeal / 4, totalWool);
+        int remainder = materialHeal - woolToUse * 4;
+        int stringToUse;
+
+        if (remainder <= totalString) {
+            // 线足够覆盖余数
+            stringToUse = remainder;
+        } else if (woolToUse < totalWool) {
+            // 线不够，多用一个羊毛覆盖余数
+            woolToUse++;
+            stringToUse = 0;
+        } else {
+            // 羊毛已用完，用所有可用的线
+            stringToUse = totalString;
+        }
+
+        int actualMaterialHeal = woolToUse * 4 + stringToUse;
+        if (actualMaterialHeal <= 0) return false;
+
+        // 最终治疗量 = 实际材料治疗 + 器官加成
+        int actualHeal = actualMaterialHeal + clothCount;
+
+        // 扣除材料
+        for (int i = 0; i < contents.size() && (woolToUse > 0 || stringToUse > 0); i++) {
+            ItemStack stack = contents.getItemUnsafe(i);
+            if (stack.is(ItemTags.WOOL) && woolToUse > 0) {
+                int consume = Math.min(woolToUse, stack.getCount());
+                stack.consume(consume, entity);
+                woolToUse -= consume;
+            } else if (stack.is(Items.STRING) && stringToUse > 0) {
+                int consume = Math.min(stringToUse, stack.getCount());
+                stack.consume(consume, entity);
+                stringToUse -= consume;
+            }
+        }
+
+        entity.heal(actualHeal);
+        return true;
     }
 }

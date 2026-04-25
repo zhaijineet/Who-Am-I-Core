@@ -6,7 +6,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.component.BundleContents;
@@ -17,6 +16,7 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
+import net.zhaiji.who_am_i_core.item.ClothTeddyBearItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
@@ -703,6 +703,110 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 1.25)
             .addValueAttribute(InitAttribute.SPEED, 1.25)
+            .build()
+    );
+
+    // ==================== 布织泰迪熊器官系列 ====================
+    // 布织泰迪熊
+    public static final Supplier<Item> CLOTH_TEDDY_BEAR = WAICItem.ITEM.register(
+        "cloth_teddy_bear",
+        () -> Organ.builder(ClothTeddyBearItem::new)
+            .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .skill(WAICOrganSkillUtil::clothTeddyBearSkill)
+            .cooldown(100)
+            .build()
+    );
+
+    // 布织心脏
+    public static final Supplier<Item> CLOTH_HEART = WAICItem.ITEM.register(
+        "cloth_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1.0)
+            .build()
+    );
+
+    // 布织肺脏
+    public static final Supplier<Item> CLOTH_LUNG = WAICItem.ITEM.register(
+        "cloth_lung",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.0)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.0)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.0)
+            .build()
+    );
+
+    // 布织肝脏
+    public static final Supplier<Item> CLOTH_LIVER = WAICItem.ITEM.register(
+        "cloth_liver",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 1.0)
+            .build()
+    );
+
+    // 布织肠子
+    public static final Supplier<Item> CLOTH_INTESTINE = WAICItem.ITEM.register(
+        "cloth_intestine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 1.0)
+            .build()
+    );
+
+    // 布织胃
+    public static final Supplier<Item> CLOTH_STOMACH = WAICItem.ITEM.register(
+        "cloth_stomach",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 1.0)
+            .build()
+    );
+
+    // 布织肾脏
+    public static final Supplier<Item> CLOTH_KIDNEY = WAICItem.ITEM.register(
+        "cloth_kidney",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.FILTRATION, 1.0)
+            .build()
+    );
+
+    // 布织脾脏
+    public static final Supplier<Item> CLOTH_SPLEEN = WAICItem.ITEM.register(
+        "cloth_spleen",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.METABOLISM, 1.0)
+            .build()
+    );
+
+    // 布织脊柱
+    public static final Supplier<Item> CLOTH_SPINE = WAICItem.ITEM.register(
+        "cloth_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 1.0)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.5)
+            .build()
+    );
+
+    // 布织肋骨
+    public static final Supplier<Item> CLOTH_RIB = WAICItem.ITEM.register(
+        "cloth_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 1.0)
+            .build()
+    );
+
+    // 布织肌肉
+    public static final Supplier<Item> CLOTH_MUSCLE = WAICItem.ITEM.register(
+        "cloth_muscle",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 1.0)
+            .addValueAttribute(InitAttribute.SPEED, 1.0)
+            .build()
+    );
+
+    // 布织阑尾
+    public static final Supplier<Item> CLOTH_APPENDIX = WAICItem.ITEM.register(
+        "cloth_appendix",
+        () -> Organ.builder()
+            .addValueAttribute(Attributes.LUCK, 1.0)
             .build()
     );
 

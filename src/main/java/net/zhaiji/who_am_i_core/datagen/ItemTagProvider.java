@@ -350,6 +350,47 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.RIB).add(WAICOrgans.FANTASTICAL_RIB.get());
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.FANTASTICAL_MUSCLE.get());
 
+        // ==================== 布织泰迪熊器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.CLOTH_TEDDY_BEAR.get(),
+            WAICOrgans.CLOTH_HEART.get(),
+            WAICOrgans.CLOTH_LUNG.get(),
+            WAICOrgans.CLOTH_LIVER.get(),
+            WAICOrgans.CLOTH_INTESTINE.get(),
+            WAICOrgans.CLOTH_STOMACH.get(),
+            WAICOrgans.CLOTH_KIDNEY.get(),
+            WAICOrgans.CLOTH_SPLEEN.get(),
+            WAICOrgans.CLOTH_SPINE.get(),
+            WAICOrgans.CLOTH_RIB.get(),
+            WAICOrgans.CLOTH_MUSCLE.get(),
+            WAICOrgans.CLOTH_APPENDIX.get()
+        );
+        tag(ItemTagManager.SPECIAL).add(WAICOrgans.CLOTH_TEDDY_BEAR.get());
+        tag(ItemTagManager.HEART).add(WAICOrgans.CLOTH_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.CLOTH_LUNG.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.CLOTH_LIVER.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.CLOTH_INTESTINE.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.CLOTH_STOMACH.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.CLOTH_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.CLOTH_SPLEEN.get());
+        tag(ItemTagManager.SPINE).add(WAICOrgans.CLOTH_SPINE.get());
+        tag(ItemTagManager.RIB).add(WAICOrgans.CLOTH_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.CLOTH_MUSCLE.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.CLOTH_APPENDIX.get());
+        tag(WAICItemTagManager.CLOTH_ORGAN).add(
+            WAICOrgans.CLOTH_HEART.get(),
+            WAICOrgans.CLOTH_LUNG.get(),
+            WAICOrgans.CLOTH_LIVER.get(),
+            WAICOrgans.CLOTH_INTESTINE.get(),
+            WAICOrgans.CLOTH_STOMACH.get(),
+            WAICOrgans.CLOTH_KIDNEY.get(),
+            WAICOrgans.CLOTH_SPLEEN.get(),
+            WAICOrgans.CLOTH_SPINE.get(),
+            WAICOrgans.CLOTH_RIB.get(),
+            WAICOrgans.CLOTH_MUSCLE.get(),
+            WAICOrgans.CLOTH_APPENDIX.get()
+        );
+
         // ==================== 浮霜器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             AnvilCraftOrgans.FROST_METAL_HEART.get(),
@@ -415,6 +456,60 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.APPENDIX).add(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX.get());
         tag(ItemTagManager.RIB).add(AnvilCraftOrgans.TRANSCENDIUM_RIB.get());
         tag(ItemTagManager.MUSCLE).add(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE.get());
+
+        // ==================== 诅咒金器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            AnvilCraftOrgans.CURSED_GOLD_HEART.get(),
+            AnvilCraftOrgans.CURSED_GOLD_LUNG.get(),
+            AnvilCraftOrgans.CURSED_GOLD_LIVER.get(),
+            AnvilCraftOrgans.CURSED_GOLD_INTESTINE.get()
+        );
+        tag(ItemTagManager.HEART).add(AnvilCraftOrgans.CURSED_GOLD_HEART.get());
+        tag(ItemTagManager.LUNG).add(AnvilCraftOrgans.CURSED_GOLD_LUNG.get());
+        tag(ItemTagManager.LIVER).add(AnvilCraftOrgans.CURSED_GOLD_LIVER.get());
+        tag(ItemTagManager.INTESTINE).add(AnvilCraftOrgans.CURSED_GOLD_INTESTINE.get());
+        tag(WAICItemTagManager.CURSED_GOLD).add(
+            AnvilCraftOrgans.CURSED_GOLD_HEART.get(),
+            AnvilCraftOrgans.CURSED_GOLD_LUNG.get(),
+            AnvilCraftOrgans.CURSED_GOLD_LIVER.get(),
+            AnvilCraftOrgans.CURSED_GOLD_INTESTINE.get()
+        );
+
+        // ==================== 余烬金属器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            AnvilCraftOrgans.EMBER_METAL_RIB.get(),
+            AnvilCraftOrgans.EMBER_METAL_MUSCLE.get(),
+            AnvilCraftOrgans.EMBER_METAL_SPINE.get(),
+            AnvilCraftOrgans.EMBER_METAL_APPENDIX.get()
+        );
+        tag(ItemTagManager.RIB).add(AnvilCraftOrgans.EMBER_METAL_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(AnvilCraftOrgans.EMBER_METAL_MUSCLE.get());
+        tag(ItemTagManager.SPINE).add(AnvilCraftOrgans.EMBER_METAL_SPINE.get());
+        tag(ItemTagManager.APPENDIX).add(AnvilCraftOrgans.EMBER_METAL_APPENDIX.get());
+        tag(WAICItemTagManager.EMBER_METAL).add(
+            AnvilCraftOrgans.EMBER_METAL_RIB.get(),
+            AnvilCraftOrgans.EMBER_METAL_MUSCLE.get(),
+            AnvilCraftOrgans.EMBER_METAL_SPINE.get(),
+            AnvilCraftOrgans.EMBER_METAL_APPENDIX.get()
+        );
+        tag(WAICItemTagManager.FIRE).add(
+            AnvilCraftOrgans.EMBER_METAL_RIB.get(),
+            AnvilCraftOrgans.EMBER_METAL_MUSCLE.get(),
+            AnvilCraftOrgans.EMBER_METAL_SPINE.get(),
+            AnvilCraftOrgans.EMBER_METAL_APPENDIX.get()
+        );
+
+        // ==================== 皇家钢器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            AnvilCraftOrgans.ROYAL_STEEL_RIB.get(),
+            AnvilCraftOrgans.ROYAL_STEEL_MUSCLE.get(),
+            AnvilCraftOrgans.ROYAL_STEEL_SPINE.get(),
+            AnvilCraftOrgans.ROYAL_STEEL_APPENDIX.get()
+        );
+        tag(ItemTagManager.RIB).add(AnvilCraftOrgans.ROYAL_STEEL_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE.get());
+        tag(ItemTagManager.SPINE).add(AnvilCraftOrgans.ROYAL_STEEL_SPINE.get());
+        tag(ItemTagManager.APPENDIX).add(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX.get());
 
         // ==================== 墨水器官标签 ====================
         tag(ItemTagManager.ORGANS).add(

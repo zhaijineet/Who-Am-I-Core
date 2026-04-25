@@ -242,6 +242,21 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FANTASTICAL_RIB, "Fantastical Rib");
         addItem(WAICOrgans.FANTASTICAL_MUSCLE, "Fantastical Muscle");
 
+        // 布织泰迪熊器官翻译
+        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "Cloth Teddy Bear");
+        addOrganSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "Mending: consume string or wool to restore health");
+        addItem(WAICOrgans.CLOTH_HEART, "Cloth Heart");
+        addItem(WAICOrgans.CLOTH_LUNG, "Cloth Lung");
+        addItem(WAICOrgans.CLOTH_LIVER, "Cloth Liver");
+        addItem(WAICOrgans.CLOTH_INTESTINE, "Cloth Intestine");
+        addItem(WAICOrgans.CLOTH_STOMACH, "Cloth Stomach");
+        addItem(WAICOrgans.CLOTH_KIDNEY, "Cloth Kidney");
+        addItem(WAICOrgans.CLOTH_SPLEEN, "Cloth Spleen");
+        addItem(WAICOrgans.CLOTH_SPINE, "Cloth Spine");
+        addItem(WAICOrgans.CLOTH_RIB, "Cloth Rib");
+        addItem(WAICOrgans.CLOTH_MUSCLE, "Cloth Muscle");
+        addItem(WAICOrgans.CLOTH_APPENDIX, "Cloth Appendix");
+
         // 浮霜器官翻译
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "Frost Metal Heart");
         addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "Frost Metal Lung");
@@ -273,6 +288,28 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 超限合金器官description描述
         add("organ.who_am_i_core.tooltips.looting_burst", "Loot Burst: +1 Looting and +1 Fortune");
+
+        // 诅咒金器官翻译
+        addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "Cursed Gold Heart");
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "Cursed Gold Lung");
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "Cursed Gold Liver");
+        addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "Cursed Gold Intestine");
+        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "Curse: the more cursed gold organs in your chest, the heavier the penalty");
+
+        // 余烬金属器官翻译
+        addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "Ember Metal Rib");
+        addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "Ember Metal Muscle");
+        addOrganSkill(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "Ember Forging: +0.5 Melee Damage");
+        addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "Ember Metal Spine");
+        addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "Ember Metal Appendix");
+        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "Ember Absorption: fire damage heals instead of hurting");
+
+        // 皇家钢器官翻译
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "Royal Steel Rib");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "Royal Steel Muscle");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "Royal Steel Spine");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "Royal Steel Appendix");
+        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "Solid Foundation: simple fixed attribute bonuses");
 
         // 墨水器官翻译
         addItem(WAICOrgans.INK_HEART, "Ink Heart");
@@ -619,6 +656,21 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FANTASTICAL_RIB, "幻想种肋骨");
         addItem(WAICOrgans.FANTASTICAL_MUSCLE, "幻想种肌肉");
 
+        // 布织泰迪熊器官翻译
+        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "布织泰迪熊");
+        addOrganSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "缝补：消耗羊毛或线来回复生命值");
+        addItem(WAICOrgans.CLOTH_HEART, "布织心脏");
+        addItem(WAICOrgans.CLOTH_LUNG, "布织肺脏");
+        addItem(WAICOrgans.CLOTH_LIVER, "布织肝脏");
+        addItem(WAICOrgans.CLOTH_INTESTINE, "布织肠子");
+        addItem(WAICOrgans.CLOTH_STOMACH, "布织胃");
+        addItem(WAICOrgans.CLOTH_KIDNEY, "布织肾脏");
+        addItem(WAICOrgans.CLOTH_SPLEEN, "布织脾脏");
+        addItem(WAICOrgans.CLOTH_SPINE, "布织脊柱");
+        addItem(WAICOrgans.CLOTH_RIB, "布织肋骨");
+        addItem(WAICOrgans.CLOTH_MUSCLE, "布织肌肉");
+        addItem(WAICOrgans.CLOTH_APPENDIX, "布织阑尾");
+
         // 浮霜器官翻译
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "浮霜金属心脏");
         addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "浮霜金属肺脏");
@@ -650,6 +702,28 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 超限合金器官description描述
         add(AnvilCraftOrgans.LOOTING_BURST_TRANSLATION, "战利品大爆发：+1抢夺和+1幸运");
+
+        // 诅咒金器官翻译
+        addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "诅咒金心脏");
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "诅咒金肺脏");
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "诅咒金肝脏");
+        addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "诅咒金肠子");
+        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "诅咒：胸腔中诅咒金器官越多，负面效果越重");
+
+        // 余烬金属器官翻译
+        addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "余烬金属肋骨");
+        addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "余烬金属肌肉");
+        addOrganSkill(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "余烬锻造：+0.5近战伤害");
+        addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "余烬金属脊柱");
+        addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "余烬金属阑尾");
+        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "余烬吸收：火焰伤害转化为治疗");
+
+        // 皇家钢器官翻译
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "皇家钢肋骨");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "皇家钢肌肉");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "皇家钢脊柱");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "皇家钢阑尾");
+        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "坚实可靠：朴素的固定属性加成");
 
         // 墨水器官翻译
         addItem(WAICOrgans.INK_HEART, "墨水心脏");

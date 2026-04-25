@@ -14,8 +14,151 @@ import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 import java.util.function.Supplier;
 
 public class AnvilCraftOrgans {
+    // 皇家钢器官description翻译键
+    public static final String ROYAL_STEEL_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.royal_steel";
+
+    // 诅咒金器官description翻译键
+    public static final String CURSED_GOLD_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.cursed_gold";
+
+    // 余烬金属器官description翻译键
+    public static final String EMBER_ABSORPTION_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.ember_absorption";
+
     // 浮霜器官description翻译键
     public static final String MERCILESS_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.merciless";
+
+    // 超限合金器官description翻译键
+    public static final String LOOTING_BURST_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.looting_burst";
+
+    // ==================== 皇家钢器官 ====================
+    // 皇家钢肋骨
+    public static final Supplier<Item> ROYAL_STEEL_RIB = WAICItem.ITEM.register(
+        "royal_steel_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2.0)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
+            .build()
+    );
+
+    // 皇家钢肌肉
+    public static final Supplier<Item> ROYAL_STEEL_MUSCLE = WAICItem.ITEM.register(
+        "royal_steel_muscle",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 1.5)
+            .addValueAttribute(InitAttribute.SPEED, 1.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
+            .build()
+    );
+
+    // 皇家钢脊柱
+    public static final Supplier<Item> ROYAL_STEEL_SPINE = WAICItem.ITEM.register(
+        "royal_steel_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 1.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 1.0)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
+            .build()
+    );
+
+    // 皇家钢阑尾
+    public static final Supplier<Item> ROYAL_STEEL_APPENDIX = WAICItem.ITEM.register(
+        "royal_steel_appendix",
+        () -> Organ.builder()
+            .addValueAttribute(Attributes.LUCK, 2.0)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
+            .build()
+    );
+
+    // ==================== 诅咒金器官 ====================
+    // 诅咒金心脏
+    public static final Supplier<Item> CURSED_GOLD_HEART = WAICItem.ITEM.register(
+        "cursed_gold_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2.0)
+            .addValueAttribute(WAICAttribute.LOOTING, 0.5)
+            .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
+            .build()
+    );
+
+    // 诅咒金肺脏
+    public static final Supplier<Item> CURSED_GOLD_LUNG = WAICItem.ITEM.register(
+        "cursed_gold_lung",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
+            .addValueAttribute(WAICAttribute.LOOTING, 0.5)
+            .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
+            .build()
+    );
+
+    // 诅咒金肝脏
+    public static final Supplier<Item> CURSED_GOLD_LIVER = WAICItem.ITEM.register(
+        "cursed_gold_liver",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 2.0)
+            .addValueAttribute(WAICAttribute.LOOTING, 0.5)
+            .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
+            .build()
+    );
+
+    // 诅咒金肠子
+    public static final Supplier<Item> CURSED_GOLD_INTESTINE = WAICItem.ITEM.register(
+        "cursed_gold_intestine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 2.0)
+            .addValueAttribute(WAICAttribute.LOOTING, 0.5)
+            .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
+            .build()
+    );
+
+    // ==================== 余烬金属器官 ====================
+    // 余烬肋骨
+    public static final Supplier<Item> EMBER_METAL_RIB = WAICItem.ITEM.register(
+        "ember_metal_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2.5)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
+            .build()
+    );
+
+    // 余烬肌肉
+    public static final Supplier<Item> EMBER_METAL_MUSCLE = WAICItem.ITEM.register(
+        "ember_metal_muscle",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 2.0)
+            .addValueAttribute(InitAttribute.SPEED, 2.0)
+            .addValueAttribute(WAICAttribute.MELEE_DAMAGE, 0.5)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .build()
+    );
+
+    // 余烬脊柱
+    public static final Supplier<Item> EMBER_METAL_SPINE = WAICItem.ITEM.register(
+        "ember_metal_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2.0)
+            .addValueAttribute(InitAttribute.DEFENSE, 1.0)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
+            .build()
+    );
+
+    // 余烬阑尾
+    public static final Supplier<Item> EMBER_METAL_APPENDIX = WAICItem.ITEM.register(
+        "ember_metal_appendix",
+        () -> Organ.builder()
+            .addValueAttribute(Attributes.LUCK, 2.5)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
+            .build()
+    );
 
     // ==================== 浮霜器官 ====================
     // 浮霜心脏
@@ -164,9 +307,6 @@ public class AnvilCraftOrgans {
             })
             .build()
     );
-
-    // 超限合金器官description翻译键
-    public static final String LOOTING_BURST_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.looting_burst";
 
     // ==================== 超限合金器官 ====================
     // 超限合金心脏

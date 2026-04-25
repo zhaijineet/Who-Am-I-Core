@@ -36,6 +36,15 @@ public class WAICItemTagManager {
     // 病变
     public static final TagKey<Item> LESION = create("lesion");
 
+    // 诅咒金
+    public static final TagKey<Item> CURSED_GOLD = create("cursed_gold");
+
+    // 余烬金属
+    public static final TagKey<Item> EMBER_METAL = create("ember_metal");
+
+    // 布织器官
+    public static final TagKey<Item> CLOTH_ORGAN = create("cloth_organ");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }
