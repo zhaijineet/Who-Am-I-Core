@@ -34,3 +34,4 @@ E:\Mod Project\cataclysm
 E:\Mod Project\AnvilCraft
 E:\Mod Project\irons-spells-n-spellbooks
 E:\Mod Project\TouhouLittleMaid
+E:\Mod Project\Companions

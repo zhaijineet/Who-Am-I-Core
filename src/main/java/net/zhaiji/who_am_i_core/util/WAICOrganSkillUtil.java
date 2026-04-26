@@ -421,11 +421,101 @@ public class WAICOrganSkillUtil {
     }
 
     /**
+     * 布织泰迪熊：胸腔关闭时，将胸腔内的羊毛转换为随机布织器官
+     * <p>
+     * 单次遍历收集空槽位和羊毛信息，然后按类型处理：
+     * - 单个羊毛（count==1）：原位替换为随机布织器官
+     * - 多个羊毛（count>1）：尽可能消耗羊毛填满空槽位
+     * 若空槽位 >= count-1：完全消耗，最后1个原位替换
+     * 若空槽位 < count-1：只消耗空槽位数量个羊毛
+     * </p>
+     *
+     * @param context 胸腔槽位上下文
+     */
+    public static void clothTeddyBearChestCavityClose(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = data.getOwner();
+        Level level = entity.level();
+        if (level.isClientSide()) return;
+
+        // 1. 单次遍历：收集空槽位 + 羊毛信息
+        List<Integer> emptySlots = new ArrayList<>();
+        List<int[]> woolSlots = new ArrayList<>();
+
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.isEmpty()) {
+                emptySlots.add(i);
+            } else if (stack.is(ItemTags.WOOL)) {
+                woolSlots.add(new int[]{
+                    i,
+                    stack.getCount()
+                });
+            }
+        }
+
+        if (woolSlots.isEmpty()) return;
+
+        // 布织器官候选列表（11种）
+        List<Item> clothOrgans = List.of(
+            WAICOrgans.CLOTH_HEART.get(),
+            WAICOrgans.CLOTH_LUNG.get(),
+            WAICOrgans.CLOTH_LIVER.get(),
+            WAICOrgans.CLOTH_INTESTINE.get(),
+            WAICOrgans.CLOTH_STOMACH.get(),
+            WAICOrgans.CLOTH_KIDNEY.get(),
+            WAICOrgans.CLOTH_SPLEEN.get(),
+            WAICOrgans.CLOTH_SPINE.get(),
+            WAICOrgans.CLOTH_RIB.get(),
+            WAICOrgans.CLOTH_MUSCLE.get(),
+            WAICOrgans.CLOTH_APPENDIX.get()
+        );
+
+        int emptyIdx = 0;
+
+        // 2. 处理羊毛
+        for (int[] info : woolSlots) {
+            int slotIdx = info[0];
+            int count = info[1];
+            ItemStack stack = data.getStackInSlot(slotIdx);
+
+            if (count == 1) {
+                // 单个羊毛：原位替换
+                Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                data.setStackInSlot(slotIdx, organ.getDefaultInstance());
+            } else {
+                // 多个羊毛：尽可能消耗填满空槽位
+                int availableEmpty = emptySlots.size() - emptyIdx;
+                if (availableEmpty <= 0) continue;
+
+                if (availableEmpty >= count - 1) {
+                    // 可以完全消耗：前 (count-1) 个放空槽位，最后1个原位替换
+                    for (int j = 0; j < count - 1; j++) {
+                        stack.consume(1, entity);
+                        Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                        data.setStackInSlot(emptySlots.get(emptyIdx++), organ.getDefaultInstance());
+                    }
+                    // 最后1个：原位替换
+                    stack.consume(1, entity);
+                    Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                    data.setStackInSlot(slotIdx, organ.getDefaultInstance());
+                } else {
+                    // 只能消耗 availableEmpty 个
+                    for (int j = 0; j < availableEmpty; j++) {
+                        stack.consume(1, entity);
+                        Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                        data.setStackInSlot(emptySlots.get(emptyIdx++), organ.getDefaultInstance());
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * 布织泰迪熊技能：缝补
      * <p>
-     * 消耗收纳袋中的羊毛或线回复生命值。
-     * 1根线 = 1点生命，1个羊毛 = 4点生命。
-     * 每有一个布织器官在胸腔中，额外 +1 治疗量。
+     * 消耗收纳袋中的羊毛回复生命值。
+     * 每个羊毛治疗 4 + clothCount 点生命（clothCount = 胸腔中布织器官数量）。
      * 自动计算最低消耗以尽可能恢复至满血。
      * 5秒冷却（100 tick）。
      * </p>
@@ -443,61 +533,32 @@ public class WAICOrganSkillUtil {
         int clothCount = context.data().getOrganCount(WAICItemTagManager.CLOTH_ORGAN);
 
         BundleContents contents = context.stack().getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-        int totalWool = 0, totalString = 0;
+        int totalWool = 0;
         for (int i = 0; i < contents.size(); i++) {
             ItemStack stack = contents.getItemUnsafe(i);
             if (stack.is(ItemTags.WOOL)) {
                 totalWool += stack.getCount();
-            } else if (stack.is(Items.STRING)) {
-                totalString += stack.getCount();
             }
         }
 
-        if (totalWool + totalString <= 0) return false;   // 无材料，直接失败
-        // 计算材料可提供的最大基础治疗量
-        int maxMaterialHeal = totalWool * 4 + totalString;
+        if (totalWool <= 0) return false;
 
-        // 最终总治疗 = 材料治疗 + clothCount（不超过missingHP）
-        // 目标材料治疗 = missingHP - clothCount，但至少为 1（因为必须消耗材料）
-        int targetMaterialHeal = Math.max(1, missingHP - clothCount);
+        // 每个羊毛治疗 4 + clothCount 点
+        int healPerWool = 4 + clothCount;
 
-        // 实际需要的材料治疗量（不超过材料上限）
-        int materialHeal = Math.min(targetMaterialHeal, maxMaterialHeal);
+        // 计算恢复满血所需的羊毛数量（向上取整）
+        int woolNeeded = (missingHP + healPerWool - 1) / healPerWool;
+        int woolToUse = Math.min(woolNeeded, totalWool);
 
-        // 用最少材料提供至少 materialHeal 的治疗：羊毛优先（4HP/个），线补余数（1HP/个）
-        int woolToUse = Math.min(materialHeal / 4, totalWool);
-        int remainder = materialHeal - woolToUse * 4;
-        int stringToUse;
+        int actualHeal = woolToUse * healPerWool;
 
-        if (remainder <= totalString) {
-            // 线足够覆盖余数
-            stringToUse = remainder;
-        } else if (woolToUse < totalWool) {
-            // 线不够，多用一个羊毛覆盖余数
-            woolToUse++;
-            stringToUse = 0;
-        } else {
-            // 羊毛已用完，用所有可用的线
-            stringToUse = totalString;
-        }
-
-        int actualMaterialHeal = woolToUse * 4 + stringToUse;
-        if (actualMaterialHeal <= 0) return false;
-
-        // 最终治疗量 = 实际材料治疗 + 器官加成
-        int actualHeal = actualMaterialHeal + clothCount;
-
-        // 扣除材料
-        for (int i = 0; i < contents.size() && (woolToUse > 0 || stringToUse > 0); i++) {
+        // 扣除羊毛
+        for (int i = 0; i < contents.size() && woolToUse > 0; i++) {
             ItemStack stack = contents.getItemUnsafe(i);
-            if (stack.is(ItemTags.WOOL) && woolToUse > 0) {
+            if (stack.is(ItemTags.WOOL)) {
                 int consume = Math.min(woolToUse, stack.getCount());
                 stack.consume(consume, entity);
                 woolToUse -= consume;
-            } else if (stack.is(Items.STRING) && stringToUse > 0) {
-                int consume = Math.min(stringToUse, stack.getCount());
-                stack.consume(consume, entity);
-                stringToUse -= consume;
             }
         }
 

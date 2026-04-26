@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-26T00:57:29.4489152	Item Models: who_am_i_core
+// 1.21.1	2026-04-27T06:21:17.7026088	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -11,6 +11,8 @@ d79fdb4d1cf34d84a5a4f70c97b9e909ba26c5cd assets/who_am_i_core/models/item/aged_r
 f2eebe6bf21c46701d4a756ac14ddecaaec03113 assets/who_am_i_core/models/item/aged_spine.json
 46e42a840b7fbd462801c0c6b963f7c691e784f2 assets/who_am_i_core/models/item/aged_spleen.json
 6f8c219471ef65fe9203c9ebdc71cda91978cbd1 assets/who_am_i_core/models/item/aged_stomach.json
+8dd1241d5c0558f1c96a0822b785f2e4cc0fa57b assets/who_am_i_core/models/item/aptrgangr_rib.json
+0a1d336ca4b34ea3df32987892346c046dfcfa07 assets/who_am_i_core/models/item/aptrgangr_spine.json
 0a80f1f856c7159ad8a33c680c91aa8b26e23e5f assets/who_am_i_core/models/item/bitter_flesh.json
 84f289d50ab7df9268ec15800b8b2a8933ce4162 assets/who_am_i_core/models/item/bluff_core.json
 e4b84038d8ee2b42d501e7515b335bd8584747f5 assets/who_am_i_core/models/item/bluff_tablet.json
@@ -33,6 +35,8 @@ f5a8b7e4caeb3689dc532ddd6c369cdcdaad89a7 assets/who_am_i_core/models/item/cursed
 3c5aa64984139fe424a6e4574340fd1bbb8ff0a1 assets/who_am_i_core/models/item/cursed_gold_intestine.json
 d127ca2c1f175d5cf0f9c8dd1651e825341402ee assets/who_am_i_core/models/item/cursed_gold_liver.json
 5fd1e3b988cf86b321844a900931d8922c62192d assets/who_am_i_core/models/item/cursed_gold_lung.json
+51a236a35d47afe156a37514c8bd2af28628463a assets/who_am_i_core/models/item/dead_king_rib.json
+188e04cf5a13441f76aa11e620ef98b1de1b6301 assets/who_am_i_core/models/item/dead_king_spine.json
 7f32dfe5b878d936beedd20b51171329922df4e5 assets/who_am_i_core/models/item/divine_core.json
 f0145a09c3de3ab9db0b0c8d01a5e578dc8f1f7c assets/who_am_i_core/models/item/dragon_blood_preparation_group.json
 94ec6c8fd4ca98272a900bf8cf8522ca1edde2a1 assets/who_am_i_core/models/item/dread_phylactery.json
@@ -164,11 +168,15 @@ a5c51af0d86b8c839b1ad69ee43364fb6a3e4963 assets/who_am_i_core/models/item/lightn
 0344005c8b2f50236f94a323723aef7752e8922e assets/who_am_i_core/models/item/lightning_dragon_stomach.json
 e36fa01498ce40de9a353a520965948a2af9245f assets/who_am_i_core/models/item/limbo.json
 3f34b0a6619b31cdb242cca6359b5a8c026c4c87 assets/who_am_i_core/models/item/lust.json
+acc0f585ebde9d4ff2620d1ad1e260f76e14908c assets/who_am_i_core/models/item/maledictus_rib.json
+d29fef007ff889e8cb1791886c19323e0e1a0742 assets/who_am_i_core/models/item/maledictus_spine.json
 1d06a1a04ff212031deae4019b311802afcb32ed assets/who_am_i_core/models/item/malkuth.json
 f934611deab4f39102969f4309b528441ba54fe2 assets/who_am_i_core/models/item/mimic_heart.json
 a6df1f6fdefecdc5156d5be872a2abc8d77f99b6 assets/who_am_i_core/models/item/mimic_liver.json
 57134483a8b924adf83a9c7a19b4beba50a0a051 assets/who_am_i_core/models/item/mimic_lung.json
 2877182790af45bc289896db3798388792309a04 assets/who_am_i_core/models/item/nature_core.json
+d9e3b65ba09ffec7e44b0c43589b075178ea1c83 assets/who_am_i_core/models/item/necromancer_rib.json
+87f636a68d1329abc6ee698c24b0a06ffd7b2274 assets/who_am_i_core/models/item/necromancer_spine.json
 203f36bf7f5de91a2a41b3c8a21a86bd8fcf7655 assets/who_am_i_core/models/item/nib.json
 b6ecb4eb58c804c2462cca0d27faeba7e85abdf4 assets/who_am_i_core/models/item/palette.json
 b97b3c412f48ba6314b1f03ee39c2cacea1ad686 assets/who_am_i_core/models/item/pigment_appendix.json

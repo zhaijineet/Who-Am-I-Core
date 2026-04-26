@@ -159,6 +159,8 @@ dependencies {
     implementation "curse.maven:fdlib-1271749:7653105"
     // player animator
     implementation "curse.maven:playeranimator-658587:7389814"
+    // knight lib
+    implementation "curse.maven:knight-lib-1105855:6942154"
 
     // Chest Cavity Beyond
     implementation "curse.maven:chest-cavity-beyond-1427715:7951210"
@@ -176,6 +178,8 @@ dependencies {
     implementation "curse.maven:anvilcraft-986251:7754185"
     // 车万女仆
     implementation "curse.maven:touhou-little-maid-355044:7510722"
+    // 同伴！
+    implementation "curse.maven:companions-mod-1300341:7558671"
     // 生活调味料：胡萝卜版
     implementation "curse.maven:spice-of-life-carrot-edition-277616:7374098"
 

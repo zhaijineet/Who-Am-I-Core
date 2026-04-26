@@ -205,6 +205,14 @@
     "who_am_i_core:sword_bone",
     "who_am_i_core:straight_intestine",
     "who_am_i_core:squash",
-    "who_am_i_core:experience_heart"
+    "who_am_i_core:experience_heart",
+    "who_am_i_core:aptrgangr_spine",
+    "who_am_i_core:aptrgangr_rib",
+    "who_am_i_core:maledictus_spine",
+    "who_am_i_core:maledictus_rib",
+    "who_am_i_core:necromancer_spine",
+    "who_am_i_core:necromancer_rib",
+    "who_am_i_core:dead_king_spine",
+    "who_am_i_core:dead_king_rib"
   ]
 }

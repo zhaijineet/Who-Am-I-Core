@@ -7,8 +7,6 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.Tags;
 
 public class ClothTeddyBearItem extends BundleItem {
     public ClothTeddyBearItem(Properties properties) {
@@ -18,7 +16,7 @@ public class ClothTeddyBearItem extends BundleItem {
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
         ItemStack target = slot.getItem();
-        if (target.isEmpty() || target.is(ItemTags.WOOL) || target.is(Items.STRING)) {
+        if (target.isEmpty() || target.is(ItemTags.WOOL)) {
             return super.overrideStackedOnOther(stack, slot, action, player);
         }
         return false;
@@ -33,7 +31,7 @@ public class ClothTeddyBearItem extends BundleItem {
         Player player,
         SlotAccess access
     ) {
-        if (other.isEmpty() || other.is(ItemTags.WOOL) || other.is(Items.STRING)) {
+        if (other.isEmpty() || other.is(ItemTags.WOOL)) {
             return super.overrideOtherStackedOnMe(stack, other, slot, action, player, access);
         }
         return false;

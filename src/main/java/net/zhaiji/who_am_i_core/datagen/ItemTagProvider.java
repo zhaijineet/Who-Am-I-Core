@@ -10,8 +10,10 @@ import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
+import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import org.jetbrains.annotations.Nullable;
@@ -706,5 +708,37 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.SQUASH.get());
         tag(ItemTagManager.HEART).add(WAICOrgans.EXPERIENCE_HEART.get());
         tag(WAICItemTagManager.MAGIC).add(WAICOrgans.EXPERIENCE_HEART.get());
+
+        // ==================== Cataclysm 冥行武弁器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.APTRGANGR_SPINE.get(),
+            CataclysmOrgans.APTRGANGR_RIB.get()
+        );
+        tag(ItemTagManager.SPINE).add(CataclysmOrgans.APTRGANGR_SPINE.get());
+        tag(ItemTagManager.RIB).add(CataclysmOrgans.APTRGANGR_RIB.get());
+
+        // ==================== Cataclysm 咒翼灵骸器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.MALEDICTUS_SPINE.get(),
+            CataclysmOrgans.MALEDICTUS_RIB.get()
+        );
+        tag(ItemTagManager.SPINE).add(CataclysmOrgans.MALEDICTUS_SPINE.get());
+        tag(ItemTagManager.RIB).add(CataclysmOrgans.MALEDICTUS_RIB.get());
+
+        // ==================== IronSpell 死灵法师器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            IronSpellOrgans.NECROMANCER_SPINE.get(),
+            IronSpellOrgans.NECROMANCER_RIB.get()
+        );
+        tag(ItemTagManager.SPINE).add(IronSpellOrgans.NECROMANCER_SPINE.get());
+        tag(ItemTagManager.RIB).add(IronSpellOrgans.NECROMANCER_RIB.get());
+
+        // ==================== IronSpell 死者之王器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            IronSpellOrgans.DEAD_KING_SPINE.get(),
+            IronSpellOrgans.DEAD_KING_RIB.get()
+        );
+        tag(ItemTagManager.SPINE).add(IronSpellOrgans.DEAD_KING_SPINE.get());
+        tag(ItemTagManager.RIB).add(IronSpellOrgans.DEAD_KING_RIB.get());
     }
 }

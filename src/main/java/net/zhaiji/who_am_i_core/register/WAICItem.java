@@ -10,6 +10,7 @@ import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
+import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.function.Supplier;
@@ -66,5 +67,6 @@ public class WAICItem {
         FDBossesOrgans.register();
         AnvilCraftOrgans.register();
         CataclysmOrgans.register();
+        IronSpellOrgans.register();
     }
 }

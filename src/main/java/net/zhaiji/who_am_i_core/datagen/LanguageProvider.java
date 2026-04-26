@@ -12,6 +12,7 @@ import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
@@ -152,6 +153,22 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "Leviathan Spine");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "Leviathan Fishbone");
 
+        // Cataclysm 冥行武弁器官翻译
+        addItem(CataclysmOrgans.APTRGANGR_SPINE, "Aptrgangr Spine");
+        addItem(CataclysmOrgans.APTRGANGR_RIB, "Aptrgangr Rib");
+
+        // Cataclysm 咒翼灵骸器官翻译
+        addItem(CataclysmOrgans.MALEDICTUS_SPINE, "Maledictus Spine");
+        addItem(CataclysmOrgans.MALEDICTUS_RIB, "Maledictus Rib");
+
+        // IronSpell 死灵法师器官翻译
+        addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
+        addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
+
+        // IronSpell 死者之王器官翻译
+        addItem(IronSpellOrgans.DEAD_KING_SPINE, "Dead King Spine");
+        addItem(IronSpellOrgans.DEAD_KING_RIB, "Dead King Rib");
+
         addItem(WAICOrgans.DIVINE_CORE, "Divine Core");
         addItem(WAICOrgans.FROST_CORE, "Frost Core");
         addItem(WAICOrgans.FLAME_CORE, "Flame Core");
@@ -244,7 +261,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 布织泰迪熊器官翻译
         addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "Cloth Teddy Bear");
-        addOrganSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "Mending: consume string or wool to restore health");
+        addOrganDescription(WAICOrgans.CLOTH_TEDDY_BEAR, "When chest cavity closes, converts wool items in the chest cavity into random cloth organs");
+        addOrganSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "Mending: consume wool to restore health");
         addItem(WAICOrgans.CLOTH_HEART, "Cloth Heart");
         addItem(WAICOrgans.CLOTH_LUNG, "Cloth Lung");
         addItem(WAICOrgans.CLOTH_LIVER, "Cloth Liver");
@@ -571,6 +589,22 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "利维坦脊柱");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "利维坦鱼骨");
 
+        // 冥行武弁器官翻译
+        addItem(CataclysmOrgans.APTRGANGR_SPINE, "冥行武弁脊柱");
+        addItem(CataclysmOrgans.APTRGANGR_RIB, "冥行武弁肋骨");
+
+        // 咒翼灵骸器官翻译
+        addItem(CataclysmOrgans.MALEDICTUS_SPINE, "咒翼灵骸脊柱");
+        addItem(CataclysmOrgans.MALEDICTUS_RIB, "咒翼灵骸肋骨");
+
+        // IronSpell 死灵法师器官翻译
+        addItem(IronSpellOrgans.NECROMANCER_SPINE, "死灵法师脊柱");
+        addItem(IronSpellOrgans.NECROMANCER_RIB, "死灵法师肋骨");
+
+        // IronSpell 死者之王器官翻译
+        addItem(IronSpellOrgans.DEAD_KING_SPINE, "死者之王脊柱");
+        addItem(IronSpellOrgans.DEAD_KING_RIB, "死者之王肋骨");
+
         addItem(WAICOrgans.DIVINE_CORE, "神圣核心");
         addItem(WAICOrgans.FROST_CORE, "冰霜核心");
         addItem(WAICOrgans.FLAME_CORE, "炽焰核心");
@@ -658,7 +692,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 布织泰迪熊器官翻译
         addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "布织泰迪熊");
-        addOrganSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "缝补：消耗羊毛或线来回复生命值");
+        addOrganDescription(WAICOrgans.CLOTH_TEDDY_BEAR, "胸腔关闭时，将胸腔内的羊毛转换为随机布织器官");
+        addOrganSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "缝补：消耗羊毛来回复生命值");
         addItem(WAICOrgans.CLOTH_HEART, "布织心脏");
         addItem(WAICOrgans.CLOTH_LUNG, "布织肺脏");
         addItem(WAICOrgans.CLOTH_LIVER, "布织肝脏");

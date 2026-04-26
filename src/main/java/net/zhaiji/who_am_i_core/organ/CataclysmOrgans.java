@@ -20,8 +20,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .addValueAttribute(InitAttribute.WATER_BREATH, 2)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -77,6 +75,44 @@ public class CataclysmOrgans {
         "leviathan_fishbone",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2.25)
+            .build()
+    );
+
+    // ==================== 冥行武弁器官 ====================
+
+    // 冥行武弁脊柱
+    public static final Supplier<Item> APTRGANGR_SPINE = WAICItem.ITEM.register(
+        "aptrgangr_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 1.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.75)
+            .build()
+    );
+
+    // 冥行武弁肋骨
+    public static final Supplier<Item> APTRGANGR_RIB = WAICItem.ITEM.register(
+        "aptrgangr_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .build()
+    );
+
+    // ==================== 咒翼灵骸器官 ====================
+
+    // 咒翼灵骸脊柱
+    public static final Supplier<Item> MALEDICTUS_SPINE = WAICItem.ITEM.register(
+        "maledictus_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .build()
+    );
+
+    // 咒翼灵骸肋骨
+    public static final Supplier<Item> MALEDICTUS_RIB = WAICItem.ITEM.register(
+        "maledictus_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .build()
     );
 

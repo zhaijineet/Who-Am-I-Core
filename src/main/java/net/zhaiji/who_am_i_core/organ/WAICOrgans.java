@@ -14,10 +14,10 @@ import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
+import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.item.ClothTeddyBearItem;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
-import net.zhaiji.who_am_i_core.item.ClothTeddyBearItem;
-import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
@@ -712,9 +712,11 @@ public class WAICOrgans {
         "cloth_teddy_bear",
         () -> Organ.builder(ClothTeddyBearItem::new)
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(WAICOrganSkillUtil::clothTeddyBearSkill)
             .cooldown(100)
+            .skill(WAICOrganSkillUtil::clothTeddyBearSkill)
+            .chestCavityClose(WAICOrganSkillUtil::clothTeddyBearChestCavityClose)
             .build()
     );
 
