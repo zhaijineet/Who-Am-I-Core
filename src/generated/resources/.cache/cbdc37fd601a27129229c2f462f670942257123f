@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-27T06:21:17.7026088	Item Models: who_am_i_core
+// 1.21.1	2026-04-28T10:09:17.5372609	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -31,6 +31,7 @@ eb541e9e5da8b104cc8dec8650758a833a94544f assets/who_am_i_core/models/item/cloth_
 1cad4d83d8480906666fc75e9c60461ed5d2207c assets/who_am_i_core/models/item/cloth_stomach.json
 41ed23e30e8ee9aa7d97c70fbaaba182fee2fcf5 assets/who_am_i_core/models/item/cloth_teddy_bear.json
 9261b6b063bc55b69ec024f9601b1dcba9db037d assets/who_am_i_core/models/item/control_rod.json
+c8e9e759b7a98cf2b9527cf65c1b91366b6fd7a0 assets/who_am_i_core/models/item/corrupted_soul_lantern.json
 f5a8b7e4caeb3689dc532ddd6c369cdcdaad89a7 assets/who_am_i_core/models/item/cursed_gold_heart.json
 3c5aa64984139fe424a6e4574340fd1bbb8ff0a1 assets/who_am_i_core/models/item/cursed_gold_intestine.json
 d127ca2c1f175d5cf0f9c8dd1651e825341402ee assets/who_am_i_core/models/item/cursed_gold_liver.json

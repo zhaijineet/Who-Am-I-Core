@@ -735,9 +735,11 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
         // ==================== IronSpell 死者之王器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
+            IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get(),
             IronSpellOrgans.DEAD_KING_SPINE.get(),
             IronSpellOrgans.DEAD_KING_RIB.get()
         );
+        tag(ItemTagManager.SPECIAL).add(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get());
         tag(ItemTagManager.SPINE).add(IronSpellOrgans.DEAD_KING_SPINE.get());
         tag(ItemTagManager.RIB).add(IronSpellOrgans.DEAD_KING_RIB.get());
     }

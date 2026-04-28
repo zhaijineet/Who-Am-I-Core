@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.event;
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.iafenvoy.iceandfire.registry.IafEntities;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.DamageTypeTags;
@@ -32,12 +33,16 @@ import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
+import net.zhaiji.who_am_i_core.attachment.HumoursData;
+import net.zhaiji.who_am_i_core.register.WAICAttachment;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
+import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
@@ -196,20 +201,35 @@ public class CommonEventHandler {
         block += IceAndFireOrganUtil.hydraRibSkill(entity, attacker);
         // 九头蛇肌肉效果（唯一）
         if (attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleSkill(attacker, entity);
+        // 尸王脊柱效果（唯一）
+        block += IronSpellOrganUtil.deadKingSpineSkill(entity, damage);
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
     }
 
     /**
-     * 调色盘器官：施法时消耗对应颜色染料，增加法术等级
+     * 调色盘：施法时消耗对应颜色染料，增加法术等级
+     * 腐败魂灯：猩红法术消耗黑胆汁增级
      */
     public static void handlerSpellOnCastEvent(SpellOnCastEvent event) {
         LivingEntity entity = event.getEntity();
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        if (!data.hasOrgan(WAICOrgans.PALETTE.get())) return;
-        if (WAICOrganSkillUtil.consumeDyeForSchool(entity, event.getSchoolType())) {
-            // 成功消耗染料，增加1级法术等级
-            event.setSpellLevel(event.getSpellLevel() + 1);
+
+        // 调色盘：消耗染料增级
+        if (data.hasOrgan(WAICOrgans.PALETTE.get())) {
+            if (WAICOrganSkillUtil.consumeDyeForSchool(entity, event.getSchoolType())) {
+                event.setSpellLevel(event.getSpellLevel() + 1);
+            }
+        }
+
+        // 腐败魂灯：猩红法术消耗黑胆汁增级
+        if (data.hasOrgan(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get())) {
+            if (event.getSchoolType() == SchoolRegistry.BLOOD.get()) {
+                HumoursData humours = entity.getData(WAICAttachment.HUMOURS);
+                if (humours.extractBlackBile(10, false) >= 10) {
+                    event.setSpellLevel(event.getSpellLevel() + 2);
+                }
+            }
         }
     }
 

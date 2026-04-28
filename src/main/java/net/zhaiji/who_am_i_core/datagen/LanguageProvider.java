@@ -166,8 +166,19 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
 
         // IronSpell 死者之王器官翻译
+        addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Corrupted Soul Lantern");
+        addOrganDescription(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Absorbs undead life force into black bile");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 0, "Absorb all undead within 5 blocks, converting HP to black bile");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 1, "Overflow damages you but cannot kill (min 1 HP)");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 2, "Blood spells consume 10 black bile to gain +2 spell level");
+
         addItem(IronSpellOrgans.DEAD_KING_SPINE, "Dead King Spine");
+        addOrganDescription(IronSpellOrgans.DEAD_KING_SPINE, "Absorbs damage with black bile");
+        addOrganSkill(IronSpellOrgans.DEAD_KING_SPINE, "Consumes black bile equal to damage absorbed (up to 50%)");
+
         addItem(IronSpellOrgans.DEAD_KING_RIB, "Dead King Rib");
+        addOrganDescription(IronSpellOrgans.DEAD_KING_RIB, "Increases black bile capacity");
+        addOrganSkill(IronSpellOrgans.DEAD_KING_RIB, "+10 max black bile");
 
         addItem(WAICOrgans.DIVINE_CORE, "Divine Core");
         addItem(WAICOrgans.FROST_CORE, "Frost Core");
@@ -602,8 +613,19 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IronSpellOrgans.NECROMANCER_RIB, "死灵法师肋骨");
 
         // IronSpell 死者之王器官翻译
-        addItem(IronSpellOrgans.DEAD_KING_SPINE, "死者之王脊柱");
-        addItem(IronSpellOrgans.DEAD_KING_RIB, "死者之王肋骨");
+        addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "腐败魂灯");
+        addOrganDescription(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "将亡灵生命力吸收为黑胆汁");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 0, "吸收半径5格内所有亡灵生物，将其血量1:1转化为黑胆汁");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 1, "溢出部分将1:1扣除生命值，但不会杀死（最低剩1HP）");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 2, "使用猩红法术时，消耗10点黑胆汁使等级+2");
+
+        addItem(IronSpellOrgans.DEAD_KING_SPINE, "尸王脊柱");
+        addOrganDescription(IronSpellOrgans.DEAD_KING_SPINE, "以黑胆汁吸收伤害");
+        addOrganSkill(IronSpellOrgans.DEAD_KING_SPINE, "受伤时，消耗等额黑胆汁吸收最高50%的伤害");
+
+        addItem(IronSpellOrgans.DEAD_KING_RIB, "尸王肋骨");
+        addOrganDescription(IronSpellOrgans.DEAD_KING_RIB, "增加黑胆汁容量");
+        addOrganSkill(IronSpellOrgans.DEAD_KING_RIB, "+10 黑胆汁上限");
 
         addItem(WAICOrgans.DIVINE_CORE, "神圣核心");
         addItem(WAICOrgans.FROST_CORE, "冰霜核心");
@@ -614,7 +636,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.BITTER_FLESH, "苦寒血肉");
         addItem(IceAndFireOrgans.ICE_SHARD, "冰魂残片");
         addItem(IceAndFireOrgans.FROSTBURN_SOUL, "冻结魂火");
-        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "悚恐怖匣");
+        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "悚怖命匣");
         addItem(IceAndFireOrgans.DREAD_RIB, "悚怖肋骨");
         addItem(IceAndFireOrgans.DREAD_SPINE, "悚怖脊柱");
 

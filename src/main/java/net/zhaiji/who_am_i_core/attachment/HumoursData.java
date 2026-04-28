@@ -128,10 +128,6 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toExtract;
     }
 
-    public float consumeBlood(float amount, boolean simulate) {
-        return extractBlood(amount, simulate);
-    }
-
     public float fillBlood(boolean simulate) {
         if (maxBlood <= 0) return 0;
         float toFill = Math.max(0, maxBlood - blood);
@@ -207,10 +203,6 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
             yellowBile -= toExtract;
         }
         return toExtract;
-    }
-
-    public float consumeYellowBile(float amount, boolean simulate) {
-        return extractYellowBile(amount, simulate);
     }
 
     public float fillYellowBile(boolean simulate) {
@@ -290,10 +282,6 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toExtract;
     }
 
-    public float consumeBlackBile(float amount, boolean simulate) {
-        return extractBlackBile(amount, simulate);
-    }
-
     public float fillBlackBile(boolean simulate) {
         if (maxBlackBile <= 0) return 0;
         float toFill = Math.max(0, maxBlackBile - blackBile);
@@ -369,10 +357,6 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
             phlegm -= toExtract;
         }
         return toExtract;
-    }
-
-    public float consumePhlegm(float amount, boolean simulate) {
-        return extractPhlegm(amount, simulate);
     }
 
     public float fillPhlegm(boolean simulate) {

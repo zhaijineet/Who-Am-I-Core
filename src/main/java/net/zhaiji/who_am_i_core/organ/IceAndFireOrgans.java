@@ -424,7 +424,7 @@ public class IceAndFireOrgans {
             .build()
     );
 
-    // 悚恐怖匣
+    // 悚怖命匣
     public static final Supplier<Item> DREAD_PHYLACTERY = WAICItem.ITEM.register(
         "dread_phylactery",
         () -> Organ.builder()
