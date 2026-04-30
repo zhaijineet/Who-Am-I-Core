@@ -2,7 +2,6 @@ package net.zhaiji.who_am_i_core.util;
 
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.AABB;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
@@ -24,7 +23,7 @@ public class IronSpellOrganUtil {
         LivingEntity entity = context.entity();
         if (entity.level().isClientSide()) return false;
 
-        // 查找半径5格内的亡灵生物
+        // 查找半径5格内的亡灵生物（服务端专属）
         List<LivingEntity> undead = entity.level().getEntitiesOfClass(
             LivingEntity.class,
             entity.getBoundingBox().inflate(5),
@@ -32,7 +31,6 @@ public class IronSpellOrganUtil {
         );
         if (undead.isEmpty()) return false;
 
-        HumoursData humours = entity.getData(WAICAttachment.HUMOURS);
         float totalHealthAbsorbed = 0;
 
         for (LivingEntity target : undead) {
@@ -40,8 +38,8 @@ public class IronSpellOrganUtil {
             target.kill();
         }
 
-        // 先尽可能填入黑胆汁
-        float inserted = humours.insertBlackBile(totalHealthAbsorbed, false);
+        // 先尽可能填入黑胆汁（静态方法自动同步）
+        float inserted = HumoursData.insertBlackBile(entity, totalHealthAbsorbed, false);
         float overflow = totalHealthAbsorbed - inserted;
 
         // 溢出部分扣除生命值（最低1HP）
@@ -55,18 +53,17 @@ public class IronSpellOrganUtil {
     }
 
     /**
-     * 尸王脊柱技能：消耗等额黑胆汁吸收最高50%伤害
+     * 尸王脊柱：消耗等额黑胆汁吸收最高50%伤害
      * 返回实际吸收的伤害值，应加入 block
      */
-    public static float deadKingSpineSkill(LivingEntity entity, float damage) {
+    public static float deadKingSpineHurt(LivingEntity entity, float damage) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         if (!data.hasOrgan(IronSpellOrgans.DEAD_KING_SPINE.get())) return 0;
         float maxAbsorb = damage * 0.5F;
-        HumoursData humours = entity.getData(WAICAttachment.HUMOURS);
-        float available = humours.getBlackBile();
+        float available = HumoursData.get(entity).getBlackBile();
         float toAbsorb = Math.min(maxAbsorb, available);
         if (toAbsorb > 0) {
-            humours.extractBlackBile(toAbsorb, false);
+            HumoursData.extractBlackBile(entity, toAbsorb, false);
         }
         return toAbsorb;
     }
@@ -76,9 +73,8 @@ public class IronSpellOrganUtil {
      */
     public static void deadKingRibAdded(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        if (entity.level().isClientSide()) return;
-        HumoursData humours = entity.getData(WAICAttachment.HUMOURS);
-        humours.setMaxBlackBile(humours.getMaxBlackBile() + 10);
+        if (entity == null) return;
+        HumoursData.setMaxBlackBile(entity, HumoursData.get(entity).getMaxBlackBile() + 10);
     }
 
     /**
@@ -86,8 +82,7 @@ public class IronSpellOrganUtil {
      */
     public static void deadKingRibRemoved(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        if (entity.level().isClientSide()) return;
-        HumoursData humours = entity.getData(WAICAttachment.HUMOURS);
-        humours.setMaxBlackBile(humours.getMaxBlackBile() - 10);
+        if (entity == null) return;
+        HumoursData.setMaxBlackBile(entity, HumoursData.get(entity).getMaxBlackBile() - 10);
     }
 }

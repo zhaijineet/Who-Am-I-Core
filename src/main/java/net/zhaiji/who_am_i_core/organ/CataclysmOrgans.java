@@ -6,6 +6,7 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -113,6 +114,43 @@ public class CataclysmOrgans {
         "maledictus_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .build()
+    );
+
+    // ==================== 斯库拉器官 ====================
+
+    // 涛浪提灯
+    public static final Supplier<Item> TIDAL_LANTERN = WAICItem.ITEM.register(
+        "tidal_lantern",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.WATER_BREATH, 2)
+            .baseMultipliedAttribute(NeoForgeMod.SWIM_SPEED, 0.5)
+            .attack(CataclysmOrganUtil::tidalLanternAttack)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
+            .build()
+    );
+
+    // 风暴脊柱 - 减伤效果在全局事件处理
+    public static final Supplier<Item> STORM_SPINE = WAICItem.ITEM.register(
+        "storm_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
+            .build()
+    );
+
+    // 风暴肋骨
+    public static final Supplier<Item> STORM_RIB = WAICItem.ITEM.register(
+        "storm_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .added(CataclysmOrganUtil::stormRibAdded)
+            .removed(CataclysmOrganUtil::stormRibRemoved)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 

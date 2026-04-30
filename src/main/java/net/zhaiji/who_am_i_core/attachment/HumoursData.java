@@ -4,8 +4,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.zhaiji.who_am_i_core.register.WAICAttachment;
 
 /**
  * 四体液学说数据
@@ -69,18 +71,179 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
 //        phlegm = DEFAULT_BASE;
     }
 
+    // ===== 静态操作方法 =====
+
+    /**
+     * 便捷获取实体的四体液数据
+     */
+    public static HumoursData get(LivingEntity entity) {
+        return entity.getData(WAICAttachment.HUMOURS);
+    }
+
+    /**
+     * 插入血液
+     */
+    public static float insertBlood(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.insertBlood(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 提取血液
+     */
+    public static float extractBlood(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.extractBlood(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 设置血液当前值
+     */
+    public static void setBlood(LivingEntity entity, float value) {
+        HumoursData data = get(entity);
+        data.setBlood(value);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 设置血液最大值
+     */
+    public static void setMaxBlood(LivingEntity entity, float max) {
+        HumoursData data = get(entity);
+        data.setMaxBlood(max);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 插入黄胆汁
+     */
+    public static float insertYellowBile(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.insertYellowBile(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 提取黄胆汁
+     */
+    public static float extractYellowBile(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.extractYellowBile(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 设置黄胆汁当前值
+     */
+    public static void setYellowBile(LivingEntity entity, float value) {
+        HumoursData data = get(entity);
+        data.setYellowBile(value);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 设置黄胆汁最大值
+     */
+    public static void setMaxYellowBile(LivingEntity entity, float max) {
+        HumoursData data = get(entity);
+        data.setMaxYellowBile(max);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 插入黑胆汁
+     */
+    public static float insertBlackBile(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.insertBlackBile(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 提取黑胆汁
+     */
+    public static float extractBlackBile(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.extractBlackBile(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 设置黑胆汁当前值
+     */
+    public static void setBlackBile(LivingEntity entity, float value) {
+        HumoursData data = get(entity);
+        data.setBlackBile(value);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 设置黑胆汁最大值
+     */
+    public static void setMaxBlackBile(LivingEntity entity, float max) {
+        HumoursData data = get(entity);
+        data.setMaxBlackBile(max);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 插入粘液
+     */
+    public static float insertPhlegm(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.insertPhlegm(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 提取粘液
+     */
+    public static float extractPhlegm(LivingEntity entity, float amount, boolean simulate) {
+        HumoursData data = get(entity);
+        float result = data.extractPhlegm(amount, simulate);
+        if (!simulate && result > 0) entity.setData(WAICAttachment.HUMOURS, data);
+        return result;
+    }
+
+    /**
+     * 设置粘液当前值
+     */
+    public static void setPhlegm(LivingEntity entity, float value) {
+        HumoursData data = get(entity);
+        data.setPhlegm(value);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 设置粘液最大值
+     */
+    public static void setMaxPhlegm(LivingEntity entity, float max) {
+        HumoursData data = get(entity);
+        data.setMaxPhlegm(max);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
     // ===== 血液 =====
 
     public float getMaxBlood() {
         return maxBlood;
     }
 
-    public void setMaxBlood(float max) {
+    private void setMaxBlood(float max) {
         this.maxBlood = max;
         this.blood = Math.min(blood, max);
     }
 
-    public void resetMaxBlood() {
+    private void resetMaxBlood() {
         this.maxBlood = DEFAULT_MAX;
     }
 
@@ -88,7 +251,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return blood;
     }
 
-    public void setBlood(float current) {
+    private void setBlood(float current) {
         this.blood = Math.min(current, maxBlood);
     }
 
@@ -109,7 +272,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return maxBlood <= 0 || blood >= maxBlood;
     }
 
-    public float insertBlood(float amount, boolean simulate) {
+    private float insertBlood(float amount, boolean simulate) {
         if (maxBlood <= 0 || amount <= 0) return 0;
         float space = Math.max(0, maxBlood - blood);
         float toInsert = Math.max(0, Math.min(amount, space));
@@ -119,7 +282,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toInsert;
     }
 
-    public float extractBlood(float amount, boolean simulate) {
+    private float extractBlood(float amount, boolean simulate) {
         if (amount <= 0 || blood <= 0) return 0;
         float toExtract = Math.max(0, Math.min(amount, blood));
         if (!simulate) {
@@ -128,7 +291,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toExtract;
     }
 
-    public float fillBlood(boolean simulate) {
+    private float fillBlood(boolean simulate) {
         if (maxBlood <= 0) return 0;
         float toFill = Math.max(0, maxBlood - blood);
         if (!simulate) {
@@ -137,7 +300,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toFill;
     }
 
-    public float drainBlood(boolean simulate) {
+    private float drainBlood(boolean simulate) {
         if (blood <= 0) return 0;
         float toDrain = blood;
         if (!simulate) {
@@ -152,12 +315,12 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return maxYellowBile;
     }
 
-    public void setMaxYellowBile(float max) {
+    private void setMaxYellowBile(float max) {
         this.maxYellowBile = max;
         this.yellowBile = Math.min(yellowBile, max);
     }
 
-    public void resetMaxYellowBile() {
+    private void resetMaxYellowBile() {
         this.maxYellowBile = DEFAULT_MAX;
     }
 
@@ -165,7 +328,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return yellowBile;
     }
 
-    public void setYellowBile(float current) {
+    private void setYellowBile(float current) {
         this.yellowBile = Math.min(current, maxYellowBile);
     }
 
@@ -186,7 +349,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return maxYellowBile <= 0 || yellowBile >= maxYellowBile;
     }
 
-    public float insertYellowBile(float amount, boolean simulate) {
+    private float insertYellowBile(float amount, boolean simulate) {
         if (maxYellowBile <= 0 || amount <= 0) return 0;
         float space = Math.max(0, maxYellowBile - yellowBile);
         float toInsert = Math.max(0, Math.min(amount, space));
@@ -196,7 +359,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toInsert;
     }
 
-    public float extractYellowBile(float amount, boolean simulate) {
+    private float extractYellowBile(float amount, boolean simulate) {
         if (amount <= 0 || yellowBile <= 0) return 0;
         float toExtract = Math.max(0, Math.min(amount, yellowBile));
         if (!simulate) {
@@ -205,7 +368,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toExtract;
     }
 
-    public float fillYellowBile(boolean simulate) {
+    private float fillYellowBile(boolean simulate) {
         if (maxYellowBile <= 0) return 0;
         float toFill = Math.max(0, maxYellowBile - yellowBile);
         if (!simulate) {
@@ -214,7 +377,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toFill;
     }
 
-    public float drainYellowBile(boolean simulate) {
+    private float drainYellowBile(boolean simulate) {
         if (yellowBile <= 0) return 0;
         float toDrain = yellowBile;
         if (!simulate) {
@@ -229,12 +392,12 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return maxBlackBile;
     }
 
-    public void setMaxBlackBile(float max) {
+    private void setMaxBlackBile(float max) {
         this.maxBlackBile = max;
         this.blackBile = Math.min(blackBile, max);
     }
 
-    public void resetMaxBlackBile() {
+    private void resetMaxBlackBile() {
         this.maxBlackBile = DEFAULT_MAX;
     }
 
@@ -242,7 +405,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return blackBile;
     }
 
-    public void setBlackBile(float current) {
+    private void setBlackBile(float current) {
         this.blackBile = Math.min(current, maxBlackBile);
     }
 
@@ -263,7 +426,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return maxBlackBile <= 0 || blackBile >= maxBlackBile;
     }
 
-    public float insertBlackBile(float amount, boolean simulate) {
+    private float insertBlackBile(float amount, boolean simulate) {
         if (maxBlackBile <= 0 || amount <= 0) return 0;
         float space = Math.max(0, maxBlackBile - blackBile);
         float toInsert = Math.max(0, Math.min(amount, space));
@@ -273,7 +436,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toInsert;
     }
 
-    public float extractBlackBile(float amount, boolean simulate) {
+    private float extractBlackBile(float amount, boolean simulate) {
         if (amount <= 0 || blackBile <= 0) return 0;
         float toExtract = Math.max(0, Math.min(amount, blackBile));
         if (!simulate) {
@@ -282,7 +445,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toExtract;
     }
 
-    public float fillBlackBile(boolean simulate) {
+    private float fillBlackBile(boolean simulate) {
         if (maxBlackBile <= 0) return 0;
         float toFill = Math.max(0, maxBlackBile - blackBile);
         if (!simulate) {
@@ -291,7 +454,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toFill;
     }
 
-    public float drainBlackBile(boolean simulate) {
+    private float drainBlackBile(boolean simulate) {
         if (blackBile <= 0) return 0;
         float toDrain = blackBile;
         if (!simulate) {
@@ -306,12 +469,12 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return maxPhlegm;
     }
 
-    public void setMaxPhlegm(float max) {
+    private void setMaxPhlegm(float max) {
         this.maxPhlegm = max;
         this.phlegm = Math.min(phlegm, max);
     }
 
-    public void resetMaxPhlegm() {
+    private void resetMaxPhlegm() {
         this.maxPhlegm = DEFAULT_MAX;
     }
 
@@ -319,7 +482,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return phlegm;
     }
 
-    public void setPhlegm(float current) {
+    private void setPhlegm(float current) {
         this.phlegm = Math.min(current, maxPhlegm);
     }
 
@@ -340,7 +503,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return maxPhlegm <= 0 || phlegm >= maxPhlegm;
     }
 
-    public float insertPhlegm(float amount, boolean simulate) {
+    private float insertPhlegm(float amount, boolean simulate) {
         if (maxPhlegm <= 0 || amount <= 0) return 0;
         float space = Math.max(0, maxPhlegm - phlegm);
         float toInsert = Math.max(0, Math.min(amount, space));
@@ -350,7 +513,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toInsert;
     }
 
-    public float extractPhlegm(float amount, boolean simulate) {
+    private float extractPhlegm(float amount, boolean simulate) {
         if (amount <= 0 || phlegm <= 0) return 0;
         float toExtract = Math.max(0, Math.min(amount, phlegm));
         if (!simulate) {
@@ -359,7 +522,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toExtract;
     }
 
-    public float fillPhlegm(boolean simulate) {
+    private float fillPhlegm(boolean simulate) {
         if (maxPhlegm <= 0) return 0;
         float toFill = Math.max(0, maxPhlegm - phlegm);
         if (!simulate) {
@@ -368,7 +531,7 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toFill;
     }
 
-    public float drainPhlegm(boolean simulate) {
+    private float drainPhlegm(boolean simulate) {
         if (phlegm <= 0) return 0;
         float toDrain = phlegm;
         if (!simulate) {

@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.config.WhoAmIClientConfig;
-import net.zhaiji.who_am_i_core.register.WAICAttachment;
 
 public class HumoursOverlay {
     public static final ResourceLocation HUMOURS_HUD = WhoAmICore.of("humours_hud");
@@ -32,7 +31,7 @@ public class HumoursOverlay {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null || minecraft.options.hideGui) return;
 
-        HumoursData data = minecraft.player.getData(WAICAttachment.HUMOURS);
+        HumoursData data = HumoursData.get(minecraft.player);
 
         // 如果设置为"永不显示"，直接跳过渲染
         if (WhoAmIClientConfig.hudVisibility == HudVisibility.NEVER) return;

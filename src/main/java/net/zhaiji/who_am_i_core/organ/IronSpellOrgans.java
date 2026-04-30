@@ -38,7 +38,7 @@ public class IronSpellOrgans {
             .skill(IronSpellOrganUtil::corruptedPhylacterySkill)
             .cooldown(60 * 20) // 60秒冷却
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 

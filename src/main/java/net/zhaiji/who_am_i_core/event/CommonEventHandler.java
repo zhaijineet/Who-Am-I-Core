@@ -40,8 +40,8 @@ import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
-import net.zhaiji.who_am_i_core.register.WAICAttachment;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
+import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
@@ -183,6 +183,7 @@ public class CommonEventHandler {
             }
         }
         // 最终倍率乘数
+        // TODO 实际上是有问题的，倍率应该在最低优先级施加
         double finalMultiplier = 1;
         if (source.is(WAICDamageTagManager.IS_MELEE)) {
             // 近战伤害加伤
@@ -198,11 +199,13 @@ public class CommonEventHandler {
             finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
         }
         // 九头蛇肋骨效果（唯一）
-        block += IceAndFireOrganUtil.hydraRibSkill(entity, attacker);
+        block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
         // 九头蛇肌肉效果（唯一）
-        if (attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleSkill(attacker, entity);
+        if (attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
         // 尸王脊柱效果（唯一）
-        block += IronSpellOrganUtil.deadKingSpineSkill(entity, damage);
+        block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
+        // 风暴脊柱效果（唯一）
+        block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
     }
@@ -225,8 +228,7 @@ public class CommonEventHandler {
         // 腐败魂灯：猩红法术消耗黑胆汁增级
         if (data.hasOrgan(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get())) {
             if (event.getSchoolType() == SchoolRegistry.BLOOD.get()) {
-                HumoursData humours = entity.getData(WAICAttachment.HUMOURS);
-                if (humours.extractBlackBile(10, false) >= 10) {
+                if (HumoursData.extractBlackBile(entity, 10, false) >= 10) {
                     event.setSpellLevel(event.getSpellLevel() + 2);
                 }
             }

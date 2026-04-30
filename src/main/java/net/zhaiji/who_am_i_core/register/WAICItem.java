@@ -4,6 +4,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.chestcavitybeyond.item.ChestOpenerItem;
 import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
@@ -17,6 +18,12 @@ import java.util.function.Supplier;
 
 public class WAICItem {
     public static final DeferredRegister<Item> ITEM = DeferredRegister.create(BuiltInRegistries.ITEM, WhoAmICore.MOD_ID);
+
+    // ==================== 娇小开胸器 ====================
+    public static final Supplier<Item> PETITE_CHEST_OPENER = ITEM.register(
+        "petite_chest_opener",
+        () -> new ChestOpenerItem(new Item.Properties().stacksTo(1), 1.0F)
+    );
 
     // ==================== 龙之血药剂 ====================
     // 火龙之血

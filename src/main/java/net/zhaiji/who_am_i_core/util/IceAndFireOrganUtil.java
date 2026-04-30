@@ -196,20 +196,18 @@ public class IceAndFireOrganUtil {
     }
 
     /**
-     * 九头蛇肋骨技能
-     * 从目标转移中毒效果到攻击者，抵消伤害
+     * 九头蛇肋骨：从目标转移中毒效果到攻击者，抵消伤害
      */
-    public static float hydraRibSkill(LivingEntity target, LivingEntity attacker) {
+    public static float hydraRibHurt(LivingEntity target, LivingEntity attacker) {
         ChestCavityData data = ChestCavityUtil.getData(target);
         if (!data.hasOrgan(IceAndFireOrgans.HYDRA_RIB.get())) return 0;
         return transferPoison(target, attacker, 100);
     }
 
     /**
-     * 九头蛇肌肉技能
-     * 从攻击者转移中毒效果到目标，造成额外伤害
+     * 九头蛇肌肉：从攻击者转移中毒效果到目标，造成额外伤害
      */
-    public static float hydraMuscleSkill(LivingEntity attacker, LivingEntity target) {
+    public static float hydraMuscleHurt(LivingEntity attacker, LivingEntity target) {
         ChestCavityData data = ChestCavityUtil.getData(attacker);
         if (!data.hasOrgan(IceAndFireOrgans.HYDRA_MUSCLE.get())) return 0;
         return transferPoison(attacker, target, 100);

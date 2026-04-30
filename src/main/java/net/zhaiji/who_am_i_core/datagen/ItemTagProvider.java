@@ -725,6 +725,16 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPINE).add(CataclysmOrgans.MALEDICTUS_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.MALEDICTUS_RIB.get());
 
+        // ==================== Cataclysm 斯库拉器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.TIDAL_LANTERN.get(),
+            CataclysmOrgans.STORM_SPINE.get(),
+            CataclysmOrgans.STORM_RIB.get()
+        );
+        tag(ItemTagManager.SPECIAL).add(CataclysmOrgans.TIDAL_LANTERN.get());
+        tag(ItemTagManager.SPINE).add(CataclysmOrgans.STORM_SPINE.get());
+        tag(ItemTagManager.RIB).add(CataclysmOrgans.STORM_RIB.get());
+
         // ==================== IronSpell 死灵法师器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             IronSpellOrgans.NECROMANCER_SPINE.get(),

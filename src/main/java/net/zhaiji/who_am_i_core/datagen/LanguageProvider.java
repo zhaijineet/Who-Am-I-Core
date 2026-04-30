@@ -36,6 +36,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     public void English() {
         add(WAICCreativeModeTab.WHO_AM_I_CORE_TAB_TRANSLATABLE, "Who Am I");
 
+        addItem(WAICItem.PETITE_CHEST_OPENER, "Petite Chest Opener");
+
         addItem(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, "Ferrous Wroughtnaut Heart Mirror");
         addOrganSkill(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, 0, "Removes FOV modification");
         addOrganSkill(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, 1, "Blocks entity attacks from the front");
@@ -140,7 +142,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Ice Malkuth Warrior Heart");
         addOrganSkill(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Immune to ice attacks when fighting Malkuth");
         addItem(FDBossesOrgans.MALKUTH, "Malkuth");
-        addOrganDescription(FDBossesOrgans.MALKUTH, "Global temperature is always 0; local temperature uses the full positive/negative temperature from all organs");
+        addOrganSkill(FDBossesOrgans.MALKUTH, "Global temperature is always 0; local temperature uses the full positive/negative temperature from all organs");
         addItem(FDBossesOrgans.CHESED, "Chesed");
         addItem(FDBossesOrgans.GEBURAH, "Geburah");
 
@@ -160,6 +162,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // Cataclysm 咒翼灵骸器官翻译
         addItem(CataclysmOrgans.MALEDICTUS_SPINE, "Maledictus Spine");
         addItem(CataclysmOrgans.MALEDICTUS_RIB, "Maledictus Rib");
+
+        // Cataclysm 斯库拉器官翻译
+        addItem(CataclysmOrgans.TIDAL_LANTERN, "Tidal Lantern");
+        addOrganDescription(CataclysmOrgans.TIDAL_LANTERN, "Consume all phlegm on attack");
+        addOrganSkill(CataclysmOrgans.TIDAL_LANTERN, 0, "Consumes all current phlegm and adds equal damage");
+        addOrganSkill(CataclysmOrgans.TIDAL_LANTERN, 1, "When consumed phlegm >= 30, summons water waves with damage equal to this attack");
+        addItem(CataclysmOrgans.STORM_SPINE, "Storm Spine");
+        addOrganDescription(CataclysmOrgans.STORM_SPINE, "Absorbs damage into phlegm");
+        addOrganSkill(CataclysmOrgans.STORM_SPINE, 0, "When hit, absorbs 20% of damage as phlegm (also reduces damage by 20%), capped at 10 per hit");
+        addOrganSkill(CataclysmOrgans.STORM_SPINE, 1, "Becomes inactive when phlegm is full");
+        addItem(CataclysmOrgans.STORM_RIB, "Storm Rib");
+        addOrganSkill(CataclysmOrgans.STORM_RIB, "+10 phlegm capacity");
 
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
@@ -490,6 +504,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     public void Chinese() {
         add(WAICCreativeModeTab.WHO_AM_I_CORE_TAB_TRANSLATABLE, "我非我");
 
+        addItem(WAICItem.PETITE_CHEST_OPENER, "娇小开胸器");
+
         addItem(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, "钢铁守护者护心镜");
         addOrganSkill(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, 0, "移除FOV修改");
         addOrganSkill(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, 1, "抵挡来自正面的实体的攻击");
@@ -607,6 +623,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // 咒翼灵骸器官翻译
         addItem(CataclysmOrgans.MALEDICTUS_SPINE, "咒翼灵骸脊柱");
         addItem(CataclysmOrgans.MALEDICTUS_RIB, "咒翼灵骸肋骨");
+
+        // 斯库拉器官翻译
+        addItem(CataclysmOrgans.TIDAL_LANTERN, "涛浪提灯");
+        addOrganDescription(CataclysmOrgans.TIDAL_LANTERN, "攻击时消耗粘液");
+        addOrganSkill(CataclysmOrgans.TIDAL_LANTERN, 0, "攻击时，消耗所有当前粘液并增加等额伤害");
+        addOrganSkill(CataclysmOrgans.TIDAL_LANTERN, 1, "消耗的粘液大于等于30时，额外召唤伤害等同于本次伤害的水浪");
+        addItem(CataclysmOrgans.STORM_SPINE, "风暴脊柱");
+        addOrganDescription(CataclysmOrgans.STORM_SPINE, "吸收伤害转化为粘液");
+        addOrganSkill(CataclysmOrgans.STORM_SPINE, 0, "受伤时，吸收伤害的20%转化为粘液（同时减伤20%），单次上限10点");
+        addOrganSkill(CataclysmOrgans.STORM_SPINE, 1, "粘液达到上限时失效");
+        addItem(CataclysmOrgans.STORM_RIB, "风暴肋骨");
+        addOrganSkill(CataclysmOrgans.STORM_RIB, "+10 粘液上限");
 
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "死灵法师脊柱");
