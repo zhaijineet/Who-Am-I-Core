@@ -31,14 +31,12 @@ public class IronSpellOrgans {
 
     // ==================== 死者之王器官 ====================
 
-    // 腐败魂灯
+    // 腐败魂灯 - 灵魂收割被动在 CommonEventHandler 的 LivingDeathEvent 中处理
     public static final Supplier<Item> CORRUPTED_SOUL_LANTERN = WAICItem.ITEM.register(
         "corrupted_soul_lantern",
         () -> Organ.builder()
-            .skill(IronSpellOrganUtil::corruptedPhylacterySkill)
-            .cooldown(60 * 20) // 60秒冷却
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 

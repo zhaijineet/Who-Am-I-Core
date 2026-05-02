@@ -11,6 +11,7 @@ import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
+import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
@@ -792,5 +793,38 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPECIAL).add(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get());
         tag(ItemTagManager.SPINE).add(IronSpellOrgans.DEAD_KING_SPINE.get());
         tag(ItemTagManager.RIB).add(IronSpellOrgans.DEAD_KING_RIB.get());
+
+        // ==================== Companions 神圣教宗器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CompanionsOrgans.PONTIFF_HEART.get(),
+            CompanionsOrgans.PONTIFF_LUNG.get(),
+            CompanionsOrgans.PONTIFF_STOMACH.get(),
+            CompanionsOrgans.PONTIFF_INTESTINE.get(),
+            CompanionsOrgans.PONTIFF_KIDNEY.get(),
+            CompanionsOrgans.PONTIFF_SPLEEN.get(),
+            CompanionsOrgans.PONTIFF_LIVER.get(),
+            CompanionsOrgans.PONTIFF_APPENDIX.get(),
+            CompanionsOrgans.PONTIFF_MUSCLE.get()
+        );
+        tag(ItemTagManager.HEART).add(CompanionsOrgans.PONTIFF_HEART.get());
+        tag(ItemTagManager.LUNG).add(CompanionsOrgans.PONTIFF_LUNG.get());
+        tag(ItemTagManager.STOMACH).add(CompanionsOrgans.PONTIFF_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(CompanionsOrgans.PONTIFF_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(CompanionsOrgans.PONTIFF_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(CompanionsOrgans.PONTIFF_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(CompanionsOrgans.PONTIFF_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(CompanionsOrgans.PONTIFF_APPENDIX.get());
+        tag(ItemTagManager.MUSCLE).add(CompanionsOrgans.PONTIFF_MUSCLE.get());
+        tag(WAICItemTagManager.PONTIFF).add(
+            CompanionsOrgans.PONTIFF_HEART.get(),
+            CompanionsOrgans.PONTIFF_LUNG.get(),
+            CompanionsOrgans.PONTIFF_STOMACH.get(),
+            CompanionsOrgans.PONTIFF_INTESTINE.get(),
+            CompanionsOrgans.PONTIFF_KIDNEY.get(),
+            CompanionsOrgans.PONTIFF_SPLEEN.get(),
+            CompanionsOrgans.PONTIFF_LIVER.get(),
+            CompanionsOrgans.PONTIFF_APPENDIX.get(),
+            CompanionsOrgans.PONTIFF_MUSCLE.get()
+        );
     }
 }

@@ -35,6 +35,7 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
+import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
@@ -563,6 +564,59 @@ public class WAICOrganSkillUtil {
         }
 
         entity.heal(actualHeal);
+        return true;
+    }
+
+    // ==================== 猩红器官 ====================
+
+    /**
+     * 猩红心脏泣血：每次受到治疗时，将治疗量 ×5 转化为血液存储
+     */
+    public static void crimsonHeartHeal(ChestCavitySlotContext context, LivingHealEvent event) {
+        LivingEntity entity = context.entity();
+        if (HumoursData.get(entity).isBloodFull()) return;
+        float amount = event.getAmount();
+        HumoursData.insertBlood(entity, amount * 5, false);
+    }
+
+    /**
+     * 猩红心脏安装：增加 100 点血液上限
+     */
+    public static void crimsonHeartAdded(ChestCavitySlotContext context) {
+        HumoursData.addMaxBlood(context.entity(), 100);
+    }
+
+    /**
+     * 猩红心脏移除：收回 100 点血液上限
+     */
+    public static void crimsonHeartRemoved(ChestCavitySlotContext context) {
+        HumoursData.addMaxBlood(context.entity(), -100);
+    }
+
+    /**
+     * 猩红阑尾技能：鲜血涌泉
+     * <p>
+     * 消耗 5 点血液回复 1 点生命值，尽可能填补生命差值。
+     * 血液不足或已满血时不触发、不冷却。
+     * 30 秒冷却（600 tick）。
+     * </p>
+     *
+     * @param context 胸腔槽位上下文
+     * @return true 触发冷却
+     */
+    public static boolean crimsonAppendixSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+
+        float missingHP = entity.getMaxHealth() - entity.getHealth();
+        if (missingHP <= 0) return false;
+
+        float bloodNeeded = missingHP * 5;
+        float actualBlood = HumoursData.extractBlood(entity, bloodNeeded, false);
+        if (actualBlood <= 0) return false;
+
+        float healAmount = actualBlood / 5;
+        // 使用 setHealth 直接设置，不触发 heal() → 避免心脏泣血回调将血液加回
+        entity.setHealth(Math.min(entity.getHealth() + healAmount, entity.getMaxHealth()));
         return true;
     }
 }

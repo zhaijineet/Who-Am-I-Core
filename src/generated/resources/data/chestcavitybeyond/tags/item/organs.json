@@ -223,6 +223,15 @@
     "who_am_i_core:necromancer_rib",
     "who_am_i_core:corrupted_soul_lantern",
     "who_am_i_core:dead_king_spine",
-    "who_am_i_core:dead_king_rib"
+    "who_am_i_core:dead_king_rib",
+    "who_am_i_core:pontiff_heart",
+    "who_am_i_core:pontiff_lung",
+    "who_am_i_core:pontiff_stomach",
+    "who_am_i_core:pontiff_intestine",
+    "who_am_i_core:pontiff_kidney",
+    "who_am_i_core:pontiff_spleen",
+    "who_am_i_core:pontiff_liver",
+    "who_am_i_core:pontiff_appendix",
+    "who_am_i_core:pontiff_muscle"
   ]
 }

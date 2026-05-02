@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "who_am_i_core:item/pontiff_muscle"
+  }
+}

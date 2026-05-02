@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -36,7 +37,6 @@ import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
-import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
@@ -136,13 +136,16 @@ public class CommonEventHandler {
      */
     public static void handlerLivingDeathEvent(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity.level().isClientSide()) return;
+        Level level = entity.level();
+        if (level.isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(entity);
         // 九头蛇脊柱复活技能
         if (IceAndFireOrganUtil.hydraSpineSkill(entity, data)) {
             event.setCanceled(true);
             return;
         }
+        // 腐败魂灯：灵魂收割
+        IronSpellOrganUtil.corruptedSoulLanternSoulHarvest(entity, level);
     }
 
     /**
@@ -222,7 +225,7 @@ public class CommonEventHandler {
 
     /**
      * 调色盘：施法时消耗对应颜色染料，增加法术等级
-     * 腐败魂灯：猩红法术消耗黑胆汁增级
+     * 猩红肝脏：猩红法术消耗血液增级
      */
     public static void handlerSpellOnCastEvent(SpellOnCastEvent event) {
         LivingEntity entity = event.getEntity();
@@ -235,10 +238,10 @@ public class CommonEventHandler {
             }
         }
 
-        // 腐败魂灯：猩红法术消耗黑胆汁增级
-        if (data.hasOrgan(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get())) {
+        // 猩红肝脏：以血炼法 — 猩红法术消耗血液增级
+        if (data.hasOrgan(WAICOrgans.CRIMSON_LIVER.get())) {
             if (event.getSchoolType() == SchoolRegistry.BLOOD.get()) {
-                if (HumoursData.extractBlackBile(entity, 10, false) >= 10) {
+                if (HumoursData.extractBlood(entity, 10, false) >= 10) {
                     event.setSpellLevel(event.getSpellLevel() + 2);
                 }
             }

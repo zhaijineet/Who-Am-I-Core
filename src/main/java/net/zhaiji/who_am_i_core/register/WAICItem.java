@@ -3,15 +3,16 @@ package net.zhaiji.who_am_i_core.register;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.chestcavitybeyond.item.ChestOpenerItem;
+import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
+import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
-import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
+import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.function.Supplier;
@@ -75,5 +76,6 @@ public class WAICItem {
         AnvilCraftOrgans.register();
         CataclysmOrgans.register();
         IronSpellOrgans.register();
+        CompanionsOrgans.register();
     }
 }

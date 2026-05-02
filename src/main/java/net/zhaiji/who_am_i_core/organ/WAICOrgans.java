@@ -861,6 +861,91 @@ public class WAICOrgans {
             .build()
     );
 
+    // ==================== 猩红器官 ====================
+    // 猩红心脏
+    public static final Supplier<Item> CRIMSON_HEART = WAICItem.ITEM.register(
+        "crimson_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(AttributeRegistry.BLOOD_SPELL_POWER, 1)
+            .heal(WAICOrganSkillUtil::crimsonHeartHeal)
+            .added(WAICOrganSkillUtil::crimsonHeartAdded)
+            .removed(WAICOrganSkillUtil::crimsonHeartRemoved)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+            .build()
+    );
+
+    // 猩红肺脏
+    public static final Supplier<Item> CRIMSON_LUNG = WAICItem.ITEM.register(
+        "crimson_lung",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
+            .build()
+    );
+
+    // 猩红胃
+    public static final Supplier<Item> CRIMSON_STOMACH = WAICItem.ITEM.register(
+        "crimson_stomach",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .build()
+    );
+
+    // 猩红肠子
+    public static final Supplier<Item> CRIMSON_INTESTINE = WAICItem.ITEM.register(
+        "crimson_intestine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .build()
+    );
+
+    // 猩红肾脏
+    public static final Supplier<Item> CRIMSON_KIDNEY = WAICItem.ITEM.register(
+        "crimson_kidney",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.FILTRATION, 2)
+            .build()
+    );
+
+    // 猩红脾脏
+    public static final Supplier<Item> CRIMSON_SPLEEN = WAICItem.ITEM.register(
+        "crimson_spleen",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.METABOLISM, 2)
+            .build()
+    );
+
+    // 猩红肝脏
+    public static final Supplier<Item> CRIMSON_LIVER = WAICItem.ITEM.register(
+        "crimson_liver",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
+            .build()
+    );
+
+    // 猩红阑尾
+    public static final Supplier<Item> CRIMSON_APPENDIX = WAICItem.ITEM.register(
+        "crimson_appendix",
+        () -> Organ.builder()
+            .addValueAttribute(Attributes.LUCK, 2)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .skill(WAICOrganSkillUtil::crimsonAppendixSkill)
+            .cooldown(30 * 20)
+            .build()
+    );
+
+    // 猩红肌肉
+    public static final Supplier<Item> CRIMSON_MUSCLE = WAICItem.ITEM.register(
+        "crimson_muscle",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 2)
+            .addValueAttribute(InitAttribute.SPEED, 1.5)
+            .build()
+    );
+
     public static void register() {
     }
 }

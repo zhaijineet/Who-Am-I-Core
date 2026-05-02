@@ -12,6 +12,7 @@
     "MalkuthCannonEntityMixin",
     "MalkuthWeaknessHandlerMixin",
     "MalkuthWeaknessOverlayMixin",
+    "PlayerMixin",
     "PoisonMobEffectMixin"
   ],
   "client": [],

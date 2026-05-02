@@ -48,6 +48,9 @@ public class WAICItemTagManager {
     // 巨兽
     public static final TagKey<Item> MONSTROSITY = create("monstrosity");
 
+    // 教宗
+    public static final TagKey<Item> PONTIFF = create("pontiff");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }

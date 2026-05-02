@@ -1,55 +1,38 @@
 package net.zhaiji.who_am_i_core.util;
 
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
-import net.zhaiji.who_am_i_core.register.WAICAttachment;
-import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IronSpellOrganUtil {
     /**
-     * 腐败魂灯主动技能：吸收亡灵
-     * - 获取半径5格内所有亡灵生物
-     * - 将其生命值1:1转化为黑胆汁
-     * - 溢出部分1:1扣除玩家生命值（最低剩1HP）
-     * - 无亡灵时不触发也不冷却
+     * 腐败魂灯灵魂收割：死亡实体 16 格内所有拥有腐败魂灯的 LivingEntity 均分黑胆汁
      */
-    public static boolean corruptedPhylacterySkill(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        if (entity.level().isClientSide()) return false;
+    public static void corruptedSoulLanternSoulHarvest(LivingEntity dead, Level level) {
+        float totalBile = dead.getMaxHealth();
+        if (totalBile <= 0) return;
 
-        // 查找半径5格内的亡灵生物（服务端专属）
-        List<LivingEntity> undead = entity.level().getEntitiesOfClass(
-            LivingEntity.class,
-            entity.getBoundingBox().inflate(5),
-            target -> target != entity && target.getType().is(EntityTypeTags.UNDEAD)
-        );
-        if (undead.isEmpty()) return false;
-
-        float totalHealthAbsorbed = 0;
-
-        for (LivingEntity target : undead) {
-            totalHealthAbsorbed += target.getHealth();
-            target.kill();
+        AABB searchBox = dead.getBoundingBox().inflate(16);
+        List<LivingEntity> lanternHolders = new ArrayList<>();
+        for (LivingEntity nearby : level.getEntitiesOfClass(LivingEntity.class, searchBox)) {
+            if (nearby.isAlive() && ChestCavityUtil.getData(nearby).hasOrgan(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get())) {
+                lanternHolders.add(nearby);
+            }
         }
+        if (lanternHolders.isEmpty()) return;
 
-        // 先尽可能填入黑胆汁（静态方法自动同步）
-        float inserted = HumoursData.insertBlackBile(entity, totalHealthAbsorbed, false);
-        float overflow = totalHealthAbsorbed - inserted;
-
-        // 溢出部分扣除生命值（最低1HP）
-        if (overflow > 0) {
-            float currentHealth = entity.getHealth();
-            float newHealth = Math.max(1.0F, currentHealth - overflow);
-            entity.setHealth(newHealth);
+        float share = totalBile / lanternHolders.size();
+        for (LivingEntity holder : lanternHolders) {
+            HumoursData.insertBlackBile(holder, share, false);
         }
-
-        return true;
     }
 
     /**

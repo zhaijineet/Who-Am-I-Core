@@ -10,6 +10,7 @@ import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
+import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
@@ -199,10 +200,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // IronSpell 死者之王器官翻译
         addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Corrupted Soul Lantern");
-        addOrganDescription(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Absorbs undead life force into black bile");
-        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 0, "Absorb all undead within 5 blocks, converting HP to black bile");
-        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 1, "Overflow damages you but cannot kill (min 1 HP)");
-        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 2, "Blood spells consume 10 black bile to gain +2 spell level");
+        addOrganDescription(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Harvests souls from killed entities into black bile");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Soul Harvest: gain black bile when nearby entities die");
 
         addItem(IronSpellOrgans.DEAD_KING_SPINE, "Dead King Spine");
         addOrganDescription(IronSpellOrgans.DEAD_KING_SPINE, "Absorbs damage with black bile");
@@ -216,6 +215,26 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FROST_CORE, "Frost Core");
         addItem(WAICOrgans.FLAME_CORE, "Flame Core");
         addItem(WAICOrgans.NATURE_CORE, "Nature Core");
+
+        // ==================== Companions 神圣教宗器官翻译 ====================
+        addItem(CompanionsOrgans.PONTIFF_HEART, "Pontiff Heart");
+        addOrganDescription(CompanionsOrgans.PONTIFF_HEART, "Holy Transformation: when HP drops below 30%, heals 50% max HP and grants Strength II, Resistance II, Speed II for 15s. 3min cooldown");
+
+        addItem(CompanionsOrgans.PONTIFF_LUNG, "Pontiff Lung");
+        addItem(CompanionsOrgans.PONTIFF_STOMACH, "Pontiff Stomach");
+        addItem(CompanionsOrgans.PONTIFF_INTESTINE, "Pontiff Intestine");
+        addItem(CompanionsOrgans.PONTIFF_KIDNEY, "Pontiff Kidney");
+
+        addItem(CompanionsOrgans.PONTIFF_SPLEEN, "Pontiff Spleen");
+        addOrganSkill(CompanionsOrgans.PONTIFF_SPLEEN, "Releases expanding fire rings. Layers = min(1 + Pontiff organs / 4, 3). 10s cooldown");
+
+        addItem(CompanionsOrgans.PONTIFF_LIVER, "Pontiff Liver");
+
+        addItem(CompanionsOrgans.PONTIFF_APPENDIX, "Pontiff Appendix");
+        addOrganSkill(CompanionsOrgans.PONTIFF_APPENDIX, "Launches a tracking star. Positive temp = Red (fire), Negative = Blue (freeze). 8s cooldown");
+
+        addItem(CompanionsOrgans.PONTIFF_MUSCLE, "Pontiff Muscle");
+        addOrganSkill(CompanionsOrgans.PONTIFF_MUSCLE, "Knockback Resistance +8%");
 
         // 悚恐怖官翻译
         addItem(IceAndFireOrgans.BITTER_FLESH, "Bitter Flesh");
@@ -275,7 +294,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 九头蛇脊柱
         addOrganDescription(IceAndFireOrgans.HYDRA_SPINE, "Cheats death through poison");
-        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 0, "When dying with >10s of poison, recover to 10% HP");
+        addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 0, "On death with >10s of poison, recover to 10% HP");
         addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 1, "Increases poison level and halves remaining duration");
         addOrganSkill(IceAndFireOrgans.HYDRA_SPINE, 2, "Cancels death event");
 
@@ -335,17 +354,17 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "Merciless: convert all enchantments into organ attributes");
 
         // 超限合金器官翻译
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "Transcendence Heart");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "Transcendence Lung");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "Transcendence Spine");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "Transcendence Stomach");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "Transcendence Intestine");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "Transcendence Kidney");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "Transcendence Spleen");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "Transcendence Liver");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "Transcendence Appendix");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "Transcendence Rib");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "Transcendence Muscle");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "Transcendium Heart");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "Transcendium Lung");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "Transcendium Spine");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "Transcendium Stomach");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "Transcendium Intestine");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "Transcendium Kidney");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "Transcendium Spleen");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "Transcendium Liver");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "Transcendium Appendix");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "Transcendium Rib");
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "Transcendium Muscle");
 
         // 超限合金器官description描述
         add("organ.who_am_i_core.tooltips.looting_burst", "Loot Burst: +1 Looting and +1 Fortune");
@@ -452,7 +471,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.HERESY, "Heresy");
         addItem(WAICOrgans.VIOLENCE, "Violence");
         addItem(WAICOrgans.FRAUD, "Fraud");
-        addItem(WAICOrgans.TREACHERY, "Treason");
+        addItem(WAICOrgans.TREACHERY, "Treachery");
 
         // 双子魔眼器官翻译
         addItem(WAICOrgans.STRANGE_EYEBALL, "Strange Eyeball");
@@ -678,10 +697,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // IronSpell 死者之王器官翻译
         addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "腐败魂灯");
-        addOrganDescription(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "将亡灵生命力吸收为黑胆汁");
-        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 0, "吸收半径5格内所有亡灵生物，将其血量1:1转化为黑胆汁");
-        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 1, "溢出部分将1:1扣除生命值，但不会杀死（最低剩1HP）");
-        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, 2, "使用猩红法术时，消耗10点黑胆汁使等级+2");
+        addOrganDescription(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "收割死亡生物的灵魂为黑胆汁");
+        addOrganSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "灵魂收割：附近有生物死亡时，获取黑胆汁");
 
         addItem(IronSpellOrgans.DEAD_KING_SPINE, "尸王脊柱");
         addOrganDescription(IronSpellOrgans.DEAD_KING_SPINE, "以黑胆汁吸收伤害");
@@ -695,6 +712,26 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FROST_CORE, "冰霜核心");
         addItem(WAICOrgans.FLAME_CORE, "炽焰核心");
         addItem(WAICOrgans.NATURE_CORE, "自然核心");
+
+        // ==================== Companions 神圣教宗器官翻译 ====================
+        addItem(CompanionsOrgans.PONTIFF_HEART, "教宗心脏");
+        addOrganDescription(CompanionsOrgans.PONTIFF_HEART, "圣化变身：生命值降至30%以下时，回复50%最大生命，获得力量II、抗性II、速度II（15秒）。冷却3分钟");
+
+        addItem(CompanionsOrgans.PONTIFF_LUNG, "教宗肺脏");
+        addItem(CompanionsOrgans.PONTIFF_STOMACH, "教宗胃");
+        addItem(CompanionsOrgans.PONTIFF_INTESTINE, "教宗肠子");
+        addItem(CompanionsOrgans.PONTIFF_KIDNEY, "教宗肾脏");
+
+        addItem(CompanionsOrgans.PONTIFF_SPLEEN, "教宗脾脏");
+        addOrganSkill(CompanionsOrgans.PONTIFF_SPLEEN, "释放向外扩展的火环。层数 = min(1 + 教宗器官数/4, 3)。冷却10秒");
+
+        addItem(CompanionsOrgans.PONTIFF_LIVER, "教宗肝脏");
+
+        addItem(CompanionsOrgans.PONTIFF_APPENDIX, "教宗阑尾");
+        addOrganSkill(CompanionsOrgans.PONTIFF_APPENDIX, "发射追踪星弹。正温度→红星（点燃），负温度→蓝星（冻结）。冷却8秒");
+
+        addItem(CompanionsOrgans.PONTIFF_MUSCLE, "教宗肌肉");
+        addOrganSkill(CompanionsOrgans.PONTIFF_MUSCLE, "击退抗性+8%");
 
         // 悚恐怖官翻译
         addItem(IceAndFireOrgans.BITTER_FLESH, "苦寒血肉");
