@@ -45,6 +45,9 @@ public class WAICItemTagManager {
     // 布织器官
     public static final TagKey<Item> CLOTH_ORGAN = create("cloth_organ");
 
+    // 巨兽
+    public static final TagKey<Item> MONSTROSITY = create("monstrosity");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }

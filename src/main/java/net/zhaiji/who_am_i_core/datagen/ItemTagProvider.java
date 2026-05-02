@@ -735,6 +735,46 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPINE).add(CataclysmOrgans.STORM_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.STORM_RIB.get());
 
+        // ==================== 焰魔（Ignited Revenant）器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.UNDYING_EMBER.get(),
+            CataclysmOrgans.IGNITED_RIB_PLATING.get(),
+            CataclysmOrgans.BLAZING_VISAGE.get()
+        );
+        tag(ItemTagManager.HEART).add(CataclysmOrgans.UNDYING_EMBER.get());
+        tag(ItemTagManager.RIB).add(CataclysmOrgans.IGNITED_RIB_PLATING.get());
+        tag(ItemTagManager.SPECIAL).add(CataclysmOrgans.BLAZING_VISAGE.get());
+        tag(WAICItemTagManager.FIRE).add(
+            CataclysmOrgans.UNDYING_EMBER.get(),
+            CataclysmOrgans.IGNITED_RIB_PLATING.get(),
+            CataclysmOrgans.BLAZING_VISAGE.get()
+        );
+        tag(WAICItemTagManager.MECHANICAL).add(CataclysmOrgans.BLAZING_VISAGE.get());
+
+        // ==================== 下界合金巨兽（Netherite Monstrosity）器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.MONSTROSITY_CORE.get(),
+            CataclysmOrgans.MONSTROSITY_CIRCUIT.get(),
+            CataclysmOrgans.MONSTROSITY_FURNACE.get()
+        );
+        tag(ItemTagManager.HEART).add(CataclysmOrgans.MONSTROSITY_CORE.get());
+        tag(ItemTagManager.SPINE).add(CataclysmOrgans.MONSTROSITY_CIRCUIT.get());
+        tag(ItemTagManager.STOMACH).add(CataclysmOrgans.MONSTROSITY_FURNACE.get());
+        tag(WAICItemTagManager.FIRE).add(
+            CataclysmOrgans.MONSTROSITY_CORE.get(),
+            CataclysmOrgans.MONSTROSITY_CIRCUIT.get(),
+            CataclysmOrgans.MONSTROSITY_FURNACE.get()
+        );
+        tag(WAICItemTagManager.MONSTROSITY).add(
+            CataclysmOrgans.MONSTROSITY_CORE.get(),
+            CataclysmOrgans.MONSTROSITY_CIRCUIT.get(),
+            CataclysmOrgans.MONSTROSITY_FURNACE.get()
+        );
+        tag(WAICItemTagManager.MECHANICAL).add(
+            CataclysmOrgans.MONSTROSITY_CIRCUIT.get(),
+            CataclysmOrgans.MONSTROSITY_FURNACE.get()
+        );
+
         // ==================== IronSpell 死灵法师器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             IronSpellOrgans.NECROMANCER_SPINE.get(),

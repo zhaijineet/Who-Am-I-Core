@@ -16,6 +16,12 @@
     "who_am_i_core:ember_metal_rib",
     "who_am_i_core:ember_metal_muscle",
     "who_am_i_core:ember_metal_spine",
-    "who_am_i_core:ember_metal_appendix"
+    "who_am_i_core:ember_metal_appendix",
+    "who_am_i_core:undying_ember",
+    "who_am_i_core:ignited_rib_plating",
+    "who_am_i_core:blazing_visage",
+    "who_am_i_core:monstrosity_core",
+    "who_am_i_core:monstrosity_circuit",
+    "who_am_i_core:monstrosity_furnace"
   ]
 }

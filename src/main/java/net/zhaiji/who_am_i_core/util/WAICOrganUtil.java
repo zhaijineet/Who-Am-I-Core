@@ -239,6 +239,17 @@ public class WAICOrganUtil {
             return getMalkuthLocalTemperature(context);
         }
         int center = context.index();
+        if (center < 0) {
+            // 物品不在胸腔中，只取静态属性温度（不触发动态 modifier，避免递归）
+            ChestCavitySlotContext staticContext = new ChestCavitySlotContext(
+                null,
+                null,
+                context.id(),
+                context.index(),
+                context.stack()
+            );
+            return getStackTemperature(staticContext);
+        }
         List<Integer> adjacent = getAdjacentSlots(center);
         double total = 0;
         // 中心 + 遍历相邻 8 格
@@ -271,18 +282,14 @@ public class WAICOrganUtil {
         List<ItemStack> organs = context.data().getOrgans();
         for (int slot = 0; slot < organs.size(); slot++) {
             ItemStack stack = organs.get(slot);
-            IOrgan organ = ChestCavityUtil.getOrganCap(stack);
-            if (organ == OrganManager.EMPTY_ORGAN) continue;
             ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
-                context.data(), context.entity(), context.id(), slot, stack
+                context.data(),
+                context.entity(),
+                context.id(),
+                slot,
+                stack
             );
-            double temperature = 0;
-            for (Map.Entry<Holder<Attribute>, AttributeModifier> entry : organ.getAttributeModifiers(slotContext).entries()) {
-                if (entry.getKey().equals(WAICAttribute.TEMPERATURE)) {
-                    temperature = entry.getValue().amount();
-                    break;
-                }
-            }
+            double temperature = getStackTemperature(slotContext);
             if (temperature < 0) iceTotal += temperature;
             if (temperature > 0) fireTotal += temperature;
         }
@@ -295,11 +302,26 @@ public class WAICOrganUtil {
         }
     }
 
+    /**
+     * 获取器官物品的温度属性值
+     *
+     * @param context 槽位上下文（stack 为目标器官物品）
+     * @return 温度属性值，无温度属性则返回 0
+     */
+    public static double getStackTemperature(ChestCavitySlotContext context) {
+        IOrgan organ = ChestCavityUtil.getOrganCap(context.stack());
+        if (organ == OrganManager.EMPTY_ORGAN) return 0;
+        for (Map.Entry<Holder<Attribute>, AttributeModifier> entry : organ.getAttributeModifiers(context).entries()) {
+            if (entry.getKey().equals(WAICAttribute.TEMPERATURE)) {
+                return entry.getValue().amount();
+            }
+        }
+        return 0;
+    }
+
     private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {
         ItemStack stack = context.data().getOrgans().get(slot);
         if (stack.isEmpty()) return 0;
-        IOrgan organ = ChestCavityUtil.getOrganCap(stack);
-        if (organ == OrganManager.EMPTY_ORGAN) return 0;
         ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
             context.data(),
             context.entity(),
@@ -307,11 +329,6 @@ public class WAICOrganUtil {
             slot,
             stack
         );
-        for (Map.Entry<Holder<Attribute>, AttributeModifier> entry : organ.getAttributeModifiers(slotContext).entries()) {
-            if (entry.getKey().equals(WAICAttribute.TEMPERATURE)) {
-                return entry.getValue().amount();
-            }
-        }
-        return 0;
+        return getStackTemperature(slotContext);
     }
 }

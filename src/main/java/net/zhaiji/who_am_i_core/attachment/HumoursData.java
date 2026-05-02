@@ -18,8 +18,6 @@ import net.zhaiji.who_am_i_core.register.WAICAttachment;
 public class HumoursData implements INBTSerializable<CompoundTag> {
     public static final float DEFAULT_MAX = 100;
 
-    public static final float DEFAULT_BASE = 0;
-
     /**
      * 用于 NeoForge Attachment 内置客户端同步的 StreamCodec
      */
@@ -62,13 +60,9 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
 
     public HumoursData(IAttachmentHolder holder) {
         maxBlood = DEFAULT_MAX;
-//        blood = DEFAULT_BASE;
         maxYellowBile = DEFAULT_MAX;
-//        yellowBile = DEFAULT_BASE;
         maxBlackBile = DEFAULT_MAX;
-//        blackBile = DEFAULT_BASE;
         maxPhlegm = DEFAULT_MAX;
-//        phlegm = DEFAULT_BASE;
     }
 
     // ===== 静态操作方法 =====
@@ -119,6 +113,24 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     /**
+     * 增加血液最大值
+     */
+    public static void addMaxBlood(LivingEntity entity, float delta) {
+        HumoursData data = get(entity);
+        data.setMaxBlood(data.maxBlood + delta);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 重置血液最大值为默认值
+     */
+    public static void resetMaxBlood(LivingEntity entity) {
+        HumoursData data = get(entity);
+        data.resetMaxBlood();
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
      * 插入黄胆汁
      */
     public static float insertYellowBile(LivingEntity entity, float amount, boolean simulate) {
@@ -153,6 +165,24 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     public static void setMaxYellowBile(LivingEntity entity, float max) {
         HumoursData data = get(entity);
         data.setMaxYellowBile(max);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 增加黄胆汁最大值
+     */
+    public static void addMaxYellowBile(LivingEntity entity, float delta) {
+        HumoursData data = get(entity);
+        data.setMaxYellowBile(data.maxYellowBile + delta);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 重置黄胆汁最大值为默认值
+     */
+    public static void resetMaxYellowBile(LivingEntity entity) {
+        HumoursData data = get(entity);
+        data.resetMaxYellowBile();
         entity.setData(WAICAttachment.HUMOURS, data);
     }
 
@@ -195,6 +225,24 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     /**
+     * 增加黑胆汁最大值
+     */
+    public static void addMaxBlackBile(LivingEntity entity, float delta) {
+        HumoursData data = get(entity);
+        data.setMaxBlackBile(data.maxBlackBile + delta);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 重置黑胆汁最大值为默认值
+     */
+    public static void resetMaxBlackBile(LivingEntity entity) {
+        HumoursData data = get(entity);
+        data.resetMaxBlackBile();
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
      * 插入粘液
      */
     public static float insertPhlegm(LivingEntity entity, float amount, boolean simulate) {
@@ -229,6 +277,24 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     public static void setMaxPhlegm(LivingEntity entity, float max) {
         HumoursData data = get(entity);
         data.setMaxPhlegm(max);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 增加粘液最大值
+     */
+    public static void addMaxPhlegm(LivingEntity entity, float delta) {
+        HumoursData data = get(entity);
+        data.setMaxPhlegm(data.maxPhlegm + delta);
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
+    /**
+     * 重置粘液最大值为默认值
+     */
+    public static void resetMaxPhlegm(LivingEntity entity) {
+        HumoursData data = get(entity);
+        data.resetMaxPhlegm();
         entity.setData(WAICAttachment.HUMOURS, data);
     }
 
@@ -273,9 +339,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float insertBlood(float amount, boolean simulate) {
-        if (maxBlood <= 0 || amount <= 0) return 0;
-        float space = Math.max(0, maxBlood - blood);
-        float toInsert = Math.max(0, Math.min(amount, space));
+        if (amount <= 0 || isBloodFull()) return 0;
+        float toInsert = Math.min(amount, maxBlood - blood);
         if (!simulate) {
             blood += toInsert;
         }
@@ -283,8 +348,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float extractBlood(float amount, boolean simulate) {
-        if (amount <= 0 || blood <= 0) return 0;
-        float toExtract = Math.max(0, Math.min(amount, blood));
+        if (amount <= 0 || isBloodEmpty()) return 0;
+        float toExtract = Math.min(amount, blood);
         if (!simulate) {
             blood -= toExtract;
         }
@@ -350,9 +415,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float insertYellowBile(float amount, boolean simulate) {
-        if (maxYellowBile <= 0 || amount <= 0) return 0;
-        float space = Math.max(0, maxYellowBile - yellowBile);
-        float toInsert = Math.max(0, Math.min(amount, space));
+        if (amount <= 0 || isYellowBileFull()) return 0;
+        float toInsert = Math.min(amount, maxYellowBile - yellowBile);
         if (!simulate) {
             yellowBile += toInsert;
         }
@@ -360,8 +424,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float extractYellowBile(float amount, boolean simulate) {
-        if (amount <= 0 || yellowBile <= 0) return 0;
-        float toExtract = Math.max(0, Math.min(amount, yellowBile));
+        if (amount <= 0 || isYellowBileEmpty()) return 0;
+        float toExtract = Math.min(amount, yellowBile);
         if (!simulate) {
             yellowBile -= toExtract;
         }
@@ -427,9 +491,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float insertBlackBile(float amount, boolean simulate) {
-        if (maxBlackBile <= 0 || amount <= 0) return 0;
-        float space = Math.max(0, maxBlackBile - blackBile);
-        float toInsert = Math.max(0, Math.min(amount, space));
+        if (amount <= 0 || isBlackBileFull()) return 0;
+        float toInsert = Math.min(amount, maxBlackBile - blackBile);
         if (!simulate) {
             blackBile += toInsert;
         }
@@ -437,8 +500,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float extractBlackBile(float amount, boolean simulate) {
-        if (amount <= 0 || blackBile <= 0) return 0;
-        float toExtract = Math.max(0, Math.min(amount, blackBile));
+        if (amount <= 0 || isBlackBileEmpty()) return 0;
+        float toExtract = Math.min(amount, blackBile);
         if (!simulate) {
             blackBile -= toExtract;
         }
@@ -504,9 +567,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float insertPhlegm(float amount, boolean simulate) {
-        if (maxPhlegm <= 0 || amount <= 0) return 0;
-        float space = Math.max(0, maxPhlegm - phlegm);
-        float toInsert = Math.max(0, Math.min(amount, space));
+        if (amount <= 0 || isPhlegmFull()) return 0;
+        float toInsert = Math.min(amount, maxPhlegm - phlegm);
         if (!simulate) {
             phlegm += toInsert;
         }
@@ -514,8 +576,8 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
     }
 
     private float extractPhlegm(float amount, boolean simulate) {
-        if (amount <= 0 || phlegm <= 0) return 0;
-        float toExtract = Math.max(0, Math.min(amount, phlegm));
+        if (amount <= 0 || isPhlegmEmpty()) return 0;
+        float toExtract = Math.min(amount, phlegm);
         if (!simulate) {
             phlegm -= toExtract;
         }

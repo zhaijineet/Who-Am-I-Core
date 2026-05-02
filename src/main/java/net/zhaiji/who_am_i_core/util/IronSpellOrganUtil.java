@@ -73,8 +73,7 @@ public class IronSpellOrganUtil {
      */
     public static void deadKingRibAdded(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        if (entity == null) return;
-        HumoursData.setMaxBlackBile(entity, HumoursData.get(entity).getMaxBlackBile() + 10);
+        HumoursData.addMaxBlackBile(entity, 10);
     }
 
     /**
@@ -82,7 +81,6 @@ public class IronSpellOrganUtil {
      */
     public static void deadKingRibRemoved(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        if (entity == null) return;
-        HumoursData.setMaxBlackBile(entity, HumoursData.get(entity).getMaxBlackBile() - 10);
+        HumoursData.addMaxBlackBile(entity, -10);
     }
 }

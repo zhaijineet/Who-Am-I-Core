@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-29T12:19:18.5465038	Item Models: who_am_i_core
+// 1.21.1	2026-05-01T10:00:48.8972947	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -14,6 +14,7 @@ f2eebe6bf21c46701d4a756ac14ddecaaec03113 assets/who_am_i_core/models/item/aged_s
 8dd1241d5c0558f1c96a0822b785f2e4cc0fa57b assets/who_am_i_core/models/item/aptrgangr_rib.json
 0a1d336ca4b34ea3df32987892346c046dfcfa07 assets/who_am_i_core/models/item/aptrgangr_spine.json
 0a80f1f856c7159ad8a33c680c91aa8b26e23e5f assets/who_am_i_core/models/item/bitter_flesh.json
+a195bb6e77ecc9b4502253d76e494e1566b785f0 assets/who_am_i_core/models/item/blazing_visage.json
 84f289d50ab7df9268ec15800b8b2a8933ce4162 assets/who_am_i_core/models/item/bluff_core.json
 e4b84038d8ee2b42d501e7515b335bd8584747f5 assets/who_am_i_core/models/item/bluff_tablet.json
 994f50d110bd741ce857e6306e03740cb616eb6d assets/who_am_i_core/models/item/chesed.json
@@ -127,6 +128,7 @@ cbbbfa6cadb17668381c88c55ae2df40489d01a0 assets/who_am_i_core/models/item/ice_dr
 25e3d68bbb03b52c947d19a1593b6a99540be3a9 assets/who_am_i_core/models/item/ice_dragon_stomach.json
 37b80d2154d7ab68444eb8c3b9b802aba5679759 assets/who_am_i_core/models/item/ice_malkuth_warrior_heart.json
 37c143cea02a340c97e34cd431f05dce1e56e9df assets/who_am_i_core/models/item/ice_shard.json
+6f216a2d24a90a6e1af7a90bc1979e2e931e19dc assets/who_am_i_core/models/item/ignited_rib_plating.json
 0fe5cbb591b8428b877840f41c708055978c0546 assets/who_am_i_core/models/item/ink_appendix.json
 94f1c689d17d446e96564cef515209995c72591d assets/who_am_i_core/models/item/ink_bottle.json
 0339a0021be7450ab6bf7104285d2aaef49de9a5 assets/who_am_i_core/models/item/ink_heart.json
@@ -175,6 +177,9 @@ d29fef007ff889e8cb1791886c19323e0e1a0742 assets/who_am_i_core/models/item/maledi
 f934611deab4f39102969f4309b528441ba54fe2 assets/who_am_i_core/models/item/mimic_heart.json
 a6df1f6fdefecdc5156d5be872a2abc8d77f99b6 assets/who_am_i_core/models/item/mimic_liver.json
 57134483a8b924adf83a9c7a19b4beba50a0a051 assets/who_am_i_core/models/item/mimic_lung.json
+72f67df02305b1d765e865d3b6897360c6059c33 assets/who_am_i_core/models/item/monstrosity_circuit.json
+f539e826997af00aeba93f7b3a4b328da48bc4d8 assets/who_am_i_core/models/item/monstrosity_core.json
+3a1af683affe51612353a6db97a265b47525159a assets/who_am_i_core/models/item/monstrosity_furnace.json
 2877182790af45bc289896db3798388792309a04 assets/who_am_i_core/models/item/nature_core.json
 d9e3b65ba09ffec7e44b0c43589b075178ea1c83 assets/who_am_i_core/models/item/necromancer_rib.json
 87f636a68d1329abc6ee698c24b0a06ffd7b2274 assets/who_am_i_core/models/item/necromancer_spine.json
@@ -216,6 +221,7 @@ f9b04b36cbc628c1d302faca7e40f0de373644b0 assets/who_am_i_core/models/item/transc
 4aa5b7435f7a90f621c262e636141ccd42a18acc assets/who_am_i_core/models/item/transcendium_spleen.json
 ebc35a986d5e7395bc3038f4322cc36922bd2309 assets/who_am_i_core/models/item/transcendium_stomach.json
 e9838d184b7c26c287a8bded58908765ce3493eb assets/who_am_i_core/models/item/treachery.json
+b57bc18f362a743e944e75ff7a074b63ff534acb assets/who_am_i_core/models/item/undying_ember.json
 c4c4ca7a1601874f836f8fa43fe5d0f3bc815fd3 assets/who_am_i_core/models/item/violence.json
 77b5ed87f188ecb875dfa47da064e5d86328af24 assets/who_am_i_core/models/item/wooden_appendix.json
 d2b30bfd088bedcf516a75548a70858ceb7734e2 assets/who_am_i_core/models/item/wooden_heart.json

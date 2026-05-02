@@ -175,6 +175,24 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.STORM_RIB, "Storm Rib");
         addOrganSkill(CataclysmOrgans.STORM_RIB, "+10 phlegm capacity");
 
+        // ==================== 焰魔器官翻译 ====================
+        addItem(CataclysmOrgans.UNDYING_EMBER, "Undying Ember");
+        addOrganDescription(CataclysmOrgans.UNDYING_EMBER, "Grants Strength based on √temperature");
+        addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "Ignited Rib Plating");
+        addOrganDescription(CataclysmOrgans.IGNITED_RIB_PLATING, "Grants Block based on √local temperature");
+        addItem(CataclysmOrgans.BLAZING_VISAGE, "Blazing Visage");
+        addOrganDescription(CataclysmOrgans.BLAZING_VISAGE, "Applies Blazing Brand on melee hit. Heals based on local temperature.");
+        addOrganSkill(CataclysmOrgans.BLAZING_VISAGE, 0, "Melee attacks apply Blazing Brand (-20% armor, -20% toughness)");
+        addOrganSkill(CataclysmOrgans.BLAZING_VISAGE, 1, "Heal Value = 2 + local temperature x 0.5. Doubled if target already has Blazing Brand");
+
+        // ==================== 下界合金巨兽器官翻译 ====================
+        addItem(CataclysmOrgans.MONSTROSITY_CORE, "Monstrosity Core");
+        addOrganDescription(CataclysmOrgans.MONSTROSITY_CORE, "Generates yellow bile from heat. +100 yellow bile capacity.");
+        addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Monstrosity Circuit");
+        addOrganSkill(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Consumes all yellow bile: AoE earthquake deals (bile + 5% max HP + temp x 2) damage");
+        addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "Monstrosity Furnace");
+        addOrganDescription(CataclysmOrgans.MONSTROSITY_FURNACE, "Allows drinking lava. Restores hunger, yellow bile, and grants Monstrous effect.");
+
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
         addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
@@ -635,6 +653,24 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganSkill(CataclysmOrgans.STORM_SPINE, 1, "粘液达到上限时失效");
         addItem(CataclysmOrgans.STORM_RIB, "风暴肋骨");
         addOrganSkill(CataclysmOrgans.STORM_RIB, "+10 粘液上限");
+
+        // 焰魔器官翻译
+        addItem(CataclysmOrgans.UNDYING_EMBER, "不灭薪火");
+        addOrganDescription(CataclysmOrgans.UNDYING_EMBER, "根据全局正温度提供力量加成");
+        addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "焰魔肋甲");
+        addOrganDescription(CataclysmOrgans.IGNITED_RIB_PLATING, "根据局部正温度提供格挡加成，格挡 = √局部温度");
+        addItem(CataclysmOrgans.BLAZING_VISAGE, "炽面甲");
+        addOrganDescription(CataclysmOrgans.BLAZING_VISAGE, "近战命中施加炽烙，根据局部温度回血");
+        addOrganSkill(CataclysmOrgans.BLAZING_VISAGE, 0, "近战攻击施加炽烙（-20%护甲、-20%韧性）");
+        addOrganSkill(CataclysmOrgans.BLAZING_VISAGE, 1, "回血量 = 2 + 局部温度×0.5，已有炽烙则翻倍");
+
+        // 下界合金巨兽器官翻译
+        addItem(CataclysmOrgans.MONSTROSITY_CORE, "巨兽炉心");
+        addOrganDescription(CataclysmOrgans.MONSTROSITY_CORE, "从热量中生成黄胆汁。+100黄胆汁上限。");
+        addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "巨兽回路");
+        addOrganSkill(CataclysmOrgans.MONSTROSITY_CIRCUIT, "消耗全部黄胆汁：AoE地震造成(消耗量 + 5%最大HP + 温度×2)伤害");
+        addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "巨兽熔炉");
+        addOrganDescription(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆。恢复饥饿值、黄胆汁，并赋予骇人之恶效果。");
 
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "死灵法师脊柱");
