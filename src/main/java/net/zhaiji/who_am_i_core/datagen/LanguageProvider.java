@@ -236,6 +236,14 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CompanionsOrgans.PONTIFF_MUSCLE, "Pontiff Muscle");
         addOrganSkill(CompanionsOrgans.PONTIFF_MUSCLE, "Knockback Resistance +8%");
 
+        // ==================== Companions 蛋糕器官翻译 ====================
+        addItem(CompanionsOrgans.CAKE_HEART, "Cake Heart");
+        addItem(CompanionsOrgans.CAKE_LUNG, "Cake Lung");
+        addItem(CompanionsOrgans.CAKE_STOMACH, "Cake Stomach");
+        addOrganSkill(CompanionsOrgans.CAKE_STOMACH, "Eating food grants Sweetness effect. Stacks and resets duration on each eat");
+        addItem(CompanionsOrgans.CAKE_LIVER, "Cake Liver");
+        addOrganSkill(CompanionsOrgans.CAKE_LIVER, "Sweetness level >= 2: consumes 1 level per second to remove 1 random harmful effect");
+
         // 悚恐怖官翻译
         addItem(IceAndFireOrgans.BITTER_FLESH, "Bitter Flesh");
         addItem(IceAndFireOrgans.ICE_SHARD, "Ice Shard");
@@ -536,6 +544,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addEffect(WAICEffect.ICE_DRAGON_POWER::value, "Ice Dragon Power");
         addEffect(WAICEffect.LIGHTNING_DRAGON_POWER::value, "Lightning Dragon Power");
         addEffect(WAICEffect.DRAGON_POWER::value, "Dragon Power");
+
+        // 甜蜜效果翻译
+        addEffect(WAICEffect.SWEETNESS::value, "Sweetness");
     }
 
     public void Chinese() {
@@ -732,6 +743,14 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(CompanionsOrgans.PONTIFF_MUSCLE, "教宗肌肉");
         addOrganSkill(CompanionsOrgans.PONTIFF_MUSCLE, "击退抗性+8%");
+
+        // ==================== Companions 蛋糕器官翻译 ====================
+        addItem(CompanionsOrgans.CAKE_HEART, "蛋糕心脏");
+        addItem(CompanionsOrgans.CAKE_LUNG, "蛋糕肺脏");
+        addItem(CompanionsOrgans.CAKE_STOMACH, "蛋糕胃");
+        addOrganSkill(CompanionsOrgans.CAKE_STOMACH, "食用食物时给予甜蜜效果，已有甜蜜时叠加等级并重置时长");
+        addItem(CompanionsOrgans.CAKE_LIVER, "蛋糕肝脏");
+        addOrganSkill(CompanionsOrgans.CAKE_LIVER, "甜蜜等级>=2时：每秒消耗1级甜蜜清除1个随机负面效果");
 
         // 悚恐怖官翻译
         addItem(IceAndFireOrgans.BITTER_FLESH, "苦寒血肉");
@@ -1028,6 +1047,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addEffect(WAICEffect.ICE_DRAGON_POWER::value, "冰龙之力");
         addEffect(WAICEffect.LIGHTNING_DRAGON_POWER::value, "电龙之力");
         addEffect(WAICEffect.DRAGON_POWER::value, "龙之力");
+
+        // 甜蜜效果翻译
+        addEffect(WAICEffect.SWEETNESS::value, "甜蜜");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {

@@ -98,6 +98,42 @@ public class CompanionsOrgans {
             .build()
     );
 
+    // ==================== 蛋糕器官 ====================
+
+    // 蛋糕心脏
+    public static final Supplier<Item> CAKE_HEART = WAICItem.ITEM.register(
+        "cake_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .build()
+    );
+
+    // 蛋糕肺脏
+    public static final Supplier<Item> CAKE_LUNG = WAICItem.ITEM.register(
+        "cake_lung",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
+            .build()
+    );
+
+    // 蛋糕胃
+    public static final Supplier<Item> CAKE_STOMACH = WAICItem.ITEM.register(
+        "cake_stomach",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .build()
+    );
+
+    // 蛋糕肝脏
+    public static final Supplier<Item> CAKE_LIVER = WAICItem.ITEM.register(
+        "cake_liver",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
+            .build()
+    );
+
     public static void register() {
     }
 }

@@ -25,5 +25,6 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Expired);
         gameBus.addListener(CommonEventHandler::handlerPlayerXpPickup);
         gameBus.addListener(CommonEventHandler::handlerPlayerLevelChange);
+        gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
     }
 }

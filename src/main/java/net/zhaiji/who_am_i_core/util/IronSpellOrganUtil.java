@@ -9,7 +9,6 @@ import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IronSpellOrganUtil {
@@ -21,12 +20,12 @@ public class IronSpellOrganUtil {
         if (totalBile <= 0) return;
 
         AABB searchBox = dead.getBoundingBox().inflate(16);
-        List<LivingEntity> lanternHolders = new ArrayList<>();
-        for (LivingEntity nearby : level.getEntitiesOfClass(LivingEntity.class, searchBox)) {
-            if (nearby.isAlive() && ChestCavityUtil.getData(nearby).hasOrgan(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get())) {
-                lanternHolders.add(nearby);
-            }
-        }
+        List<LivingEntity> lanternHolders = level.getEntitiesOfClass(
+            LivingEntity.class,
+            searchBox,
+            nearby -> nearby != dead && ChestCavityUtil.getData(nearby).hasOrgan(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get())
+        );
+
         if (lanternHolders.isEmpty()) return;
 
         float share = totalBile / lanternHolders.size();

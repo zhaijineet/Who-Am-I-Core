@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +21,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
@@ -36,9 +38,11 @@ import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
+import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
+import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
@@ -100,7 +104,8 @@ public class CommonEventHandler {
         // 巨兽熔炉可以饮用岩浆
         EdibleCondition.builder()
             .matchesItem(stack -> stack.is(Items.LAVA_BUCKET))
-            .matchesEntity(entity -> ChestCavityUtil.getData(entity).hasOrgan(CataclysmOrgans.MONSTROSITY_FURNACE.get()) && !entity.isShiftKeyDown())
+            .matchesEntity(entity -> ChestCavityUtil.getData(entity)
+                                         .hasOrgan(CataclysmOrgans.MONSTROSITY_FURNACE.get()) && !entity.isShiftKeyDown())
             .onEat(CataclysmOrganUtil::drinkLava)
             .drinkAnimation()
             .build();
@@ -337,5 +342,43 @@ public class CommonEventHandler {
                 OrganAttributeUtil.updateSlotOrganAttribute(ChestCavityUtil.createContext(data, player, i, stack));
             }
         }
+    }
+
+    /**
+     * 直肠子：30% 几率在 3 秒后掉落一份相同食物
+     * 蛋糕胃：食用食物时给予甜蜜效果，等级 = 蛋糕器官数量，可叠加，每次重置 30 秒
+     */
+    public static void handlerLivingEntityUseItemEvent$Finish(LivingEntityUseItemEvent.Finish event) {
+        LivingEntity entity = event.getEntity();
+
+        if (entity.level().isClientSide()) return;
+
+        ItemStack food = event.getItem();
+
+        if (!food.has(DataComponents.FOOD)) return;
+
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+
+        // 直肠子技能
+        WAICOrganSkillUtil.straightIntestineSkill(entity, data, food);
+
+        // 蛋糕胃：给予甜蜜效果
+        if (!data.hasOrgan(CompanionsOrgans.CAKE_STOMACH.get())) return;
+
+        // 计算蛋糕器官数量
+        int cakeOrganCount = data.getOrganCount(WAICItemTagManager.CAKE);
+
+        if (cakeOrganCount <= 0) return;
+
+        MobEffectInstance currentSweetness = entity.getEffect(WAICEffect.SWEETNESS);
+        int newAmplifier;
+        if (currentSweetness != null) {
+            // 已有甜蜜：叠加等级，重置时长
+            newAmplifier = currentSweetness.getAmplifier() + cakeOrganCount;
+        } else {
+            // 没有甜蜜：初始等级 = 蛋糕器官数量 - 1（因为 amplifier 从 0 开始）
+            newAmplifier = cakeOrganCount - 1;
+        }
+        entity.addEffect(new MobEffectInstance(WAICEffect.SWEETNESS, 600, newAmplifier));
     }
 }

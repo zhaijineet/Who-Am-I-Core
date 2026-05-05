@@ -48,6 +48,9 @@ public class WAICItemTagManager {
     // 巨兽
     public static final TagKey<Item> MONSTROSITY = create("monstrosity");
 
+    // 蛋糕
+    public static final TagKey<Item> CAKE = create("cake");
+
     // 教宗
     public static final TagKey<Item> PONTIFF = create("pontiff");
 

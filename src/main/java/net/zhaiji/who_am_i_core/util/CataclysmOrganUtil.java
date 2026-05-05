@@ -181,7 +181,7 @@ public class CataclysmOrganUtil {
         entity.addEffect(new MobEffectInstance(ModEffect.EFFECTMONSTROUS, 60 * 20, count - 1));
 
         if (entity instanceof Player player) {
-            player.getFoodData().eat(20, 20);
+            player.getFoodData().eat(20, 0.5F);
             if (player.hasInfiniteMaterials()) return stack;
             return ItemUtils.createFilledResult(stack, player, Items.BUCKET.getDefaultInstance());
         }

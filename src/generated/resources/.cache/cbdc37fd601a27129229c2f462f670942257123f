@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-03T05:31:48.5343606	Item Models: who_am_i_core
+// 1.21.1	2026-05-04T06:04:52.0508289	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -17,6 +17,10 @@ f2eebe6bf21c46701d4a756ac14ddecaaec03113 assets/who_am_i_core/models/item/aged_s
 a195bb6e77ecc9b4502253d76e494e1566b785f0 assets/who_am_i_core/models/item/blazing_visage.json
 84f289d50ab7df9268ec15800b8b2a8933ce4162 assets/who_am_i_core/models/item/bluff_core.json
 e4b84038d8ee2b42d501e7515b335bd8584747f5 assets/who_am_i_core/models/item/bluff_tablet.json
+5278b925616176795623c0992d91f5bdfbb77486 assets/who_am_i_core/models/item/cake_heart.json
+93ec38510eab8e5d890c4821c1a8976f385428a5 assets/who_am_i_core/models/item/cake_liver.json
+9deea12fee9fa5b33f0d0cc31d69c2c5a6d30afe assets/who_am_i_core/models/item/cake_lung.json
+a964d2293f93d39511d397d358633b5dc0681ebe assets/who_am_i_core/models/item/cake_stomach.json
 994f50d110bd741ce857e6306e03740cb616eb6d assets/who_am_i_core/models/item/chesed.json
 fa970f31cde969875f7ccc9aff01862eb9ee93d0 assets/who_am_i_core/models/item/chest_nova.json
 78f39877761ad27bcab0266b6dee63173b70550e assets/who_am_i_core/models/item/cloth_appendix.json

@@ -14,7 +14,6 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
-import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -48,7 +47,6 @@ public abstract class LivingEntityMixin extends Entity {
      * <p>
      * 九头蛇肠子提高获得的负面效果时长为1.5倍
      * </p>
-     * 直肠子效果
      */
     @Inject(
         method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;",
@@ -57,8 +55,6 @@ public abstract class LivingEntityMixin extends Entity {
     public void whoAmICore$eat(Level level, ItemStack food, FoodProperties foodProperties, CallbackInfoReturnable<ItemStack> cir) {
         if (level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(whoAmICore$self());
-        // 调用直肠子技能方法
-        WAICOrganSkillUtil.straightIntestineSkill(whoAmICore$self(), data, food);
 
         int hydraStomachCount = data.getOrganCount(IceAndFireOrgans.HYDRA_STOMACH.get());
         if (hydraStomachCount <= 0) return;

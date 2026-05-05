@@ -826,5 +826,23 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CompanionsOrgans.PONTIFF_APPENDIX.get(),
             CompanionsOrgans.PONTIFF_MUSCLE.get()
         );
+
+        // ==================== Companions 蛋糕器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CompanionsOrgans.CAKE_HEART.get(),
+            CompanionsOrgans.CAKE_LUNG.get(),
+            CompanionsOrgans.CAKE_STOMACH.get(),
+            CompanionsOrgans.CAKE_LIVER.get()
+        );
+        tag(ItemTagManager.HEART).add(CompanionsOrgans.CAKE_HEART.get());
+        tag(ItemTagManager.LUNG).add(CompanionsOrgans.CAKE_LUNG.get());
+        tag(ItemTagManager.STOMACH).add(CompanionsOrgans.CAKE_STOMACH.get());
+        tag(ItemTagManager.LIVER).add(CompanionsOrgans.CAKE_LIVER.get());
+        tag(WAICItemTagManager.CAKE).add(
+            CompanionsOrgans.CAKE_HEART.get(),
+            CompanionsOrgans.CAKE_LUNG.get(),
+            CompanionsOrgans.CAKE_STOMACH.get(),
+            CompanionsOrgans.CAKE_LIVER.get()
+        );
     }
 }
