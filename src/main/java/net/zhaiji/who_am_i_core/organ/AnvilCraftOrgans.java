@@ -4,11 +4,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
-import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -166,11 +165,7 @@ public class AnvilCraftOrgans {
         "frost_metal_heart",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalHeartModifier)
             .build()
     );
 
@@ -179,13 +174,7 @@ public class AnvilCraftOrgans {
         "frost_metal_lung",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalLungModifier)
             .build()
     );
 
@@ -194,12 +183,7 @@ public class AnvilCraftOrgans {
         "frost_metal_spine",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double bonus = WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.NERVES, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0 + bonus));
-                modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), 0.5 + bonus));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -(1.0 + bonus)));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalSpineModifier)
             .build()
     );
 
@@ -208,11 +192,7 @@ public class AnvilCraftOrgans {
         "frost_metal_stomach",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalStomachModifier)
             .build()
     );
 
@@ -221,11 +201,7 @@ public class AnvilCraftOrgans {
         "frost_metal_intestine",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.NUTRITION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalIntestineModifier)
             .build()
     );
 
@@ -234,11 +210,7 @@ public class AnvilCraftOrgans {
         "frost_metal_kidney",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.FILTRATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalKidneyModifier)
             .build()
     );
 
@@ -247,11 +219,7 @@ public class AnvilCraftOrgans {
         "frost_metal_spleen",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.METABOLISM, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalSpleenModifier)
             .build()
     );
 
@@ -260,11 +228,7 @@ public class AnvilCraftOrgans {
         "frost_metal_liver",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalLiverModifier)
             .build()
     );
 
@@ -273,11 +237,7 @@ public class AnvilCraftOrgans {
         "frost_metal_appendix",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(Attributes.LUCK, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalAppendixModifier)
             .build()
     );
 
@@ -286,11 +246,7 @@ public class AnvilCraftOrgans {
         "frost_metal_rib",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalRibModifier)
             .build()
     );
 
@@ -299,12 +255,7 @@ public class AnvilCraftOrgans {
         "frost_metal_muscle",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
-            })
+            .modifier(AnvilCraftOrganUtil::frostMetalMuscleModifier)
             .build()
     );
 
@@ -314,12 +265,7 @@ public class AnvilCraftOrgans {
         "transcendium_heart",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumHeartModifier)
             .build()
     );
 
@@ -328,14 +274,7 @@ public class AnvilCraftOrgans {
         "transcendium_lung",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumLungModifier)
             .build()
     );
 
@@ -344,13 +283,7 @@ public class AnvilCraftOrgans {
         "transcendium_spine",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.NERVES, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumSpineModifier)
             .build()
     );
 
@@ -359,12 +292,7 @@ public class AnvilCraftOrgans {
         "transcendium_stomach",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumStomachModifier)
             .build()
     );
 
@@ -373,12 +301,7 @@ public class AnvilCraftOrgans {
         "transcendium_intestine",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.NUTRITION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumIntestineModifier)
             .build()
     );
 
@@ -387,12 +310,7 @@ public class AnvilCraftOrgans {
         "transcendium_kidney",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.FILTRATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumKidneyModifier)
             .build()
     );
 
@@ -401,12 +319,7 @@ public class AnvilCraftOrgans {
         "transcendium_spleen",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.METABOLISM, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumSpleenModifier)
             .build()
     );
 
@@ -415,12 +328,7 @@ public class AnvilCraftOrgans {
         "transcendium_liver",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumLiverModifier)
             .build()
     );
 
@@ -429,12 +337,7 @@ public class AnvilCraftOrgans {
         "transcendium_appendix",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(Attributes.LUCK, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumAppendixModifier)
             .build()
     );
 
@@ -443,12 +346,7 @@ public class AnvilCraftOrgans {
         "transcendium_rib",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumRibModifier)
             .build()
     );
 
@@ -457,13 +355,7 @@ public class AnvilCraftOrgans {
         "transcendium_muscle",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
-            .modifier((context, modifiers) -> {
-                double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
-                modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), value));
-                modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-                modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
-            })
+            .modifier(AnvilCraftOrganUtil::transcendiumMuscleModifier)
             .build()
     );
 

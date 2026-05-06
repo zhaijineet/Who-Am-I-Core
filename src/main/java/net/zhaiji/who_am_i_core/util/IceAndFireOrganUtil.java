@@ -270,32 +270,20 @@ public class IceAndFireOrganUtil {
     }
 
     /**
-     * 冰魂残片属性修饰符 - 全局温度 * -0.05 的健康
+     * 冰系器官温度健康 modifier 通用方法
+     *
+     * @param selfTemperature 器官自身的温度贡献（index==-1时补偿）
+     * @param multiplier      温度→健康的乘数系数
      */
-    public static void iceShardModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+    public static void coldHealthModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers,
+        double selfTemperature,
+        double multiplier
+    ) {
         double temp = WAICOrganUtil.getEffectiveTemperature(context.entity());
-        if (context.index() == -1) temp -= 1;
-        double healthBonus = temp * -0.05;
-        modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
-    }
-
-    /**
-     * 冻结魂火属性修饰符 - 全局温度 * -0.15 的健康
-     */
-    public static void frostburnSoulModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double temp = WAICOrganUtil.getEffectiveTemperature(context.entity());
-        if (context.index() == -1) temp -= 2;
-        double healthBonus = temp * -0.15;
-        modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
-    }
-
-    /**
-     * 悚恐怖匣属性修饰符 - 全局温度 * -0.25 的健康
-     */
-    public static void dreadPhylacteryModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double temp = WAICOrganUtil.getEffectiveTemperature(context.entity());
-        if (context.index() == -1) temp -= 3;
-        double healthBonus = temp * -0.25;
+        if (context.index() == -1) temp -= selfTemperature;
+        double healthBonus = temp * -multiplier;
         modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
     }
 

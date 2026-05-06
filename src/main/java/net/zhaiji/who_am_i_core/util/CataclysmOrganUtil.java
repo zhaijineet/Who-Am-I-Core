@@ -2,26 +2,38 @@ package net.zhaiji.who_am_i_core.util;
 
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
+import com.github.L_Ender.cataclysm.entity.projectile.Wither_Howitzer_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
+import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.google.common.collect.Multimap;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
+
 
 public class CataclysmOrganUtil {
     /**
@@ -112,6 +124,23 @@ public class CataclysmOrganUtil {
     }
 
     // ==================== 焰魔器官 ====================
+
+    /**
+     * 不灭薪火属性修饰符 - 全局温度的平方根的力量
+     */
+    public static void undyingEmberModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        double temp = WAICOrganUtil.getEffectiveTemperature(context.entity());
+        if (context.index() == -1) temp += 9;
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(temp))));
+    }
+
+    /**
+     * 焰魔肋甲属性修饰符 - 局部温度的平方根的格挡
+     */
+    public static void ignitedRibPlatingModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        double localTemp = WAICOrganUtil.getLocalTemperature(context);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(localTemp))));
+    }
 
     /**
      * 炽面甲 — 炽热烙印攻击回调
@@ -244,6 +273,98 @@ public class CataclysmOrganUtil {
                 target.hurtMarked = true;
             }
         }
+
+        return true;
+    }
+
+    // ==================== 远古工厂器官 ====================
+
+    /**
+     * 远古工厂器官 modifier - 机械器官数量的平方根加成
+     *
+     * @param primaryAttribute 要加成的主属性
+     */
+    public static void ancientFactoryModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers,
+        Holder<Attribute> primaryAttribute
+    ) {
+        int count = context.data().getOrganCount(WAICItemTagManager.MECHANICAL);
+        if (context.index() == -1) count++;
+        double bonus = Math.floor(Math.sqrt(count * 2));
+        modifiers.put(primaryAttribute, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+    }
+
+    /**
+     * 蓄能电芯 — 自动修复
+     * 每 40 tick（2秒），若未满血，回复 1 点 HP
+     */
+    public static void powerCellTick(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.tickCount % 40 != 0) return;
+        if (entity.getHealth() < entity.getMaxHealth() || entity instanceof Player player && player.isHurt()) {
+            entity.heal(1.0F);
+        }
+    }
+
+    /**
+     * 机械之星 — 凋零榴弹
+     * 向视线方向发射一枚凋零榴弹（对齐先驱者 LaunchGoal 逻辑）
+     * 命中后产生爆炸 + 凋零烟雾区域
+     */
+    public static boolean mechanicalStarSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        Level level = entity.level();
+
+        Vec3 look = entity.getLookAngle();
+
+        // 发射凋零榴弹（对齐先驱者 LaunchGoal 的 howitzer 创建方式）
+        Wither_Howitzer_Entity howitzer = new Wither_Howitzer_Entity(
+            ModEntities.WITHER_HOWITZER.get(), level, entity);
+        howitzer.setPos(entity.getX(), entity.getEyeY() - 0.5, entity.getZ());
+        howitzer.setRadius(3.0F);
+        howitzer.shoot(look.x, look.y, look.z, 0.6F, 60);
+        level.addFreshEntity(howitzer);
+
+        // 发射音效
+        level.playSound(null, entity, ModSounds.ROCKET_LAUNCH.get(), SoundSource.PLAYERS, 1.5F, 1.0F);
+
+        return true;
+    }
+
+    /**
+     * 死亡透镜 — 死亡激光
+     * 向视线方向发射一道死亡激光束
+     * 安全特性：默认不点火（setFire=false），不破坏常规方块
+     */
+    public static boolean deathLensSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        Level level = entity.level();
+
+        Death_Laser_Beam_Entity laser = new Death_Laser_Beam_Entity(
+            ModEntities.DEATH_LASER_BEAM.get(),
+            level,
+            entity,
+            entity.getX(),
+            entity.getEyeY() - 0.5,
+            entity.getZ(),
+            entity.getYRot(),
+            entity.getXRot(),
+            12,    // duration：预热20tick后，12 tick 的活跃伤害窗口
+            6.0F,          // damage：基础伤害
+            6.0F           // Hpdamage：目标最大生命 6%（×0.01 后在内部使用）
+        );
+        level.addFreshEntity(laser);
+
+        // 激光音效
+        level.playSound(
+            null,
+            entity,
+            ModSounds.DEATH_LASER.get(),
+            SoundSource.PLAYERS,
+            1.5F,
+            1.0F
+        );
 
         return true;
     }

@@ -410,7 +410,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier(IceAndFireOrganUtil::iceShardModifier)
+            .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 1, 0.05))
             .build()
     );
 
@@ -420,7 +420,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier(IceAndFireOrganUtil::frostburnSoulModifier)
+            .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 2, 0.15))
             .build()
     );
 
@@ -430,7 +430,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(WAICAttribute.TEMPERATURE, -3)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier(IceAndFireOrganUtil::dreadPhylacteryModifier)
+            .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 3, 0.25))
             .skillTooltip(WAICTooltipUtil.skillTooltip())
             .attack(IceAndFireOrganUtil::dreadPhylacteryAttack)
             .build()

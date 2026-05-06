@@ -194,6 +194,20 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "Monstrosity Furnace");
         addOrganDescription(CataclysmOrgans.MONSTROSITY_FURNACE, "Allows drinking lava. Restores hunger, yellow bile, and grants Monstrous effect.");
 
+        // Cataclysm 远古工厂器官翻译
+        addItem(CataclysmOrgans.TACTICAL_DISK, "Tactical Disk");
+        addOrganDescription(CataclysmOrgans.TACTICAL_DISK, "Stores combat logs from factory components. More data means better system diagnostics.");
+        addItem(CataclysmOrgans.REINFORCED_FRAME, "Reinforced Frame");
+        addOrganDescription(CataclysmOrgans.REINFORCED_FRAME, "Standard factory structural component. Rigid, stable, unmovable.");
+        addItem(CataclysmOrgans.POWER_CELL, "Power Cell");
+        addOrganDescription(CataclysmOrgans.POWER_CELL, "Standard factory power module. Slowly releases repair current.");
+        addItem(CataclysmOrgans.COMPUTE_CHIP, "Compute Chip");
+        addOrganDescription(CataclysmOrgans.COMPUTE_CHIP, "Co-processor. Each additional factory part opens a new data channel.");
+        addItem(CataclysmOrgans.MECHANICAL_STAR, "Mechanical Star");
+        addOrganSkill(CataclysmOrgans.MECHANICAL_STAR, 0, "Lock onto an enemy in sight and fire a homing missile (8.0 damage). 8 second cooldown.");
+        addItem(CataclysmOrgans.DEATH_LENS, "Death Lens");
+        addOrganSkill(CataclysmOrgans.DEATH_LENS, 0, "Fire a death laser (6 damage + 6%% target max HP). No fire or block damage. 15 second cooldown.");
+
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
         addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
@@ -701,6 +715,20 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganSkill(CataclysmOrgans.MONSTROSITY_CIRCUIT, "消耗全部黄胆汁：AoE地震造成(消耗量 + 5%最大HP + 温度×2)伤害");
         addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "巨兽熔炉");
         addOrganDescription(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆。恢复饥饿值、黄胆汁，并赋予骇人之恶效果。");
+
+        // Cataclysm 远古工厂器官翻译
+        addItem(CataclysmOrgans.TACTICAL_DISK, "战术磁盘");
+        addOrganDescription(CataclysmOrgans.TACTICAL_DISK, "磁盘存储所有工厂组件的运行日志。数据越完整，系统自检越精确——对机械而言，数据即生命。");
+        addItem(CataclysmOrgans.REINFORCED_FRAME, "强化构架");
+        addOrganDescription(CataclysmOrgans.REINFORCED_FRAME, "工厂标准结构件。也许过刚则折，但至少现在不会。");
+        addItem(CataclysmOrgans.POWER_CELL, "蓄能电芯");
+        addOrganDescription(CataclysmOrgans.POWER_CELL, "持续输出微弱修复电流——虽然缓慢，但永不停歇。");
+        addItem(CataclysmOrgans.COMPUTE_CHIP, "运算晶片");
+        addOrganDescription(CataclysmOrgans.COMPUTE_CHIP, "协处理器。每增加一个工厂零件，晶片就多一条数据通道，系统响应就越快。");
+        addItem(CataclysmOrgans.MECHANICAL_STAR, "机械之星");
+        addOrganSkill(CataclysmOrgans.MECHANICAL_STAR, 0, "锁定视线方向的敌人，发射一枚追踪导弹（伤害 8.0）。冷却 8 秒。");
+        addItem(CataclysmOrgans.DEATH_LENS, "死亡透镜");
+        addOrganSkill(CataclysmOrgans.DEATH_LENS, 0, "发射一道死亡激光（伤害 6 + 目标最大生命 6%%）。不点火不破坏方块。冷却 15 秒。");
 
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "死灵法师脊柱");

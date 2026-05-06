@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -53,6 +54,7 @@ import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
+@EventBusSubscriber()
 public class CommonEventHandler {
     /**
      * 为所有实体添加默认初始化器官属性

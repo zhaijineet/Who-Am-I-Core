@@ -776,6 +776,33 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CataclysmOrgans.MONSTROSITY_FURNACE.get()
         );
 
+        // ==================== Cataclysm 远古工厂器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.TACTICAL_DISK.get(),
+            CataclysmOrgans.REINFORCED_FRAME.get(),
+            CataclysmOrgans.POWER_CELL.get(),
+            CataclysmOrgans.COMPUTE_CHIP.get(),
+            CataclysmOrgans.MECHANICAL_STAR.get(),
+            CataclysmOrgans.DEATH_LENS.get()
+        );
+        tag(ItemTagManager.SPECIAL).add(
+            CataclysmOrgans.TACTICAL_DISK.get(),
+            CataclysmOrgans.REINFORCED_FRAME.get(),
+            CataclysmOrgans.POWER_CELL.get(),
+            CataclysmOrgans.COMPUTE_CHIP.get(),
+            CataclysmOrgans.MECHANICAL_STAR.get(),
+            CataclysmOrgans.DEATH_LENS.get()
+        );
+        tag(WAICItemTagManager.MECHANICAL).add(
+            CataclysmOrgans.TACTICAL_DISK.get(),
+            CataclysmOrgans.REINFORCED_FRAME.get(),
+            CataclysmOrgans.POWER_CELL.get(),
+            CataclysmOrgans.COMPUTE_CHIP.get(),
+            CataclysmOrgans.MECHANICAL_STAR.get(),
+            CataclysmOrgans.DEATH_LENS.get()
+        );
+        tag(WAICItemTagManager.UNIQUE).add(CataclysmOrgans.MECHANICAL_STAR.get());
+
         // ==================== IronSpell 死灵法师器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             IronSpellOrgans.NECROMANCER_SPINE.get(),

@@ -5,11 +5,9 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
-import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -166,10 +164,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 9)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier((context, modifiers) -> {
-                double temp = WAICOrganUtil.getEffectiveTemperature(context.entity());
-                modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(temp))));
-            })
+            .modifier(CataclysmOrganUtil::undyingEmberModifier)
             .build()
     );
 
@@ -181,10 +176,7 @@ public class CataclysmOrgans {
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier((context, modifiers) -> {
-                double localTemp = WAICOrganUtil.getLocalTemperature(context);
-                modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(localTemp))));
-            })
+            .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
             .build()
     );
 
@@ -240,6 +232,70 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
+    // ==================== 远古工厂器官 ====================
+
+    // 战术磁盘
+    public static final Supplier<Item> TACTICAL_DISK = WAICItem.ITEM.register(
+        "tactical_disk",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .modifier((context, modifiers) -> CataclysmOrganUtil.ancientFactoryModifier(context, modifiers, InitAttribute.HEALTH))
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
+    // 强化构架
+    public static final Supplier<Item> REINFORCED_FRAME = WAICItem.ITEM.register(
+        "reinforced_frame",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2.5)
+            .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
+            .build()
+    );
+
+    // 蓄能电芯
+    public static final Supplier<Item> POWER_CELL = WAICItem.ITEM.register(
+        "power_cell",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .tick(CataclysmOrganUtil::powerCellTick)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
+    // 运算晶片
+    public static final Supplier<Item> COMPUTE_CHIP = WAICItem.ITEM.register(
+        "compute_chip",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 1.5)
+            .modifier((context, modifiers) -> CataclysmOrganUtil.ancientFactoryModifier(context, modifiers, InitAttribute.NERVES))
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
+    // 机械之星
+    public static final Supplier<Item> MECHANICAL_STAR = WAICItem.ITEM.register(
+        "mechanical_star",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 2)
+            .skill(CataclysmOrganUtil::mechanicalStarSkill)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
+            .cooldown(160)
+            .build()
+    );
+
+    // 死亡透镜
+    public static final Supplier<Item> DEATH_LENS = WAICItem.ITEM.register(
+        "death_lens",
+        () -> Organ.builder()
+            .skill(CataclysmOrganUtil::deathLensSkill)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
+            .cooldown(300)
             .build()
     );
 
