@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-05T16:04:36.9172429	Item Models: who_am_i_core
+// 1.21.1	2026-05-06T18:24:12.869464	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -120,6 +120,7 @@ a69abaa7f66475c903a74702681e3959b6ef2361 assets/who_am_i_core/models/item/frost_
 02fdce296c19f7ca48a8ac8c3ec314d429179032 assets/who_am_i_core/models/item/geburah.json
 cf435346b93b036a1b68faeaa24102c53ed90a8a assets/who_am_i_core/models/item/gluttony.json
 d6760437cabe46ce3e630e38f9afe5d5be61ad31 assets/who_am_i_core/models/item/greed.json
+a6cd0525c5407fc9113b65d83a1d01ae1e9ae8bb assets/who_am_i_core/models/item/guardian_stone.json
 1ae3c3c47a7fd58d00d1473157316085325f41a6 assets/who_am_i_core/models/item/haunted_bone.json
 607176673d493806f5569cd51323cc851011ea85 assets/who_am_i_core/models/item/heresy.json
 3fc12b3536ba4a2d871a6692dbdc4edfa3d48111 assets/who_am_i_core/models/item/hydra_intestine.json
@@ -251,6 +252,7 @@ ebc35a986d5e7395bc3038f4322cc36922bd2309 assets/who_am_i_core/models/item/transc
 e9838d184b7c26c287a8bded58908765ce3493eb assets/who_am_i_core/models/item/treachery.json
 b57bc18f362a743e944e75ff7a074b63ff534acb assets/who_am_i_core/models/item/undying_ember.json
 c4c4ca7a1601874f836f8fa43fe5d0f3bc815fd3 assets/who_am_i_core/models/item/violence.json
+b8aea31bb03df1c4f6aa433a2aaa3a37b5addf14 assets/who_am_i_core/models/item/void_crystal_spine.json
 77b5ed87f188ecb875dfa47da064e5d86328af24 assets/who_am_i_core/models/item/wooden_appendix.json
 d2b30bfd088bedcf516a75548a70858ceb7734e2 assets/who_am_i_core/models/item/wooden_heart.json
 03ad3c4056b95ab2e8121bd4c344b84e5c5a7a18 assets/who_am_i_core/models/item/wooden_intestine.json

@@ -3,13 +3,17 @@ package net.zhaiji.who_am_i_core.util;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
+import com.github.L_Ender.cataclysm.entity.projectile.Void_Rune_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Wither_Howitzer_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.google.common.collect.Multimap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,8 +25,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
@@ -367,5 +373,102 @@ public class CataclysmOrganUtil {
         );
 
         return true;
+    }
+
+    /**
+     * 虚空晶脊 — 虚空践踏
+     * 以自身为中心召唤三环虚空符文阵，与 Boss Ender_Guardian_Entity.StompAttack() 一致
+     */
+    public static boolean voidCrystalSpineSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+
+        if(!entity.onGround()) return false;
+
+        Level level = entity.level();
+
+        // 音效
+        level.playSound(
+            null,
+            entity,
+            ModSounds.ENDER_GUARDIAN_FIST.get(),
+            SoundSource.PLAYERS,
+            0.3f,
+            1.0F + entity.getRandom().nextFloat() * 0.1F
+        );
+
+        // 震屏
+        ScreenShake_Entity.ScreenShake(level, entity.position(), 10, 0.1f, 0, 5);
+
+        double d0 = entity.getY();
+        double d1 = entity.getY() + 1.0D;
+        float angle2 = 0.01745329251F * entity.yBodyRot;
+
+        // 内环：6个符文，半径1.5，延迟3 tick
+        for (int k = 0; k < 6; ++k) {
+            float f2 = angle2 + (float) k * (float) Math.PI * 2.0F / 6.0F + ((float) Math.PI * 2F / 5F);
+            spawnVoidRune(level, entity.getX() + Mth.cos(f2) * 1.5D, entity.getZ() + Mth.sin(f2) * 1.5D,
+                d0, d1, f2, 0, 16.0F, entity
+            );
+        }
+
+        // 中环：11个符文，半径3.5，延迟10 tick
+        for (int k = 0; k < 12; ++k) {
+            float f3 = angle2 + (float) k * (float) Math.PI * 2.0F / 11.0F + ((float) Math.PI * 2F / 10F);
+            spawnVoidRune(level, entity.getX() + Mth.cos(f3) * 2.5D, entity.getZ() + Mth.sin(f3) * 2.5D,
+                d0, d1, f3, 7, 16.0F, entity
+            );
+        }
+
+        // 外环：14个符文，半3.5，延迟15 tick
+        for (int k = 0; k < 14; ++k) {
+            float f4 = angle2 + (float) k * (float) Math.PI * 2.0F / 14.0F + ((float) Math.PI * 2F / 20F);
+            spawnVoidRune(level, entity.getX() + Mth.cos(f4) * 3.5D, entity.getZ() + Mth.sin(f4) * 3.5D,
+                d0, d1, f4, 12, 16.0F, entity
+            );
+        }
+
+        return true;
+    }
+
+    /**
+     * 虚空符文生成辅助方法，对齐 Boss Ender_Guardian_Entity.spawnFangs()
+     */
+    private static void spawnVoidRune(
+        Level level, double x, double z, double minY, double maxY,
+        float rotation, int delay, float damage, LivingEntity caster
+    ) {
+        BlockPos blockpos = BlockPos.containing(x, maxY, z);
+        boolean flag = false;
+        double d0 = 0.0D;
+
+        do {
+            BlockPos blockpos1 = blockpos.below();
+            BlockState blockstate = level.getBlockState(blockpos1);
+            if (blockstate.isFaceSturdy(level, blockpos1, Direction.UP)) {
+                if (!level.isEmptyBlock(blockpos)) {
+                    BlockState blockstate1 = level.getBlockState(blockpos);
+                    VoxelShape voxelshape = blockstate1.getCollisionShape(level, blockpos);
+                    if (!voxelshape.isEmpty()) {
+                        d0 = voxelshape.max(Direction.Axis.Y);
+                    }
+                }
+                flag = true;
+                break;
+            }
+            blockpos = blockpos.below();
+        } while (blockpos.getY() >= Mth.floor(minY));
+
+        if (flag) {
+            level.addFreshEntity(
+                new Void_Rune_Entity(
+                    level, x,
+                    d0 + (double) blockpos.getY(),
+                    z,
+                    rotation,
+                    delay,
+                    damage,
+                    caster
+                ));
+        }
     }
 }

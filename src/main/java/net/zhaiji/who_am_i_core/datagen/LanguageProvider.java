@@ -208,6 +208,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.DEATH_LENS, "Death Lens");
         addOrganSkill(CataclysmOrgans.DEATH_LENS, 0, "Fire a death laser (6 damage + 6%% target max HP). No fire or block damage. 15 second cooldown.");
 
+        // Cataclysm 末影守卫器官翻译
+        addItem(CataclysmOrgans.GUARDIAN_STONE, "Guardian Stone");
+        addItem(CataclysmOrgans.VOID_CRYSTAL_SPINE, "Void Crystal Spine");
+        addOrganDescription(CataclysmOrgans.VOID_CRYSTAL_SPINE, "The Ender Guardian's spinal power crystal, still pulsing with residual void energy.");
+        addOrganSkill(CataclysmOrgans.VOID_CRYSTAL_SPINE, 0, "Summons 3 rings of void runes around you (inner 6, middle 11, outer 14). 15 second cooldown.");
+
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
         addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
@@ -729,6 +735,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganSkill(CataclysmOrgans.MECHANICAL_STAR, 0, "锁定视线方向的敌人，发射一枚追踪导弹（伤害 8.0）。冷却 8 秒。");
         addItem(CataclysmOrgans.DEATH_LENS, "死亡透镜");
         addOrganSkill(CataclysmOrgans.DEATH_LENS, 0, "发射一道死亡激光（伤害 6 + 目标最大生命 6%%）。不点火不破坏方块。冷却 15 秒。");
+
+        // Cataclysm 末影守卫器官翻译
+        addItem(CataclysmOrgans.GUARDIAN_STONE, "守卫石块");
+        addItem(CataclysmOrgans.VOID_CRYSTAL_SPINE, "虚空晶脊");
+        addOrganDescription(CataclysmOrgans.VOID_CRYSTAL_SPINE, "末影守卫的脊柱动力晶核，残余的虚空能量仍在其中脉动。");
+        addOrganSkill(CataclysmOrgans.VOID_CRYSTAL_SPINE, 0, "以自身为中心召唤三环虚空符文阵（内6+中11+外14）。冷却15秒。");
 
         // IronSpell 死灵法师器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "死灵法师脊柱");

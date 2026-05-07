@@ -299,6 +299,30 @@ public class CataclysmOrgans {
             .build()
     );
 
+    // ==================== 末影守卫器官 ====================
+
+    // 守卫石块
+    public static final Supplier<Item> GUARDIAN_STONE = WAICItem.ITEM.register(
+        "guardian_stone",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 3)
+            .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.1) // +10%
+            .build()
+    );
+
+    // 虚空晶脊
+    public static final Supplier<Item> VOID_CRYSTAL_SPINE = WAICItem.ITEM.register(
+        "void_crystal_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .skill(CataclysmOrganUtil::voidCrystalSpineSkill)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
+            .cooldown(300)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
     public static void register() {
     }
 }

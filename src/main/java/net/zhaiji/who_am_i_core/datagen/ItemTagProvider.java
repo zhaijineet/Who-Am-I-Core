@@ -803,6 +803,20 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         );
         tag(WAICItemTagManager.UNIQUE).add(CataclysmOrgans.MECHANICAL_STAR.get());
 
+        // ==================== Cataclysm 末影守卫器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.GUARDIAN_STONE.get(),
+            CataclysmOrgans.VOID_CRYSTAL_SPINE.get()
+        );
+        tag(ItemTagManager.SPECIAL).add(
+            CataclysmOrgans.GUARDIAN_STONE.get(),
+            CataclysmOrgans.VOID_CRYSTAL_SPINE.get()
+        );
+        tag(WAICItemTagManager.MECHANICAL).add(
+            CataclysmOrgans.GUARDIAN_STONE.get(),
+            CataclysmOrgans.VOID_CRYSTAL_SPINE.get()
+        );
+
         // ==================== IronSpell 死灵法师器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             IronSpellOrgans.NECROMANCER_SPINE.get(),
