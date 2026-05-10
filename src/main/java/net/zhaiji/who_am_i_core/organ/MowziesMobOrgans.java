@@ -169,10 +169,21 @@ public class MowziesMobOrgans {
 
     /**
      * 禅心
+     * <pre>
+     * 生命值+3，防御+1.5，击退抗性+100%，跳跃力+2
+     * 磐石之躯：免疫摔落伤害
+     * 地卜亲和：拥有地卜术效果时，伤害减免50%
+     * </pre>
      */
     public static final Supplier<Item> ZEN_HEART = WAICItem.ITEM.register(
         "zen_heart",
-        () -> Organ.builder().build()
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
+            .addValueAttribute(InitAttribute.LEAPING, 2)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
     );
 
 

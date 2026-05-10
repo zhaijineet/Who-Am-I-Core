@@ -247,6 +247,11 @@
     "who_am_i_core:cake_heart",
     "who_am_i_core:cake_lung",
     "who_am_i_core:cake_stomach",
-    "who_am_i_core:cake_liver"
+    "who_am_i_core:cake_liver",
+    "who_am_i_core:computing_core",
+    "who_am_i_core:current_rib",
+    "who_am_i_core:charged_muscle",
+    "who_am_i_core:conductive_spine",
+    "who_am_i_core:energy_module"
   ]
 }

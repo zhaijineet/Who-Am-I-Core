@@ -29,6 +29,7 @@ import java.util.function.Supplier;
 public class WAICOrgans {
     public static final String INK_BOTTLE_INK_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".ink_bottle.ink";
     public static final String PALETTE_DYE_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".palette.dye";
+    public static final String ENERGY_MODULE_CHARGE_TRANSLATION = "organ.who_am_i_core.energy_module.charge";
 
     // 神圣核心
     public static final Supplier<Item> DIVINE_CORE = WAICItem.ITEM.register(
@@ -849,6 +850,8 @@ public class WAICOrgans {
     public static final Supplier<Item> SQUASH = WAICItem.ITEM.register(
         "squash",
         () -> Organ.builder()
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .incomingDamage(WAICOrganSkillUtil::squashIncomingDamage)
             .build()
     );
 
@@ -948,4 +951,65 @@ public class WAICOrgans {
 
     public static void register() {
     }
+
+    // ==================== 电磁义体器官 ====================
+
+    // 演算核心
+    public static final Supplier<Item> COMPUTING_CORE = WAICItem.ITEM.register(
+        "computing_core",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.SPEED, 0.5)
+            .tick(WAICOrganSkillUtil::computingCoreTick)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
+    // 导流肋骨
+    public static final Supplier<Item> CURRENT_RIB = WAICItem.ITEM.register(
+        "current_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
+    // 充能肌束
+    public static final Supplier<Item> CHARGED_MUSCLE = WAICItem.ITEM.register(
+        "charged_muscle",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 1.5)
+            .addValueAttribute(InitAttribute.SPEED, 1.5)
+            .tick(WAICOrganSkillUtil::chargedMuscleTick)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .build()
+    );
+
+    // 传导链节
+    public static final Supplier<Item> CONDUCTIVE_SPINE = WAICItem.ITEM.register(
+        "conductive_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .skill(WAICOrganSkillUtil::conductiveSpineSkill)
+            .cooldown(20 * 20)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .build()
+    );
+
+    // 蓄能模块
+    public static final Supplier<Item> ENERGY_MODULE = WAICItem.ITEM.register(
+        "energy_module",
+        () -> Organ.builder()
+            .tick(WAICOrganSkillUtil::energyModuleTick)
+            .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+                float charge = WAICOrganSkillUtil.getModuleCharge(stack);
+                List<Component> add = List.of(
+                    Component.translatable(ENERGY_MODULE_CHARGE_TRANSLATION, (int) charge, 500)
+                );
+                TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
+            })
+            .build()
+    );
 }

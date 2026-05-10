@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.effect.DragonPowerEffect;
+import net.zhaiji.who_am_i_core.effect.OverloadEffect;
 import net.zhaiji.who_am_i_core.effect.SweetnessEffect;
 
 public class WAICEffect {
@@ -35,5 +36,10 @@ public class WAICEffect {
     public static final Holder<MobEffect> SWEETNESS = EFFECT.register(
         "sweetness",
         () -> new SweetnessEffect(MobEffectCategory.BENEFICIAL, 0xFFB6C1)
+    );
+
+    public static final Holder<MobEffect> OVERLOAD = EFFECT.register(
+        "overload",
+        () -> new OverloadEffect(MobEffectCategory.BENEFICIAL, 0x00CED1)
     );
 }

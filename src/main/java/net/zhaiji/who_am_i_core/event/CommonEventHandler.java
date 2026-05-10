@@ -1,6 +1,7 @@
 package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
+import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
 import com.iafenvoy.iceandfire.registry.IafEntities;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
@@ -40,6 +41,7 @@ import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
@@ -47,11 +49,11 @@ import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
-import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 public class CommonEventHandler {
     /**
@@ -171,6 +173,15 @@ public class CommonEventHandler {
             event.setCanceled(true);
             return;
         }
+        // 禅心 - 磐石之躯：免疫摔落伤害
+        if (data.hasOrgan(MowziesMobOrgans.ZEN_HEART.get()) && event.getSource().is(DamageTypeTags.IS_FALL)) {
+            event.setCanceled(true);
+            return;
+        }
+        // 禅心 - 地卜亲和：拥有地卜术效果时减伤50%
+        if (data.hasOrgan(MowziesMobOrgans.ZEN_HEART.get()) && entity.hasEffect(EffectHandler.GEOMANCY)) {
+            event.setAmount(event.getAmount() * 0.50F);
+        }
     }
 
     /**
@@ -218,6 +229,8 @@ public class CommonEventHandler {
         }
         // 九头蛇肋骨效果（唯一）
         block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
+        // 导流肋骨护盾（唯一）
+        block += WAICOrganSkillUtil.currentRibShield(entity, damage);
         // 九头蛇肌肉效果（唯一）
         if (attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
         // 尸王脊柱效果（唯一）

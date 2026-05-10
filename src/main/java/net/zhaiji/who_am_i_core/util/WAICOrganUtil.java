@@ -331,4 +331,13 @@ public class WAICOrganUtil {
         );
         return getStackTemperature(slotContext);
     }
+
+    /**
+     * 获取对称槽位索引（胸腔 N×9，镜像列：0↔8, 1↔7, 2↔6, 3↔5, 4不变）
+     */
+    public static int getSymmetricRibIndex(int index) {
+        int row = index / 9;
+        int col = index % 9;
+        return row * 9 + (8 - col);
+    }
 }

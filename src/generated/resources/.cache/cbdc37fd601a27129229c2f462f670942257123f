@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-08T18:26:16.8285816	Item Models: who_am_i_core
+// 1.21.1	2026-05-10T14:00:05.4436816	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -21,6 +21,7 @@ e4b84038d8ee2b42d501e7515b335bd8584747f5 assets/who_am_i_core/models/item/bluff_
 93ec38510eab8e5d890c4821c1a8976f385428a5 assets/who_am_i_core/models/item/cake_liver.json
 9deea12fee9fa5b33f0d0cc31d69c2c5a6d30afe assets/who_am_i_core/models/item/cake_lung.json
 a964d2293f93d39511d397d358633b5dc0681ebe assets/who_am_i_core/models/item/cake_stomach.json
+819ad4a856f35859ea623d9b5a9e4b3b9d96c7f7 assets/who_am_i_core/models/item/charged_muscle.json
 994f50d110bd741ce857e6306e03740cb616eb6d assets/who_am_i_core/models/item/chesed.json
 fa970f31cde969875f7ccc9aff01862eb9ee93d0 assets/who_am_i_core/models/item/chest_nova.json
 78f39877761ad27bcab0266b6dee63173b70550e assets/who_am_i_core/models/item/cloth_appendix.json
@@ -36,6 +37,8 @@ eb541e9e5da8b104cc8dec8650758a833a94544f assets/who_am_i_core/models/item/cloth_
 1cad4d83d8480906666fc75e9c60461ed5d2207c assets/who_am_i_core/models/item/cloth_stomach.json
 41ed23e30e8ee9aa7d97c70fbaaba182fee2fcf5 assets/who_am_i_core/models/item/cloth_teddy_bear.json
 8d568e7a4be8e1ba903598a30b811c7d817dc9ff assets/who_am_i_core/models/item/compute_chip.json
+b24e79715322d978eaa102445c2c6130352088fe assets/who_am_i_core/models/item/computing_core.json
+30e09fc63c2f88d1e38ca2157d3c45d95b159488 assets/who_am_i_core/models/item/conductive_spine.json
 9261b6b063bc55b69ec024f9601b1dcba9db037d assets/who_am_i_core/models/item/control_rod.json
 c8e9e759b7a98cf2b9527cf65c1b91366b6fd7a0 assets/who_am_i_core/models/item/corrupted_soul_lantern.json
 ac9253965b9c2c3028a49b35b65fcb125ddde834 assets/who_am_i_core/models/item/crimson_appendix.json
@@ -47,6 +50,7 @@ e17ba0f036899ca2d7989f8f302c9c232ed0f5cd assets/who_am_i_core/models/item/crimso
 32934248239bdcbccac00787e718b04be389698b assets/who_am_i_core/models/item/crimson_muscle.json
 986e5d6f4587ded5cd672939a0f9361f5fb0c2c5 assets/who_am_i_core/models/item/crimson_spleen.json
 241c08199782736758ad78700f17967fe8ef78da assets/who_am_i_core/models/item/crimson_stomach.json
+0b5b47feeb50733de6a5bad63ef139145c25bec6 assets/who_am_i_core/models/item/current_rib.json
 f5a8b7e4caeb3689dc532ddd6c369cdcdaad89a7 assets/who_am_i_core/models/item/cursed_gold_heart.json
 3c5aa64984139fe424a6e4574340fd1bbb8ff0a1 assets/who_am_i_core/models/item/cursed_gold_intestine.json
 d127ca2c1f175d5cf0f9c8dd1651e825341402ee assets/who_am_i_core/models/item/cursed_gold_liver.json
@@ -65,6 +69,7 @@ ddebdb42960f38146d88dac3b5d95d92740f1752 assets/who_am_i_core/models/item/eerie_
 ecbe05ff956b09145d39e5ee8a91792a95485928 assets/who_am_i_core/models/item/ember_metal_muscle.json
 2b35073893768e7bbb7439388b0dddbe5f822b39 assets/who_am_i_core/models/item/ember_metal_rib.json
 981dd27edc3e394c769556a05661b2c7c8e708f4 assets/who_am_i_core/models/item/ember_metal_spine.json
+fe792531330ef17a8df96fc00f777722be317c5a assets/who_am_i_core/models/item/energy_module.json
 ac44c4d0871ed1eb466c34375821370787ee91cb assets/who_am_i_core/models/item/experience_heart.json
 0c264102c0f6313ff829aedc5d15ed3f28a05602 assets/who_am_i_core/models/item/fantastical_appendix.json
 d422946d6cbb105eba69d31f66c6e5e44d4fc5ab assets/who_am_i_core/models/item/fantastical_heart.json

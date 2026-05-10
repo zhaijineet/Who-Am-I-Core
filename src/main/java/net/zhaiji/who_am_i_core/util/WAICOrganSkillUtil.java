@@ -12,11 +12,13 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -30,6 +32,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
@@ -40,6 +43,7 @@ import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
 import java.util.ArrayList;
@@ -666,5 +670,304 @@ public class WAICOrganSkillUtil {
             float bonusDamage = target.getMaxHealth() * 0.03F * harmfulCount;
             damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
         }
+    }
+
+    /**
+     * 窝瓜 - 受到摔落伤害时免疫，并将等量摔落伤害平分给周围5×5×5范围内的实体
+     */
+    public static void squashIncomingDamage(ChestCavitySlotContext slotContext, LivingIncomingDamageEvent event) {
+        if (!event.getSource().is(DamageTypeTags.IS_FALL)) return;
+
+        LivingEntity entity = slotContext.entity();
+        Level level = entity.level();
+        if (level.isClientSide()) return;
+
+        float fallDamage = event.getAmount();
+
+        // 5×5×5 范围搜索（半径2.5格）
+        AABB searchBox = entity.getBoundingBox().inflate(2.5);
+        List<LivingEntity> targets = level.getEntitiesOfClass(
+            LivingEntity.class,
+            searchBox,
+            target -> target != entity
+                      && !(target instanceof TamableAnimal tamable && entity instanceof Player player && tamable.isOwnedBy(player))
+        );
+
+        // 平分摔落伤害
+        float damagePerTarget = fallDamage / targets.size();
+        DamageSource fallSource = level.damageSources().fall();
+        for (LivingEntity target : targets) {
+            target.hurt(fallSource, damagePerTarget);
+        }
+
+        // 免疫摔落伤害
+        event.setCanceled(true);
+    }
+
+    // ==================== 电荷系统 ====================
+
+    /**
+     * 收集胸腔中所有蓄能模块
+     */
+    public static List<ItemStack> collectEnergyModules(ChestCavityData data) {
+        List<ItemStack> modules = new ArrayList<>();
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (!stack.isEmpty() && stack.is(WAICOrgans.ENERGY_MODULE.get())) {
+                modules.add(stack);
+            }
+        }
+        return modules;
+    }
+
+    /**
+     * 获取当前所有蓄能模块的电荷总量
+     */
+    public static float getCharge(ChestCavityData data) {
+        return getCharge(collectEnergyModules(data));
+    }
+
+    /**
+     * 获取电荷总量（已有模块列表）
+     */
+    public static float getCharge(List<ItemStack> modules) {
+        float total = 0;
+        for (ItemStack module : modules) {
+            total += getModuleCharge(module);
+        }
+        return total;
+    }
+
+    /**
+     * 获取单个蓄能模块的电荷量
+     */
+    public static float getModuleCharge(ItemStack module) {
+        CompoundTag tag = module.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        return tag.contains("charge") ? tag.getFloat("charge") : 0;
+    }
+
+    /**
+     * 设置单个蓄能模块的电荷量
+     */
+    public static void setModuleCharge(ItemStack module, float charge) {
+        CompoundTag tag = new CompoundTag();
+        tag.putFloat("charge", Math.max(0, charge));
+        module.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+    }
+
+    /**
+     * 获取最大电荷上限 = 500 × 蓄能模块数量
+     */
+    public static float getMaxCharge(ChestCavityData data) {
+        return getMaxCharge(collectEnergyModules(data));
+    }
+
+    /**
+     * 获取最大电荷上限（已有模块列表）
+     */
+    public static float getMaxCharge(List<ItemStack> modules) {
+        return 500 * modules.size();
+    }
+
+    /**
+     * 获取有效超载上限 = maxCharge × (1 + 0.5)
+     */
+    public static float getEffectiveMaxCharge(ChestCavityData data) {
+        return getEffectiveMaxCharge(collectEnergyModules(data));
+    }
+
+    /**
+     * 获取有效超载上限（已有模块列表）
+     */
+    public static float getEffectiveMaxCharge(List<ItemStack> modules) {
+        return getMaxCharge(modules) * (1 + 0.5F);
+    }
+
+    /**
+     * 向蓄能模块中插入电荷（按比例分配到各模块）
+     */
+    public static float insertCharge(ChestCavityData data, float amount, boolean simulate) {
+        if (amount <= 0) return 0;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return 0;
+
+        float effectiveMax = getEffectiveMaxCharge(modules);
+        float currentCharge = getCharge(modules);
+        float canInsert = Math.max(0, effectiveMax - currentCharge);
+        float toInsert = Math.min(amount, canInsert);
+
+        if (toInsert <= 0) return 0;
+        if (simulate) return toInsert;
+
+        float maxPerModule = effectiveMax / modules.size();
+        float remaining = toInsert;
+        for (ItemStack module : modules) {
+            float moduleCharge = getModuleCharge(module);
+            float moduleCanInsert = Math.max(0, maxPerModule - moduleCharge);
+            float insert = Math.min(remaining, moduleCanInsert);
+            if (insert > 0) {
+                setModuleCharge(module, moduleCharge + insert);
+                remaining -= insert;
+            }
+            if (remaining <= 0) break;
+        }
+        return toInsert - remaining;
+    }
+
+    /**
+     * 从蓄能模块中提取电荷（按比例从各模块扣除）
+     * 内部处理充能肌束余电回收
+     */
+    public static float extractCharge(ChestCavityData data, LivingEntity entity, float amount, boolean simulate) {
+        if (amount <= 0) return 0;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return 0;
+
+        float currentCharge = getCharge(modules);
+        float toExtract = Math.min(amount, currentCharge);
+
+        if (toExtract <= 0) return 0;
+        if (simulate) return toExtract;
+
+        float remaining = toExtract;
+        for (ItemStack module : modules) {
+            float moduleCharge = getModuleCharge(module);
+            float extract = Math.min(remaining, moduleCharge);
+            if (extract > 0) {
+                setModuleCharge(module, moduleCharge - extract);
+                remaining -= extract;
+            }
+            if (remaining <= 0) break;
+        }
+        float extracted = toExtract - remaining;
+        // 充能肌束余电回收
+        if (extracted > 0 && data.hasOrgan(WAICOrgans.CHARGED_MUSCLE.get())) {
+            float healRate = isOverloadMode(entity) ? 0.20f : 0.10f;
+            entity.heal(extracted * healRate);
+        }
+        return extracted;
+    }
+
+    /**
+     * 消耗电荷（含充能肌束回路返还逻辑）
+     */
+    public static float consumeCharge(ChestCavityData data, LivingEntity entity, float amount, boolean simulate) {
+        float extracted = extractCharge(data, entity, amount, simulate);
+        if (extracted > 0 && !simulate && data.hasOrgan(WAICOrgans.CHARGED_MUSCLE.get())) {
+            float refundChance = isOverloadMode(entity) ? 0.5f : 0.25f;
+            if (entity.getRandom().nextFloat() < refundChance) {
+                insertCharge(data, extracted, false);
+            }
+        }
+        return extracted;
+    }
+
+    /**
+     * 是否处于超频模式
+     */
+    public static boolean isOverloadMode(LivingEntity entity) {
+        return entity.hasEffect(WAICEffect.OVERLOAD);
+    }
+
+    /**
+     * 蓄能模块 tick：超载衰减
+     */
+    public static void energyModuleTick(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return;
+        float charge = getCharge(modules);
+        float maxCharge = getMaxCharge(modules);
+        if (charge > maxCharge) {
+            float drain = Math.min(1.0F, charge - maxCharge);
+            extractCharge(data, entity, drain, false);
+        }
+    }
+
+    /**
+     * 演算核心 tick：信号再生
+     */
+    public static void computingCoreTick(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        if (isOverloadMode(entity)) return;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return;
+        float charge = getCharge(modules);
+        float maxCharge = getMaxCharge(modules);
+        if (charge < maxCharge) {
+            float toRegen = Math.min(1.0f, maxCharge - charge);
+            insertCharge(data, toRegen, false);
+        }
+    }
+
+    /**
+     * 充能肌束 tick：电流推动（冲刺产生电荷）
+     */
+    public static void chargedMuscleTick(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        if (!entity.isSprinting()) return;
+        insertCharge(data, 1, false);
+    }
+
+    /**
+     * 传导链节主动技能：激活超频模式
+     */
+    public static boolean conductiveSpineSkill(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return false;
+        float maxCharge = getMaxCharge(modules);
+        float activationCost = maxCharge / 2;
+        float currentCharge = getCharge(modules);
+        if (currentCharge < activationCost) return false;
+        consumeCharge(data, entity, activationCost, false);
+        entity.addEffect(new MobEffectInstance(WAICEffect.OVERLOAD, 200));
+        return true;
+    }
+
+    /**
+     * 检查对称位置是否存在导流肋骨
+     */
+    public static boolean hasSymmetricCurrentRib(ChestCavityData data, int index) {
+        int symmetricIndex = WAICOrganUtil.getSymmetricRibIndex(index);
+        if (symmetricIndex == index) return false;
+        if (symmetricIndex < 0 || symmetricIndex >= data.getSlots()) return false;
+        ItemStack symmetricStack = data.getStackInSlot(symmetricIndex);
+        return !symmetricStack.isEmpty() && symmetricStack.is(WAICOrgans.CURRENT_RIB.get());
+    }
+
+    /**
+     * 导流肋骨护盾：每10电荷抵消1伤害，上限4（超频8）
+     */
+    public static float currentRibShield(LivingEntity entity, float damage) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!data.hasOrgan(WAICOrgans.CURRENT_RIB.get())) return 0;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return 0;
+        float charge = getCharge(modules);
+        if (charge <= 0) return 0;
+        boolean overload = isOverloadMode(entity);
+        boolean hasSymmetric = false;
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (!stack.isEmpty() && stack.is(WAICOrgans.CURRENT_RIB.get())) {
+                if (hasSymmetricCurrentRib(data, i)) {
+                    hasSymmetric = true;
+                    break;
+                }
+            }
+        }
+        float costPerPoint = hasSymmetric ? 5 : 10;
+        int maxBlock = overload ? 8 : 4;
+        int maxAffordable = (int) (charge / costPerPoint);
+        int blockPoints = Math.min(maxBlock, Math.min(maxAffordable, (int) Math.floor(damage)));
+        if (blockPoints <= 0) return 0;
+        float actualCost = blockPoints * costPerPoint;
+        consumeCharge(data, entity, actualCost, false);
+        return blockPoints;
     }
 }

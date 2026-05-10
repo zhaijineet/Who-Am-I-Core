@@ -895,5 +895,26 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CompanionsOrgans.CAKE_STOMACH.get(),
             CompanionsOrgans.CAKE_LIVER.get()
         );
+
+        // ==================== 电磁义体器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.COMPUTING_CORE.get(),
+            WAICOrgans.CURRENT_RIB.get(),
+            WAICOrgans.CHARGED_MUSCLE.get(),
+            WAICOrgans.CONDUCTIVE_SPINE.get(),
+            WAICOrgans.ENERGY_MODULE.get()
+        );
+        tag(ItemTagManager.SPECIAL).add(WAICOrgans.COMPUTING_CORE.get());
+        tag(ItemTagManager.RIB).add(WAICOrgans.CURRENT_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.CHARGED_MUSCLE.get());
+        tag(ItemTagManager.SPINE).add(WAICOrgans.CONDUCTIVE_SPINE.get());
+        tag(ItemTagManager.SPECIAL).add(WAICOrgans.ENERGY_MODULE.get());
+        tag(WAICItemTagManager.MECHANICAL).add(
+            WAICOrgans.COMPUTING_CORE.get(),
+            WAICOrgans.CURRENT_RIB.get(),
+            WAICOrgans.CHARGED_MUSCLE.get(),
+            WAICOrgans.CONDUCTIVE_SPINE.get(),
+            WAICOrgans.ENERGY_MODULE.get()
+        );
     }
 }

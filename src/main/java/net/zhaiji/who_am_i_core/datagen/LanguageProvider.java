@@ -575,6 +575,29 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 甜蜜效果翻译
         addEffect(WAICEffect.SWEETNESS::value, "Sweetness");
+
+        // 超频效果翻译
+        addEffect(WAICEffect.OVERLOAD::value, "Overload");
+
+        // 电磁义体器官翻译
+        addItem(WAICOrgans.COMPUTING_CORE, "Computing Core");
+        addOrganDescription(WAICOrgans.COMPUTING_CORE, "Central processor managing charge regeneration");
+        addOrganSkill(WAICOrgans.COMPUTING_CORE, 0, "Signal Regen: +1 charge/tick (capped at max). Paused during Overload");
+        addItem(WAICOrgans.CURRENT_RIB, "Current Rib");
+        addOrganDescription(WAICOrgans.CURRENT_RIB, "Diverts current to shield against damage");
+        addOrganSkill(WAICOrgans.CURRENT_RIB, 0, "Parallel: symmetric Current Rib halves shield cost");
+        addOrganSkill(WAICOrgans.CURRENT_RIB, 1, "Shield: 10 charge per 1 damage blocked, max 4 (8 in Overload)");
+        addItem(WAICOrgans.CHARGED_MUSCLE, "Charged Muscle");
+        addOrganDescription(WAICOrgans.CHARGED_MUSCLE, "Cylindrical capacitor optimizing energy efficiency");
+        addOrganSkill(WAICOrgans.CHARGED_MUSCLE, 0, "Circuit Return: 25% chance to refund consumed charge (50% in Overload)");
+        addOrganSkill(WAICOrgans.CHARGED_MUSCLE, 1, "Residual Recovery: 10% of lost charge converted to healing (20% in Overload)");
+        addOrganSkill(WAICOrgans.CHARGED_MUSCLE, 2, "Current Push: Generates 1 charge per tick while sprinting");
+        addItem(WAICOrgans.CONDUCTIVE_SPINE, "Conductive Spine");
+        addOrganDescription(WAICOrgans.CONDUCTIVE_SPINE, "Signal channel triggering Overload mode");
+        addOrganSkill(WAICOrgans.CONDUCTIVE_SPINE, "Overload: consume maxCharge/2 to enter 10s Overload mode. Cooldown 20s");
+        addItem(WAICOrgans.ENERGY_MODULE, "Energy Module");
+        addOrganDescription(WAICOrgans.ENERGY_MODULE, "Physical battery storing all charge. +500 capacity each, allows 50% overload");
+        add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "Charge: %s/%s");
     }
 
     public void Chinese() {
@@ -1106,6 +1129,29 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 甜蜜效果翻译
         addEffect(WAICEffect.SWEETNESS::value, "甜蜜");
+
+        // 超频效果翻译
+        addEffect(WAICEffect.OVERLOAD::value, "超频");
+
+        // 电磁义体器官翻译
+        addItem(WAICOrgans.COMPUTING_CORE, "演算核心");
+        addOrganDescription(WAICOrgans.COMPUTING_CORE, "中央处理器，管理电荷再生");
+        addOrganSkill(WAICOrgans.COMPUTING_CORE, 0, "信号再生：每tick回复1点电荷（不超过上限）。超频期间暂停");
+        addItem(WAICOrgans.CURRENT_RIB, "导流肋骨");
+        addOrganDescription(WAICOrgans.CURRENT_RIB, "导流元件，消耗电荷形成防护");
+        addOrganSkill(WAICOrgans.CURRENT_RIB, 0, "并联优化：对称位置存在导流肋骨时，护盾消耗减半");
+        addOrganSkill(WAICOrgans.CURRENT_RIB, 1, "导流护盾：每10电荷抵消1点伤害，上限4点（超频时8点）");
+        addItem(WAICOrgans.CHARGED_MUSCLE, "充能肌束");
+        addOrganDescription(WAICOrgans.CHARGED_MUSCLE, "圆柱电容，优化能量效率并回收余电");
+        addOrganSkill(WAICOrgans.CHARGED_MUSCLE, 0, "回路返还：消耗电荷时，25%概率返还（超频时50%）");
+        addOrganSkill(WAICOrgans.CHARGED_MUSCLE, 1, "余电回收：电荷流失量的10%转化为生命回复（超频时20%）");
+        addOrganSkill(WAICOrgans.CHARGED_MUSCLE, 2, "电流推动：冲刺时每 tick 产生 1 电荷");
+        addItem(WAICOrgans.CONDUCTIVE_SPINE, "传导链节");
+        addOrganDescription(WAICOrgans.CONDUCTIVE_SPINE, "信号传导通道，激活超频模式");
+        addOrganSkill(WAICOrgans.CONDUCTIVE_SPINE, "超频模式：消耗maxCharge/2电荷激活，持续10秒。冷却20秒");
+        addItem(WAICOrgans.ENERGY_MODULE, "蓄能模块");
+        addOrganDescription(WAICOrgans.ENERGY_MODULE, "物理电池仓，每个提供500电荷存储上限，允许50%超载");
+        add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "电荷: %s/%s");
     }
 
     private void addOrganSkill(Supplier<Item> item, String value) {
