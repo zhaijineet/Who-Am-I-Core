@@ -145,7 +145,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.MALKUTH, "Malkuth");
         addOrganSkill(FDBossesOrgans.MALKUTH, "Global temperature is always 0; local temperature uses the full positive/negative temperature from all organs");
         addItem(FDBossesOrgans.CHESED, "Chesed");
+        addOrganSkill(FDBossesOrgans.CHESED, "Attacks summon a lightning ray that tracks the target, dealing weapon damage and applying Shocked. Cooldown: 1s");
         addItem(FDBossesOrgans.GEBURAH, "Geburah");
+        addOrganSkill(FDBossesOrgans.GEBURAH, "Attacks deal bonus damage equal to 3% max HP per harmful effect on the target");
 
         // 利维坦器官翻译
         addItem(CataclysmOrgans.LEVIATHAN_HEART, "Leviathan Heart");
@@ -163,6 +165,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // Cataclysm 咒翼灵骸器官翻译
         addItem(CataclysmOrgans.MALEDICTUS_SPINE, "Maledictus Spine");
         addItem(CataclysmOrgans.MALEDICTUS_RIB, "Maledictus Rib");
+        addItem(CataclysmOrgans.PHANTOM_HEART, "Phantom Heart");
+        addOrganDescription(CataclysmOrgans.PHANTOM_HEART, "A cursed heart of the Maledictus");
+        addOrganSkill(CataclysmOrgans.PHANTOM_HEART, 1, "While sprinting, all damage dealt is increased by 25%");
+        addItem(CataclysmOrgans.PHANTOM_SHARD, "Phantom Shard");
+        addItem(CataclysmOrgans.SEALING_STONE_SLAB, "Sealing Stone Slab");
+        addOrganSkill(CataclysmOrgans.SEALING_STONE_SLAB, 0, "Summons 5 phantom halberds in a fan shape, each dealing 12 magic damage");
 
         // Cataclysm 斯库拉器官翻译
         addItem(CataclysmOrgans.TIDAL_LANTERN, "Tidal Lantern");
@@ -673,7 +681,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.MALKUTH, "王国");
         addOrganSkill(FDBossesOrgans.MALKUTH, "全局温度始终为0；获取局部温度时，使用所有器官的全局正/负温度");
         addItem(FDBossesOrgans.CHESED, "慈悲");
+        addOrganSkill(FDBossesOrgans.CHESED, "攻击时召唤闪电射线追踪目标，造成武器伤害并施加感电效果。冷却：1秒");
         addItem(FDBossesOrgans.GEBURAH, "严厉");
+        addOrganSkill(FDBossesOrgans.GEBURAH, "攻击时，对目标每个负面效果额外造成其最大生命值3%的伤害");
 
         // 利维坦器官翻译
         addItem(CataclysmOrgans.LEVIATHAN_HEART, "利维坦心脏");
@@ -691,6 +701,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // 咒翼灵骸器官翻译
         addItem(CataclysmOrgans.MALEDICTUS_SPINE, "咒翼灵骸脊柱");
         addItem(CataclysmOrgans.MALEDICTUS_RIB, "咒翼灵骸肋骨");
+        addItem(CataclysmOrgans.PHANTOM_HEART, "咒魂心脏");
+        addOrganDescription(CataclysmOrgans.PHANTOM_HEART, "咒翼灵骸的诅咒心脏");
+        addOrganSkill(CataclysmOrgans.PHANTOM_HEART, 1, "冲刺状态下，所有造成的伤害最终增加25%");
+        addItem(CataclysmOrgans.PHANTOM_SHARD, "咒魂残片");
+        addItem(CataclysmOrgans.SEALING_STONE_SLAB, "封印石板");
+        addOrganSkill(CataclysmOrgans.SEALING_STONE_SLAB, 0, "在前方扇形范围召唤5道幻影战戟，每道造成12点咒翼魔法伤害");
 
         // 斯库拉器官翻译
         addItem(CataclysmOrgans.TIDAL_LANTERN, "涛浪提灯");

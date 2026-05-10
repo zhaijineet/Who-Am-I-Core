@@ -721,10 +721,20 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         // ==================== Cataclysm 咒翼灵骸器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             CataclysmOrgans.MALEDICTUS_SPINE.get(),
-            CataclysmOrgans.MALEDICTUS_RIB.get()
+            CataclysmOrgans.MALEDICTUS_RIB.get(),
+            CataclysmOrgans.PHANTOM_HEART.get(),
+            CataclysmOrgans.PHANTOM_SHARD.get(),
+            CataclysmOrgans.SEALING_STONE_SLAB.get()
         );
         tag(ItemTagManager.SPINE).add(CataclysmOrgans.MALEDICTUS_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.MALEDICTUS_RIB.get());
+        tag(ItemTagManager.HEART).add(CataclysmOrgans.PHANTOM_HEART.get());
+        tag(ItemTagManager.SPECIAL).add(CataclysmOrgans.PHANTOM_SHARD.get());
+        tag(ItemTagManager.SPECIAL).add(CataclysmOrgans.SEALING_STONE_SLAB.get());
+        tag(WAICItemTagManager.ICE).add(
+            CataclysmOrgans.PHANTOM_HEART.get(),
+            CataclysmOrgans.PHANTOM_SHARD.get()
+        );
 
         // ==================== Cataclysm 斯库拉器官标签 ====================
         tag(ItemTagManager.ORGANS).add(

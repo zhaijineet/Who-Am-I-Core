@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.util;
 
+import com.finderfeed.fdbosses.content.entities.chesed_boss.chesed_mini_ray.ChesedMiniRay;
 import com.google.common.collect.Multimap;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -31,6 +32,7 @@ import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
@@ -618,5 +620,51 @@ public class WAICOrganSkillUtil {
         // 使用 setHealth 直接设置，不触发 heal() → 避免心脏泣血回调将血液加回
         entity.setHealth(Math.min(entity.getHealth() + healAmount, entity.getMaxHealth()));
         return true;
+    }
+
+    // ==================== FDBosses 器官 ====================
+
+    /**
+     * 慈悲被动：闪电射线
+     * <p>
+     * 攻击时召唤Chesed闪电射线，自动追踪目标并造成武器伤害100%的魔法伤害+感电效果。
+     * 冷却时间1秒（20tick），通过 OrganSkillUtil 检测和设置冷却。
+     * </p>
+     */
+    public static void chesedAttack(
+        ChestCavitySlotContext context, LivingEntity target,
+        DamageSource source, DamageContainer damageContainer
+    ) {
+        LivingEntity entity = context.entity();
+        Level level = entity.level();
+        if (level.isClientSide()) return;
+        // 检测冷却
+        if (OrganSkillUtil.hasCooldown(entity, context.stack())) return;
+        // 召唤闪电射线
+        ChesedMiniRay.summon(level, target, entity.getMainHandItem(), entity);
+        // 设置冷却 20 tick（1秒）
+        OrganSkillUtil.addCooldown(entity, context.stack(), 20);
+    }
+
+    /**
+     * 严厉被动：罪恶审判
+     * <p>
+     * 攻击拥有负面效果的目标时，额外造成目标最大生命值×3%×负面效果数量的伤害。
+     * </p>
+     */
+    public static void geburahAttack(
+        ChestCavitySlotContext context, LivingEntity target,
+        DamageSource source, DamageContainer damageContainer
+    ) {
+        int harmfulCount = 0;
+        for (MobEffectInstance effect : target.getActiveEffects()) {
+            if (effect instanceof IMobEffectInstance instance && instance.isHarmful()) {
+                harmfulCount++;
+            }
+        }
+        if (harmfulCount > 0) {
+            float bonusDamage = target.getMaxHealth() * 0.03F * harmfulCount;
+            damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
+        }
     }
 }

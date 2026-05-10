@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-06T18:24:12.869464	Item Models: who_am_i_core
+// 1.21.1	2026-05-08T18:26:16.8285816	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -203,6 +203,8 @@ d9e3b65ba09ffec7e44b0c43589b075178ea1c83 assets/who_am_i_core/models/item/necrom
 203f36bf7f5de91a2a41b3c8a21a86bd8fcf7655 assets/who_am_i_core/models/item/nib.json
 b6ecb4eb58c804c2462cca0d27faeba7e85abdf4 assets/who_am_i_core/models/item/palette.json
 36fb41bb9f20c7fc211f1c55a96ca2ee69061c69 assets/who_am_i_core/models/item/petite_chest_opener.json
+b4f083609ab9abb1f3b12afc81ef8a53c10348d9 assets/who_am_i_core/models/item/phantom_heart.json
+d3e293ba3a2bdb43e86612a40857547ede6f5360 assets/who_am_i_core/models/item/phantom_shard.json
 b97b3c412f48ba6314b1f03ee39c2cacea1ad686 assets/who_am_i_core/models/item/pigment_appendix.json
 c7c72fd7c8d5d8c6808a0170c3cbdbae7bd4447f assets/who_am_i_core/models/item/pigment_heart.json
 20483feefdd6b71aea0cdecc7f49f465f000c0b9 assets/who_am_i_core/models/item/pigment_intestine.json
@@ -229,6 +231,7 @@ fa39234bdb3c2360243a37b823276ace61c1d77e assets/who_am_i_core/models/item/power_
 feead5ce41491babb710a401a6fbe4f112b421e2 assets/who_am_i_core/models/item/royal_steel_muscle.json
 f0ad197c4deea5263afcd7bc4f2d810199b63d8a assets/who_am_i_core/models/item/royal_steel_rib.json
 1493e9966629a2eb7fe1277b4c1689a5ab5d8888 assets/who_am_i_core/models/item/royal_steel_spine.json
+f425320fe64d6c2d24d50d063baaacc151c7ec7d assets/who_am_i_core/models/item/sealing_stone_slab.json
 c2edfe1f041d81625585f5573e1275b91d3e3e68 assets/who_am_i_core/models/item/squash.json
 9145630e077be77d0c0da619b68909605ff1c76f assets/who_am_i_core/models/item/storm_rib.json
 c3bb8b1a5a8c741e4e59ce88c53c43310de6a014 assets/who_am_i_core/models/item/storm_spine.json

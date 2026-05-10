@@ -118,6 +118,40 @@ public class CataclysmOrgans {
             .build()
     );
 
+    // 咒魂心脏
+    public static final Supplier<Item> PHANTOM_HEART = WAICItem.ITEM.register(
+        "phantom_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
+            .attack(CataclysmOrganUtil::phantomHeartAttack)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
+            .build()
+    );
+
+    // 咒魂残片
+    public static final Supplier<Item> PHANTOM_SHARD = WAICItem.ITEM.register(
+        "phantom_shard",
+        () -> Organ.builder()
+            .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
+            .addValueAttribute(InitAttribute.LEAPING, 2)
+            .build()
+    );
+
+    // 封印石板
+    public static final Supplier<Item> SEALING_STONE_SLAB = WAICItem.ITEM.register(
+        "sealing_stone_slab",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
+            .skill(CataclysmOrganUtil::sealingStoneSlabSkill)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
+            .cooldown(300)
+            .build()
+    );
+
     // ==================== 斯库拉器官 ====================
 
     // 涛浪提灯

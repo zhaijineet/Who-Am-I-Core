@@ -4,6 +4,7 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -44,6 +45,11 @@ public class FDBossesOrgans {
     public static final Supplier<Item> CHESED = WAICItem.ITEM.register(
         "chesed",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .attack(WAICOrganSkillUtil::chesedAttack)
             .build()
     );
 
@@ -51,6 +57,11 @@ public class FDBossesOrgans {
     public static final Supplier<Item> GEBURAH = WAICItem.ITEM.register(
         "geburah",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.STRENGTH, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
+            .attack(WAICOrganSkillUtil::geburahAttack)
             .build()
     );
 

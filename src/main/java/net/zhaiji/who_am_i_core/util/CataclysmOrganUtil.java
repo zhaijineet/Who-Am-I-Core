@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.util;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
+import com.github.L_Ender.cataclysm.entity.projectile.Phantom_Halberd_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Void_Rune_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Wither_Howitzer_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
@@ -469,6 +470,113 @@ public class CataclysmOrganUtil {
                     damage,
                     caster
                 ));
+        }
+    }
+
+    // ==================== 咒翼灵骸器官 ====================
+
+    /**
+     * 咒魂心脏 — 咒魂战意攻击回调
+     * 冲刺状态下，所有造成的伤害最终增加25%
+     */
+    public static void phantomHeartAttack(
+        ChestCavitySlotContext context,
+        LivingEntity target,
+        DamageSource source,
+        DamageContainer damageContainer
+    ) {
+        LivingEntity entity = context.entity();
+        if (entity == target) return;
+        if (!entity.isSprinting()) return;
+
+        float currentDamage = damageContainer.getNewDamage();
+        damageContainer.setNewDamage(currentDamage * 1.25F);
+    }
+
+    /**
+     * 封印石板 — 破封·幻戟阵
+     * 在前方扇形范围召唤5道幻影战戟从地面依次刺出
+     */
+    public static boolean sealingStoneSlabSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (!entity.onGround()) return false;
+
+        Level level = entity.level();
+
+        // 音效
+        level.playSound(
+            null,
+            entity,
+            ModSounds.PHANTOM_SPEAR.get(),
+            SoundSource.PLAYERS,
+            1.5F,
+            1.0F + entity.getRandom().nextFloat() * 0.1F
+        );
+
+        // 震屏
+        ScreenShake_Entity.ScreenShake(level, entity.position(), 15, 0.2f, 0, 10);
+
+        // 扇形5道幻影战戟
+        float baseYRot = entity.getYRot() * ((float) Math.PI / 180F);
+        float[] angleOffsets = {
+            -24.0F, -12.0F, 0.0F, 12.0F, 24.0F
+        };
+
+        for (int i = 0; i < angleOffsets.length; i++) {
+            float angleRad = baseYRot + angleOffsets[i] * ((float) Math.PI / 180F);
+            int warmupDelay = i * 3;
+
+            // 计算戟的位置：从玩家前方2格处
+            double spawnX = entity.getX() + Mth.cos(angleRad) * 2.0D;
+            double spawnZ = entity.getZ() + Mth.sin(angleRad) * 2.0D;
+
+            spawnPhantomHalberd(level, spawnX, entity.getY(), spawnZ, angleRad, warmupDelay, entity, 12.0F);
+        }
+
+        return true;
+    }
+
+    /**
+     * 幻影战戟生成辅助方法
+     * 从指定位置向下搜索地面，在地面生成幻影战戟
+     */
+    private static void spawnPhantomHalberd(
+        Level level, double x, double minY, double z,
+        float rotation, int delay, LivingEntity caster, float damage
+    ) {
+        double maxY = minY + 3.0D;
+        BlockPos blockpos = BlockPos.containing(x, maxY, z);
+        boolean foundGround = false;
+        double groundOffset = 0.0D;
+
+        do {
+            BlockPos below = blockpos.below();
+            BlockState blockstate = level.getBlockState(below);
+            if (blockstate.isFaceSturdy(level, below, Direction.UP)) {
+                if (!level.isEmptyBlock(blockpos)) {
+                    VoxelShape voxelshape = level.getBlockState(blockpos).getCollisionShape(level, blockpos);
+                    if (!voxelshape.isEmpty()) {
+                        groundOffset = voxelshape.max(Direction.Axis.Y);
+                    }
+                }
+                foundGround = true;
+                break;
+            }
+            blockpos = blockpos.below();
+        } while (blockpos.getY() >= Mth.floor(minY));
+
+        if (foundGround) {
+            level.addFreshEntity(
+                new Phantom_Halberd_Entity(
+                    level, x,
+                    groundOffset + blockpos.getY(),
+                    z,
+                    rotation,
+                    delay,
+                    caster,
+                    damage
+                )
+            );
         }
     }
 }
