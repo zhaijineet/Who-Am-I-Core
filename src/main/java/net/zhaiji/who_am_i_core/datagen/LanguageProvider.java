@@ -158,7 +158,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "Leviathan Spine");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "Leviathan Fishbone");
 
-        // Cataclysm 冥行武弁器官翻译
+        // Cataclysm 咒骸器官翻译
         addItem(CataclysmOrgans.APTRGANGR_SPINE, "Aptrgangr Spine");
         addItem(CataclysmOrgans.APTRGANGR_RIB, "Aptrgangr Rib");
 
@@ -222,9 +222,19 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganDescription(CataclysmOrgans.VOID_CRYSTAL_SPINE, "The Ender Guardian's spinal power crystal, still pulsing with residual void energy.");
         addOrganSkill(CataclysmOrgans.VOID_CRYSTAL_SPINE, 0, "Summons 3 rings of void runes around you (inner 6, middle 11, outer 14). 15 second cooldown.");
 
-        // IronSpell 死灵法师器官翻译
+        // IronSpell 亡魂器官翻译
         addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
         addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
+
+        // IronSpell 提洛斯回响·原初受火者器官翻译
+        addItem(IronSpellOrgans.PRIMORDIAL_FLAME, "Primordial Flame");
+        addOrganDescription(IronSpellOrgans.PRIMORDIAL_FLAME, "The first spark that kindled the primeval fire");
+        addOrganSkill(IronSpellOrgans.PRIMORDIAL_FLAME, 0, "Fire spells gain +1 spell level");
+
+        // IronSpell 高位唤魔者器官翻译
+        addItem(IronSpellOrgans.EMERALD_SKULL, "Emerald Skull");
+        addOrganDescription(IronSpellOrgans.EMERALD_SKULL, "The cursed skull of an arch-evoker, pulsing with emerald magic");
+        addOrganSkill(IronSpellOrgans.EMERALD_SKULL, 0, "Evocation spells gain +1 spell level");
 
         // IronSpell 死者之王器官翻译
         addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Corrupted Soul Lantern");
@@ -444,6 +454,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_BOTTLE, "Ink Bottle");
         add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "Ink: %s/1000");
         addItem(WAICOrgans.NIB, "Nib");
+        addOrganDescription(WAICOrgans.NIB, "Consumes ink (5×level) to boost spell level by 1 on cast (triggers first)");
 
         // 颜料器官翻译
         addItem(WAICOrgans.PIGMENT_HEART, "Pigment Heart");
@@ -500,14 +511,41 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 九狱器官翻译
         addItem(WAICOrgans.LIMBO, "Limbo");
+        addOrganSkill(WAICOrgans.LIMBO, 0, "Sin 1: Gain 1 XP/sec");
+        addOrganSkill(WAICOrgans.LIMBO, 1, "Sin 2: Gain 3 XP/sec");
+        addOrganSkill(WAICOrgans.LIMBO, 2, "Sin 3: Gain 5 XP/sec");
         addItem(WAICOrgans.LUST, "Lust");
+        addOrganSkill(WAICOrgans.LUST, 0, "Sin 1: Attacks heal 10% of damage dealt");
+        addOrganSkill(WAICOrgans.LUST, 1, "Sin 2: Attacks heal 20% of damage dealt");
+        addOrganSkill(WAICOrgans.LUST, 2, "Sin 3: Attacks heal 30% of damage dealt");
         addItem(WAICOrgans.GLUTTONY, "Gluttony");
+        addOrganSkill(WAICOrgans.GLUTTONY, 0, "Can eat any food item");
+        addOrganSkill(WAICOrgans.GLUTTONY, 1, "Eating grants absorption hearts equal to hunger value × N (cap N×20)");
+        addOrganSkill(WAICOrgans.GLUTTONY, 2, "Eating additionally heals N HP");
         addItem(WAICOrgans.GREED, "Greed");
+        addOrganSkill(WAICOrgans.GREED, 0, "Sin 1: +1 Looting, +1 Fortune");
+        addOrganSkill(WAICOrgans.GREED, 1, "Sin 2: +2 Looting, +2 Fortune");
+        addOrganSkill(WAICOrgans.GREED, 2, "Sin 3: +3 Looting, +3 Fortune");
         addItem(WAICOrgans.WRATH, "Wrath");
+        addOrganSkill(WAICOrgans.WRATH, 0, "Sin 1: +1 Strength, +1 Speed");
+        addOrganSkill(WAICOrgans.WRATH, 1, "Sin 2: +2 Strength, +2 Speed");
+        addOrganSkill(WAICOrgans.WRATH, 2, "Sin 3: +3 Strength, +3 Speed");
         addItem(WAICOrgans.HERESY, "Heresy");
+        addOrganSkill(WAICOrgans.HERESY, 0, "Sin 1: Potion duration +50%");
+        addOrganSkill(WAICOrgans.HERESY, 1, "Sin 2: Potion duration +100%");
+        addOrganSkill(WAICOrgans.HERESY, 2, "Sin 3: Potion amplifier +1");
         addItem(WAICOrgans.VIOLENCE, "Violence");
+        addOrganSkill(WAICOrgans.VIOLENCE, 0, "Sin 1: Critical damage ×2");
+        addOrganSkill(WAICOrgans.VIOLENCE, 1, "Sin 2: Critical damage ×2");
+        addOrganSkill(WAICOrgans.VIOLENCE, 2, "Sin 3: Attacks always crit");
         addItem(WAICOrgans.FRAUD, "Fraud");
+        addOrganSkill(WAICOrgans.FRAUD, 0, "Sin 1: Villager trade bonus experience");
+        addOrganSkill(WAICOrgans.FRAUD, 1, "Sin 2: Villager trade discount");
+        addOrganSkill(WAICOrgans.FRAUD, 2, "Sin 3: Villager trades never run out of stock");
         addItem(WAICOrgans.TREACHERY, "Treachery");
+        addOrganSkill(WAICOrgans.TREACHERY, 0, "Sin 1: Attacks deal 1% of target max health");
+        addOrganSkill(WAICOrgans.TREACHERY, 1, "Sin 2: Attacks deal 3% of target max health");
+        addOrganSkill(WAICOrgans.TREACHERY, 2, "Sin 3: Attacks deal 5% of target max health");
 
         // 双子魔眼器官翻译
         addItem(WAICOrgans.STRANGE_EYEBALL, "Strange Eyeball");
@@ -717,9 +755,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "利维坦脊柱");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "利维坦鱼骨");
 
-        // 冥行武弁器官翻译
-        addItem(CataclysmOrgans.APTRGANGR_SPINE, "冥行武弁脊柱");
-        addItem(CataclysmOrgans.APTRGANGR_RIB, "冥行武弁肋骨");
+        // 咒骸器官翻译
+        addItem(CataclysmOrgans.APTRGANGR_SPINE, "咒骸脊柱");
+        addItem(CataclysmOrgans.APTRGANGR_RIB, "咒骸肋骨");
 
         // 咒翼灵骸器官翻译
         addItem(CataclysmOrgans.MALEDICTUS_SPINE, "咒翼灵骸脊柱");
@@ -781,9 +819,19 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganDescription(CataclysmOrgans.VOID_CRYSTAL_SPINE, "末影守卫的脊柱动力晶核，残余的虚空能量仍在其中脉动。");
         addOrganSkill(CataclysmOrgans.VOID_CRYSTAL_SPINE, 0, "以自身为中心召唤三环虚空符文阵（内6+中11+外14）。冷却15秒。");
 
-        // IronSpell 死灵法师器官翻译
-        addItem(IronSpellOrgans.NECROMANCER_SPINE, "死灵法师脊柱");
-        addItem(IronSpellOrgans.NECROMANCER_RIB, "死灵法师肋骨");
+        // IronSpell 亡魂器官翻译
+        addItem(IronSpellOrgans.NECROMANCER_SPINE, "亡魂脊柱");
+        addItem(IronSpellOrgans.NECROMANCER_RIB, "亡魂肋骨");
+
+        // IronSpell 提洛斯回响·原初受火者器官翻译
+        addItem(IronSpellOrgans.PRIMORDIAL_FLAME, "原初之火");
+        addOrganDescription(IronSpellOrgans.PRIMORDIAL_FLAME, "点燃原初之火的余烬，回荡着首位受火者的力量");
+        addOrganSkill(IronSpellOrgans.PRIMORDIAL_FLAME, 0, "施放火焰法术时，法术等级+1");
+
+        // IronSpell 高位唤魔者器官翻译
+        addItem(IronSpellOrgans.EMERALD_SKULL, "绿宝石头骨");
+        addOrganDescription(IronSpellOrgans.EMERALD_SKULL, "高位唤魔者的诅咒颅骨，涌动着翡翠色的唤魔之力");
+        addOrganSkill(IronSpellOrgans.EMERALD_SKULL, 0, "施放唤魔法术时，法术等级+1");
 
         // IronSpell 死者之王器官翻译
         addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "腐败魂灯");
@@ -998,6 +1046,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.INK_BOTTLE, "墨水瓶");
         add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "墨水: %s/1000");
         addItem(WAICOrgans.NIB, "钢笔尖");
+        addOrganDescription(WAICOrgans.NIB, "释放法术时消耗墨水(5×等级)提升法术1级（优先触发）");
 
         // 颜料器官翻译
         addItem(WAICOrgans.PIGMENT_HEART, "颜料心脏");
@@ -1054,14 +1103,41 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 九狱器官翻译
         addItem(WAICOrgans.LIMBO, "灵薄");
+        addOrganSkill(WAICOrgans.LIMBO, 0, "罪业1：每秒获得1点经验");
+        addOrganSkill(WAICOrgans.LIMBO, 1, "罪业2：每秒获得3点经验");
+        addOrganSkill(WAICOrgans.LIMBO, 2, "罪业3：每秒获得5点经验");
         addItem(WAICOrgans.LUST, "色欲");
+        addOrganSkill(WAICOrgans.LUST, 0, "罪业1：攻击回复造成伤害10%的生命");
+        addOrganSkill(WAICOrgans.LUST, 1, "罪业2：攻击回复造成伤害20%的生命");
+        addOrganSkill(WAICOrgans.LUST, 2, "罪业3：攻击回复造成伤害30%的生命");
         addItem(WAICOrgans.GLUTTONY, "暴食");
+        addOrganSkill(WAICOrgans.GLUTTONY, 0, "可以食用任何食物");
+        addOrganSkill(WAICOrgans.GLUTTONY, 1, "食用获得饥饿值×N的黄心（上限N×20）");
+        addOrganSkill(WAICOrgans.GLUTTONY, 2, "食用额外回复N点生命");
         addItem(WAICOrgans.GREED, "贪婪");
+        addOrganSkill(WAICOrgans.GREED, 0, "罪业1：+1抢夺, +1时运");
+        addOrganSkill(WAICOrgans.GREED, 1, "罪业2：+2抢夺, +2时运");
+        addOrganSkill(WAICOrgans.GREED, 2, "罪业3：+3抢夺, +3时运");
         addItem(WAICOrgans.WRATH, "愤怒");
+        addOrganSkill(WAICOrgans.WRATH, 0, "罪业1：+1力量, +1速度");
+        addOrganSkill(WAICOrgans.WRATH, 1, "罪业2：+2力量, +2速度");
+        addOrganSkill(WAICOrgans.WRATH, 2, "罪业3：+3力量, +3速度");
         addItem(WAICOrgans.HERESY, "异端");
+        addOrganSkill(WAICOrgans.HERESY, 0, "罪业1：药水持续时间+50%");
+        addOrganSkill(WAICOrgans.HERESY, 1, "罪业2：药水持续时间+100%");
+        addOrganSkill(WAICOrgans.HERESY, 2, "罪业3：药水等级+1");
         addItem(WAICOrgans.VIOLENCE, "暴力");
+        addOrganSkill(WAICOrgans.VIOLENCE, 0, "罪业1：暴击伤害×2");
+        addOrganSkill(WAICOrgans.VIOLENCE, 1, "罪业2：暴击伤害×2");
+        addOrganSkill(WAICOrgans.VIOLENCE, 2, "罪业3：攻击永远暴击");
         addItem(WAICOrgans.FRAUD, "欺诈");
+        addOrganSkill(WAICOrgans.FRAUD, 0, "罪业1：村民交易获得额外经验");
+        addOrganSkill(WAICOrgans.FRAUD, 1, "罪业2：村民交易打折");
+        addOrganSkill(WAICOrgans.FRAUD, 2, "罪业3：村民交易不缺货");
         addItem(WAICOrgans.TREACHERY, "背叛");
+        addOrganSkill(WAICOrgans.TREACHERY, 0, "罪业1：攻击额外造成目标1%最大生命值伤害");
+        addOrganSkill(WAICOrgans.TREACHERY, 1, "罪业2：攻击额外造成目标3%最大生命值伤害");
+        addOrganSkill(WAICOrgans.TREACHERY, 2, "罪业3：攻击额外造成目标5%最大生命值伤害");
 
         // 双子魔眼器官翻译
         addItem(WAICOrgans.STRANGE_EYEBALL, "奇怪的眼球");

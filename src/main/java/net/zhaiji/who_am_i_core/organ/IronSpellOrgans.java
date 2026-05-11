@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.organ;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
@@ -26,6 +27,31 @@ public class IronSpellOrgans {
         "necromancer_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .build()
+    );
+
+    // ==================== 提洛斯回响·原初受火者器官 ====================
+
+    // 原初之火
+    public static final Supplier<Item> PRIMORDIAL_FLAME = WAICItem.ITEM.register(
+        "primordial_flame",
+        () -> Organ.builder()
+            .addValueAttribute(WAICAttribute.TEMPERATURE, 5)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
+            .build()
+    );
+
+    // ==================== 高位唤魔者器官 ====================
+
+    // 绿宝石头骨
+    public static final Supplier<Item> EMERALD_SKULL = WAICItem.ITEM.register(
+        "emerald_skull",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 

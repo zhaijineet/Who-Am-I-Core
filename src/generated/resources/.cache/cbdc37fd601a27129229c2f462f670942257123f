@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-10T14:00:05.4436816	Item Models: who_am_i_core
+// 1.21.1	2026-05-11T22:16:04.6246866	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -69,6 +69,7 @@ ddebdb42960f38146d88dac3b5d95d92740f1752 assets/who_am_i_core/models/item/eerie_
 ecbe05ff956b09145d39e5ee8a91792a95485928 assets/who_am_i_core/models/item/ember_metal_muscle.json
 2b35073893768e7bbb7439388b0dddbe5f822b39 assets/who_am_i_core/models/item/ember_metal_rib.json
 981dd27edc3e394c769556a05661b2c7c8e708f4 assets/who_am_i_core/models/item/ember_metal_spine.json
+cc2ea774e725e1fe0c8be1092b8493ae5a58bf4e assets/who_am_i_core/models/item/emerald_skull.json
 fe792531330ef17a8df96fc00f777722be317c5a assets/who_am_i_core/models/item/energy_module.json
 ac44c4d0871ed1eb466c34375821370787ee91cb assets/who_am_i_core/models/item/experience_heart.json
 0c264102c0f6313ff829aedc5d15ed3f28a05602 assets/who_am_i_core/models/item/fantastical_appendix.json
@@ -231,6 +232,7 @@ aa779de8d68427e11e29883985846180d10c846c assets/who_am_i_core/models/item/pontif
 d945f6562becd7187d51ef37ec2bd8ef6ac99bd5 assets/who_am_i_core/models/item/pontiff_spleen.json
 89e1a4ca3ee2e2fcc57121467882cf34fd233fe3 assets/who_am_i_core/models/item/pontiff_stomach.json
 fa39234bdb3c2360243a37b823276ace61c1d77e assets/who_am_i_core/models/item/power_cell.json
+3e5ca1611ff5844868caf89cbe7ca4436b163068 assets/who_am_i_core/models/item/primordial_flame.json
 409dd2bb5b81d9f1fcda9d78a95b8b00576250fe assets/who_am_i_core/models/item/reinforced_frame.json
 7253d23419e61cbf6efada09fd206279fcf012f7 assets/who_am_i_core/models/item/royal_steel_appendix.json
 feead5ce41491babb710a401a6fbe4f112b421e2 assets/who_am_i_core/models/item/royal_steel_muscle.json

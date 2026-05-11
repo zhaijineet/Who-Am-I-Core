@@ -54,6 +54,9 @@ public class WAICItemTagManager {
     // 教宗
     public static final TagKey<Item> PONTIFF = create("pontiff");
 
+    // 九狱
+    public static final TagKey<Item> NINE_HELL = create("nine_hell");
+
     public static TagKey<Item> create(String name) {
         return ItemTags.create(WhoAmICore.of(name));
     }

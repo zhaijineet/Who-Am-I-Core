@@ -25,7 +25,10 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
@@ -41,6 +44,7 @@ import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
@@ -242,6 +246,7 @@ public class CommonEventHandler {
     }
 
     /**
+     * 钢笔尖：施法时消耗墨水增级
      * 调色盘：施法时消耗对应颜色染料，增加法术等级
      * 猩红肝脏：猩红法术消耗血液增级
      */
@@ -249,9 +254,33 @@ public class CommonEventHandler {
         LivingEntity entity = event.getEntity();
         ChestCavityData data = ChestCavityUtil.getData(entity);
 
+        // ⚡ 钢笔尖：消耗墨水增级（优先于其他增级效果触发）
+        if (data.hasOrgan(WAICOrgans.NIB.get())) {
+            int currentLevel = event.getSpellLevel();
+            int inkCost = WAICOrganSkillUtil.getNibInkCost(currentLevel);
+            if (WAICOrganSkillUtil.extractInkToBottle(data, inkCost, true) >= inkCost) {
+                WAICOrganSkillUtil.extractInkToBottle(data, inkCost, false);
+                event.setSpellLevel(currentLevel + 1);
+            }
+        }
+
         // 调色盘：消耗染料增级
         if (data.hasOrgan(WAICOrgans.PALETTE.get())) {
             if (WAICOrganSkillUtil.consumeDyeForSchool(entity, event.getSchoolType())) {
+                event.setSpellLevel(event.getSpellLevel() + 1);
+            }
+        }
+
+        // 原初之火：火焰法术无条件增级
+        if (data.hasOrgan(IronSpellOrgans.PRIMORDIAL_FLAME.get())) {
+            if (event.getSchoolType() == SchoolRegistry.FIRE.get()) {
+                event.setSpellLevel(event.getSpellLevel() + 1);
+            }
+        }
+
+        // 绿宝石头骨：唤魔法术无条件增级
+        if (data.hasOrgan(IronSpellOrgans.EMERALD_SKULL.get())) {
+            if (event.getSchoolType() == SchoolRegistry.EVOCATION.get()) {
                 event.setSpellLevel(event.getSpellLevel() + 1);
             }
         }
@@ -285,6 +314,8 @@ public class CommonEventHandler {
                 );
             }
         }
+        // 异端（脾脏）药水效果增强
+        WAICOrganSkillUtil.heresyMobEffectAdded(entity, event.getEffectInstance());
     }
 
     /**
@@ -393,5 +424,28 @@ public class CommonEventHandler {
             newAmplifier = cakeOrganCount - 1;
         }
         entity.addEffect(new MobEffectInstance(WAICEffect.SWEETNESS, 600, newAmplifier));
+    }
+
+    /**
+     * 暴力（肌肉）：暴击倍率增强 + 永远暴击
+     */
+    public static void handlerCriticalHitEvent(CriticalHitEvent event) {
+        Player player = event.getEntity();
+        WAICOrganSkillUtil.violenceCriticalHit(player, event);
+    }
+
+    /**
+     * 欺诈（肾脏）：交易完成时额外经验 + 不缺货
+     */
+    public static void handlerTradeWithVillagerEvent(TradeWithVillagerEvent event) {
+        WAICOrganSkillUtil.fraudTradeComplete(event.getEntity(), event.getMerchantOffer());
+    }
+
+    /**
+     * 欺诈（肾脏）：打开交易界面时打折
+     */
+    public static void handlerPlayerContainerEvent$Open(PlayerContainerEvent.Open event) {
+        Player player = event.getEntity();
+        WAICOrganSkillUtil.fraudTradeDiscount(player, event.getContainer());
     }
 }

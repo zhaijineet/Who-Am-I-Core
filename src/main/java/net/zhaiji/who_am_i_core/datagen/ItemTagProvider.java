@@ -22,7 +22,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
-    public ItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+    public ItemTagProvider(
+        PackOutput output,
+        CompletableFuture<HolderLookup.Provider> lookupProvider,
+        @Nullable ExistingFileHelper existingFileHelper
+    ) {
         super(output, Registries.ITEM, lookupProvider, item -> item.builtInRegistryHolder().key(), WhoAmICore.MOD_ID, existingFileHelper);
     }
 
@@ -670,6 +674,17 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.VIOLENCE.get());
         tag(ItemTagManager.KIDNEY).add(WAICOrgans.FRAUD.get());
         tag(ItemTagManager.HEART).add(WAICOrgans.TREACHERY.get());
+        tag(WAICItemTagManager.NINE_HELL).add(
+            WAICOrgans.LIMBO.get(),
+            WAICOrgans.LUST.get(),
+            WAICOrgans.GLUTTONY.get(),
+            WAICOrgans.GREED.get(),
+            WAICOrgans.WRATH.get(),
+            WAICOrgans.HERESY.get(),
+            WAICOrgans.VIOLENCE.get(),
+            WAICOrgans.FRAUD.get(),
+            WAICOrgans.TREACHERY.get()
+        );
 
         // ==================== 双子魔眼器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
@@ -916,5 +931,16 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WAICOrgans.CONDUCTIVE_SPINE.get(),
             WAICOrgans.ENERGY_MODULE.get()
         );
+
+        // ==================== IronSpell 提洛斯回响·原初受火者器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(IronSpellOrgans.PRIMORDIAL_FLAME.get());
+        tag(ItemTagManager.SPECIAL).add(IronSpellOrgans.PRIMORDIAL_FLAME.get());
+        tag(WAICItemTagManager.MAGIC).add(IronSpellOrgans.PRIMORDIAL_FLAME.get());
+        tag(WAICItemTagManager.FIRE).add(IronSpellOrgans.PRIMORDIAL_FLAME.get());
+
+        // ==================== IronSpell 高位唤魔者器官标签 ====================
+        tag(ItemTagManager.ORGANS).add(IronSpellOrgans.EMERALD_SKULL.get());
+        tag(ItemTagManager.SPINE).add(IronSpellOrgans.EMERALD_SKULL.get());
+        tag(WAICItemTagManager.MAGIC).add(IronSpellOrgans.EMERALD_SKULL.get());
     }
 }

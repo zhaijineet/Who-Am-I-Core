@@ -99,7 +99,8 @@ public abstract class LivingEntityMixin extends Entity {
         ChestCavityData data = ChestCavityUtil.getData(whoAmICore$self());
         int hydraIntestineCount = data.getOrganCount(IceAndFireOrgans.HYDRA_INTESTINE.get());
         if (hydraIntestineCount > 0) {
-            ((IMobEffectInstance) effectInstance).setDuration(duration -> (int) (duration * (1 + (0.5 * hydraIntestineCount))));
+            ((IMobEffectInstance) effectInstance).setDuration(duration -> (int) (duration * (1 + (0.5 * hydraIntestineCount))),
+                whoAmICore$self());
         }
         return effectInstance;
     }

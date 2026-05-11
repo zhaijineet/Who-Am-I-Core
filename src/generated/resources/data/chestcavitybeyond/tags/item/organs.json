@@ -252,6 +252,8 @@
     "who_am_i_core:current_rib",
     "who_am_i_core:charged_muscle",
     "who_am_i_core:conductive_spine",
-    "who_am_i_core:energy_module"
+    "who_am_i_core:energy_module",
+    "who_am_i_core:primordial_flame",
+    "who_am_i_core:emerald_skull"
   ]
 }

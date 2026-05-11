@@ -21,18 +21,23 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
@@ -43,6 +48,7 @@ import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
@@ -285,6 +291,16 @@ public class WAICOrganSkillUtil {
         float damage = damageContainer.getNewDamage();
         if (damage <= 0) return;
         insertInkToBottle(context.data(), (int) damage, false);
+    }
+
+    /**
+     * 钢笔尖墨水消耗 = 5 × 当前法术等级
+     *
+     * @param currentLevel 当前法术等级
+     * @return 需要消耗的墨水量
+     */
+    public static int getNibInkCost(int currentLevel) {
+        return 5 * currentLevel;
     }
 
     /**
@@ -969,5 +985,258 @@ public class WAICOrganSkillUtil {
         float actualCost = blockPoints * costPerPoint;
         consumeCharge(data, entity, actualCost, false);
         return blockPoints;
+    }
+
+    // ==================== 九狱器官通用 ====================
+
+    /**
+     * 获取胸腔中九狱器官的数量
+     */
+    private static int getNineHellCount(ChestCavitySlotContext context) {
+        int count = context.data().getOrganCount(WAICItemTagManager.NINE_HELL);
+        if (context.index() == -1) count++;
+        return count;
+    }
+
+    /**
+     * 九狱器官共用 otherChange 回调
+     * 当其他槽位的器官变化涉及九狱器官时，重新计算当前器官的属性
+     */
+    public static void nineHellOtherChange(ChestCavitySlotContext context, int changedIndex, ItemStack oldStack, ItemStack newStack) {
+        if (newStack.is(WAICItemTagManager.NINE_HELL) || oldStack.is(WAICItemTagManager.NINE_HELL)) {
+            OrganAttributeUtil.updateSlotOrganAttribute(context);
+        }
+    }
+
+    // ==================== 灵薄（阑尾）====================
+
+    /**
+     * 灵薄 modifier：幸运属性动态调整（基础 2 - N）
+     */
+    public static void limboModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(Attributes.LUCK, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 灵薄 tick：每秒给予经验（叠加式 1/3/5）
+     */
+    public static void limboTick(ChestCavitySlotContext context) {
+        if (!(context.entity() instanceof ServerPlayer serverPlayer)) return;
+        // 每 20 tick（1秒）触发一次
+        if (serverPlayer.tickCount % 20 != 0) return;
+        int n = getNineHellCount(context);
+        int xp = n * n;
+        serverPlayer.giveExperiencePoints(xp);
+    }
+
+    // ==================== 色欲（肠子）====================
+
+    /**
+     * 色欲 modifier：营养属性动态调整（基础 2 - N）
+     */
+    public static void lustModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.NUTRITION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 色欲 attack：攻击回复伤害 10%/30%/60% 生命（叠加式）
+     */
+    public static void lustAttack(
+        ChestCavitySlotContext context,
+        LivingEntity target,
+        DamageSource source,
+        DamageContainer damageContainer
+    ) {
+        int n = getNineHellCount(context);
+        float healPercent = n >= 3 ? 0.6F : (n == 2 ? 0.3F : 0.1F);
+        float damage = damageContainer.getNewDamage();
+        float healAmount = damage * healPercent;
+        if (healAmount > 0) {
+            context.entity().heal(healAmount);
+        }
+    }
+
+    // ==================== 暴食（胃）====================
+
+    /**
+     * 暴食 modifier：消化属性动态调整（基础 2 - N）
+     */
+    public static void gluttonyModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    // ==================== 贪婪（肺脏）====================
+
+    /**
+     * 贪婪 modifier：呼吸恢复/容量/耐力动态调整（基础 2 - N）+ 抢夺/时运
+     */
+    public static void greedModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int n = getNineHellCount(context);
+        modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        // 抢夺 + 时运（叠加式）
+        int bonus = n >= 3 ? 6 : (n == 2 ? 3 : 1);
+        modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+        modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+    }
+
+    // ==================== 愤怒（肝脏）====================
+
+    /**
+     * 愤怒 modifier：解毒属性动态调整（基础 2 - N）+ 力量/速度（叠加式）
+     */
+    public static void wrathModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int n = getNineHellCount(context);
+        modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        // 力量 + 速度（叠加式）
+        int bonus = n >= 3 ? 6 : (n == 2 ? 3 : 1);
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+        modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+    }
+
+    // ==================== 异端（脾脏）====================
+
+    /**
+     * 异端 modifier：代谢属性动态调整（基础 2 - N）
+     * 药水效果增强通过事件处理（CommonEventHandler 中 MobEffectEvent.Added）
+     */
+    public static void heresyModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.METABOLISM, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 异端药水效果增强（在 MobEffectEvent.Added 中调用）
+     * 罪业1: 药水持续时间 +50%（×1.5）
+     * 罪业2: 药水持续时间额外 +50%（总计 +100%，×2.0）
+     * 罪业3: 药水等级 +1（不再加时长）
+     */
+    public static void heresyMobEffectAdded(LivingEntity entity, MobEffectInstance effectInstance) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!data.hasOrgan(WAICOrgans.HERESY.get())) return;
+
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        IMobEffectInstance iEffect = (IMobEffectInstance) effectInstance;
+
+        // 药水持续时间延长，罪业100%+50%，罪业2：100%+50%+100%
+        iEffect.setDuration(duration -> (int) (duration * n >= 2 ? 2.5 : 1.5), entity);
+
+        // 药水等级 +1
+        if (n >= 3) {
+            iEffect.setAmplifier(effectInstance.getAmplifier() + 1, entity);
+        }
+    }
+
+    // ==================== 暴力（肌肉）====================
+
+    /**
+     * 暴力 modifier：力量/速度属性动态调整（基础 2 - N）
+     * 暴击效果通过事件处理（CommonEventHandler 中 CriticalHitEvent）
+     */
+    public static void violenceModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int n = getNineHellCount(context);
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+    }
+
+    /**
+     * 暴力暴击增强（在 CriticalHitEvent 中调用）
+     * N≥1: 暴击伤害 ×2（设置倍率为 3.0，原版暴击为 1.5）
+     * N≥2: 暴击伤害 ×2（设置倍率为 6.0）
+     * N≥3: 攻击永远暴击
+     */
+    public static void violenceCriticalHit(Player player, CriticalHitEvent event) {
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        if (!data.hasOrgan(WAICOrgans.VIOLENCE.get())) return;
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+
+        if (n >= 3) {
+            // 永远暴击 + 暴击伤害 ×4
+            event.setCriticalHit(true);
+            event.setDamageMultiplier(6.0F);
+        } else {
+            // 暴击伤害 ×2
+            if (event.isCriticalHit()) {
+                event.setDamageMultiplier(n == 2 ? 6F : 3F);
+            }
+        }
+    }
+
+    // ==================== 欺诈（肾脏）====================
+
+    /**
+     * 欺诈 modifier：过滤属性动态调整（基础 2 - N）
+     * 交易效果通过事件处理（CommonEventHandler 中 TradeWithVillagerEvent / PlayerContainerEvent）
+     */
+    public static void fraudModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.FILTRATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 欺诈交易效果 - 交易完成时（在 TradeWithVillagerEvent 中调用）
+     * N≥1: 交易额外经验
+     * N≥3: 交易不缺货（重置使用次数）
+     */
+    public static void fraudTradeComplete(Player player, MerchantOffer offer) {
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return;
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+
+        // 额外经验
+        player.giveExperiencePoints(offer.getXp() * 10);
+        if (n >= 3) {
+            // 不缺货：重置使用次数
+            offer.resetUses();
+        }
+    }
+
+    /**
+     * 欺诈交易打折（在 PlayerContainerEvent.Open 中调用）
+     * N≥2: 交易打折 30%×(N-1)
+     * <p>
+     * 仿照原版村庄英雄的打折方式：直接 addToSpecialPriceDiff 追加折扣。
+     * 原版在 startTrading 时已先 resetSpecialPrices 清零，再 updateSpecialPrices 施加声望/村庄英雄折扣，
+     * 此事件在之后触发，直接追加即可。关闭交易时由原版 resetSpecialPrices 自动还原。
+     * </p>
+     */
+    public static void fraudTradeDiscount(Player player, AbstractContainerMenu container) {
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return;
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        if (n < 2) return;
+
+        if (container instanceof MerchantMenu merchantMenu) {
+            double discountRate = 0.3 * (n - 1);
+            for (MerchantOffer offer : merchantMenu.getOffers()) {
+                int discount = (int) Math.floor(discountRate * offer.getBaseCostA().getCount());
+                offer.addToSpecialPriceDiff(-Math.max(discount, 1));
+            }
+        }
+    }
+
+    // ==================== 背叛（心脏）====================
+
+    /**
+     * 背叛 modifier：健康属性动态调整（基础 2 - N）
+     */
+    public static void treacheryModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 背叛 attack：攻击额外造成目标最大生命值 1%/4%/9% 伤害（叠加式）
+     */
+    public static void treacheryAttack(
+        ChestCavitySlotContext context,
+        LivingEntity target,
+        DamageSource source,
+        DamageContainer damageContainer
+    ) {
+        int n = getNineHellCount(context);
+        float percent = n >= 3 ? 0.09F : (n == 2 ? 0.04F : 0.01F);
+        float bonusDamage = target.getMaxHealth() * percent;
+        if (bonusDamage > 0) {
+            target.hurt(target.damageSources().mobAttack(context.entity()), bonusDamage);
+        }
     }
 }

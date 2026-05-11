@@ -26,5 +26,8 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerPlayerXpPickup);
         gameBus.addListener(CommonEventHandler::handlerPlayerLevelChange);
         gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
+        gameBus.addListener(CommonEventHandler::handlerCriticalHitEvent);
+        gameBus.addListener(CommonEventHandler::handlerTradeWithVillagerEvent);
+        gameBus.addListener(CommonEventHandler::handlerPlayerContainerEvent$Open);
     }
 }

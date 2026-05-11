@@ -172,6 +172,7 @@ public class WAICOrgans {
     public static final Supplier<Item> NIB = WAICItem.ITEM.register(
         "nib",
         () -> Organ.builder()
+            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -488,66 +489,96 @@ public class WAICOrgans {
     );
 
     // ==================== 九狱器官 ====================
-    // 灵薄（阑尾）
+    // 灵薄（阑尾）— 属性 = 2 - N；效果：每秒获得经验
     public static final Supplier<Item> LIMBO = WAICItem.ITEM.register(
         "limbo",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::limboModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .tick(WAICOrganSkillUtil::limboTick)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 色欲（肠子）
+    // 色欲（肠子）— 属性 = 2 - N；效果：攻击回复生命
     public static final Supplier<Item> LUST = WAICItem.ITEM.register(
         "lust",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::lustModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .attack(WAICOrganSkillUtil::lustAttack)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 暴食（胃）
+    // 暴食（胃）— 属性 = 2 - N；效果：食用任何食物 + 食用额外效果
     public static final Supplier<Item> GLUTTONY = WAICItem.ITEM.register(
         "gluttony",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::gluttonyModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 贪婪（肺脏）
+    // 贪婪（肺脏）— 属性 = 2 - N；效果：抢夺 + 时运
     public static final Supplier<Item> GREED = WAICItem.ITEM.register(
         "greed",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::greedModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 愤怒（肝脏）
+    // 愤怒（肝脏）— 属性 = 2 - N；效果：力量 + 速度
     public static final Supplier<Item> WRATH = WAICItem.ITEM.register(
         "wrath",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::wrathModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 异端（脾脏）
+    // 异端（脾脏）— 属性 = 2 - N；效果：药水持续延长 + 等级提升
     public static final Supplier<Item> HERESY = WAICItem.ITEM.register(
         "heresy",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::heresyModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 暴力（肌肉）
+    // 暴力（肌肉）— 属性 = 2 - N；效果：暴击倍率 + 永远暴击
     public static final Supplier<Item> VIOLENCE = WAICItem.ITEM.register(
         "violence",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::violenceModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 欺诈（肾脏）
+    // 欺诈（肾脏）— 属性 = 2 - N；效果：交易经验/打折/不缺货
     public static final Supplier<Item> FRAUD = WAICItem.ITEM.register(
         "fraud",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::fraudModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
-    // 背叛（心脏）
+    // 背叛（心脏）— 属性 = 2 - N；效果：额外造成目标最大生命%伤害
     public static final Supplier<Item> TREACHERY = WAICItem.ITEM.register(
         "treachery",
         () -> Organ.builder()
+            .modifier(WAICOrganSkillUtil::treacheryModifier)
+            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .attack(WAICOrganSkillUtil::treacheryAttack)
+            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
