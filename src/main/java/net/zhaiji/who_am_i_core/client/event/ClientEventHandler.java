@@ -22,7 +22,7 @@ import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICEntity;
-import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.OrganUtil;
 
 public class ClientEventHandler {
     /**
@@ -93,7 +93,7 @@ public class ClientEventHandler {
             WAICOrgans.FRANKENSTEIN_HEART.get(),
             WhoAmICore.of("frankenstein_heart_active"),
             (stack, level, entity, seed) -> {
-                if (entity instanceof LivingEntity living && WAICOrganUtil.isInChest(living, stack)) {
+                if (entity instanceof LivingEntity living && OrganUtil.isInChest(living, stack)) {
                     return (
                                living.hasEffect(WAICEffect.FIRE_DRAGON_POWER)
                                || living.hasEffect(WAICEffect.ICE_DRAGON_POWER)
@@ -108,7 +108,7 @@ public class ClientEventHandler {
             WAICOrgans.FRANKENSTEIN_HEART.get(),
             WhoAmICore.of("frankenstein_heart_super_active"),
             (stack, level, entity, seed) -> {
-                if (entity instanceof LivingEntity living && WAICOrganUtil.isInChest(living, stack)) {
+                if (entity instanceof LivingEntity living && OrganUtil.isInChest(living, stack)) {
                     return
                         living.hasEffect(WAICEffect.FIRE_DRAGON_POWER) &&
                         living.hasEffect(WAICEffect.ICE_DRAGON_POWER) &&

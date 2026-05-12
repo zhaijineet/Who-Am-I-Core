@@ -22,7 +22,7 @@ import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 
-public class CompanionsOrganSkillUtil {
+public class CompanionsOrganUtil {
 
     /**
      * 教宗心脏 — 圣化变身（hurt 回调）
@@ -104,7 +104,7 @@ public class CompanionsOrganSkillUtil {
         if (!(hitResult instanceof EntityHitResult entityHitResult)) return false;
         if (!(entityHitResult.getEntity() instanceof LivingEntity target)) return false;
 
-        boolean isPositiveTemp = WAICOrganUtil.getEffectiveTemperature(entity) > 0;
+        boolean isPositiveTemp = OrganUtil.getEffectiveTemperature(entity) > 0;
 
         HolinessStartProjectile star = CompanionsEntities.HOLINESS_STAR.get().create(level);
         if (star == null) return false;

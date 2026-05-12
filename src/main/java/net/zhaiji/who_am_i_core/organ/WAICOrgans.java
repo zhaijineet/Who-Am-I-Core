@@ -19,7 +19,7 @@ import net.zhaiji.who_am_i_core.item.ClothTeddyBearItem;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
+import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
@@ -153,7 +153,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 1)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(WAICOrganSkillUtil::inkAppendixSkill)
+            .skill(WAICOrganUtil::inkAppendixSkill)
             .build()
     );
 
@@ -164,7 +164,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.STRENGTH, 1)
             .addValueAttribute(InitAttribute.SPEED, 1)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .hurt(WAICOrganSkillUtil::inkMuscleSkill)
+            .hurt(WAICOrganUtil::inkMuscleSkill)
             .build()
     );
 
@@ -355,7 +355,7 @@ public class WAICOrgans {
         "frankenstein_heart",
         () -> Organ.builder(properties -> new FrankensteinItem(properties, ItemTagManager.HEART))
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
-            .modifier(WAICOrganUtil::aggregateFrankensteinHeartAttributes)
+            .modifier(OrganUtil::aggregateFrankensteinHeartAttributes)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
@@ -421,8 +421,8 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_HEART = WAICItem.ITEM.register(
         "lesion_heart",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::lesionHeartModifier)
-            .skill(WAICOrganSkillUtil::lesionHeartSkill)
+            .modifier(WAICOrganUtil::lesionHeartModifier)
+            .skill(WAICOrganUtil::lesionHeartSkill)
             .cooldown(10 * 20)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip())
@@ -482,8 +482,8 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_MUSCLE = WAICItem.ITEM.register(
         "lesion_muscle",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::lesionMuscleModifier)
-            .attack(WAICOrganSkillUtil::lesionMuscleAttack)
+            .modifier(WAICOrganUtil::lesionMuscleModifier)
+            .attack(WAICOrganUtil::lesionMuscleAttack)
             .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
@@ -493,9 +493,9 @@ public class WAICOrgans {
     public static final Supplier<Item> LIMBO = WAICItem.ITEM.register(
         "limbo",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::limboModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
-            .tick(WAICOrganSkillUtil::limboTick)
+            .modifier(WAICOrganUtil::limboModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
+            .tick(WAICOrganUtil::limboTick)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -504,9 +504,9 @@ public class WAICOrgans {
     public static final Supplier<Item> LUST = WAICItem.ITEM.register(
         "lust",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::lustModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
-            .attack(WAICOrganSkillUtil::lustAttack)
+            .modifier(WAICOrganUtil::lustModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
+            .attack(WAICOrganUtil::lustAttack)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -515,8 +515,8 @@ public class WAICOrgans {
     public static final Supplier<Item> GLUTTONY = WAICItem.ITEM.register(
         "gluttony",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::gluttonyModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .modifier(WAICOrganUtil::gluttonyModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -525,8 +525,8 @@ public class WAICOrgans {
     public static final Supplier<Item> GREED = WAICItem.ITEM.register(
         "greed",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::greedModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .modifier(WAICOrganUtil::greedModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -535,8 +535,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WRATH = WAICItem.ITEM.register(
         "wrath",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::wrathModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .modifier(WAICOrganUtil::wrathModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -545,8 +545,8 @@ public class WAICOrgans {
     public static final Supplier<Item> HERESY = WAICItem.ITEM.register(
         "heresy",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::heresyModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .modifier(WAICOrganUtil::heresyModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -555,8 +555,8 @@ public class WAICOrgans {
     public static final Supplier<Item> VIOLENCE = WAICItem.ITEM.register(
         "violence",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::violenceModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .modifier(WAICOrganUtil::violenceModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -565,8 +565,8 @@ public class WAICOrgans {
     public static final Supplier<Item> FRAUD = WAICItem.ITEM.register(
         "fraud",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::fraudModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
+            .modifier(WAICOrganUtil::fraudModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -575,9 +575,9 @@ public class WAICOrgans {
     public static final Supplier<Item> TREACHERY = WAICItem.ITEM.register(
         "treachery",
         () -> Organ.builder()
-            .modifier(WAICOrganSkillUtil::treacheryModifier)
-            .otherChange(WAICOrganSkillUtil::nineHellOtherChange)
-            .attack(WAICOrganSkillUtil::treacheryAttack)
+            .modifier(WAICOrganUtil::treacheryModifier)
+            .otherChange(WAICOrganUtil::nineHellOtherChange)
+            .attack(WAICOrganUtil::treacheryAttack)
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
@@ -618,7 +618,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .heal(WAICOrganSkillUtil::mimicHealBoost)
+            .heal(WAICOrganUtil::mimicHealBoost)
             .build()
     );
 
@@ -628,7 +628,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 3)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .heal(WAICOrganSkillUtil::mimicHealBoost)
+            .heal(WAICOrganUtil::mimicHealBoost)
             .build()
     );
 
@@ -641,7 +641,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.ENDURANCE, 3)
             .addValueAttribute(InitAttribute.WATER_BREATH, 3)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .heal(WAICOrganSkillUtil::mimicHealBoost)
+            .heal(WAICOrganUtil::mimicHealBoost)
             .build()
     );
 
@@ -747,8 +747,8 @@ public class WAICOrgans {
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip())
             .cooldown(100)
-            .skill(WAICOrganSkillUtil::clothTeddyBearSkill)
-            .chestCavityClose(WAICOrganSkillUtil::clothTeddyBearChestCavityClose)
+            .skill(WAICOrganUtil::clothTeddyBearSkill)
+            .chestCavityClose(WAICOrganUtil::clothTeddyBearChestCavityClose)
             .build()
     );
 
@@ -850,8 +850,8 @@ public class WAICOrgans {
         "haunted_bone",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .chestCavityOpen(WAICOrganSkillUtil::hauntedBoneChestCavityOpen)
-            .chestCavityClose(WAICOrganSkillUtil::hauntedBoneChestCavityClose)
+            .chestCavityOpen(WAICOrganUtil::hauntedBoneChestCavityOpen)
+            .chestCavityClose(WAICOrganUtil::hauntedBoneChestCavityClose)
             .addValueAttribute(InitAttribute.SPEED, 1)
             .addValueAttribute(Attributes.LUCK, 1)
             .build()
@@ -882,7 +882,7 @@ public class WAICOrgans {
         "squash",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .incomingDamage(WAICOrganSkillUtil::squashIncomingDamage)
+            .incomingDamage(WAICOrganUtil::squashIncomingDamage)
             .build()
     );
 
@@ -891,7 +891,7 @@ public class WAICOrgans {
         "experience_heart",
         () -> Organ.builder()
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .modifier(WAICOrganSkillUtil::experienceHeartModifier)
+            .modifier(WAICOrganUtil::experienceHeartModifier)
             .build()
     );
 
@@ -902,9 +902,9 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(AttributeRegistry.BLOOD_SPELL_POWER, 1)
-            .heal(WAICOrganSkillUtil::crimsonHeartHeal)
-            .added(WAICOrganSkillUtil::crimsonHeartAdded)
-            .removed(WAICOrganSkillUtil::crimsonHeartRemoved)
+            .heal(WAICOrganUtil::crimsonHeartHeal)
+            .added(WAICOrganUtil::crimsonHeartAdded)
+            .removed(WAICOrganUtil::crimsonHeartRemoved)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
@@ -966,7 +966,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .skill(WAICOrganSkillUtil::crimsonAppendixSkill)
+            .skill(WAICOrganUtil::crimsonAppendixSkill)
             .cooldown(30 * 20)
             .build()
     );
@@ -991,7 +991,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.5)
-            .tick(WAICOrganSkillUtil::computingCoreTick)
+            .tick(WAICOrganUtil::computingCoreTick)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
@@ -1011,7 +1011,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 1.5)
             .addValueAttribute(InitAttribute.SPEED, 1.5)
-            .tick(WAICOrganSkillUtil::chargedMuscleTick)
+            .tick(WAICOrganUtil::chargedMuscleTick)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
@@ -1022,7 +1022,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
-            .skill(WAICOrganSkillUtil::conductiveSpineSkill)
+            .skill(WAICOrganUtil::conductiveSpineSkill)
             .cooldown(20 * 20)
             .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .skillTooltip(WAICTooltipUtil.skillTooltip())
@@ -1033,9 +1033,9 @@ public class WAICOrgans {
     public static final Supplier<Item> ENERGY_MODULE = WAICItem.ITEM.register(
         "energy_module",
         () -> Organ.builder()
-            .tick(WAICOrganSkillUtil::energyModuleTick)
+            .tick(WAICOrganUtil::energyModuleTick)
             .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-                float charge = WAICOrganSkillUtil.getModuleCharge(stack);
+                float charge = WAICOrganUtil.getModuleCharge(stack);
                 List<Component> add = List.of(
                     Component.translatable(ENERGY_MODULE_CHARGE_TRANSLATION, (int) charge, 500)
                 );

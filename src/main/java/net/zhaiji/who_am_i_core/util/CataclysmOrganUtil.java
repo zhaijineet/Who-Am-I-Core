@@ -136,7 +136,7 @@ public class CataclysmOrganUtil {
      * 不灭薪火属性修饰符 - 全局温度的平方根的力量
      */
     public static void undyingEmberModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double temp = WAICOrganUtil.getEffectiveTemperature(context.entity());
+        double temp = OrganUtil.getEffectiveTemperature(context.entity());
         if (context.index() == -1) temp += 9;
         modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(temp))));
     }
@@ -145,7 +145,7 @@ public class CataclysmOrganUtil {
      * 焰魔肋甲属性修饰符 - 局部温度的平方根的格挡
      */
     public static void ignitedRibPlatingModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double localTemp = WAICOrganUtil.getLocalTemperature(context);
+        double localTemp = OrganUtil.getLocalTemperature(context);
         modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(localTemp))));
     }
 
@@ -163,7 +163,7 @@ public class CataclysmOrganUtil {
         if (entity == target) return;
 
         // 根据局部温度计算回血量
-        double localTemp = WAICOrganUtil.getLocalTemperature(context);
+        double localTemp = OrganUtil.getLocalTemperature(context);
         float healAmount = 2.0F + (float) Math.floor(localTemp * 0.5);
 
         // 若有炽热烙印，回血量翻倍
@@ -200,7 +200,7 @@ public class CataclysmOrganUtil {
         LivingEntity entity = context.entity();
         if (entity.level().isClientSide()) return;
         if (entity.tickCount % 20 != 0) return;
-        double temp = WAICOrganUtil.getEffectiveTemperature(entity);
+        double temp = OrganUtil.getEffectiveTemperature(entity);
         if (temp > 0) {
             HumoursData.insertYellowBile(entity, (float) (temp * 0.05), false);
         }
@@ -253,7 +253,7 @@ public class CataclysmOrganUtil {
             1.0F + entity.getRandom().nextFloat() * 0.1F
         );
 
-        double temp = WAICOrganUtil.getEffectiveTemperature(entity);
+        double temp = OrganUtil.getEffectiveTemperature(entity);
         float baseDamage = consumed + (float) (temp * 2);
 
         // AoE伤害：半径6.25格（对齐原版 EarthQuake(6.25D)）

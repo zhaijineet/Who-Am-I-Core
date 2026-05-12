@@ -33,7 +33,7 @@ import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 
 import java.util.List;
 
-public class MowziesMobOrganSkillUtil {
+public class MowziesMobOrganUtil {
     /**
      * 钢铁守护者护心镜 - 受到伤害前
      */
@@ -88,7 +88,7 @@ public class MowziesMobOrganSkillUtil {
      */
     public static void chestNovaChestCavityClose(ChestCavitySlotContext slotContext) {
         ChestCavityData data = slotContext.data();
-        List<Integer> adjacentSlots = WAICOrganUtil.getAdjacentSlots(slotContext.index());
+        List<Integer> adjacentSlots = OrganUtil.getAdjacentSlots(slotContext.index());
         for (int slot : adjacentSlots) {
             ItemStack adjacentStack = data.getStackInSlot(slot);
             if (adjacentStack.isEmpty()) continue;

@@ -1,343 +1,1275 @@
 package net.zhaiji.who_am_i_core.util;
 
+import com.finderfeed.fdbosses.content.entities.chesed_boss.chesed_mini_ray.ChesedMiniRay;
+import com.finderfeed.fdbosses.content.entities.geburah.sins.attachment.PlayerSins;
+import com.finderfeed.fdbosses.init.BossEffects;
 import com.google.common.collect.Multimap;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
+import io.redspace.ironsspellbooks.item.InkItem;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
+import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
-import net.zhaiji.chestcavitybeyond.api.capability.IOrgan;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
-import net.zhaiji.chestcavitybeyond.manager.OrganManager;
+import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
+import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
+import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
-import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
+import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
+import net.zhaiji.who_am_i_core.register.WAICEffect;
+import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class WAICOrganUtil {
     /**
-     * 计算周围8个位置的槽位索引，越界槽位自动排除
+     * 闹鬼的骨头：胸腔打开时设置可以移动的标记
      */
-    public static List<Integer> getAdjacentSlots(int slotIndex) {
-        List<Integer> result = new ArrayList<>();
-        int col = slotIndex % 9;
-        int row = slotIndex / 9;
-        for (int dr = -1; dr <= 1; dr++) {
-            for (int dc = -1; dc <= 1; dc++) {
-                if (dr == 0 && dc == 0) continue;
-                int r = row + dr;
-                int c = col + dc;
-                if (r < 0 || r > 2 || c < 0 || c > 8) continue;
-                result.add(r * 9 + c);
+    public static void hauntedBoneChestCavityOpen(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        if (data == null) return;
+        Level level = data.getOwner().level();
+        if (level.isClientSide()) return;
+        ItemStack stack = context.stack();
+        CustomData customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).update(tag -> {
+            tag.putBoolean("canChange", true);
+        });
+        stack.set(DataComponents.CUSTOM_DATA, customData);
+    }
+
+    /**
+     * 闹鬼的骨头：胸腔打开时随机移动到一个空槽位
+     */
+    public static void hauntedBoneChestCavityClose(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        if (data == null) return;
+        Level level = data.getOwner().level();
+        if (level.isClientSide()) return;
+        List<Integer> emptySlots = new ArrayList<>();
+        for (int i = 0; i < 27; i++) {
+            if (data.getStackInSlot(i).isEmpty()) {
+                emptySlots.add(i);
             }
         }
-        return result;
+        if (emptySlots.isEmpty()) return;
+        ItemStack stack = context.stack();
+        CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        if (tag.contains("canChange") && !tag.getBoolean("canChange")) return;
+        tag.putBoolean("canChange", false);
+        data.setStackInSlot(context.index(), ItemStack.EMPTY);
+        int targetSlot = emptySlots.get(level.random.nextInt(emptySlots.size()));
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        data.setStackInSlot(targetSlot, stack);
     }
 
     /**
-     * 获取物品的总附魔等级
-     */
-    private static int getTotalEnchantmentLevels(ItemStack stack) {
-        if (stack.isEmpty()) return 0;
-        ItemEnchantments enchantments = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
-        int total = 0;
-        for (Holder<Enchantment> ench : enchantments.keySet()) {
-            total += enchantments.getLevel(ench);
-        }
-        return total;
-    }
-
-    /**
-     * 无情机制的附魔加成
-     */
-    public static double mercilessBonus(ChestCavitySlotContext context) {
-        return Math.floor(Math.sqrt(getTotalEnchantmentLevels(context.stack())));
-    }
-
-    /**
-     * 根据实体的幸运属性进行判定次数计算
-     * 每5点幸运值获得1次判定，余数部分每点有20%几率获得额外判定
+     * 直肠子器官技能
+     * <p>
+     * 食用食物后，30%几率添加延迟掉落任务（3秒后掉落1个食物）
+     * </p>
      *
-     * @param entity 实体，用于获取幸运属性
-     * @return 判定次数
+     * @param entity 食用食物的实体
+     * @param data   实体的胸腔数据
+     * @param food   被食用的食物物品
      */
-    public static int rollChance(LivingEntity entity) {
-        int luck = (int) entity.getAttributeValue(Attributes.LUCK);
-        if (luck <= 0) return luck;
-        int count = luck / 5;
-        int remainder = luck % 5;
-        // 余数部分按每点20%几率额外获得1次判定
-        if (remainder > 0 && entity.getRandom().nextFloat() < remainder * 0.2F) {
-            count++;
+    public static void straightIntestineSkill(LivingEntity entity, ChestCavityData data, ItemStack food) {
+        // 检查是否拥有直肠子器官
+        if (!data.hasOrgan(WAICOrgans.STRAIGHT_INTESTINE.get())) return;
+        // 30%几率触发
+        if (OrganUtil.rollResult(entity, 0.3F)) {
+            // 添加延迟任务（3秒后掉落1个食物）
+            data.addTask(new StraightIntestineTask(data, food.copyWithCount(1)));
         }
-        return count;
     }
 
     /**
-     * 简单判断几率是否通过判定
+     * 向墨水瓶插入墨水，多瓶依次填充
      *
-     * @param entity 实体
-     * @param chance 几率
-     * @return 是否通过判定
+     * @param data     胸腔数据
+     * @param amount   要插入的墨水量（必须 >= 0）
+     * @param capacity 墨水瓶容量
+     * @param simulate 是否模拟（true 时不修改数据）
+     * @return 实际插入量
      */
-    public static boolean rollResult(LivingEntity entity, float chance) {
-        int rollChance = rollChance(entity);
-        if (rollChance <= 0) {
-            // 幸运低，每低一点减少判定20%几率，如果够幸运，应该是有成功的可能性的
-            return entity.getRandom().nextFloat() < Math.clamp(chance - rollChance * 0.2F, 0.001F, 1.0F);
-        } else {
-            for (int i = 0; i < rollChance; i++) {
-                if (entity.getRandom().nextFloat() < chance) {
-                    return true;
+    public static int insertInkToBottle(ChestCavityData data, int amount, int capacity, boolean simulate) {
+        if (amount <= 0 || capacity <= 0) return 0;
+        List<ItemStack> inkBottles = collectInkBottles(data);
+        if (inkBottles.isEmpty()) return 0;
+        int inserted = 0;
+        for (ItemStack inkBottle : inkBottles) {
+            CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+            CompoundTag tag = customData.copyTag();
+            int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+            int space = Math.max(0, capacity - currentInk);
+            int toInsert = Math.max(0, Math.min(amount - inserted, space));
+            if (toInsert == 0) continue;
+            if (!simulate) {
+                tag.putInt("ink", currentInk + toInsert);
+                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            }
+            inserted += toInsert;
+            if (inserted >= amount) break;
+        }
+        return inserted;
+    }
+
+    /**
+     * 向墨水瓶插入墨水，默认容量 1000
+     *
+     * @param data     胸腔数据
+     * @param amount   要插入的墨水量（必须 >= 0）
+     * @param simulate 是否模拟
+     * @return 实际插入量
+     */
+    public static int insertInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+        return insertInkToBottle(data, amount, 1000, simulate);
+    }
+
+    /**
+     * 从墨水瓶抽取墨水，多瓶依次抽取
+     *
+     * @param data     胸腔数据
+     * @param amount   要抽取的墨水量（必须 >= 0）
+     * @param capacity 墨水瓶容量
+     * @param simulate 是否模拟（true 时不修改数据）
+     * @return 实际抽取量
+     */
+    public static int extractInkToBottle(ChestCavityData data, int amount, int capacity, boolean simulate) {
+        if (amount <= 0) return 0;
+        List<ItemStack> inkBottles = collectInkBottles(data);
+        if (inkBottles.isEmpty()) return 0;
+        int extracted = 0;
+        for (ItemStack inkBottle : inkBottles) {
+            CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+            CompoundTag tag = customData.copyTag();
+            int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+            int toExtract = Math.max(0, Math.min(amount - extracted, currentInk));
+            if (toExtract == 0) continue;
+            if (!simulate) {
+                tag.putInt("ink", currentInk - toExtract);
+                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            }
+            extracted += toExtract;
+            if (extracted >= amount) break;
+        }
+        return extracted;
+    }
+
+    /**
+     * 从墨水瓶抽取墨水，默认容量 1000
+     *
+     * @param data     胸腔数据
+     * @param amount   要抽取的墨水量（必须 >= 0）
+     * @param simulate 是否模拟
+     * @return 实际抽取量
+     */
+    public static int extractInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+        return extractInkToBottle(data, amount, 1000, simulate);
+    }
+
+    /**
+     * 收集胸腔中所有墨水瓶物品
+     */
+    private static List<ItemStack> collectInkBottles(ChestCavityData data) {
+        List<ItemStack> inkBottles = new ArrayList<>();
+        for (ItemStack organ : data.getOrgans()) {
+            if (organ.is(WAICOrgans.INK_BOTTLE.get())) {
+                inkBottles.add(organ);
+            }
+        }
+        return inkBottles;
+    }
+
+    /**
+     * 饮用墨水，最高存储1000点
+     */
+    public static ItemStack drinkInk(LivingEntity entity, ItemStack stack) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!(stack.getItem() instanceof InkItem inkItem)) return stack;
+
+        int value = switch (inkItem.getRarity()) {
+            case COMMON -> 1;
+            case UNCOMMON -> 5;
+            case RARE -> 25;
+            case EPIC -> 125;
+            case LEGENDARY -> 625;
+        };
+        insertInkToBottle(data, value, false);
+        if (entity instanceof ServerPlayer player) {
+            CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);
+        }
+        if (entity instanceof Player player) {
+            player.awardStat(Stats.ITEM_USED.get(inkItem));
+            stack.consume(1, player);
+            if (!player.hasInfiniteMaterials()) {
+                if (stack.isEmpty()) {
+                    player.gameEvent(GameEvent.DRINK);
+                    return Items.GLASS_BOTTLE.getDefaultInstance();
+                } else {
+                    player.getInventory().add(Items.GLASS_BOTTLE.getDefaultInstance());
                 }
             }
-            return false;
         }
+        entity.gameEvent(GameEvent.DRINK);
+        return stack;
     }
 
     /**
-     * 武器伤害倍率
-     * TODO 不好计算攻击是主手还是副手
+     * 从调色盘器官中消耗对应流派的染料
      *
-     * @return 武器伤害倍率
-     */
-    public static float getWeaponDamageMultiplier(LivingEntity entity) {
-        return 1;
-    }
-
-    /**
-     * 根据法术流派获取对应的染料物品
-     *
+     * @param entity     实体
      * @param schoolType 法术流派
-     * @return 对应的染料物品，如果没有对应染料则返回null
+     * @return 是否成功消耗染料
      */
-    public static Item getDyeItemForSchool(SchoolType schoolType) {
-        ResourceLocation id = schoolType.getId();
-        if (id.equals(SchoolRegistry.BLOOD_RESOURCE)) return Items.RED_DYE;
-        if (id.equals(SchoolRegistry.FIRE_RESOURCE)) return Items.ORANGE_DYE;
-        if (id.equals(SchoolRegistry.HOLY_RESOURCE)) return Items.YELLOW_DYE;
-        if (id.equals(SchoolRegistry.ICE_RESOURCE)) return Items.LIGHT_BLUE_DYE;
-        if (id.equals(SchoolRegistry.LIGHTNING_RESOURCE)) return Items.BLUE_DYE;
-        if (id.equals(SchoolRegistry.NATURE_RESOURCE)) return Items.GREEN_DYE;
-        if (id.equals(SchoolRegistry.ELDRITCH_RESOURCE)) return Items.CYAN_DYE;
-        if (id.equals(SchoolRegistry.ENDER_RESOURCE)) return Items.PURPLE_DYE;
-        if (id.equals(SchoolRegistry.EVOCATION_RESOURCE)) return Items.GRAY_DYE;
-        return Items.AIR;
-    }
-
-    /**
-     * 从弗兰肯斯坦心脏的 BundleContents 中聚合所有内部心脏器官的属性修饰符
-     * <p>
-     * 遍历收纳袋中存储的所有心脏物品，获取每个心脏的 IOrgan 属性修饰符，
-     * 将相同属性+相同操作类型的修饰符合并为一个，值相加。
-     * </p>
-     *
-     * @param context   当前弗兰肯斯坦心脏的槽位上下文
-     * @param modifiers 需要填充的属性修饰符集合
-     */
-    public static void aggregateFrankensteinHeartAttributes(
-        ChestCavitySlotContext context,
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers
-    ) {
-        BundleContents contents = context.stack().getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-        // 使用 Map 按 (属性, 操作类型) 分组合并值
-        Map<Map.Entry<Holder<Attribute>, AttributeModifier.Operation>, Double> merged = new LinkedHashMap<>();
-        for (ItemStack stack : contents.itemsCopy()) {
-            IOrgan organ = ChestCavityUtil.getOrganCap(stack);
-            if (organ != OrganManager.EMPTY_ORGAN) {
-                ChestCavitySlotContext organContext = new ChestCavitySlotContext(
-                    context.data(),
-                    context.entity(),
-                    context.id(),
-                    context.index(),
-                    stack
-                );
-                organ.getAttributeModifiers(organContext).forEach((attribute, modifier) ->
-                    merged.merge(Map.entry(attribute, modifier.operation()), modifier.amount(), Double::sum)
-                );
-            }
-        }
-        merged.forEach((key, amount) ->
-            modifiers.put(key.getKey(), new AttributeModifier(context.id(), amount, key.getValue()))
-        );
-    }
-
-    /**
-     * 检查指定物品是否是实体胸腔中的器官（通过引用比较）
-     * <p>
-     * 仅当渲染传入的 stack 与胸腔 handler 中存储的是同一个 Java 对象引用时返回 true。
-     * </p>
-     *
-     * @param entity 实体
-     * @param stack  待检查的物品
-     * @return 该 stack 是否是胸腔内的原始器官引用
-     */
-    public static boolean isInChest(LivingEntity entity, ItemStack stack) {
+    public static boolean consumeDyeForSchool(LivingEntity entity, SchoolType schoolType) {
+        Item targetDye = OrganUtil.getDyeItemForSchool(schoolType);
+        if (targetDye == Items.AIR) return false;
         ChestCavityData data = ChestCavityUtil.getData(entity);
         for (ItemStack organ : data.getOrgans()) {
-            if (organ == stack) {
-                return true;
+            if (organ.is(WAICOrgans.PALETTE.get())) {
+                BundleContents contents = organ.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+                // 创建可变副本并找到染料索引
+                int targetIndex = -1;
+                for (int i = 0; i < contents.size(); i++) {
+                    if (contents.getItemUnsafe(i).is(targetDye)) {
+                        targetIndex = i;
+                        break;
+                    }
+                }
+                if (targetIndex >= 0) {
+                    contents.getItemUnsafe(targetIndex).consume(1, entity);
+                    return true;
+                }
             }
         }
         return false;
     }
 
     /**
-     * 获取实体的原始全局温度
+     * 墨水肌肉技能：挨打时为墨水瓶添加墨水
      *
-     * @param entity 实体
-     * @return 实体的温度属性值，无任何修改
+     * @param context         胸腔槽位上下文
+     * @param source          伤害源
+     * @param damageContainer 伤害容器（用于获取伤害值）
      */
-    public static double getOriginalTemperature(LivingEntity entity) {
-        return entity.getAttributeValue(WAICAttribute.TEMPERATURE);
+    public static void inkMuscleSkill(ChestCavitySlotContext context, DamageSource source, DamageContainer damageContainer) {
+        float damage = damageContainer.getNewDamage();
+        if (damage <= 0) return;
+        insertInkToBottle(context.data(), (int) damage, false);
     }
 
     /**
-     * 获取实体的有效全局温度
-     * <p>
-     * 若实体拥有王国器官，温度强制为 0；否则返回原始温度。
-     * </p>
+     * 钢笔尖墨水消耗 = 5 × 当前法术等级
      *
-     * @param entity 实体
-     * @return 经过器官修正后的有效温度
+     * @param currentLevel 当前法术等级
+     * @return 需要消耗的墨水量
      */
-    public static double getEffectiveTemperature(LivingEntity entity) {
-        if (ChestCavityUtil.getData(entity).hasOrgan(FDBossesOrgans.MALKUTH.get())) {
-            return 0;
-        }
-        return getOriginalTemperature(entity);
+    public static int getNibInkCost(int currentLevel) {
+        return 5 * currentLevel;
     }
 
     /**
-     * 获取以指定槽位为中心的九宫格内局部温度
+     * 墨水阑尾技能：消耗墨水瓶中的墨水回复法力
+     * 消耗的墨水量等于回复的法力量（1:1），尽可能填补法力差值
+     * 墨水不足时有墨水就全耗，只回复实际消耗掉的墨水量
+     * 没有墨水或法力已满时不触发也不冷却
+     */
+    public static boolean inkAppendixSkill(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+
+        // 计算需要回复的法力量
+        MagicData magicData = MagicData.getPlayerMagicData(entity);
+        float currentMana = magicData.getMana();
+        float maxMana = (float) entity.getAttributeValue(AttributeRegistry.MAX_MANA);
+        float manaToRestore = maxMana - currentMana;
+
+        if (manaToRestore <= 0) return false; // 法力已满，不触发
+
+        // 消耗墨水，返回实际抽取量
+        int actualExtracted = extractInkToBottle(data, (int) manaToRestore, false);
+        if (actualExtracted <= 0) return false;
+
+        // 回复法力
+        magicData.addMana(actualExtracted);
+
+        // 手动设置冷却（仅在成功消耗墨水后才冷却）
+        OrganSkillUtil.addCooldown(entity, context.stack(), 200);
+        return true;
+    }
+
+    /**
+     * 拟态器官共效果：生命恢复效果提升50%
+     *
+     * @param context 胸腔槽位上下文
+     * @param event   治疗事件
+     */
+    public static void mimicHealBoost(ChestCavitySlotContext context, LivingHealEvent event) {
+        event.setAmount(event.getAmount() * 1.5F);
+    }
+
+    /**
+     * 经验之心：每10级经验等级+1健康值
+     */
+    public static void experienceHeartModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers
+    ) {
+        LivingEntity entity = context.entity();
+        int level = 0;
+        if (entity instanceof Player player) {
+            level = player.experienceLevel;
+        }
+        double healthBonus = Math.floor(level / 10.0);
+        modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
+    }
+
+    // ==================== 病变器官 ====================
+
+    /**
+     * 病变心脏 modifier：每有一个负面效果+1健康，每有一个正面效果-1健康
+     */
+    public static void lesionHeartModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers
+    ) {
+        LivingEntity entity = context.entity();
+        int beneficial = 0, harmful = 0;
+        for (MobEffectInstance instance : entity.getActiveEffects()) {
+            if (instance.getEffect().value().getCategory() == MobEffectCategory.BENEFICIAL) {
+                beneficial++;
+            } else if (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
+                harmful++;
+            }
+        }
+        modifiers.put(
+            InitAttribute.HEALTH,
+            OrganAttributeUtil.createAddValueModifier(context.id(), harmful - beneficial)
+        );
+    }
+
+    /**
+     * 病变心脏技能：将自身所有效果传播给10格范围内的所有LivingEntity
+     * 冷却时间10秒（200tick）
+     */
+    public static boolean lesionHeartSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        Collection<MobEffectInstance> effects = entity.getActiveEffects();
+        if (effects.isEmpty()) return false;
+        AABB aabb = entity.getBoundingBox().inflate(10);
+        List<LivingEntity> targets = entity.level().getEntitiesOfClass(
+            LivingEntity.class, aabb, target -> target != entity
+        );
+        for (LivingEntity target : targets) {
+            for (MobEffectInstance instance : effects) {
+                target.addEffect(new MobEffectInstance(instance));
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 病变肌肉 modifier：每有一个负面效果，+1速度+1力量
+     */
+    public static void lesionMuscleModifier(
+        ChestCavitySlotContext context,
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers
+    ) {
+        LivingEntity entity = context.entity();
+        int harmfulCount = 0;
+        for (MobEffectInstance instance : entity.getActiveEffects()) {
+            if (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) harmfulCount++;
+        }
+        modifiers.put(
+            InitAttribute.STRENGTH,
+            OrganAttributeUtil.createAddValueModifier(context.id(), harmfulCount)
+        );
+        modifiers.put(
+            InitAttribute.SPEED,
+            OrganAttributeUtil.createAddValueModifier(context.id(), harmfulCount)
+        );
+    }
+
+    /**
+     * 病变肌肉攻击：对持有负面效果的目标，额外伤害等于目标所有负面效果的(amplifier + 1)之和
+     */
+    public static void lesionMuscleAttack(
+        ChestCavitySlotContext context, LivingEntity target,
+        DamageSource source, DamageContainer damageContainer
+    ) {
+        int bonusDamage = 0;
+        for (MobEffectInstance instance : target.getActiveEffects()) {
+            if (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
+                bonusDamage += instance.getAmplifier() + 1;
+            }
+        }
+        if (bonusDamage > 0) {
+            damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
+        }
+    }
+
+    /**
+     * 布织泰迪熊：胸腔关闭时，将胸腔内的羊毛转换为随机布织器官
      * <p>
-     * 遍历中心槽位及相邻 8 格，累加每个有效槽位中器官通过属性修饰符贡献的温度值。
-     * 空槽位视为温度 0，跳过不计。
+     * 单次遍历收集空槽位和羊毛信息，然后按类型处理：
+     * - 单个羊毛（count==1）：原位替换为随机布织器官
+     * - 多个羊毛（count>1）：尽可能消耗羊毛填满空槽位
+     * 若空槽位 >= count-1：完全消耗，最后1个原位替换
+     * 若空槽位 < count-1：只消耗空槽位数量个羊毛
      * </p>
      *
-     * @param context 当前槽位上下文
-     * @return 九宫格内器官贡献的局部温度总和
+     * @param context 胸腔槽位上下文
      */
-    public static double getLocalTemperature(ChestCavitySlotContext context) {
-        if (context.data().hasOrgan(FDBossesOrgans.MALKUTH.get())) {
-            return getMalkuthLocalTemperature(context);
+    public static void clothTeddyBearChestCavityClose(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = data.getOwner();
+        Level level = entity.level();
+        if (level.isClientSide()) return;
+
+        // 1. 单次遍历：收集空槽位 + 羊毛信息
+        List<Integer> emptySlots = new ArrayList<>();
+        List<int[]> woolSlots = new ArrayList<>();
+
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.isEmpty()) {
+                emptySlots.add(i);
+            } else if (stack.is(ItemTags.WOOL)) {
+                woolSlots.add(new int[]{
+                    i,
+                    stack.getCount()
+                });
+            }
         }
-        int center = context.index();
-        if (center < 0) {
-            // 物品不在胸腔中，只取静态属性温度（不触发动态 modifier，避免递归）
-            ChestCavitySlotContext staticContext = new ChestCavitySlotContext(
-                null,
-                null,
-                context.id(),
-                context.index(),
-                context.stack()
-            );
-            return getStackTemperature(staticContext);
+
+        if (woolSlots.isEmpty()) return;
+
+        // 布织器官候选列表（11种）
+        List<Item> clothOrgans = List.of(
+            WAICOrgans.CLOTH_HEART.get(),
+            WAICOrgans.CLOTH_LUNG.get(),
+            WAICOrgans.CLOTH_LIVER.get(),
+            WAICOrgans.CLOTH_INTESTINE.get(),
+            WAICOrgans.CLOTH_STOMACH.get(),
+            WAICOrgans.CLOTH_KIDNEY.get(),
+            WAICOrgans.CLOTH_SPLEEN.get(),
+            WAICOrgans.CLOTH_SPINE.get(),
+            WAICOrgans.CLOTH_RIB.get(),
+            WAICOrgans.CLOTH_MUSCLE.get(),
+            WAICOrgans.CLOTH_APPENDIX.get()
+        );
+
+        int emptyIdx = 0;
+
+        // 2. 处理羊毛
+        for (int[] info : woolSlots) {
+            int slotIdx = info[0];
+            int count = info[1];
+            ItemStack stack = data.getStackInSlot(slotIdx);
+
+            if (count == 1) {
+                // 单个羊毛：原位替换
+                Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                data.setStackInSlot(slotIdx, organ.getDefaultInstance());
+            } else {
+                // 多个羊毛：尽可能消耗填满空槽位
+                int availableEmpty = emptySlots.size() - emptyIdx;
+                if (availableEmpty <= 0) continue;
+
+                if (availableEmpty >= count - 1) {
+                    // 可以完全消耗：前 (count-1) 个放空槽位，最后1个原位替换
+                    for (int j = 0; j < count - 1; j++) {
+                        stack.consume(1, entity);
+                        Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                        data.setStackInSlot(emptySlots.get(emptyIdx++), organ.getDefaultInstance());
+                    }
+                    // 最后1个：原位替换
+                    stack.consume(1, entity);
+                    Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                    data.setStackInSlot(slotIdx, organ.getDefaultInstance());
+                } else {
+                    // 只能消耗 availableEmpty 个
+                    for (int j = 0; j < availableEmpty; j++) {
+                        stack.consume(1, entity);
+                        Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                        data.setStackInSlot(emptySlots.get(emptyIdx++), organ.getDefaultInstance());
+                    }
+                }
+            }
         }
-        List<Integer> adjacent = getAdjacentSlots(center);
-        double total = 0;
-        // 中心 + 遍历相邻 8 格
-        total += collectTemperatureFromSlot(context, center);
-        for (int slot : adjacent) {
-            total += collectTemperatureFromSlot(context, slot);
+    }
+
+    /**
+     * 布织泰迪熊技能：缝补
+     * <p>
+     * 消耗收纳袋中的羊毛回复生命值。
+     * 每个羊毛治疗 4 + clothCount 点生命（clothCount = 胸腔中布织器官数量）。
+     * 自动计算最低消耗以尽可能恢复至满血。
+     * 5秒冷却（100 tick）。
+     * </p>
+     *
+     * @param context 胸腔槽位上下文
+     * @return true 触发冷却
+     */
+    public static boolean clothTeddyBearSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.level().isClientSide()) return false;
+
+        int missingHP = (int) (entity.getMaxHealth() - entity.getHealth());
+        if (missingHP <= 0) return false;
+
+        int clothCount = context.data().getOrganCount(WAICItemTagManager.CLOTH_ORGAN);
+
+        BundleContents contents = context.stack().getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        int totalWool = 0;
+        for (int i = 0; i < contents.size(); i++) {
+            ItemStack stack = contents.getItemUnsafe(i);
+            if (stack.is(ItemTags.WOOL)) {
+                totalWool += stack.getCount();
+            }
+        }
+
+        if (totalWool <= 0) return false;
+
+        // 每个羊毛治疗 4 + clothCount 点
+        int healPerWool = 4 + clothCount;
+
+        // 计算恢复满血所需的羊毛数量（向上取整）
+        int woolNeeded = (missingHP + healPerWool - 1) / healPerWool;
+        int woolToUse = Math.min(woolNeeded, totalWool);
+
+        int actualHeal = woolToUse * healPerWool;
+
+        // 扣除羊毛
+        for (int i = 0; i < contents.size() && woolToUse > 0; i++) {
+            ItemStack stack = contents.getItemUnsafe(i);
+            if (stack.is(ItemTags.WOOL)) {
+                int consume = Math.min(woolToUse, stack.getCount());
+                stack.consume(consume, entity);
+                woolToUse -= consume;
+            }
+        }
+
+        entity.heal(actualHeal);
+        return true;
+    }
+
+    // ==================== 猩红器官 ====================
+
+    /**
+     * 猩红心脏泣血：每次受到治疗时，将治疗量 ×5 转化为血液存储
+     */
+    public static void crimsonHeartHeal(ChestCavitySlotContext context, LivingHealEvent event) {
+        LivingEntity entity = context.entity();
+        if (HumoursData.get(entity).isBloodFull()) return;
+        float amount = event.getAmount();
+        HumoursData.insertBlood(entity, amount * 5, false);
+    }
+
+    /**
+     * 猩红心脏安装：增加 100 点血液上限
+     */
+    public static void crimsonHeartAdded(ChestCavitySlotContext context) {
+        HumoursData.addMaxBlood(context.entity(), 100);
+    }
+
+    /**
+     * 猩红心脏移除：收回 100 点血液上限
+     */
+    public static void crimsonHeartRemoved(ChestCavitySlotContext context) {
+        HumoursData.addMaxBlood(context.entity(), -100);
+    }
+
+    /**
+     * 猩红阑尾技能：鲜血涌泉
+     * <p>
+     * 消耗 5 点血液回复 1 点生命值，尽可能填补生命差值。
+     * 血液不足或已满血时不触发、不冷却。
+     * 30 秒冷却（600 tick）。
+     * </p>
+     *
+     * @param context 胸腔槽位上下文
+     * @return true 触发冷却
+     */
+    public static boolean crimsonAppendixSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+
+        float missingHP = entity.getMaxHealth() - entity.getHealth();
+        if (missingHP <= 0) return false;
+
+        float bloodNeeded = missingHP * 5;
+        float actualBlood = HumoursData.extractBlood(entity, bloodNeeded, false);
+        if (actualBlood <= 0) return false;
+
+        float healAmount = actualBlood / 5;
+        // 使用 setHealth 直接设置，不触发 heal() → 避免心脏泣血回调将血液加回
+        entity.setHealth(Math.min(entity.getHealth() + healAmount, entity.getMaxHealth()));
+        return true;
+    }
+
+    // ==================== FDBosses 器官 ====================
+
+    /**
+     * 慈悲被动：闪电射线
+     * <p>
+     * 攻击时召唤Chesed闪电射线，自动追踪目标并造成武器伤害100%的魔法伤害+感电效果。
+     * 冷却时间1秒（20tick），通过 OrganSkillUtil 检测和设置冷却。
+     * </p>
+     */
+    public static void chesedAttack(
+        ChestCavitySlotContext context, LivingEntity target,
+        DamageSource source, DamageContainer damageContainer
+    ) {
+        LivingEntity entity = context.entity();
+        Level level = entity.level();
+        if (level.isClientSide()) return;
+        // 检测冷却
+        if (OrganSkillUtil.hasCooldown(entity, context.stack())) return;
+        // 召唤闪电射线
+        ChesedMiniRay.summon(level, target, entity.getMainHandItem(), entity);
+        // 设置冷却 20 tick（1秒）
+        OrganSkillUtil.addCooldown(entity, context.stack(), 20);
+    }
+
+    /**
+     * 严厉被动：罪恶审判
+     * <p>
+     * 攻击拥有负面效果的目标时，额外造成目标最大生命值×3%×负面效果数量的伤害。
+     * </p>
+     */
+    public static void geburahAttack(
+        ChestCavitySlotContext context, LivingEntity target,
+        DamageSource source, DamageContainer damageContainer
+    ) {
+        int harmfulCount = 0;
+        for (MobEffectInstance effect : target.getActiveEffects()) {
+            if (effect instanceof IMobEffectInstance instance && instance.isHarmful()) {
+                harmfulCount++;
+            }
+        }
+        if (harmfulCount > 0) {
+            float bonusDamage = target.getMaxHealth() * 0.03F * harmfulCount;
+            damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
+        }
+    }
+
+    /**
+     * 血肉偶像主动技能：赎罪祭血
+     * <p>
+     * 使用迭代器逐个遍历负面效果，每有1个负面效果当前生命值折半一次并立即清除该效果。
+     * 当清除的是「罪人」效果时，额外减少1层罪孽。
+     * </p>
+     */
+    public static boolean fleshIdolSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.level().isClientSide()) return false;
+
+        float health = entity.getHealth();
+        Iterator<MobEffectInstance> iterator = entity.getActiveEffects().iterator();
+        while (iterator.hasNext()) {
+            MobEffectInstance effect = iterator.next();
+            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
+                health /= 2;
+                // 清除罪人效果时，减少1层罪孽
+                if (effect.getEffect().is(BossEffects.SINNER) && entity instanceof Player player) {
+                    PlayerSins sins = PlayerSins.getPlayerSins(player);
+                    sins.setSinnedTimes(Math.max(0, sins.getSinnedTimes() - 1));
+                    PlayerSins.setPlayerSins(player, sins);
+                }
+                entity.removeEffect(effect.getEffect());
+            }
+        }
+        entity.setHealth(Math.max(1, health));
+        return true;
+    }
+
+    /**
+     * 窝瓜 - 受到摔落伤害时免疫，并将等量摔落伤害平分给周围5×5×5范围内的实体
+     */
+    public static void squashIncomingDamage(ChestCavitySlotContext slotContext, LivingIncomingDamageEvent event) {
+        if (!event.getSource().is(DamageTypeTags.IS_FALL)) return;
+
+        LivingEntity entity = slotContext.entity();
+        Level level = entity.level();
+        if (level.isClientSide()) return;
+
+        float fallDamage = event.getAmount();
+
+        // 5×5×5 范围搜索（半径2.5格）
+        AABB searchBox = entity.getBoundingBox().inflate(2.5);
+        List<LivingEntity> targets = level.getEntitiesOfClass(
+            LivingEntity.class,
+            searchBox,
+            target -> target != entity
+                      && !(target instanceof TamableAnimal tamable && entity instanceof Player player && tamable.isOwnedBy(player))
+        );
+
+        // 平分摔落伤害
+        float damagePerTarget = fallDamage / targets.size();
+        DamageSource fallSource = level.damageSources().fall();
+        for (LivingEntity target : targets) {
+            target.hurt(fallSource, damagePerTarget);
+        }
+
+        // 免疫摔落伤害
+        event.setCanceled(true);
+    }
+
+    // ==================== 电荷系统 ====================
+
+    /**
+     * 收集胸腔中所有蓄能模块
+     */
+    public static List<ItemStack> collectEnergyModules(ChestCavityData data) {
+        List<ItemStack> modules = new ArrayList<>();
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (!stack.isEmpty() && stack.is(WAICOrgans.ENERGY_MODULE.get())) {
+                modules.add(stack);
+            }
+        }
+        return modules;
+    }
+
+    /**
+     * 获取当前所有蓄能模块的电荷总量
+     */
+    public static float getCharge(ChestCavityData data) {
+        return getCharge(collectEnergyModules(data));
+    }
+
+    /**
+     * 获取电荷总量（已有模块列表）
+     */
+    public static float getCharge(List<ItemStack> modules) {
+        float total = 0;
+        for (ItemStack module : modules) {
+            total += getModuleCharge(module);
         }
         return total;
     }
 
     /**
-     * 王国器官的局部温度聚合
-     * <p>
-     * 遍历胸腔内所有器官，根据物品标签判断温度方向：
-     * </p>
-     * <pre>
-     *   仅有 ICE 标签 → 取负温度（温度 < 0 的部分）
-     *   仅有 FIRE 标签 → 取正温度（温度 > 0 的部分）
-     *   同时拥有 ICE 和 FIRE → 取绝对值最高的温度值
-     *   两者皆无 → 返回原始胸腔温度
-     * </pre>
+     * 获取单个蓄能模块的电荷量
      */
-    private static double getMalkuthLocalTemperature(ChestCavitySlotContext context) {
-        ItemStack caller = context.stack();
-        boolean isIce = caller.is(WAICItemTagManager.ICE);
-        boolean isFire = caller.is(WAICItemTagManager.FIRE);
-        if (!isIce && !isFire) return getOriginalTemperature(context.entity());
-        double iceTotal = 0;
-        double fireTotal = 0;
-        List<ItemStack> organs = context.data().getOrgans();
-        for (int slot = 0; slot < organs.size(); slot++) {
-            ItemStack stack = organs.get(slot);
-            ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
-                context.data(),
-                context.entity(),
-                context.id(),
-                slot,
-                stack
-            );
-            double temperature = getStackTemperature(slotContext);
-            if (temperature < 0) iceTotal += temperature;
-            if (temperature > 0) fireTotal += temperature;
-        }
-        if (isIce && isFire) {
-            return Math.abs(iceTotal) >= fireTotal ? iceTotal : fireTotal;
-        } else if (isIce) {
-            return iceTotal;
-        } else {
-            return fireTotal;
-        }
+    public static float getModuleCharge(ItemStack module) {
+        CompoundTag tag = module.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        return tag.contains("charge") ? tag.getFloat("charge") : 0;
     }
 
     /**
-     * 获取器官物品的温度属性值
-     *
-     * @param context 槽位上下文（stack 为目标器官物品）
-     * @return 温度属性值，无温度属性则返回 0
+     * 设置单个蓄能模块的电荷量
      */
-    public static double getStackTemperature(ChestCavitySlotContext context) {
-        IOrgan organ = ChestCavityUtil.getOrganCap(context.stack());
-        if (organ == OrganManager.EMPTY_ORGAN) return 0;
-        for (Map.Entry<Holder<Attribute>, AttributeModifier> entry : organ.getAttributeModifiers(context).entries()) {
-            if (entry.getKey().equals(WAICAttribute.TEMPERATURE)) {
-                return entry.getValue().amount();
+    public static void setModuleCharge(ItemStack module, float charge) {
+        CompoundTag tag = new CompoundTag();
+        tag.putFloat("charge", Math.max(0, charge));
+        module.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+    }
+
+    /**
+     * 获取最大电荷上限 = 500 × 蓄能模块数量
+     */
+    public static float getMaxCharge(ChestCavityData data) {
+        return getMaxCharge(collectEnergyModules(data));
+    }
+
+    /**
+     * 获取最大电荷上限（已有模块列表）
+     */
+    public static float getMaxCharge(List<ItemStack> modules) {
+        return 500 * modules.size();
+    }
+
+    /**
+     * 获取有效超载上限 = maxCharge × (1 + 0.5)
+     */
+    public static float getEffectiveMaxCharge(ChestCavityData data) {
+        return getEffectiveMaxCharge(collectEnergyModules(data));
+    }
+
+    /**
+     * 获取有效超载上限（已有模块列表）
+     */
+    public static float getEffectiveMaxCharge(List<ItemStack> modules) {
+        return getMaxCharge(modules) * (1 + 0.5F);
+    }
+
+    /**
+     * 向蓄能模块中插入电荷（按比例分配到各模块）
+     */
+    public static float insertCharge(ChestCavityData data, float amount, boolean simulate) {
+        if (amount <= 0) return 0;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return 0;
+
+        float effectiveMax = getEffectiveMaxCharge(modules);
+        float currentCharge = getCharge(modules);
+        float canInsert = Math.max(0, effectiveMax - currentCharge);
+        float toInsert = Math.min(amount, canInsert);
+
+        if (toInsert <= 0) return 0;
+        if (simulate) return toInsert;
+
+        float maxPerModule = effectiveMax / modules.size();
+        float remaining = toInsert;
+        for (ItemStack module : modules) {
+            float moduleCharge = getModuleCharge(module);
+            float moduleCanInsert = Math.max(0, maxPerModule - moduleCharge);
+            float insert = Math.min(remaining, moduleCanInsert);
+            if (insert > 0) {
+                setModuleCharge(module, moduleCharge + insert);
+                remaining -= insert;
+            }
+            if (remaining <= 0) break;
+        }
+        return toInsert - remaining;
+    }
+
+    /**
+     * 从蓄能模块中提取电荷（按比例从各模块扣除）
+     * 内部处理充能肌束余电回收
+     */
+    public static float extractCharge(ChestCavityData data, LivingEntity entity, float amount, boolean simulate) {
+        if (amount <= 0) return 0;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return 0;
+
+        float currentCharge = getCharge(modules);
+        float toExtract = Math.min(amount, currentCharge);
+
+        if (toExtract <= 0) return 0;
+        if (simulate) return toExtract;
+
+        float remaining = toExtract;
+        for (ItemStack module : modules) {
+            float moduleCharge = getModuleCharge(module);
+            float extract = Math.min(remaining, moduleCharge);
+            if (extract > 0) {
+                setModuleCharge(module, moduleCharge - extract);
+                remaining -= extract;
+            }
+            if (remaining <= 0) break;
+        }
+        float extracted = toExtract - remaining;
+        // 充能肌束余电回收
+        if (extracted > 0 && data.hasOrgan(WAICOrgans.CHARGED_MUSCLE.get())) {
+            float healRate = isOverloadMode(entity) ? 0.20f : 0.10f;
+            entity.heal(extracted * healRate);
+        }
+        return extracted;
+    }
+
+    /**
+     * 消耗电荷（含充能肌束回路返还逻辑）
+     */
+    public static float consumeCharge(ChestCavityData data, LivingEntity entity, float amount, boolean simulate) {
+        float extracted = extractCharge(data, entity, amount, simulate);
+        if (extracted > 0 && !simulate && data.hasOrgan(WAICOrgans.CHARGED_MUSCLE.get())) {
+            float refundChance = isOverloadMode(entity) ? 0.5f : 0.25f;
+            if (entity.getRandom().nextFloat() < refundChance) {
+                insertCharge(data, extracted, false);
             }
         }
-        return 0;
-    }
-
-    private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {
-        ItemStack stack = context.data().getOrgans().get(slot);
-        if (stack.isEmpty()) return 0;
-        ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
-            context.data(),
-            context.entity(),
-            context.id(),
-            slot,
-            stack
-        );
-        return getStackTemperature(slotContext);
+        return extracted;
     }
 
     /**
-     * 获取对称槽位索引（胸腔 N×9，镜像列：0↔8, 1↔7, 2↔6, 3↔5, 4不变）
+     * 是否处于超频模式
      */
-    public static int getSymmetricRibIndex(int index) {
-        int row = index / 9;
-        int col = index % 9;
-        return row * 9 + (8 - col);
+    public static boolean isOverloadMode(LivingEntity entity) {
+        return entity.hasEffect(WAICEffect.OVERLOAD);
+    }
+
+    /**
+     * 蓄能模块 tick：超载衰减
+     */
+    public static void energyModuleTick(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return;
+        float charge = getCharge(modules);
+        float maxCharge = getMaxCharge(modules);
+        if (charge > maxCharge) {
+            float drain = Math.min(1.0F, charge - maxCharge);
+            extractCharge(data, entity, drain, false);
+        }
+    }
+
+    /**
+     * 演算核心 tick：信号再生
+     */
+    public static void computingCoreTick(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        if (isOverloadMode(entity)) return;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return;
+        float charge = getCharge(modules);
+        float maxCharge = getMaxCharge(modules);
+        if (charge < maxCharge) {
+            float toRegen = Math.min(1.0f, maxCharge - charge);
+            insertCharge(data, toRegen, false);
+        }
+    }
+
+    /**
+     * 充能肌束 tick：电流推动（冲刺产生电荷）
+     */
+    public static void chargedMuscleTick(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        if (!entity.isSprinting()) return;
+        insertCharge(data, 1, false);
+    }
+
+    /**
+     * 传导链节主动技能：激活超频模式
+     */
+    public static boolean conductiveSpineSkill(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = context.entity();
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return false;
+        float maxCharge = getMaxCharge(modules);
+        float activationCost = maxCharge / 2;
+        float currentCharge = getCharge(modules);
+        if (currentCharge < activationCost) return false;
+        consumeCharge(data, entity, activationCost, false);
+        entity.addEffect(new MobEffectInstance(WAICEffect.OVERLOAD, 200));
+        return true;
+    }
+
+    /**
+     * 检查对称位置是否存在导流肋骨
+     */
+    public static boolean hasSymmetricCurrentRib(ChestCavityData data, int index) {
+        int symmetricIndex = OrganUtil.getSymmetricRibIndex(index);
+        if (symmetricIndex == index) return false;
+        if (symmetricIndex < 0 || symmetricIndex >= data.getSlots()) return false;
+        ItemStack symmetricStack = data.getStackInSlot(symmetricIndex);
+        return !symmetricStack.isEmpty() && symmetricStack.is(WAICOrgans.CURRENT_RIB.get());
+    }
+
+    /**
+     * 导流肋骨护盾：每10电荷抵消1伤害，上限4（超频8）
+     */
+    public static float currentRibShield(LivingEntity entity, float damage) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!data.hasOrgan(WAICOrgans.CURRENT_RIB.get())) return 0;
+        List<ItemStack> modules = collectEnergyModules(data);
+        if (modules.isEmpty()) return 0;
+        float charge = getCharge(modules);
+        if (charge <= 0) return 0;
+        boolean overload = isOverloadMode(entity);
+        boolean hasSymmetric = false;
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (!stack.isEmpty() && stack.is(WAICOrgans.CURRENT_RIB.get())) {
+                if (hasSymmetricCurrentRib(data, i)) {
+                    hasSymmetric = true;
+                    break;
+                }
+            }
+        }
+        float costPerPoint = hasSymmetric ? 5 : 10;
+        int maxBlock = overload ? 8 : 4;
+        int maxAffordable = (int) (charge / costPerPoint);
+        int blockPoints = Math.min(maxBlock, Math.min(maxAffordable, (int) Math.floor(damage)));
+        if (blockPoints <= 0) return 0;
+        float actualCost = blockPoints * costPerPoint;
+        consumeCharge(data, entity, actualCost, false);
+        return blockPoints;
+    }
+
+    // ==================== 九狱器官通用 ====================
+
+    /**
+     * 获取胸腔中九狱器官的数量
+     */
+    private static int getNineHellCount(ChestCavitySlotContext context) {
+        int count = context.data().getOrganCount(WAICItemTagManager.NINE_HELL);
+        if (context.index() == -1) count++;
+        return count;
+    }
+
+    /**
+     * 九狱器官共用 otherChange 回调
+     * 当其他槽位的器官变化涉及九狱器官时，重新计算当前器官的属性
+     */
+    public static void nineHellOtherChange(ChestCavitySlotContext context, int changedIndex, ItemStack oldStack, ItemStack newStack) {
+        if (newStack.is(WAICItemTagManager.NINE_HELL) || oldStack.is(WAICItemTagManager.NINE_HELL)) {
+            OrganAttributeUtil.updateSlotOrganAttribute(context);
+        }
+    }
+
+    // ==================== 灵薄（阑尾）====================
+
+    /**
+     * 灵薄 modifier：幸运属性动态调整（基础 2 - N）
+     */
+    public static void limboModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(Attributes.LUCK, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 灵薄 tick：每秒给予经验（叠加式 1/3/5）
+     */
+    public static void limboTick(ChestCavitySlotContext context) {
+        if (!(context.entity() instanceof ServerPlayer serverPlayer)) return;
+        // 每 20 tick（1秒）触发一次
+        if (serverPlayer.tickCount % 20 != 0) return;
+        int n = getNineHellCount(context);
+        int xp = n * n;
+        serverPlayer.giveExperiencePoints(xp);
+    }
+
+    // ==================== 色欲（肠子）====================
+
+    /**
+     * 色欲 modifier：营养属性动态调整（基础 2 - N）
+     */
+    public static void lustModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.NUTRITION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 色欲 attack：攻击回复伤害 10%/30%/60% 生命（叠加式）
+     */
+    public static void lustAttack(
+        ChestCavitySlotContext context,
+        LivingEntity target,
+        DamageSource source,
+        DamageContainer damageContainer
+    ) {
+        int n = getNineHellCount(context);
+        float healPercent = n >= 3 ? 0.6F : (n == 2 ? 0.3F : 0.1F);
+        float damage = damageContainer.getNewDamage();
+        float healAmount = damage * healPercent;
+        if (healAmount > 0) {
+            context.entity().heal(healAmount);
+        }
+    }
+
+    // ==================== 暴食（胃）====================
+
+    /**
+     * 暴食 modifier：消化属性动态调整（基础 2 - N）
+     */
+    public static void gluttonyModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    // ==================== 贪婪（肺脏）====================
+
+    /**
+     * 贪婪 modifier：呼吸恢复/容量/耐力动态调整（基础 2 - N）+ 抢夺/时运
+     */
+    public static void greedModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int n = getNineHellCount(context);
+        modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        // 抢夺 + 时运（叠加式）
+        int bonus = n >= 3 ? 6 : (n == 2 ? 3 : 1);
+        modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+        modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+    }
+
+    // ==================== 愤怒（肝脏）====================
+
+    /**
+     * 愤怒 modifier：解毒属性动态调整（基础 2 - N）+ 力量/速度（叠加式）
+     */
+    public static void wrathModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int n = getNineHellCount(context);
+        modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        // 力量 + 速度（叠加式）
+        int bonus = n >= 3 ? 6 : (n == 2 ? 3 : 1);
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+        modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+    }
+
+    // ==================== 异端（脾脏）====================
+
+    /**
+     * 异端 modifier：代谢属性动态调整（基础 2 - N）
+     * 药水效果增强通过事件处理（CommonEventHandler 中 MobEffectEvent.Added）
+     */
+    public static void heresyModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.METABOLISM, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 异端药水效果增强（在 MobEffectEvent.Added 中调用）
+     * 罪业1: 药水持续时间 +50%（×1.5）
+     * 罪业2: 药水持续时间额外 +50%（总计 +100%，×2.0）
+     * 罪业3: 药水等级 +1（不再加时长）
+     */
+    public static void heresyMobEffectAdded(LivingEntity entity, MobEffectInstance effectInstance) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!data.hasOrgan(WAICOrgans.HERESY.get())) return;
+
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        IMobEffectInstance iEffect = (IMobEffectInstance) effectInstance;
+
+        // 药水持续时间延长，罪业100%+50%，罪业2：100%+50%+100%
+        iEffect.setDuration(duration -> (int) (duration * n >= 2 ? 2.5 : 1.5), entity);
+
+        // 药水等级 +1
+        if (n >= 3) {
+            iEffect.setAmplifier(effectInstance.getAmplifier() + 1, entity);
+        }
+    }
+
+    // ==================== 暴力（肌肉）====================
+
+    /**
+     * 暴力 modifier：力量/速度属性动态调整（基础 2 - N）
+     * 暴击效果通过事件处理（CommonEventHandler 中 CriticalHitEvent）
+     */
+    public static void violenceModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int n = getNineHellCount(context);
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+    }
+
+    /**
+     * 暴力暴击增强（在 CriticalHitEvent 中调用）
+     * N≥1: 暴击伤害 ×2（设置倍率为 3.0，原版暴击为 1.5）
+     * N≥2: 暴击伤害 ×2（设置倍率为 6.0）
+     * N≥3: 攻击永远暴击
+     */
+    public static void violenceCriticalHit(Player player, CriticalHitEvent event) {
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        if (!data.hasOrgan(WAICOrgans.VIOLENCE.get())) return;
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+
+        if (n >= 3) {
+            // 永远暴击 + 暴击伤害 ×4
+            event.setCriticalHit(true);
+            event.setDamageMultiplier(6.0F);
+        } else {
+            // 暴击伤害 ×2
+            if (event.isCriticalHit()) {
+                event.setDamageMultiplier(n == 2 ? 6F : 3F);
+            }
+        }
+    }
+
+    // ==================== 欺诈（肾脏）====================
+
+    /**
+     * 欺诈 modifier：过滤属性动态调整（基础 2 - N）
+     * 交易效果通过事件处理（CommonEventHandler 中 TradeWithVillagerEvent / PlayerContainerEvent）
+     */
+    public static void fraudModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.FILTRATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 欺诈交易效果 - 交易完成时（在 TradeWithVillagerEvent 中调用）
+     * N≥1: 交易额外经验
+     * N≥3: 交易不缺货（重置使用次数）
+     */
+    public static void fraudTradeComplete(Player player, MerchantOffer offer) {
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return;
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+
+        // 额外经验
+        player.giveExperiencePoints(offer.getXp() * 10);
+        if (n >= 3) {
+            // 不缺货：重置使用次数
+            offer.resetUses();
+        }
+    }
+
+    /**
+     * 欺诈交易打折（在 PlayerContainerEvent.Open 中调用）
+     * N≥2: 交易打折 30%×(N-1)
+     * <p>
+     * 仿照原版村庄英雄的打折方式：直接 addToSpecialPriceDiff 追加折扣。
+     * 原版在 startTrading 时已先 resetSpecialPrices 清零，再 updateSpecialPrices 施加声望/村庄英雄折扣，
+     * 此事件在之后触发，直接追加即可。关闭交易时由原版 resetSpecialPrices 自动还原。
+     * </p>
+     */
+    public static void fraudTradeDiscount(Player player, AbstractContainerMenu container) {
+        ChestCavityData data = ChestCavityUtil.getData(player);
+        if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return;
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        if (n < 2) return;
+
+        if (container instanceof MerchantMenu merchantMenu) {
+            double discountRate = 0.3 * (n - 1);
+            for (MerchantOffer offer : merchantMenu.getOffers()) {
+                int discount = (int) Math.floor(discountRate * offer.getBaseCostA().getCount());
+                offer.addToSpecialPriceDiff(-Math.max(discount, 1));
+            }
+        }
+    }
+
+    // ==================== 背叛（心脏）====================
+
+    /**
+     * 背叛 modifier：健康属性动态调整（基础 2 - N）
+     */
+    public static void treacheryModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 背叛 attack：攻击额外造成目标最大生命值 1%/4%/9% 伤害（叠加式）
+     */
+    public static void treacheryAttack(
+        ChestCavitySlotContext context,
+        LivingEntity target,
+        DamageSource source,
+        DamageContainer damageContainer
+    ) {
+        int n = getNineHellCount(context);
+        float percent = n >= 3 ? 0.09F : (n == 2 ? 0.04F : 0.01F);
+        float bonusDamage = target.getMaxHealth() * percent;
+        if (bonusDamage > 0) {
+            target.hurt(target.damageSources().mobAttack(context.entity()), bonusDamage);
+        }
     }
 }

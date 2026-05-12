@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
+import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -29,8 +29,8 @@ public class MowziesMobOrgans {
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             // -80%最终移动速度
             .totalMultipliedAttribute(Attributes.MOVEMENT_SPEED, -0.8)
-            .incomingDamage(MowziesMobOrganSkillUtil::ferrousWroughtnautHeartMirrorIncomingDamage)
-            .attack(MowziesMobOrganSkillUtil::ferrousWroughtnautHeartMirrorAttack)
+            .incomingDamage(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorIncomingDamage)
+            .attack(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorAttack)
             .build()
     );
 
@@ -50,9 +50,9 @@ public class MowziesMobOrgans {
             .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .addValueAttribute(InitAttribute.HEALTH, 2)
             // 胸腔关闭时烧毁周围器官以及尝试创建任务
-            .chestCavityClose(MowziesMobOrganSkillUtil::chestNovaChestCavityClose)
+            .chestCavityClose(MowziesMobOrganUtil::chestNovaChestCavityClose)
             // 器官移除时清理任务
-            .removed(MowziesMobOrganSkillUtil::chestNovaRemoved)
+            .removed(MowziesMobOrganUtil::chestNovaRemoved)
             .build()
     );
 
@@ -227,7 +227,7 @@ public class MowziesMobOrgans {
         "bluff_core",
         () -> Organ.builder()
             .skillTooltip(WAICTooltipUtil.skillTooltip(5))
-            .skill(MowziesMobOrganSkillUtil::bluffCoreSkill)
+            .skill(MowziesMobOrganUtil::bluffCoreSkill)
             .build()
     );
 

@@ -148,6 +148,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganSkill(FDBossesOrgans.CHESED, "Attacks summon a lightning ray that tracks the target, dealing weapon damage and applying Shocked. Cooldown: 1s");
         addItem(FDBossesOrgans.GEBURAH, "Geburah");
         addOrganSkill(FDBossesOrgans.GEBURAH, "Attacks deal bonus damage equal to 3% max HP per harmful effect on the target");
+        addItem(FDBossesOrgans.FLESH_IDOL, "Flesh Idol");
+        addOrganSkill(FDBossesOrgans.FLESH_IDOL, 0, "For each harmful effect: halve current HP, then remove that effect");
+        addOrganSkill(FDBossesOrgans.FLESH_IDOL, 1, "Removing Sinner effect also reduces 1 Sin layer. Cooldown: 20s");
 
         // 利维坦器官翻译
         addItem(CataclysmOrgans.LEVIATHAN_HEART, "Leviathan Heart");
@@ -745,6 +748,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganSkill(FDBossesOrgans.CHESED, "攻击时召唤闪电射线追踪目标，造成武器伤害并施加感电效果。冷却：1秒");
         addItem(FDBossesOrgans.GEBURAH, "严厉");
         addOrganSkill(FDBossesOrgans.GEBURAH, "攻击时，对目标每个负面效果额外造成其最大生命值3%的伤害");
+        addItem(FDBossesOrgans.FLESH_IDOL, "血肉偶像");
+        addOrganSkill(FDBossesOrgans.FLESH_IDOL, 0, "逐个清除负面效果：每清除1个负面效果，当前生命值折半一次");
+        addOrganSkill(FDBossesOrgans.FLESH_IDOL, 1, "清除「罪人」效果时，减少1层罪孽。冷却：20秒");
 
         // 利维坦器官翻译
         addItem(CataclysmOrgans.LEVIATHAN_HEART, "利维坦心脏");

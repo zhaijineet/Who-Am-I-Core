@@ -264,7 +264,7 @@ public class IceAndFireOrganUtil {
         DamageSource source,
         DamageContainer damageContainer
     ) {
-        double localTemp = WAICOrganUtil.getLocalTemperature(context);
+        double localTemp = OrganUtil.getLocalTemperature(context);
         int slownessLevel = (int) Math.max(0, (Math.abs(localTemp) - 1) / 2);
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 3 * 20, slownessLevel));
     }
@@ -281,7 +281,7 @@ public class IceAndFireOrganUtil {
         double selfTemperature,
         double multiplier
     ) {
-        double temp = WAICOrganUtil.getEffectiveTemperature(context.entity());
+        double temp = OrganUtil.getEffectiveTemperature(context.entity());
         if (context.index() == -1) temp -= selfTemperature;
         double healthBonus = temp * -multiplier;
         modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));

@@ -114,13 +114,15 @@ src/main/java/net/zhaiji/who_am_i_core/
 │   └── StraightIntestineTask.java  # 直肠子掉落食物任务
 │
 └── util/
-    ├── CataclysmOrganUtil.java     # 灾变器官工具类（涛浪提灯攻击、风暴脊柱减伤、风暴肋骨等）
-    ├── IceAndFireOrganUtil.java    # 冰火器官工具类（龙宝玉、吐息、悚怖命匣、九头蛇全套技能）
+    ├── OrganUtil.java              # 跨 mod 通用工具（邻接槽位计算、无情机制、温度系统、弗兰肯斯坦聚合、几率判定等）
+    ├── WAICOrganUtil.java          # WAIC 器官工具类（墨水、病变、经验之心、布织泰迪熊、猩红、九狱、电荷系统、FDBosses 等）
+    ├── WAICTooltipUtil.java        # 工具提示生成工具
+    ├── AnvilCraftOrganUtil.java    # AnvilCraft 器官工具类（浮霜金属、超限合金）
+    ├── CataclysmOrganUtil.java     # 灾变器官工具类（涛浪提灯、风暴脊柱/肋骨、焰魔、巨兽、远古工厂、咒翼灵骸等）
+    ├── CompanionsOrganUtil.java    # Companions 器官工具类（教宗心脏/脾脏/阑尾）
+    ├── IceAndFireOrganUtil.java    # 冰火器官工具类（龙宝玉、吐息、悚恐怖匣、九头蛇全套技能）
     ├── IronSpellOrganUtil.java     # 铁魔法器官工具类（腐败魂灯、尸王脊柱/肋骨）
-    ├── MowziesMobOrganSkillUtil.java # Mowzie 器官技能（护心镜、胸中新星、泥峭等）
-    ├── WAICOrganSkillUtil.java     # WAIC 器官技能工具类（墨水、病变心脏/肌肉、经验之心、布织泰迪熊等）
-    ├── WAICOrganUtil.java          # WAIC 器官通用工具（邻接槽位计算、无情机制、温度系统、弗兰肯斯坦聚合等）
-    └── WAICTooltipUtil.java        # 工具提示生成工具
+    └── MowziesMobOrganUtil.java    # Mowzie 器官工具类（护心镜、胸中新星、泥峭等）
 ```
 
 ---
@@ -344,7 +346,7 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 
 ## 工具方法速查
 
-### WAICOrganUtil
+### OrganUtil
 - `getAdjacentSlots(int slotIndex)` — 获取 3×9 网格中某槽位周围 8 格的索引列表
 - `mercilessBonus(ChestCavitySlotContext)` — `floor(sqrt(总附魔等级))`，浮霜和超限的核心机制
 - `rollChance(entity)` — 幸运判定次数：每 5 点幸运 = 1 次，余数每点 20% 几率
@@ -353,6 +355,7 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 - `getLocalTemperature(slotContext)` — 九宫格内局部温度总和
 - `aggregateFrankensteinHeartAttributes(context, modifiers)` — 弗兰肯斯坦心脏聚合内部器官属性
 - `isInChest(entity, stack)` — 引用比较判断是否在胸腔中
+- `getSymmetricRibIndex(int index)` — 获取对称槽位索引
 
-### WAICOrganSkillUtil
-- 墨水阑尾/肌肉、病变心脏/肌肉、经验之心、布织泰迪熊、闹鬼骨头等技能实现
+### WAICOrganUtil
+- 墨水阑尾/肌肉、病变心脏/肌肉、经验之心、布织泰迪熊、猩红、九狱、电荷系统、FDBosses 等器官实现

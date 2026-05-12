@@ -53,11 +53,11 @@ import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
+import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
-import net.zhaiji.who_am_i_core.util.MowziesMobOrganSkillUtil;
-import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 public class CommonEventHandler {
     /**
@@ -86,9 +86,9 @@ public class CommonEventHandler {
         // 注册可食用条件
         // 泥峭器官可食用泥土
         EdibleCondition.builder()
-            .matchesItem(MowziesMobOrganSkillUtil::isDirtItem)
-            .matchesEntity(MowziesMobOrganSkillUtil::hasBluffOrgan)
-            .onEat(MowziesMobOrganSkillUtil::eatDirt)
+            .matchesItem(MowziesMobOrganUtil::isDirtItem)
+            .matchesEntity(MowziesMobOrganUtil::hasBluffOrgan)
+            .onEat(MowziesMobOrganUtil::eatDirt)
             .build();
 
         // 暴食可以食用任何食物，且食用速度减半
@@ -103,7 +103,7 @@ public class CommonEventHandler {
         EdibleCondition.builder()
             .matchesItem(stack -> stack.getItem() instanceof InkItem)
             .matchesEntity(entity -> ChestCavityUtil.getData(entity).hasOrgan(WAICOrgans.INK_BOTTLE.get()))
-            .onEat(WAICOrganSkillUtil::drinkInk)
+            .onEat(WAICOrganUtil::drinkInk)
             .drinkAnimation()
             .build();
 
@@ -220,21 +220,21 @@ public class CommonEventHandler {
         double finalMultiplier = 1;
         if (source.is(WAICDamageTagManager.IS_MELEE)) {
             // 近战伤害加伤
-            extraDamage += entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE) * WAICOrganUtil.getWeaponDamageMultiplier(entity);
+            extraDamage += entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE) * OrganUtil.getWeaponDamageMultiplier(entity);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE_PERCENTAGE);
         } else if (source.is(Tags.DamageTypes.IS_MAGIC)) {
             // 魔法伤害加伤
-            extraDamage += entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE) * WAICOrganUtil.getWeaponDamageMultiplier(entity);
+            extraDamage += entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE) * OrganUtil.getWeaponDamageMultiplier(entity);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE);
         } else if (source.is(DamageTypeTags.IS_PROJECTILE)) {
             // 远程伤害加伤
-            extraDamage += entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE) * WAICOrganUtil.getWeaponDamageMultiplier(entity);
+            extraDamage += entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE) * OrganUtil.getWeaponDamageMultiplier(entity);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
         }
         // 九头蛇肋骨效果（唯一）
         block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
         // 导流肋骨护盾（唯一）
-        block += WAICOrganSkillUtil.currentRibShield(entity, damage);
+        block += WAICOrganUtil.currentRibShield(entity, damage);
         // 九头蛇肌肉效果（唯一）
         if (attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
         // 尸王脊柱效果（唯一）
@@ -257,16 +257,16 @@ public class CommonEventHandler {
         // ⚡ 钢笔尖：消耗墨水增级（优先于其他增级效果触发）
         if (data.hasOrgan(WAICOrgans.NIB.get())) {
             int currentLevel = event.getSpellLevel();
-            int inkCost = WAICOrganSkillUtil.getNibInkCost(currentLevel);
-            if (WAICOrganSkillUtil.extractInkToBottle(data, inkCost, true) >= inkCost) {
-                WAICOrganSkillUtil.extractInkToBottle(data, inkCost, false);
+            int inkCost = WAICOrganUtil.getNibInkCost(currentLevel);
+            if (WAICOrganUtil.extractInkToBottle(data, inkCost, true) >= inkCost) {
+                WAICOrganUtil.extractInkToBottle(data, inkCost, false);
                 event.setSpellLevel(currentLevel + 1);
             }
         }
 
         // 调色盘：消耗染料增级
         if (data.hasOrgan(WAICOrgans.PALETTE.get())) {
-            if (WAICOrganSkillUtil.consumeDyeForSchool(entity, event.getSchoolType())) {
+            if (WAICOrganUtil.consumeDyeForSchool(entity, event.getSchoolType())) {
                 event.setSpellLevel(event.getSpellLevel() + 1);
             }
         }
@@ -315,7 +315,7 @@ public class CommonEventHandler {
             }
         }
         // 异端（脾脏）药水效果增强
-        WAICOrganSkillUtil.heresyMobEffectAdded(entity, event.getEffectInstance());
+        WAICOrganUtil.heresyMobEffectAdded(entity, event.getEffectInstance());
     }
 
     /**
@@ -404,7 +404,7 @@ public class CommonEventHandler {
         ChestCavityData data = ChestCavityUtil.getData(entity);
 
         // 直肠子技能
-        WAICOrganSkillUtil.straightIntestineSkill(entity, data, food);
+        WAICOrganUtil.straightIntestineSkill(entity, data, food);
 
         // 蛋糕胃：给予甜蜜效果
         if (!data.hasOrgan(CompanionsOrgans.CAKE_STOMACH.get())) return;
@@ -431,14 +431,14 @@ public class CommonEventHandler {
      */
     public static void handlerCriticalHitEvent(CriticalHitEvent event) {
         Player player = event.getEntity();
-        WAICOrganSkillUtil.violenceCriticalHit(player, event);
+        WAICOrganUtil.violenceCriticalHit(player, event);
     }
 
     /**
      * 欺诈（肾脏）：交易完成时额外经验 + 不缺货
      */
     public static void handlerTradeWithVillagerEvent(TradeWithVillagerEvent event) {
-        WAICOrganSkillUtil.fraudTradeComplete(event.getEntity(), event.getMerchantOffer());
+        WAICOrganUtil.fraudTradeComplete(event.getEntity(), event.getMerchantOffer());
     }
 
     /**
@@ -446,6 +446,6 @@ public class CommonEventHandler {
      */
     public static void handlerPlayerContainerEvent$Open(PlayerContainerEvent.Open event) {
         Player player = event.getEntity();
-        WAICOrganSkillUtil.fraudTradeDiscount(player, event.getContainer());
+        WAICOrganUtil.fraudTradeDiscount(player, event.getContainer());
     }
 }

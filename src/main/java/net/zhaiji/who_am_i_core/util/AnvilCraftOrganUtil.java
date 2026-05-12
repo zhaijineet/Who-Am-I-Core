@@ -24,7 +24,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers,
         Holder<Attribute>... primaryAttributes
     ) {
-        double value = 1.0 + WAICOrganUtil.mercilessBonus(context);
+        double value = 1.0 + OrganUtil.mercilessBonus(context);
         for (Holder<Attribute> attribute : primaryAttributes) {
             modifiers.put(attribute, OrganAttributeUtil.createAddValueModifier(context.id(), value));
         }
@@ -126,7 +126,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers,
         Holder<Attribute>... primaryAttributes
     ) {
-        double value = 5.0 + WAICOrganUtil.mercilessBonus(context);
+        double value = 5.0 + OrganUtil.mercilessBonus(context);
         for (Holder<Attribute> attribute : primaryAttributes) {
             modifiers.put(attribute, OrganAttributeUtil.createAddValueModifier(context.id(), value));
         }

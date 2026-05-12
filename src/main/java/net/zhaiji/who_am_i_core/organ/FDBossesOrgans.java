@@ -4,7 +4,7 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
@@ -49,7 +49,7 @@ public class FDBossesOrgans {
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .attack(WAICOrganSkillUtil::chesedAttack)
+            .attack(WAICOrganUtil::chesedAttack)
             .build()
     );
 
@@ -61,7 +61,18 @@ public class FDBossesOrgans {
             .addValueAttribute(InitAttribute.STRENGTH, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .skillTooltip(WAICTooltipUtil.skillTooltip())
-            .attack(WAICOrganSkillUtil::geburahAttack)
+            .attack(WAICOrganUtil::geburahAttack)
+            .build()
+    );
+
+    // 血肉偶像
+    public static final Supplier<Item> FLESH_IDOL = WAICItem.ITEM.register(
+        "flesh_idol",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .skill(WAICOrganUtil::fleshIdolSkill)
+            .cooldown(20 * 20)
+            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 

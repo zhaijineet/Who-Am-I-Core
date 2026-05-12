@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
-import net.zhaiji.who_am_i_core.util.WAICOrganSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 /**
  * 超频效果 — 传导链节激活后施加，持续 10 秒
@@ -19,8 +19,8 @@ public class OverloadEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        float consumed = WAICOrganSkillUtil.extractCharge(data, entity, 3, false);
-        return !(WAICOrganSkillUtil.getCharge(data) <= 0) || !(consumed < 3);
+        float consumed = WAICOrganUtil.extractCharge(data, entity, 3, false);
+        return !(WAICOrganUtil.getCharge(data) <= 0) || !(consumed < 3);
     }
 
     @Override
