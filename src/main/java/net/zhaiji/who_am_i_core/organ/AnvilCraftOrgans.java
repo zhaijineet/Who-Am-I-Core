@@ -8,7 +8,6 @@ import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -34,7 +33,6 @@ public class AnvilCraftOrgans {
         "royal_steel_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2.0)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
             .build()
     );
 
@@ -44,7 +42,6 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 1.5)
             .addValueAttribute(InitAttribute.SPEED, 1.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
             .build()
     );
 
@@ -54,7 +51,6 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 1.5)
             .addValueAttribute(InitAttribute.DEFENSE, 1.0)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
             .build()
     );
 
@@ -63,7 +59,6 @@ public class AnvilCraftOrgans {
         "royal_steel_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2.0)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(ROYAL_STEEL_TRANSLATION))
             .build()
     );
 
@@ -75,7 +70,6 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2.0)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
             .build()
     );
 
@@ -88,7 +82,6 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
             .build()
     );
 
@@ -99,7 +92,6 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.DETOXIFICATION, 2.0)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
             .build()
     );
 
@@ -110,7 +102,6 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.NUTRITION, 2.0)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(CURSED_GOLD_TRANSLATION))
             .build()
     );
 
@@ -121,7 +112,6 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2.5)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
             .build()
     );
 
@@ -133,8 +123,6 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.SPEED, 2.0)
             .addValueAttribute(WAICAttribute.MELEE_DAMAGE, 0.5)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -145,7 +133,6 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.NERVES, 2.0)
             .addValueAttribute(InitAttribute.DEFENSE, 1.0)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
             .build()
     );
 
@@ -155,7 +142,6 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2.5)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(EMBER_ABSORPTION_TRANSLATION))
             .build()
     );
 
@@ -164,7 +150,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_HEART = WAICItem.ITEM.register(
         "frost_metal_heart",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalHeartModifier)
             .build()
     );
@@ -173,7 +158,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_LUNG = WAICItem.ITEM.register(
         "frost_metal_lung",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalLungModifier)
             .build()
     );
@@ -182,7 +166,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_SPINE = WAICItem.ITEM.register(
         "frost_metal_spine",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalSpineModifier)
             .build()
     );
@@ -191,7 +174,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_STOMACH = WAICItem.ITEM.register(
         "frost_metal_stomach",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalStomachModifier)
             .build()
     );
@@ -200,7 +182,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_INTESTINE = WAICItem.ITEM.register(
         "frost_metal_intestine",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalIntestineModifier)
             .build()
     );
@@ -209,7 +190,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_KIDNEY = WAICItem.ITEM.register(
         "frost_metal_kidney",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalKidneyModifier)
             .build()
     );
@@ -218,7 +198,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_SPLEEN = WAICItem.ITEM.register(
         "frost_metal_spleen",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalSpleenModifier)
             .build()
     );
@@ -227,7 +206,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_LIVER = WAICItem.ITEM.register(
         "frost_metal_liver",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalLiverModifier)
             .build()
     );
@@ -236,7 +214,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_APPENDIX = WAICItem.ITEM.register(
         "frost_metal_appendix",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalAppendixModifier)
             .build()
     );
@@ -245,7 +222,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_RIB = WAICItem.ITEM.register(
         "frost_metal_rib",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalRibModifier)
             .build()
     );
@@ -254,7 +230,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_MUSCLE = WAICItem.ITEM.register(
         "frost_metal_muscle",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::frostMetalMuscleModifier)
             .build()
     );
@@ -264,7 +239,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_HEART = WAICItem.ITEM.register(
         "transcendium_heart",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumHeartModifier)
             .build()
     );
@@ -273,7 +247,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_LUNG = WAICItem.ITEM.register(
         "transcendium_lung",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumLungModifier)
             .build()
     );
@@ -282,7 +255,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_SPINE = WAICItem.ITEM.register(
         "transcendium_spine",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumSpineModifier)
             .build()
     );
@@ -291,7 +263,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_STOMACH = WAICItem.ITEM.register(
         "transcendium_stomach",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumStomachModifier)
             .build()
     );
@@ -300,7 +271,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_INTESTINE = WAICItem.ITEM.register(
         "transcendium_intestine",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumIntestineModifier)
             .build()
     );
@@ -309,7 +279,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_KIDNEY = WAICItem.ITEM.register(
         "transcendium_kidney",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumKidneyModifier)
             .build()
     );
@@ -318,7 +287,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_SPLEEN = WAICItem.ITEM.register(
         "transcendium_spleen",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumSpleenModifier)
             .build()
     );
@@ -327,7 +295,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_LIVER = WAICItem.ITEM.register(
         "transcendium_liver",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumLiverModifier)
             .build()
     );
@@ -336,7 +303,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_APPENDIX = WAICItem.ITEM.register(
         "transcendium_appendix",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumAppendixModifier)
             .build()
     );
@@ -345,7 +311,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_RIB = WAICItem.ITEM.register(
         "transcendium_rib",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumRibModifier)
             .build()
     );
@@ -354,7 +319,6 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> TRANSCENDIUM_MUSCLE = WAICItem.ITEM.register(
         "transcendium_muscle",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip(MERCILESS_TRANSLATION, LOOTING_BURST_TRANSLATION))
             .modifier(AnvilCraftOrganUtil::transcendiumMuscleModifier)
             .build()
     );

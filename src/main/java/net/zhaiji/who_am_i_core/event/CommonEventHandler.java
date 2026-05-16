@@ -310,7 +310,7 @@ public class CommonEventHandler {
             if (stack.isEmpty()) continue;
             if (stack.is(WAICOrgans.LESION_HEART.get()) || stack.is(WAICOrgans.LESION_MUSCLE.get())) {
                 OrganAttributeUtil.updateSlotOrganAttribute(
-                    ChestCavityUtil.createContext(data, entity, i, stack)
+                    ChestCavityUtil.createContext(data, i, stack)
                 );
             }
         }
@@ -332,7 +332,7 @@ public class CommonEventHandler {
             if (stack.isEmpty()) continue;
             if (stack.is(WAICOrgans.LESION_HEART.get()) || stack.is(WAICOrgans.LESION_MUSCLE.get())) {
                 OrganAttributeUtil.updateSlotOrganAttribute(
-                    ChestCavityUtil.createContext(data, entity, i, stack)
+                    ChestCavityUtil.createContext(data, i, stack)
                 );
             }
         }
@@ -352,7 +352,7 @@ public class CommonEventHandler {
             if (stack.isEmpty()) continue;
             if (stack.is(WAICOrgans.LESION_HEART.get()) || stack.is(WAICOrgans.LESION_MUSCLE.get())) {
                 OrganAttributeUtil.updateSlotOrganAttribute(
-                    ChestCavityUtil.createContext(data, entity, i, stack)
+                    ChestCavityUtil.createContext(data, i, stack)
                 );
             }
         }
@@ -383,7 +383,7 @@ public class CommonEventHandler {
             ItemStack stack = data.getStackInSlot(i);
             if (stack.isEmpty()) continue;
             if (stack.is(WAICOrgans.EXPERIENCE_HEART.get())) {
-                OrganAttributeUtil.updateSlotOrganAttribute(ChestCavityUtil.createContext(data, player, i, stack));
+                OrganAttributeUtil.updateSlotOrganAttribute(ChestCavityUtil.createContext(data, i, stack));
             }
         }
     }

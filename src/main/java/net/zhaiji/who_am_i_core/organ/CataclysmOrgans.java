@@ -8,7 +8,6 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -125,8 +124,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
             .attack(CataclysmOrganUtil::phantomHeartAttack)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -147,7 +144,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .skill(CataclysmOrganUtil::sealingStoneSlabSkill)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
             .cooldown(300)
             .build()
     );
@@ -162,8 +158,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.WATER_BREATH, 2)
             .baseMultipliedAttribute(NeoForgeMod.SWIM_SPEED, 0.5)
             .attack(CataclysmOrganUtil::tidalLanternAttack)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -173,8 +167,6 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -185,7 +177,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .added(CataclysmOrganUtil::stormRibAdded)
             .removed(CataclysmOrganUtil::stormRibRemoved)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -197,7 +188,6 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 9)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .modifier(CataclysmOrganUtil::undyingEmberModifier)
             .build()
     );
@@ -209,7 +199,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
             .build()
     );
@@ -221,8 +210,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NERVES, 1)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .attack(CataclysmOrganUtil::blazingVisageAttack)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -239,7 +226,6 @@ public class CataclysmOrgans {
             .added(CataclysmOrganUtil::monstrosityCoreAdded)
             .removed(CataclysmOrganUtil::monstrosityCoreRemoved)
             .tick(CataclysmOrganUtil::monstrosityCoreTick)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -252,7 +238,6 @@ public class CataclysmOrgans {
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
             .skill(CataclysmOrganUtil::monstrosityCircuitSkill)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .cooldown(160)
             .build()
     );
@@ -265,7 +250,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NUTRITION, 1)
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -277,7 +261,6 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .modifier((context, modifiers) -> CataclysmOrganUtil.ancientFactoryModifier(context, modifiers, InitAttribute.HEALTH))
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -296,7 +279,6 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2)
             .tick(CataclysmOrganUtil::powerCellTick)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -306,7 +288,6 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 1.5)
             .modifier((context, modifiers) -> CataclysmOrganUtil.ancientFactoryModifier(context, modifiers, InitAttribute.NERVES))
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -318,7 +299,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 2)
             .skill(CataclysmOrganUtil::mechanicalStarSkill)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
             .cooldown(160)
             .build()
     );
@@ -328,7 +308,6 @@ public class CataclysmOrgans {
         "death_lens",
         () -> Organ.builder()
             .skill(CataclysmOrganUtil::deathLensSkill)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
             .cooldown(300)
             .build()
     );
@@ -351,9 +330,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NERVES, 2.5)
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
             .skill(CataclysmOrganUtil::voidCrystalSpineSkill)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(0))
             .cooldown(300)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 

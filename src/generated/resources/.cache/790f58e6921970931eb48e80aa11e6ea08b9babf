@@ -1,14 +1,14 @@
-// 1.21.1	2026-05-11T22:19:17.5923765	Tags for minecraft:item mod id who_am_i_core
-84d47c8a3f04ebbbabed9dbe2cb1951a644fe3fa data/chestcavitybeyond/tags/item/organs.json
-55287e0aa2f5587bf59d82c5181a2492556f7ec9 data/chestcavitybeyond/tags/item/organs/appendix.json
+// 1.21.1	2026-05-16T20:13:33.2958102	Tags for minecraft:item mod id who_am_i_core
+dc07fd3ab0240f0ae147255407b031e8dddd5635 data/chestcavitybeyond/tags/item/organs.json
+7c89e4094b335abae49f9ed28277287d8120d126 data/chestcavitybeyond/tags/item/organs/appendix.json
 40a2013425714ae52140e94ee693dee9b36250d5 data/chestcavitybeyond/tags/item/organs/heart.json
 0d2051cca664d704aeb0d2f0968def8c5d063990 data/chestcavitybeyond/tags/item/organs/intestine.json
 88913a37fd9d512a3311343457bb26568850e072 data/chestcavitybeyond/tags/item/organs/kidney.json
 fa2e12555091ad9deebf228cc01e24f613447a18 data/chestcavitybeyond/tags/item/organs/liver.json
 fe7e6351833174dd8cc4a7e73c38019b779c6e3e data/chestcavitybeyond/tags/item/organs/lung.json
-8ffa56ca0aeeec29dccbe5c08d9e26e8f0a8f472 data/chestcavitybeyond/tags/item/organs/muscle.json
+2395df0fac67a0d799d0a46ed19e08858a72b7c5 data/chestcavitybeyond/tags/item/organs/muscle.json
 4dd12beadb0a469f9a23b4dd890feb7ce34ea0d7 data/chestcavitybeyond/tags/item/organs/rib.json
-bcb3c31a40ac4cddd429a6614b2fe2b4e50785eb data/chestcavitybeyond/tags/item/organs/special.json
+071596b78921b614546c0849bb998d6539e5177e data/chestcavitybeyond/tags/item/organs/special.json
 656b19f36841569b6f020c329878b9e7bbf529c2 data/chestcavitybeyond/tags/item/organs/spine.json
 4cb17c94bc10c572c96a419fd682be846406f5af data/chestcavitybeyond/tags/item/organs/spleen.json
 5aecac0889b940a991fcca177367d9b2f37e4694 data/chestcavitybeyond/tags/item/organs/stomach.json
@@ -22,7 +22,7 @@ a74e1b2f9a21e2bcdd044e12c2a67144a717112a data/who_am_i_core/tags/item/ice.json
 037474d4e6d328bfe54a10e52940d00546ee3060 data/who_am_i_core/tags/item/ice_dragon.json
 4470346b3c65a66522318aca29d2d07e774009e4 data/who_am_i_core/tags/item/lesion.json
 bbbdafc91bf753f51db26c93e4c6d8768f3abadf data/who_am_i_core/tags/item/lightning_dragon.json
-70891f2a3b2e1b7b95d225c0d252ac897bff8d02 data/who_am_i_core/tags/item/magic.json
+69d568048100f6a626264db5e489d3e3e7cefdf8 data/who_am_i_core/tags/item/magic.json
 5e03257dd20e50f17411fc2031a22f566449b65a data/who_am_i_core/tags/item/mechanical.json
 b8c1bb4184284d1d541fe7d0928fcd8716051655 data/who_am_i_core/tags/item/monstrosity.json
 2b2f1773c3231d50468f824f15699129132188f7 data/who_am_i_core/tags/item/nine_hell.json

@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-11T22:16:04.6246866	Item Models: who_am_i_core
+// 1.21.1	2026-05-12T08:44:21.4397199	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -98,6 +98,7 @@ d2c503ca37a446814e4fc1ccb0dc886ae362c8eb assets/who_am_i_core/models/item/fire_d
 ef4f8e42664f221ebcc6e39f4a756730c3db1892 assets/who_am_i_core/models/item/fire_dragon_stomach.json
 7d63c364463ccfdfc04f8be0000a1c3e0c36afff assets/who_am_i_core/models/item/fire_malkuth_warrior_heart.json
 88fe1e343fefdc641875d32022b44311b9793554 assets/who_am_i_core/models/item/flame_core.json
+b0d17dcfb3da34bfcb69e0519b0b3f4c8dc8e994 assets/who_am_i_core/models/item/flesh_idol.json
 9047f794bd0d897f5afbc6a4b9ab97aac906322f assets/who_am_i_core/models/item/frankenstein_appendix.json
 696dd17a85982b0377abd1cb931f6547485d77b7 assets/who_am_i_core/models/item/frankenstein_heart.json
 ec95772717ca6602bdcc03fdd9c7057a6473930a assets/who_am_i_core/models/item/frankenstein_heart_active.json

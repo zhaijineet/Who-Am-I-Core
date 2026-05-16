@@ -6,7 +6,6 @@ import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -37,8 +36,6 @@ public class IronSpellOrgans {
         "primordial_flame",
         () -> Organ.builder()
             .addValueAttribute(WAICAttribute.TEMPERATURE, 5)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -50,8 +47,6 @@ public class IronSpellOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -61,8 +56,6 @@ public class IronSpellOrgans {
     public static final Supplier<Item> CORRUPTED_SOUL_LANTERN = WAICItem.ITEM.register(
         "corrupted_soul_lantern",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -72,8 +65,6 @@ public class IronSpellOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -84,8 +75,6 @@ public class IronSpellOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .added(IronSpellOrganUtil::deadKingRibAdded)
             .removed(IronSpellOrganUtil::deadKingRibRemoved)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 

@@ -13,6 +13,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.chestcavitybeyond.api.OrganTooltip;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.item.ClothTeddyBearItem;
@@ -72,6 +73,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_HEART = WAICItem.ITEM.register(
         "ink_heart",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -79,6 +81,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_LUNG = WAICItem.ITEM.register(
         "ink_lung",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -86,6 +89,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_SPINE = WAICItem.ITEM.register(
         "ink_spine",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -93,6 +97,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_STOMACH = WAICItem.ITEM.register(
         "ink_stomach",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -100,6 +105,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_INTESTINE = WAICItem.ITEM.register(
         "ink_intestine",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -107,6 +113,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_KIDNEY = WAICItem.ITEM.register(
         "ink_kidney",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -114,6 +121,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_SPLEEN = WAICItem.ITEM.register(
         "ink_spleen",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -121,6 +129,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_LIVER = WAICItem.ITEM.register(
         "ink_liver",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -128,6 +137,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_RIB = WAICItem.ITEM.register(
         "ink_rib",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -136,14 +146,14 @@ public class WAICOrgans {
         "ink_bottle",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 1)
-            .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-                CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-                int value = tag.contains("ink") ? tag.getInt("ink") : 0;
-                List<Component> add = List.of(
-                    Component.translatable(INK_BOTTLE_INK_TRANSLATION, value)
-                );
-                TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
-            })
+            .tooltip(OrganTooltip.builder()
+                .afterPassiveEffect((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+                    CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+                    int value = tag.contains("ink") ? tag.getInt("ink") : 0;
+                    return List.of(Component.translatable(INK_BOTTLE_INK_TRANSLATION, value));
+                })
+                .build()
+            )
             .build()
     );
 
@@ -152,7 +162,6 @@ public class WAICOrgans {
         "ink_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 1)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .skill(WAICOrganUtil::inkAppendixSkill)
             .build()
     );
@@ -163,7 +172,6 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 1)
             .addValueAttribute(InitAttribute.SPEED, 1)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .hurt(WAICOrganUtil::inkMuscleSkill)
             .build()
     );
@@ -172,7 +180,6 @@ public class WAICOrgans {
     public static final Supplier<Item> NIB = WAICItem.ITEM.register(
         "nib",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -181,6 +188,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_HEART = WAICItem.ITEM.register(
         "pigment_heart",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -188,6 +196,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_LUNG = WAICItem.ITEM.register(
         "pigment_lung",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -195,6 +204,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_SPINE = WAICItem.ITEM.register(
         "pigment_spine",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -202,6 +212,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_STOMACH = WAICItem.ITEM.register(
         "pigment_stomach",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -209,6 +220,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_INTESTINE = WAICItem.ITEM.register(
         "pigment_intestine",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -216,6 +228,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_KIDNEY = WAICItem.ITEM.register(
         "pigment_kidney",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -223,6 +236,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_SPLEEN = WAICItem.ITEM.register(
         "pigment_spleen",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -230,6 +244,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_LIVER = WAICItem.ITEM.register(
         "pigment_liver",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -237,6 +252,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_APPENDIX = WAICItem.ITEM.register(
         "pigment_appendix",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -244,6 +260,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_RIB = WAICItem.ITEM.register(
         "pigment_rib",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -251,6 +268,7 @@ public class WAICOrgans {
     public static final Supplier<Item> PIGMENT_MUSCLE = WAICItem.ITEM.register(
         "pigment_muscle",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -259,7 +277,10 @@ public class WAICOrgans {
         "palette",
         () -> Organ.builder(PaletteItem::new)
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
-            .skillTooltip(WAICTooltipUtil.paletteDyeTooltip())
+            .tooltip(OrganTooltip.builder()
+                .afterActiveSkill(WAICTooltipUtil::paletteDyeSection)
+                .build()
+            )
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .build()
     );
@@ -356,7 +377,6 @@ public class WAICOrgans {
         () -> Organ.builder(properties -> new FrankensteinItem(properties, ItemTagManager.HEART))
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
             .modifier(OrganUtil::aggregateFrankensteinHeartAttributes)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -364,6 +384,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_LUNG = WAICItem.ITEM.register(
         "frankenstein_lung",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -371,6 +392,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_STOMACH = WAICItem.ITEM.register(
         "frankenstein_stomach",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -378,6 +400,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_INTESTINE = WAICItem.ITEM.register(
         "frankenstein_intestine",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -385,6 +408,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_KIDNEY = WAICItem.ITEM.register(
         "frankenstein_kidney",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -392,6 +416,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_SPLEEN = WAICItem.ITEM.register(
         "frankenstein_spleen",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -399,6 +424,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_LIVER = WAICItem.ITEM.register(
         "frankenstein_liver",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -406,6 +432,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_APPENDIX = WAICItem.ITEM.register(
         "frankenstein_appendix",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -413,6 +440,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FRANKENSTEIN_MUSCLE = WAICItem.ITEM.register(
         "frankenstein_muscle",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -424,8 +452,6 @@ public class WAICOrgans {
             .modifier(WAICOrganUtil::lesionHeartModifier)
             .skill(WAICOrganUtil::lesionHeartSkill)
             .cooldown(10 * 20)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -433,6 +459,7 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_LUNG = WAICItem.ITEM.register(
         "lesion_lung",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -440,6 +467,7 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_STOMACH = WAICItem.ITEM.register(
         "lesion_stomach",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -447,6 +475,7 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_INTESTINE = WAICItem.ITEM.register(
         "lesion_intestine",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -454,6 +483,7 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_KIDNEY = WAICItem.ITEM.register(
         "lesion_kidney",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -461,6 +491,7 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_SPLEEN = WAICItem.ITEM.register(
         "lesion_spleen",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -468,6 +499,7 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_LIVER = WAICItem.ITEM.register(
         "lesion_liver",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -475,6 +507,7 @@ public class WAICOrgans {
     public static final Supplier<Item> LESION_APPENDIX = WAICItem.ITEM.register(
         "lesion_appendix",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -484,7 +517,6 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::lesionMuscleModifier)
             .attack(WAICOrganUtil::lesionMuscleAttack)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -496,7 +528,6 @@ public class WAICOrgans {
             .modifier(WAICOrganUtil::limboModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
             .tick(WAICOrganUtil::limboTick)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
@@ -507,7 +538,6 @@ public class WAICOrgans {
             .modifier(WAICOrganUtil::lustModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
             .attack(WAICOrganUtil::lustAttack)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
@@ -517,7 +547,6 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::gluttonyModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .build()
     );
 
@@ -527,7 +556,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::greedModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+
             .build()
     );
 
@@ -537,7 +566,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::wrathModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+
             .build()
     );
 
@@ -547,7 +576,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::heresyModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+
             .build()
     );
 
@@ -557,7 +586,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::violenceModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+
             .build()
     );
 
@@ -567,7 +596,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::fraudModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+
             .build()
     );
 
@@ -578,7 +607,7 @@ public class WAICOrgans {
             .modifier(WAICOrganUtil::treacheryModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
             .attack(WAICOrganUtil::treacheryAttack)
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+
             .build()
     );
 
@@ -587,6 +616,7 @@ public class WAICOrgans {
     public static final Supplier<Item> STRANGE_EYEBALL = WAICItem.ITEM.register(
         "strange_eyeball",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -594,6 +624,7 @@ public class WAICOrgans {
     public static final Supplier<Item> EERIE_EYEBALL = WAICItem.ITEM.register(
         "eerie_eyeball",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -601,6 +632,7 @@ public class WAICOrgans {
     public static final Supplier<Item> STRANGE_MECHANICAL_EYEBALL = WAICItem.ITEM.register(
         "strange_mechanical_eyeball",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -608,6 +640,7 @@ public class WAICOrgans {
     public static final Supplier<Item> EERIE_MECHANICAL_EYEBALL = WAICItem.ITEM.register(
         "eerie_mechanical_eyeball",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
             .build()
     );
 
@@ -617,7 +650,7 @@ public class WAICOrgans {
         "mimic_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
+
             .heal(WAICOrganUtil::mimicHealBoost)
             .build()
     );
@@ -627,7 +660,7 @@ public class WAICOrgans {
         "mimic_liver",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 3)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
+
             .heal(WAICOrganUtil::mimicHealBoost)
             .build()
     );
@@ -640,7 +673,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
             .addValueAttribute(InitAttribute.ENDURANCE, 3)
             .addValueAttribute(InitAttribute.WATER_BREATH, 3)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
+
             .heal(WAICOrganUtil::mimicHealBoost)
             .build()
     );
@@ -744,8 +777,8 @@ public class WAICOrgans {
         "cloth_teddy_bear",
         () -> Organ.builder(ClothTeddyBearItem::new)
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
+
+
             .cooldown(100)
             .skill(WAICOrganUtil::clothTeddyBearSkill)
             .chestCavityClose(WAICOrganUtil::clothTeddyBearChestCavityClose)
@@ -849,7 +882,7 @@ public class WAICOrgans {
     public static final Supplier<Item> HAUNTED_BONE = WAICItem.ITEM.register(
         "haunted_bone",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+
             .chestCavityOpen(WAICOrganUtil::hauntedBoneChestCavityOpen)
             .chestCavityClose(WAICOrganUtil::hauntedBoneChestCavityClose)
             .addValueAttribute(InitAttribute.SPEED, 1)
@@ -861,7 +894,7 @@ public class WAICOrgans {
     public static final Supplier<Item> SWORD_BONE = WAICItem.ITEM.register(
         "sword_bone",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+
             .properties(properties -> properties.attributes(SwordItem.createAttributes(Tiers.IRON, 3, -2.4F)))
             .addValueAttribute(InitAttribute.NERVES, 1.5)
             .addValueAttribute(InitAttribute.DEFENSE, 0.75)
@@ -872,7 +905,7 @@ public class WAICOrgans {
     public static final Supplier<Item> STRAIGHT_INTESTINE = WAICItem.ITEM.register(
         "straight_intestine",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+
             .addValueAttribute(InitAttribute.NUTRITION, 1)
             .build()
     );
@@ -881,7 +914,7 @@ public class WAICOrgans {
     public static final Supplier<Item> SQUASH = WAICItem.ITEM.register(
         "squash",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+
             .incomingDamage(WAICOrganUtil::squashIncomingDamage)
             .build()
     );
@@ -890,7 +923,7 @@ public class WAICOrgans {
     public static final Supplier<Item> EXPERIENCE_HEART = WAICItem.ITEM.register(
         "experience_heart",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
+
             .modifier(WAICOrganUtil::experienceHeartModifier)
             .build()
     );
@@ -905,8 +938,8 @@ public class WAICOrgans {
             .heal(WAICOrganUtil::crimsonHeartHeal)
             .added(WAICOrganUtil::crimsonHeartAdded)
             .removed(WAICOrganUtil::crimsonHeartRemoved)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
+
+
             .build()
     );
 
@@ -965,7 +998,7 @@ public class WAICOrgans {
         "crimson_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
+
             .skill(WAICOrganUtil::crimsonAppendixSkill)
             .cooldown(30 * 20)
             .build()
@@ -992,7 +1025,6 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.5)
             .tick(WAICOrganUtil::computingCoreTick)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -1001,7 +1033,6 @@ public class WAICOrgans {
         "current_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -1012,7 +1043,6 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.STRENGTH, 1.5)
             .addValueAttribute(InitAttribute.SPEED, 1.5)
             .tick(WAICOrganUtil::chargedMuscleTick)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -1024,8 +1054,6 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .skill(WAICOrganUtil::conductiveSpineSkill)
             .cooldown(20 * 20)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -1034,13 +1062,15 @@ public class WAICOrgans {
         "energy_module",
         () -> Organ.builder()
             .tick(WAICOrganUtil::energyModuleTick)
-            .skillTooltip((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-                float charge = WAICOrganUtil.getModuleCharge(stack);
-                List<Component> add = List.of(
-                    Component.translatable(ENERGY_MODULE_CHARGE_TRANSLATION, (int) charge, 500)
-                );
-                TooltipUtil.simpleTooltipAdd(tooltipComponents, add);
-            })
+            .tooltip(
+                OrganTooltip.builder()
+                    .afterPassiveEffect((data, index, stack, keyContext, context, tooltipComponents, flag) -> {
+                        float charge = WAICOrganUtil.getModuleCharge(stack);
+                        return List.of(Component.literal(TooltipUtil.DEFAULT_PREFIX).append(
+                            Component.translatable(ENERGY_MODULE_CHARGE_TRANSLATION, (int) charge, 500)));
+                    })
+                    .build()
+            )
             .build()
     );
 }

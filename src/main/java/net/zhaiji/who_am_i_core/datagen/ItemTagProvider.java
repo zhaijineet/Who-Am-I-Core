@@ -528,11 +528,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WAICOrgans.INK_KIDNEY.get(),
             WAICOrgans.INK_SPLEEN.get(),
             WAICOrgans.INK_LIVER.get(),
-            WAICOrgans.INK_APPENDIX.get(),
-            WAICOrgans.INK_RIB.get(),
-            WAICOrgans.INK_MUSCLE.get(),
-            WAICOrgans.INK_BOTTLE.get(),
-            WAICOrgans.NIB.get()
+            WAICOrgans.INK_RIB.get()
         );
         tag(ItemTagManager.HEART).add(WAICOrgans.INK_HEART.get());
         tag(ItemTagManager.LUNG).add(WAICOrgans.INK_LUNG.get());
@@ -542,11 +538,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.KIDNEY).add(WAICOrgans.INK_KIDNEY.get());
         tag(ItemTagManager.SPLEEN).add(WAICOrgans.INK_SPLEEN.get());
         tag(ItemTagManager.LIVER).add(WAICOrgans.INK_LIVER.get());
-        tag(ItemTagManager.APPENDIX).add(WAICOrgans.INK_APPENDIX.get());
         tag(ItemTagManager.RIB).add(WAICOrgans.INK_RIB.get());
-        tag(ItemTagManager.MUSCLE).add(WAICOrgans.INK_MUSCLE.get());
-        tag(ItemTagManager.SPECIAL).add(WAICOrgans.INK_BOTTLE.get());
-        tag(ItemTagManager.SPECIAL).add(WAICOrgans.NIB.get());
 
         // ==================== 颜料器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
@@ -942,5 +934,34 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.ORGANS).add(IronSpellOrgans.EMERALD_SKULL.get());
         tag(ItemTagManager.SPINE).add(IronSpellOrgans.EMERALD_SKULL.get());
         tag(WAICItemTagManager.MAGIC).add(IronSpellOrgans.EMERALD_SKULL.get());
+
+        inkSpecialTags();
+        elementCoresTags();
+    }
+
+    // ==================== 墨水特殊器官（隔离方法） ====================
+
+    private void inkSpecialTags() {
+        tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.INK_MUSCLE.get(),
+            WAICOrgans.INK_APPENDIX.get(),
+            WAICOrgans.INK_BOTTLE.get(),
+            WAICOrgans.NIB.get()
+        );
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.INK_MUSCLE.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.INK_APPENDIX.get());
+        tag(ItemTagManager.SPECIAL).add(WAICOrgans.INK_BOTTLE.get());
+        tag(ItemTagManager.SPECIAL).add(WAICOrgans.NIB.get());
+    }
+
+    // ==================== 元素核心（隔离方法） ====================
+
+    private void elementCoresTags() {
+        tag(WAICItemTagManager.MAGIC).add(
+            WAICOrgans.DIVINE_CORE.get(),
+            WAICOrgans.FROST_CORE.get(),
+            WAICOrgans.FLAME_CORE.get(),
+            WAICOrgans.NATURE_CORE.get()
+        );
     }
 }

@@ -6,19 +6,16 @@ import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.CompanionsOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
 public class CompanionsOrgans {
-
     // 教宗心脏
     public static final Supplier<Item> PONTIFF_HEART = WAICItem.ITEM.register(
         "pontiff_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 4)
             .hurt(CompanionsOrganUtil::pontiffHeartHurt)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
 
@@ -62,7 +59,6 @@ public class CompanionsOrgans {
             .addValueAttribute(InitAttribute.METABOLISM, 4)
             .skill(CompanionsOrganUtil::pontiffSpleenSkill)
             .cooldown(200)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -83,7 +79,6 @@ public class CompanionsOrgans {
             .addValueAttribute(Attributes.LUCK, 2)
             .skill(CompanionsOrganUtil::pontiffAppendixSkill)
             .cooldown(160)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 
@@ -94,7 +89,6 @@ public class CompanionsOrgans {
             .addValueAttribute(InitAttribute.STRENGTH, 2)
             .addValueAttribute(InitAttribute.SPEED, 1.5)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.08)
-            .skillTooltip(WAICTooltipUtil.skillTooltip())
             .build()
     );
 

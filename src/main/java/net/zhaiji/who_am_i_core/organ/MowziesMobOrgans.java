@@ -6,7 +6,6 @@ import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -26,7 +25,6 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> FERROUS_WROUGHTNAUT_HEART_MIRROR = WAICItem.ITEM.register(
         "ferrous_wroughtnaut_heart_mirror",
         () -> Organ.builder()
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             // -80%最终移动速度
             .totalMultipliedAttribute(Attributes.MOVEMENT_SPEED, -0.8)
             .incomingDamage(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorIncomingDamage)
@@ -46,8 +44,6 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> CHEST_NOVA = WAICItem.ITEM.register(
         "chest_nova",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(2))
             .addValueAttribute(InitAttribute.HEALTH, 2)
             // 胸腔关闭时烧毁周围器官以及尝试创建任务
             .chestCavityClose(MowziesMobOrganUtil::chestNovaChestCavityClose)
@@ -70,8 +66,6 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> CONTROL_ROD = WAICItem.ITEM.register(
         "control_rod",
         () -> Organ.builder()
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -182,10 +176,8 @@ public class MowziesMobOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .addValueAttribute(InitAttribute.LEAPING, 2)
-            .descriptionTooltip(WAICTooltipUtil.descriptionTooltip())
             .build()
     );
-
 
     /**
      * 泥峭铭文板
@@ -197,7 +189,6 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> BLUFF_TABLET = WAICItem.ITEM.register(
         "bluff_tablet",
         () -> Organ.builder()
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -211,7 +202,6 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> ACTIVE_BLUFF_ROD = WAICItem.ITEM.register(
         "active_bluff_rod",
         () -> Organ.builder()
-            .skillTooltip(WAICTooltipUtil.skillTooltip(1))
             .build()
     );
 
@@ -226,10 +216,7 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> BLUFF_CORE = WAICItem.ITEM.register(
         "bluff_core",
         () -> Organ.builder()
-            .skillTooltip(WAICTooltipUtil.skillTooltip(5))
             .skill(MowziesMobOrganUtil::bluffCoreSkill)
             .build()
     );
-
-
 }

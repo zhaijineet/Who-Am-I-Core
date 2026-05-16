@@ -21,8 +21,6 @@
     "who_am_i_core:frostburn_soul",
     "who_am_i_core:dread_phylactery",
     "who_am_i_core:cloth_teddy_bear",
-    "who_am_i_core:ink_bottle",
-    "who_am_i_core:nib",
     "who_am_i_core:palette",
     "who_am_i_core:strange_eyeball",
     "who_am_i_core:eerie_eyeball",
@@ -45,6 +43,8 @@
     "who_am_i_core:corrupted_soul_lantern",
     "who_am_i_core:computing_core",
     "who_am_i_core:energy_module",
-    "who_am_i_core:primordial_flame"
+    "who_am_i_core:primordial_flame",
+    "who_am_i_core:ink_bottle",
+    "who_am_i_core:nib"
   ]
 }

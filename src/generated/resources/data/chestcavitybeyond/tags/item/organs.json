@@ -141,11 +141,7 @@
     "who_am_i_core:ink_kidney",
     "who_am_i_core:ink_spleen",
     "who_am_i_core:ink_liver",
-    "who_am_i_core:ink_appendix",
     "who_am_i_core:ink_rib",
-    "who_am_i_core:ink_muscle",
-    "who_am_i_core:ink_bottle",
-    "who_am_i_core:nib",
     "who_am_i_core:pigment_heart",
     "who_am_i_core:pigment_lung",
     "who_am_i_core:pigment_spine",
@@ -254,6 +250,10 @@
     "who_am_i_core:conductive_spine",
     "who_am_i_core:energy_module",
     "who_am_i_core:primordial_flame",
-    "who_am_i_core:emerald_skull"
+    "who_am_i_core:emerald_skull",
+    "who_am_i_core:ink_muscle",
+    "who_am_i_core:ink_appendix",
+    "who_am_i_core:ink_bottle",
+    "who_am_i_core:nib"
   ]
 }
