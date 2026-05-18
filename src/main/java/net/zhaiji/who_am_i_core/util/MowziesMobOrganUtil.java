@@ -42,6 +42,8 @@ public class MowziesMobOrganUtil {
         DamageSource source = event.getSource();
         // 只抵挡来自实体的伤害
         if (source.getEntity() == null) return;
+        // 排除自伤
+        if (OrganUtil.isSelfDamage(entity, source)) return;
         // 检查伤害方向是否来自前方
         Vec3 sourcePosition = source.getSourcePosition();
         if (sourcePosition != null) {

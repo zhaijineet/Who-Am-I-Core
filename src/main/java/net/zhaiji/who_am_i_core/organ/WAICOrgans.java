@@ -277,7 +277,8 @@ public class WAICOrgans {
         "palette",
         () -> Organ.builder(PaletteItem::new)
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
-            .tooltip(OrganTooltip.builder()
+            .tooltip(
+                OrganTooltip.builder()
                 .afterActiveSkill(WAICTooltipUtil::paletteDyeSection)
                 .build()
             )

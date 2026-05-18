@@ -264,6 +264,7 @@ public class IceAndFireOrganUtil {
         DamageSource source,
         DamageContainer damageContainer
     ) {
+        if (OrganUtil.isSelfDamage(target, source)) return;
         double localTemp = OrganUtil.getLocalTemperature(context);
         int slownessLevel = (int) Math.max(0, (Math.abs(localTemp) - 1) / 2);
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 3 * 20, slownessLevel));
@@ -313,6 +314,7 @@ public class IceAndFireOrganUtil {
         DamageSource source,
         DamageContainer damageContainer
     ) {
+        if (OrganUtil.isSelfDamage(target, source)) return;
         MobEffectInstance slowness = target.getEffect(MobEffects.MOVEMENT_SLOWDOWN);
         if (slowness == null) return;
         if (slowness.isInfiniteDuration()) {

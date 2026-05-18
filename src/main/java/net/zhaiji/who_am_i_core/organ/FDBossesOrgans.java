@@ -4,7 +4,7 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.FDBossesOrganUtil;
 
 import java.util.function.Supplier;
 
@@ -44,7 +44,7 @@ public class FDBossesOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
-            .attack(WAICOrganUtil::chesedAttack)
+            .attack(FDBossesOrganUtil::chesedAttack)
             .build()
     );
 
@@ -55,7 +55,7 @@ public class FDBossesOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(InitAttribute.STRENGTH, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
-            .attack(WAICOrganUtil::geburahAttack)
+            .attack(FDBossesOrganUtil::geburahAttack)
             .build()
     );
 
@@ -64,7 +64,7 @@ public class FDBossesOrgans {
         "flesh_idol",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
-            .skill(WAICOrganUtil::fleshIdolSkill)
+            .skill(FDBossesOrganUtil::fleshIdolSkill)
             .cooldown(20 * 20)
             .build()
     );

@@ -55,8 +55,8 @@ public class CataclysmOrganUtil {
         DamageContainer damageContainer
     ) {
         LivingEntity entity = context.entity();
-        // 非对自己造成伤害
-        if (entity == target) return;
+        // 排除自伤
+        if (OrganUtil.isSelfDamage(target, source)) return;
 
         float extracted = HumoursData.extractPhlegm(entity, HumoursData.get(entity).getPhlegm(), false);
         if (extracted <= 0) return;
@@ -160,7 +160,7 @@ public class CataclysmOrganUtil {
         DamageContainer damageContainer
     ) {
         LivingEntity entity = context.entity();
-        if (entity == target) return;
+        if (OrganUtil.isSelfDamage(target, source)) return;
 
         // 根据局部温度计算回血量
         double localTemp = OrganUtil.getLocalTemperature(context);
@@ -486,7 +486,7 @@ public class CataclysmOrganUtil {
         DamageContainer damageContainer
     ) {
         LivingEntity entity = context.entity();
-        if (entity == target) return;
+        if (OrganUtil.isSelfDamage(target, source)) return;
         if (!entity.isSprinting()) return;
 
         float currentDamage = damageContainer.getNewDamage();

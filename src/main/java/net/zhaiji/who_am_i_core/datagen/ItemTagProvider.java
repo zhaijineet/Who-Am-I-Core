@@ -518,133 +518,6 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPINE).add(AnvilCraftOrgans.ROYAL_STEEL_SPINE.get());
         tag(ItemTagManager.APPENDIX).add(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX.get());
 
-        // ==================== 墨水器官标签 ====================
-        tag(ItemTagManager.ORGANS).add(
-            WAICOrgans.INK_HEART.get(),
-            WAICOrgans.INK_LUNG.get(),
-            WAICOrgans.INK_SPINE.get(),
-            WAICOrgans.INK_STOMACH.get(),
-            WAICOrgans.INK_INTESTINE.get(),
-            WAICOrgans.INK_KIDNEY.get(),
-            WAICOrgans.INK_SPLEEN.get(),
-            WAICOrgans.INK_LIVER.get(),
-            WAICOrgans.INK_RIB.get()
-        );
-        tag(ItemTagManager.HEART).add(WAICOrgans.INK_HEART.get());
-        tag(ItemTagManager.LUNG).add(WAICOrgans.INK_LUNG.get());
-        tag(ItemTagManager.SPINE).add(WAICOrgans.INK_SPINE.get());
-        tag(ItemTagManager.STOMACH).add(WAICOrgans.INK_STOMACH.get());
-        tag(ItemTagManager.INTESTINE).add(WAICOrgans.INK_INTESTINE.get());
-        tag(ItemTagManager.KIDNEY).add(WAICOrgans.INK_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(WAICOrgans.INK_SPLEEN.get());
-        tag(ItemTagManager.LIVER).add(WAICOrgans.INK_LIVER.get());
-        tag(ItemTagManager.RIB).add(WAICOrgans.INK_RIB.get());
-
-        // ==================== 颜料器官标签 ====================
-        tag(ItemTagManager.ORGANS).add(
-            WAICOrgans.PIGMENT_HEART.get(),
-            WAICOrgans.PIGMENT_LUNG.get(),
-            WAICOrgans.PIGMENT_SPINE.get(),
-            WAICOrgans.PIGMENT_STOMACH.get(),
-            WAICOrgans.PIGMENT_INTESTINE.get(),
-            WAICOrgans.PIGMENT_KIDNEY.get(),
-            WAICOrgans.PIGMENT_SPLEEN.get(),
-            WAICOrgans.PIGMENT_LIVER.get(),
-            WAICOrgans.PIGMENT_APPENDIX.get(),
-            WAICOrgans.PIGMENT_RIB.get(),
-            WAICOrgans.PIGMENT_MUSCLE.get(),
-            WAICOrgans.PALETTE.get()
-        );
-        tag(ItemTagManager.HEART).add(WAICOrgans.PIGMENT_HEART.get());
-        tag(ItemTagManager.LUNG).add(WAICOrgans.PIGMENT_LUNG.get());
-        tag(ItemTagManager.SPINE).add(WAICOrgans.PIGMENT_SPINE.get());
-        tag(ItemTagManager.STOMACH).add(WAICOrgans.PIGMENT_STOMACH.get());
-        tag(ItemTagManager.INTESTINE).add(WAICOrgans.PIGMENT_INTESTINE.get());
-        tag(ItemTagManager.KIDNEY).add(WAICOrgans.PIGMENT_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(WAICOrgans.PIGMENT_SPLEEN.get());
-        tag(ItemTagManager.LIVER).add(WAICOrgans.PIGMENT_LIVER.get());
-        tag(ItemTagManager.APPENDIX).add(WAICOrgans.PIGMENT_APPENDIX.get());
-        tag(ItemTagManager.RIB).add(WAICOrgans.PIGMENT_RIB.get());
-        tag(ItemTagManager.MUSCLE).add(WAICOrgans.PIGMENT_MUSCLE.get());
-        tag(ItemTagManager.SPECIAL).add(WAICOrgans.PALETTE.get());
-
-        // ==================== 木质器官标签 ====================
-        tag(ItemTagManager.ORGANS).add(
-            WAICOrgans.WOODEN_HEART.get(),
-            WAICOrgans.WOODEN_LUNG.get(),
-            WAICOrgans.WOODEN_STOMACH.get(),
-            WAICOrgans.WOODEN_INTESTINE.get(),
-            WAICOrgans.WOODEN_KIDNEY.get(),
-            WAICOrgans.WOODEN_SPLEEN.get(),
-            WAICOrgans.WOODEN_LIVER.get(),
-            WAICOrgans.WOODEN_APPENDIX.get(),
-            WAICOrgans.WOODEN_MUSCLE.get()
-        );
-        tag(ItemTagManager.HEART).add(WAICOrgans.WOODEN_HEART.get());
-        tag(ItemTagManager.LUNG).add(WAICOrgans.WOODEN_LUNG.get());
-        tag(ItemTagManager.STOMACH).add(WAICOrgans.WOODEN_STOMACH.get());
-        tag(ItemTagManager.INTESTINE).add(WAICOrgans.WOODEN_INTESTINE.get());
-        tag(ItemTagManager.KIDNEY).add(WAICOrgans.WOODEN_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(WAICOrgans.WOODEN_SPLEEN.get());
-        tag(ItemTagManager.LIVER).add(WAICOrgans.WOODEN_LIVER.get());
-        tag(ItemTagManager.APPENDIX).add(WAICOrgans.WOODEN_APPENDIX.get());
-        tag(ItemTagManager.MUSCLE).add(WAICOrgans.WOODEN_MUSCLE.get());
-
-        // ==================== 弗兰肯斯坦器官标签 ====================
-        tag(ItemTagManager.ORGANS).add(
-            WAICOrgans.FRANKENSTEIN_HEART.get(),
-            WAICOrgans.FRANKENSTEIN_LUNG.get(),
-            WAICOrgans.FRANKENSTEIN_STOMACH.get(),
-            WAICOrgans.FRANKENSTEIN_INTESTINE.get(),
-            WAICOrgans.FRANKENSTEIN_KIDNEY.get(),
-            WAICOrgans.FRANKENSTEIN_SPLEEN.get(),
-            WAICOrgans.FRANKENSTEIN_LIVER.get(),
-            WAICOrgans.FRANKENSTEIN_APPENDIX.get(),
-            WAICOrgans.FRANKENSTEIN_MUSCLE.get()
-        );
-        tag(ItemTagManager.HEART).add(WAICOrgans.FRANKENSTEIN_HEART.get());
-        tag(ItemTagManager.LUNG).add(WAICOrgans.FRANKENSTEIN_LUNG.get());
-        tag(ItemTagManager.STOMACH).add(WAICOrgans.FRANKENSTEIN_STOMACH.get());
-        tag(ItemTagManager.INTESTINE).add(WAICOrgans.FRANKENSTEIN_INTESTINE.get());
-        tag(ItemTagManager.KIDNEY).add(WAICOrgans.FRANKENSTEIN_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(WAICOrgans.FRANKENSTEIN_SPLEEN.get());
-        tag(ItemTagManager.LIVER).add(WAICOrgans.FRANKENSTEIN_LIVER.get());
-        tag(ItemTagManager.APPENDIX).add(WAICOrgans.FRANKENSTEIN_APPENDIX.get());
-        tag(ItemTagManager.MUSCLE).add(WAICOrgans.FRANKENSTEIN_MUSCLE.get());
-
-        // ==================== 病变器官标签 ====================
-        tag(ItemTagManager.ORGANS).add(
-            WAICOrgans.LESION_HEART.get(),
-            WAICOrgans.LESION_LUNG.get(),
-            WAICOrgans.LESION_STOMACH.get(),
-            WAICOrgans.LESION_INTESTINE.get(),
-            WAICOrgans.LESION_KIDNEY.get(),
-            WAICOrgans.LESION_SPLEEN.get(),
-            WAICOrgans.LESION_LIVER.get(),
-            WAICOrgans.LESION_APPENDIX.get(),
-            WAICOrgans.LESION_MUSCLE.get()
-        );
-        tag(ItemTagManager.HEART).add(WAICOrgans.LESION_HEART.get());
-        tag(ItemTagManager.LUNG).add(WAICOrgans.LESION_LUNG.get());
-        tag(ItemTagManager.STOMACH).add(WAICOrgans.LESION_STOMACH.get());
-        tag(ItemTagManager.INTESTINE).add(WAICOrgans.LESION_INTESTINE.get());
-        tag(ItemTagManager.KIDNEY).add(WAICOrgans.LESION_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(WAICOrgans.LESION_SPLEEN.get());
-        tag(ItemTagManager.LIVER).add(WAICOrgans.LESION_LIVER.get());
-        tag(ItemTagManager.APPENDIX).add(WAICOrgans.LESION_APPENDIX.get());
-        tag(ItemTagManager.MUSCLE).add(WAICOrgans.LESION_MUSCLE.get());
-        tag(WAICItemTagManager.LESION).add(
-            WAICOrgans.LESION_HEART.get(),
-            WAICOrgans.LESION_LUNG.get(),
-            WAICOrgans.LESION_STOMACH.get(),
-            WAICOrgans.LESION_INTESTINE.get(),
-            WAICOrgans.LESION_KIDNEY.get(),
-            WAICOrgans.LESION_SPLEEN.get(),
-            WAICOrgans.LESION_LIVER.get(),
-            WAICOrgans.LESION_APPENDIX.get(),
-            WAICOrgans.LESION_MUSCLE.get()
-        );
-
         // ==================== 九狱器官标签 ====================
         tag(ItemTagManager.ORGANS).add(
             WAICOrgans.LIMBO.get(),
@@ -935,33 +808,172 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPINE).add(IronSpellOrgans.EMERALD_SKULL.get());
         tag(WAICItemTagManager.MAGIC).add(IronSpellOrgans.EMERALD_SKULL.get());
 
-        inkSpecialTags();
-        elementCoresTags();
+        inkOrgansTags();
+        elementOrgansTags();
+        pigmentOrgansTags();
+        woodenOrgansTags();
+        frankensteinOrgansTags();
+        lesionOrgansTags();
     }
 
-    // ==================== 墨水特殊器官（隔离方法） ====================
+    // ==================== 墨水器官 ====================
 
-    private void inkSpecialTags() {
+    private void inkOrgansTags() {
         tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.INK_HEART.get(),
+            WAICOrgans.INK_LUNG.get(),
+            WAICOrgans.INK_SPINE.get(),
+            WAICOrgans.INK_STOMACH.get(),
+            WAICOrgans.INK_INTESTINE.get(),
+            WAICOrgans.INK_KIDNEY.get(),
+            WAICOrgans.INK_SPLEEN.get(),
+            WAICOrgans.INK_LIVER.get(),
+            WAICOrgans.INK_RIB.get(),
             WAICOrgans.INK_MUSCLE.get(),
             WAICOrgans.INK_APPENDIX.get(),
             WAICOrgans.INK_BOTTLE.get(),
             WAICOrgans.NIB.get()
         );
+        tag(ItemTagManager.HEART).add(WAICOrgans.INK_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.INK_LUNG.get());
+        tag(ItemTagManager.SPINE).add(WAICOrgans.INK_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.INK_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.INK_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.INK_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.INK_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.INK_LIVER.get());
+        tag(ItemTagManager.RIB).add(WAICOrgans.INK_RIB.get());
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.INK_MUSCLE.get());
         tag(ItemTagManager.APPENDIX).add(WAICOrgans.INK_APPENDIX.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.INK_BOTTLE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.NIB.get());
     }
 
-    // ==================== 元素核心（隔离方法） ====================
+    // ==================== 颜料器官 ====================
 
-    private void elementCoresTags() {
+    private void pigmentOrgansTags() {
+        tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.PIGMENT_HEART.get(),
+            WAICOrgans.PIGMENT_LUNG.get(),
+            WAICOrgans.PIGMENT_SPINE.get(),
+            WAICOrgans.PIGMENT_STOMACH.get(),
+            WAICOrgans.PIGMENT_INTESTINE.get(),
+            WAICOrgans.PIGMENT_KIDNEY.get(),
+            WAICOrgans.PIGMENT_SPLEEN.get(),
+            WAICOrgans.PIGMENT_LIVER.get(),
+            WAICOrgans.PIGMENT_APPENDIX.get(),
+            WAICOrgans.PIGMENT_RIB.get(),
+            WAICOrgans.PIGMENT_MUSCLE.get(),
+            WAICOrgans.PALETTE.get()
+        );
+        tag(ItemTagManager.HEART).add(WAICOrgans.PIGMENT_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.PIGMENT_LUNG.get());
+        tag(ItemTagManager.SPINE).add(WAICOrgans.PIGMENT_SPINE.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.PIGMENT_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.PIGMENT_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.PIGMENT_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.PIGMENT_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.PIGMENT_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.PIGMENT_APPENDIX.get());
+        tag(ItemTagManager.RIB).add(WAICOrgans.PIGMENT_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.PIGMENT_MUSCLE.get());
+        tag(ItemTagManager.SPECIAL).add(WAICOrgans.PALETTE.get());
+    }
+
+    // ==================== 病变器官 ====================
+
+    private void lesionOrgansTags() {
+        tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.LESION_HEART.get(),
+            WAICOrgans.LESION_LUNG.get(),
+            WAICOrgans.LESION_STOMACH.get(),
+            WAICOrgans.LESION_INTESTINE.get(),
+            WAICOrgans.LESION_KIDNEY.get(),
+            WAICOrgans.LESION_SPLEEN.get(),
+            WAICOrgans.LESION_LIVER.get(),
+            WAICOrgans.LESION_APPENDIX.get(),
+            WAICOrgans.LESION_MUSCLE.get()
+        );
+        tag(ItemTagManager.HEART).add(WAICOrgans.LESION_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.LESION_LUNG.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.LESION_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.LESION_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.LESION_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.LESION_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.LESION_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.LESION_APPENDIX.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.LESION_MUSCLE.get());
+        tag(WAICItemTagManager.LESION).add(
+            WAICOrgans.LESION_HEART.get(),
+            WAICOrgans.LESION_LUNG.get(),
+            WAICOrgans.LESION_STOMACH.get(),
+            WAICOrgans.LESION_INTESTINE.get(),
+            WAICOrgans.LESION_KIDNEY.get(),
+            WAICOrgans.LESION_SPLEEN.get(),
+            WAICOrgans.LESION_LIVER.get(),
+            WAICOrgans.LESION_APPENDIX.get(),
+            WAICOrgans.LESION_MUSCLE.get()
+        );
+    }
+
+    // ==================== 元素器官 ====================
+
+    private void elementOrgansTags() {
         tag(WAICItemTagManager.MAGIC).add(
             WAICOrgans.DIVINE_CORE.get(),
             WAICOrgans.FROST_CORE.get(),
             WAICOrgans.FLAME_CORE.get(),
             WAICOrgans.NATURE_CORE.get()
         );
+    }
+
+    // ==================== 木质器官 ====================
+
+    private void woodenOrgansTags() {
+        tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.WOODEN_HEART.get(),
+            WAICOrgans.WOODEN_LUNG.get(),
+            WAICOrgans.WOODEN_STOMACH.get(),
+            WAICOrgans.WOODEN_INTESTINE.get(),
+            WAICOrgans.WOODEN_KIDNEY.get(),
+            WAICOrgans.WOODEN_SPLEEN.get(),
+            WAICOrgans.WOODEN_LIVER.get(),
+            WAICOrgans.WOODEN_APPENDIX.get(),
+            WAICOrgans.WOODEN_MUSCLE.get()
+        );
+        tag(ItemTagManager.HEART).add(WAICOrgans.WOODEN_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.WOODEN_LUNG.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.WOODEN_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.WOODEN_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.WOODEN_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.WOODEN_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.WOODEN_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.WOODEN_APPENDIX.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.WOODEN_MUSCLE.get());
+    }
+
+    // ==================== 弗兰肯斯坦器官 ====================
+
+    private void frankensteinOrgansTags() {
+        tag(ItemTagManager.ORGANS).add(
+            WAICOrgans.FRANKENSTEIN_HEART.get(),
+            WAICOrgans.FRANKENSTEIN_LUNG.get(),
+            WAICOrgans.FRANKENSTEIN_STOMACH.get(),
+            WAICOrgans.FRANKENSTEIN_INTESTINE.get(),
+            WAICOrgans.FRANKENSTEIN_KIDNEY.get(),
+            WAICOrgans.FRANKENSTEIN_SPLEEN.get(),
+            WAICOrgans.FRANKENSTEIN_LIVER.get(),
+            WAICOrgans.FRANKENSTEIN_APPENDIX.get(),
+            WAICOrgans.FRANKENSTEIN_MUSCLE.get()
+        );
+        tag(ItemTagManager.HEART).add(WAICOrgans.FRANKENSTEIN_HEART.get());
+        tag(ItemTagManager.LUNG).add(WAICOrgans.FRANKENSTEIN_LUNG.get());
+        tag(ItemTagManager.STOMACH).add(WAICOrgans.FRANKENSTEIN_STOMACH.get());
+        tag(ItemTagManager.INTESTINE).add(WAICOrgans.FRANKENSTEIN_INTESTINE.get());
+        tag(ItemTagManager.KIDNEY).add(WAICOrgans.FRANKENSTEIN_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(WAICOrgans.FRANKENSTEIN_SPLEEN.get());
+        tag(ItemTagManager.LIVER).add(WAICOrgans.FRANKENSTEIN_LIVER.get());
+        tag(ItemTagManager.APPENDIX).add(WAICOrgans.FRANKENSTEIN_APPENDIX.get());
+        tag(ItemTagManager.MUSCLE).add(WAICOrgans.FRANKENSTEIN_MUSCLE.get());
     }
 }

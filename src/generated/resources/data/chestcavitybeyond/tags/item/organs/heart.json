@@ -15,11 +15,6 @@
     "who_am_i_core:frost_metal_heart",
     "who_am_i_core:transcendium_heart",
     "who_am_i_core:cursed_gold_heart",
-    "who_am_i_core:ink_heart",
-    "who_am_i_core:pigment_heart",
-    "who_am_i_core:wooden_heart",
-    "who_am_i_core:frankenstein_heart",
-    "who_am_i_core:lesion_heart",
     "who_am_i_core:treachery",
     "who_am_i_core:mimic_heart",
     "who_am_i_core:experience_heart",
@@ -27,6 +22,11 @@
     "who_am_i_core:undying_ember",
     "who_am_i_core:monstrosity_core",
     "who_am_i_core:pontiff_heart",
-    "who_am_i_core:cake_heart"
+    "who_am_i_core:cake_heart",
+    "who_am_i_core:ink_heart",
+    "who_am_i_core:pigment_heart",
+    "who_am_i_core:wooden_heart",
+    "who_am_i_core:frankenstein_heart",
+    "who_am_i_core:lesion_heart"
   ]
 }

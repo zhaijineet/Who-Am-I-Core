@@ -6,6 +6,8 @@ import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -339,5 +341,25 @@ public class OrganUtil {
         int row = index / 9;
         int col = index % 9;
         return row * 9 + (8 - col);
+    }
+
+    /**
+     * 检查是否为自伤（攻击者和被攻击者是同一实体）
+     * <p>
+     * 同时检测间接攻击者（{@code source.getEntity()}，如射箭的玩家）
+     * 和直接攻击者（{@code source.getDirectEntity()}，如投射物本身），
+     * 防止因投射物反射、药水溅射等边缘情况触发自身器官效果。
+     * </p>
+     *
+     * @param target 被攻击目标
+     * @param source 伤害源
+     * @return true 表示是自伤，应跳过效果
+     */
+    public static boolean isSelfDamage(LivingEntity target, DamageSource source) {
+        Entity sourceEntity = source.getEntity();
+        if (sourceEntity instanceof LivingEntity living && living == target) return true;
+        Entity directEntity = source.getDirectEntity();
+        if (directEntity instanceof LivingEntity living && living == target) return true;
+        return false;
     }
 }

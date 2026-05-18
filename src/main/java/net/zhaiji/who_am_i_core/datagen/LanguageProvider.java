@@ -158,9 +158,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             "Global temperature is always 0; local temperature uses the full positive/negative temperature from all organs"
         );
         addItem(FDBossesOrgans.CHESED, "Chesed");
-        addOrganActiveSkill(
+        addOrganPassiveEffect(
             FDBossesOrgans.CHESED,
-            "Attacks summon a lightning ray that tracks the target, dealing weapon damage and applying Shocked. Cooldown: 1s"
+            "Attacks summon a lightning ray that tracks the target, dealing 33% max HP damage and applying Shocked",
+            "Damage = Player max HP × 33%",
+            "Applies Shocked effect (target deals 25% less damage, 10 seconds)",
+            "Cooldown: 3 seconds"
         );
         addItem(FDBossesOrgans.GEBURAH, "Geburah");
         addOrganActiveSkill(FDBossesOrgans.GEBURAH, "Attacks deal bonus damage equal to 3% max HP per harmful effect on the target");
@@ -516,72 +519,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "Royal Steel Appendix");
         add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "Solid Foundation: simple fixed attribute bonuses");
 
-        // 墨水器官翻译
-        addItem(WAICOrgans.INK_HEART, "Ink Heart");
-        addItem(WAICOrgans.INK_LUNG, "Ink Lung");
-        addItem(WAICOrgans.INK_SPINE, "Ink Spine");
-        addItem(WAICOrgans.INK_STOMACH, "Ink Stomach");
-        addItem(WAICOrgans.INK_INTESTINE, "Ink Intestine");
-        addItem(WAICOrgans.INK_KIDNEY, "Ink Kidney");
-        addItem(WAICOrgans.INK_SPLEEN, "Ink Spleen");
-        addItem(WAICOrgans.INK_LIVER, "Ink Liver");
-        addItem(WAICOrgans.INK_RIB, "Ink Rib");
-
-        // 颜料器官翻译
-        addItem(WAICOrgans.PIGMENT_HEART, "Pigment Heart");
-        addItem(WAICOrgans.PIGMENT_LUNG, "Pigment Lung");
-        addItem(WAICOrgans.PIGMENT_SPINE, "Pigment Spine");
-        addItem(WAICOrgans.PIGMENT_STOMACH, "Pigment Stomach");
-        addItem(WAICOrgans.PIGMENT_INTESTINE, "Pigment Intestine");
-        addItem(WAICOrgans.PIGMENT_KIDNEY, "Pigment Kidney");
-        addItem(WAICOrgans.PIGMENT_SPLEEN, "Pigment Spleen");
-        addItem(WAICOrgans.PIGMENT_LIVER, "Pigment Liver");
-        addItem(WAICOrgans.PIGMENT_APPENDIX, "Pigment Appendix");
-        addItem(WAICOrgans.PIGMENT_RIB, "Pigment Rib");
-        addItem(WAICOrgans.PIGMENT_MUSCLE, "Pigment Muscle");
-        addItem(WAICOrgans.PALETTE, "Palette");
-        add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
-
-        // 木质器官翻译
-        addItem(WAICOrgans.WOODEN_HEART, "Wooden Heart");
-        addItem(WAICOrgans.WOODEN_LUNG, "Wooden Lung");
-        addItem(WAICOrgans.WOODEN_STOMACH, "Wooden Stomach");
-        addItem(WAICOrgans.WOODEN_INTESTINE, "Wooden Intestine");
-        addItem(WAICOrgans.WOODEN_KIDNEY, "Wooden Kidney");
-        addItem(WAICOrgans.WOODEN_SPLEEN, "Wooden Spleen");
-        addItem(WAICOrgans.WOODEN_LIVER, "Wooden Liver");
-        addItem(WAICOrgans.WOODEN_APPENDIX, "Wooden Appendix");
-        addItem(WAICOrgans.WOODEN_MUSCLE, "Wooden Muscle");
-
-        // 弗兰肯斯坦器官翻译
-        addItem(WAICOrgans.FRANKENSTEIN_HEART, "Frankenstein Heart");
-        addOrganPassiveEffect(WAICOrgans.FRANKENSTEIN_HEART, "A stitched-together heart. Inherits attributes from stored hearts.");
-        addItem(WAICOrgans.FRANKENSTEIN_LUNG, "Frankenstein Lung");
-        addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "Frankenstein Stomach");
-        addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "Frankenstein Intestine");
-        addItem(WAICOrgans.FRANKENSTEIN_KIDNEY, "Frankenstein Kidney");
-        addItem(WAICOrgans.FRANKENSTEIN_SPLEEN, "Frankenstein Spleen");
-        addItem(WAICOrgans.FRANKENSTEIN_LIVER, "Frankenstein Liver");
-        addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "Frankenstein Appendix");
-        addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "Frankenstein Muscle");
-
         // 病变器官翻译
-        addItem(WAICOrgans.LESION_HEART, "Lesion Heart");
-        addOrganPassiveEffect(WAICOrgans.LESION_HEART, "A festering heart that thrives on corruption");
-        addOrganActiveSkill(WAICOrgans.LESION_HEART, "Spread all your effects to living entities within 10 blocks");
-        addItem(WAICOrgans.LESION_LUNG, "Lesion Lung");
-        addItem(WAICOrgans.LESION_STOMACH, "Lesion Stomach");
-        addItem(WAICOrgans.LESION_INTESTINE, "Lesion Intestine");
-        addItem(WAICOrgans.LESION_KIDNEY, "Lesion Kidney");
-        addItem(WAICOrgans.LESION_SPLEEN, "Lesion Spleen");
-        addItem(WAICOrgans.LESION_LIVER, "Lesion Liver");
-        addItem(WAICOrgans.LESION_APPENDIX, "Lesion Appendix");
-        addItem(WAICOrgans.LESION_MUSCLE, "Lesion Muscle");
-        addOrganActiveSkill(
-            WAICOrgans.LESION_MUSCLE,
-            "+1 Strength and +1 Speed per harmful effect on yourself",
-            "+bonus damage equal to the sum of (amplifier + 1) of all harmful effects on the target"
-        );
 
         // 九狱器官翻译
         addItem(WAICOrgans.LIMBO, "Limbo");
@@ -742,8 +680,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "Enter Overload mode");
         addOrganPassiveEffectSimple(WAICOrgans.ENERGY_MODULE, "Provides charge storage");
 
-        inkSpecialEN();
-        elementCoresEN();
+        inkOrgansEN();
+        elementOrgansEN();
+        pigmentOrgansEN();
+        woodenOrgansEN();
+        frankensteinOrgansEN();
+        lesionOrgansEN();
     }
 
     public void Chinese() {
@@ -864,7 +806,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.MALKUTH, "王国");
         addOrganActiveSkill(FDBossesOrgans.MALKUTH, "全局温度始终为0；获取局部温度时，使用所有器官的全局正/负温度");
         addItem(FDBossesOrgans.CHESED, "慈悲");
-        addOrganActiveSkill(FDBossesOrgans.CHESED, "攻击时召唤闪电射线追踪目标，造成武器伤害并施加感电效果。冷却：1秒");
+        addOrganPassiveEffect(
+            FDBossesOrgans.CHESED,
+            "攻击时召唤闪电射线追踪目标，造成玩家最大生命值33%的伤害并施加感电效果",
+            "伤害 = 玩家最大生命值 × 33%",
+            "施加感电效果（目标造成伤害降低25%，持续10秒）",
+            "冷却：3秒"
+        );
         addItem(FDBossesOrgans.GEBURAH, "严厉");
         addOrganActiveSkill(FDBossesOrgans.GEBURAH, "攻击时，对目标每个负面效果额外造成其最大生命值3%的伤害");
         addItem(FDBossesOrgans.FLESH_IDOL, "血肉偶像");
@@ -1180,72 +1128,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "皇家钢阑尾");
         add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "坚实可靠：朴素的固定属性加成");
 
-        // 墨水器官翻译
-        addItem(WAICOrgans.INK_HEART, "墨水心脏");
-        addItem(WAICOrgans.INK_LUNG, "墨水肺脏");
-        addItem(WAICOrgans.INK_SPINE, "墨水脊柱");
-        addItem(WAICOrgans.INK_STOMACH, "墨水胃");
-        addItem(WAICOrgans.INK_INTESTINE, "墨水肠子");
-        addItem(WAICOrgans.INK_KIDNEY, "墨水肾脏");
-        addItem(WAICOrgans.INK_SPLEEN, "墨水脾脏");
-        addItem(WAICOrgans.INK_LIVER, "墨水肝脏");
-        addItem(WAICOrgans.INK_RIB, "墨水肋骨");
-
-        // 颜料器官翻译
-        addItem(WAICOrgans.PIGMENT_HEART, "颜料心脏");
-        addItem(WAICOrgans.PIGMENT_LUNG, "颜料肺脏");
-        addItem(WAICOrgans.PIGMENT_SPINE, "颜料脊柱");
-        addItem(WAICOrgans.PIGMENT_STOMACH, "颜料胃");
-        addItem(WAICOrgans.PIGMENT_INTESTINE, "颜料肠子");
-        addItem(WAICOrgans.PIGMENT_KIDNEY, "颜料肾脏");
-        addItem(WAICOrgans.PIGMENT_SPLEEN, "颜料脾脏");
-        addItem(WAICOrgans.PIGMENT_LIVER, "颜料肝脏");
-        addItem(WAICOrgans.PIGMENT_APPENDIX, "颜料阑尾");
-        addItem(WAICOrgans.PIGMENT_RIB, "颜料肋骨");
-        addItem(WAICOrgans.PIGMENT_MUSCLE, "颜料肌肉");
-        addItem(WAICOrgans.PALETTE, "调色盘");
-        add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
-
-        // 木质器官翻译
-        addItem(WAICOrgans.WOODEN_HEART, "木质心脏");
-        addItem(WAICOrgans.WOODEN_LUNG, "木质肺脏");
-        addItem(WAICOrgans.WOODEN_STOMACH, "木质胃");
-        addItem(WAICOrgans.WOODEN_INTESTINE, "木质肠子");
-        addItem(WAICOrgans.WOODEN_KIDNEY, "木质肾脏");
-        addItem(WAICOrgans.WOODEN_SPLEEN, "木质脾脏");
-        addItem(WAICOrgans.WOODEN_LIVER, "木质肝脏");
-        addItem(WAICOrgans.WOODEN_APPENDIX, "木质阑尾");
-        addItem(WAICOrgans.WOODEN_MUSCLE, "木质肌肉");
-
-        // 弗兰肯斯坦器官翻译
-        addItem(WAICOrgans.FRANKENSTEIN_HEART, "弗兰肯斯坦心脏");
-        addOrganPassiveEffect(WAICOrgans.FRANKENSTEIN_HEART, "缝合心脏。继承存储心脏的属性加成。");
-        addItem(WAICOrgans.FRANKENSTEIN_LUNG, "弗兰肯斯坦肺脏");
-        addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "弗兰肯斯坦胃");
-        addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "弗兰肯斯坦肠子");
-        addItem(WAICOrgans.FRANKENSTEIN_KIDNEY, "弗兰肯斯坦肾脏");
-        addItem(WAICOrgans.FRANKENSTEIN_SPLEEN, "弗兰肯斯坦脾脏");
-        addItem(WAICOrgans.FRANKENSTEIN_LIVER, "弗兰肯斯坦肝脏");
-        addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "弗兰肯斯坦阑尾");
-        addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "弗兰肯斯坦肌肉");
-
         // 病变器官翻译
-        addItem(WAICOrgans.LESION_HEART, "病变心脏");
-        addOrganPassiveEffect(WAICOrgans.LESION_HEART, "一颗在腐化中跳动的心脏");
-        addOrganActiveSkill(WAICOrgans.LESION_HEART, "将自身所有效果传播给10格范围内的生物");
-        addItem(WAICOrgans.LESION_LUNG, "病变肺脏");
-        addItem(WAICOrgans.LESION_STOMACH, "病变胃");
-        addItem(WAICOrgans.LESION_INTESTINE, "病变肠子");
-        addItem(WAICOrgans.LESION_KIDNEY, "病变肾脏");
-        addItem(WAICOrgans.LESION_SPLEEN, "病变脾脏");
-        addItem(WAICOrgans.LESION_LIVER, "病变肝脏");
-        addItem(WAICOrgans.LESION_APPENDIX, "病变阑尾");
-        addItem(WAICOrgans.LESION_MUSCLE, "病变肌肉");
-        addOrganActiveSkill(
-            WAICOrgans.LESION_MUSCLE,
-            "每有一个负面效果，+1力量和+1速度",
-            "对目标额外造成等同于目标所有负面效果(等级+1)之和的伤害"
-        );
 
         // 九狱器官翻译
         addItem(WAICOrgans.LIMBO, "灵薄");
@@ -1386,13 +1269,27 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "消耗电荷进入超频");
         addOrganPassiveEffectSimple(WAICOrgans.ENERGY_MODULE, "提供电荷存储");
 
-        inkSpecialZH();
-        elementCoresZH();
+        inkOrgansZH();
+        elementOrgansZH();
+        pigmentOrgansZH();
+        woodenOrgansZH();
+        frankensteinOrgansZH();
+        lesionOrgansZH();
     }
 
     // ==================== 墨水器官 ====================
 
-    private void inkSpecialEN() {
+    private void inkOrgansEN() {
+        addItem(WAICOrgans.INK_HEART, "Ink Heart");
+        addItem(WAICOrgans.INK_LUNG, "Ink Lung");
+        addItem(WAICOrgans.INK_SPINE, "Ink Spine");
+        addItem(WAICOrgans.INK_STOMACH, "Ink Stomach");
+        addItem(WAICOrgans.INK_INTESTINE, "Ink Intestine");
+        addItem(WAICOrgans.INK_KIDNEY, "Ink Kidney");
+        addItem(WAICOrgans.INK_SPLEEN, "Ink Spleen");
+        addItem(WAICOrgans.INK_LIVER, "Ink Liver");
+        addItem(WAICOrgans.INK_RIB, "Ink Rib");
+
         addItem(WAICOrgans.INK_MUSCLE, "Ink Muscle");
         addOrganDescription(WAICOrgans.INK_MUSCLE, "Muscle fibers steeped in dark ink");
         addOrganActiveSkill(WAICOrgans.INK_MUSCLE, "When damaged, adds ink equal to the damage taken into the Ink Bottle");
@@ -1412,7 +1309,17 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffectSimple(WAICOrgans.NIB, "Boosts spell level by 1 when casting, consuming ink");
     }
 
-    private void inkSpecialZH() {
+    private void inkOrgansZH() {
+        addItem(WAICOrgans.INK_HEART, "墨水心脏");
+        addItem(WAICOrgans.INK_LUNG, "墨水肺脏");
+        addItem(WAICOrgans.INK_SPINE, "墨水脊柱");
+        addItem(WAICOrgans.INK_STOMACH, "墨水胃");
+        addItem(WAICOrgans.INK_INTESTINE, "墨水肠子");
+        addItem(WAICOrgans.INK_KIDNEY, "墨水肾脏");
+        addItem(WAICOrgans.INK_SPLEEN, "墨水脾脏");
+        addItem(WAICOrgans.INK_LIVER, "墨水肝脏");
+        addItem(WAICOrgans.INK_RIB, "墨水肋骨");
+
         addItem(WAICOrgans.INK_MUSCLE, "墨水肌肉");
         addOrganDescription(WAICOrgans.INK_MUSCLE, "浸泡在浓墨中的肌肉纤维");
         addOrganActiveSkill(WAICOrgans.INK_MUSCLE, "受到伤害时，将等同于伤害值的墨水注入墨水瓶");
@@ -1432,9 +1339,45 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffectSimple(WAICOrgans.NIB, "释放法术时消耗墨水提升法术等级");
     }
 
-    // ==================== 元素核心 ====================
+    // ==================== 颜料器官 ====================
 
-    private void elementCoresEN() {
+    private void pigmentOrgansEN() {
+        addItem(WAICOrgans.PALETTE, "Palette");
+        add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
+
+        addItem(WAICOrgans.PIGMENT_HEART, "Pigment Heart");
+        addItem(WAICOrgans.PIGMENT_LUNG, "Pigment Lung");
+        addItem(WAICOrgans.PIGMENT_SPINE, "Pigment Spine");
+        addItem(WAICOrgans.PIGMENT_STOMACH, "Pigment Stomach");
+        addItem(WAICOrgans.PIGMENT_INTESTINE, "Pigment Intestine");
+        addItem(WAICOrgans.PIGMENT_KIDNEY, "Pigment Kidney");
+        addItem(WAICOrgans.PIGMENT_SPLEEN, "Pigment Spleen");
+        addItem(WAICOrgans.PIGMENT_LIVER, "Pigment Liver");
+        addItem(WAICOrgans.PIGMENT_APPENDIX, "Pigment Appendix");
+        addItem(WAICOrgans.PIGMENT_RIB, "Pigment Rib");
+        addItem(WAICOrgans.PIGMENT_MUSCLE, "Pigment Muscle");
+    }
+
+    private void pigmentOrgansZH() {
+        addItem(WAICOrgans.PALETTE, "调色盘");
+        add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
+
+        addItem(WAICOrgans.PIGMENT_HEART, "颜料心脏");
+        addItem(WAICOrgans.PIGMENT_LUNG, "颜料肺脏");
+        addItem(WAICOrgans.PIGMENT_SPINE, "颜料脊柱");
+        addItem(WAICOrgans.PIGMENT_STOMACH, "颜料胃");
+        addItem(WAICOrgans.PIGMENT_INTESTINE, "颜料肠子");
+        addItem(WAICOrgans.PIGMENT_KIDNEY, "颜料肾脏");
+        addItem(WAICOrgans.PIGMENT_SPLEEN, "颜料脾脏");
+        addItem(WAICOrgans.PIGMENT_LIVER, "颜料肝脏");
+        addItem(WAICOrgans.PIGMENT_APPENDIX, "颜料阑尾");
+        addItem(WAICOrgans.PIGMENT_RIB, "颜料肋骨");
+        addItem(WAICOrgans.PIGMENT_MUSCLE, "颜料肌肉");
+    }
+
+    // ==================== 元器官心 ====================
+
+    private void elementOrgansEN() {
         addItem(WAICOrgans.DIVINE_CORE, "Divine Core");
         addOrganDescription(WAICOrgans.DIVINE_CORE, "A crystallized core resonating with holy light, emitting a pure and warm radiance");
 
@@ -1442,13 +1385,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganDescription(WAICOrgans.FROST_CORE, "A frozen core harboring the essence of eternal winter, radiating an icy chill");
 
         addItem(WAICOrgans.FLAME_CORE, "Flame Core");
-        addOrganDescription(WAICOrgans.FLAME_CORE, "A blazing core burning with primordial flame, its heat never fading");
+        addOrganDescription(WAICOrgans.FLAME_CORE, "A blazing core of molten lava, its heat never fading");
 
         addItem(WAICOrgans.NATURE_CORE, "Nature Core");
         addOrganDescription(WAICOrgans.NATURE_CORE, "A verdant core pulsing with the rhythm of life itself, brimming with natural vitality");
     }
 
-    private void elementCoresZH() {
+    private void elementOrgansZH() {
         addItem(WAICOrgans.DIVINE_CORE, "神圣核心");
         addOrganDescription(WAICOrgans.DIVINE_CORE, "凝聚圣光之力而结晶的核心，散发着纯净而温暖的光芒");
 
@@ -1456,10 +1399,100 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganDescription(WAICOrgans.FROST_CORE, "封存永冬之本质的冰冷核心，散发着刺骨的寒意");
 
         addItem(WAICOrgans.FLAME_CORE, "炽焰核心");
-        addOrganDescription(WAICOrgans.FLAME_CORE, "燃烧着原初之火的灼热核心，其热度永不消退");
+        addOrganDescription(WAICOrgans.FLAME_CORE, "流淌着熔岩的灼热核心，其热度永不消退");
 
         addItem(WAICOrgans.NATURE_CORE, "自然核心");
         addOrganDescription(WAICOrgans.NATURE_CORE, "脉动着生命韵律的翠绿核心，充盈着自然的活力");
+    }
+
+    // ==================== 木质器官 ====================
+
+    private void woodenOrgansEN() {
+        addItem(WAICOrgans.WOODEN_HEART, "Wooden Heart");
+        addItem(WAICOrgans.WOODEN_LUNG, "Wooden Lung");
+        addItem(WAICOrgans.WOODEN_STOMACH, "Wooden Stomach");
+        addItem(WAICOrgans.WOODEN_INTESTINE, "Wooden Intestine");
+        addItem(WAICOrgans.WOODEN_KIDNEY, "Wooden Kidney");
+        addItem(WAICOrgans.WOODEN_SPLEEN, "Wooden Spleen");
+        addItem(WAICOrgans.WOODEN_LIVER, "Wooden Liver");
+        addItem(WAICOrgans.WOODEN_APPENDIX, "Wooden Appendix");
+        addItem(WAICOrgans.WOODEN_MUSCLE, "Wooden Muscle");
+    }
+
+    private void woodenOrgansZH() {
+        addItem(WAICOrgans.WOODEN_HEART, "木质心脏");
+        addItem(WAICOrgans.WOODEN_LUNG, "木质肺脏");
+        addItem(WAICOrgans.WOODEN_STOMACH, "木质胃");
+        addItem(WAICOrgans.WOODEN_INTESTINE, "木质肠子");
+        addItem(WAICOrgans.WOODEN_KIDNEY, "木质肾脏");
+        addItem(WAICOrgans.WOODEN_SPLEEN, "木质脾脏");
+        addItem(WAICOrgans.WOODEN_LIVER, "木质肝脏");
+        addItem(WAICOrgans.WOODEN_APPENDIX, "木质阑尾");
+        addItem(WAICOrgans.WOODEN_MUSCLE, "木质肌肉");
+    }
+
+    // ==================== 弗兰肯斯坦器官 ====================
+
+    private void frankensteinOrgansEN() {
+        addItem(WAICOrgans.FRANKENSTEIN_HEART, "Frankenstein Heart");
+        addOrganPassiveEffect(WAICOrgans.FRANKENSTEIN_HEART, "Inherits attributes from stored hearts.");
+
+        addItem(WAICOrgans.FRANKENSTEIN_LUNG, "Frankenstein Lung");
+        addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "Frankenstein Stomach");
+        addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "Frankenstein Intestine");
+        addItem(WAICOrgans.FRANKENSTEIN_KIDNEY, "Frankenstein Kidney");
+        addItem(WAICOrgans.FRANKENSTEIN_SPLEEN, "Frankenstein Spleen");
+        addItem(WAICOrgans.FRANKENSTEIN_LIVER, "Frankenstein Liver");
+        addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "Frankenstein Appendix");
+        addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "Frankenstein Muscle");
+    }
+
+    private void frankensteinOrgansZH() {
+        addItem(WAICOrgans.FRANKENSTEIN_HEART, "弗兰肯斯坦心脏");
+        addOrganPassiveEffect(WAICOrgans.FRANKENSTEIN_HEART, "继承存储心脏的属性加成。");
+
+        addItem(WAICOrgans.FRANKENSTEIN_LUNG, "弗兰肯斯坦肺脏");
+        addItem(WAICOrgans.FRANKENSTEIN_STOMACH, "弗兰肯斯坦胃");
+        addItem(WAICOrgans.FRANKENSTEIN_INTESTINE, "弗兰肯斯坦肠子");
+        addItem(WAICOrgans.FRANKENSTEIN_KIDNEY, "弗兰肯斯坦肾脏");
+        addItem(WAICOrgans.FRANKENSTEIN_SPLEEN, "弗兰肯斯坦脾脏");
+        addItem(WAICOrgans.FRANKENSTEIN_LIVER, "弗兰肯斯坦肝脏");
+        addItem(WAICOrgans.FRANKENSTEIN_APPENDIX, "弗兰肯斯坦阑尾");
+        addItem(WAICOrgans.FRANKENSTEIN_MUSCLE, "弗兰肯斯坦肌肉");
+    }
+
+    // ==================== 病变器官 ====================
+
+    private void lesionOrgansEN() {
+        addItem(WAICOrgans.LESION_HEART, "Lesion Heart");
+        addOrganActiveSkill(WAICOrgans.LESION_HEART, "Spread all your effects to living entities within 10 blocks");
+
+        addItem(WAICOrgans.LESION_LUNG, "Lesion Lung");
+        addItem(WAICOrgans.LESION_STOMACH, "Lesion Stomach");
+        addItem(WAICOrgans.LESION_INTESTINE, "Lesion Intestine");
+        addItem(WAICOrgans.LESION_KIDNEY, "Lesion Kidney");
+        addItem(WAICOrgans.LESION_SPLEEN, "Lesion Spleen");
+        addItem(WAICOrgans.LESION_LIVER, "Lesion Liver");
+        addItem(WAICOrgans.LESION_APPENDIX, "Lesion Appendix");
+
+        addItem(WAICOrgans.LESION_MUSCLE, "Lesion Muscle");
+        addOrganPassiveEffect(WAICOrgans.LESION_MUSCLE, "Deals bonus damage equal to the sum of all harmful effect levels on the target");
+    }
+
+    private void lesionOrgansZH() {
+        addItem(WAICOrgans.LESION_HEART, "病变心脏");
+        addOrganActiveSkill(WAICOrgans.LESION_HEART, "将自身所有效果传播给10格范围内的生物");
+
+        addItem(WAICOrgans.LESION_LUNG, "病变肺脏");
+        addItem(WAICOrgans.LESION_STOMACH, "病变胃");
+        addItem(WAICOrgans.LESION_INTESTINE, "病变肠子");
+        addItem(WAICOrgans.LESION_KIDNEY, "病变肾脏");
+        addItem(WAICOrgans.LESION_SPLEEN, "病变脾脏");
+        addItem(WAICOrgans.LESION_LIVER, "病变肝脏");
+        addItem(WAICOrgans.LESION_APPENDIX, "病变阑尾");
+
+        addItem(WAICOrgans.LESION_MUSCLE, "病变肌肉");
+        addOrganPassiveEffect(WAICOrgans.LESION_MUSCLE, "对目标额外造成等同于其所有负面效果等级之和的伤害");
     }
 
     private void addOrganDescription(Supplier<Item> item, String... lines) {

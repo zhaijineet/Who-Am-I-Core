@@ -203,9 +203,11 @@ public class CommonEventHandler {
                                 : source.getDirectEntity() instanceof LivingEntity directEntity
                                   ? directEntity
                                   : null;
+        // 自伤排除
+        boolean isSelfDamage = OrganUtil.isSelfDamage(entity, source);
         // 反击属性处理
         double counterAttack = entity.getAttributeValue(WAICAttribute.COUNTER_ATTACK);
-        if (counterAttack > 0 && attacker != null) {
+        if (counterAttack > 0 && attacker != null && !isSelfDamage) {
             // 防止我反击你反击我的反击
             if (!source.is(DamageTypes.THORNS)) {
                 // 对攻击者造成荆棘类型的反击伤害
@@ -232,15 +234,15 @@ public class CommonEventHandler {
             finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
         }
         // 九头蛇肋骨效果（唯一）
-        block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
+        if (!isSelfDamage) block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
         // 导流肋骨护盾（唯一）
-        block += WAICOrganUtil.currentRibShield(entity, damage);
+        if (!isSelfDamage) block += WAICOrganUtil.currentRibShield(entity, damage);
         // 九头蛇肌肉效果（唯一）
-        if (attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
+        if (!isSelfDamage && attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
         // 尸王脊柱效果（唯一）
-        block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
+        if (!isSelfDamage) block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
         // 风暴脊柱效果（唯一）
-        block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
+        if (!isSelfDamage) block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
     }

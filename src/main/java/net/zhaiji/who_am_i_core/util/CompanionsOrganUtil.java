@@ -21,6 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
+import net.zhaiji.who_am_i_core.util.OrganUtil;
 
 public class CompanionsOrganUtil {
 
@@ -33,6 +34,7 @@ public class CompanionsOrganUtil {
      */
     public static void pontiffHeartHurt(ChestCavitySlotContext context, DamageSource damageSource, DamageContainer damageContainer) {
         LivingEntity entity = context.entity();
+        if (OrganUtil.isSelfDamage(entity, damageSource)) return;
         if (!(entity instanceof Player player)) return;
         if (OrganSkillUtil.hasCooldown(player, context.stack())) return;
         if (entity.getHealth() > entity.getMaxHealth() * 0.3F) return;
