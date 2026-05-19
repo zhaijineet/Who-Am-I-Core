@@ -77,7 +77,7 @@ public class ChestNovaTask implements ISerializableTask {
     public ChestNovaTask(ChestCavityData data, int novaSlot) {
         this.data = data;
         this.novaSlot = novaSlot;
-        adjacentSlots = OrganUtil.getAdjacentSlots(novaSlot);
+        adjacentSlots = OrganUtil.getAdjacentSlots(novaSlot, data.getSlots());
     }
 
     /**
@@ -91,7 +91,7 @@ public class ChestNovaTask implements ISerializableTask {
     public ChestNovaTask(ChestCavityData data, HolderLookup.Provider provider, CompoundTag nbt) {
         this.data = data;
         this.novaSlot = nbt.getInt("novaSlot");
-        this.adjacentSlots = OrganUtil.getAdjacentSlots(novaSlot);
+        this.adjacentSlots = OrganUtil.getAdjacentSlots(novaSlot, data.getSlots());
         // 反序列化 cooldowns
         CompoundTag cooldownsTag = nbt.getCompound("cooldowns");
         for (String key : cooldownsTag.getAllKeys()) {
@@ -266,7 +266,7 @@ public class ChestNovaTask implements ISerializableTask {
 
     private void addMaskEffect(LivingEntity entity) {
         for (int slot : adjacentSlots) {
-            if (slot < 0 || slot >= 27) continue;
+            if (slot < 0 || slot >= data.getSlots()) continue;
             ItemStack maskStack = data.getStackInSlot(slot);
             // 检查是否为乌姆塔纳面具
             if (maskStack.getItem() instanceof ItemUmvuthanaMask maskItem) {
@@ -389,7 +389,7 @@ public class ChestNovaTask implements ISerializableTask {
     public boolean isControlRodNearby() {
         // 检查相邻槽位中是否有制御棒
         for (int slot : adjacentSlots) {
-            if (slot < 0 || slot >= 27) continue;
+            if (slot < 0 || slot >= data.getSlots()) continue;
             if (data.getStackInSlot(slot).is(MowziesMobOrgans.CONTROL_ROD.get())) {
                 return true;
             }

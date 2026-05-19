@@ -27,12 +27,12 @@ public class WAICItemTagManager {
     public static final TagKey<Item> ICE = register("ice", 0xFF00AAAA, 49);
     // 病变
     public static final TagKey<Item> LESION = register("lesion", 0xFF00AA00, 40);
-    // 诅咒金
-    public static final TagKey<Item> CURSED_GOLD = register("cursed_gold", 0xFFFFAA00, 30);
-    // 余烬金属
-    public static final TagKey<Item> EMBER_METAL = register("ember_metal", 0xFFAA0000, 29);
-    // 布织器官
-    public static final TagKey<Item> CLOTH_ORGAN = register("cloth_organ", 0xFFFFFFFF, 20);
+    // 诅咒
+    public static final TagKey<Item> CURSED = register("cursed", 0xFFFFAA00, 30);
+    // 余烬
+    public static final TagKey<Item> EMBER = register("ember", 0xFFAA0000, 29);
+    // 布织
+    public static final TagKey<Item> CLOTH = register("cloth", 0xFFFFFFFF, 20);
     // 巨兽
     public static final TagKey<Item> MONSTROSITY = register("monstrosity", 0xFF555555, 15);
     // 蛋糕

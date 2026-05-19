@@ -1,19 +1,20 @@
 {
   "values": [
+    "who_am_i_core:fantastical_kidney",
+    "who_am_i_core:frost_metal_kidney",
+    "who_am_i_core:transcendium_kidney",
+    "who_am_i_core:pontiff_kidney",
     "who_am_i_core:aged_kidney",
     "who_am_i_core:fire_dragon_kidney",
     "who_am_i_core:ice_dragon_kidney",
     "who_am_i_core:lightning_dragon_kidney",
-    "who_am_i_core:fantastical_kidney",
-    "who_am_i_core:cloth_kidney",
-    "who_am_i_core:frost_metal_kidney",
-    "who_am_i_core:transcendium_kidney",
-    "who_am_i_core:fraud",
-    "who_am_i_core:pontiff_kidney",
     "who_am_i_core:ink_kidney",
+    "who_am_i_core:cloth_kidney",
+    "who_am_i_core:crimson_kidney",
     "who_am_i_core:pigment_kidney",
     "who_am_i_core:wooden_kidney",
     "who_am_i_core:frankenstein_kidney",
-    "who_am_i_core:lesion_kidney"
+    "who_am_i_core:lesion_kidney",
+    "who_am_i_core:fraud"
   ]
 }

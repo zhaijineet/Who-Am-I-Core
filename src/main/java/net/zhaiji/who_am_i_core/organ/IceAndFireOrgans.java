@@ -389,7 +389,7 @@ public class IceAndFireOrgans {
             .build()
     );
 
-    // ==================== 悚恐怖官 ====================
+    // ==================== 悚怖器官 ====================
     // 苦寒血肉
     public static final Supplier<Item> BITTER_FLESH = WAICItem.ITEM.register(
         "bitter_flesh",
@@ -428,7 +428,7 @@ public class IceAndFireOrgans {
             .build()
     );
 
-    // 悚恐怖肋骨
+    // 悚怖肋骨
     public static final Supplier<Item> DREAD_RIB = WAICItem.ITEM.register(
         "dread_rib",
         () -> Organ.builder()
@@ -437,7 +437,7 @@ public class IceAndFireOrgans {
             .build()
     );
 
-    // 悚恐怖脊柱
+    // 悚怖脊柱
     public static final Supplier<Item> DREAD_SPINE = WAICItem.ITEM.register(
         "dread_spine",
         () -> Organ.builder()
@@ -478,6 +478,7 @@ public class IceAndFireOrgans {
         "hydra_stomach",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 1.5)
+            .addValueAttribute(InitAttribute.SCAVENGER_DIGESTION, 1)
             .build()
     );
 
@@ -494,7 +495,7 @@ public class IceAndFireOrgans {
         "hydra_spleen",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 1.5)
-            .added(IceAndFireOrganUtil::hydraSpleenAdded)
+            .tick(IceAndFireOrganUtil::hydraSpleenTick)
             .build()
     );
 

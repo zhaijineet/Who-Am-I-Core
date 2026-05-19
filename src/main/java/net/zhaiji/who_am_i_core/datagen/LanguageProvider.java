@@ -39,115 +39,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICItem.PETITE_CHEST_OPENER, "Petite Chest Opener");
 
-        addItem(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, "Ferrous Wroughtnaut Heart Mirror");
-        addOrganActiveSkill(
-            MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
-            "Removes FOV modification",
-            "Blocks entity attacks from the front",
-            "Cannot move for 3 seconds after attacking"
-        );
-
-        addItem(MowziesMobOrgans.CHEST_NOVA, "Chest Nova");
-        addOrganDescription(MowziesMobOrgans.CHEST_NOVA, "It beats like a heart");
-        addOrganActiveSkill(
-            MowziesMobOrgans.CHEST_NOVA,
-            "When chest cavity is closed, burns organs in 3x3 area (except mechanical and magical organs)",
-            "Umvuthana masks in 3x3 area summon corresponding followers, respawning 30 seconds after death",
-            "Masks provide their potion effects to the owner"
-        );
-
-        addItem(MowziesMobOrgans.CONTROL_ROD, "Control Rod");
-        addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "Which sun bird is this?");
-        addOrganActiveSkill(
-            MowziesMobOrgans.CONTROL_ROD,
-            "When Control Rod is in 3x3 range of Chest Nova:",
-            "■Reduces Umvuthana follower respawn cooldown from 30s to 10s",
-            "■Masks also provide effects to followers"
-        );
-
-        // 衰老器官翻译
-        addItem(MowziesMobOrgans.AGED_HEART, "Aged Heart");
-        addItem(MowziesMobOrgans.AGED_LUNG, "Aged Lung");
-        addItem(MowziesMobOrgans.AGED_SPINE, "Aged Spine");
-        addItem(MowziesMobOrgans.AGED_STOMACH, "Aged Stomach");
-        addItem(MowziesMobOrgans.AGED_INTESTINE, "Aged Intestine");
-        addItem(MowziesMobOrgans.AGED_KIDNEY, "Aged Kidney");
-        addItem(MowziesMobOrgans.AGED_SPLEEN, "Aged Spleen");
-        addItem(MowziesMobOrgans.AGED_LIVER, "Aged Liver");
-        addItem(MowziesMobOrgans.AGED_APPENDIX, "Aged Appendix");
-        addItem(MowziesMobOrgans.AGED_RIB, "Aged Rib");
-        addItem(MowziesMobOrgans.AGED_MUSCLE, "Aged Muscle");
-        addItem(MowziesMobOrgans.ZEN_HEART, "Zen Heart");
-
-        // 泥峭器官翻译
-        addItem(MowziesMobOrgans.BLUFF_CORE, "Bluff Core");
-        addOrganActiveSkill(
-            MowziesMobOrgans.BLUFF_CORE,
-            "Allows eating dirt, restores 4 hunger",
-            "Use skill to use dirt blocks",
-            "Different dirt types grant different effects:",
-            " •Grass/Moss/Mycelium → Strength II",
-            " •Coarse Dirt/Podzol/Mud → Haste II",
-            " •Rooted Dirt/Muddy Mangrove Roots → Resistance II"
-        );
-
-        addItem(MowziesMobOrgans.BLUFF_TABLET, "Bluff Tablet");
-        addOrganActiveSkill(
-            MowziesMobOrgans.BLUFF_TABLET,
-            "Allows eating dirt, restores 4 hunger",
-            "Each tablet grants 2 absorption hearts (max: mud organs × 8)"
-        );
-
-        addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "Active Bluff Rod");
-        addOrganActiveSkill(
-            MowziesMobOrgans.ACTIVE_BLUFF_ROD,
-            "Allows eating dirt, restores 4 hunger",
-            "Each rod grants 4 saturation when eating dirt"
-        );
-
-        // 龙类器官翻译
-        addItem(IceAndFireOrgans.FIRE_DRAGON_HEART, "Fire Dragon Heart");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_LUNG, "Fire Dragon Lung");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_SPINE, "Fire Dragon Spine");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_STOMACH, "Fire Dragon Stomach");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_INTESTINE, "Fire Dragon Intestine");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_KIDNEY, "Fire Dragon Kidney");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_SPLEEN, "Fire Dragon Spleen");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "Fire Dragon Liver");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "Fire Dragon Gem");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Fire Dragon Breath Sac");
-        addOrganActiveSkill(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Sprays fire forward");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "Fire Dragon Rib");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "Fire Dragon Muscle");
-
-        addItem(IceAndFireOrgans.ICE_DRAGON_HEART, "Ice Dragon Heart");
-        addItem(IceAndFireOrgans.ICE_DRAGON_LUNG, "Ice Dragon Lung");
-        addItem(IceAndFireOrgans.ICE_DRAGON_SPINE, "Ice Dragon Spine");
-        addItem(IceAndFireOrgans.ICE_DRAGON_STOMACH, "Ice Dragon Stomach");
-        addItem(IceAndFireOrgans.ICE_DRAGON_INTESTINE, "Ice Dragon Intestine");
-        addItem(IceAndFireOrgans.ICE_DRAGON_KIDNEY, "Ice Dragon Kidney");
-        addItem(IceAndFireOrgans.ICE_DRAGON_SPLEEN, "Ice Dragon Spleen");
-        addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "Ice Dragon Liver");
-        addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "Ice Dragon Gem");
-        addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Ice Dragon Breath Sac");
-        addOrganActiveSkill(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Sprays ice forward");
-        addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "Ice Dragon Rib");
-        addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "Ice Dragon Muscle");
-
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "Lightning Dragon Heart");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "Lightning Dragon Lung");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "Lightning Dragon Spine");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "Lightning Dragon Stomach");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "Lightning Dragon Intestine");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "Lightning Dragon Kidney");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "Lightning Dragon Spleen");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "Lightning Dragon Liver");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "Lightning Dragon Gem");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Lightning Dragon Breath Sac");
-        addOrganActiveSkill(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Sprays lightning forward");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "Lightning Dragon Rib");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "Lightning Dragon Muscle");
-
         addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Fire Malkuth Warrior Heart");
         addOrganActiveSkill(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Immune to fire attacks when fighting Malkuth");
         addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Ice Malkuth Warrior Heart");
@@ -167,12 +58,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
         addItem(FDBossesOrgans.GEBURAH, "Geburah");
         addOrganActiveSkill(FDBossesOrgans.GEBURAH, "Attacks deal bonus damage equal to 3% max HP per harmful effect on the target");
-        addItem(FDBossesOrgans.FLESH_IDOL, "Flesh Idol");
-        addOrganActiveSkill(
-            FDBossesOrgans.FLESH_IDOL,
-            "For each harmful effect: halve current HP, then remove that effect",
-            "Removing Sinner effect also reduces 1 Sin layer. Cooldown: 20s"
-        );
 
         // 利维坦器官翻译
         addItem(CataclysmOrgans.LEVIATHAN_HEART, "Leviathan Heart");
@@ -234,7 +119,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Monstrosity Circuit");
         addOrganActiveSkill(
             CataclysmOrgans.MONSTROSITY_CIRCUIT,
-            "Consumes all yellow bile: AoE earthquake deals (bile + 5% max HP + temp x 2) damage"
+            "Consumes 100 yellow bile to trigger AoE earthquake dealing (bile + 5% max HP + temp x 2) damage"
         );
         addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "Monstrosity Furnace");
         addOrganPassiveEffect(
@@ -294,7 +179,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // IronSpell 死者之王器官翻译
         addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Corrupted Soul Lantern");
         addOrganPassiveEffect(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Harvests souls from killed entities into black bile");
-        addOrganActiveSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Soul Harvest: gain black bile when nearby entities die");
+        addOrganActiveSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Gain black bile when nearby entities die");
 
         addItem(IronSpellOrgans.DEAD_KING_SPINE, "Dead King Spine");
         addOrganPassiveEffect(IronSpellOrgans.DEAD_KING_SPINE, "Absorbs damage with black bile");
@@ -308,7 +193,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CompanionsOrgans.PONTIFF_HEART, "Pontiff Heart");
         addOrganPassiveEffect(
             CompanionsOrgans.PONTIFF_HEART,
-            "Holy Transformation: when HP drops below 30%, heals 50% max HP and grants Strength II, Resistance II, Speed II for 15s. 3min cooldown"
+            "When HP drops below 30%, heals 50% max HP and grants Strength II, Resistance II, Speed II for 15s. 3min cooldown"
         );
 
         addItem(CompanionsOrgans.PONTIFF_LUNG, "Pontiff Lung");
@@ -341,97 +226,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CompanionsOrgans.CAKE_LIVER, "Cake Liver");
         addOrganActiveSkill(
             CompanionsOrgans.CAKE_LIVER,
-            "Sweetness level >= 2: consumes 1 level per second to remove 1 random harmful effect"
+            "Sweetness level >= 2, consumes 1 level per second to remove 1 random harmful effect"
         );
-
-        // 悚恐怖官翻译
-        addItem(IceAndFireOrgans.BITTER_FLESH, "Bitter Flesh");
-        addItem(IceAndFireOrgans.ICE_SHARD, "Ice Shard");
-        addItem(IceAndFireOrgans.FROSTBURN_SOUL, "Frostburn Soul");
-        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "Dread Phylactery");
-        addItem(IceAndFireOrgans.DREAD_RIB, "Dread Rib");
-        addItem(IceAndFireOrgans.DREAD_SPINE, "Dread Spine");
-
-        // 冰魂残片效果描述
-        addOrganPassiveEffect(IceAndFireOrgans.ICE_SHARD, "Global temperature × -0.05 → bonus health (colder = more health)");
-        // 冻结魂火效果描述
-        addOrganPassiveEffect(IceAndFireOrgans.FROSTBURN_SOUL, "Global temperature × -0.15 → bonus health (colder = more health)");
-        // 悚恐怖匣效果描述
-        addOrganPassiveEffect(IceAndFireOrgans.DREAD_PHYLACTERY, "Global temperature × -0.25 → bonus health (colder = more health)");
-        addOrganActiveSkill(IceAndFireOrgans.DREAD_PHYLACTERY, "Converts target's Slowness into freeze damage");
-        // 悚怖脊柱技能描述
-        addOrganActiveSkill(IceAndFireOrgans.DREAD_SPINE, "On attack, applies Slowness based on local temperature (3 seconds)");
-
-        // 九头蛇器官翻译
-        addItem(IceAndFireOrgans.HYDRA_HEART, "Hydra Heart");
-        addItem(IceAndFireOrgans.HYDRA_LUNG, "Hydra Lung");
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_LUNG, "Consumes poison effect to release hydra venom breath");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_LUNG,
-            "Consumes current poison effect on the player",
-            "Breath duration = log10(poison duration) seconds",
-            "Deals damage every 4 ticks (damage = poison level + 1)",
-            "Hit enemies receive original poison effect"
-        );
-        addItem(IceAndFireOrgans.HYDRA_SPINE, "Hydra Spine");
-        addItem(IceAndFireOrgans.HYDRA_STOMACH, "Hydra Stomach");
-        addItem(IceAndFireOrgans.HYDRA_INTESTINE, "Hydra Intestine");
-        addItem(IceAndFireOrgans.HYDRA_SPLEEN, "Hydra Spleen");
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_SPLEEN, "Unique organ");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_SPLEEN,
-            "Converts poison to healing when health is below 50%",
-            "Each second, consume poison duration to heal (heal amount = poison level × multiplier)",
-            "Multiplier: 10 (≤10% HP), 5 (≤20% HP), 3 (≤50% HP)",
-            "1 healing = 1 tick of poison duration consumed"
-        );
-        addItem(IceAndFireOrgans.HYDRA_RIB, "Hydra Rib");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_RIB,
-            "When taking damage, transfers 5s of poison to attacker",
-            "Poison effect stacks on the attacker",
-            "Reduces damage taken by poison level",
-            "Example: Poison II reduces incoming damage by 2"
-        );
-
-        addItem(IceAndFireOrgans.HYDRA_MUSCLE, "Hydra Muscle");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_MUSCLE,
-            "On melee attack, transfers 5s of poison to target",
-            "Poison effect stacks on the target",
-            "Deals extra damage equal to poison level",
-            "Example: Poison II deals 2 extra damage"
-        );
-
-        // 九头蛇心脏
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_HEART, "Converts poison into regeneration");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_HEART,
-            "Every 10 ticks, converts current poison to regeneration (1s, same level)",
-            "Immune to poison damage"
-        );
-
-        // 九头蛇脊柱
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_SPINE, "Cheats death through poison");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_SPINE,
-            "On death with >10s of poison, recover to 10% HP",
-            "Increases poison level and halves remaining duration",
-            "Cancels death event"
-        );
-
-        // 九头蛇胃
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_STOMACH, "Converts food negative effects into poison");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_STOMACH,
-            "When eating, converts harmful food effects to poison",
-            "Duration = harmful effects duration × stomach count",
-            "Adds existing poison duration and takes max amplifier"
-        );
-
-        // 九头蛇肠子
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_INTESTINE, "Amplifies food effects");
-        addOrganActiveSkill(IceAndFireOrgans.HYDRA_INTESTINE, "Increases duration of food effects by 50% per organ");
 
         // 幻想种器官翻译
         addItem(WAICOrgans.FANTASTICAL_HEART, "Fantastical Heart");
@@ -445,25 +241,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FANTASTICAL_APPENDIX, "Fantastical Appendix");
         addItem(WAICOrgans.FANTASTICAL_RIB, "Fantastical Rib");
         addItem(WAICOrgans.FANTASTICAL_MUSCLE, "Fantastical Muscle");
-
-        // 布织泰迪熊器官翻译
-        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "Cloth Teddy Bear");
-        addOrganPassiveEffect(
-            WAICOrgans.CLOTH_TEDDY_BEAR,
-            "When chest cavity closes, converts wool items in the chest cavity into random cloth organs"
-        );
-        addOrganActiveSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "Mending: consume wool to restore health");
-        addItem(WAICOrgans.CLOTH_HEART, "Cloth Heart");
-        addItem(WAICOrgans.CLOTH_LUNG, "Cloth Lung");
-        addItem(WAICOrgans.CLOTH_LIVER, "Cloth Liver");
-        addItem(WAICOrgans.CLOTH_INTESTINE, "Cloth Intestine");
-        addItem(WAICOrgans.CLOTH_STOMACH, "Cloth Stomach");
-        addItem(WAICOrgans.CLOTH_KIDNEY, "Cloth Kidney");
-        addItem(WAICOrgans.CLOTH_SPLEEN, "Cloth Spleen");
-        addItem(WAICOrgans.CLOTH_SPINE, "Cloth Spine");
-        addItem(WAICOrgans.CLOTH_RIB, "Cloth Rib");
-        addItem(WAICOrgans.CLOTH_MUSCLE, "Cloth Muscle");
-        addItem(WAICOrgans.CLOTH_APPENDIX, "Cloth Appendix");
 
         // 浮霜器官翻译
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "Frost Metal Heart");
@@ -479,7 +256,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "Frost Metal Muscle");
 
         // 浮霜器官description描述
-        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "Merciless: convert all enchantments into organ attributes");
+        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "Convert all enchantments into organ attributes");
 
         // 超限合金器官翻译
         addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "Transcendium Heart");
@@ -495,111 +272,36 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "Transcendium Muscle");
 
         // 超限合金器官description描述
-        add("organ.who_am_i_core.tooltips.looting_burst", "Loot Burst: +1 Looting and +1 Fortune");
+        add("organ.who_am_i_core.tooltips.looting_burst", "+1 Looting and +1 Fortune");
 
         // 诅咒金器官翻译
         addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "Cursed Gold Heart");
         addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "Cursed Gold Lung");
         addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "Cursed Gold Liver");
         addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "Cursed Gold Intestine");
-        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "Curse: the more cursed gold organs in your chest, the heavier the penalty");
+        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "The more cursed organs in your chest, the heavier the penalty");
 
         // 余烬金属器官翻译
         addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "Ember Metal Rib");
         addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "Ember Metal Muscle");
-        addOrganActiveSkill(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "Ember Forging: +0.5 Melee Damage");
         addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "Ember Metal Spine");
         addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "Ember Metal Appendix");
-        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "Ember Absorption: fire damage heals instead of hurting");
+        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "Fire damage heals instead of hurting");
 
         // 皇家钢器官翻译
         addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "Royal Steel Rib");
         addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "Royal Steel Muscle");
         addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "Royal Steel Spine");
         addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "Royal Steel Appendix");
-        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "Solid Foundation: simple fixed attribute bonuses");
+        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "Simple fixed attribute bonuses");
 
         // 病变器官翻译
-
-        // 九狱器官翻译
-        addItem(WAICOrgans.LIMBO, "Limbo");
-        addOrganActiveSkill(WAICOrgans.LIMBO, "Sin 1: Gain 1 XP/sec", "Sin 2: Gain 3 XP/sec", "Sin 3: Gain 5 XP/sec");
-        addItem(WAICOrgans.LUST, "Lust");
-        addOrganActiveSkill(
-            WAICOrgans.LUST,
-            "Sin 1: Attacks heal 10% of damage dealt",
-            "Sin 2: Attacks heal 20% of damage dealt",
-            "Sin 3: Attacks heal 30% of damage dealt"
-        );
-        addItem(WAICOrgans.GLUTTONY, "Gluttony");
-        addOrganActiveSkill(
-            WAICOrgans.GLUTTONY,
-            "Can eat any food item",
-            "Eating grants absorption hearts equal to hunger value × N (cap N×20)",
-            "Eating additionally heals N HP"
-        );
-        addItem(WAICOrgans.GREED, "Greed");
-        addOrganActiveSkill(
-            WAICOrgans.GREED,
-            "Sin 1: +1 Looting, +1 Fortune",
-            "Sin 2: +2 Looting, +2 Fortune",
-            "Sin 3: +3 Looting, +3 Fortune"
-        );
-        addItem(WAICOrgans.WRATH, "Wrath");
-        addOrganActiveSkill(
-            WAICOrgans.WRATH,
-            "Sin 1: +1 Strength, +1 Speed",
-            "Sin 2: +2 Strength, +2 Speed",
-            "Sin 3: +3 Strength, +3 Speed"
-        );
-        addItem(WAICOrgans.HERESY, "Heresy");
-        addOrganActiveSkill(WAICOrgans.HERESY, "Sin 1: Potion duration +50%", "Sin 2: Potion duration +100%", "Sin 3: Potion amplifier +1");
-        addItem(WAICOrgans.VIOLENCE, "Violence");
-        addOrganActiveSkill(WAICOrgans.VIOLENCE, "Sin 1: Critical damage ×2", "Sin 2: Critical damage ×2", "Sin 3: Attacks always crit");
-        addItem(WAICOrgans.FRAUD, "Fraud");
-        addOrganActiveSkill(
-            WAICOrgans.FRAUD,
-            "Sin 1: Villager trade bonus experience",
-            "Sin 2: Villager trade discount",
-            "Sin 3: Villager trades never run out of stock"
-        );
-        addItem(WAICOrgans.TREACHERY, "Treachery");
-        addOrganActiveSkill(
-            WAICOrgans.TREACHERY,
-            "Sin 1: Attacks deal 1% of target max health",
-            "Sin 2: Attacks deal 3% of target max health",
-            "Sin 3: Attacks deal 5% of target max health"
-        );
 
         // 双子魔眼器官翻译
         addItem(WAICOrgans.STRANGE_EYEBALL, "Strange Eyeball");
         addItem(WAICOrgans.EERIE_EYEBALL, "Eerie Eyeball");
         addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "Strange Mechanical Eyeball");
         addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "Eerie Mechanical Eyeball");
-
-        // 拟态器官翻译
-        addItem(WAICOrgans.MIMIC_HEART, "Mimic Heart");
-        addOrganActiveSkill(WAICOrgans.MIMIC_HEART, "Mimicry: Health regeneration +50%");
-        addItem(WAICOrgans.MIMIC_LIVER, "Mimic Liver");
-        addOrganActiveSkill(WAICOrgans.MIMIC_LIVER, "Mimicry: Health regeneration +50%");
-        addItem(WAICOrgans.MIMIC_LUNG, "Mimic Lung");
-        addOrganActiveSkill(WAICOrgans.MIMIC_LUNG, "Mimicry: Health regeneration +50%");
-
-        // 单个器官翻译
-        addItem(WAICOrgans.HAUNTED_BONE, "Haunted Bone");
-        addOrganPassiveEffect(WAICOrgans.HAUNTED_BONE, "Dududa dududa");
-        addItem(WAICOrgans.SWORD_BONE, "Sword Bone");
-        addOrganPassiveEffect(WAICOrgans.SWORD_BONE, "As sharp as a sword");
-        addItem(WAICOrgans.STRAIGHT_INTESTINE, "Straight Intestine");
-        addOrganPassiveEffect(WAICOrgans.STRAIGHT_INTESTINE, "30% chance to drop consumed food after 3 seconds");
-        addItem(WAICOrgans.SQUASH, "Squash");
-        addItem(WAICOrgans.EXPERIENCE_HEART, "Experience Heart");
-        addOrganPassiveEffect(
-            WAICOrgans.EXPERIENCE_HEART,
-            "A heart pulsating with accumulated experience",
-            "Every 10 experience levels grant +1 health",
-            "Experience from orbs × (magic organs + 1)"
-        );
 
         addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
         addAttribute(WAICAttribute.BLOCK, "Block");
@@ -618,13 +320,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICDamageTagManager.IS_MELEE, "Melee");
 
         // 物品标签翻译
-        add(WAICItemTagManager.MAGIC, "Magic");
-        add(WAICItemTagManager.MECHANICAL, "Mechanical");
-        add(WAICItemTagManager.SUMMON, "Summon");
-        add(WAICItemTagManager.UNIQUE, "Unique");
-        add(WAICItemTagManager.FIRE_DRAGON, "Fire Dragon");
-        add(WAICItemTagManager.ICE_DRAGON, "Ice Dragon");
-        add(WAICItemTagManager.LIGHTNING_DRAGON, "Lightning Dragon");
+        addWAICTagTranslationsEN();
 
         // 龙血药剂翻译
         addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "Fire Dragon Blood Preparation");
@@ -644,160 +340,33 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // 超频效果翻译
         addEffect(WAICEffect.OVERLOAD::value, "Overload");
 
-        // 电磁义体器官翻译
-        addItem(WAICOrgans.COMPUTING_CORE, "Computing Core");
-        addOrganPassiveEffect(WAICOrgans.COMPUTING_CORE, "Signal Regen: +1 charge/tick (capped at max). Paused during Overload");
-        addItem(WAICOrgans.CURRENT_RIB, "Current Rib");
-        addOrganPassiveEffect(
-            WAICOrgans.CURRENT_RIB,
-            "Diverts current to shield against damage",
-            "Parallel: symmetric Current Rib halves shield cost",
-            "Shield: 10 charge per 1 damage blocked, max 4 (8 in Overload)"
-        );
-        addItem(WAICOrgans.CHARGED_MUSCLE, "Charged Muscle");
-        addOrganPassiveEffect(
-            WAICOrgans.CHARGED_MUSCLE,
-            "Cylindrical capacitor optimizing energy efficiency",
-            "Circuit Return: 25% chance to refund consumed charge (50% in Overload)",
-            "Residual Recovery: 10% of lost charge converted to healing (20% in Overload)",
-            "Current Push: Generates 1 charge per tick while sprinting"
-        );
-        addItem(WAICOrgans.CONDUCTIVE_SPINE, "Conductive Spine");
-        // 传导链节无被动效果，不设 description
-        addOrganActiveSkill(WAICOrgans.CONDUCTIVE_SPINE, "Overload: consume maxCharge/2 to enter 10s Overload mode. Cooldown 20s");
-        addItem(WAICOrgans.ENERGY_MODULE, "Energy Module");
-        addOrganPassiveEffect(WAICOrgans.ENERGY_MODULE, "Physical battery storing all charge. +500 capacity each, allows 50% overload");
-        add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "Charge: %s/%s");
-
         // Unfinished
         add("organ.who_am_i_core.unfinished", "Not yet completed");
 
-        // Electromagnetic - Simple descriptions
-        addOrganPassiveEffectSimple(WAICOrgans.COMPUTING_CORE, "Manages charge regeneration");
-        addOrganPassiveEffectSimple(WAICOrgans.CURRENT_RIB, "Forms shield with charge");
-        addOrganPassiveEffectSimple(WAICOrgans.CHARGED_MUSCLE, "Optimizes charge efficiency");
-        // 传导链节只有主动技能，无被动
-        addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "Enter Overload mode");
-        addOrganPassiveEffectSimple(WAICOrgans.ENERGY_MODULE, "Provides charge storage");
-
+        mowziesMobSpecialOrgansEN();
+        bluffOrgansEN();
+        sculptorOrgansEN();
+        WAICOrgansEN();
+        dragonOrgansEN();
+        mimicOrgansEN();
+        cyberneticOrgansEN();
         inkOrgansEN();
+        clothOrgansEN();
+        crimsonOrgansEN();
         elementOrgansEN();
         pigmentOrgansEN();
         woodenOrgansEN();
         frankensteinOrgansEN();
         lesionOrgansEN();
+        nineHellOrgansEN();
+        dreadOrgansEN();
+        hydraOrgansEN();
     }
 
     public void Chinese() {
         add(WAICCreativeModeTab.WHO_AM_I_CORE_TAB_TRANSLATABLE, "我非我");
 
         addItem(WAICItem.PETITE_CHEST_OPENER, "娇小开胸器");
-
-        addItem(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, "钢铁守护者护心镜");
-        addOrganActiveSkill(
-            MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
-            "移除FOV修改",
-            "抵挡来自正面的实体的攻击",
-            "攻击后3秒内不能移动"
-        );
-
-
-        addItem(MowziesMobOrgans.CHEST_NOVA, "胸中新星");
-        addOrganDescription(MowziesMobOrgans.CHEST_NOVA, "它像心脏一样跳动着");
-        addOrganActiveSkill(
-            MowziesMobOrgans.CHEST_NOVA,
-            "当胸腔关闭时，烧毁3x3范围内的器官（机械系和魔法系器官除外）",
-            "3x3范围内的乌姆塔纳面具会召唤对应的追随者，追随者死亡30秒后重新召唤",
-            "面具会为主人提供其药水效果"
-        );
-
-        addItem(MowziesMobOrgans.CONTROL_ROD, "制御棒");
-        addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "这他妈是哪个太阳鸟？");
-        addOrganActiveSkill(
-            MowziesMobOrgans.CONTROL_ROD,
-            "当制御棒在胸中新星的3x3范围内时：",
-            "■乌姆塔纳追随者重新召唤冷却时间从30秒缩短为10秒",
-            "■面具也会给追随者提供效果"
-        );
-
-        // 衰老器官翻译
-        addItem(MowziesMobOrgans.AGED_HEART, "衰老心脏");
-        addItem(MowziesMobOrgans.AGED_LUNG, "衰老肺脏");
-        addItem(MowziesMobOrgans.AGED_SPINE, "衰老脊柱");
-        addItem(MowziesMobOrgans.AGED_STOMACH, "衰老胃");
-        addItem(MowziesMobOrgans.AGED_INTESTINE, "衰老肠子");
-        addItem(MowziesMobOrgans.AGED_KIDNEY, "衰老肾脏");
-        addItem(MowziesMobOrgans.AGED_SPLEEN, "衰老脾脏");
-        addItem(MowziesMobOrgans.AGED_LIVER, "衰老肝脏");
-        addItem(MowziesMobOrgans.AGED_APPENDIX, "衰老阑尾");
-        addItem(MowziesMobOrgans.AGED_RIB, "衰老肋骨");
-        addItem(MowziesMobOrgans.AGED_MUSCLE, "衰老肌肉");
-        addItem(MowziesMobOrgans.ZEN_HEART, "禅心");
-
-        // 泥峭器官翻译
-        addItem(MowziesMobOrgans.BLUFF_CORE, "泥峭核心");
-        addOrganActiveSkill(
-            MowziesMobOrgans.BLUFF_CORE,
-            "允许食用泥土，恢复4点饥饿值",
-            "使用技能可食用泥土方块",
-            "不同泥土类型提供不同效果：",
-            " •草方块/苔藓块/菌丝：力量II",
-            " •砂土/灰化土/泥巴：急迫II",
-            " •缠根泥土/含泥红树根：抗性提升II"
-        );
-
-        addItem(MowziesMobOrgans.BLUFF_TABLET, "泥峭铭文板");
-        addOrganActiveSkill(
-            MowziesMobOrgans.BLUFF_TABLET,
-            "允许食用泥土，恢复4点饥饿值",
-            "每有一个铭文板，食用泥土时获得2点吸收生命值（上限为泥峭器官数量x8）"
-        );
-
-        addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "活性泥峭棒");
-        addOrganActiveSkill(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "允许食用泥土，恢复4点饥饿值", "每有一个泥峭棒增加，食用泥土时增加4点饱和度");
-
-        // 龙类器官翻译
-        addItem(IceAndFireOrgans.FIRE_DRAGON_HEART, "火龙心脏");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_LUNG, "火龙肺脏");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_SPINE, "火龙脊柱");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_STOMACH, "火龙胃");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_INTESTINE, "火龙肠子");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_KIDNEY, "火龙肾脏");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_SPLEEN, "火龙脾脏");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "火龙肝脏");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "火龙宝玉");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "火龙吐息袋");
-        addOrganActiveSkill(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "向前方喷射火焰");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "火龙肋骨");
-        addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "火龙肌肉");
-
-        addItem(IceAndFireOrgans.ICE_DRAGON_HEART, "冰龙心脏");
-        addItem(IceAndFireOrgans.ICE_DRAGON_LUNG, "冰龙肺脏");
-        addItem(IceAndFireOrgans.ICE_DRAGON_SPINE, "冰龙脊柱");
-        addItem(IceAndFireOrgans.ICE_DRAGON_STOMACH, "冰龙胃");
-        addItem(IceAndFireOrgans.ICE_DRAGON_INTESTINE, "冰龙肠子");
-        addItem(IceAndFireOrgans.ICE_DRAGON_KIDNEY, "冰龙肾脏");
-        addItem(IceAndFireOrgans.ICE_DRAGON_SPLEEN, "冰龙脾脏");
-        addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "冰龙肝脏");
-        addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "冰龙宝玉");
-        addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "冰龙吐息袋");
-        addOrganActiveSkill(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "向前方喷射冰霜");
-        addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "冰龙肋骨");
-        addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "冰龙肌肉");
-
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "电龙心脏");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "电龙肺脏");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "电龙脊柱");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "电龙胃");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "电龙肠子");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "电龙肾脏");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "电龙脾脏");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "电龙肝脏");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "电龙宝玉");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "电龙吐息袋");
-        addOrganActiveSkill(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "向前方喷射闪电");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "电龙肋骨");
-        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "电龙肌肉");
 
         addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "火焰王国战士之心");
         addOrganActiveSkill(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "对战王国时，免疫火焰攻击");
@@ -815,12 +384,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
         addItem(FDBossesOrgans.GEBURAH, "严厉");
         addOrganActiveSkill(FDBossesOrgans.GEBURAH, "攻击时，对目标每个负面效果额外造成其最大生命值3%的伤害");
-        addItem(FDBossesOrgans.FLESH_IDOL, "血肉偶像");
-        addOrganActiveSkill(
-            FDBossesOrgans.FLESH_IDOL,
-            "逐个清除负面效果：每清除1个负面效果，当前生命值折半一次",
-            "清除「罪人」效果时，减少1层罪孽。冷却：20秒"
-        );
 
         // 利维坦器官翻译
         addItem(CataclysmOrgans.LEVIATHAN_HEART, "利维坦心脏");
@@ -876,7 +439,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MONSTROSITY_CORE, "巨兽炉心");
         addOrganPassiveEffect(CataclysmOrgans.MONSTROSITY_CORE, "从热量中生成黄胆汁。+100黄胆汁上限。");
         addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "巨兽回路");
-        addOrganActiveSkill(CataclysmOrgans.MONSTROSITY_CIRCUIT, "消耗全部黄胆汁：AoE地震造成(消耗量 + 5%最大HP + 温度×2)伤害");
+        addOrganActiveSkill(CataclysmOrgans.MONSTROSITY_CIRCUIT, "消耗100黄胆汁，AoE地震造成(消耗量 + 5%最大HP + 温度×2)伤害");
         addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "巨兽熔炉");
         addOrganPassiveEffect(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆。恢复饥饿值、黄胆汁，并赋予骇人之恶效果。");
 
@@ -920,7 +483,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // IronSpell 死者之王器官翻译
         addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "腐败魂灯");
         addOrganPassiveEffect(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "收割死亡生物的灵魂为黑胆汁");
-        addOrganActiveSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "灵魂收割：附近有生物死亡时，获取黑胆汁");
+        addOrganActiveSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "附近有生物死亡时，获取黑胆汁");
 
         addItem(IronSpellOrgans.DEAD_KING_SPINE, "尸王脊柱");
         addOrganPassiveEffect(IronSpellOrgans.DEAD_KING_SPINE, "以黑胆汁吸收伤害");
@@ -934,7 +497,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CompanionsOrgans.PONTIFF_HEART, "教宗心脏");
         addOrganPassiveEffect(
             CompanionsOrgans.PONTIFF_HEART,
-            "圣化变身：生命值降至30%以下时，回复50%最大生命，获得力量II、抗性II、速度II（15秒）。冷却3分钟"
+            "生命值降至30%以下时，回复50%最大生命，获得力量II、抗性II、速度II（15秒）。冷却3分钟"
         );
 
         addItem(CompanionsOrgans.PONTIFF_LUNG, "教宗肺脏");
@@ -959,91 +522,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CompanionsOrgans.CAKE_STOMACH, "蛋糕胃");
         addOrganActiveSkill(CompanionsOrgans.CAKE_STOMACH, "食用食物时给予甜蜜效果，已有甜蜜时叠加等级并重置时长");
         addItem(CompanionsOrgans.CAKE_LIVER, "蛋糕肝脏");
-        addOrganActiveSkill(CompanionsOrgans.CAKE_LIVER, "甜蜜等级>=2时：每秒消耗1级甜蜜清除1个随机负面效果");
-
-        // 悚恐怖官翻译
-        addItem(IceAndFireOrgans.BITTER_FLESH, "苦寒血肉");
-        addItem(IceAndFireOrgans.ICE_SHARD, "冰魂残片");
-        addItem(IceAndFireOrgans.FROSTBURN_SOUL, "冻结魂火");
-        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "悚怖命匣");
-        addItem(IceAndFireOrgans.DREAD_RIB, "悚怖肋骨");
-        addItem(IceAndFireOrgans.DREAD_SPINE, "悚怖脊柱");
-
-        // 冰魂残片效果描述
-        addOrganPassiveEffect(IceAndFireOrgans.ICE_SHARD, "全局温度 × -0.05 → 额外健康值（温度越低，健康值越高）");
-        // 冻结魂火效果描述
-        addOrganPassiveEffect(IceAndFireOrgans.FROSTBURN_SOUL, "全局温度 × -0.15 → 额外健康值（温度越低，健康值越高）");
-        // 悚恐怖匣效果描述
-        addOrganPassiveEffect(IceAndFireOrgans.DREAD_PHYLACTERY, "全局温度 × -0.25 → 额外健康值（温度越低，健康值越高）");
-        addOrganActiveSkill(IceAndFireOrgans.DREAD_PHYLACTERY, "将目标身上的缓慢效果转化为冰霜伤害");
-        // 悚怖脊柱技能描述
-        addOrganActiveSkill(IceAndFireOrgans.DREAD_SPINE, "攻击时，根据局部温度对目标施加缓慢效果（持续3秒）");
-
-        // 九头蛇器官翻译
-        addItem(IceAndFireOrgans.HYDRA_HEART, "九头蛇心脏");
-        addItem(IceAndFireOrgans.HYDRA_LUNG, "九头蛇肺脏");
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_LUNG, "消耗中毒效果释放九头蛇毒物吐息");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_LUNG,
-            "消耗玩家身上的中毒效果",
-            "吐息持续时长 = log10(中毒时长) 秒",
-            "每4 tick造成一次伤害（伤害 = 中毒等级 + 1）",
-            "被击中的敌人获得原始中毒效果"
-        );
-        addItem(IceAndFireOrgans.HYDRA_SPINE, "九头蛇脊柱");
-        addItem(IceAndFireOrgans.HYDRA_STOMACH, "九头蛇胃");
-        addItem(IceAndFireOrgans.HYDRA_INTESTINE, "九头蛇肠子");
-        addItem(IceAndFireOrgans.HYDRA_SPLEEN, "九头蛇脾脏");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_SPLEEN,
-            "血量低于50%时，将中毒效果转化为治疗",
-            "每秒消耗中毒时长来治疗（治疗量 = 中毒等级 × 系数）",
-            "系数：≤10%血量时为10，≤20%时为5，≤50%时为3",
-            "1点治疗 = 消耗1 tick中毒时长"
-        );
-        addItem(IceAndFireOrgans.HYDRA_RIB, "九头蛇肋骨");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_RIB,
-            "受伤时，将自身5秒中毒效果转移给攻击者",
-            "中毒效果可在攻击者身上叠加",
-            "减少等同于中毒等级的伤害",
-            "例如：中毒II减少2点受到的伤害"
-        );
-
-        addItem(IceAndFireOrgans.HYDRA_MUSCLE, "九头蛇肌肉");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_MUSCLE,
-            "近战攻击时，将自身5秒中毒效果转移给目标",
-            "中毒效果可在目标身上叠加",
-            "造成等同于中毒等级的额外伤害",
-            "例如：中毒II造成2点额外伤害"
-        );
-
-        // 九头蛇心脏
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_HEART, "将中毒转化为再生");
-        addOrganActiveSkill(IceAndFireOrgans.HYDRA_HEART, "每10 tick将当前中毒效果转化为再生效果（持续1秒，等级相同）", "免疫中毒类型伤害");
-
-        // 九头蛇脊柱
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_SPINE, "通过中毒欺骗死亡");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_SPINE,
-            "死亡时若有超过10秒的中毒效果，恢复至10%血量",
-            "提升中毒等级并将剩余时长折半",
-            "取消死亡事件"
-        );
-
-        // 九头蛇胃
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_STOMACH, "将食物负面效果转化为中毒");
-        addOrganActiveSkill(
-            IceAndFireOrgans.HYDRA_STOMACH,
-            "进食时，将有害食物效果转化为中毒效果",
-            "中毒时长 = 有害效果时长 × 胃数量",
-            "加上已有中毒时长，并取最高等级"
-        );
-
-        // 九头蛇肠子
-        addOrganPassiveEffect(IceAndFireOrgans.HYDRA_INTESTINE, "放大食物效果");
-        addOrganActiveSkill(IceAndFireOrgans.HYDRA_INTESTINE, "每个器官增加50%的食物效果时长");
+        addOrganActiveSkill(CompanionsOrgans.CAKE_LIVER, "甜蜜等级>=2时，每秒消耗1级甜蜜清除1个随机负面效果");
 
         // 幻想种器官翻译
         addItem(WAICOrgans.FANTASTICAL_HEART, "幻想种心脏");
@@ -1057,22 +536,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FANTASTICAL_APPENDIX, "幻想种阑尾");
         addItem(WAICOrgans.FANTASTICAL_RIB, "幻想种肋骨");
         addItem(WAICOrgans.FANTASTICAL_MUSCLE, "幻想种肌肉");
-
-        // 布织泰迪熊器官翻译
-        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "布织泰迪熊");
-        addOrganPassiveEffect(WAICOrgans.CLOTH_TEDDY_BEAR, "胸腔关闭时，将胸腔内的羊毛转换为随机布织器官");
-        addOrganActiveSkill(WAICOrgans.CLOTH_TEDDY_BEAR, "缝补：消耗羊毛来回复生命值");
-        addItem(WAICOrgans.CLOTH_HEART, "布织心脏");
-        addItem(WAICOrgans.CLOTH_LUNG, "布织肺脏");
-        addItem(WAICOrgans.CLOTH_LIVER, "布织肝脏");
-        addItem(WAICOrgans.CLOTH_INTESTINE, "布织肠子");
-        addItem(WAICOrgans.CLOTH_STOMACH, "布织胃");
-        addItem(WAICOrgans.CLOTH_KIDNEY, "布织肾脏");
-        addItem(WAICOrgans.CLOTH_SPLEEN, "布织脾脏");
-        addItem(WAICOrgans.CLOTH_SPINE, "布织脊柱");
-        addItem(WAICOrgans.CLOTH_RIB, "布织肋骨");
-        addItem(WAICOrgans.CLOTH_MUSCLE, "布织肌肉");
-        addItem(WAICOrgans.CLOTH_APPENDIX, "布织阑尾");
 
         // 浮霜器官翻译
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "浮霜金属心脏");
@@ -1088,7 +551,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
 
         // 浮霜器官description描述
-        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "无情：将所有附魔转换为器官属性");
+        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "将所有附魔转换为器官属性");
 
         // 超限合金器官翻译
         addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "超限合金心脏");
@@ -1104,91 +567,36 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "超限合金肌肉");
 
         // 超限合金器官description描述
-        add(AnvilCraftOrgans.LOOTING_BURST_TRANSLATION, "战利品大爆发：+1抢夺和+1幸运");
+        add(AnvilCraftOrgans.LOOTING_BURST_TRANSLATION, "+1抢夺和+1幸运");
 
         // 诅咒金器官翻译
         addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "诅咒金心脏");
         addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "诅咒金肺脏");
         addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "诅咒金肝脏");
         addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "诅咒金肠子");
-        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "诅咒：胸腔中诅咒金器官越多，负面效果越重");
+        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "胸腔中诅咒器官越多，负面效果越重");
 
         // 余烬金属器官翻译
         addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "余烬金属肋骨");
         addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "余烬金属肌肉");
-        addOrganActiveSkill(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "余烬锻造：+0.5近战伤害");
         addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "余烬金属脊柱");
         addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "余烬金属阑尾");
-        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "余烬吸收：火焰伤害转化为治疗");
+        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "火焰伤害转化为治疗");
 
         // 皇家钢器官翻译
         addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "皇家钢肋骨");
         addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "皇家钢肌肉");
         addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "皇家钢脊柱");
         addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "皇家钢阑尾");
-        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "坚实可靠：朴素的固定属性加成");
+        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "朴素的固定属性加成");
 
         // 病变器官翻译
-
-        // 九狱器官翻译
-        addItem(WAICOrgans.LIMBO, "灵薄");
-        addOrganActiveSkill(WAICOrgans.LIMBO, "罪业1：每秒获得1点经验", "罪业2：每秒获得3点经验", "罪业3：每秒获得5点经验");
-        addItem(WAICOrgans.LUST, "色欲");
-        addOrganActiveSkill(
-            WAICOrgans.LUST,
-            "罪业1：攻击回复造成伤害10%的生命",
-            "罪业2：攻击回复造成伤害20%的生命",
-            "罪业3：攻击回复造成伤害30%的生命"
-        );
-        addItem(WAICOrgans.GLUTTONY, "暴食");
-        addOrganActiveSkill(WAICOrgans.GLUTTONY, "可以食用任何食物", "食用获得饥饿值×N的黄心（上限N×20）", "食用额外回复N点生命");
-        addItem(WAICOrgans.GREED, "贪婪");
-        addOrganActiveSkill(WAICOrgans.GREED, "罪业1：+1抢夺, +1时运", "罪业2：+2抢夺, +2时运", "罪业3：+3抢夺, +3时运");
-        addItem(WAICOrgans.WRATH, "愤怒");
-        addOrganActiveSkill(WAICOrgans.WRATH, "罪业1：+1力量, +1速度", "罪业2：+2力量, +2速度", "罪业3：+3力量, +3速度");
-        addItem(WAICOrgans.HERESY, "异端");
-        addOrganActiveSkill(WAICOrgans.HERESY, "罪业1：药水持续时间+50%", "罪业2：药水持续时间+100%", "罪业3：药水等级+1");
-        addItem(WAICOrgans.VIOLENCE, "暴力");
-        addOrganActiveSkill(WAICOrgans.VIOLENCE, "罪业1：暴击伤害×2", "罪业2：暴击伤害×2", "罪业3：攻击永远暴击");
-        addItem(WAICOrgans.FRAUD, "欺诈");
-        addOrganActiveSkill(WAICOrgans.FRAUD, "罪业1：村民交易获得额外经验", "罪业2：村民交易打折", "罪业3：村民交易不缺货");
-        addItem(WAICOrgans.TREACHERY, "背叛");
-        addOrganActiveSkill(
-            WAICOrgans.TREACHERY,
-            "罪业1：攻击额外造成目标1%最大生命值伤害",
-            "罪业2：攻击额外造成目标3%最大生命值伤害",
-            "罪业3：攻击额外造成目标5%最大生命值伤害"
-        );
 
         // 双子魔眼器官翻译
         addItem(WAICOrgans.STRANGE_EYEBALL, "奇怪的眼球");
         addItem(WAICOrgans.EERIE_EYEBALL, "诡异的眼球");
         addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "奇怪的机械眼球");
         addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "诡异的机械眼球");
-
-        // 拟态器官翻译
-        addItem(WAICOrgans.MIMIC_HEART, "拟态心脏");
-        addOrganActiveSkill(WAICOrgans.MIMIC_HEART, "拟态：生命恢复效果提升50%");
-        addItem(WAICOrgans.MIMIC_LIVER, "拟态肝脏");
-        addOrganActiveSkill(WAICOrgans.MIMIC_LIVER, "拟态：生命恢复效果提升50%");
-        addItem(WAICOrgans.MIMIC_LUNG, "拟态肺脏");
-        addOrganActiveSkill(WAICOrgans.MIMIC_LUNG, "拟态：生命恢复效果提升50%");
-
-        // 单个器官翻译
-        addItem(WAICOrgans.HAUNTED_BONE, "闹鬼的骨头");
-        addOrganPassiveEffect(WAICOrgans.HAUNTED_BONE, "嘟嘟哒嘟嘟哒");
-        addItem(WAICOrgans.SWORD_BONE, "剑骨头");
-        addOrganPassiveEffect(WAICOrgans.SWORD_BONE, "剑一般锋利");
-        addItem(WAICOrgans.STRAIGHT_INTESTINE, "直肠子");
-        addOrganPassiveEffect(WAICOrgans.STRAIGHT_INTESTINE, "食用食物后30%几率在3秒后掉落该食物");
-        addItem(WAICOrgans.SQUASH, "窝瓜");
-        addItem(WAICOrgans.EXPERIENCE_HEART, "经验之心");
-        addOrganPassiveEffect(
-            WAICOrgans.EXPERIENCE_HEART,
-            "一颗脉动着积累经验的心脏",
-            "每10级经验等级+1健康值",
-            "从经验球获取的经验×（魔法器官数量+1）倍率"
-        );
 
         addAttribute(WAICAttribute.TEMPERATURE, "温度");
         addAttribute(WAICAttribute.BLOCK, "格挡");
@@ -1207,13 +615,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICDamageTagManager.IS_MELEE, "近战");
 
         // 物品标签翻译
-        add(WAICItemTagManager.MAGIC, "魔法");
-        add(WAICItemTagManager.MECHANICAL, "机械");
-        add(WAICItemTagManager.SUMMON, "召唤");
-        add(WAICItemTagManager.UNIQUE, "唯一");
-        add(WAICItemTagManager.FIRE_DRAGON, "火龙");
-        add(WAICItemTagManager.ICE_DRAGON, "冰龙");
-        add(WAICItemTagManager.LIGHTNING_DRAGON, "电龙");
+        addWAICTagTranslationsZH();
 
         // 龙血药剂翻译
         addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "火龙血药剂");
@@ -1233,48 +635,432 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         // 超频效果翻译
         addEffect(WAICEffect.OVERLOAD::value, "超频");
 
-        // 电磁义体器官翻译
-        addItem(WAICOrgans.COMPUTING_CORE, "演算核心");
-        addOrganPassiveEffect(WAICOrgans.COMPUTING_CORE, "信号再生：每tick回复1点电荷（不超过上限）。超频期间暂停");
-        addItem(WAICOrgans.CURRENT_RIB, "导流肋骨");
-        addOrganPassiveEffect(
-            WAICOrgans.CURRENT_RIB,
-            "导流元件，消耗电荷形成防护",
-            "并联优化：对称位置存在导流肋骨时，护盾消耗减半",
-            "导流护盾：每10电荷抵消1点伤害，上限4点（超频时8点）"
-        );
-        addItem(WAICOrgans.CHARGED_MUSCLE, "充能肌束");
-        addOrganPassiveEffect(
-            WAICOrgans.CHARGED_MUSCLE,
-            "圆柱电容，优化能量效率并回收余电",
-            "回路返还：消耗电荷时，25%概率返还（超频时50%）",
-            "余电回收：电荷流失量的10%转化为生命回复（超频时20%）",
-            "电流推动：冲刺时每 tick 产生 1 电荷"
-        );
-        addItem(WAICOrgans.CONDUCTIVE_SPINE, "传导链节");
-        // 传导链节无被动效果，不设 description
-        addOrganActiveSkill(WAICOrgans.CONDUCTIVE_SPINE, "超频模式：消耗maxCharge/2电荷激活，持续10秒。冷却20秒");
-        addItem(WAICOrgans.ENERGY_MODULE, "蓄能模块");
-        addOrganPassiveEffect(WAICOrgans.ENERGY_MODULE, "物理电池仓，每个提供500电荷存储上限，允许50%超载");
-        add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "电荷: %s/%s");
-
         // 未完成占位
         add("organ.who_am_i_core.unfinished", "仍未完成");
 
-        // 电磁义体 - 简略翻译
-        addOrganPassiveEffectSimple(WAICOrgans.COMPUTING_CORE, "管理电荷再生");
-        addOrganPassiveEffectSimple(WAICOrgans.CURRENT_RIB, "消耗电荷形成防护");
-        addOrganPassiveEffectSimple(WAICOrgans.CHARGED_MUSCLE, "优化能量效率");
-        // 传导链节只有主动技能，无被动
-        addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "消耗电荷进入超频");
-        addOrganPassiveEffectSimple(WAICOrgans.ENERGY_MODULE, "提供电荷存储");
-
+        mowziesMobSpecialOrgansZH();
+        bluffOrgansZH();
+        sculptorOrgansZH();
+        WAICOrgansZH();
+        dragonOrgansZH();
+        mimicOrgansZH();
+        cyberneticOrgansZH();
         inkOrgansZH();
+        clothOrgansZH();
+        crimsonOrgansZH();
         elementOrgansZH();
         pigmentOrgansZH();
         woodenOrgansZH();
         frankensteinOrgansZH();
         lesionOrgansZH();
+        nineHellOrgansZH();
+        dreadOrgansZH();
+        hydraOrgansZH();
+    }
+
+    // ==================== Mowzie's Mobs 特殊器官 ====================
+
+    private void mowziesMobSpecialOrgansEN() {
+        addItem(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, "Ferrous Wroughtnaut Heart Mirror");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
+            "Removes FOV modification",
+            "Blocks entity attacks from the front",
+            "Cannot move for 3 seconds after attacking"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
+            "Blocks frontal attacks but restricts movement after attacking"
+        );
+
+        addItem(MowziesMobOrgans.CHEST_NOVA, "Chest Nova");
+        addOrganDescription(MowziesMobOrgans.CHEST_NOVA, "It beats like a heart");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.CHEST_NOVA,
+            "Burns non-mechanical and non-magical organs in adjacent slots when chest cavity closes",
+            "Umvuthana masks in adjacent slots summon corresponding followers that respawn 30 seconds after death",
+            "Masks provide their potion effects to the owner"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.CHEST_NOVA,
+            "Burns nearby organs and summons followers from masks"
+        );
+
+        addItem(MowziesMobOrgans.CONTROL_ROD, "Control Rod");
+        addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "A certain hellbird's control rod");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.CONTROL_ROD,
+            "Effects below activate when within adjacent slots of Chest Nova:",
+            "Follower respawn cooldown reduced from 30s to 10s",
+            "Masks also provide effects to followers"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.CONTROL_ROD,
+            "Enhances Chest Nova follower mechanics when nearby"
+        );
+    }
+
+    private void mowziesMobSpecialOrgansZH() {
+        addItem(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR, "钢铁守护者护心镜");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
+            "移除FOV修改",
+            "抵挡来自正面的实体攻击",
+            "攻击后3秒内不能移动"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
+            "抵挡正面攻击但攻击后无法移动"
+        );
+
+        addItem(MowziesMobOrgans.CHEST_NOVA, "胸中新星");
+        addOrganDescription(MowziesMobOrgans.CHEST_NOVA, "它像心脏一样跳动着");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.CHEST_NOVA,
+            "胸腔关闭时烧毁相邻槽位中非机械且非魔法的器官",
+            "相邻槽位中的乌姆塔纳面具会召唤对应的追随者，死亡30秒后重新召唤",
+            "面具会为主人提供其药水效果"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.CHEST_NOVA,
+            "烧毁周围器官并从面具中召唤追随者"
+        );
+
+        addItem(MowziesMobOrgans.CONTROL_ROD, "制御棒");
+        addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "这他妈是哪个太阳鸟？");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.CONTROL_ROD,
+            "位于胸中新星相邻槽位时，以下效果生效：",
+            "追随者重新召唤冷却时间从30秒缩短为10秒",
+            "面具也会给追随者提供效果"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.CONTROL_ROD,
+            "靠近胸中新星时增强追随者机制"
+        );
+    }
+
+    // ==================== 泥峭器官 ====================
+
+    private void bluffOrgansEN() {
+        addItem(MowziesMobOrgans.BLUFF_CORE, "Bluff Core");
+        addOrganActiveSkill(
+            MowziesMobOrgans.BLUFF_CORE,
+            "Consume the dirt block you are looking at",
+            "Restores 4 hunger when eating dirt",
+            "Different dirt types grant different effects:",
+            "Grass/Moss/Mycelium grant Strength II",
+            "Coarse Dirt/Podzol/Mud grant Haste II",
+            "Rooted Dirt/Muddy Mangrove Roots grant Resistance II"
+        );
+        addOrganActiveSkillSimple(
+            MowziesMobOrgans.BLUFF_CORE,
+            "Consume dirt blocks to gain various effects"
+        );
+
+        addItem(MowziesMobOrgans.BLUFF_TABLET, "Bluff Tablet");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.BLUFF_TABLET,
+            "Each tablet, gain 2 absorption hearts when eating dirt",
+            "Maximum absorption equals mud organ count times 8"
+        );
+
+        addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "Active Bluff Rod");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.ACTIVE_BLUFF_ROD,
+            "Each rod, gain 4 saturation when eating dirt"
+        );
+    }
+
+    private void bluffOrgansZH() {
+        addItem(MowziesMobOrgans.BLUFF_CORE, "泥峭核心");
+        addOrganActiveSkill(
+            MowziesMobOrgans.BLUFF_CORE,
+            "食用视线方向的泥土方块",
+            "食用泥土时恢复4点饥饿值",
+            "不同泥土类型提供不同效果：",
+            "草方块/苔藓块/菌丝提供力量II",
+            "砂土/灰化土/泥巴提供急迫II",
+            "缠根泥土/含泥红树根提供抗性提升II"
+        );
+        addOrganActiveSkillSimple(
+            MowziesMobOrgans.BLUFF_CORE,
+            "食用泥土方块以获得各种效果"
+        );
+
+        addItem(MowziesMobOrgans.BLUFF_TABLET, "泥峭铭文板");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.BLUFF_TABLET,
+            "每有一块铭文板，食用泥土时获得2点吸收生命值",
+            "吸收生命值上限为泥峭器官数量乘以8"
+        );
+
+        addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "活性泥峭棒");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.ACTIVE_BLUFF_ROD,
+            "每有一根泥峭棒，食用泥土时增加4点饱和度"
+        );
+    }
+
+    // ==================== 雕刻家—通臂大师器官 ====================
+
+    private void sculptorOrgansEN() {
+        addItem(MowziesMobOrgans.ZEN_HEART, "Zen Heart");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.ZEN_HEART,
+            "Immune to fall damage",
+            "Reduces damage taken by 50% while under Geomancy effect"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.ZEN_HEART,
+            "Immune to fall damage and reduces damage under Geomancy"
+        );
+
+        addItem(MowziesMobOrgans.AGED_HEART, "Aged Heart");
+        addItem(MowziesMobOrgans.AGED_LUNG, "Aged Lung");
+        addItem(MowziesMobOrgans.AGED_SPINE, "Aged Spine");
+        addItem(MowziesMobOrgans.AGED_STOMACH, "Aged Stomach");
+        addItem(MowziesMobOrgans.AGED_INTESTINE, "Aged Intestine");
+        addItem(MowziesMobOrgans.AGED_KIDNEY, "Aged Kidney");
+        addItem(MowziesMobOrgans.AGED_SPLEEN, "Aged Spleen");
+        addItem(MowziesMobOrgans.AGED_LIVER, "Aged Liver");
+        addItem(MowziesMobOrgans.AGED_APPENDIX, "Aged Appendix");
+        addItem(MowziesMobOrgans.AGED_RIB, "Aged Rib");
+        addItem(MowziesMobOrgans.AGED_MUSCLE, "Aged Muscle");
+    }
+
+    private void sculptorOrgansZH() {
+        addItem(MowziesMobOrgans.ZEN_HEART, "禅心");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.ZEN_HEART,
+            "免疫摔落伤害",
+            "拥有地卜术效果时受到伤害减免50%"
+        );
+        addOrganPassiveEffectSimple(
+            MowziesMobOrgans.ZEN_HEART,
+            "免疫摔落伤害并在地卜术效果下减伤"
+        );
+
+        addItem(MowziesMobOrgans.AGED_HEART, "衰老心脏");
+        addItem(MowziesMobOrgans.AGED_LUNG, "衰老肺脏");
+        addItem(MowziesMobOrgans.AGED_SPINE, "衰老脊柱");
+        addItem(MowziesMobOrgans.AGED_STOMACH, "衰老胃");
+        addItem(MowziesMobOrgans.AGED_INTESTINE, "衰老肠子");
+        addItem(MowziesMobOrgans.AGED_KIDNEY, "衰老肾脏");
+        addItem(MowziesMobOrgans.AGED_SPLEEN, "衰老脾脏");
+        addItem(MowziesMobOrgans.AGED_LIVER, "衰老肝脏");
+        addItem(MowziesMobOrgans.AGED_APPENDIX, "衰老阑尾");
+        addItem(MowziesMobOrgans.AGED_RIB, "衰老肋骨");
+        addItem(MowziesMobOrgans.AGED_MUSCLE, "衰老肌肉");
+    }
+
+    // ==================== 龙器官 ====================
+
+    private void dragonOrgansEN() {
+        // Fire Dragon
+        addItem(IceAndFireOrgans.FIRE_DRAGON_HEART, "Fire Dragon Heart");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LUNG, "Fire Dragon Lung");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPINE, "Fire Dragon Spine");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_STOMACH, "Fire Dragon Stomach");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_INTESTINE, "Fire Dragon Intestine");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_KIDNEY, "Fire Dragon Kidney");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPLEEN, "Fire Dragon Spleen");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "Fire Dragon Liver");
+
+        addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "Fire Dragon Gem");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.FIRE_DRAGON_GEM,
+            "Fire spell power increases with fire dragon organs in chest",
+            "Each fire dragon organ grants +5% fire spell power"
+        );
+        addOrganPassiveEffectSimple(IceAndFireOrgans.FIRE_DRAGON_GEM, "Fire spell power scales with fire dragon organ count");
+
+        addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Fire Dragon Breath Sac");
+        addOrganActiveSkill(
+            IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC,
+            "Sprays fire forward for 5 seconds",
+            "Damage and range scale with fire dragon organ count",
+            "Caps at 10 fire dragon organs"
+        );
+        addOrganActiveSkillSimple(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Sprays fire forward");
+
+        addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "Fire Dragon Rib");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "Fire Dragon Muscle");
+
+        // Ice Dragon
+        addItem(IceAndFireOrgans.ICE_DRAGON_HEART, "Ice Dragon Heart");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LUNG, "Ice Dragon Lung");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPINE, "Ice Dragon Spine");
+        addItem(IceAndFireOrgans.ICE_DRAGON_STOMACH, "Ice Dragon Stomach");
+        addItem(IceAndFireOrgans.ICE_DRAGON_INTESTINE, "Ice Dragon Intestine");
+        addItem(IceAndFireOrgans.ICE_DRAGON_KIDNEY, "Ice Dragon Kidney");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPLEEN, "Ice Dragon Spleen");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "Ice Dragon Liver");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "Ice Dragon Gem");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.ICE_DRAGON_GEM,
+            "Ice spell power increases with ice dragon organs in chest",
+            "Each ice dragon organ grants +5% ice spell power"
+        );
+        addOrganPassiveEffectSimple(IceAndFireOrgans.ICE_DRAGON_GEM, "Ice spell power scales with ice dragon organ count");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Ice Dragon Breath Sac");
+        addOrganActiveSkill(
+            IceAndFireOrgans.ICE_DRAGON_BREATH_SAC,
+            "Sprays ice forward for 5 seconds",
+            "Damage and range scale with ice dragon organ count",
+            "Caps at 10 ice dragon organs"
+        );
+        addOrganActiveSkillSimple(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Sprays ice forward");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "Ice Dragon Rib");
+        addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "Ice Dragon Muscle");
+
+        // Lightning Dragon
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "Lightning Dragon Heart");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "Lightning Dragon Lung");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "Lightning Dragon Spine");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "Lightning Dragon Stomach");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "Lightning Dragon Intestine");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "Lightning Dragon Kidney");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "Lightning Dragon Spleen");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "Lightning Dragon Liver");
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "Lightning Dragon Gem");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
+            "Lightning spell power increases with lightning dragon organs in chest",
+            "Each lightning dragon organ grants +5% lightning spell power"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
+            "Lightning spell power scales with lightning dragon organ count"
+        );
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Lightning Dragon Breath Sac");
+        addOrganActiveSkill(
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
+            "Sprays lightning forward for 5 seconds",
+            "Damage and range scale with lightning dragon organ count",
+            "Caps at 10 lightning dragon organs"
+        );
+        addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Sprays lightning forward");
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "Lightning Dragon Rib");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "Lightning Dragon Muscle");
+    }
+
+    private void dragonOrgansZH() {
+        // 火龙
+        addItem(IceAndFireOrgans.FIRE_DRAGON_HEART, "火龙心脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LUNG, "火龙肺脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPINE, "火龙脊柱");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_STOMACH, "火龙胃");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_INTESTINE, "火龙肠子");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_KIDNEY, "火龙肾脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_SPLEEN, "火龙脾脏");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_LIVER, "火龙肝脏");
+
+        addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "火龙宝玉");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.FIRE_DRAGON_GEM,
+            "火焰法术强度随胸腔内火龙器官数量增加",
+            "每增加一个火龙器官提升5%火焰法术强度"
+        );
+        addOrganPassiveEffectSimple(IceAndFireOrgans.FIRE_DRAGON_GEM, "火焰法术强度随火龙器官数量提升");
+
+        addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "火龙吐息袋");
+        addOrganActiveSkill(
+            IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC,
+            "向前方喷射火焰，持续5秒",
+            "伤害和范围随火龙器官数量增加",
+            "最多计入10个火龙器官"
+        );
+        addOrganActiveSkillSimple(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "向前方喷射火焰");
+
+        addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "火龙肋骨");
+        addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "火龙肌肉");
+
+        // 冰龙
+        addItem(IceAndFireOrgans.ICE_DRAGON_HEART, "冰龙心脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LUNG, "冰龙肺脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPINE, "冰龙脊柱");
+        addItem(IceAndFireOrgans.ICE_DRAGON_STOMACH, "冰龙胃");
+        addItem(IceAndFireOrgans.ICE_DRAGON_INTESTINE, "冰龙肠子");
+        addItem(IceAndFireOrgans.ICE_DRAGON_KIDNEY, "冰龙肾脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_SPLEEN, "冰龙脾脏");
+        addItem(IceAndFireOrgans.ICE_DRAGON_LIVER, "冰龙肝脏");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "冰龙宝玉");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.ICE_DRAGON_GEM,
+            "冰霜法术强度随胸腔内冰龙器官数量增加",
+            "每增加一个冰龙器官提升5%冰霜法术强度"
+        );
+        addOrganPassiveEffectSimple(IceAndFireOrgans.ICE_DRAGON_GEM, "冰霜法术强度随冰龙器官数量提升");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "冰龙吐息袋");
+        addOrganActiveSkill(
+            IceAndFireOrgans.ICE_DRAGON_BREATH_SAC,
+            "向前方喷射冰霜，持续5秒",
+            "伤害和范围随冰龙器官数量增加",
+            "最多计入10个冰龙器官"
+        );
+        addOrganActiveSkillSimple(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "向前方喷射冰霜");
+
+        addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "冰龙肋骨");
+        addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "冰龙肌肉");
+
+        // 电龙
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "电龙心脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "电龙肺脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "电龙脊柱");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "电龙胃");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "电龙肠子");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "电龙肾脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "电龙脾脏");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "电龙肝脏");
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "电龙宝玉");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
+            "闪电法术强度随胸腔内电龙器官数量增加",
+            "每增加一个电龙器官提升5%闪电法术强度"
+        );
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "闪电法术强度随电龙器官数量提升");
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "电龙吐息袋");
+        addOrganActiveSkill(
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
+            "向前方喷射闪电，持续5秒",
+            "伤害和范围随电龙器官数量增加",
+            "最多计入10个电龙器官"
+        );
+        addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "向前方喷射闪电");
+
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "电龙肋骨");
+        addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "电龙肌肉");
+    }
+
+    // ==================== 拟态器官 ====================
+
+    private void mimicOrgansEN() {
+        addItem(WAICOrgans.MIMIC_HEART, "Mimic Heart");
+        addOrganPassiveEffect(WAICOrgans.MIMIC_HEART, "Health regeneration +50%");
+        addItem(WAICOrgans.MIMIC_LIVER, "Mimic Liver");
+        addOrganPassiveEffect(WAICOrgans.MIMIC_LIVER, "Health regeneration +50%");
+        addItem(WAICOrgans.MIMIC_LUNG, "Mimic Lung");
+        addOrganPassiveEffect(WAICOrgans.MIMIC_LUNG, "Health regeneration +50%");
+    }
+
+    private void mimicOrgansZH() {
+        addItem(WAICOrgans.MIMIC_HEART, "拟态心脏");
+        addOrganPassiveEffect(WAICOrgans.MIMIC_HEART, "生命恢复效果提升50%");
+        addItem(WAICOrgans.MIMIC_LIVER, "拟态肝脏");
+        addOrganPassiveEffect(WAICOrgans.MIMIC_LIVER, "生命恢复效果提升50%");
+        addItem(WAICOrgans.MIMIC_LUNG, "拟态肺脏");
+        addOrganPassiveEffect(WAICOrgans.MIMIC_LUNG, "生命恢复效果提升50%");
     }
 
     // ==================== 墨水器官 ====================
@@ -1305,7 +1091,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.NIB, "Nib");
         addOrganDescription(WAICOrgans.NIB, "A precision-crafted pen tip");
-        addOrganPassiveEffect(WAICOrgans.NIB, "When casting a spell, consumes ink to boost the spell by 1 level", "Ink cost: 5 × spell level");
+        addOrganPassiveEffect(
+            WAICOrgans.NIB,
+            "When casting a spell, consumes ink to boost the spell by 1 level",
+            "Ink cost: 5 × spell level"
+        );
         addOrganPassiveEffectSimple(WAICOrgans.NIB, "Boosts spell level by 1 when casting, consuming ink");
     }
 
@@ -1388,7 +1178,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganDescription(WAICOrgans.FLAME_CORE, "A blazing core of molten lava, its heat never fading");
 
         addItem(WAICOrgans.NATURE_CORE, "Nature Core");
-        addOrganDescription(WAICOrgans.NATURE_CORE, "A verdant core pulsing with the rhythm of life itself, brimming with natural vitality");
+        addOrganDescription(
+            WAICOrgans.NATURE_CORE,
+            "A verdant core pulsing with the rhythm of life itself, brimming with natural vitality"
+        );
     }
 
     private void elementOrgansZH() {
@@ -1493,6 +1286,707 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.LESION_MUSCLE, "病变肌肉");
         addOrganPassiveEffect(WAICOrgans.LESION_MUSCLE, "对目标额外造成等同于其所有负面效果等级之和的伤害");
+    }
+
+    // ==================== 九狱器官 ====================
+
+    private void nineHellOrgansEN() {
+        add("organ.who_am_i_core.nine_hell.hint", "Each nine-hell organ activates one passive effect, all nine-hell organs' attributes -1");
+
+        addItem(WAICOrgans.LIMBO, "Limbo");
+        addOrganPassiveEffect(
+            WAICOrgans.LIMBO,
+            "Gain 1 XP/sec",
+            "Gain 3 XP/sec",
+            "Gain 5 XP/sec"
+        );
+        addItem(WAICOrgans.LUST, "Lust");
+        addOrganPassiveEffect(
+            WAICOrgans.LUST,
+            "Attacks heal 10% of damage dealt",
+            "Attacks heal 20% of damage dealt",
+            "Attacks heal 30% of damage dealt"
+        );
+        addItem(WAICOrgans.GLUTTONY, "Gluttony");
+        addOrganPassiveEffect(
+            WAICOrgans.GLUTTONY,
+            "Can eat any food item",
+            "Eating grants absorption hearts equal to hunger value × nine-hell count, capped at count × 20",
+            "Eating additionally heals HP equal to nine-hell count"
+        );
+        addItem(WAICOrgans.GREED, "Greed");
+        addOrganPassiveEffect(
+            WAICOrgans.GREED,
+            "+1 Looting and +1 Fortune",
+            "+2 Looting and +2 Fortune",
+            "+3 Looting and +3 Fortune"
+        );
+        addItem(WAICOrgans.WRATH, "Wrath");
+        addOrganPassiveEffect(
+            WAICOrgans.WRATH,
+            "+1 Strength and +1 Speed",
+            "+2 Strength and +2 Speed",
+            "+3 Strength and +3 Speed"
+        );
+        addItem(WAICOrgans.HERESY, "Heresy");
+        addOrganPassiveEffect(
+            WAICOrgans.HERESY,
+            "Potion duration +50%",
+            "Potion duration +100%",
+            "Potion amplifier +1"
+        );
+        addItem(WAICOrgans.VIOLENCE, "Violence");
+        addOrganPassiveEffect(
+            WAICOrgans.VIOLENCE,
+            "Critical damage ×2",
+            "Critical damage ×2",
+            "Attacks always crit"
+        );
+        addItem(WAICOrgans.FRAUD, "Fraud");
+        addOrganPassiveEffect(
+            WAICOrgans.FRAUD,
+            "Villager trade bonus experience",
+            "Villager trade discount",
+            "Villager trades never run out of stock"
+        );
+        addItem(WAICOrgans.TREACHERY, "Treachery");
+        addOrganPassiveEffect(
+            WAICOrgans.TREACHERY,
+            "Attacks deal 1% of target max health",
+            "Attacks deal 3% of target max health",
+            "Attacks deal 5% of target max health"
+        );
+    }
+
+    private void nineHellOrgansZH() {
+        add("organ.who_am_i_core.nine_hell.hint", "每有一个九狱器官，激活一条被动效果，所有九狱器官的属性 -1");
+
+        addItem(WAICOrgans.LIMBO, "灵薄");
+        addOrganPassiveEffect(
+            WAICOrgans.LIMBO,
+            "每秒获得1点经验",
+            "每秒获得3点经验",
+            "每秒获得5点经验"
+        );
+        addItem(WAICOrgans.LUST, "色欲");
+        addOrganPassiveEffect(
+            WAICOrgans.LUST,
+            "攻击回复造成伤害10%的生命",
+            "攻击回复造成伤害20%的生命",
+            "攻击回复造成伤害30%的生命"
+        );
+        addItem(WAICOrgans.GLUTTONY, "暴食");
+        addOrganPassiveEffect(
+            WAICOrgans.GLUTTONY,
+            "可以食用任何食物",
+            "食用获得饥饿值×九狱器官数量的黄心，上限为九狱器官数量×20",
+            "食用额外回复九狱器官数量的生命值"
+        );
+        addItem(WAICOrgans.GREED, "贪婪");
+        addOrganPassiveEffect(
+            WAICOrgans.GREED,
+            "+1抢夺与+1时运",
+            "+2抢夺与+2时运",
+            "+3抢夺与+3时运"
+        );
+        addItem(WAICOrgans.WRATH, "愤怒");
+        addOrganPassiveEffect(
+            WAICOrgans.WRATH,
+            "+1力量与+1速度",
+            "+2力量与+2速度",
+            "+3力量与+3速度"
+        );
+        addItem(WAICOrgans.HERESY, "异端");
+        addOrganPassiveEffect(
+            WAICOrgans.HERESY,
+            "药水持续时间+50%",
+            "药水持续时间+100%",
+            "药水等级+1"
+        );
+        addItem(WAICOrgans.VIOLENCE, "暴力");
+        addOrganPassiveEffect(
+            WAICOrgans.VIOLENCE,
+            "暴击伤害×2",
+            "暴击伤害×2",
+            "攻击必定暴击"
+        );
+        addItem(WAICOrgans.FRAUD, "欺诈");
+        addOrganPassiveEffect(
+            WAICOrgans.FRAUD,
+            "村民交易获得额外经验",
+            "村民交易获得折扣",
+            "村民交易不缺货"
+        );
+        addItem(WAICOrgans.TREACHERY, "背叛");
+        addOrganPassiveEffect(
+            WAICOrgans.TREACHERY,
+            "攻击额外造成目标1%最大生命值伤害",
+            "攻击额外造成目标3%最大生命值伤害",
+            "攻击额外造成目标5%最大生命值伤害"
+        );
+    }
+
+    // ==================== 布织器官 ====================
+
+    private void clothOrgansEN() {
+        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "Cloth Teddy Bear");
+        addOrganDescription(WAICOrgans.CLOTH_TEDDY_BEAR, "A patchwork teddy bear stitched from cloth and thread");
+        addOrganPassiveEffect(
+            WAICOrgans.CLOTH_TEDDY_BEAR,
+            "When chest cavity closes, wool items in the chest are converted into random cloth organs"
+        );
+        addOrganActiveSkill(
+            WAICOrgans.CLOTH_TEDDY_BEAR,
+            "Consume wool stored in the teddy bear to heal",
+            "Each wool restores 4 + cloth organ count HP"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.CLOTH_TEDDY_BEAR, "Consume wool to heal");
+
+        addItem(WAICOrgans.CLOTH_HEART, "Cloth Heart");
+        addItem(WAICOrgans.CLOTH_LUNG, "Cloth Lung");
+        addItem(WAICOrgans.CLOTH_LIVER, "Cloth Liver");
+        addItem(WAICOrgans.CLOTH_INTESTINE, "Cloth Intestine");
+        addItem(WAICOrgans.CLOTH_STOMACH, "Cloth Stomach");
+        addItem(WAICOrgans.CLOTH_KIDNEY, "Cloth Kidney");
+        addItem(WAICOrgans.CLOTH_SPLEEN, "Cloth Spleen");
+        addItem(WAICOrgans.CLOTH_SPINE, "Cloth Spine");
+        addItem(WAICOrgans.CLOTH_RIB, "Cloth Rib");
+        addItem(WAICOrgans.CLOTH_MUSCLE, "Cloth Muscle");
+        addItem(WAICOrgans.CLOTH_APPENDIX, "Cloth Appendix");
+    }
+
+    private void clothOrgansZH() {
+        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "布织泰迪熊");
+        addOrganDescription(WAICOrgans.CLOTH_TEDDY_BEAR, "用布料与线缝制的拼布泰迪熊");
+        addOrganPassiveEffect(
+            WAICOrgans.CLOTH_TEDDY_BEAR,
+            "胸腔关闭时将羊毛转换为随机布织器官"
+        );
+        addOrganActiveSkill(
+            WAICOrgans.CLOTH_TEDDY_BEAR,
+            "消耗布织泰迪熊中的羊毛回复生命",
+            "每个羊毛回复 4 + 布织器官数量 点生命"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.CLOTH_TEDDY_BEAR, "消耗羊毛回复生命");
+
+        addItem(WAICOrgans.CLOTH_HEART, "布织心脏");
+        addItem(WAICOrgans.CLOTH_LUNG, "布织肺脏");
+        addItem(WAICOrgans.CLOTH_LIVER, "布织肝脏");
+        addItem(WAICOrgans.CLOTH_INTESTINE, "布织肠子");
+        addItem(WAICOrgans.CLOTH_STOMACH, "布织胃");
+        addItem(WAICOrgans.CLOTH_KIDNEY, "布织肾脏");
+        addItem(WAICOrgans.CLOTH_SPLEEN, "布织脾脏");
+        addItem(WAICOrgans.CLOTH_SPINE, "布织脊柱");
+        addItem(WAICOrgans.CLOTH_RIB, "布织肋骨");
+        addItem(WAICOrgans.CLOTH_MUSCLE, "布织肌肉");
+        addItem(WAICOrgans.CLOTH_APPENDIX, "布织阑尾");
+    }
+
+    // ==================== 猩红器官 ====================
+
+    private void crimsonOrgansEN() {
+        addItem(WAICOrgans.CRIMSON_HEART, "Crimson Heart");
+        addOrganPassiveEffect(
+            WAICOrgans.CRIMSON_HEART,
+            "+100 blood capacity",
+            "Converts healing into blood storage at 5× rate"
+        );
+        addItem(WAICOrgans.CRIMSON_LUNG, "Crimson Lung");
+        addItem(WAICOrgans.CRIMSON_STOMACH, "Crimson Stomach");
+        addItem(WAICOrgans.CRIMSON_INTESTINE, "Crimson Intestine");
+        addItem(WAICOrgans.CRIMSON_KIDNEY, "Crimson Kidney");
+        addItem(WAICOrgans.CRIMSON_SPLEEN, "Crimson Spleen");
+        addItem(WAICOrgans.CRIMSON_LIVER, "Crimson Liver");
+        addItem(WAICOrgans.CRIMSON_APPENDIX, "Crimson Appendix");
+        addOrganActiveSkill(
+            WAICOrgans.CRIMSON_APPENDIX,
+            "Consumes blood to restore health",
+            "5 blood per 1 HP healed"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.CRIMSON_APPENDIX, "Consumes blood to heal");
+        addItem(WAICOrgans.CRIMSON_MUSCLE, "Crimson Muscle");
+    }
+
+    private void crimsonOrgansZH() {
+        addItem(WAICOrgans.CRIMSON_HEART, "猩红心脏");
+        addOrganPassiveEffect(
+            WAICOrgans.CRIMSON_HEART,
+            "+100 血液上限",
+            "将治疗量以5倍比率转化为血液存储"
+        );
+        addItem(WAICOrgans.CRIMSON_LUNG, "猩红肺脏");
+        addItem(WAICOrgans.CRIMSON_STOMACH, "猩红胃");
+        addItem(WAICOrgans.CRIMSON_INTESTINE, "猩红肠子");
+        addItem(WAICOrgans.CRIMSON_KIDNEY, "猩红肾脏");
+        addItem(WAICOrgans.CRIMSON_SPLEEN, "猩红脾脏");
+        addItem(WAICOrgans.CRIMSON_LIVER, "猩红肝脏");
+        addItem(WAICOrgans.CRIMSON_APPENDIX, "猩红阑尾");
+        addOrganActiveSkill(
+            WAICOrgans.CRIMSON_APPENDIX,
+            "消耗血液回复生命",
+            "每回复1点生命消耗5点血液"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.CRIMSON_APPENDIX, "消耗血液回复生命");
+        addItem(WAICOrgans.CRIMSON_MUSCLE, "猩红肌肉");
+    }
+
+    // ==================== 电磁义体器官 ====================
+
+    private void cyberneticOrgansEN() {
+        addItem(WAICOrgans.COMPUTING_CORE, "Computing Core");
+        addOrganPassiveEffect(
+            WAICOrgans.COMPUTING_CORE,
+            "Regenerates 1 charge per tick",
+            "Cannot exceed max charge capacity"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.COMPUTING_CORE, "Regenerates charge over time");
+
+        addItem(WAICOrgans.CURRENT_RIB, "Current Rib");
+        addOrganPassiveEffect(
+            WAICOrgans.CURRENT_RIB,
+            "Consumes charge to block incoming damage",
+            "10 charge blocks 1 damage, up to 4 points",
+            "A paired Current Rib on the opposite side halves the cost",
+            "25% chance to refund consumed charge",
+            "10% of charge loss is converted to healing"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.CURRENT_RIB, "Consumes charge to block damage");
+
+        addItem(WAICOrgans.CHARGED_MUSCLE, "Charged Muscle");
+        addOrganPassiveEffect(
+            WAICOrgans.CHARGED_MUSCLE,
+            "Generates 1 charge per tick while sprinting",
+            "Sprint-generated charge can exceed cap by 50%",
+            "Excess charge drains at 1 per tick"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.CHARGED_MUSCLE, "Generates charge while sprinting");
+
+        addItem(WAICOrgans.CONDUCTIVE_SPINE, "Conductive Spine");
+        addOrganActiveSkill(
+            WAICOrgans.CONDUCTIVE_SPINE,
+            "Consumes half of current charge to enter Overload",
+            "Overload max duration equals charge consumed in ticks",
+            "Consumes 3 charge per tick during Overload",
+            "Overload ends early when charge runs out",
+            "During Overload, Computing Core stops regenerating",
+            "During Overload, Current Rib block cap doubles to 8",
+            "During Overload, Current Rib refund chance rises to 50%",
+            "During Overload, Current Rib healing conversion rises to 20%"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "Consumes charge to enter Overload");
+
+        addItem(WAICOrgans.ENERGY_MODULE, "Energy Module");
+        addOrganPassiveEffect(WAICOrgans.ENERGY_MODULE, "+500 charge capacity");
+        add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "Charge: %s/%s");
+    }
+
+    private void cyberneticOrgansZH() {
+        addItem(WAICOrgans.COMPUTING_CORE, "演算核心");
+        addOrganPassiveEffect(
+            WAICOrgans.COMPUTING_CORE,
+            "每 tick 回复 1 点电荷",
+            "不超过最大电荷上限"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.COMPUTING_CORE, "持续回复电荷");
+
+        addItem(WAICOrgans.CURRENT_RIB, "导流肋骨");
+        addOrganPassiveEffect(
+            WAICOrgans.CURRENT_RIB,
+            "消耗电荷抵消受到的伤害",
+            "每10电荷抵消1点伤害,抵消上限4点",
+            "对称位置存在另一根导流肋骨时消耗减半",
+            "消耗电荷时有25%概率返还",
+            "电荷流失量的10%转化为生命回复"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.CURRENT_RIB, "消耗电荷抵消伤害");
+
+        addItem(WAICOrgans.CHARGED_MUSCLE, "充能肌束");
+        addOrganPassiveEffect(
+            WAICOrgans.CHARGED_MUSCLE,
+            "冲刺时每 tick 产生 1 电荷",
+            "冲刺产生的电荷可超出上限50%",
+            "超出上限的电荷每 tick 衰减1点"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.CHARGED_MUSCLE, "冲刺时产生电荷");
+
+        addItem(WAICOrgans.CONDUCTIVE_SPINE, "传导链节");
+        addOrganActiveSkill(
+            WAICOrgans.CONDUCTIVE_SPINE,
+            "消耗当前一半电荷进入超频状态",
+            "超频最大时长等于消耗电荷数",
+            "超频期间每tick消耗3电荷",
+            "电荷不足时超频提前结束",
+            "超频时演算核心暂停回复",
+            "超频时导流肋骨抵消上限翻倍至8点",
+            "超频时导流肋骨返还概率提升至50%",
+            "超频时导流肋骨转化率提升至20%"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "消耗电荷进入超频");
+
+        addItem(WAICOrgans.ENERGY_MODULE, "蓄能模块");
+        addOrganPassiveEffect(WAICOrgans.ENERGY_MODULE, "+500点电荷容量");
+        add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "电荷: %s/%s");
+    }
+
+    // ==================== WAIC 独立器官 ====================
+
+    private void WAICOrgansEN() {
+        addItem(WAICOrgans.HAUNTED_BONE, "Haunted Bone");
+        addOrganPassiveEffect(WAICOrgans.HAUNTED_BONE, "Randomly moves to an empty slot when chest cavity closes");
+
+        addItem(WAICOrgans.SWORD_BONE, "Sword Bone");
+
+        addItem(WAICOrgans.STRAIGHT_INTESTINE, "Straight Intestine");
+        addOrganPassiveEffect(WAICOrgans.STRAIGHT_INTESTINE, "30% chance to drop an identical food item 3 seconds after eating");
+
+        addItem(WAICOrgans.SQUASH, "Squash");
+        addOrganPassiveEffect(
+            WAICOrgans.SQUASH,
+            "Immune to all fall damage",
+            "Distributes equal fall damage to all entities within 5×5×5"
+        );
+
+        addItem(WAICOrgans.EXPERIENCE_HEART, "Experience Heart");
+        addOrganPassiveEffect(
+            WAICOrgans.EXPERIENCE_HEART,
+            "Every 10 experience levels grant +1 health",
+            "Experience from orbs gains a multiplier",
+            "Multiplier equals magic organs in chest + 1"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "Grants health from experience levels and boosts orb XP");
+
+        addItem(WAICOrgans.FLESH_IDOL, "Flesh Idol");
+        addOrganDescription(WAICOrgans.FLESH_IDOL, "A grotesque idol carved from living flesh, pulsing with vital energy");
+        addOrganActiveSkill(
+            WAICOrgans.FLESH_IDOL,
+            "For each harmful effect: halve current HP, then remove that effect",
+            "Removing Sinner effect also reduces 1 Sin layer"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.FLESH_IDOL, "Sacrifice HP to cleanse all harmful effects");
+    }
+
+    private void WAICOrgansZH() {
+        addItem(WAICOrgans.HAUNTED_BONE, "闹鬼的骨头");
+        addOrganPassiveEffect(WAICOrgans.HAUNTED_BONE, "胸腔关闭时随机移动到一个空槽位");
+
+        addItem(WAICOrgans.SWORD_BONE, "剑骨头");
+
+        addItem(WAICOrgans.STRAIGHT_INTESTINE, "直肠子");
+        addOrganPassiveEffect(WAICOrgans.STRAIGHT_INTESTINE, "食用食物后30%几率在3秒后掉落一份相同食物");
+
+        addItem(WAICOrgans.SQUASH, "窝瓜");
+        addOrganPassiveEffect(
+            WAICOrgans.SQUASH,
+            "免疫所有摔落伤害",
+            "将等量的摔落伤害平分给5×5×5范围内的所有实体"
+        );
+
+        addItem(WAICOrgans.EXPERIENCE_HEART, "经验之心");
+        addOrganPassiveEffect(
+            WAICOrgans.EXPERIENCE_HEART,
+            "每10级经验等级增加1点健康值",
+            "从经验球获取的经验获得额外倍率",
+            "倍率为胸腔中魔法器官数量加1"
+        );
+        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "经验等级转化为健康值，经验球获得额外倍率");
+
+        addItem(WAICOrgans.FLESH_IDOL, "血肉偶像");
+        addOrganDescription(WAICOrgans.FLESH_IDOL, "由活肉雕琢而成的怪诞偶像，脉动着生命能量");
+        addOrganActiveSkill(
+            WAICOrgans.FLESH_IDOL,
+            "逐个清除负面效果：每清除1个负面效果，当前生命值折半一次",
+            "清除「罪人」效果时，减少1层罪孽"
+        );
+        addOrganActiveSkillSimple(WAICOrgans.FLESH_IDOL, "牺牲生命值清除所有负面效果");
+    }
+
+    // ==================== 悚怖器官 ====================
+
+    private void dreadOrgansEN() {
+        addItem(IceAndFireOrgans.BITTER_FLESH, "Bitter Flesh");
+        addItem(IceAndFireOrgans.ICE_SHARD, "Ice Shard");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.ICE_SHARD,
+            "Provides 0.05 health per point of absolute global temperature"
+        );
+        addItem(IceAndFireOrgans.FROSTBURN_SOUL, "Frostburn Soul");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.FROSTBURN_SOUL,
+            "Provides 0.15 health per point of absolute global temperature"
+        );
+        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "Dread Phylactery");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.DREAD_PHYLACTERY,
+            "Provides 0.25 health per point of absolute global temperature",
+            "On attack converts target Slowness into freeze damage and removes it",
+            "Damage equals remaining Slowness seconds multiplied by level plus one",
+            "Infinite Slowness results in lethal damage"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.DREAD_PHYLACTERY,
+            "Cold grants health and converts Slowness to freeze damage on attack"
+        );
+        addItem(IceAndFireOrgans.DREAD_RIB, "Dread Rib");
+        addItem(IceAndFireOrgans.DREAD_SPINE, "Dread Spine");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.DREAD_SPINE,
+            "On attack applies Slowness to the target for 3 seconds",
+            "Slowness level scales with absolute local temperature"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.DREAD_SPINE,
+            "Applies Slowness to target on attack based on local temperature"
+        );
+    }
+
+    private void dreadOrgansZH() {
+        addItem(IceAndFireOrgans.BITTER_FLESH, "苦寒血肉");
+        addItem(IceAndFireOrgans.ICE_SHARD, "冰魂残片");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.ICE_SHARD,
+            "每点全局温度绝对值提供0.05健康"
+        );
+        addItem(IceAndFireOrgans.FROSTBURN_SOUL, "冻结魂火");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.FROSTBURN_SOUL,
+            "每点全局温度绝对值提供0.15健康"
+        );
+        addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "悚怖命匣");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.DREAD_PHYLACTERY,
+            "每点全局温度绝对值提供0.25健康",
+            "攻击时将目标的缓慢效果转化为冰霜伤害并移除",
+            "伤害等于缓慢剩余秒数乘以缓慢等级加一",
+            "无限时长的缓慢造成致命伤害"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.DREAD_PHYLACTERY,
+            "低温提供健康并将缓慢转化为冰霜伤害"
+        );
+        addItem(IceAndFireOrgans.DREAD_RIB, "悚怖肋骨");
+        addItem(IceAndFireOrgans.DREAD_SPINE, "悚怖脊柱");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.DREAD_SPINE,
+            "攻击时对目标施加3秒缓慢效果",
+            "缓慢等级随局部温度绝对值提高"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.DREAD_SPINE,
+            "攻击时根据局部温度施加缓慢效果"
+        );
+    }
+
+    // ==================== 九头蛇器官 ====================
+
+    private void hydraOrgansEN() {
+        addItem(IceAndFireOrgans.HYDRA_HEART, "Hydra Heart");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_HEART,
+            "Immune to poison damage",
+            "Gains regeneration at the same level as current poison"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_HEART,
+            "Immune to poison damage and converts it into regeneration"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_LUNG, "Hydra Lung");
+        addOrganActiveSkill(
+            IceAndFireOrgans.HYDRA_LUNG,
+            "Consumes current poison to unleash venom breath",
+            "Breath duration equals log10 of original poison duration in ticks",
+            "Deals damage equal to poison amplifier plus one every 4 ticks",
+            "Hit enemies receive the original poison effect"
+        );
+        addOrganActiveSkillSimple(
+            IceAndFireOrgans.HYDRA_LUNG,
+            "Consumes poison to unleash venom breath"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_SPINE, "Hydra Spine");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_SPINE,
+            "Prevents death when holding at least 10 seconds of poison",
+            "Recovers to 10% max health on revival",
+            "Poison level increases by one and duration is halved"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_STOMACH, "Hydra Stomach");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_STOMACH,
+            "Gains poison based on harmful food effects when eating",
+            "Poison duration equals harmful effects duration multiplied by stomach count"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_STOMACH,
+            "Gains poison from harmful food effects when eating"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_INTESTINE, "Hydra Intestine");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_INTESTINE,
+            "Increases food effect duration by 50 percent per organ"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_SPLEEN, "Hydra Spleen");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_SPLEEN,
+            "Converts poison into healing when health drops below 50 percent",
+            "Healing equals poison level multiplied by a scaling coefficient",
+            "Coefficient increases as health decreases"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_SPLEEN,
+            "Converts poison to healing at low health"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_RIB, "Hydra Rib");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_RIB,
+            "When taking damage transfers up to 5 seconds of poison to the attacker",
+            "Damage reduction equals transferred poison level"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_RIB,
+            "Transfers poison to attackers when hit"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_MUSCLE, "Hydra Muscle");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_MUSCLE,
+            "On melee attack transfers up to 5 seconds of poison to the target",
+            "Extra damage equals transferred poison level"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_MUSCLE,
+            "Transfers poison to target on melee attack"
+        );
+    }
+
+    private void hydraOrgansZH() {
+        addItem(IceAndFireOrgans.HYDRA_HEART, "九头蛇心脏");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_HEART,
+            "免疫中毒伤害",
+            "获得与中毒相同等级的再生效果"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_HEART,
+            "免疫中毒伤害并将其转化为再生"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_LUNG, "九头蛇肺脏");
+        addOrganActiveSkill(
+            IceAndFireOrgans.HYDRA_LUNG,
+            "消耗当前中毒效果释放毒物吐息",
+            "吐息持续时长等于原始中毒时长的log10",
+            "每4 tick造成等于中毒等级加一的伤害",
+            "被击中的敌人获得原始中毒效果"
+        );
+        addOrganActiveSkillSimple(
+            IceAndFireOrgans.HYDRA_LUNG,
+            "消耗中毒效果释放毒物吐息"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_SPINE, "九头蛇脊柱");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_SPINE,
+            "持有至少10秒中毒时可阻止死亡",
+            "复活时，恢复至最大生命值的10%，中毒等级提升一级且持续时长减半"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_STOMACH, "九头蛇胃");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_STOMACH,
+            "进食时根据食物的有害效果获取中毒",
+            "中毒时长等于有害效果时长乘以胃的数量"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_STOMACH,
+            "进食时根据有害食物效果获取中毒"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_INTESTINE, "九头蛇肠子");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_INTESTINE,
+            "每个器官增加50%食物效果持续时长"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_SPLEEN, "九头蛇脾脏");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_SPLEEN,
+            "血量低于50%时消耗中毒时长转化为治疗",
+            "治疗量等于中毒等级乘以缩放系数",
+            "血量越低系数越高"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_SPLEEN,
+            "低血量时将中毒转化为治疗"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_RIB, "九头蛇肋骨");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_RIB,
+            "受伤时将最多5秒的中毒效果转移给攻击者",
+            "伤害减免等于转移的中毒等级"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_RIB,
+            "受伤时将中毒转移给攻击者"
+        );
+
+        addItem(IceAndFireOrgans.HYDRA_MUSCLE, "九头蛇肌肉");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.HYDRA_MUSCLE,
+            "近战攻击时将最多5秒的中毒效果转移给目标",
+            "额外伤害等于转移的中毒等级"
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.HYDRA_MUSCLE,
+            "近战攻击时将中毒转移给目标"
+        );
+    }
+
+    // ==================== 器官标签翻译 ====================
+
+    private void addWAICTagTranslationsEN() {
+        add(WAICItemTagManager.MAGIC, "Magic");
+        add(WAICItemTagManager.MECHANICAL, "Mechanical");
+        add(WAICItemTagManager.SUMMON, "Summon");
+        add(WAICItemTagManager.UNIQUE, "Unique");
+        add(WAICItemTagManager.FIRE_DRAGON, "Fire Dragon");
+        add(WAICItemTagManager.ICE_DRAGON, "Ice Dragon");
+        add(WAICItemTagManager.LIGHTNING_DRAGON, "Lightning Dragon");
+        add(WAICItemTagManager.FIRE, "Fire");
+        add(WAICItemTagManager.ICE, "Ice");
+        add(WAICItemTagManager.LESION, "Lesion");
+        add(WAICItemTagManager.CURSED, "Cursed");
+        add(WAICItemTagManager.EMBER, "Ember");
+        add(WAICItemTagManager.CLOTH, "Cloth");
+        add(WAICItemTagManager.MONSTROSITY, "Monstrosity");
+        add(WAICItemTagManager.CAKE, "Cake");
+        add(WAICItemTagManager.PONTIFF, "Pontiff");
+        add(WAICItemTagManager.NINE_HELL, "Nine Hell");
+    }
+
+    private void addWAICTagTranslationsZH() {
+        add(WAICItemTagManager.MAGIC, "魔法");
+        add(WAICItemTagManager.MECHANICAL, "机械");
+        add(WAICItemTagManager.SUMMON, "召唤");
+        add(WAICItemTagManager.UNIQUE, "唯一");
+        add(WAICItemTagManager.FIRE_DRAGON, "火龙");
+        add(WAICItemTagManager.ICE_DRAGON, "冰龙");
+        add(WAICItemTagManager.LIGHTNING_DRAGON, "电龙");
+        add(WAICItemTagManager.FIRE, "炽焰");
+        add(WAICItemTagManager.ICE, "冰霜");
+        add(WAICItemTagManager.LESION, "病变");
+        add(WAICItemTagManager.CURSED, "诅咒");
+        add(WAICItemTagManager.EMBER, "余烬");
+        add(WAICItemTagManager.CLOTH, "布织");
+        add(WAICItemTagManager.MONSTROSITY, "巨兽");
+        add(WAICItemTagManager.CAKE, "蛋糕");
+        add(WAICItemTagManager.PONTIFF, "教宗");
+        add(WAICItemTagManager.NINE_HELL, "九狱");
     }
 
     private void addOrganDescription(Supplier<Item> item, String... lines) {

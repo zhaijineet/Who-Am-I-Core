@@ -43,7 +43,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     /**
-     * 九头蛇胃将食物负面效果转化为中毒
+     * 九头蛇胃将食物有害效果转化为中毒
      * <p>
      * 九头蛇肠子提高获得的负面效果时长为1.5倍
      * </p>
@@ -62,7 +62,7 @@ public abstract class LivingEntityMixin extends Entity {
         int amplifier = 0;
         for (FoodProperties.PossibleEffect effect : foodProperties.effects()) {
             MobEffectInstance instance = effect.effect();
-            if (!((IMobEffectInstance) instance).isHarmful()) {
+            if (((IMobEffectInstance) instance).isHarmful()) {
                 if (instance.isInfiniteDuration()) continue;
                 duration += instance.getDuration();
                 if (amplifier < instance.getAmplifier()) {

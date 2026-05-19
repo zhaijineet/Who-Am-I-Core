@@ -8,7 +8,7 @@ import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 /**
- * 超频效果 — 传导链节激活后施加，持续 10 秒
+ * 超频效果 — 传导链节激活后施加，持续时间由传导链节传入
  * 每tick消耗3电荷，电荷耗尽时自动移除
  */
 public class OverloadEffect extends MobEffect {

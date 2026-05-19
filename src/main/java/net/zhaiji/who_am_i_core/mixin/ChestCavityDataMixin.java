@@ -42,10 +42,10 @@ public abstract class ChestCavityDataMixin {
         if (heal > 0) {
             owner.heal((float) heal);
         }
-        // 诅咒金器官诅咒效果：每 40 tick 根据诅咒金器官数量施加负面效果
+        // 诅咒器官诅咒效果：每 40 tick 根据诅咒器官数量施加负面效果
         // 参考 AnvilCraft 原版 ICursed：虚弱(始终) / 缓慢(>8) / 饥饿(>64)
         if (tickCount % 40 == 0) {
-            int cursedCount = getOrganCount(WAICItemTagManager.CURSED_GOLD);
+            int cursedCount = getOrganCount(WAICItemTagManager.CURSED);
             if (cursedCount >= 1) {
                 // 虚弱：每5个器官等级+1
                 int weaknessAmp = (cursedCount - 1) / 5;

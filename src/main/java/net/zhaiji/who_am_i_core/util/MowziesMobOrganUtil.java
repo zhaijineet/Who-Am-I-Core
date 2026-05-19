@@ -90,7 +90,7 @@ public class MowziesMobOrganUtil {
      */
     public static void chestNovaChestCavityClose(ChestCavitySlotContext slotContext) {
         ChestCavityData data = slotContext.data();
-        List<Integer> adjacentSlots = OrganUtil.getAdjacentSlots(slotContext.index());
+        List<Integer> adjacentSlots = OrganUtil.getAdjacentSlots(slotContext.index(), slotContext.data().getSlots());
         for (int slot : adjacentSlots) {
             ItemStack adjacentStack = data.getStackInSlot(slot);
             if (adjacentStack.isEmpty()) continue;

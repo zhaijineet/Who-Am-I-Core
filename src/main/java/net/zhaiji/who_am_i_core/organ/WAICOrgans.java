@@ -529,6 +529,7 @@ public class WAICOrgans {
             .modifier(WAICOrganUtil::limboModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
             .tick(WAICOrganUtil::limboTick)
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -539,6 +540,7 @@ public class WAICOrgans {
             .modifier(WAICOrganUtil::lustModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
             .attack(WAICOrganUtil::lustAttack)
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -548,6 +550,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::gluttonyModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -557,7 +560,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::greedModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -567,7 +570,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::wrathModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -577,7 +580,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::heresyModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -587,7 +590,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::violenceModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -597,7 +600,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .modifier(WAICOrganUtil::fraudModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
-
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -608,7 +611,7 @@ public class WAICOrgans {
             .modifier(WAICOrganUtil::treacheryModifier)
             .otherChange(WAICOrganUtil::nineHellOtherChange)
             .attack(WAICOrganUtil::treacheryAttack)
-
+            .tooltip(WAICTooltipUtil.NINE_HELL_TOOLTIP)
             .build()
     );
 
@@ -915,7 +918,6 @@ public class WAICOrgans {
     public static final Supplier<Item> SQUASH = WAICItem.ITEM.register(
         "squash",
         () -> Organ.builder()
-
             .incomingDamage(WAICOrganUtil::squashIncomingDamage)
             .build()
     );
@@ -924,8 +926,17 @@ public class WAICOrgans {
     public static final Supplier<Item> EXPERIENCE_HEART = WAICItem.ITEM.register(
         "experience_heart",
         () -> Organ.builder()
-
             .modifier(WAICOrganUtil::experienceHeartModifier)
+            .build()
+    );
+
+    // 血肉偶像
+    public static final Supplier<Item> FLESH_IDOL = WAICItem.ITEM.register(
+        "flesh_idol",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .skill(WAICOrganUtil::fleshIdolSkill)
+            .cooldown(20 * 20)
             .build()
     );
 
@@ -939,8 +950,6 @@ public class WAICOrgans {
             .heal(WAICOrganUtil::crimsonHeartHeal)
             .added(WAICOrganUtil::crimsonHeartAdded)
             .removed(WAICOrganUtil::crimsonHeartRemoved)
-
-
             .build()
     );
 

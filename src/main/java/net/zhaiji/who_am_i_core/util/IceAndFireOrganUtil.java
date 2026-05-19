@@ -20,7 +20,6 @@ import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
 import net.zhaiji.who_am_i_core.task.HydraLungBreathTask;
-import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 
 public class IceAndFireOrganUtil {
     /**
@@ -74,15 +73,6 @@ public class IceAndFireOrganUtil {
      */
     public static boolean lightningDragonBreathSacSkill(ChestCavitySlotContext context) {
         return addBreathTask(context.data(), DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON);
-    }
-
-    /**
-     * 九头蛇脾脏
-     */
-    public static void hydraSpleenAdded(ChestCavitySlotContext slotContext) {
-        ChestCavityData data = slotContext.data();
-        if (data.hasTaskIf(task -> task instanceof HydraSpleenTask && !task.canRemove(slotContext.entity()))) return;
-        data.addTask(new HydraSpleenTask(data));
     }
 
     /**
@@ -231,6 +221,47 @@ public class IceAndFireOrganUtil {
                     poison.getAmplifier()
                 )
             );
+        }
+    }
+
+    /**
+     * 九头蛇脾脏 tick - 低血量时将中毒转化为治疗
+     */
+    public static void hydraSpleenTick(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.tickCount % 20 != 0) return;
+
+        MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
+        if (poison == null || poison.getDuration() <= 0) return;
+
+        float healthRatio = entity.getHealth() / entity.getMaxHealth();
+        if (healthRatio > 0.5) return;
+
+        int healMultiplier;
+        if (healthRatio <= 0.1) {
+            healMultiplier = 10;
+        } else if (healthRatio <= 0.2) {
+            healMultiplier = 5;
+        } else {
+            healMultiplier = 3;
+        }
+
+        int amplifier = poison.getAmplifier() + 1;
+        float healAmount = amplifier * healMultiplier;
+        int consumeDuration = Math.min((int) Math.ceil(healAmount), poison.getDuration());
+
+        entity.heal(Math.min(healAmount, consumeDuration));
+
+        int newDuration = poison.getDuration() - consumeDuration;
+        entity.removeEffect(MobEffects.POISON);
+        if (newDuration > 0) {
+            entity.addEffect(new MobEffectInstance(
+                MobEffects.POISON,
+                newDuration,
+                poison.getAmplifier(),
+                poison.isAmbient(),
+                poison.isVisible()
+            ));
         }
     }
 

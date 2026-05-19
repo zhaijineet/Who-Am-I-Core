@@ -1,20 +1,14 @@
 package net.zhaiji.who_am_i_core.util;
 
 import com.finderfeed.fdbosses.content.entities.chesed_boss.chesed_mini_ray.ChesedMiniRay;
-import com.finderfeed.fdbosses.content.entities.geburah.sins.attachment.PlayerSins;
-import com.finderfeed.fdbosses.init.BossEffects;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
-
-import java.util.Iterator;
 
 public class FDBossesOrganUtil {
     /**
@@ -65,33 +59,5 @@ public class FDBossesOrganUtil {
         }
     }
 
-    /**
-     * 血肉偶像主动技能：赎罪祭血
-     * <p>
-     * 使用迭代器逐个遍历负面效果，每有1个负面效果当前生命值折半一次并立即清除该效果。
-     * 当清除的是「罪人」效果时，额外减少1层罪孽。
-     * </p>
-     */
-    public static boolean fleshIdolSkill(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        if (entity.level().isClientSide()) return false;
 
-        float health = entity.getHealth();
-        Iterator<MobEffectInstance> iterator = entity.getActiveEffects().iterator();
-        while (iterator.hasNext()) {
-            MobEffectInstance effect = iterator.next();
-            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
-                health /= 2;
-                // 清除罪人效果时，减少1层罪孽
-                if (effect.getEffect().is(BossEffects.SINNER) && entity instanceof Player player) {
-                    PlayerSins sins = PlayerSins.getPlayerSins(player);
-                    sins.setSinnedTimes(Math.max(0, sins.getSinnedTimes() - 1));
-                    PlayerSins.setPlayerSins(player, sins);
-                }
-                entity.removeEffect(effect.getEffect());
-            }
-        }
-        entity.setHealth(Math.max(1, health));
-        return true;
-    }
 }

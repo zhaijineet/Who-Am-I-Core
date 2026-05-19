@@ -59,16 +59,6 @@ public class FDBossesOrgans {
             .build()
     );
 
-    // 血肉偶像
-    public static final Supplier<Item> FLESH_IDOL = WAICItem.ITEM.register(
-        "flesh_idol",
-        () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 2)
-            .skill(FDBossesOrganUtil::fleshIdolSkill)
-            .cooldown(20 * 20)
-            .build()
-    );
-
     public static void register() {
     }
 }

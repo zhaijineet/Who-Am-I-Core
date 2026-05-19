@@ -91,7 +91,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 │
 ├── organ/                     # ⚠ 核心目录：所有器官定义
 │   ├── WAICOrgans.java        # 本模组核心器官（墨水、颜料、木质、弗兰肯斯坦、病变、九狱、双子魔眼、拟态、幻想种、布织、独立器官）
-│   ├── IceAndFireOrgans.java  # 冰与火：火龙/冰龙/电龙器官、悚恐怖官、九头蛇器官
+│   ├── IceAndFireOrgans.java  # 冰与火：火龙/冰龙/电龙器官、悚怖器官、九头蛇器官
 │   ├── MowziesMobOrgans.java  # Mowzie's Mobs：胸中新星、制御棒、衰老器官、禅心、泥峭系列
 │   ├── FDBossesOrgans.java    # FDBosses 逆卡巴拉：王国战士之心、王国、慈悲、严厉
 │   ├── AnvilCraftOrgans.java  # AnvilCraft：皇家钢、诅咒金、余烬金属、浮霜金属、超限合金
@@ -110,7 +110,6 @@ src/main/java/net/zhaiji/who_am_i_core/
 │   ├── ChestNovaTask.java     # 胸中新星任务（燃烧周围器官、召唤乌姆塔纳追随者）
 │   ├── DragonBreathCastingTask.java # 龙息施法任务
 │   ├── HydraLungBreathTask.java    # 九头蛇肺吐息任务
-│   ├── HydraSpleenTask.java        # 九头蛇脾脏治疗任务
 │   └── StraightIntestineTask.java  # 直肠子掉落食物任务
 │
 └── util/
@@ -120,7 +119,7 @@ src/main/java/net/zhaiji/who_am_i_core/
     ├── AnvilCraftOrganUtil.java    # AnvilCraft 器官工具类（浮霜金属、超限合金）
     ├── CataclysmOrganUtil.java     # 灾变器官工具类（涛浪提灯、风暴脊柱/肋骨、焰魔、巨兽、远古工厂、咒翼灵骸等）
     ├── CompanionsOrganUtil.java    # Companions 器官工具类（教宗心脏/脾脏/阑尾）
-    ├── IceAndFireOrganUtil.java    # 冰火器官工具类（龙宝玉、吐息、悚恐怖匣、九头蛇全套技能）
+    ├── IceAndFireOrganUtil.java    # 冰火器官工具类（龙宝玉、吐息、悚怖命匣、九头蛇全套技能）
     ├── IronSpellOrganUtil.java     # 铁魔法器官工具类（腐败魂灯、尸王脊柱/肋骨）
     └── MowziesMobOrganUtil.java    # Mowzie 器官工具类（护心镜、胸中新星、泥峭等）
 ```
@@ -290,8 +289,9 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 ## 任务系统（Task）
 
 - **ChestNovaTask** — 胸腔关闭时烧毁周围器官（魔法/机械除外），检测乌姆塔纳面具并召唤追随者
-- **HydraSpleenTask** — 血量低于 50% 时将中毒效果转化为治疗
 - **StraightIntestineTask** — 食用食物后 30% 几率在 3 秒后掉落该食物
+
+> 九头蛇脾脏治疗效果已从独立 Task 改为器官 `.tick()` 回调（`IceAndFireOrganUtil.hydraSpleenTick`），不再使用 Task 系统。
 
 ---
 

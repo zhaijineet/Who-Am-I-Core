@@ -119,9 +119,8 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_MUSCLE = WAICItem.ITEM.register(
         "ember_metal_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 2.0)
+            .addValueAttribute(InitAttribute.STRENGTH, 2.5)
             .addValueAttribute(InitAttribute.SPEED, 2.0)
-            .addValueAttribute(WAICAttribute.MELEE_DAMAGE, 0.5)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2.5)
             .build()
     );

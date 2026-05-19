@@ -35,17 +35,20 @@ import java.util.Map;
 public class OrganUtil {
     /**
      * 计算周围8个位置的槽位索引，越界槽位自动排除
+     * @param slotIndex 当前槽位索引
+     * @param maxSlots 胸腔总槽位数（27/36/45/54）
      */
-    public static List<Integer> getAdjacentSlots(int slotIndex) {
+    public static List<Integer> getAdjacentSlots(int slotIndex, int maxSlots) {
         List<Integer> result = new ArrayList<>();
         int col = slotIndex % 9;
         int row = slotIndex / 9;
+        int maxRow = maxSlots / 9 - 1;
         for (int dr = -1; dr <= 1; dr++) {
             for (int dc = -1; dc <= 1; dc++) {
                 if (dr == 0 && dc == 0) continue;
                 int r = row + dr;
                 int c = col + dc;
-                if (r < 0 || r > 2 || c < 0 || c > 8) continue;
+                if (r < 0 || r > maxRow || c < 0 || c > 8) continue;
                 result.add(r * 9 + c);
             }
         }
@@ -252,7 +255,7 @@ public class OrganUtil {
             );
             return getStackTemperature(staticContext);
         }
-        List<Integer> adjacent = getAdjacentSlots(center);
+        List<Integer> adjacent = getAdjacentSlots(center, context.data().getSlots());
         double total = 0;
         // 中心 + 遍历相邻 8 格
         total += collectTemperatureFromSlot(context, center);

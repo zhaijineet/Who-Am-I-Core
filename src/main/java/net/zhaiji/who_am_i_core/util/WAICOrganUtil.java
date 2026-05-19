@@ -1,6 +1,8 @@
 package net.zhaiji.who_am_i_core.util;
 
 import com.google.common.collect.Multimap;
+import com.finderfeed.fdbosses.content.entities.geburah.sins.attachment.PlayerSins;
+import com.finderfeed.fdbosses.init.BossEffects;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
@@ -16,6 +18,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -53,6 +56,7 @@ import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 public class WAICOrganUtil {
@@ -554,7 +558,7 @@ public class WAICOrganUtil {
         int missingHP = (int) (entity.getMaxHealth() - entity.getHealth());
         if (missingHP <= 0) return false;
 
-        int clothCount = context.data().getOrganCount(WAICItemTagManager.CLOTH_ORGAN);
+        int clothCount = context.data().getOrganCount(WAICItemTagManager.CLOTH);
 
         BundleContents contents = context.stack().getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
         int totalWool = 0;
@@ -721,7 +725,7 @@ public class WAICOrganUtil {
      * 设置单个蓄能模块的电荷量
      */
     public static void setModuleCharge(ItemStack module, float charge) {
-        CompoundTag tag = new CompoundTag();
+        CompoundTag tag = module.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
         tag.putFloat("charge", Math.max(0, charge));
         module.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
@@ -786,8 +790,8 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 从蓄能模块中提取电荷（按比例从各模块扣除）
-     * 内部处理充能肌束余电回收
+     * 从蓄能模块中提取电荷（优先消耗超载电荷，再消耗普通电荷）
+     * 内部处理导流肋骨余电回收
      */
     public static float extractCharge(ChestCavityData data, LivingEntity entity, float amount, boolean simulate) {
         if (amount <= 0) return 0;
@@ -801,18 +805,33 @@ public class WAICOrganUtil {
         if (simulate) return toExtract;
 
         float remaining = toExtract;
+
+        // 第一阶段：优先消耗超载电荷（超出每模块500基础容量的部分）
         for (ItemStack module : modules) {
+            if (remaining <= 0) break;
+            float moduleCharge = getModuleCharge(module);
+            float overload = Math.max(0, moduleCharge - 500);
+            float extract = Math.min(remaining, overload);
+            if (extract > 0) {
+                setModuleCharge(module, moduleCharge - extract);
+                remaining -= extract;
+            }
+        }
+
+        // 第二阶段：消耗普通电荷
+        for (ItemStack module : modules) {
+            if (remaining <= 0) break;
             float moduleCharge = getModuleCharge(module);
             float extract = Math.min(remaining, moduleCharge);
             if (extract > 0) {
                 setModuleCharge(module, moduleCharge - extract);
                 remaining -= extract;
             }
-            if (remaining <= 0) break;
         }
+
         float extracted = toExtract - remaining;
-        // 充能肌束余电回收
-        if (extracted > 0 && data.hasOrgan(WAICOrgans.CHARGED_MUSCLE.get())) {
+        // 导流肋骨余电回收
+        if (extracted > 0 && data.hasOrgan(WAICOrgans.CURRENT_RIB.get())) {
             float healRate = isOverloadMode(entity) ? 0.20f : 0.10f;
             entity.heal(extracted * healRate);
         }
@@ -820,11 +839,11 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 消耗电荷（含充能肌束回路返还逻辑）
+     * 消耗电荷（含导流肋骨回路返还逻辑）
      */
     public static float consumeCharge(ChestCavityData data, LivingEntity entity, float amount, boolean simulate) {
         float extracted = extractCharge(data, entity, amount, simulate);
-        if (extracted > 0 && !simulate && data.hasOrgan(WAICOrgans.CHARGED_MUSCLE.get())) {
+        if (extracted > 0 && !simulate && data.hasOrgan(WAICOrgans.CURRENT_RIB.get())) {
             float refundChance = isOverloadMode(entity) ? 0.5f : 0.25f;
             if (entity.getRandom().nextFloat() < refundChance) {
                 insertCharge(data, extracted, false);
@@ -885,18 +904,18 @@ public class WAICOrganUtil {
 
     /**
      * 传导链节主动技能：激活超频模式
+     * 消耗当前总电荷的一半，持续时间等于消耗电荷量（tick）
      */
     public static boolean conductiveSpineSkill(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
         LivingEntity entity = context.entity();
         List<ItemStack> modules = collectEnergyModules(data);
         if (modules.isEmpty()) return false;
-        float maxCharge = getMaxCharge(modules);
-        float activationCost = maxCharge / 2;
         float currentCharge = getCharge(modules);
-        if (currentCharge < activationCost) return false;
+        float activationCost = currentCharge / 2;
+        if (activationCost <= 0) return false;
         consumeCharge(data, entity, activationCost, false);
-        entity.addEffect(new MobEffectInstance(WAICEffect.OVERLOAD, 200));
+        entity.addEffect(new MobEffectInstance(WAICEffect.OVERLOAD, (int) activationCost));
         return true;
     }
 
@@ -1019,6 +1038,34 @@ public class WAICOrganUtil {
      */
     public static void gluttonyModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+    }
+
+    /**
+     * 暴食食用效果（在 LivingEntityUseItemEvent.Finish 中调用）
+     * 效果2 (N≥2)：食用获得饥饿值×N的黄心（吸收生命值），上限N×20
+     * 效果3 (N≥3)：食用额外回复N点生命
+     */
+    public static void gluttonyEatEffect(LivingEntity entity, ChestCavityData data, ItemStack food) {
+        if (!data.hasOrgan(WAICOrgans.GLUTTONY.get())) return;
+
+        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        if (n < 2) return;
+
+        FoodProperties foodProperties = food.get(DataComponents.FOOD);
+        if (foodProperties == null) return;
+        int nutrition = foodProperties.nutrition();
+
+        // 效果2：吸收生命值（黄心），上限 N × 20
+        float absorptionToAdd = Math.min((float) nutrition * n, n * 20.0F);
+        if (absorptionToAdd > 0) {
+            float currentAbsorption = entity.getAbsorptionAmount();
+            entity.setAbsorptionAmount(currentAbsorption + absorptionToAdd);
+        }
+
+        // 效果3：额外生命回复
+        if (n >= 3) {
+            entity.heal(n);
+        }
     }
 
     // ==================== 贪婪（肺脏）====================
@@ -1195,5 +1242,35 @@ public class WAICOrganUtil {
         if (bonusDamage > 0) {
             target.hurt(target.damageSources().mobAttack(context.entity()), bonusDamage);
         }
+    }
+
+    /**
+     * 血肉偶像主动技能：赎罪祭血
+     * <p>
+     * 使用迭代器逐个遍历负面效果，每有1个负面效果当前生命值折半一次并立即清除该效果。
+     * 当清除的是「罪人」效果时，额外减少1层罪孽。
+     * </p>
+     */
+    public static boolean fleshIdolSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.level().isClientSide()) return false;
+
+        float health = entity.getHealth();
+        Iterator<MobEffectInstance> iterator = entity.getActiveEffects().iterator();
+        while (iterator.hasNext()) {
+            MobEffectInstance effect = iterator.next();
+            if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
+                health /= 2;
+                // 清除罪人效果时，减少1层罪孽
+                if (effect.getEffect().is(BossEffects.SINNER) && entity instanceof Player player) {
+                    PlayerSins sins = PlayerSins.getPlayerSins(player);
+                    sins.setSinnedTimes(Math.max(0, sins.getSinnedTimes() - 1));
+                    PlayerSins.setPlayerSins(player, sins);
+                }
+                entity.removeEffect(effect.getEffect());
+            }
+        }
+        entity.setHealth(Math.max(1, health));
+        return true;
     }
 }

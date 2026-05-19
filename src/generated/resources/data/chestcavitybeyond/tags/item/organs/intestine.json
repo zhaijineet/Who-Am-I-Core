@@ -1,21 +1,22 @@
 {
   "values": [
+    "who_am_i_core:fantastical_intestine",
+    "who_am_i_core:frost_metal_intestine",
+    "who_am_i_core:transcendium_intestine",
+    "who_am_i_core:cursed_gold_intestine",
+    "who_am_i_core:pontiff_intestine",
     "who_am_i_core:aged_intestine",
     "who_am_i_core:fire_dragon_intestine",
     "who_am_i_core:ice_dragon_intestine",
     "who_am_i_core:lightning_dragon_intestine",
-    "who_am_i_core:hydra_intestine",
-    "who_am_i_core:fantastical_intestine",
-    "who_am_i_core:cloth_intestine",
-    "who_am_i_core:frost_metal_intestine",
-    "who_am_i_core:transcendium_intestine",
-    "who_am_i_core:cursed_gold_intestine",
-    "who_am_i_core:lust",
-    "who_am_i_core:pontiff_intestine",
     "who_am_i_core:ink_intestine",
+    "who_am_i_core:cloth_intestine",
+    "who_am_i_core:crimson_intestine",
     "who_am_i_core:pigment_intestine",
     "who_am_i_core:wooden_intestine",
     "who_am_i_core:frankenstein_intestine",
-    "who_am_i_core:lesion_intestine"
+    "who_am_i_core:lesion_intestine",
+    "who_am_i_core:lust",
+    "who_am_i_core:hydra_intestine"
   ]
 }

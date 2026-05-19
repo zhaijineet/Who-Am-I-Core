@@ -50,7 +50,6 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
-import net.zhaiji.who_am_i_core.task.HydraSpleenTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
@@ -80,7 +79,6 @@ public class CommonEventHandler {
 
     public static void handlerChestCavityRegisterEvent(ChestCavityRegisterEvent event) {
         event.registerTask(ChestNovaTask.TYPE, ChestNovaTask::new);
-        event.registerTask(HydraSpleenTask.TYPE, HydraSpleenTask::new);
         event.registerTask(StraightIntestineTask.TYPE, StraightIntestineTask::new);
 
         // 注册可食用条件
@@ -172,7 +170,7 @@ public class CommonEventHandler {
             return;
         }
         // 余烬金属器官火焰吸收：受到火焰伤害时取消伤害并回复等量生命值
-        if (data.hasOrgan(WAICItemTagManager.EMBER_METAL) && event.getSource().is(DamageTypeTags.IS_FIRE)) {
+        if (data.hasOrgan(WAICItemTagManager.EMBER) && event.getSource().is(DamageTypeTags.IS_FIRE)) {
             entity.heal(event.getAmount());
             event.setCanceled(true);
             return;
@@ -392,6 +390,7 @@ public class CommonEventHandler {
 
     /**
      * 直肠子：30% 几率在 3 秒后掉落一份相同食物
+     * 暴食：N≥2获得黄心 + N≥3回复生命
      * 蛋糕胃：食用食物时给予甜蜜效果，等级 = 蛋糕器官数量，可叠加，每次重置 30 秒
      */
     public static void handlerLivingEntityUseItemEvent$Finish(LivingEntityUseItemEvent.Finish event) {
@@ -408,24 +407,27 @@ public class CommonEventHandler {
         // 直肠子技能
         WAICOrganUtil.straightIntestineSkill(entity, data, food);
 
+        // 暴食额外效果（黄心 + 生命回复）
+        WAICOrganUtil.gluttonyEatEffect(entity, data, food);
+
         // 蛋糕胃：给予甜蜜效果
-        if (!data.hasOrgan(CompanionsOrgans.CAKE_STOMACH.get())) return;
+        if (data.hasOrgan(CompanionsOrgans.CAKE_STOMACH.get())) {
+            // 计算蛋糕器官数量
+            int cakeOrganCount = data.getOrganCount(WAICItemTagManager.CAKE);
 
-        // 计算蛋糕器官数量
-        int cakeOrganCount = data.getOrganCount(WAICItemTagManager.CAKE);
-
-        if (cakeOrganCount <= 0) return;
-
-        MobEffectInstance currentSweetness = entity.getEffect(WAICEffect.SWEETNESS);
-        int newAmplifier;
-        if (currentSweetness != null) {
-            // 已有甜蜜：叠加等级，重置时长
-            newAmplifier = currentSweetness.getAmplifier() + cakeOrganCount;
-        } else {
-            // 没有甜蜜：初始等级 = 蛋糕器官数量 - 1（因为 amplifier 从 0 开始）
-            newAmplifier = cakeOrganCount - 1;
+            if (cakeOrganCount > 0) {
+                MobEffectInstance currentSweetness = entity.getEffect(WAICEffect.SWEETNESS);
+                int newAmplifier;
+                if (currentSweetness != null) {
+                    // 已有甜蜜：叠加等级，重置时长
+                    newAmplifier = currentSweetness.getAmplifier() + cakeOrganCount;
+                } else {
+                    // 没有甜蜜：初始等级 = 蛋糕器官数量 - 1（因为 amplifier 从 0 开始）
+                    newAmplifier = cakeOrganCount - 1;
+                }
+                entity.addEffect(new MobEffectInstance(WAICEffect.SWEETNESS, 600, newAmplifier));
+            }
         }
-        entity.addEffect(new MobEffectInstance(WAICEffect.SWEETNESS, 600, newAmplifier));
     }
 
     /**
