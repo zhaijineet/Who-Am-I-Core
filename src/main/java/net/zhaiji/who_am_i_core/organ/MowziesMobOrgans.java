@@ -6,6 +6,7 @@ import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -66,6 +67,7 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> CONTROL_ROD = WAICItem.ITEM.register(
         "control_rod",
         () -> Organ.builder()
+            .tooltip(WAICTooltipUtil.CONTROL_ROD_TOOLTIP)
             .build()
     );
 

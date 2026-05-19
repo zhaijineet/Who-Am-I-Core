@@ -332,8 +332,6 @@ public class WAICOrganUtil {
         // 回复法力
         magicData.addMana(actualExtracted);
 
-        // 手动设置冷却（仅在成功消耗墨水后才冷却）
-        OrganSkillUtil.addCooldown(entity, context.stack(), 200);
         return true;
     }
 

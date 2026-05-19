@@ -15,14 +15,16 @@ import net.zhaiji.chestcavitybeyond.api.TooltipsKeyContext;
 import net.zhaiji.chestcavitybeyond.api.function.OrganTooltipConsumer;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
-import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class WAICTooltipUtil {
     /**
@@ -30,10 +32,11 @@ public class WAICTooltipUtil {
      */
     public static final OrganTooltipConsumer UNFINISHED_TOOLTIP = (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
         List<Component> components = List.of(Component.literal(TooltipUtil.DEFAULT_PREFIX)
-            .append(Component.translatable("organ." + WhoAmICore.MOD_ID + ".unfinished"))
+            .append(Component.translatable("organ.who_am_i_core.unfinished"))
             .withStyle(ChatFormatting.GRAY));
         TooltipUtil.simpleTooltipAdd(tooltipComponents, components);
     };
+
     /**
      * 九狱器官工具提示
      * <p>
@@ -48,8 +51,7 @@ public class WAICTooltipUtil {
             int count = data.getOrganCount(WAICItemTagManager.NINE_HELL);
             if (index == -1) count++;
             // 共用提示行（灰色 + • 前缀）
-            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
-                .append(Component.translatable("organ." + WhoAmICore.MOD_ID + ".nine_hell.hint")));
+            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX).append(Component.translatable("organ.who_am_i_core.nine_hell.hint")));
             // 复用 CCB 的 detailed 分支逻辑（九狱器官无 simple 简略文本）
             List<Component> lines = TooltipUtil.addSimpleOrDetailedLines(
                 stack,
@@ -60,6 +62,52 @@ public class WAICTooltipUtil {
             // 按数量给未激活效果加暗灰色
             for (int i = 0; i < lines.size(); i++) {
                 if (i >= count) {
+                    lines.set(i, lines.get(i).copy().withStyle(ChatFormatting.DARK_GRAY));
+                }
+            }
+            result.addAll(lines);
+            return result;
+        })
+        .build();
+
+    /**
+     * 制御棒工具提示
+     * <p>
+     * 第一行为条件提示（始终灰色），后续效果行根据制御棒是否在胸中新星相邻槽位来决定颜色：
+     * 已激活白色，未激活暗灰色。
+     * </p>
+     */
+    public static final OrganTooltipConsumer CONTROL_ROD_TOOLTIP = OrganTooltip.builder()
+        .passiveEffect((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+            List<Component> result = new ArrayList<>();
+            // 条件提示行
+            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                .append(Component.translatable("organ.who_am_i_core.control_rod.hint")));
+            // 判断制御棒是否在胸中新星的相邻槽位
+            boolean active = false;
+            if (index >= 0) {
+                for (int i = 0; i < data.getSlots(); i++) {
+                    if (data.getStackInSlot(i).is(MowziesMobOrgans.CHEST_NOVA.get())) {
+                        List<Integer> adjacent = OrganUtil.getAdjacentSlots(i, data.getSlots());
+                        if (adjacent.contains(index)) {
+                            active = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            boolean detailed = TooltipUtil.isDetailedMode(keyContext);
+            // 复用 CCB 的 detailed 分支逻辑
+            List<Component> lines = TooltipUtil.addSimpleOrDetailedLines(
+                stack,
+                "passive_effect",
+                detailed,
+                TooltipUtil.DEFAULT_PREFIX
+            );
+            // 第一行是条件提示，跳过它（上面已经手动添加了灰色的条件行）
+            // 剩余行为效果行，根据激活状态着色
+            for (int i = 0; i < lines.size(); i++) {
+                if (!active) {
                     lines.set(i, lines.get(i).copy().withStyle(ChatFormatting.DARK_GRAY));
                 }
             }
@@ -141,5 +189,34 @@ public class WAICTooltipUtil {
             }
         }
         return result;
+    }
+
+    /**
+     * 调色盘 ShiftHint — 染料种类未满 9 种时显示"按住[Shift]查看详细说明"
+     */
+    public static List<Component> paletteShiftHint(
+        ChestCavityData data,
+        int index,
+        ItemStack stack,
+        TooltipsKeyContext keyContext,
+        Item.TooltipContext context,
+        List<Component> tooltipComponents,
+        TooltipFlag tooltipFlag
+    ) {
+        BundleContents contents = stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        Set<Item> dyeTypes = new HashSet<>();
+        for (ItemStack itemStack : contents.itemsCopy()) {
+            if (ALL_DYES.contains(itemStack.getItem())) dyeTypes.add(itemStack.getItem());
+        }
+        if (dyeTypes.size() < 9) {
+            return List.of(
+                Component.empty()
+                    .append(Component.translatable(TooltipUtil.PREFIX + "tooltip.hint.0").withStyle(ChatFormatting.GRAY))
+                    .append(Component.translatable(TooltipUtil.PREFIX + "tooltip.hint.1")
+                        .withStyle(keyContext.isKeyShiftDown() ? ChatFormatting.YELLOW : ChatFormatting.DARK_GRAY))
+                    .append(Component.translatable(TooltipUtil.PREFIX + "tooltip.hint.2").withStyle(ChatFormatting.GRAY))
+            );
+        }
+        return List.of();
     }
 }

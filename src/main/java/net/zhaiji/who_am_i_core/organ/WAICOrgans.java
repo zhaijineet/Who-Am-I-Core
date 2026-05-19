@@ -150,7 +150,8 @@ public class WAICOrgans {
                 .afterPassiveEffect((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
                     CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
                     int value = tag.contains("ink") ? tag.getInt("ink") : 0;
-                    return List.of(Component.translatable(INK_BOTTLE_INK_TRANSLATION, value));
+                    return List.of(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                        .append(Component.translatable(INK_BOTTLE_INK_TRANSLATION, value)));
                 })
                 .build()
             )
@@ -163,6 +164,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 1)
             .skill(WAICOrganUtil::inkAppendixSkill)
+            .cooldown(20 * 10)
             .build()
     );
 
@@ -279,6 +281,7 @@ public class WAICOrgans {
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
             .tooltip(
                 OrganTooltip.builder()
+                .shiftHint(WAICTooltipUtil::paletteShiftHint)
                 .afterActiveSkill(WAICTooltipUtil::paletteDyeSection)
                 .build()
             )
@@ -1008,7 +1011,6 @@ public class WAICOrgans {
         "crimson_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2)
-
             .skill(WAICOrganUtil::crimsonAppendixSkill)
             .cooldown(30 * 20)
             .build()

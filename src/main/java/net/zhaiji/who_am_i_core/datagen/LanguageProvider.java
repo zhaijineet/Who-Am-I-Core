@@ -192,15 +192,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(MowziesMobOrgans.CONTROL_ROD, "Control Rod");
         addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "A certain hellbird's control rod");
+        add("organ." + WhoAmICore.MOD_ID + ".control_rod.hint", "Effects below activate when within adjacent slots of Chest Nova");
         addOrganPassiveEffect(
             MowziesMobOrgans.CONTROL_ROD,
-            "Effects below activate when within adjacent slots of Chest Nova:",
             "Follower respawn cooldown reduced from 30s to 10s",
             "Masks also provide effects to followers"
-        );
-        addOrganPassiveEffectSimple(
-            MowziesMobOrgans.CONTROL_ROD,
-            "Enhances Chest Nova follower mechanics when nearby"
         );
     }
 
@@ -232,15 +228,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(MowziesMobOrgans.CONTROL_ROD, "制御棒");
         addOrganDescription(MowziesMobOrgans.CONTROL_ROD, "这他妈是哪个太阳鸟？");
+        add("organ.who_am_i_core.control_rod.hint", "位于胸中新星相邻槽位时，以下效果生效");
         addOrganPassiveEffect(
             MowziesMobOrgans.CONTROL_ROD,
-            "位于胸中新星相邻槽位时，以下效果生效：",
             "追随者重新召唤冷却时间从30秒缩短为10秒",
             "面具也会给追随者提供效果"
-        );
-        addOrganPassiveEffectSimple(
-            MowziesMobOrgans.CONTROL_ROD,
-            "靠近胸中新星时增强追随者机制"
         );
     }
 
@@ -582,7 +574,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.INK_MUSCLE, "Ink Muscle");
         addOrganDescription(WAICOrgans.INK_MUSCLE, "Muscle fibers steeped in dark ink");
-        addOrganActiveSkill(WAICOrgans.INK_MUSCLE, "When damaged, adds ink equal to the damage taken into the Ink Bottle");
+        addOrganPassiveEffect(WAICOrgans.INK_MUSCLE, "When damaged, adds ink equal to the damage taken into the Ink Bottle");
 
         addItem(WAICOrgans.INK_APPENDIX, "Ink Appendix");
         addOrganDescription(WAICOrgans.INK_APPENDIX, "A vestigial organ darkened by ink");
@@ -616,7 +608,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.INK_MUSCLE, "墨水肌肉");
         addOrganDescription(WAICOrgans.INK_MUSCLE, "浸泡在浓墨中的肌肉纤维");
-        addOrganActiveSkill(WAICOrgans.INK_MUSCLE, "受到伤害时，将等同于伤害值的墨水注入墨水瓶");
+        addOrganPassiveEffect(WAICOrgans.INK_MUSCLE, "受到伤害时，将等同于伤害值的墨水注入墨水瓶");
 
         addItem(WAICOrgans.INK_APPENDIX, "墨水阑尾");
         addOrganDescription(WAICOrgans.INK_APPENDIX, "一根被墨水浸染的退化器官");
@@ -764,6 +756,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void lesionOrgansEN() {
         addItem(WAICOrgans.LESION_HEART, "Lesion Heart");
+        addOrganDescription(WAICOrgans.LESION_HEART, "+1 Health per harmful effect, -1 Health per beneficial effect");
         addOrganActiveSkill(WAICOrgans.LESION_HEART, "Spread all your effects to living entities within 10 blocks");
 
         addItem(WAICOrgans.LESION_LUNG, "Lesion Lung");
@@ -775,11 +768,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.LESION_APPENDIX, "Lesion Appendix");
 
         addItem(WAICOrgans.LESION_MUSCLE, "Lesion Muscle");
+        addOrganDescription(WAICOrgans.LESION_MUSCLE, "+1 Strength and +1 Speed per harmful effect");
         addOrganPassiveEffect(WAICOrgans.LESION_MUSCLE, "Deals bonus damage equal to the sum of all harmful effect levels on the target");
     }
 
     private void lesionOrgansZH() {
         addItem(WAICOrgans.LESION_HEART, "病变心脏");
+        addOrganDescription(WAICOrgans.LESION_HEART, "每有一个负面效果+1健康，每有一个正面效果−1健康");
         addOrganActiveSkill(WAICOrgans.LESION_HEART, "将自身所有效果传播给10格范围内的生物");
 
         addItem(WAICOrgans.LESION_LUNG, "病变肺脏");
@@ -791,6 +786,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.LESION_APPENDIX, "病变阑尾");
 
         addItem(WAICOrgans.LESION_MUSCLE, "病变肌肉");
+        addOrganDescription(WAICOrgans.LESION_MUSCLE, "每有一个负面效果，+1力量、+1速度");
         addOrganPassiveEffect(WAICOrgans.LESION_MUSCLE, "对目标额外造成等同于其所有负面效果等级之和的伤害");
     }
 
@@ -851,7 +847,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRAUD, "Fraud");
         addOrganPassiveEffect(
             WAICOrgans.FRAUD,
-            "Villager trade bonus experience",
+            "Gain 10× trade experience",
             "Villager trade discount",
             "Villager trades never run out of stock"
         );
@@ -919,7 +915,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRAUD, "欺诈");
         addOrganPassiveEffect(
             WAICOrgans.FRAUD,
-            "村民交易获得额外经验",
+            "获得10倍交易经验",
             "村民交易获得折扣",
             "村民交易不缺货"
         );
