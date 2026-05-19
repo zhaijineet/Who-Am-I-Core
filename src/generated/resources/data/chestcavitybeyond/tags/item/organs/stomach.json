@@ -1,8 +1,6 @@
 {
   "values": [
-    "who_am_i_core:fantastical_stomach",
-    "who_am_i_core:frost_metal_stomach",
-    "who_am_i_core:transcendium_stomach",
+    "who_am_i_core:leviathan_stomach",
     "who_am_i_core:monstrosity_furnace",
     "who_am_i_core:pontiff_stomach",
     "who_am_i_core:cake_stomach",
@@ -18,6 +16,9 @@
     "who_am_i_core:frankenstein_stomach",
     "who_am_i_core:lesion_stomach",
     "who_am_i_core:gluttony",
-    "who_am_i_core:hydra_stomach"
+    "who_am_i_core:hydra_stomach",
+    "who_am_i_core:frost_metal_stomach",
+    "who_am_i_core:transcendium_stomach",
+    "who_am_i_core:fantastical_stomach"
   ]
 }

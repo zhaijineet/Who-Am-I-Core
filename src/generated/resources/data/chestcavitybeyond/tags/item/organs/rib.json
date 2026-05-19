@@ -1,10 +1,6 @@
 {
   "values": [
-    "who_am_i_core:fantastical_rib",
-    "who_am_i_core:frost_metal_rib",
-    "who_am_i_core:transcendium_rib",
-    "who_am_i_core:ember_metal_rib",
-    "who_am_i_core:royal_steel_rib",
+    "who_am_i_core:leviathan_fishbone",
     "who_am_i_core:aptrgangr_rib",
     "who_am_i_core:maledictus_rib",
     "who_am_i_core:storm_rib",
@@ -21,6 +17,11 @@
     "who_am_i_core:pigment_rib",
     "who_am_i_core:current_rib",
     "who_am_i_core:dread_rib",
-    "who_am_i_core:hydra_rib"
+    "who_am_i_core:hydra_rib",
+    "who_am_i_core:royal_steel_rib",
+    "who_am_i_core:ember_metal_rib",
+    "who_am_i_core:frost_metal_rib",
+    "who_am_i_core:transcendium_rib",
+    "who_am_i_core:fantastical_rib"
   ]
 }

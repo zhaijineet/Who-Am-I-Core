@@ -1,9 +1,6 @@
 {
   "values": [
-    "who_am_i_core:fantastical_lung",
-    "who_am_i_core:frost_metal_lung",
-    "who_am_i_core:transcendium_lung",
-    "who_am_i_core:cursed_gold_lung",
+    "who_am_i_core:leviathan_gill",
     "who_am_i_core:pontiff_lung",
     "who_am_i_core:cake_lung",
     "who_am_i_core:aged_lung",
@@ -19,6 +16,10 @@
     "who_am_i_core:frankenstein_lung",
     "who_am_i_core:lesion_lung",
     "who_am_i_core:greed",
-    "who_am_i_core:hydra_lung"
+    "who_am_i_core:hydra_lung",
+    "who_am_i_core:cursed_gold_lung",
+    "who_am_i_core:frost_metal_lung",
+    "who_am_i_core:transcendium_lung",
+    "who_am_i_core:fantastical_lung"
   ]
 }

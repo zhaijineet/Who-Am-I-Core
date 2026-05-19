@@ -1,7 +1,5 @@
 {
   "values": [
-    "who_am_i_core:strange_mechanical_eyeball",
-    "who_am_i_core:eerie_mechanical_eyeball",
     "who_am_i_core:blazing_visage",
     "who_am_i_core:monstrosity_circuit",
     "who_am_i_core:monstrosity_furnace",
@@ -14,6 +12,8 @@
     "who_am_i_core:guardian_stone",
     "who_am_i_core:void_crystal_spine",
     "who_am_i_core:control_rod",
+    "who_am_i_core:strange_mechanical_eyeball",
+    "who_am_i_core:eerie_mechanical_eyeball",
     "who_am_i_core:computing_core",
     "who_am_i_core:current_rib",
     "who_am_i_core:charged_muscle",

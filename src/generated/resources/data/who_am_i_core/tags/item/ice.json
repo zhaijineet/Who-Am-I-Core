@@ -1,17 +1,6 @@
 {
   "values": [
     "who_am_i_core:ice_malkuth_warrior_heart",
-    "who_am_i_core:frost_metal_heart",
-    "who_am_i_core:frost_metal_lung",
-    "who_am_i_core:frost_metal_spine",
-    "who_am_i_core:frost_metal_stomach",
-    "who_am_i_core:frost_metal_intestine",
-    "who_am_i_core:frost_metal_kidney",
-    "who_am_i_core:frost_metal_spleen",
-    "who_am_i_core:frost_metal_liver",
-    "who_am_i_core:frost_metal_appendix",
-    "who_am_i_core:frost_metal_rib",
-    "who_am_i_core:frost_metal_muscle",
     "who_am_i_core:phantom_heart",
     "who_am_i_core:phantom_shard",
     "iceandfire:ice_dragon_heart",
@@ -31,6 +20,17 @@
     "who_am_i_core:frostburn_soul",
     "who_am_i_core:dread_phylactery",
     "who_am_i_core:dread_rib",
-    "who_am_i_core:dread_spine"
+    "who_am_i_core:dread_spine",
+    "who_am_i_core:frost_metal_heart",
+    "who_am_i_core:frost_metal_lung",
+    "who_am_i_core:frost_metal_spine",
+    "who_am_i_core:frost_metal_stomach",
+    "who_am_i_core:frost_metal_intestine",
+    "who_am_i_core:frost_metal_kidney",
+    "who_am_i_core:frost_metal_spleen",
+    "who_am_i_core:frost_metal_liver",
+    "who_am_i_core:frost_metal_appendix",
+    "who_am_i_core:frost_metal_rib",
+    "who_am_i_core:frost_metal_muscle"
   ]
 }

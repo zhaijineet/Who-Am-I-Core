@@ -106,7 +106,7 @@ public class CompanionsOrganUtil {
         if (!(hitResult instanceof EntityHitResult entityHitResult)) return false;
         if (!(entityHitResult.getEntity() instanceof LivingEntity target)) return false;
 
-        boolean isPositiveTemp = OrganUtil.getEffectiveTemperature(entity) > 0;
+        boolean isPositiveTemp = OrganUtil.getEffectiveTemperature(entity) >= 0;
 
         HolinessStartProjectile star = CompanionsEntities.HOLINESS_STAR.get().create(level);
         if (star == null) return false;

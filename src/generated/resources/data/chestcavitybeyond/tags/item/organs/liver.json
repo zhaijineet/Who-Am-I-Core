@@ -1,9 +1,5 @@
 {
   "values": [
-    "who_am_i_core:fantastical_liver",
-    "who_am_i_core:frost_metal_liver",
-    "who_am_i_core:transcendium_liver",
-    "who_am_i_core:cursed_gold_liver",
     "who_am_i_core:pontiff_liver",
     "who_am_i_core:cake_liver",
     "who_am_i_core:aged_liver",
@@ -18,6 +14,10 @@
     "who_am_i_core:wooden_liver",
     "who_am_i_core:frankenstein_liver",
     "who_am_i_core:lesion_liver",
-    "who_am_i_core:wrath"
+    "who_am_i_core:wrath",
+    "who_am_i_core:cursed_gold_liver",
+    "who_am_i_core:frost_metal_liver",
+    "who_am_i_core:transcendium_liver",
+    "who_am_i_core:fantastical_liver"
   ]
 }

@@ -38,270 +38,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICCreativeModeTab.WHO_AM_I_CORE_TAB_TRANSLATABLE, "Who Am I");
 
         addItem(WAICItem.PETITE_CHEST_OPENER, "Petite Chest Opener");
-
-        addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Fire Malkuth Warrior Heart");
-        addOrganActiveSkill(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Immune to fire attacks when fighting Malkuth");
-        addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Ice Malkuth Warrior Heart");
-        addOrganActiveSkill(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Immune to ice attacks when fighting Malkuth");
-        addItem(FDBossesOrgans.MALKUTH, "Malkuth");
-        addOrganActiveSkill(
-            FDBossesOrgans.MALKUTH,
-            "Global temperature is always 0; local temperature uses the full positive/negative temperature from all organs"
-        );
-        addItem(FDBossesOrgans.CHESED, "Chesed");
-        addOrganPassiveEffect(
-            FDBossesOrgans.CHESED,
-            "Attacks summon a lightning ray that tracks the target, dealing 33% max HP damage and applying Shocked",
-            "Damage = Player max HP × 33%",
-            "Applies Shocked effect (target deals 25% less damage, 10 seconds)",
-            "Cooldown: 3 seconds"
-        );
-        addItem(FDBossesOrgans.GEBURAH, "Geburah");
-        addOrganActiveSkill(FDBossesOrgans.GEBURAH, "Attacks deal bonus damage equal to 3% max HP per harmful effect on the target");
-
-        // 利维坦器官翻译
-        addItem(CataclysmOrgans.LEVIATHAN_HEART, "Leviathan Heart");
-        addItem(CataclysmOrgans.LEVIATHAN_MUSCLE, "Leviathan Muscle");
-        addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "Leviathan Intestine");
-        addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "Leviathan Stomach");
-        addItem(CataclysmOrgans.LEVIATHAN_GILL, "Leviathan Gill");
-        addItem(CataclysmOrgans.LEVIATHAN_SPINE, "Leviathan Spine");
-        addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "Leviathan Fishbone");
-
-        // Cataclysm 咒骸器官翻译
-        addItem(CataclysmOrgans.APTRGANGR_SPINE, "Aptrgangr Spine");
-        addItem(CataclysmOrgans.APTRGANGR_RIB, "Aptrgangr Rib");
-
-        // Cataclysm 咒翼灵骸器官翻译
-        addItem(CataclysmOrgans.MALEDICTUS_SPINE, "Maledictus Spine");
-        addItem(CataclysmOrgans.MALEDICTUS_RIB, "Maledictus Rib");
-        addItem(CataclysmOrgans.PHANTOM_HEART, "Phantom Heart");
-        addOrganPassiveEffect(CataclysmOrgans.PHANTOM_HEART, "A cursed heart of the Maledictus");
-        addOrganActiveSkill(CataclysmOrgans.PHANTOM_HEART, "While sprinting, all damage dealt is increased by 25%");
-        addItem(CataclysmOrgans.PHANTOM_SHARD, "Phantom Shard");
-        addItem(CataclysmOrgans.SEALING_STONE_SLAB, "Sealing Stone Slab");
-        addOrganActiveSkill(CataclysmOrgans.SEALING_STONE_SLAB, "Summons 5 phantom halberds in a fan shape, each dealing 12 magic damage");
-
-        // Cataclysm 斯库拉器官翻译
-        addItem(CataclysmOrgans.TIDAL_LANTERN, "Tidal Lantern");
-        addOrganPassiveEffect(CataclysmOrgans.TIDAL_LANTERN, "Consume all phlegm on attack");
-        addOrganActiveSkill(
-            CataclysmOrgans.TIDAL_LANTERN,
-            "Consumes all current phlegm and adds equal damage",
-            "When consumed phlegm >= 30, summons water waves with damage equal to this attack"
-        );
-        addItem(CataclysmOrgans.STORM_SPINE, "Storm Spine");
-        addOrganPassiveEffect(CataclysmOrgans.STORM_SPINE, "Absorbs damage into phlegm");
-        addOrganActiveSkill(
-            CataclysmOrgans.STORM_SPINE,
-            "When hit, absorbs 20% of damage as phlegm (also reduces damage by 20%), capped at 10 per hit",
-            "Becomes inactive when phlegm is full"
-        );
-        addItem(CataclysmOrgans.STORM_RIB, "Storm Rib");
-        addOrganActiveSkill(CataclysmOrgans.STORM_RIB, "+10 phlegm capacity");
-
-        // ==================== 焰魔器官翻译 ====================
-        addItem(CataclysmOrgans.UNDYING_EMBER, "Undying Ember");
-        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "Grants Strength based on √temperature");
-        addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "Ignited Rib Plating");
-        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "Grants Block based on √local temperature");
-        addItem(CataclysmOrgans.BLAZING_VISAGE, "Blazing Visage");
-        addOrganPassiveEffect(CataclysmOrgans.BLAZING_VISAGE, "Applies Blazing Brand on melee hit. Heals based on local temperature.");
-        addOrganActiveSkill(
-            CataclysmOrgans.BLAZING_VISAGE,
-            "Melee attacks apply Blazing Brand (-20% armor, -20% toughness)",
-            "Heal Value = 2 + local temperature x 0.5. Doubled if target already has Blazing Brand"
-        );
-
-        // ==================== 下界合金巨兽器官翻译 ====================
-        addItem(CataclysmOrgans.MONSTROSITY_CORE, "Monstrosity Core");
-        addOrganPassiveEffect(CataclysmOrgans.MONSTROSITY_CORE, "Generates yellow bile from heat. +100 yellow bile capacity.");
-        addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Monstrosity Circuit");
-        addOrganActiveSkill(
-            CataclysmOrgans.MONSTROSITY_CIRCUIT,
-            "Consumes 100 yellow bile to trigger AoE earthquake dealing (bile + 5% max HP + temp x 2) damage"
-        );
-        addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "Monstrosity Furnace");
-        addOrganPassiveEffect(
-            CataclysmOrgans.MONSTROSITY_FURNACE,
-            "Allows drinking lava. Restores hunger, yellow bile, and grants Monstrous effect."
-        );
-
-        // Cataclysm 远古工厂器官翻译
-        addItem(CataclysmOrgans.TACTICAL_DISK, "Tactical Disk");
-        addOrganPassiveEffect(
-            CataclysmOrgans.TACTICAL_DISK,
-            "Stores combat logs from factory components. More data means better system diagnostics."
-        );
-        addItem(CataclysmOrgans.REINFORCED_FRAME, "Reinforced Frame");
-        addOrganPassiveEffect(CataclysmOrgans.REINFORCED_FRAME, "Standard factory structural component. Rigid, stable, unmovable.");
-        addItem(CataclysmOrgans.POWER_CELL, "Power Cell");
-        addOrganPassiveEffect(CataclysmOrgans.POWER_CELL, "Standard factory power module. Slowly releases repair current.");
-        addItem(CataclysmOrgans.COMPUTE_CHIP, "Compute Chip");
-        addOrganPassiveEffect(CataclysmOrgans.COMPUTE_CHIP, "Co-processor. Each additional factory part opens a new data channel.");
-        addItem(CataclysmOrgans.MECHANICAL_STAR, "Mechanical Star");
-        addOrganActiveSkill(
-            CataclysmOrgans.MECHANICAL_STAR,
-            "Lock onto an enemy in sight and fire a homing missile (8.0 damage). 8 second cooldown."
-        );
-        addItem(CataclysmOrgans.DEATH_LENS, "Death Lens");
-        addOrganActiveSkill(
-            CataclysmOrgans.DEATH_LENS,
-            "Fire a death laser (6 damage + 6%% target max HP). No fire or block damage. 15 second cooldown."
-        );
-
-        // Cataclysm 末影守卫器官翻译
-        addItem(CataclysmOrgans.GUARDIAN_STONE, "Guardian Stone");
-        addItem(CataclysmOrgans.VOID_CRYSTAL_SPINE, "Void Crystal Spine");
-        addOrganPassiveEffect(
-            CataclysmOrgans.VOID_CRYSTAL_SPINE,
-            "The Ender Guardian's spinal power crystal, still pulsing with residual void energy."
-        );
-        addOrganActiveSkill(
-            CataclysmOrgans.VOID_CRYSTAL_SPINE,
-            "Summons 3 rings of void runes around you (inner 6, middle 11, outer 14). 15 second cooldown."
-        );
-
-        // IronSpell 亡魂器官翻译
-        addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
-        addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
-
-        // IronSpell 提洛斯回响·原初受火者器官翻译
-        addItem(IronSpellOrgans.PRIMORDIAL_FLAME, "Primordial Flame");
-        addOrganPassiveEffect(IronSpellOrgans.PRIMORDIAL_FLAME, "The first spark that kindled the primeval fire");
-        addOrganActiveSkill(IronSpellOrgans.PRIMORDIAL_FLAME, "Fire spells gain +1 spell level");
-
-        // IronSpell 高位唤魔者器官翻译
-        addItem(IronSpellOrgans.EMERALD_SKULL, "Emerald Skull");
-        addOrganPassiveEffect(IronSpellOrgans.EMERALD_SKULL, "The cursed skull of an arch-evoker, pulsing with emerald magic");
-        addOrganActiveSkill(IronSpellOrgans.EMERALD_SKULL, "Evocation spells gain +1 spell level");
-
-        // IronSpell 死者之王器官翻译
-        addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Corrupted Soul Lantern");
-        addOrganPassiveEffect(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Harvests souls from killed entities into black bile");
-        addOrganActiveSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Gain black bile when nearby entities die");
-
-        addItem(IronSpellOrgans.DEAD_KING_SPINE, "Dead King Spine");
-        addOrganPassiveEffect(IronSpellOrgans.DEAD_KING_SPINE, "Absorbs damage with black bile");
-        addOrganActiveSkill(IronSpellOrgans.DEAD_KING_SPINE, "Consumes black bile equal to damage absorbed (up to 50%)");
-
-        addItem(IronSpellOrgans.DEAD_KING_RIB, "Dead King Rib");
-        addOrganPassiveEffect(IronSpellOrgans.DEAD_KING_RIB, "Increases black bile capacity");
-        addOrganActiveSkill(IronSpellOrgans.DEAD_KING_RIB, "+10 max black bile");
-
-        // ==================== Companions 神圣教宗器官翻译 ====================
-        addItem(CompanionsOrgans.PONTIFF_HEART, "Pontiff Heart");
-        addOrganPassiveEffect(
-            CompanionsOrgans.PONTIFF_HEART,
-            "When HP drops below 30%, heals 50% max HP and grants Strength II, Resistance II, Speed II for 15s. 3min cooldown"
-        );
-
-        addItem(CompanionsOrgans.PONTIFF_LUNG, "Pontiff Lung");
-        addItem(CompanionsOrgans.PONTIFF_STOMACH, "Pontiff Stomach");
-        addItem(CompanionsOrgans.PONTIFF_INTESTINE, "Pontiff Intestine");
-        addItem(CompanionsOrgans.PONTIFF_KIDNEY, "Pontiff Kidney");
-
-        addItem(CompanionsOrgans.PONTIFF_SPLEEN, "Pontiff Spleen");
-        addOrganActiveSkill(
-            CompanionsOrgans.PONTIFF_SPLEEN,
-            "Releases expanding fire rings. Layers = min(1 + Pontiff organs / 4, 3). 10s cooldown"
-        );
-
-        addItem(CompanionsOrgans.PONTIFF_LIVER, "Pontiff Liver");
-
-        addItem(CompanionsOrgans.PONTIFF_APPENDIX, "Pontiff Appendix");
-        addOrganActiveSkill(
-            CompanionsOrgans.PONTIFF_APPENDIX,
-            "Launches a tracking star. Positive temp = Red (fire), Negative = Blue (freeze). 8s cooldown"
-        );
-
-        addItem(CompanionsOrgans.PONTIFF_MUSCLE, "Pontiff Muscle");
-        addOrganActiveSkill(CompanionsOrgans.PONTIFF_MUSCLE, "Knockback Resistance +8%");
-
-        // ==================== Companions 蛋糕器官翻译 ====================
-        addItem(CompanionsOrgans.CAKE_HEART, "Cake Heart");
-        addItem(CompanionsOrgans.CAKE_LUNG, "Cake Lung");
-        addItem(CompanionsOrgans.CAKE_STOMACH, "Cake Stomach");
-        addOrganActiveSkill(CompanionsOrgans.CAKE_STOMACH, "Eating food grants Sweetness effect. Stacks and resets duration on each eat");
-        addItem(CompanionsOrgans.CAKE_LIVER, "Cake Liver");
-        addOrganActiveSkill(
-            CompanionsOrgans.CAKE_LIVER,
-            "Sweetness level >= 2, consumes 1 level per second to remove 1 random harmful effect"
-        );
-
-        // 幻想种器官翻译
-        addItem(WAICOrgans.FANTASTICAL_HEART, "Fantastical Heart");
-        addItem(WAICOrgans.FANTASTICAL_LUNG, "Fantastical Lung");
-        addItem(WAICOrgans.FANTASTICAL_SPINE, "Fantastical Spine");
-        addItem(WAICOrgans.FANTASTICAL_STOMACH, "Fantastical Stomach");
-        addItem(WAICOrgans.FANTASTICAL_INTESTINE, "Fantastical Intestine");
-        addItem(WAICOrgans.FANTASTICAL_KIDNEY, "Fantastical Kidney");
-        addItem(WAICOrgans.FANTASTICAL_SPLEEN, "Fantastical Spleen");
-        addItem(WAICOrgans.FANTASTICAL_LIVER, "Fantastical Liver");
-        addItem(WAICOrgans.FANTASTICAL_APPENDIX, "Fantastical Appendix");
-        addItem(WAICOrgans.FANTASTICAL_RIB, "Fantastical Rib");
-        addItem(WAICOrgans.FANTASTICAL_MUSCLE, "Fantastical Muscle");
-
-        // 浮霜器官翻译
-        addItem(AnvilCraftOrgans.FROST_METAL_HEART, "Frost Metal Heart");
-        addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "Frost Metal Lung");
-        addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "Frost Metal Spine");
-        addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "Frost Metal Stomach");
-        addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "Frost Metal Intestine");
-        addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "Frost Metal Kidney");
-        addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "Frost Metal Spleen");
-        addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "Frost Metal Liver");
-        addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "Frost Metal Appendix");
-        addItem(AnvilCraftOrgans.FROST_METAL_RIB, "Frost Metal Rib");
-        addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "Frost Metal Muscle");
-
-        // 浮霜器官description描述
-        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "Convert all enchantments into organ attributes");
-
-        // 超限合金器官翻译
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "Transcendium Heart");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "Transcendium Lung");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "Transcendium Spine");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "Transcendium Stomach");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "Transcendium Intestine");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "Transcendium Kidney");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "Transcendium Spleen");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "Transcendium Liver");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "Transcendium Appendix");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "Transcendium Rib");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "Transcendium Muscle");
-
-        // 超限合金器官description描述
-        add("organ.who_am_i_core.tooltips.looting_burst", "+1 Looting and +1 Fortune");
-
-        // 诅咒金器官翻译
-        addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "Cursed Gold Heart");
-        addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "Cursed Gold Lung");
-        addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "Cursed Gold Liver");
-        addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "Cursed Gold Intestine");
-        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "The more cursed organs in your chest, the heavier the penalty");
-
-        // 余烬金属器官翻译
-        addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "Ember Metal Rib");
-        addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "Ember Metal Muscle");
-        addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "Ember Metal Spine");
-        addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "Ember Metal Appendix");
-        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "Fire damage heals instead of hurting");
-
-        // 皇家钢器官翻译
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "Royal Steel Rib");
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "Royal Steel Muscle");
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "Royal Steel Spine");
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "Royal Steel Appendix");
-        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "Simple fixed attribute bonuses");
-
-        // 病变器官翻译
-
-        // 双子魔眼器官翻译
-        addItem(WAICOrgans.STRANGE_EYEBALL, "Strange Eyeball");
-        addItem(WAICOrgans.EERIE_EYEBALL, "Eerie Eyeball");
-        addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "Strange Mechanical Eyeball");
-        addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "Eerie Mechanical Eyeball");
+        addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "Fire Dragon Blood Preparation");
+        addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "Ice Dragon Blood Preparation");
+        addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "Lightning Dragon Blood Preparation");
+        addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "Dragon Blood Preparation");
 
         addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
         addAttribute(WAICAttribute.BLOCK, "Block");
@@ -316,31 +56,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.LOOTING, "Looting");
         addAttribute(WAICAttribute.FORTUNE, "Fortune");
 
-        // 伤害类型标签翻译
         add(WAICDamageTagManager.IS_MELEE, "Melee");
-
-        // 物品标签翻译
         addWAICTagTranslationsEN();
 
-        // 龙血药剂翻译
-        addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "Fire Dragon Blood Preparation");
-        addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "Ice Dragon Blood Preparation");
-        addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "Lightning Dragon Blood Preparation");
-        addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "Dragon Blood Preparation");
-
-        // 龙之力效果翻译
         addEffect(WAICEffect.FIRE_DRAGON_POWER::value, "Fire Dragon Power");
         addEffect(WAICEffect.ICE_DRAGON_POWER::value, "Ice Dragon Power");
         addEffect(WAICEffect.LIGHTNING_DRAGON_POWER::value, "Lightning Dragon Power");
         addEffect(WAICEffect.DRAGON_POWER::value, "Dragon Power");
-
-        // 甜蜜效果翻译
         addEffect(WAICEffect.SWEETNESS::value, "Sweetness");
-
-        // 超频效果翻译
         addEffect(WAICEffect.OVERLOAD::value, "Overload");
 
-        // Unfinished
         add("organ.who_am_i_core.unfinished", "Not yet completed");
 
         mowziesMobSpecialOrgansEN();
@@ -361,242 +86,26 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         nineHellOrgansEN();
         dreadOrgansEN();
         hydraOrgansEN();
+        fdBossesOrgansEN();
+        royalSteelOrgansEN();
+        cursedGoldOrgansEN();
+        emberMetalOrgansEN();
+        frostMetalOrgansEN();
+        transcendiumOrgansEN();
+        fantasticalOrgansEN();
+        cataclysmOrgansEN();
+        ironSpellOrgansEN();
+        companionsOrgansEN();
     }
 
     public void Chinese() {
         add(WAICCreativeModeTab.WHO_AM_I_CORE_TAB_TRANSLATABLE, "我非我");
 
         addItem(WAICItem.PETITE_CHEST_OPENER, "娇小开胸器");
-
-        addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "火焰王国战士之心");
-        addOrganActiveSkill(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "对战王国时，免疫火焰攻击");
-        addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "冰霜王国战士之心");
-        addOrganActiveSkill(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "对战王国时，免疫冰霜攻击");
-        addItem(FDBossesOrgans.MALKUTH, "王国");
-        addOrganActiveSkill(FDBossesOrgans.MALKUTH, "全局温度始终为0；获取局部温度时，使用所有器官的全局正/负温度");
-        addItem(FDBossesOrgans.CHESED, "慈悲");
-        addOrganPassiveEffect(
-            FDBossesOrgans.CHESED,
-            "攻击时召唤闪电射线追踪目标，造成玩家最大生命值33%的伤害并施加感电效果",
-            "伤害 = 玩家最大生命值 × 33%",
-            "施加感电效果（目标造成伤害降低25%，持续10秒）",
-            "冷却：3秒"
-        );
-        addItem(FDBossesOrgans.GEBURAH, "严厉");
-        addOrganActiveSkill(FDBossesOrgans.GEBURAH, "攻击时，对目标每个负面效果额外造成其最大生命值3%的伤害");
-
-        // 利维坦器官翻译
-        addItem(CataclysmOrgans.LEVIATHAN_HEART, "利维坦心脏");
-        addItem(CataclysmOrgans.LEVIATHAN_MUSCLE, "利维坦肌肉");
-        addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "利维坦肠子");
-        addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "利维坦胃");
-        addItem(CataclysmOrgans.LEVIATHAN_GILL, "利维坦鳃");
-        addItem(CataclysmOrgans.LEVIATHAN_SPINE, "利维坦脊柱");
-        addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "利维坦鱼骨");
-
-        // 咒骸器官翻译
-        addItem(CataclysmOrgans.APTRGANGR_SPINE, "咒骸脊柱");
-        addItem(CataclysmOrgans.APTRGANGR_RIB, "咒骸肋骨");
-
-        // 咒翼灵骸器官翻译
-        addItem(CataclysmOrgans.MALEDICTUS_SPINE, "咒翼灵骸脊柱");
-        addItem(CataclysmOrgans.MALEDICTUS_RIB, "咒翼灵骸肋骨");
-        addItem(CataclysmOrgans.PHANTOM_HEART, "咒魂心脏");
-        addOrganPassiveEffect(CataclysmOrgans.PHANTOM_HEART, "咒翼灵骸的诅咒心脏");
-        addOrganActiveSkill(CataclysmOrgans.PHANTOM_HEART, "冲刺状态下，所有造成的伤害最终增加25%");
-        addItem(CataclysmOrgans.PHANTOM_SHARD, "咒魂残片");
-        addItem(CataclysmOrgans.SEALING_STONE_SLAB, "封印石板");
-        addOrganActiveSkill(CataclysmOrgans.SEALING_STONE_SLAB, "在前方扇形范围召唤5道幻影战戟，每道造成12点咒翼魔法伤害");
-
-        // 斯库拉器官翻译
-        addItem(CataclysmOrgans.TIDAL_LANTERN, "涛浪提灯");
-        addOrganPassiveEffect(CataclysmOrgans.TIDAL_LANTERN, "攻击时消耗粘液");
-        addOrganActiveSkill(
-            CataclysmOrgans.TIDAL_LANTERN,
-            "攻击时，消耗所有当前粘液并增加等额伤害",
-            "消耗的粘液大于等于30时，额外召唤伤害等同于本次伤害的水浪"
-        );
-        addItem(CataclysmOrgans.STORM_SPINE, "风暴脊柱");
-        addOrganPassiveEffect(CataclysmOrgans.STORM_SPINE, "吸收伤害转化为粘液");
-        addOrganActiveSkill(CataclysmOrgans.STORM_SPINE, "受伤时，吸收伤害的20%转化为粘液（同时减伤20%），单次上限10点", "粘液达到上限时失效");
-        addItem(CataclysmOrgans.STORM_RIB, "风暴肋骨");
-        addOrganActiveSkill(CataclysmOrgans.STORM_RIB, "+10 粘液上限");
-
-        // 焰魔器官翻译
-        addItem(CataclysmOrgans.UNDYING_EMBER, "不灭薪火");
-        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "根据全局正温度提供力量加成");
-        addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "焰魔肋甲");
-        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "根据局部正温度提供格挡加成，格挡 = √局部温度");
-        addItem(CataclysmOrgans.BLAZING_VISAGE, "炽面甲");
-        addOrganPassiveEffect(CataclysmOrgans.BLAZING_VISAGE, "近战命中施加炽烙，根据局部温度回血");
-        addOrganActiveSkill(
-            CataclysmOrgans.BLAZING_VISAGE,
-            "近战攻击施加炽烙（-20%护甲、-20%韧性）",
-            "回血量 = 2 + 局部温度×0.5，已有炽烙则翻倍"
-        );
-
-        // 下界合金巨兽器官翻译
-        addItem(CataclysmOrgans.MONSTROSITY_CORE, "巨兽炉心");
-        addOrganPassiveEffect(CataclysmOrgans.MONSTROSITY_CORE, "从热量中生成黄胆汁。+100黄胆汁上限。");
-        addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "巨兽回路");
-        addOrganActiveSkill(CataclysmOrgans.MONSTROSITY_CIRCUIT, "消耗100黄胆汁，AoE地震造成(消耗量 + 5%最大HP + 温度×2)伤害");
-        addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "巨兽熔炉");
-        addOrganPassiveEffect(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆。恢复饥饿值、黄胆汁，并赋予骇人之恶效果。");
-
-        // Cataclysm 远古工厂器官翻译
-        addItem(CataclysmOrgans.TACTICAL_DISK, "战术磁盘");
-        addOrganPassiveEffect(
-            CataclysmOrgans.TACTICAL_DISK,
-            "磁盘存储所有工厂组件的运行日志。数据越完整，系统自检越精确——对机械而言，数据即生命。"
-        );
-        addItem(CataclysmOrgans.REINFORCED_FRAME, "强化构架");
-        addOrganPassiveEffect(CataclysmOrgans.REINFORCED_FRAME, "工厂标准结构件。也许过刚则折，但至少现在不会。");
-        addItem(CataclysmOrgans.POWER_CELL, "蓄能电芯");
-        addOrganPassiveEffect(CataclysmOrgans.POWER_CELL, "持续输出微弱修复电流——虽然缓慢，但永不停歇。");
-        addItem(CataclysmOrgans.COMPUTE_CHIP, "运算晶片");
-        addOrganPassiveEffect(CataclysmOrgans.COMPUTE_CHIP, "协处理器。每增加一个工厂零件，晶片就多一条数据通道，系统响应就越快。");
-        addItem(CataclysmOrgans.MECHANICAL_STAR, "机械之星");
-        addOrganActiveSkill(CataclysmOrgans.MECHANICAL_STAR, "锁定视线方向的敌人，发射一枚追踪导弹（伤害 8.0）。冷却 8 秒。");
-        addItem(CataclysmOrgans.DEATH_LENS, "死亡透镜");
-        addOrganActiveSkill(CataclysmOrgans.DEATH_LENS, "发射一道死亡激光（伤害 6 + 目标最大生命 6%%）。不点火不破坏方块。冷却 15 秒。");
-
-        // Cataclysm 末影守卫器官翻译
-        addItem(CataclysmOrgans.GUARDIAN_STONE, "守卫石块");
-        addItem(CataclysmOrgans.VOID_CRYSTAL_SPINE, "虚空晶脊");
-        addOrganPassiveEffect(CataclysmOrgans.VOID_CRYSTAL_SPINE, "末影守卫的脊柱动力晶核，残余的虚空能量仍在其中脉动。");
-        addOrganActiveSkill(CataclysmOrgans.VOID_CRYSTAL_SPINE, "以自身为中心召唤三环虚空符文阵（内6+中11+外14）。冷却15秒。");
-
-        // IronSpell 亡魂器官翻译
-        addItem(IronSpellOrgans.NECROMANCER_SPINE, "亡魂脊柱");
-        addItem(IronSpellOrgans.NECROMANCER_RIB, "亡魂肋骨");
-
-        // IronSpell 提洛斯回响·原初受火者器官翻译
-        addItem(IronSpellOrgans.PRIMORDIAL_FLAME, "原初之火");
-        addOrganPassiveEffect(IronSpellOrgans.PRIMORDIAL_FLAME, "点燃原初之火的余烬，回荡着首位受火者的力量");
-        addOrganActiveSkill(IronSpellOrgans.PRIMORDIAL_FLAME, "施放火焰法术时，法术等级+1");
-
-        // IronSpell 高位唤魔者器官翻译
-        addItem(IronSpellOrgans.EMERALD_SKULL, "绿宝石头骨");
-        addOrganPassiveEffect(IronSpellOrgans.EMERALD_SKULL, "高位唤魔者的诅咒颅骨，涌动着翡翠色的唤魔之力");
-        addOrganActiveSkill(IronSpellOrgans.EMERALD_SKULL, "施放唤魔法术时，法术等级+1");
-
-        // IronSpell 死者之王器官翻译
-        addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "腐败魂灯");
-        addOrganPassiveEffect(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "收割死亡生物的灵魂为黑胆汁");
-        addOrganActiveSkill(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "附近有生物死亡时，获取黑胆汁");
-
-        addItem(IronSpellOrgans.DEAD_KING_SPINE, "尸王脊柱");
-        addOrganPassiveEffect(IronSpellOrgans.DEAD_KING_SPINE, "以黑胆汁吸收伤害");
-        addOrganActiveSkill(IronSpellOrgans.DEAD_KING_SPINE, "受伤时，消耗等额黑胆汁吸收最高50%的伤害");
-
-        addItem(IronSpellOrgans.DEAD_KING_RIB, "尸王肋骨");
-        addOrganPassiveEffect(IronSpellOrgans.DEAD_KING_RIB, "增加黑胆汁容量");
-        addOrganActiveSkill(IronSpellOrgans.DEAD_KING_RIB, "+10 黑胆汁上限");
-
-        // ==================== Companions 神圣教宗器官翻译 ====================
-        addItem(CompanionsOrgans.PONTIFF_HEART, "教宗心脏");
-        addOrganPassiveEffect(
-            CompanionsOrgans.PONTIFF_HEART,
-            "生命值降至30%以下时，回复50%最大生命，获得力量II、抗性II、速度II（15秒）。冷却3分钟"
-        );
-
-        addItem(CompanionsOrgans.PONTIFF_LUNG, "教宗肺脏");
-        addItem(CompanionsOrgans.PONTIFF_STOMACH, "教宗胃");
-        addItem(CompanionsOrgans.PONTIFF_INTESTINE, "教宗肠子");
-        addItem(CompanionsOrgans.PONTIFF_KIDNEY, "教宗肾脏");
-
-        addItem(CompanionsOrgans.PONTIFF_SPLEEN, "教宗脾脏");
-        addOrganActiveSkill(CompanionsOrgans.PONTIFF_SPLEEN, "释放向外扩展的火环。层数 = min(1 + 教宗器官数/4, 3)。冷却10秒");
-
-        addItem(CompanionsOrgans.PONTIFF_LIVER, "教宗肝脏");
-
-        addItem(CompanionsOrgans.PONTIFF_APPENDIX, "教宗阑尾");
-        addOrganActiveSkill(CompanionsOrgans.PONTIFF_APPENDIX, "发射追踪星弹。正温度→红星（点燃），负温度→蓝星（冻结）。冷却8秒");
-
-        addItem(CompanionsOrgans.PONTIFF_MUSCLE, "教宗肌肉");
-        addOrganActiveSkill(CompanionsOrgans.PONTIFF_MUSCLE, "击退抗性+8%");
-
-        // ==================== Companions 蛋糕器官翻译 ====================
-        addItem(CompanionsOrgans.CAKE_HEART, "蛋糕心脏");
-        addItem(CompanionsOrgans.CAKE_LUNG, "蛋糕肺脏");
-        addItem(CompanionsOrgans.CAKE_STOMACH, "蛋糕胃");
-        addOrganActiveSkill(CompanionsOrgans.CAKE_STOMACH, "食用食物时给予甜蜜效果，已有甜蜜时叠加等级并重置时长");
-        addItem(CompanionsOrgans.CAKE_LIVER, "蛋糕肝脏");
-        addOrganActiveSkill(CompanionsOrgans.CAKE_LIVER, "甜蜜等级>=2时，每秒消耗1级甜蜜清除1个随机负面效果");
-
-        // 幻想种器官翻译
-        addItem(WAICOrgans.FANTASTICAL_HEART, "幻想种心脏");
-        addItem(WAICOrgans.FANTASTICAL_LUNG, "幻想种肺脏");
-        addItem(WAICOrgans.FANTASTICAL_SPINE, "幻想种脊柱");
-        addItem(WAICOrgans.FANTASTICAL_STOMACH, "幻想种胃");
-        addItem(WAICOrgans.FANTASTICAL_INTESTINE, "幻想种肠子");
-        addItem(WAICOrgans.FANTASTICAL_KIDNEY, "幻想种肾脏");
-        addItem(WAICOrgans.FANTASTICAL_SPLEEN, "幻想种脾脏");
-        addItem(WAICOrgans.FANTASTICAL_LIVER, "幻想种肝脏");
-        addItem(WAICOrgans.FANTASTICAL_APPENDIX, "幻想种阑尾");
-        addItem(WAICOrgans.FANTASTICAL_RIB, "幻想种肋骨");
-        addItem(WAICOrgans.FANTASTICAL_MUSCLE, "幻想种肌肉");
-
-        // 浮霜器官翻译
-        addItem(AnvilCraftOrgans.FROST_METAL_HEART, "浮霜金属心脏");
-        addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "浮霜金属肺脏");
-        addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "浮霜金属脊柱");
-        addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "浮霜金属胃");
-        addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "浮霜金属肠子");
-        addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "浮霜金属肾脏");
-        addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "浮霜金属脾脏");
-        addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "浮霜金属肝脏");
-        addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "浮霜金属阑尾");
-        addItem(AnvilCraftOrgans.FROST_METAL_RIB, "浮霜金属肋骨");
-        addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
-
-        // 浮霜器官description描述
-        add(AnvilCraftOrgans.MERCILESS_TRANSLATION, "将所有附魔转换为器官属性");
-
-        // 超限合金器官翻译
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "超限合金心脏");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "超限合金肺脏");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "超限合金脊柱");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "超限合金胃");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "超限合金肠子");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "超限合金肾脏");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "超限合金脾脏");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "超限合金肝脏");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "超限合金阑尾");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "超限合金肋骨");
-        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "超限合金肌肉");
-
-        // 超限合金器官description描述
-        add(AnvilCraftOrgans.LOOTING_BURST_TRANSLATION, "+1抢夺和+1幸运");
-
-        // 诅咒金器官翻译
-        addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "诅咒金心脏");
-        addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "诅咒金肺脏");
-        addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "诅咒金肝脏");
-        addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "诅咒金肠子");
-        add(AnvilCraftOrgans.CURSED_GOLD_TRANSLATION, "胸腔中诅咒器官越多，负面效果越重");
-
-        // 余烬金属器官翻译
-        addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "余烬金属肋骨");
-        addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "余烬金属肌肉");
-        addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "余烬金属脊柱");
-        addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "余烬金属阑尾");
-        add(AnvilCraftOrgans.EMBER_ABSORPTION_TRANSLATION, "火焰伤害转化为治疗");
-
-        // 皇家钢器官翻译
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "皇家钢肋骨");
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "皇家钢肌肉");
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "皇家钢脊柱");
-        addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "皇家钢阑尾");
-        add(AnvilCraftOrgans.ROYAL_STEEL_TRANSLATION, "朴素的固定属性加成");
-
-        // 病变器官翻译
-
-        // 双子魔眼器官翻译
-        addItem(WAICOrgans.STRANGE_EYEBALL, "奇怪的眼球");
-        addItem(WAICOrgans.EERIE_EYEBALL, "诡异的眼球");
-        addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "奇怪的机械眼球");
-        addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "诡异的机械眼球");
+        addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "火龙血药剂");
+        addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "冰龙血药剂");
+        addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "电龙血药剂");
+        addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "龙血药剂组");
 
         addAttribute(WAICAttribute.TEMPERATURE, "温度");
         addAttribute(WAICAttribute.BLOCK, "格挡");
@@ -611,31 +120,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.LOOTING, "抢夺");
         addAttribute(WAICAttribute.FORTUNE, "时运");
 
-        // 伤害类型标签翻译
         add(WAICDamageTagManager.IS_MELEE, "近战");
-
-        // 物品标签翻译
         addWAICTagTranslationsZH();
 
-        // 龙血药剂翻译
-        addItem(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION, "火龙血药剂");
-        addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "冰龙血药剂");
-        addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "电龙血药剂");
-        addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "龙血药剂组");
-
-        // 龙之力效果翻译
         addEffect(WAICEffect.FIRE_DRAGON_POWER::value, "火龙之力");
         addEffect(WAICEffect.ICE_DRAGON_POWER::value, "冰龙之力");
         addEffect(WAICEffect.LIGHTNING_DRAGON_POWER::value, "电龙之力");
         addEffect(WAICEffect.DRAGON_POWER::value, "龙之力");
-
-        // 甜蜜效果翻译
         addEffect(WAICEffect.SWEETNESS::value, "甜蜜");
-
-        // 超频效果翻译
         addEffect(WAICEffect.OVERLOAD::value, "超频");
 
-        // 未完成占位
         add("organ.who_am_i_core.unfinished", "仍未完成");
 
         mowziesMobSpecialOrgansZH();
@@ -656,6 +150,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         nineHellOrgansZH();
         dreadOrgansZH();
         hydraOrgansZH();
+        fdBossesOrgansZH();
+        royalSteelOrgansZH();
+        cursedGoldOrgansZH();
+        emberMetalOrgansZH();
+        frostMetalOrgansZH();
+        transcendiumOrgansZH();
+        fantasticalOrgansZH();
+        cataclysmOrgansZH();
+        ironSpellOrgansZH();
+        companionsOrgansZH();
     }
 
     // ==================== Mowzie's Mobs 特殊器官 ====================
@@ -1133,6 +637,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void pigmentOrgansEN() {
         addItem(WAICOrgans.PALETTE, "Palette");
+        addOrganPassiveEffect(WAICOrgans.PALETTE, "When casting a spell, consumes the corresponding dye to increase spell level by 1");
         add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
 
         addItem(WAICOrgans.PIGMENT_HEART, "Pigment Heart");
@@ -1150,6 +655,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void pigmentOrgansZH() {
         addItem(WAICOrgans.PALETTE, "调色盘");
+        addOrganPassiveEffect(WAICOrgans.PALETTE, "释放法术时，消耗对应染料使法术等级+1");
         add(WAICOrgans.PALETTE_DYE_TRANSLATION, "%s: %s");
 
         addItem(WAICOrgans.PIGMENT_HEART, "颜料心脏");
@@ -1659,10 +1165,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganDescription(WAICOrgans.FLESH_IDOL, "A grotesque idol carved from living flesh, pulsing with vital energy");
         addOrganActiveSkill(
             WAICOrgans.FLESH_IDOL,
-            "For each harmful effect: halve current HP, then remove that effect",
+            "For each harmful effect, halve current HP, then remove that effect",
             "Removing Sinner effect also reduces 1 Sin layer"
         );
         addOrganActiveSkillSimple(WAICOrgans.FLESH_IDOL, "Sacrifice HP to cleanse all harmful effects");
+
+        addItem(WAICOrgans.STRANGE_EYEBALL, "Strange Eyeball");
+        addItem(WAICOrgans.EERIE_EYEBALL, "Eerie Eyeball");
+        addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "Strange Mechanical Eyeball");
+        addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "Eerie Mechanical Eyeball");
     }
 
     private void WAICOrgansZH() {
@@ -1694,10 +1205,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganDescription(WAICOrgans.FLESH_IDOL, "由活肉雕琢而成的怪诞偶像，脉动着生命能量");
         addOrganActiveSkill(
             WAICOrgans.FLESH_IDOL,
-            "逐个清除负面效果：每清除1个负面效果，当前生命值折半一次",
+            "逐个清除负面效果，每清除1个负面效果，当前生命值折半一次",
             "清除「罪人」效果时，减少1层罪孽"
         );
         addOrganActiveSkillSimple(WAICOrgans.FLESH_IDOL, "牺牲生命值清除所有负面效果");
+
+        addItem(WAICOrgans.STRANGE_EYEBALL, "奇怪的眼球");
+        addItem(WAICOrgans.EERIE_EYEBALL, "诡异的眼球");
+        addItem(WAICOrgans.STRANGE_MECHANICAL_EYEBALL, "奇怪的机械眼球");
+        addItem(WAICOrgans.EERIE_MECHANICAL_EYEBALL, "诡异的机械眼球");
     }
 
     // ==================== 悚怖器官 ====================
@@ -1987,6 +1503,894 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.CAKE, "蛋糕");
         add(WAICItemTagManager.PONTIFF, "教宗");
         add(WAICItemTagManager.NINE_HELL, "九狱");
+    }
+
+    // ==================== FDBosses 逆卡巴拉器官 ====================
+
+    private void fdBossesOrgansEN() {
+        addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Fire Malkuth Warrior Heart");
+        addOrganPassiveEffect(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "Immune to fire attacks when fighting Malkuth");
+
+        addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Ice Malkuth Warrior Heart");
+        addOrganPassiveEffect(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "Immune to ice attacks when fighting Malkuth");
+
+        addItem(FDBossesOrgans.MALKUTH, "Malkuth");
+        addOrganPassiveEffect(
+            FDBossesOrgans.MALKUTH,
+            "Global temperature is always 0",
+            "Local temperature in the chest cavity becomes the sum of global positive and negative temperatures"
+        );
+        addOrganPassiveEffectSimple(FDBossesOrgans.MALKUTH, "Neutralizes global temperature and amplifies local temperature");
+
+        addItem(FDBossesOrgans.CHESED, "Chesed");
+        addOrganPassiveEffect(
+            FDBossesOrgans.CHESED,
+            "Attacks summon a lightning ray that tracks the target",
+            "Ray deals damage equal to 33% of player max health",
+            "Applies Shocked to the target for 10 seconds",
+            "Target deals 25% less damage while Shocked",
+            "Cooldown: 3 seconds"
+        );
+        addOrganPassiveEffectSimple(FDBossesOrgans.CHESED, "Attacks summon a lightning ray that tracks and shocks the target");
+
+        addItem(FDBossesOrgans.GEBURAH, "Geburah");
+        addOrganPassiveEffect(
+            FDBossesOrgans.GEBURAH,
+            "Attacks deal bonus damage equal to 3% of target max health per harmful effect on the target"
+        );
+    }
+
+    private void fdBossesOrgansZH() {
+        addItem(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "火焰王国战士之心");
+        addOrganPassiveEffect(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART, "对战王国时免疫火焰攻击");
+
+        addItem(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "冰霜王国战士之心");
+        addOrganPassiveEffect(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART, "对战王国时免疫冰霜攻击");
+
+        addItem(FDBossesOrgans.MALKUTH, "王国");
+        addOrganPassiveEffect(
+            FDBossesOrgans.MALKUTH,
+            "全局温度始终为0",
+            "胸腔的局部温度等于全局温度正负之和"
+        );
+        addOrganPassiveEffectSimple(FDBossesOrgans.MALKUTH, "中和全局温度并放大局部温度");
+
+        addItem(FDBossesOrgans.CHESED, "慈悲");
+        addOrganPassiveEffect(
+            FDBossesOrgans.CHESED,
+            "攻击时召唤闪电射线追踪目标",
+            "射线造成玩家最大生命值33%的伤害",
+            "对目标施加10秒感电效果",
+            "感电期间目标造成伤害降低25%",
+            "冷却3秒"
+        );
+        addOrganPassiveEffectSimple(FDBossesOrgans.CHESED, "攻击时召唤闪电射线追踪并感电目标");
+
+        addItem(FDBossesOrgans.GEBURAH, "严厉");
+        addOrganPassiveEffect(
+            FDBossesOrgans.GEBURAH,
+            "攻击时对目标每个负面效果额外造成其最大生命值3%的伤害"
+        );
+    }
+
+    // ==================== AnvilCraft 皇家钢器官 ====================
+
+    // ==================== AnvilCraft 皇家钢器官 ====================
+
+    private void royalSteelOrgansEN() {
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "Royal Steel Rib");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "Royal Steel Muscle");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "Royal Steel Spine");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "Royal Steel Appendix");
+    }
+
+    // ==================== AnvilCraft 诅咒金器官 ====================
+
+    private void cursedGoldOrgansEN() {
+        String effect0 = "Cursed organs in the chest impose stacking penalties";
+        String effect1 = "1 or more organs inflict Weakness";
+        String effect2 = "3 or more organs inflict Slowness";
+        String effect3 = "5 or more organs inflict Hunger";
+        String effect4 = "Effect amplifiers scale with cursed organ count";
+        String simple = "Cursed organs in the chest impose stacking debuffs";
+
+        addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "Cursed Gold Heart");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_HEART, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_HEART, simple);
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "Cursed Gold Lung");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LUNG, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LUNG, simple);
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "Cursed Gold Liver");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LIVER, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LIVER, simple);
+        addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "Cursed Gold Intestine");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, simple);
+    }
+
+    // ==================== AnvilCraft 余烬金属器官 ====================
+
+    private void emberMetalOrgansEN() {
+        String effect0 = "Each organ nullifies 25% of fire damage";
+        String effect1 = "Heals for the nullified amount";
+        String simple = "Each organ absorbs 25% fire damage as healing";
+
+        addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "Ember Metal Rib");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_RIB, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_RIB, simple);
+        addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "Ember Metal Muscle");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_MUSCLE, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_MUSCLE, simple);
+        addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "Ember Metal Spine");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPINE, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_SPINE, simple);
+        addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "Ember Metal Appendix");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_APPENDIX, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_APPENDIX, simple);
+    }
+
+    // ==================== AnvilCraft 浮霜金属器官 ====================
+
+    private void frostMetalOrgansEN() {
+        String effect0 = "Base attribute value is 1 plus enchantment bonus";
+        String effect1 = "Enchantment bonus equals the square root of total enchantment levels rounded down";
+        String effect2 = "Also adds equal negative temperature";
+        String simple = "Converts enchantments into organ attributes";
+
+        addItem(AnvilCraftOrgans.FROST_METAL_HEART, "Frost Metal Heart");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_HEART, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_HEART, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "Frost Metal Lung");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LUNG, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LUNG, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "Frost Metal Spine");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPINE, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "Frost Metal Stomach");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_STOMACH, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_STOMACH, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "Frost Metal Intestine");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_INTESTINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_INTESTINE, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "Frost Metal Kidney");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_KIDNEY, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_KIDNEY, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "Frost Metal Spleen");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPLEEN, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPLEEN, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "Frost Metal Liver");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LIVER, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LIVER, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "Frost Metal Appendix");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_APPENDIX, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_APPENDIX, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_RIB, "Frost Metal Rib");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_RIB, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_RIB, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "Frost Metal Muscle");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_MUSCLE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_MUSCLE, simple);
+    }
+
+    // ==================== AnvilCraft 超限合金器官 ====================
+
+    private void transcendiumOrgansEN() {
+        String effect0 = "Base attribute value is 5 plus enchantment bonus";
+        String effect1 = "Enchantment bonus equals the square root of total enchantment levels rounded down";
+        String effect2 = "Also grants +1 Looting and +1 Fortune";
+        String simple = "Converts enchantments into organ attributes and grants Looting and Fortune";
+
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "Transcendium Heart");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_HEART, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_HEART, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "Transcendium Lung");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_LUNG, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_LUNG, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "Transcendium Spine");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_SPINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_SPINE, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "Transcendium Stomach");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "Transcendium Intestine");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "Transcendium Kidney");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "Transcendium Spleen");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "Transcendium Liver");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_LIVER, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_LIVER, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "Transcendium Appendix");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "Transcendium Rib");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_RIB, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_RIB, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "Transcendium Muscle");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, simple);
+    }
+
+    // ==================== AnvilCraft 皇家钢器官 ====================
+
+    private void royalSteelOrgansZH() {
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_RIB, "皇家钢肋骨");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_MUSCLE, "皇家钢肌肉");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_SPINE, "皇家钢脊柱");
+        addItem(AnvilCraftOrgans.ROYAL_STEEL_APPENDIX, "皇家钢阑尾");
+    }
+
+    // ==================== AnvilCraft 诅咒金器官 ====================
+
+    private void cursedGoldOrgansZH() {
+        String effect0 = "胸腔中的诅咒器官会叠加惩罚效果";
+        String effect1 = "1个及以上施加虚弱";
+        String effect2 = "3个及以上施加缓慢";
+        String effect3 = "5个及以上施加饥饿";
+        String effect4 = "效果等级随诅咒器官数量递增";
+        String simple = "胸腔中诅咒器官叠加惩罚效果";
+
+        addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "诅咒金心脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_HEART, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_HEART, simple);
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "诅咒金肺脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LUNG, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LUNG, simple);
+        addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "诅咒金肝脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LIVER, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LIVER, simple);
+        addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "诅咒金肠子");
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, simple);
+    }
+
+    // ==================== AnvilCraft 余烬金属器官 ====================
+
+    private void emberMetalOrgansZH() {
+        String effect0 = "每个器官抵消 25% 火焰伤害";
+        String effect1 = "回复抵消伤害等量的生命值";
+        String simple = "每个器官将 25% 火焰伤害转化为治疗";
+
+        addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "余烬金属肋骨");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_RIB, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_RIB, simple);
+        addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "余烬金属肌肉");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_MUSCLE, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_MUSCLE, simple);
+        addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "余烬金属脊柱");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPINE, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_SPINE, simple);
+        addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "余烬金属阑尾");
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_APPENDIX, effect0, effect1);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.EMBER_METAL_APPENDIX, simple);
+    }
+
+    // ==================== AnvilCraft 浮霜金属器官 ====================
+
+    private void frostMetalOrgansZH() {
+        String effect0 = "基础属性值为1加上附魔加成";
+        String effect1 = "附魔加成等于附魔等级总和的平方根向下取整";
+        String effect2 = "同时添加等额的负温度";
+        String simple = "将附魔转化为器官属性";
+
+        addItem(AnvilCraftOrgans.FROST_METAL_HEART, "浮霜金属心脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_HEART, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_HEART, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "浮霜金属肺脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LUNG, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LUNG, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "浮霜金属脊柱");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPINE, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "浮霜金属胃");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_STOMACH, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_STOMACH, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "浮霜金属肠子");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_INTESTINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_INTESTINE, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "浮霜金属肾脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_KIDNEY, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_KIDNEY, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "浮霜金属脾脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPLEEN, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPLEEN, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "浮霜金属肝脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LIVER, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LIVER, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "浮霜金属阑尾");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_APPENDIX, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_APPENDIX, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_RIB, "浮霜金属肋骨");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_RIB, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_RIB, simple);
+        addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_MUSCLE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_MUSCLE, simple);
+    }
+
+    // ==================== AnvilCraft 超限合金器官 ====================
+
+    private void transcendiumOrgansZH() {
+        String effect0 = "基础属性值为5加上附魔加成";
+        String effect1 = "附魔加成等于附魔等级总和的平方根向下取整";
+        String effect2 = "同时提供+1抢夺和+1时运";
+        String simple = "将附魔转化为器官属性并提供抢夺与时运";
+
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_HEART, "超限合金心脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_HEART, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_HEART, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LUNG, "超限合金肺脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_LUNG, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_LUNG, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPINE, "超限合金脊柱");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_SPINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_SPINE, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, "超限合金胃");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_STOMACH, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, "超限合金肠子");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_INTESTINE, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, "超限合金肾脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_KIDNEY, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, "超限合金脾脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_SPLEEN, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_LIVER, "超限合金肝脏");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_LIVER, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_LIVER, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, "超限合金阑尾");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_APPENDIX, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_RIB, "超限合金肋骨");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_RIB, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_RIB, simple);
+        addItem(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, "超限合金肌肉");
+        addOrganPassiveEffect(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, effect0, effect1, effect2);
+        addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, simple);
+    }
+
+    // ==================== 幻想种器官 ====================
+
+    private void fantasticalOrgansEN() {
+        addItem(WAICOrgans.FANTASTICAL_HEART, "Fantastical Heart");
+        addItem(WAICOrgans.FANTASTICAL_LUNG, "Fantastical Lung");
+        addItem(WAICOrgans.FANTASTICAL_SPINE, "Fantastical Spine");
+        addItem(WAICOrgans.FANTASTICAL_STOMACH, "Fantastical Stomach");
+        addItem(WAICOrgans.FANTASTICAL_INTESTINE, "Fantastical Intestine");
+        addItem(WAICOrgans.FANTASTICAL_KIDNEY, "Fantastical Kidney");
+        addItem(WAICOrgans.FANTASTICAL_SPLEEN, "Fantastical Spleen");
+        addItem(WAICOrgans.FANTASTICAL_LIVER, "Fantastical Liver");
+        addItem(WAICOrgans.FANTASTICAL_APPENDIX, "Fantastical Appendix");
+        addItem(WAICOrgans.FANTASTICAL_RIB, "Fantastical Rib");
+        addItem(WAICOrgans.FANTASTICAL_MUSCLE, "Fantastical Muscle");
+    }
+
+    private void fantasticalOrgansZH() {
+        addItem(WAICOrgans.FANTASTICAL_HEART, "幻想种心脏");
+        addItem(WAICOrgans.FANTASTICAL_LUNG, "幻想种肺脏");
+        addItem(WAICOrgans.FANTASTICAL_SPINE, "幻想种脊柱");
+        addItem(WAICOrgans.FANTASTICAL_STOMACH, "幻想种胃");
+        addItem(WAICOrgans.FANTASTICAL_INTESTINE, "幻想种肠子");
+        addItem(WAICOrgans.FANTASTICAL_KIDNEY, "幻想种肾脏");
+        addItem(WAICOrgans.FANTASTICAL_SPLEEN, "幻想种脾脏");
+        addItem(WAICOrgans.FANTASTICAL_LIVER, "幻想种肝脏");
+        addItem(WAICOrgans.FANTASTICAL_APPENDIX, "幻想种阑尾");
+        addItem(WAICOrgans.FANTASTICAL_RIB, "幻想种肋骨");
+        addItem(WAICOrgans.FANTASTICAL_MUSCLE, "幻想种肌肉");
+    }
+
+    // ==================== Cataclysm 器官 ====================
+
+    private void cataclysmOrgansEN() {
+        // 利维坦系列
+        addItem(CataclysmOrgans.LEVIATHAN_HEART, "Leviathan Heart");
+        addItem(CataclysmOrgans.LEVIATHAN_MUSCLE, "Leviathan Muscle");
+        addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "Leviathan Intestine");
+        addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "Leviathan Stomach");
+        addItem(CataclysmOrgans.LEVIATHAN_GILL, "Leviathan Gill");
+        addItem(CataclysmOrgans.LEVIATHAN_SPINE, "Leviathan Spine");
+        addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "Leviathan Fishbone");
+
+        // 咒骸系列
+        addItem(CataclysmOrgans.APTRGANGR_SPINE, "Aptrgangr Spine");
+        addItem(CataclysmOrgans.APTRGANGR_RIB, "Aptrgangr Rib");
+
+        // 咒翼灵骸系列
+        addItem(CataclysmOrgans.MALEDICTUS_SPINE, "Maledictus Spine");
+        addItem(CataclysmOrgans.MALEDICTUS_RIB, "Maledictus Rib");
+        addItem(CataclysmOrgans.PHANTOM_HEART, "Phantom Heart");
+        addOrganPassiveEffect(
+            CataclysmOrgans.PHANTOM_HEART,
+            "All damage dealt is increased by 25% while sprinting"
+        );
+        addItem(CataclysmOrgans.PHANTOM_SHARD, "Phantom Shard");
+        addItem(CataclysmOrgans.SEALING_STONE_SLAB, "Sealing Stone Slab");
+        addOrganActiveSkill(
+            CataclysmOrgans.SEALING_STONE_SLAB,
+            "Summons 5 phantom halberds in a fan shape",
+            "Each halberd deals 12 magic damage"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.SEALING_STONE_SLAB, "Summons phantom halberds in a fan shape");
+
+        // 斯库拉系列
+        addItem(CataclysmOrgans.TIDAL_LANTERN, "Tidal Lantern");
+        addOrganPassiveEffect(
+            CataclysmOrgans.TIDAL_LANTERN,
+            "On attack consumes all current phlegm and adds equal damage",
+            "When consumed phlegm is 30 or more summons water waves with damage equal to this attack"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.TIDAL_LANTERN, "Consumes phlegm on attack for bonus damage");
+        addItem(CataclysmOrgans.STORM_SPINE, "Storm Spine");
+        addOrganPassiveEffect(
+            CataclysmOrgans.STORM_SPINE,
+            "On hit absorbs 20% of damage as phlegm and reduces damage by 20%",
+            "Capped at 10 phlegm per hit, becomes inactive when phlegm is full"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.STORM_SPINE, "Absorbs damage as phlegm on hit");
+        addItem(CataclysmOrgans.STORM_RIB, "Storm Rib");
+        addOrganPassiveEffect(CataclysmOrgans.STORM_RIB, "+10 phlegm capacity");
+
+        // 焰魔系列
+        addItem(CataclysmOrgans.UNDYING_EMBER, "Undying Ember");
+        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "Grants Strength based on the square root of global positive temperature");
+        addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "Ignited Rib Plating");
+        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "Grants Block equal to the square root of local positive temperature");
+        addItem(CataclysmOrgans.BLAZING_VISAGE, "Blazing Visage");
+        addOrganPassiveEffect(
+            CataclysmOrgans.BLAZING_VISAGE,
+            "Melee attacks apply Blazing Brand for 5 seconds",
+            "Blazing Brand reduces target armor and toughness by 20%",
+            "Heals 2 plus local temperature times 0.5 on hit",
+            "Healing is doubled if target already has Blazing Brand"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.BLAZING_VISAGE, "Melee attacks apply Blazing Brand and heal based on temperature");
+
+        // 下界合金巨兽系列
+        addItem(CataclysmOrgans.MONSTROSITY_CORE, "Monstrosity Core");
+        addOrganPassiveEffect(
+            CataclysmOrgans.MONSTROSITY_CORE,
+            "+100 yellow bile capacity",
+            "Generates yellow bile from positive temperature every second"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_CORE, "Generates yellow bile from temperature");
+        addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Monstrosity Circuit");
+        addOrganActiveSkill(
+            CataclysmOrgans.MONSTROSITY_CIRCUIT,
+            "Consumes 100 yellow bile to trigger an AoE earthquake",
+            "Damage equals consumed bile plus 5% of target max health plus temperature times 2"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Consumes yellow bile for AoE earthquake");
+        addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "Monstrosity Furnace");
+        addOrganPassiveEffect(
+            CataclysmOrgans.MONSTROSITY_FURNACE,
+            "Allows drinking lava buckets",
+            "Restores all hunger and saturation and grants 100 yellow bile, grants Monstrous effect for 60 seconds"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "Allows drinking lava for yellow bile and buffs");
+
+        // 远古工厂系列
+        addItem(CataclysmOrgans.TACTICAL_DISK, "Tactical Disk");
+        addOrganPassiveEffect(
+            CataclysmOrgans.TACTICAL_DISK,
+            "Each additional mechanical organ grants bonus health",
+            "Bonus equals the square root of mechanical organ count times 2"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.TACTICAL_DISK, "Mechanical organs grant bonus health");
+        addItem(CataclysmOrgans.REINFORCED_FRAME, "Reinforced Frame");
+        addItem(CataclysmOrgans.POWER_CELL, "Power Cell");
+        addOrganPassiveEffect(CataclysmOrgans.POWER_CELL, "Regenerates 1 health every 2 seconds when not at full health");
+        addItem(CataclysmOrgans.COMPUTE_CHIP, "Compute Chip");
+        addOrganPassiveEffect(
+            CataclysmOrgans.COMPUTE_CHIP,
+            "Each additional mechanical organ grants bonus nerves",
+            "Bonus equals the square root of mechanical organ count times 2"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.COMPUTE_CHIP, "Mechanical organs grant bonus nerves");
+        addItem(CataclysmOrgans.MECHANICAL_STAR, "Mechanical Star");
+        addOrganActiveSkill(
+            CataclysmOrgans.MECHANICAL_STAR,
+            "Locks onto a target in sight and fires a homing missile",
+            "Deals 8.0 damage on impact"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.MECHANICAL_STAR, "Fires a homing missile at a target");
+        addItem(CataclysmOrgans.DEATH_LENS, "Death Lens");
+        addOrganActiveSkill(
+            CataclysmOrgans.DEATH_LENS,
+            "Fires a death laser beam",
+            "Deals 6 damage plus 6% of target max health",
+            "Does not ignite or destroy blocks"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.DEATH_LENS, "Fires a death laser at the target");
+
+        // 末影守卫系列
+        addItem(CataclysmOrgans.GUARDIAN_STONE, "Guardian Stone");
+        addItem(CataclysmOrgans.VOID_CRYSTAL_SPINE, "Void Crystal Spine");
+        addOrganActiveSkill(
+            CataclysmOrgans.VOID_CRYSTAL_SPINE,
+            "Summons 3 rings of void runes around you",
+            "Inner ring has 6 runes at radius 1.5",
+            "Middle ring has 12 runes at radius 2.5",
+            "Outer ring has 14 runes at radius 3.5"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.VOID_CRYSTAL_SPINE, "Summons void rune rings around you");
+    }
+
+    private void cataclysmOrgansZH() {
+        // 利维坦系列
+        addItem(CataclysmOrgans.LEVIATHAN_HEART, "利维坦心脏");
+        addItem(CataclysmOrgans.LEVIATHAN_MUSCLE, "利维坦肌肉");
+        addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "利维坦肠子");
+        addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "利维坦胃");
+        addItem(CataclysmOrgans.LEVIATHAN_GILL, "利维坦鳃");
+        addItem(CataclysmOrgans.LEVIATHAN_SPINE, "利维坦脊柱");
+        addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "利维坦鱼骨");
+
+        // 咒骸系列
+        addItem(CataclysmOrgans.APTRGANGR_SPINE, "咒骸脊柱");
+        addItem(CataclysmOrgans.APTRGANGR_RIB, "咒骸肋骨");
+
+        // 咒翼灵骸系列
+        addItem(CataclysmOrgans.MALEDICTUS_SPINE, "咒翼灵骸脊柱");
+        addItem(CataclysmOrgans.MALEDICTUS_RIB, "咒翼灵骸肋骨");
+        addItem(CataclysmOrgans.PHANTOM_HEART, "咒魂心脏");
+        addOrganPassiveEffect(
+            CataclysmOrgans.PHANTOM_HEART,
+            "冲刺状态下所有造成的伤害增加25%"
+        );
+        addItem(CataclysmOrgans.PHANTOM_SHARD, "咒魂残片");
+        addItem(CataclysmOrgans.SEALING_STONE_SLAB, "封印石板");
+        addOrganActiveSkill(
+            CataclysmOrgans.SEALING_STONE_SLAB,
+            "在前方扇形范围召唤5道幻影战戟",
+            "每道造成12点咒翼魔法伤害"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.SEALING_STONE_SLAB, "扇形召唤幻影战戟");
+
+        // 斯库拉系列
+        addItem(CataclysmOrgans.TIDAL_LANTERN, "涛浪提灯");
+        addOrganPassiveEffect(
+            CataclysmOrgans.TIDAL_LANTERN,
+            "攻击时消耗所有当前粘液并增加等额伤害",
+            "消耗粘液达到30时额外召唤伤害等同于本次伤害的水浪"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.TIDAL_LANTERN, "攻击时消耗粘液增加伤害");
+        addItem(CataclysmOrgans.STORM_SPINE, "风暴脊柱");
+        addOrganPassiveEffect(
+            CataclysmOrgans.STORM_SPINE,
+            "受伤时吸收伤害的20%转化为粘液，同时减免20%伤害",
+            "单次吸收上限10点粘液，粘液达到上限时失效"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.STORM_SPINE, "受伤时吸收伤害转化为粘液");
+        addItem(CataclysmOrgans.STORM_RIB, "风暴肋骨");
+        addOrganPassiveEffect(CataclysmOrgans.STORM_RIB, "+10 粘液上限");
+
+        // 焰魔系列
+        addItem(CataclysmOrgans.UNDYING_EMBER, "不灭薪火");
+        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "根据全局正温度的平方根提供力量加成");
+        addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "焰魔肋甲");
+        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "根据局部正温度的平方根提供格挡加成");
+        addItem(CataclysmOrgans.BLAZING_VISAGE, "炽面甲");
+        addOrganPassiveEffect(
+            CataclysmOrgans.BLAZING_VISAGE,
+            "近战攻击施加5秒炽热烙印",
+            "炽热烙印降低目标20%护甲与韧性",
+            "命中时回复2加局部温度乘0.5的生命值",
+            "目标已有炽热烙印时回复量翻倍"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.BLAZING_VISAGE, "近战施加炽热烙印并根据温度回血");
+
+        // 下界合金巨兽系列
+        addItem(CataclysmOrgans.MONSTROSITY_CORE, "巨兽炉心");
+        addOrganPassiveEffect(
+            CataclysmOrgans.MONSTROSITY_CORE,
+            "+100 黄胆汁上限",
+            "每秒根据正温度生成黄胆汁"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_CORE, "根据温度生成黄胆汁");
+        addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "巨兽回路");
+        addOrganActiveSkill(
+            CataclysmOrgans.MONSTROSITY_CIRCUIT,
+            "消耗100黄胆汁触发范围地震",
+            "伤害等于消耗量加目标最大生命5%加温度乘2"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.MONSTROSITY_CIRCUIT, "消耗黄胆汁触发范围地震");
+        addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "巨兽熔炉");
+        addOrganPassiveEffect(
+            CataclysmOrgans.MONSTROSITY_FURNACE,
+            "允许饮用岩浆桶",
+            "恢复所有饥饿值与饱和度并获得100黄胆汁，获得60秒骇人之恶效果"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆获取黄胆汁和增益");
+
+        // 远古工厂系列
+        addItem(CataclysmOrgans.TACTICAL_DISK, "战术磁盘");
+        addOrganPassiveEffect(
+            CataclysmOrgans.TACTICAL_DISK,
+            "每增加一个机械器官获得额外健康值",
+            "额外健康值等于机械器官数乘2的平方根"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.TACTICAL_DISK, "机械器官提供额外健康值");
+        addItem(CataclysmOrgans.REINFORCED_FRAME, "强化构架");
+        addItem(CataclysmOrgans.POWER_CELL, "蓄能电芯");
+        addOrganPassiveEffect(CataclysmOrgans.POWER_CELL, "未满血时每2秒回复1点生命值");
+        addItem(CataclysmOrgans.COMPUTE_CHIP, "运算晶片");
+        addOrganPassiveEffect(
+            CataclysmOrgans.COMPUTE_CHIP,
+            "每增加一个机械器官获得额外神经",
+            "额外神经等于机械器官数乘2的平方根"
+        );
+        addOrganPassiveEffectSimple(CataclysmOrgans.COMPUTE_CHIP, "机械器官提供额外神经");
+        addItem(CataclysmOrgans.MECHANICAL_STAR, "机械之星");
+        addOrganActiveSkill(
+            CataclysmOrgans.MECHANICAL_STAR,
+            "锁定视线方向的敌人发射追踪导弹",
+            "命中后造成8.0伤害"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.MECHANICAL_STAR, "发射追踪导弹");
+        addItem(CataclysmOrgans.DEATH_LENS, "死亡透镜");
+        addOrganActiveSkill(
+            CataclysmOrgans.DEATH_LENS,
+            "发射一道死亡激光",
+            "造成6点伤害加目标最大生命值6%",
+            "不点火不破坏方块"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.DEATH_LENS, "发射死亡激光");
+
+        // 末影守卫系列
+        addItem(CataclysmOrgans.GUARDIAN_STONE, "守卫石块");
+        addItem(CataclysmOrgans.VOID_CRYSTAL_SPINE, "虚空晶脊");
+        addOrganActiveSkill(
+            CataclysmOrgans.VOID_CRYSTAL_SPINE,
+            "以自身为中心召唤三环虚空符文阵",
+            "内环6枚符文半径1.5",
+            "中环12枚符文半径2.5",
+            "外环14枚符文半径3.5"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.VOID_CRYSTAL_SPINE, "召唤三环虚空符文阵");
+    }
+
+    // ==================== IronSpell 器官 ====================
+
+    private void ironSpellOrgansEN() {
+        // 死灵法师
+        addItem(IronSpellOrgans.NECROMANCER_SPINE, "Necromancer Spine");
+        addItem(IronSpellOrgans.NECROMANCER_RIB, "Necromancer Rib");
+
+        // 原初受火者
+        addItem(IronSpellOrgans.PRIMORDIAL_FLAME, "Primordial Flame");
+        addOrganPassiveEffect(
+            IronSpellOrgans.PRIMORDIAL_FLAME,
+            "Fire spells gain +1 spell level"
+        );
+
+        // 高位唤魔者
+        addItem(IronSpellOrgans.EMERALD_SKULL, "Emerald Skull");
+        addOrganPassiveEffect(
+            IronSpellOrgans.EMERALD_SKULL,
+            "Evocation spells gain +1 spell level"
+        );
+
+        // 死者之王
+        addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "Corrupted Soul Lantern");
+        addOrganPassiveEffect(
+            IronSpellOrgans.CORRUPTED_SOUL_LANTERN,
+            "Harvests souls from nearby killed entities into black bile",
+            "Harvest amount equals the killed entity max health"
+        );
+        addOrganPassiveEffectSimple(
+            IronSpellOrgans.CORRUPTED_SOUL_LANTERN,
+            "Harvests souls from nearby killed entities into black bile"
+        );
+
+        addItem(IronSpellOrgans.DEAD_KING_SPINE, "Dead King Spine");
+        addOrganPassiveEffect(
+            IronSpellOrgans.DEAD_KING_SPINE,
+            "Consumes black bile equal to damage absorbed",
+            "Absorbs up to 50% of incoming damage"
+        );
+        addOrganPassiveEffectSimple(
+            IronSpellOrgans.DEAD_KING_SPINE,
+            "Consumes black bile to absorb incoming damage"
+        );
+
+        addItem(IronSpellOrgans.DEAD_KING_RIB, "Dead King Rib");
+        addOrganPassiveEffect(
+            IronSpellOrgans.DEAD_KING_RIB,
+            "+10 max black bile"
+        );
+    }
+
+    private void ironSpellOrgansZH() {
+        // 死灵法师
+        addItem(IronSpellOrgans.NECROMANCER_SPINE, "亡魂脊柱");
+        addItem(IronSpellOrgans.NECROMANCER_RIB, "亡魂肋骨");
+
+        // 原初受火者
+        addItem(IronSpellOrgans.PRIMORDIAL_FLAME, "原初之火");
+        addOrganPassiveEffect(
+            IronSpellOrgans.PRIMORDIAL_FLAME,
+            "施放火焰法术时法术等级+1"
+        );
+
+        // 高位唤魔者
+        addItem(IronSpellOrgans.EMERALD_SKULL, "绿宝石头骨");
+        addOrganPassiveEffect(
+            IronSpellOrgans.EMERALD_SKULL,
+            "施放唤魔法术时法术等级+1"
+        );
+
+        // 死者之王
+        addItem(IronSpellOrgans.CORRUPTED_SOUL_LANTERN, "腐败魂灯");
+        addOrganPassiveEffect(
+            IronSpellOrgans.CORRUPTED_SOUL_LANTERN,
+            "收割附近死亡生物的灵魂为黑胆汁",
+            "收割量等于死亡生物的最大生命值"
+        );
+        addOrganPassiveEffectSimple(
+            IronSpellOrgans.CORRUPTED_SOUL_LANTERN,
+            "收割附近死亡生物灵魂为黑胆汁"
+        );
+
+        addItem(IronSpellOrgans.DEAD_KING_SPINE, "尸王脊柱");
+        addOrganPassiveEffect(
+            IronSpellOrgans.DEAD_KING_SPINE,
+            "消耗等额黑胆汁吸收伤害",
+            "最多吸收50%的伤害"
+        );
+        addOrganPassiveEffectSimple(
+            IronSpellOrgans.DEAD_KING_SPINE,
+            "消耗黑胆汁吸收伤害"
+        );
+
+        addItem(IronSpellOrgans.DEAD_KING_RIB, "尸王肋骨");
+        addOrganPassiveEffect(
+            IronSpellOrgans.DEAD_KING_RIB,
+            "+10 黑胆汁上限"
+        );
+    }
+
+    // ==================== Companions 器官 ====================
+
+    private void companionsOrgansEN() {
+        // 教宗系列
+        addItem(CompanionsOrgans.PONTIFF_HEART, "Pontiff Heart");
+        addOrganPassiveEffect(
+            CompanionsOrgans.PONTIFF_HEART,
+            "Heals 50% max HP when HP drops below 30%",
+            "Grants Strength II, Resistance II, Speed II for 15 seconds",
+            "Cooldown: 3 minutes"
+        );
+        addOrganPassiveEffectSimple(
+            CompanionsOrgans.PONTIFF_HEART,
+            "Low HP triggers healing and buff effects"
+        );
+
+        addItem(CompanionsOrgans.PONTIFF_LUNG, "Pontiff Lung");
+        addItem(CompanionsOrgans.PONTIFF_STOMACH, "Pontiff Stomach");
+        addItem(CompanionsOrgans.PONTIFF_INTESTINE, "Pontiff Intestine");
+        addItem(CompanionsOrgans.PONTIFF_KIDNEY, "Pontiff Kidney");
+
+        addItem(CompanionsOrgans.PONTIFF_SPLEEN, "Pontiff Spleen");
+        addOrganActiveSkill(
+            CompanionsOrgans.PONTIFF_SPLEEN,
+            "Releases an expanding fire ring centered on self",
+            "Deals magic damage and ignites entities in its path"
+        );
+        addOrganActiveSkillSimple(
+            CompanionsOrgans.PONTIFF_SPLEEN,
+            "Releases an expanding fire ring"
+        );
+
+        addItem(CompanionsOrgans.PONTIFF_LIVER, "Pontiff Liver");
+
+        addItem(CompanionsOrgans.PONTIFF_APPENDIX, "Pontiff Appendix");
+        addOrganActiveSkill(
+            CompanionsOrgans.PONTIFF_APPENDIX,
+            "Launches a tracking star at the target in sight",
+            "Positive temperature creates a red star that ignites",
+            "Negative temperature creates a blue star that freezes"
+        );
+        addOrganActiveSkillSimple(
+            CompanionsOrgans.PONTIFF_APPENDIX,
+            "Launches a tracking star that ignites or freezes"
+        );
+
+        addItem(CompanionsOrgans.PONTIFF_MUSCLE, "Pontiff Muscle");
+
+        // 蛋糕系列
+        addItem(CompanionsOrgans.CAKE_HEART, "Cake Heart");
+        addItem(CompanionsOrgans.CAKE_LUNG, "Cake Lung");
+
+        addItem(CompanionsOrgans.CAKE_STOMACH, "Cake Stomach");
+        addOrganPassiveEffect(
+            CompanionsOrgans.CAKE_STOMACH,
+            "Eating food grants Sweetness that heals nearby entities",
+            "Each eat adds levels equal to cake organ count and resets duration"
+        );
+        addOrganPassiveEffectSimple(
+            CompanionsOrgans.CAKE_STOMACH,
+            "Eating food grants Sweetness that heals nearby entities"
+        );
+
+        addItem(CompanionsOrgans.CAKE_LIVER, "Cake Liver");
+        addOrganPassiveEffect(
+            CompanionsOrgans.CAKE_LIVER,
+            "Sweetness level 2 or above consumes 1 level per second to remove 1 random harmful effect"
+        );
+    }
+
+    private void companionsOrgansZH() {
+        // 教宗系列
+        addItem(CompanionsOrgans.PONTIFF_HEART, "教宗心脏");
+        addOrganPassiveEffect(
+            CompanionsOrgans.PONTIFF_HEART,
+            "生命值降至30%以下时回复50%最大生命",
+            "获得力量II、抗性II、速度II持续15秒",
+            "冷却3分钟"
+        );
+        addOrganPassiveEffectSimple(
+            CompanionsOrgans.PONTIFF_HEART,
+            "低血量时触发回复与增益效果"
+        );
+
+        addItem(CompanionsOrgans.PONTIFF_LUNG, "教宗肺脏");
+        addItem(CompanionsOrgans.PONTIFF_STOMACH, "教宗胃");
+        addItem(CompanionsOrgans.PONTIFF_INTESTINE, "教宗肠子");
+        addItem(CompanionsOrgans.PONTIFF_KIDNEY, "教宗肾脏");
+
+        addItem(CompanionsOrgans.PONTIFF_SPLEEN, "教宗脾脏");
+        addOrganActiveSkill(
+            CompanionsOrgans.PONTIFF_SPLEEN,
+            "以自身为中心释放向外扩展的火环",
+            "对路径上的生物造成魔法伤害并点燃"
+        );
+        addOrganActiveSkillSimple(
+            CompanionsOrgans.PONTIFF_SPLEEN,
+            "释放向外扩展的火环"
+        );
+
+        addItem(CompanionsOrgans.PONTIFF_LIVER, "教宗肝脏");
+
+        addItem(CompanionsOrgans.PONTIFF_APPENDIX, "教宗阑尾");
+        addOrganActiveSkill(
+            CompanionsOrgans.PONTIFF_APPENDIX,
+            "向视线中的目标发射追踪星弹",
+            "正温度发射点燃的红色星弹",
+            "负温度发射冻结的蓝色星弹"
+        );
+        addOrganActiveSkillSimple(
+            CompanionsOrgans.PONTIFF_APPENDIX,
+            "发射点燃或冻结的追踪星弹"
+        );
+
+        addItem(CompanionsOrgans.PONTIFF_MUSCLE, "教宗肌肉");
+
+        // 蛋糕系列
+        addItem(CompanionsOrgans.CAKE_HEART, "蛋糕心脏");
+        addItem(CompanionsOrgans.CAKE_LUNG, "蛋糕肺脏");
+
+        addItem(CompanionsOrgans.CAKE_STOMACH, "蛋糕胃");
+        addOrganPassiveEffect(
+            CompanionsOrgans.CAKE_STOMACH,
+            "食用食物获得甜蜜效果治疗周围生物",
+            "每次食用叠加等级等于蛋糕器官数并重置持续时长"
+        );
+        addOrganPassiveEffectSimple(
+            CompanionsOrgans.CAKE_STOMACH,
+            "食用食物获得可叠加的甜蜜效果治疗周围生物"
+        );
+
+        addItem(CompanionsOrgans.CAKE_LIVER, "蛋糕肝脏");
+        addOrganPassiveEffect(
+            CompanionsOrgans.CAKE_LIVER,
+            "甜蜜等级达到2时每秒消耗1级清除1个随机负面效果"
+        );
     }
 
     private void addOrganDescription(Supplier<Item> item, String... lines) {

@@ -412,7 +412,7 @@ public class CataclysmOrganUtil {
             );
         }
 
-        // 中环：11个符文，半径3.5，延迟10 tick
+        // 中环：12个符文，半径2.5，延迟7 tick
         for (int k = 0; k < 12; ++k) {
             float f3 = angle2 + (float) k * (float) Math.PI * 2.0F / 11.0F + ((float) Math.PI * 2F / 10F);
             spawnVoidRune(level, entity.getX() + Mth.cos(f3) * 2.5D, entity.getZ() + Mth.sin(f3) * 2.5D,

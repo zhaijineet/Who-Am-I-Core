@@ -1,8 +1,5 @@
 {
   "values": [
-    "who_am_i_core:fantastical_spleen",
-    "who_am_i_core:frost_metal_spleen",
-    "who_am_i_core:transcendium_spleen",
     "who_am_i_core:pontiff_spleen",
     "who_am_i_core:aged_spleen",
     "who_am_i_core:fire_dragon_spleen",
@@ -16,6 +13,9 @@
     "who_am_i_core:frankenstein_spleen",
     "who_am_i_core:lesion_spleen",
     "who_am_i_core:heresy",
-    "who_am_i_core:hydra_spleen"
+    "who_am_i_core:hydra_spleen",
+    "who_am_i_core:frost_metal_spleen",
+    "who_am_i_core:transcendium_spleen",
+    "who_am_i_core:fantastical_spleen"
   ]
 }

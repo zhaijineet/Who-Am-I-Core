@@ -169,11 +169,20 @@ public class CommonEventHandler {
             event.setCanceled(true);
             return;
         }
-        // 余烬金属器官火焰吸收：受到火焰伤害时取消伤害并回复等量生命值
-        if (data.hasOrgan(WAICItemTagManager.EMBER) && event.getSource().is(DamageTypeTags.IS_FIRE)) {
-            entity.heal(event.getAmount());
-            event.setCanceled(true);
-            return;
+        // 余烬金属器官火焰吸收：每个器官免疫 25% 火焰伤害，回复免疫量的生命值
+        if (event.getSource().is(DamageTypeTags.IS_FIRE)) {
+            int emberCount = data.getOrganCount(WAICItemTagManager.EMBER);
+            if (emberCount > 0) {
+                float originalDamage = event.getAmount();
+                float ratio = Math.min(emberCount * 0.25F, 1.0F);
+                float reducedDamage = originalDamage * (1.0F - ratio);
+                entity.heal(originalDamage * ratio);
+                if (reducedDamage <= 0) {
+                    event.setCanceled(true);
+                } else {
+                    event.setAmount(reducedDamage);
+                }
+            }
         }
         // 禅心 - 磐石之躯：免疫摔落伤害
         if (data.hasOrgan(MowziesMobOrgans.ZEN_HEART.get()) && event.getSource().is(DamageTypeTags.IS_FALL)) {

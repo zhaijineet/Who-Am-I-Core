@@ -79,9 +79,9 @@ public class CataclysmOrgans {
             .build()
     );
 
-    // ==================== 冥行武弁器官 ====================
+    // ==================== 咒骸器官 ====================
 
-    // 冥行武弁脊柱
+    // 咒骸脊柱
     public static final Supplier<Item> APTRGANGR_SPINE = WAICItem.ITEM.register(
         "aptrgangr_spine",
         () -> Organ.builder()
@@ -90,7 +90,7 @@ public class CataclysmOrgans {
             .build()
     );
 
-    // 冥行武弁肋骨
+    // 咒骸肋骨
     public static final Supplier<Item> APTRGANGR_RIB = WAICItem.ITEM.register(
         "aptrgangr_rib",
         () -> Organ.builder()

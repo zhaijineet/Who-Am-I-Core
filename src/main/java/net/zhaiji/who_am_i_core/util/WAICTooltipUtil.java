@@ -29,11 +29,9 @@ public class WAICTooltipUtil {
      * 完全覆盖器官工具提示，仅显示「仍未完成」信息
      */
     public static final OrganTooltipConsumer UNFINISHED_TOOLTIP = (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-        List<Component> components = List.of(
-            Component.literal(TooltipUtil.DEFAULT_PREFIX)
-                .append(Component.translatable("organ." + WhoAmICore.MOD_ID + ".unfinished"))
-                .withStyle(ChatFormatting.GRAY)
-        );
+        List<Component> components = List.of(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+            .append(Component.translatable("organ." + WhoAmICore.MOD_ID + ".unfinished"))
+            .withStyle(ChatFormatting.GRAY));
         TooltipUtil.simpleTooltipAdd(tooltipComponents, components);
     };
     /**
@@ -50,10 +48,15 @@ public class WAICTooltipUtil {
             int count = data.getOrganCount(WAICItemTagManager.NINE_HELL);
             if (index == -1) count++;
             // 共用提示行（灰色 + • 前缀）
-            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX).append(Component.translatable("organ." + WhoAmICore.MOD_ID + ".nine_hell.hint")));
+            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                .append(Component.translatable("organ." + WhoAmICore.MOD_ID + ".nine_hell.hint")));
             // 复用 CCB 的 detailed 分支逻辑（九狱器官无 simple 简略文本）
             List<Component> lines = TooltipUtil.addSimpleOrDetailedLines(
-                stack, "passive_effect", TooltipUtil.isDetailedMode(keyContext), TooltipUtil.DEFAULT_PREFIX);
+                stack,
+                "passive_effect",
+                TooltipUtil.isDetailedMode(keyContext),
+                TooltipUtil.DEFAULT_PREFIX
+            );
             // 按数量给未激活效果加暗灰色
             for (int i = 0; i < lines.size(); i++) {
                 if (i >= count) {
@@ -64,6 +67,21 @@ public class WAICTooltipUtil {
             return result;
         })
         .build();
+
+    /**
+     * 全部染料物品有序列表（用于 detailed 模式遍历显示）
+     */
+    public static final List<Item> ALL_DYES = List.of(
+        Items.RED_DYE,
+        Items.ORANGE_DYE,
+        Items.YELLOW_DYE,
+        Items.LIGHT_BLUE_DYE,
+        Items.BLUE_DYE,
+        Items.GREEN_DYE,
+        Items.CYAN_DYE,
+        Items.PURPLE_DYE,
+        Items.GRAY_DYE
+    );
 
     /**
      * 将染料物品映射为对应的法术流派
@@ -83,6 +101,10 @@ public class WAICTooltipUtil {
 
     /**
      * 调色盘染料统计 — TooltipSectionFunction 版本
+     * <p>
+     * Simple 模式：只显示数量 > 0 的染料
+     * Detailed 模式（按 Shift 或配置开启）：显示全部 9 种染料，数量为 0 的也显示
+     * </p>
      */
     public static List<Component> paletteDyeSection(
         ChestCavityData data,
@@ -102,9 +124,21 @@ public class WAICTooltipUtil {
             }
         }
         List<Component> result = new ArrayList<>();
-        for (var entry : dyeCount.entrySet()) {
-            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX).append(
-                Component.translatable(WAICOrgans.PALETTE_DYE_TRANSLATION, entry.getKey().getDisplayName(), entry.getValue())));
+        if (TooltipUtil.isDetailedMode(keyContext)) {
+            // 详细模式：显示全部 9 种染料，数量为 0 的也显示
+            for (Item dye : ALL_DYES) {
+                SchoolType school = dyeToSchool(dye);
+                if (school == null) continue;
+                int count = dyeCount.getOrDefault(school, 0);
+                result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                    .append(Component.translatable(WAICOrgans.PALETTE_DYE_TRANSLATION, school.getDisplayName(), count)));
+            }
+        } else {
+            // 简略模式：只显示已有的染料
+            for (Map.Entry<SchoolType, Integer> entry : dyeCount.entrySet()) {
+                result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                    .append(Component.translatable(WAICOrgans.PALETTE_DYE_TRANSLATION, entry.getKey().getDisplayName(), entry.getValue())));
+            }
         }
         return result;
     }

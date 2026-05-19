@@ -2,10 +2,7 @@
   "values": [
     "who_am_i_core:fire_malkuth_warrior_heart",
     "who_am_i_core:ice_malkuth_warrior_heart",
-    "who_am_i_core:fantastical_heart",
-    "who_am_i_core:frost_metal_heart",
-    "who_am_i_core:transcendium_heart",
-    "who_am_i_core:cursed_gold_heart",
+    "who_am_i_core:leviathan_heart",
     "who_am_i_core:phantom_heart",
     "who_am_i_core:undying_ember",
     "who_am_i_core:monstrosity_core",
@@ -28,6 +25,10 @@
     "who_am_i_core:frankenstein_heart",
     "who_am_i_core:lesion_heart",
     "who_am_i_core:treachery",
-    "iceandfire:hydra_heart"
+    "iceandfire:hydra_heart",
+    "who_am_i_core:cursed_gold_heart",
+    "who_am_i_core:frost_metal_heart",
+    "who_am_i_core:transcendium_heart",
+    "who_am_i_core:fantastical_heart"
   ]
 }

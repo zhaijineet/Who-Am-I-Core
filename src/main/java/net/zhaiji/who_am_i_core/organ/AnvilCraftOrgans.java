@@ -4,7 +4,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
-import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
@@ -12,21 +11,6 @@ import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
 import java.util.function.Supplier;
 
 public class AnvilCraftOrgans {
-    // 皇家钢器官description翻译键
-    public static final String ROYAL_STEEL_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.royal_steel";
-
-    // 诅咒金器官description翻译键
-    public static final String CURSED_GOLD_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.cursed_gold";
-
-    // 余烬金属器官description翻译键
-    public static final String EMBER_ABSORPTION_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.ember_absorption";
-
-    // 浮霜器官description翻译键
-    public static final String MERCILESS_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.merciless";
-
-    // 超限合金器官description翻译键
-    public static final String LOOTING_BURST_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".tooltips.looting_burst";
-
     // ==================== 皇家钢器官 ====================
     // 皇家钢肋骨
     public static final Supplier<Item> ROYAL_STEEL_RIB = WAICItem.ITEM.register(
