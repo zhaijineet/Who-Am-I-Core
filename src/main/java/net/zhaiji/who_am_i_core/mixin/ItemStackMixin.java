@@ -8,8 +8,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.zhaiji.who_am_i_core.api.EdibleCondition;
-import net.zhaiji.who_am_i_core.manager.EdibleConditionManager;
+import net.zhaiji.who_am_i_core.api.UseCondition;
+import net.zhaiji.who_am_i_core.manager.UseConditionManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -40,10 +40,19 @@ public abstract class ItemStackMixin {
         InteractionHand usedHand,
         CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir
     ) {
-        if (EdibleConditionManager.canEat(player, whoAmICore$self())) {
+        Optional<UseCondition> condition = UseConditionManager.getMatchingCondition(player, whoAmICore$self());
+        if (condition.isEmpty()) return;
+
+        UseCondition useCondition = condition.get();
+        if (useCondition.hasOnFinishUsingItem()) {
+            // 持续使用路径：开始使用物品，等待完成后调用 finishUsingItem → onFinishUsingItem
             player.startUsingItem(usedHand);
             cir.setReturnValue(InteractionResultHolder.consume(whoAmICore$self()));
+        } else if (useCondition.hasOnUse()) {
+            // 瞬发使用路径：立即调用 onUse
+            cir.setReturnValue(useCondition.onUse(player, whoAmICore$self()));
         }
+        // 都没有 → 不拦截，让原版 use() 正常执行
     }
 
     @Inject(
@@ -52,32 +61,31 @@ public abstract class ItemStackMixin {
         cancellable = true
     )
     public void whoAmICore$finishUsingItem(Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
-        Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(livingEntity, whoAmICore$self());
-        condition.ifPresent(edibleCondition -> cir.setReturnValue(edibleCondition.onEat(livingEntity, whoAmICore$self())));
+        Optional<UseCondition> condition = UseConditionManager.getMatchingCondition(livingEntity, whoAmICore$self());
+        condition.filter(UseCondition::hasOnFinishUsingItem)
+            .ifPresent(useCondition -> cir.setReturnValue(useCondition.onFinishUsingItem(livingEntity, whoAmICore$self())));
     }
 
     @Inject(
         method = "getUseAnimation",
-        at = @At("HEAD"),
+        at = @At("RETURN"),
         cancellable = true
     )
     public void whoAmICore$getUseAnimation(CallbackInfoReturnable<UseAnim> cir) {
-        if (getItem().getUseAnimation(whoAmICore$self()) == UseAnim.NONE) {
-            EdibleConditionManager.getUseAnimation(whoAmICore$self()).ifPresent(cir::setReturnValue);
-        }
+        if (cir.getReturnValue() != UseAnim.NONE) return;
+        UseConditionManager.getUseAnimation(whoAmICore$self()).ifPresent(cir::setReturnValue);
     }
 
     @Inject(
         method = "getUseDuration",
-        at = @At("HEAD"),
+        at = @At("RETURN"),
         cancellable = true
     )
     public void whoAmICore$getUseDuration(LivingEntity entity, CallbackInfoReturnable<Integer> cir) {
-        Optional<EdibleCondition> condition = EdibleConditionManager.getMatchingCondition(entity, whoAmICore$self());
-        condition.ifPresent(edibleCondition -> {
-            int original = getItem().getUseDuration(whoAmICore$self(), entity);
-            int duration = edibleCondition.getUseDuration(entity, whoAmICore$self());
-            if (duration != original) {
+        Optional<UseCondition> condition = UseConditionManager.getMatchingCondition(entity, whoAmICore$self());
+        condition.ifPresent(useCondition -> {
+            int duration = useCondition.getUseDuration(entity, whoAmICore$self());
+            if (duration != cir.getReturnValue()) {
                 cir.setReturnValue(duration);
             }
         });

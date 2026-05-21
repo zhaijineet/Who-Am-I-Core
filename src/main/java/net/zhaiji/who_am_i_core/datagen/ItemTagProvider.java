@@ -17,6 +17,7 @@ import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -32,6 +33,9 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        // 开胸器
+        tag(ItemTagManager.CHEST_OPENERS).add(WAICItem.PETITE_CHEST_OPENER.get());
+
         fdBossesOrgansTags();
         cataclysmOrgansTags();
         ironSpellOrgansTags();

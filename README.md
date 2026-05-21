@@ -24,7 +24,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 ├── WhoAmICoreClient.java        # 客户端入口（@Mod Dist.CLIENT），注册客户端事件
 │
 ├── api/
-│   └── EdibleCondition.java     # 可食用条件 API。Builder 模式定义哪些物品可被食用及食用效果
+│   └── UseCondition.java     # 可使用条件 API。Builder 模式定义哪些物品可被使用及使用效果
 │
 ├── attachment/
 │   └── HumoursData.java         # 四体液学说数据（Attachment）：血液/黄胆汁/黑胆汁/粘液，各有当前值+上限
@@ -68,7 +68,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 │   └── PaletteItem.java                # 调色盘特殊物品
 │
 ├── manager/
-│   ├── EdibleConditionManager.java         # 可食用条件管理器
+│   ├── UseConditionManager.java         # 可使用条件管理器
 │   ├── IceAndFireChestCavityTypeManager.java  # 龙类和九头蛇胸腔类型定义
 │   ├── WAICChestCavityTypeManager.java     # 幻想种胸腔类型定义
 │   ├── WAICDamageTagManager.java           # 伤害类型标签常量（IS_MELEE）
@@ -79,7 +79,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 │   ├── ChestCavityDataMixin.java           # 胸腔数据 mixin
 │   ├── EnchantedCountIncreaseFunctionMixin.java  # 附魔数量增加函数
 │   ├── EntityUmvuthanaFollowerToPlayerMixin.java # 乌姆塔纳追随者关系转玩家
-│   ├── ItemStackMixin.java                 # ItemStack mixin（EdibleCondition 支持）
+│   ├── ItemStackMixin.java                 # ItemStack mixin（UseCondition 使用流程支持）
 │   ├── LivingEntityMixin.java              # LivingEntity mixin
 │   ├── MalkuthCannonEntityMixin.java       # FDBosses 王国炮台 mixin
 │   ├── MalkuthWeaknessHandlerMixin.java    # 王国弱点处理器 mixin
@@ -237,18 +237,22 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 
 ---
 
-## 可食用条件系统（EdibleCondition）
+## 可使用条件系统（UseCondition）
 
-通过 Builder 模式定义哪些物品可以被玩家右键食用：
+通过 Builder 模式定义哪些物品可以被玩家右键使用：
+- 物品属性由 `IItemExtensionMixin` 接管，使用流程由 `ItemStackMixin` + `LivingEntityMixin` 接管，不再依赖事件结算。
 - `matchesItem(Predicate<ItemStack>)` — 物品匹配条件
 - `matchesEntity(Predicate<LivingEntity>)` — 实体匹配条件（通常检查是否有某器官）
-- `onEat(BiFunction)` — 食用回调
+- `onUse(BiFunction)` — 主使用逻辑
+- `afterUse(BiFunction)` — 使用完成后的额外收尾
+- `foodProperties(Function)` — 挂载 `FoodProperties`，提供后就会进入原版食物管线
 - `eatAnimation()` / `drinkAnimation()` — 使用动画类型
-- `useDuration(int)` / `fastEat()` — 使用时长
+- `useDuration(int)` / `fastUse()` / `instantUse()` — 使用时长与使用模式
+- 只要条件提供了 `FoodProperties`，它就会被视为食物，后续是否为食物的判断都走 `getFoodProperties(...)`
 
 已注册的条件（在 ChestCavityRegisterEvent 中）：
-- 泥峭器官 → 可以吃泥土类物品
-- 暴食器官 → 可以吃任何食物，速度减半
+- 泥峭器官 → 可以使用泥土类物品
+- 暴食器官 → 可以使用任何食物，速度减半
 - 墨水瓶器官 → 可以喝铁魔法的墨水
 
 ---
@@ -301,11 +305,12 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 2. `ChestCavityDataMixin` — 胸腔数据扩展
 3. `EnchantedCountIncreaseFunctionMixin` — 附魔计算
 4. `EntityUmvuthanaFollowerToPlayerMixin` — 追随者归属改为玩家
-5. `ItemStackMixin` — 使 EdibleCondition 系统生效
-6. `LivingEntityMixin` — 生物实体扩展
-7. `MalkuthCannonEntityMixin` — FDBosses 王国炮台
-8. `MalkuthWeaknessHandlerMixin` + `MalkuthWeaknessOverlayMixin` — 王国弱点系统
-9. `PoisonMobEffectMixin` — 中毒效果（需要 Access Transformer）
+5. `IItemExtensionMixin` — 使 UseCondition 的食物属性注入生效
+6. `ItemStackMixin` — 使 UseCondition 的使用流程生效
+7. `LivingEntityMixin` — 生物实体扩展
+8. `MalkuthCannonEntityMixin` — FDBosses 王国炮台
+9. `MalkuthWeaknessHandlerMixin` + `MalkuthWeaknessOverlayMixin` — 王国弱点系统
+10. `PoisonMobEffectMixin` — 中毒效果（需要 Access Transformer）
 
 ---
 

@@ -2,7 +2,7 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
-import com.iafenvoy.iceandfire.registry.IafEntities;
+import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.item.InkItem;
@@ -10,7 +10,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -35,27 +34,31 @@ import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
-import net.zhaiji.who_am_i_core.api.EdibleCondition;
+import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
+import net.zhaiji.who_am_i_core.manager.CataclysmChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.CompanionsChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.FDBossesChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.IronSpellChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.MowziesMobChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
-import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
-import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
-import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
-import net.zhaiji.who_am_i_core.util.OrganUtil;
+import net.zhaiji.who_am_i_core.util.CompanionsOrganUtil;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
+import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
+import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
 public class CommonEventHandler {
@@ -83,45 +86,52 @@ public class CommonEventHandler {
 
         // 注册可食用条件
         // 泥峭器官可食用泥土
-        EdibleCondition.builder()
+        UseCondition.builder()
             .matchesItem(MowziesMobOrganUtil::isDirtItem)
             .matchesEntity(MowziesMobOrganUtil::hasBluffOrgan)
-            .onEat(MowziesMobOrganUtil::eatDirt)
+            .eatAnimation()
+            .onFinishUsingItem((entity, stack, condition) -> MowziesMobOrganUtil.eatDirt(entity, stack))
             .build();
 
         // 暴食可以食用任何食物，且食用速度减半
-        EdibleCondition.builder()
+        // 优先级设低（范围宽），让更具体的条件优先匹配
+        UseCondition.builder()
+            .priority(-100)
             .matchesItem(stack -> stack.has(DataComponents.FOOD))
             .matchesEntity(entity -> ChestCavityUtil.getData(entity).hasOrgan(WAICOrgans.GLUTTONY.get()))
             // 不能直接使用stack的getUseDuration，会无限循环
+            .onFinishUsingItem((entity, stack, useCondition) -> stack.getItem().finishUsingItem(stack, entity.level(), entity))
             .useDuration((entity, stack) -> stack.getItem().getUseDuration(stack, entity) / 2)
             .build();
 
         // 墨水瓶器官可以饮用铁魔法的墨水
-        EdibleCondition.builder()
+        UseCondition.builder()
             .matchesItem(stack -> stack.getItem() instanceof InkItem)
             .matchesEntity(entity -> ChestCavityUtil.getData(entity).hasOrgan(WAICOrgans.INK_BOTTLE.get()))
-            .onEat(WAICOrganUtil::drinkInk)
+            .onFinishUsingItem(WAICOrganUtil::drinkInk)
             .drinkAnimation()
             .build();
 
         // 巨兽熔炉可以饮用岩浆
-        EdibleCondition.builder()
+        UseCondition.builder()
             .matchesItem(stack -> stack.is(Items.LAVA_BUCKET))
             .matchesEntity(entity -> ChestCavityUtil.getData(entity)
                                          .hasOrgan(CataclysmOrgans.MONSTROSITY_FURNACE.get()) && !entity.isShiftKeyDown())
-            .onEat(CataclysmOrganUtil::drinkLava)
+            .onFinishUsingItem(CataclysmOrganUtil::drinkLava)
             .drinkAnimation()
             .build();
 
-        // 注册龙类胸腔
-        event.registerEntity(IafEntities.FIRE_DRAGON.get(), IceAndFireChestCavityTypeManager.FIRE_DRAGON);
-        event.registerEntity(IafEntities.ICE_DRAGON.get(), IceAndFireChestCavityTypeManager.ICE_DRAGON);
-        event.registerEntity(IafEntities.LIGHTNING_DRAGON.get(), IceAndFireChestCavityTypeManager.LIGHTNING_DRAGON);
+        // 各mod注册胸腔类型以及对应实体注册胸腔类型
+        IceAndFireChestCavityTypeManager.registerEntities(event);
+        MowziesMobChestCavityTypeManager.registerEntities(event);
+        FDBossesChestCavityTypeManager.registerEntities(event);
+        CataclysmChestCavityTypeManager.registerEntities(event);
+        IronSpellChestCavityTypeManager.registerEntities(event);
+        CompanionsChestCavityTypeManager.registerEntities(event);
 
-        // 注册幻想种和九头蛇胸腔
-        event.registerEntity(IafEntities.PIXIE.get(), WAICChestCavityTypeManager.FANTASTICAL);
-        event.registerEntity(IafEntities.HYDRA.get(), IceAndFireChestCavityTypeManager.HYDRA);
+        // Touhou Little Maid
+        event.registerEntity(InitEntities.MAID.get(), WAICChestCavityTypeManager.FANTASTICAL);
+        event.registerEntity(InitEntities.FAIRY.get(), WAICChestCavityTypeManager.FANTASTICAL);
     }
 
     /**
@@ -420,23 +430,7 @@ public class CommonEventHandler {
         WAICOrganUtil.gluttonyEatEffect(entity, data, food);
 
         // 蛋糕胃：给予甜蜜效果
-        if (data.hasOrgan(CompanionsOrgans.CAKE_STOMACH.get())) {
-            // 计算蛋糕器官数量
-            int cakeOrganCount = data.getOrganCount(WAICItemTagManager.CAKE);
-
-            if (cakeOrganCount > 0) {
-                MobEffectInstance currentSweetness = entity.getEffect(WAICEffect.SWEETNESS);
-                int newAmplifier;
-                if (currentSweetness != null) {
-                    // 已有甜蜜：叠加等级，重置时长
-                    newAmplifier = currentSweetness.getAmplifier() + cakeOrganCount;
-                } else {
-                    // 没有甜蜜：初始等级 = 蛋糕器官数量 - 1（因为 amplifier 从 0 开始）
-                    newAmplifier = cakeOrganCount - 1;
-                }
-                entity.addEffect(new MobEffectInstance(WAICEffect.SWEETNESS, 600, newAmplifier));
-            }
-        }
+        CompanionsOrganUtil.cakeStomachEatEffect(entity, data);
     }
 
     /**

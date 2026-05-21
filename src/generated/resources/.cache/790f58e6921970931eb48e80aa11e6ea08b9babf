@@ -1,4 +1,5 @@
-// 1.21.1	2026-05-20T00:19:28.4063223	Tags for minecraft:item mod id who_am_i_core
+// 1.21.1	2026-05-21T19:39:03.8018867	Tags for minecraft:item mod id who_am_i_core
+ffbd0b58b3eeefed73caa7615dfa32ab780bdd2d data/chestcavitybeyond/tags/item/chest_openers.json
 4cef1eec25309d2b3fd6fcc1c0ac697d2b964d6c data/chestcavitybeyond/tags/item/organs.json
 46c8b37880a5298aad4002ffb40e3b9e18454de6 data/chestcavitybeyond/tags/item/organs/appendix.json
 df7bf3665f0db1e2458d4d2f568b809c517345e8 data/chestcavitybeyond/tags/item/organs/heart.json

@@ -36,6 +36,7 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
@@ -210,7 +211,9 @@ public class CataclysmOrganUtil {
      * 巨兽熔炉 — 饮用岩浆桶
      * 增加100点黄胆汁，根据巨兽器官数量施加巨兽之力效果，恢复饱食度
      */
-    public static ItemStack drinkLava(LivingEntity entity, ItemStack stack) {
+    public static ItemStack drinkLava(LivingEntity entity, ItemStack stack, UseCondition condition) {
+        if (entity.isShiftKeyDown()) return stack;
+
         HumoursData.insertYellowBile(entity, 100, false);
         ChestCavityData data = ChestCavityUtil.getData(entity);
         int count = data.getOrganCount(WAICItemTagManager.MONSTROSITY);
@@ -383,7 +386,7 @@ public class CataclysmOrganUtil {
     public static boolean voidCrystalSpineSkill(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
 
-        if(!entity.onGround()) return false;
+        if (!entity.onGround()) return false;
 
         Level level = entity.level();
 
@@ -519,7 +522,11 @@ public class CataclysmOrganUtil {
         // 扇形5道幻影战戟
         float baseYRot = entity.getYRot() * ((float) Math.PI / 180F);
         float[] angleOffsets = {
-            -24.0F, -12.0F, 0.0F, 12.0F, 24.0F
+            -24.0F,
+            -12.0F,
+            0.0F,
+            12.0F,
+            24.0F
         };
 
         for (int i = 0; i < angleOffsets.length; i++) {

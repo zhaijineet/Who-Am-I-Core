@@ -20,8 +20,11 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
+import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
-import net.zhaiji.who_am_i_core.util.OrganUtil;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
+import net.zhaiji.who_am_i_core.register.WAICEffect;
 
 public class CompanionsOrganUtil {
 
@@ -122,5 +125,25 @@ public class CompanionsOrganUtil {
         level.addFreshEntity(star);
 
         return true;
+    }
+
+    /**
+     * 蛋糕胃：食用食物时给予甜蜜效果，等级 = 蛋糕器官数量，可叠加，每次重置 30 秒
+     */
+    public static void cakeStomachEatEffect(LivingEntity entity, ChestCavityData data) {
+        if (!data.hasOrgan(CompanionsOrgans.CAKE_STOMACH.get())) return;
+        int cakeOrganCount = data.getOrganCount(WAICItemTagManager.CAKE);
+        if (cakeOrganCount <= 0) return;
+
+        MobEffectInstance currentSweetness = entity.getEffect(WAICEffect.SWEETNESS);
+        int newAmplifier;
+        if (currentSweetness != null) {
+            // 已有甜蜜：叠加等级，重置时长
+            newAmplifier = currentSweetness.getAmplifier() + cakeOrganCount;
+        } else {
+            // 没有甜蜜：初始等级 = 蛋糕器官数量 - 1（因为 amplifier 从 0 开始）
+            newAmplifier = cakeOrganCount - 1;
+        }
+        entity.addEffect(new MobEffectInstance(WAICEffect.SWEETNESS, 600, newAmplifier));
     }
 }

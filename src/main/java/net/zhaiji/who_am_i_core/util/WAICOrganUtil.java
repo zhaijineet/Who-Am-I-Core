@@ -1,8 +1,8 @@
 package net.zhaiji.who_am_i_core.util;
 
-import com.google.common.collect.Multimap;
 import com.finderfeed.fdbosses.content.entities.geburah.sins.attachment.PlayerSins;
 import com.finderfeed.fdbosses.init.BossEffects;
+import com.google.common.collect.Multimap;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
@@ -18,13 +18,13 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.Item;
@@ -46,7 +46,7 @@ import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
-import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
+import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
@@ -56,7 +56,6 @@ import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public class WAICOrganUtil {
@@ -221,7 +220,7 @@ public class WAICOrganUtil {
     /**
      * 饮用墨水，最高存储1000点
      */
-    public static ItemStack drinkInk(LivingEntity entity, ItemStack stack) {
+    public static ItemStack drinkInk(LivingEntity entity, ItemStack stack, UseCondition condition) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         if (!(stack.getItem() instanceof InkItem inkItem)) return stack;
 
@@ -1066,8 +1065,6 @@ public class WAICOrganUtil {
         }
     }
 
-    // ==================== 贪婪（肺脏）====================
-
     /**
      * 贪婪 modifier：呼吸恢复/容量/耐力动态调整（基础 2 - N）+ 抢夺/时运
      */
@@ -1082,8 +1079,6 @@ public class WAICOrganUtil {
         modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
     }
 
-    // ==================== 愤怒（肝脏）====================
-
     /**
      * 愤怒 modifier：解毒属性动态调整（基础 2 - N）+ 力量/速度（叠加式）
      */
@@ -1095,8 +1090,6 @@ public class WAICOrganUtil {
         modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
         modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
     }
-
-    // ==================== 异端（脾脏）====================
 
     /**
      * 异端 modifier：代谢属性动态调整（基础 2 - N）
@@ -1127,8 +1120,6 @@ public class WAICOrganUtil {
             iEffect.setAmplifier(effectInstance.getAmplifier() + 1, entity);
         }
     }
-
-    // ==================== 暴力（肌肉）====================
 
     /**
      * 暴力 modifier：力量/速度属性动态调整（基础 2 - N）
@@ -1162,8 +1153,6 @@ public class WAICOrganUtil {
             }
         }
     }
-
-    // ==================== 欺诈（肾脏）====================
 
     /**
      * 欺诈 modifier：过滤属性动态调整（基础 2 - N）
@@ -1215,8 +1204,6 @@ public class WAICOrganUtil {
         }
     }
 
-    // ==================== 背叛（心脏）====================
-
     /**
      * 背叛 modifier：健康属性动态调整（基础 2 - N）
      */
@@ -1254,9 +1241,7 @@ public class WAICOrganUtil {
         if (entity.level().isClientSide()) return false;
 
         float health = entity.getHealth();
-        Iterator<MobEffectInstance> iterator = entity.getActiveEffects().iterator();
-        while (iterator.hasNext()) {
-            MobEffectInstance effect = iterator.next();
+        for (MobEffectInstance effect : entity.getActiveEffects()) {
             if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
                 health /= 2;
                 // 清除罪人效果时，减少1层罪孽

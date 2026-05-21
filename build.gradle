@@ -163,7 +163,7 @@ dependencies {
     implementation "curse.maven:knight-lib-1105855:6942154"
 
     // Chest Cavity Beyond
-    implementation "curse.maven:chest-cavity-beyond-1427715:8107645"
+    implementation "curse.maven:chest-cavity-beyond-1427715:8118464"
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物
