@@ -56,42 +56,54 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.LOOTING, "Looting");
         addAttribute(WAICAttribute.FORTUNE, "Fortune");
 
-        addAttributeDescription(WAICAttribute.HEAL,
+        addAttributeDescription(
+            WAICAttribute.HEAL,
             "Restores health equal to attribute value every second"
         );
-        addAttributeDescription(WAICAttribute.BLOCK,
+        addAttributeDescription(
+            WAICAttribute.BLOCK,
             "Reduces incoming damage by a flat amount",
             "Can reduce damage to zero but not below"
         );
-        addAttributeDescription(WAICAttribute.COUNTER_ATTACK,
+        addAttributeDescription(
+            WAICAttribute.COUNTER_ATTACK,
             "Deals thorns damage to the attacker when hit",
             "Does not trigger on self-damage or thorns damage"
         );
-        addAttributeDescription(WAICAttribute.MELEE_DAMAGE,
+        addAttributeDescription(
+            WAICAttribute.MELEE_DAMAGE,
             "Adds flat bonus damage when hit by melee attacks"
         );
-        addAttributeDescription(WAICAttribute.RANGED_DAMAGE,
+        addAttributeDescription(
+            WAICAttribute.RANGED_DAMAGE,
             "Adds flat bonus damage when hit by ranged attacks"
         );
-        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE,
+        addAttributeDescription(
+            WAICAttribute.MAGIC_DAMAGE,
             "Adds flat bonus damage when hit by magic attacks"
         );
-        addAttributeDescription(WAICAttribute.TEMPERATURE,
+        addAttributeDescription(
+            WAICAttribute.TEMPERATURE,
             "Affects various organ effects that scale with temperature"
         );
-        addAttributeDescription(WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
+        addAttributeDescription(
+            WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
             "Final multiplier for melee damage, default 100%"
         );
-        addAttributeDescription(WAICAttribute.RANGED_DAMAGE_PERCENTAGE,
+        addAttributeDescription(
+            WAICAttribute.RANGED_DAMAGE_PERCENTAGE,
             "Final multiplier for ranged damage, default 100%"
         );
-        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE,
+        addAttributeDescription(
+            WAICAttribute.MAGIC_DAMAGE_PERCENTAGE,
             "Final multiplier for magic damage, default 100%"
         );
-        addAttributeDescription(WAICAttribute.LOOTING,
+        addAttributeDescription(
+            WAICAttribute.LOOTING,
             "Adds extra levels to Looting enchantment effect"
         );
-        addAttributeDescription(WAICAttribute.FORTUNE,
+        addAttributeDescription(
+            WAICAttribute.FORTUNE,
             "Adds extra levels to Fortune enchantment effect"
         );
 
@@ -159,42 +171,54 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.LOOTING, "抢夺");
         addAttribute(WAICAttribute.FORTUNE, "时运");
 
-        addAttributeDescription(WAICAttribute.HEAL,
+        addAttributeDescription(
+            WAICAttribute.HEAL,
             "每秒回复等同于属性值的生命值"
         );
-        addAttributeDescription(WAICAttribute.BLOCK,
+        addAttributeDescription(
+            WAICAttribute.BLOCK,
             "等值减少受到的伤害",
             "可将伤害减至零但不会低于零"
         );
-        addAttributeDescription(WAICAttribute.COUNTER_ATTACK,
+        addAttributeDescription(
+            WAICAttribute.COUNTER_ATTACK,
             "受到伤害时对攻击者造成等值荆棘伤害",
             "自伤和荆棘伤害不会触发反击"
         );
-        addAttributeDescription(WAICAttribute.MELEE_DAMAGE,
+        addAttributeDescription(
+            WAICAttribute.MELEE_DAMAGE,
             "受到近战攻击时额外增加等值伤害"
         );
-        addAttributeDescription(WAICAttribute.RANGED_DAMAGE,
+        addAttributeDescription(
+            WAICAttribute.RANGED_DAMAGE,
             "受到远程攻击时额外增加等值伤害"
         );
-        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE,
+        addAttributeDescription(
+            WAICAttribute.MAGIC_DAMAGE,
             "受到魔法攻击时额外增加等值伤害"
         );
-        addAttributeDescription(WAICAttribute.TEMPERATURE,
+        addAttributeDescription(
+            WAICAttribute.TEMPERATURE,
             "影响多种与温度相关的器官效果"
         );
-        addAttributeDescription(WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
+        addAttributeDescription(
+            WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
             "近战伤害的最终倍率，默认100%"
         );
-        addAttributeDescription(WAICAttribute.RANGED_DAMAGE_PERCENTAGE,
+        addAttributeDescription(
+            WAICAttribute.RANGED_DAMAGE_PERCENTAGE,
             "远程伤害的最终倍率，默认100%"
         );
-        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE,
+        addAttributeDescription(
+            WAICAttribute.MAGIC_DAMAGE_PERCENTAGE,
             "魔法伤害的最终倍率，默认100%"
         );
-        addAttributeDescription(WAICAttribute.LOOTING,
+        addAttributeDescription(
+            WAICAttribute.LOOTING,
             "额外增加抢夺附魔的等效等级"
         );
-        addAttributeDescription(WAICAttribute.FORTUNE,
+        addAttributeDescription(
+            WAICAttribute.FORTUNE,
             "额外增加时运附魔的等效等级"
         );
 
@@ -408,11 +432,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             MowziesMobOrgans.ZEN_HEART,
             "免疫摔落伤害",
-            "拥有地卜术效果时受到伤害减免50%"
+            "拥有大地祝福效果时受到伤害减免50%"
         );
         addOrganPassiveEffectSimple(
             MowziesMobOrgans.ZEN_HEART,
-            "免疫摔落伤害并在地卜术效果下减伤"
+            "免疫摔落伤害并在大地祝福效果下减伤"
         );
 
         addItem(MowziesMobOrgans.AGED_HEART, "衰老心脏");
@@ -834,7 +858,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void lesionOrgansEN() {
         addItem(WAICOrgans.LESION_HEART, "Lesion Heart");
-        addOrganDescription(WAICOrgans.LESION_HEART, "+1 Health per harmful effect, -1 Health per beneficial effect");
+        addOrganPassiveEffect(WAICOrgans.LESION_HEART, "+1 Health per harmful effect, -1 Health per beneficial effect");
         addOrganActiveSkill(WAICOrgans.LESION_HEART, "Spread all your effects to living entities within 10 blocks");
 
         addItem(WAICOrgans.LESION_LUNG, "Lesion Lung");
@@ -846,13 +870,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.LESION_APPENDIX, "Lesion Appendix");
 
         addItem(WAICOrgans.LESION_MUSCLE, "Lesion Muscle");
-        addOrganDescription(WAICOrgans.LESION_MUSCLE, "+1 Strength and +1 Speed per harmful effect");
-        addOrganPassiveEffect(WAICOrgans.LESION_MUSCLE, "Deals bonus damage equal to the sum of all harmful effect levels on the target");
+        addOrganPassiveEffect(
+            WAICOrgans.LESION_MUSCLE,
+            "+1 Strength and +1 Speed per harmful effect",
+            "Deals bonus damage equal to the sum of all harmful effect levels on the target"
+        );
     }
 
     private void lesionOrgansZH() {
         addItem(WAICOrgans.LESION_HEART, "病变心脏");
-        addOrganDescription(WAICOrgans.LESION_HEART, "每有一个负面效果+1健康，每有一个正面效果−1健康");
+        addOrganPassiveEffect(WAICOrgans.LESION_HEART, "每有一个负面效果+1健康，每有一个正面效果−1健康");
         addOrganActiveSkill(WAICOrgans.LESION_HEART, "将自身所有效果传播给10格范围内的生物");
 
         addItem(WAICOrgans.LESION_LUNG, "病变肺脏");
@@ -864,8 +891,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.LESION_APPENDIX, "病变阑尾");
 
         addItem(WAICOrgans.LESION_MUSCLE, "病变肌肉");
-        addOrganDescription(WAICOrgans.LESION_MUSCLE, "每有一个负面效果，+1力量、+1速度");
-        addOrganPassiveEffect(WAICOrgans.LESION_MUSCLE, "对目标额外造成等同于其所有负面效果等级之和的伤害");
+        addOrganPassiveEffect(
+            WAICOrgans.LESION_MUSCLE,
+            "每有一个负面效果，+1力量、+1速度",
+            "对目标额外造成等同于其所有负面效果等级之和的伤害"
+        );
     }
 
     // ==================== 九狱器官 ====================
@@ -1971,9 +2001,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "Leviathan Spine");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "Leviathan Fishbone");
 
-        // 咒骸系列
-        addItem(CataclysmOrgans.APTRGANGR_SPINE, "Aptrgangr Spine");
-        addItem(CataclysmOrgans.APTRGANGR_RIB, "Aptrgangr Rib");
+        // 魂尸系列
+        addItem(CataclysmOrgans.DRAUGR_SPINE, "Draugr Spine");
+        addItem(CataclysmOrgans.DRAUGR_RIB, "Draugr Rib");
 
         // 咒翼灵骸系列
         addItem(CataclysmOrgans.MALEDICTUS_SPINE, "Maledictus Spine");
@@ -2105,9 +2135,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "利维坦脊柱");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "利维坦鱼骨");
 
-        // 咒骸系列
-        addItem(CataclysmOrgans.APTRGANGR_SPINE, "咒骸脊柱");
-        addItem(CataclysmOrgans.APTRGANGR_RIB, "咒骸肋骨");
+        // 魂尸系列
+        addItem(CataclysmOrgans.DRAUGR_SPINE, "魂尸脊柱");
+        addItem(CataclysmOrgans.DRAUGR_RIB, "魂尸肋骨");
 
         // 咒翼灵骸系列
         addItem(CataclysmOrgans.MALEDICTUS_SPINE, "咒翼灵骸脊柱");

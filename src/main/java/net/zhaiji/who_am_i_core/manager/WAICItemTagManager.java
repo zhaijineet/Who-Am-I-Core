@@ -14,7 +14,7 @@ public class WAICItemTagManager {
     // 召唤
     public static final TagKey<Item> SUMMON = register("summon", 0xFF5555FF, 70);
     // 唯一
-    public static final TagKey<Item> UNIQUE = register("unique", 0xFFFF55FF, 100);
+    public static final TagKey<Item> UNIQUE = register("unique", 0xFFFF55FF, 0);
     // 火龙
     public static final TagKey<Item> FIRE_DRAGON = register("fire_dragon", 0xFFFF5555, 60);
     // 冰龙
@@ -39,6 +39,8 @@ public class WAICItemTagManager {
     public static final TagKey<Item> CAKE = register("cake", 0xFFFF55FF, 10);
     // 教宗
     public static final TagKey<Item> PONTIFF = register("pontiff", 0xFFFFAA00, 5);
+    // 逆卡巴拉
+    public static final TagKey<Item> QLIPHOTH = register("qliphoth", 0xFFAA00AA, 2);
     // 九狱
     public static final TagKey<Item> NINE_HELL = register("nine_hell", 0xFFAA00AA, 1);
 

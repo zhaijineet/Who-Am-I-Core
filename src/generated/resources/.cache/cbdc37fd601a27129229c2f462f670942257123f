@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-12T08:44:21.4397199	Item Models: who_am_i_core
+// 1.21.1	2026-05-23T23:30:32.1593001	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -11,8 +11,6 @@ d79fdb4d1cf34d84a5a4f70c97b9e909ba26c5cd assets/who_am_i_core/models/item/aged_r
 f2eebe6bf21c46701d4a756ac14ddecaaec03113 assets/who_am_i_core/models/item/aged_spine.json
 46e42a840b7fbd462801c0c6b963f7c691e784f2 assets/who_am_i_core/models/item/aged_spleen.json
 6f8c219471ef65fe9203c9ebdc71cda91978cbd1 assets/who_am_i_core/models/item/aged_stomach.json
-8dd1241d5c0558f1c96a0822b785f2e4cc0fa57b assets/who_am_i_core/models/item/aptrgangr_rib.json
-0a1d336ca4b34ea3df32987892346c046dfcfa07 assets/who_am_i_core/models/item/aptrgangr_spine.json
 0a80f1f856c7159ad8a33c680c91aa8b26e23e5f assets/who_am_i_core/models/item/bitter_flesh.json
 a195bb6e77ecc9b4502253d76e494e1566b785f0 assets/who_am_i_core/models/item/blazing_visage.json
 84f289d50ab7df9268ec15800b8b2a8933ce4162 assets/who_am_i_core/models/item/bluff_core.json
@@ -60,6 +58,8 @@ d127ca2c1f175d5cf0f9c8dd1651e825341402ee assets/who_am_i_core/models/item/cursed
 838a512d5ddbc927fb29de704f0fb3acc9cfac99 assets/who_am_i_core/models/item/death_lens.json
 7f32dfe5b878d936beedd20b51171329922df4e5 assets/who_am_i_core/models/item/divine_core.json
 f0145a09c3de3ab9db0b0c8d01a5e578dc8f1f7c assets/who_am_i_core/models/item/dragon_blood_preparation_group.json
+fb903a6eeba22d923d314e3ae21e6723921ba8da assets/who_am_i_core/models/item/draugr_rib.json
+65f7c09759db77f2e849816a0b55302e23d21905 assets/who_am_i_core/models/item/draugr_spine.json
 94ec6c8fd4ca98272a900bf8cf8522ca1edde2a1 assets/who_am_i_core/models/item/dread_phylactery.json
 c1f5e0528156b2af032be8bacd8d8506899b4bf5 assets/who_am_i_core/models/item/dread_rib.json
 f2f2ef7bf32a605f12ea4c13ebd84ca6c860a99e assets/who_am_i_core/models/item/dread_spine.json

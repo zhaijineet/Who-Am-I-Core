@@ -79,20 +79,20 @@ public class CataclysmOrgans {
             .build()
     );
 
-    // ==================== 咒骸器官 ====================
+    // ==================== 魂尸器官 ====================
 
-    // 咒骸脊柱
-    public static final Supplier<Item> APTRGANGR_SPINE = WAICItem.ITEM.register(
-        "aptrgangr_spine",
+    // 魂尸脊柱
+    public static final Supplier<Item> DRAUGR_SPINE = WAICItem.ITEM.register(
+        "draugr_spine",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 1.5)
             .addValueAttribute(InitAttribute.DEFENSE, 0.75)
             .build()
     );
 
-    // 咒骸肋骨
-    public static final Supplier<Item> APTRGANGR_RIB = WAICItem.ITEM.register(
-        "aptrgangr_rib",
+    // 魂尸肋骨
+    public static final Supplier<Item> DRAUGR_RIB = WAICItem.ITEM.register(
+        "draugr_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
             .build()

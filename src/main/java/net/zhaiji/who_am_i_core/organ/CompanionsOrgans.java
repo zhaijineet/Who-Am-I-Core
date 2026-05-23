@@ -27,6 +27,7 @@ public class CompanionsOrgans {
         "pontiff_lung",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
             .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
             .build()
     );

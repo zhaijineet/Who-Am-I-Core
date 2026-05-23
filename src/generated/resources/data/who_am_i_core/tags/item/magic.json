@@ -2,14 +2,24 @@
   "values": [
     "who_am_i_core:primordial_flame",
     "who_am_i_core:emerald_skull",
+    "who_am_i_core:corrupted_soul_lantern",
+    "who_am_i_core:dead_king_spine",
+    "who_am_i_core:dead_king_rib",
     "who_am_i_core:chest_nova",
     "who_am_i_core:bluff_core",
     "who_am_i_core:bluff_tablet",
     "who_am_i_core:active_bluff_rod",
     "who_am_i_core:experience_heart",
+    "who_am_i_core:fire_dragon_gem",
+    "who_am_i_core:ice_dragon_gem",
+    "who_am_i_core:lightning_dragon_gem",
+    "who_am_i_core:nib",
+    "who_am_i_core:crimson_heart",
+    "who_am_i_core:crimson_liver",
     "who_am_i_core:divine_core",
     "who_am_i_core:frost_core",
     "who_am_i_core:flame_core",
-    "who_am_i_core:nature_core"
+    "who_am_i_core:nature_core",
+    "who_am_i_core:palette"
   ]
 }

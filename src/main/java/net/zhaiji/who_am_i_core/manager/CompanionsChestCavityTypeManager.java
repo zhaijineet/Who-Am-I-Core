@@ -1,6 +1,7 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import dev.xylonity.companions.registry.CompanionsEntities;
+import dev.xylonity.companions.registry.CompanionsItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
@@ -104,11 +105,46 @@ public class CompanionsChestCavityTypeManager {
             InitAttribute.NERVES, 1.0
         ));
 
+    // 暗影胸腔
+    public static final ChestCavityType SHADE = register("shade")
+        .setSecondRow(4, CompanionsItems.CRYSTALLIZED_BLOOD.get())
+        .addValueBonuses(CompanionsItems.CRYSTALLIZED_BLOOD.get(), Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.NERVES, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
+
+    // 活体蜡烛胸腔
+    public static final ChestCavityType LIVING_CANDLE = register("living_candle")
+        .setSecondRow(4, Items.CANDLE)
+        .addValueBonuses(Items.CANDLE, Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.NERVES, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
+
+    // 电纳魔胸腔
+    public static final ChestCavityType DINAMO = register("dinamo")
+        .setFirstRow(3, InitItem.GOLEM_ARMOR_PLATE.get())
+        .setFirstRow(4, InitItem.GOLEM_CORE.get())
+        .setFirstRow(5, InitItem.GOLEM_ARMOR_PLATE.get())
+        .setSecondRow(3, InitItem.GOLEM_ARMOR_PLATE.get())
+        .setSecondRow(4, InitItem.GOLEM_CABLE.get())
+        .setSecondRow(5, InitItem.GOLEM_ARMOR_PLATE.get())
+        .setThirdRow(3, InitItem.INNER_FURNACE.get())
+        .setThirdRow(4, InitItem.INNER_FURNACE.get())
+        .setThirdRow(5, InitItem.INNER_FURNACE.get())
+        .addValueBonuses(InitItem.GOLEM_CORE.get(), Map.of(
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
+
     /**
      * 注册 Companions 所有实体的胸腔类型
      */
     public static void registerEntities(ChestCavityRegisterEvent event) {
-        // --- 有专属器官的实体 ---
         // 神圣教宗
         event.registerEntity(CompanionsEntities.SACRED_PONTIFF.get(), PONTIFF);
         // 泰迪
@@ -118,54 +154,52 @@ public class CompanionsChestCavityTypeManager {
         event.registerEntity(CompanionsEntities.CORNELIUS.get(), ChestCavityTypeManager.FROG);
         // 蚁狮
         event.registerEntity(CompanionsEntities.ANTLION.get(), ChestCavityTypeManager.ARTHROPOD);
-        // TODO 电纳魔
-        event.registerEntity(CompanionsEntities.DINAMO.get(), ChestCavityTypeManager.IRON_GOLEM);
-        // TODO 爪牙
-        event.registerEntity(CompanionsEntities.MINION.get(), ChestCavityTypeManager.HUMAN);
+        // 电纳魔
+        event.registerEntity(CompanionsEntities.DINAMO.get(), DINAMO);
+        // 爪牙
+        event.registerEntity(CompanionsEntities.MINION.get(), ChestCavityTypeManager.FIREPROOF);
         // 金色悦灵
         event.registerEntity(CompanionsEntities.GOLDEN_ALLAY.get(), WAICChestCavityTypeManager.FANTASTICAL);
         // 灵魂魔导士
         event.registerEntity(CompanionsEntities.SOUL_MAGE.get(), WAICChestCavityTypeManager.FANTASTICAL);
         // 可颂龙
         event.registerEntity(CompanionsEntities.CROISSANT_DRAGON.get(), CAKE);
-        // TODO 木偶手套
+        // 木偶手套
         event.registerEntity(CompanionsEntities.PUPPET_GLOVE.get(), CLOTH);
-        // TODO 木偶
-        event.registerEntity(CompanionsEntities.PUPPET.get(), WAICChestCavityTypeManager.WOODEN);
-        // TODO 暗影利剑
-        event.registerEntity(CompanionsEntities.SHADE_SWORD.get(), ChestCavityTypeManager.ARMOR_STAND);
-        // TODO 暗影魔颚
-        event.registerEntity(CompanionsEntities.SHADE_MAW.get(), ChestCavityTypeManager.ARMOR_STAND);
-        // TODO 猕安卡
-        event.registerEntity(CompanionsEntities.MANKH.get(), ChestCavityTypeManager.HUMAN);
-        // TODO 斗篷客
-        event.registerEntity(CompanionsEntities.CLOAK.get(), CLOTH);
+        // 木偶
+        event.registerEntity(CompanionsEntities.PUPPET.get(), CLOTH);
+        // 暗影利剑
+        event.registerEntity(CompanionsEntities.SHADE_SWORD.get(), SHADE);
+        // 暗影魔颚
+        event.registerEntity(CompanionsEntities.SHADE_MAW.get(), SHADE);
+        // 猕安卡
+        event.registerEntity(CompanionsEntities.MANKH.get(), PONTIFF);
+        // 斗篷客
+        event.registerEntity(CompanionsEntities.CLOAK.get(), PONTIFF);
 
-        // --- 召唤生物 ---
-        // TODO 活体蜡烛
-        event.registerEntity(CompanionsEntities.LIVING_CANDLE.get(), ChestCavityTypeManager.BLAZE);
+        // 活体蜡烛
+        event.registerEntity(CompanionsEntities.LIVING_CANDLE.get(), LIVING_CANDLE);
         // 焰火蟾蜍
         event.registerEntity(CompanionsEntities.FIREWORK_TOAD.get(), ChestCavityTypeManager.FROG);
         // 泡泡蛙
         event.registerEntity(CompanionsEntities.BUBBLE_FROG.get(), ChestCavityTypeManager.FROG);
-        // TODO 灰烬蝌蚪
-        event.registerEntity(CompanionsEntities.EMBER_POLE.get(), ChestCavityTypeManager.BLAZE);
+        // 灰烬蝌蚪
+        event.registerEntity(CompanionsEntities.EMBER_POLE.get(), ChestCavityTypeManager.SMALL_AQUATIC);
         // 下界牛蛙
         event.registerEntity(CompanionsEntities.NETHER_BULLFROG.get(), ChestCavityTypeManager.FROG);
         // 末影蛙
         event.registerEntity(CompanionsEntities.ENDER_FROG.get(), ChestCavityTypeManager.FROG);
 
-
-        // TODO 敌意小鬼
-        event.registerEntity(CompanionsEntities.HOSTILE_IMP.get(), ChestCavityTypeManager.BLAZE);
-        // TODO 灾厄电磁傀儡
-        event.registerEntity(CompanionsEntities.ILLAGER_GOLEM.get(), ChestCavityTypeManager.IRON_GOLEM);
-        // TODO 魔法手套
+        // 敌意小鬼
+        event.registerEntity(CompanionsEntities.HOSTILE_IMP.get(), ChestCavityTypeManager.FIREPROOF);
+        // 灾厄电磁傀儡
+        event.registerEntity(CompanionsEntities.ILLAGER_GOLEM.get(), DINAMO);
+        // 魔法手套
         event.registerEntity(CompanionsEntities.HOSTILE_PUPPET_GLOVE.get(), CLOTH);
         // 野生蚁狮
         event.registerEntity(CompanionsEntities.WILD_ANTLION.get(), ChestCavityTypeManager.ARTHROPOD);
-        // TODO 损坏的电纳魔
-        event.registerEntity(CompanionsEntities.BROKEN_DINAMO.get(), ChestCavityTypeManager.IRON_GOLEM);
+        // 损坏的电纳魔
+        event.registerEntity(CompanionsEntities.BROKEN_DINAMO.get(), DINAMO);
     }
 
     private static ChestCavityType register(String path) {

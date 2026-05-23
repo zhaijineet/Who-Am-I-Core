@@ -438,8 +438,8 @@ public class CommonEventHandler {
 
         ChestCavityData data = ChestCavityUtil.getData(entity);
 
-        // 直肠子技能
-        WAICOrganUtil.straightIntestineSkill(entity, data, food);
+        // 直肠子效果
+        WAICOrganUtil.straightIntestineEffect(entity, data, food);
 
         // 暴食额外效果（黄心 + 生命回复）
         WAICOrganUtil.gluttonyEatEffect(entity, data, food);

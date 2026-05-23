@@ -1,6 +1,6 @@
-// 1.21.1	2026-05-21T19:39:03.8018867	Tags for minecraft:item mod id who_am_i_core
+// 1.21.1	2026-05-24T00:34:41.4492081	Tags for minecraft:item mod id who_am_i_core
 ffbd0b58b3eeefed73caa7615dfa32ab780bdd2d data/chestcavitybeyond/tags/item/chest_openers.json
-4cef1eec25309d2b3fd6fcc1c0ac697d2b964d6c data/chestcavitybeyond/tags/item/organs.json
+6417928cfffdd9bef3f5ba246f3bcc5b4c72c869 data/chestcavitybeyond/tags/item/organs.json
 46c8b37880a5298aad4002ffb40e3b9e18454de6 data/chestcavitybeyond/tags/item/organs/appendix.json
 df7bf3665f0db1e2458d4d2f568b809c517345e8 data/chestcavitybeyond/tags/item/organs/heart.json
 1b5f5c37394c78d0614a19ef24cd1b6c010672bc data/chestcavitybeyond/tags/item/organs/intestine.json
@@ -8,13 +8,13 @@ df7bf3665f0db1e2458d4d2f568b809c517345e8 data/chestcavitybeyond/tags/item/organs
 09166a492f438f954ffc499ed775a3f8fb91507f data/chestcavitybeyond/tags/item/organs/liver.json
 a68039ae7f7dfad2a928dafd1773b731f298cacc data/chestcavitybeyond/tags/item/organs/lung.json
 3e148ced5adedf80abdc57104da7d07d58966c98 data/chestcavitybeyond/tags/item/organs/muscle.json
-225195da5665c42b7f84ebe5e8c6570e4b0befbc data/chestcavitybeyond/tags/item/organs/rib.json
-9f9c6250d5e8681437eee4f255bf52d15ddc8296 data/chestcavitybeyond/tags/item/organs/special.json
-b6199b1663ac085119d70a350ffa96dfeb47b574 data/chestcavitybeyond/tags/item/organs/spine.json
+3cc971440b9db435822ae294d7afe9473676ab83 data/chestcavitybeyond/tags/item/organs/rib.json
+f9ce071f782815b65a6717b0e56b6871eabf6d97 data/chestcavitybeyond/tags/item/organs/special.json
+b861ee12c1491c738ae8d9dcdcba75ce5e2abb49 data/chestcavitybeyond/tags/item/organs/spine.json
 b61588664539244df75fa8ae4b34e2932cb2d4b0 data/chestcavitybeyond/tags/item/organs/spleen.json
 b0c1deec93d058cb28041c7880b528ebb02b4c13 data/chestcavitybeyond/tags/item/organs/stomach.json
 effdba38003716dca40d0d8565679213f0ea5029 data/who_am_i_core/tags/item/cake.json
-e41c77c080a2d94d4b2800b69da0ab1163b9bf7a data/who_am_i_core/tags/item/cloth.json
+7128c238f0d592f33d0babe706d137c21cc57962 data/who_am_i_core/tags/item/cloth.json
 c32e751c738f189df5c2ce1d19404ff77b0d71d6 data/who_am_i_core/tags/item/cursed.json
 7534deac0d70469aba09c3439711a804dfdfd25c data/who_am_i_core/tags/item/ember.json
 dd13b5ec85aa98d74ae38cd1451315a23e1cf1c8 data/who_am_i_core/tags/item/fire.json
@@ -23,10 +23,11 @@ bac8b8752b9ce3cb690854583dd00e793e81ce0d data/who_am_i_core/tags/item/ice.json
 037474d4e6d328bfe54a10e52940d00546ee3060 data/who_am_i_core/tags/item/ice_dragon.json
 4470346b3c65a66522318aca29d2d07e774009e4 data/who_am_i_core/tags/item/lesion.json
 bbbdafc91bf753f51db26c93e4c6d8768f3abadf data/who_am_i_core/tags/item/lightning_dragon.json
-d6bb10d820076290ad635efd8c232d1aa62f697a data/who_am_i_core/tags/item/magic.json
-bb3b5a4f9abd018b53f30c9200e1e547ccb79de6 data/who_am_i_core/tags/item/mechanical.json
+1f869b48c725db8d37d08a85b897b2da07d828fc data/who_am_i_core/tags/item/magic.json
+b00cd6acf8a00602058e85e8be27f99beef50ca1 data/who_am_i_core/tags/item/mechanical.json
 b8c1bb4184284d1d541fe7d0928fcd8716051655 data/who_am_i_core/tags/item/monstrosity.json
 2b2f1773c3231d50468f824f15699129132188f7 data/who_am_i_core/tags/item/nine_hell.json
 71660fd5c08f98c657911fc1be99810f792c43fe data/who_am_i_core/tags/item/pontiff.json
+09d30f5459d30978a3aff76cb0687906139e2c7f data/who_am_i_core/tags/item/qliphoth.json
 c1e793e55c2c391a64d272d8e779e19d6d538f77 data/who_am_i_core/tags/item/summon.json
-9fad006e56240a712d5cc496e34d8f6b498a6dbc data/who_am_i_core/tags/item/unique.json
+19bf96a5a065766a8bd06459a2d607a93fa789df data/who_am_i_core/tags/item/unique.json

@@ -14,7 +14,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -109,7 +108,7 @@ public class WAICOrganUtil {
      * @param data   实体的胸腔数据
      * @param food   被食用的食物物品
      */
-    public static void straightIntestineSkill(LivingEntity entity, ChestCavityData data, ItemStack food) {
+    public static void straightIntestineEffect(LivingEntity entity, ChestCavityData data, ItemStack food) {
         // 检查是否拥有直肠子器官
         if (!data.hasOrgan(WAICOrgans.STRAIGHT_INTESTINE.get())) return;
         // 30%几率触发
@@ -956,8 +955,8 @@ public class WAICOrganUtil {
     /**
      * 异端药水效果增强（在 MobEffectEvent.Added 中调用）
      * 罪业1: 药水持续时间 +50%（×1.5）
-     * 罪业2: 药水持续时间额外 +50%（总计 +100%，×2.0）
-     * 罪业3: 药水等级 +1（不再加时长）
+     * 罪业2: 药水持续时间 +150%（×2.5）
+     * 罪业3: 药水持续时间 +150%（×2.5）+ 药水等级 +1
      */
     public static void heresyMobEffectAdded(LivingEntity entity, MobEffectInstance effectInstance) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
@@ -966,8 +965,8 @@ public class WAICOrganUtil {
         int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
         IMobEffectInstance iEffect = (IMobEffectInstance) effectInstance;
 
-        // 药水持续时间延长，罪业100%+50%，罪业2：100%+50%+100%
-        iEffect.setDuration(duration -> (int) (duration * n >= 2 ? 2.5 : 1.5), entity);
+        // 药水持续时间延长，罪业1：+50%（×1.5），罪业2：+150%（×2.5），罪业3：+150%（×2.5）
+        iEffect.setDuration(duration -> (int) (duration * (n >= 2 ? 2.5 : 1.5)), entity);
 
         // 药水等级 +1
         if (n >= 3) {

@@ -317,9 +317,10 @@ public class OrganUtil {
     private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {
         ItemStack stack = context.data().getOrgans().get(slot);
         if (stack.isEmpty()) return 0;
+        // 使用静态上下文，只读取 addValueAttribute 的静态温度值，不触发动态 modifier，避免递归
         ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
-            context.data(),
-            context.entity(),
+            null,
+            null,
             context.id(),
             slot,
             stack

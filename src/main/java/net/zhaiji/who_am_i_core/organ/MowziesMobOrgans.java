@@ -168,7 +168,7 @@ public class MowziesMobOrgans {
      * <pre>
      * 生命值+3，防御+1.5，击退抗性+100%，跳跃力+2
      * 磐石之躯：免疫摔落伤害
-     * 地卜亲和：拥有地卜术效果时，伤害减免50%
+     * 地卜亲和：拥有大地祝福效果时，伤害减免50%
      * </pre>
      */
     public static final Supplier<Item> ZEN_HEART = WAICItem.ITEM.register(

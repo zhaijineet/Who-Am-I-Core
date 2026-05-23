@@ -1,11 +1,16 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
+import com.bobmowzie.mowziesmobs.server.item.ItemHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.manager.ChestCavityTypeManager;
+import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.chestcavitybeyond.register.InitItem;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
+
+import java.util.Map;
 
 public class MowziesMobChestCavityTypeManager {
     // 衰老胸腔
@@ -39,34 +44,83 @@ public class MowziesMobChestCavityTypeManager {
 
     // 钢铁守护者
     public static final ChestCavityType WROUGHTNAUT = register("wroughtnaut")
-        .copyWith(ChestCavityTypeManager.IRON_GOLEM)
-        .setFirstRow(4, MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
+        .setSecondRow(4, MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get())
+
+        .addValueBonuses(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get(), Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.NERVES, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
 
     // 太阳鸟
     public static final ChestCavityType UMVUTHI = register("umvuthi")
-        .copyWith(AGED)
-        .setFirstRow(2, MowziesMobOrgans.CONTROL_ROD.get())
-        .setFirstRow(4, MowziesMobOrgans.CHEST_NOVA.get());
+        .setSecondRow(4, MowziesMobOrgans.CHEST_NOVA.get())
+
+        .addValueBonuses(MowziesMobOrgans.CHEST_NOVA.get(), Map.of(
+            InitAttribute.NERVES, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
 
     // 泥峭胸腔
     public static final ChestCavityType BLUFF = register("bluff")
-        .copyWith(AGED)
-        .setFirstRow(2, MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
-        .setFirstRow(4, MowziesMobOrgans.BLUFF_CORE.get())
-        .setThirdRow(4, MowziesMobOrgans.BLUFF_TABLET.get());
+        .setFirstRow(1, MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
+        .setFirstRow(4, MowziesMobOrgans.BLUFF_TABLET.get())
+
+        .setSecondRow(3, MowziesMobOrgans.BLUFF_TABLET.get())
+        .setSecondRow(4, MowziesMobOrgans.BLUFF_CORE.get())
+        .setSecondRow(5, MowziesMobOrgans.BLUFF_TABLET.get())
+        .setSecondRow(6, MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
+
+        .setThirdRow(3, MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
+        .setThirdRow(4, MowziesMobOrgans.BLUFF_TABLET.get())
+
+        .addValueBonuses(MowziesMobOrgans.BLUFF_CORE.get(), Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.NERVES, 1.0
+        ))
+        .addValueBonuses(MowziesMobOrgans.BLUFF_TABLET.get(), Map.of(
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
+
+    // 荧光浮灯
+    public static final ChestCavityType LANTERN = register("lantern")
+        .setSecondRow(4, ItemHandler.GLOWING_JELLY.get())
+
+        .addValueBonuses(ItemHandler.GLOWING_JELLY.get(), Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.NERVES, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
+
+    // 巨噬叶
+    public static final ChestCavityType FOLIAATH = register("foliaath")
+        .setFirstRow(4, InitItem.CREEPER_LEAF.get())
+        .setSecondRow(4, InitItem.CREEPER_LEAF.get())
+        .setThirdRow(4, InitItem.CREEPER_LEAF.get())
+
+        .addValueBonuses(InitItem.CREEPER_LEAF.get(), Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.NERVES, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0
+        ));
 
     /**
-     *注册 Mowzie's Mobs 所有实体的胸腔类型
+     * 注册 Mowzie's Mobs 所有实体的胸腔类型
      */
     public static void registerEntities(ChestCavityRegisterEvent event) {
-        // TODO 巨噬叶
-        event.registerEntity(EntityHandler.FOLIAATH.get(), AGED);
-        // TODO 巨噬叶幼苗
-        event.registerEntity(EntityHandler.BABY_FOLIAATH.get(), AGED);
+        // 巨噬叶
+        event.registerEntity(EntityHandler.FOLIAATH.get(), FOLIAATH);
+        // 巨噬叶幼苗
+        event.registerEntity(EntityHandler.BABY_FOLIAATH.get(), FOLIAATH);
         // 霜冻巨兽
         event.registerEntity(EntityHandler.FROSTMAW.get(), ChestCavityTypeManager.ANIMAL);
         // 荧光浮灯
-        event.registerEntity(EntityHandler.LANTERN.get(), ChestCavityTypeManager.SMALL_ANIMAL);
+        event.registerEntity(EntityHandler.LANTERN.get(), LANTERN);
         // 岩壳居蟹
         event.registerEntity(EntityHandler.GROTTOL.get(), ChestCavityTypeManager.SMALL_ANIMAL);
         // 飞蛇
@@ -87,12 +141,16 @@ public class MowziesMobChestCavityTypeManager {
         // 乌姆塔纳食人鹤追随者
         event.registerEntity(EntityHandler.UMVUTHANA_CRANE_TO_PLAYER.get(), ChestCavityTypeManager.ANIMAL);
 
-        // TODO 钢铁守护者
+        // 钢铁守护者
         event.registerEntity(EntityHandler.WROUGHTNAUT.get(), WROUGHTNAUT);
-        // TODO 太阳鸟-乌姆武提
+        // 太阳鸟-乌姆武提
         event.registerEntity(EntityHandler.UMVUTHI.get(), UMVUTHI);
-        // TODO 泥峭人
+        // 泥峭人
         event.registerEntity(EntityHandler.BLUFF.get(), BLUFF);
+        // 山魁-嚎叫者
+        event.registerEntity(EntityHandler.ELOKOSA_HOWLER.get(), ChestCavityTypeManager.ANIMAL);
+        // 山魁-追随者
+        event.registerEntity(EntityHandler.ELOKOSA_FOLLOWER_TO_HOWLER.get(), ChestCavityTypeManager.ANIMAL);
     }
 
     private static ChestCavityType register(String path) {

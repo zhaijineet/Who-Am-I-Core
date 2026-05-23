@@ -1,12 +1,36 @@
 {
   "values": [
-    "who_am_i_core:mechanical_star",
+    "who_am_i_core:fire_malkuth_warrior_heart",
+    "who_am_i_core:ice_malkuth_warrior_heart",
+    "who_am_i_core:storm_spine",
+    "who_am_i_core:monstrosity_furnace",
+    "who_am_i_core:primordial_flame",
+    "who_am_i_core:emerald_skull",
+    "who_am_i_core:corrupted_soul_lantern",
+    "who_am_i_core:dead_king_spine",
+    "who_am_i_core:cake_stomach",
+    "who_am_i_core:cake_liver",
     "who_am_i_core:chest_nova",
     "who_am_i_core:control_rod",
+    "who_am_i_core:ferrous_wroughtnaut_heart_mirror",
+    "who_am_i_core:bluff_core",
+    "who_am_i_core:bluff_tablet",
+    "who_am_i_core:active_bluff_rod",
+    "who_am_i_core:zen_heart",
+    "who_am_i_core:straight_intestine",
+    "who_am_i_core:experience_heart",
+    "who_am_i_core:nib",
+    "who_am_i_core:crimson_heart",
+    "who_am_i_core:crimson_liver",
+    "who_am_i_core:palette",
     "who_am_i_core:gluttony",
     "who_am_i_core:heresy",
     "who_am_i_core:violence",
     "who_am_i_core:fraud",
-    "who_am_i_core:current_rib"
+    "who_am_i_core:current_rib",
+    "iceandfire:hydra_heart",
+    "who_am_i_core:hydra_spine",
+    "who_am_i_core:hydra_rib",
+    "who_am_i_core:hydra_muscle"
   ]
 }
