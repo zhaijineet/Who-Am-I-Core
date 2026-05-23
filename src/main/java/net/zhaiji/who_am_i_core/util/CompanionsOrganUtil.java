@@ -4,9 +4,11 @@ import dev.xylonity.companions.common.entity.projectile.HolinessStartProjectile;
 import dev.xylonity.companions.common.entity.projectile.PontiffFireRingProjectile;
 import dev.xylonity.companions.registry.CompanionsEntities;
 import dev.xylonity.companions.registry.CompanionsSounds;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,6 +16,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -25,6 +30,9 @@ import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompanionsOrganUtil {
 
@@ -145,5 +153,153 @@ public class CompanionsOrganUtil {
             newAmplifier = cakeOrganCount - 1;
         }
         entity.addEffect(new MobEffectInstance(WAICEffect.SWEETNESS, 600, newAmplifier));
+    }
+
+    // ==================== 布织泰迪熊 ====================
+
+    /**
+     * 布织泰迪熊 — 胸腔关闭回调
+     * <p>
+     * 单次遍历收集空槽位和羊毛信息，然后按类型处理：
+     * - 单个羊毛（count==1）：原位替换为随机布织器官
+     * - 多个羊毛（count>1）：尽可能消耗羊毛填满空槽位
+     * 若空槽位 >= count-1：完全消耗，最后1个原位替换
+     * 若空槽位 < count-1：只消耗空槽位数量个羊毛
+     * </p>
+     *
+     * @param context 胸腔槽位上下文
+     */
+    public static void clothTeddyBearChestCavityClose(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        LivingEntity entity = data.getOwner();
+        Level level = entity.level();
+        if (level.isClientSide()) return;
+
+        // 1. 单次遍历：收集空槽位 + 羊毛信息
+        List<Integer> emptySlots = new ArrayList<>();
+        List<int[]> woolSlots = new ArrayList<>();
+
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack stack = data.getStackInSlot(i);
+            if (stack.isEmpty()) {
+                emptySlots.add(i);
+            } else if (stack.is(ItemTags.WOOL)) {
+                woolSlots.add(new int[]{
+                    i,
+                    stack.getCount()
+                });
+            }
+        }
+
+        if (woolSlots.isEmpty()) return;
+
+        // 布织器官候选列表（11种）
+        List<Item> clothOrgans = List.of(
+            CompanionsOrgans.CLOTH_HEART.get(),
+            CompanionsOrgans.CLOTH_LUNG.get(),
+            CompanionsOrgans.CLOTH_LIVER.get(),
+            CompanionsOrgans.CLOTH_INTESTINE.get(),
+            CompanionsOrgans.CLOTH_STOMACH.get(),
+            CompanionsOrgans.CLOTH_KIDNEY.get(),
+            CompanionsOrgans.CLOTH_SPLEEN.get(),
+            CompanionsOrgans.CLOTH_SPINE.get(),
+            CompanionsOrgans.CLOTH_RIB.get(),
+            CompanionsOrgans.CLOTH_MUSCLE.get(),
+            CompanionsOrgans.CLOTH_APPENDIX.get()
+        );
+
+        int emptyIdx = 0;
+
+        // 2. 处理羊毛
+        for (int[] info : woolSlots) {
+            int slotIdx = info[0];
+            int count = info[1];
+            ItemStack stack = data.getStackInSlot(slotIdx);
+
+            if (count == 1) {
+                // 单个羊毛：原位替换
+                Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                data.setStackInSlot(slotIdx, organ.getDefaultInstance());
+            } else {
+                // 多个羊毛：尽可能消耗填满空槽位
+                int availableEmpty = emptySlots.size() - emptyIdx;
+                if (availableEmpty <= 0) continue;
+
+                if (availableEmpty >= count - 1) {
+                    // 可以完全消耗：前 (count-1) 个放空槽位，最后1个原位替换
+                    for (int j = 0; j < count - 1; j++) {
+                        stack.consume(1, entity);
+                        Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                        data.setStackInSlot(emptySlots.get(emptyIdx++), organ.getDefaultInstance());
+                    }
+                    // 最后1个：原位替换
+                    stack.consume(1, entity);
+                    Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                    data.setStackInSlot(slotIdx, organ.getDefaultInstance());
+                } else {
+                    // 只能消耗 availableEmpty 个
+                    for (int j = 0; j < availableEmpty; j++) {
+                        stack.consume(1, entity);
+                        Item organ = clothOrgans.get(level.random.nextInt(clothOrgans.size()));
+                        data.setStackInSlot(emptySlots.get(emptyIdx++), organ.getDefaultInstance());
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 布织泰迪熊技能：缝补
+     * <p>
+     * 消耗收纳袋中的羊毛回复生命值。
+     * 每个羊毛治疗 4 + clothCount 点生命（clothCount = 胸腔中布织器官数量）。
+     * 自动计算最低消耗以尽可能恢复至满血。
+     * 5秒冷却（100 tick）。
+     * </p>
+     *
+     * @param context 胸腔槽位上下文
+     * @return true 触发冷却
+     */
+    public static boolean clothTeddyBearSkill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        if (entity.level().isClientSide()) return false;
+
+        int missingHP = (int) (entity.getMaxHealth() - entity.getHealth());
+        if (missingHP <= 0) return false;
+
+        int clothCount = context.data().getOrganCount(WAICItemTagManager.CLOTH);
+
+        BundleContents contents = context.stack().getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
+        int totalWool = 0;
+        for (int i = 0; i < contents.size(); i++) {
+            ItemStack stack = contents.getItemUnsafe(i);
+            if (stack.is(ItemTags.WOOL)) {
+                totalWool += stack.getCount();
+            }
+        }
+
+        if (totalWool <= 0) return false;
+
+        // 每个羊毛治疗 4 + clothCount 点
+        int healPerWool = 4 + clothCount;
+
+        // 计算恢复满血所需的羊毛数量（向上取整）
+        int woolNeeded = (missingHP + healPerWool - 1) / healPerWool;
+        int woolToUse = Math.min(woolNeeded, totalWool);
+
+        int actualHeal = woolToUse * healPerWool;
+
+        // 扣除羊毛
+        for (int i = 0; i < contents.size() && woolToUse > 0; i++) {
+            ItemStack stack = contents.getItemUnsafe(i);
+            if (stack.is(ItemTags.WOOL)) {
+                int consume = Math.min(woolToUse, stack.getCount());
+                stack.consume(consume, entity);
+                woolToUse -= consume;
+            }
+        }
+
+        entity.heal(actualHeal);
+        return true;
     }
 }

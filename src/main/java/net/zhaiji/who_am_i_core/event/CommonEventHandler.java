@@ -32,6 +32,7 @@ import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.manager.AttributeDisplayManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
@@ -132,6 +133,20 @@ public class CommonEventHandler {
         // Touhou Little Maid
         event.registerEntity(InitEntities.MAID.get(), WAICChestCavityTypeManager.FANTASTICAL);
         event.registerEntity(InitEntities.FAIRY.get(), WAICChestCavityTypeManager.FANTASTICAL);
+
+        // 注册属性显示信息到 CCB 属性查询系统
+        AttributeDisplayManager.register(WAICAttribute.HEAL, 40);
+        AttributeDisplayManager.register(WAICAttribute.BLOCK, 30);
+        AttributeDisplayManager.register(WAICAttribute.COUNTER_ATTACK, 30);
+        AttributeDisplayManager.register(WAICAttribute.MELEE_DAMAGE, 30);
+        AttributeDisplayManager.register(WAICAttribute.RANGED_DAMAGE, 30);
+        AttributeDisplayManager.register(WAICAttribute.MAGIC_DAMAGE, 30);
+        AttributeDisplayManager.register(WAICAttribute.TEMPERATURE, 25);
+        AttributeDisplayManager.register(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, 0);
+        AttributeDisplayManager.register(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, 0);
+        AttributeDisplayManager.register(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, 0);
+        AttributeDisplayManager.register(WAICAttribute.LOOTING, 0);
+        AttributeDisplayManager.register(WAICAttribute.FORTUNE, 0);
     }
 
     /**
@@ -239,15 +254,15 @@ public class CommonEventHandler {
         double finalMultiplier = 1;
         if (source.is(WAICDamageTagManager.IS_MELEE)) {
             // 近战伤害加伤
-            extraDamage += entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE) * OrganUtil.getWeaponDamageMultiplier(entity);
+            extraDamage += entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.MELEE_DAMAGE_PERCENTAGE);
         } else if (source.is(Tags.DamageTypes.IS_MAGIC)) {
             // 魔法伤害加伤
-            extraDamage += entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE) * OrganUtil.getWeaponDamageMultiplier(entity);
+            extraDamage += entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE);
         } else if (source.is(DamageTypeTags.IS_PROJECTILE)) {
             // 远程伤害加伤
-            extraDamage += entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE) * OrganUtil.getWeaponDamageMultiplier(entity);
+            extraDamage += entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
         }
         // 九头蛇肋骨效果（唯一）

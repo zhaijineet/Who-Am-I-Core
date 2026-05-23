@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.manager;
 import com.iafenvoy.iceandfire.entity.DragonBaseEntity;
 import com.iafenvoy.iceandfire.registry.IafEntities;
 import com.iafenvoy.iceandfire.registry.IafItems;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 public class IceAndFireChestCavityTypeManager {
     // 火龙胸腔
-    public static final ChestCavityType FIRE_DRAGON = ChestCavityTypeManager.register("fire_dragon")
+    public static final ChestCavityType FIRE_DRAGON = register("fire_dragon")
         .setFirstRow(0, IceAndFireOrgans.FIRE_DRAGON_MUSCLE.get())
         .setFirstRow(1, IceAndFireOrgans.FIRE_DRAGON_RIB.get())
         .setFirstRow(2, IceAndFireOrgans.FIRE_DRAGON_GEM.get())
@@ -47,7 +48,7 @@ public class IceAndFireChestCavityTypeManager {
         .setCanOpen(IceAndFireChestCavityTypeManager::canOpenDragonRibcage);
 
     // 冰龙胸腔
-    public static final ChestCavityType ICE_DRAGON = ChestCavityTypeManager.register("ice_dragon")
+    public static final ChestCavityType ICE_DRAGON = register("ice_dragon")
         .setFirstRow(0, IceAndFireOrgans.ICE_DRAGON_MUSCLE.get())
         .setFirstRow(1, IceAndFireOrgans.ICE_DRAGON_RIB.get())
         .setFirstRow(2, IceAndFireOrgans.ICE_DRAGON_GEM.get())
@@ -78,7 +79,7 @@ public class IceAndFireChestCavityTypeManager {
         .setCanOpen(IceAndFireChestCavityTypeManager::canOpenDragonRibcage);
 
     // 电龙胸腔
-    public static final ChestCavityType LIGHTNING_DRAGON = ChestCavityTypeManager.register("lightning_dragon")
+    public static final ChestCavityType LIGHTNING_DRAGON = register("lightning_dragon")
         .setFirstRow(0, IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE.get())
         .setFirstRow(1, IceAndFireOrgans.LIGHTNING_DRAGON_RIB.get())
         .setFirstRow(2, IceAndFireOrgans.LIGHTNING_DRAGON_GEM.get())
@@ -109,7 +110,7 @@ public class IceAndFireChestCavityTypeManager {
         .setCanOpen(IceAndFireChestCavityTypeManager::canOpenDragonRibcage);
 
     // 九头蛇胸腔
-    public static final ChestCavityType HYDRA = ChestCavityTypeManager.register("hydra")
+    public static final ChestCavityType HYDRA = register("hydra")
         .setFirstRow(0, IceAndFireOrgans.HYDRA_MUSCLE.get())
         .setFirstRow(1, IceAndFireOrgans.HYDRA_RIB.get())
         .setFirstRow(3, IceAndFireOrgans.HYDRA_LUNG.get())
@@ -134,7 +135,7 @@ public class IceAndFireChestCavityTypeManager {
         .setThirdRow(8, IceAndFireOrgans.HYDRA_MUSCLE.get());
 
     // 悚怖骷髅
-    public static final ChestCavityType DREAD_SKELETON = ChestCavityTypeManager.register("dread_skeleton")
+    public static final ChestCavityType DREAD_SKELETON = register("dread_skeleton")
         .copyWith(ChestCavityTypeManager.SKELETON)
         .setNeedHealth(false)
         .setFirstRow(1, IceAndFireOrgans.DREAD_RIB.get())
@@ -149,7 +150,7 @@ public class IceAndFireChestCavityTypeManager {
         ));
 
     // 悚怖亡灵
-    public static final ChestCavityType DREAD_UNDEAD = ChestCavityTypeManager.register("dread_undead")
+    public static final ChestCavityType DREAD_UNDEAD = register("dread_undead")
         .copyWith(ChestCavityTypeManager.UNDEAD)
         .setNeedHealth(false)
         .setFirstRow(0, IceAndFireOrgans.BITTER_FLESH.get())
@@ -165,12 +166,12 @@ public class IceAndFireChestCavityTypeManager {
         .setThirdRow(8, IceAndFireOrgans.BITTER_FLESH.get());
 
     // 悚怖尸巫
-    public static final ChestCavityType DREAD_LICH = ChestCavityTypeManager.register("dread_lich")
+    public static final ChestCavityType DREAD_LICH = register("dread_lich")
         .copyWith(DREAD_SKELETON)
         .setFirstRow(4, IceAndFireOrgans.DREAD_PHYLACTERY.get());
 
     // 幽灵
-    public static final ChestCavityType GHOST = ChestCavityTypeManager.register("ghost")
+    public static final ChestCavityType GHOST = register("ghost")
         .setNeedHealth(false)
         .setSecondRow(4, IafItems.ECTOPLASM.get())
         .addValueBonuses(IafItems.ECTOPLASM.get(), Map.of(
@@ -180,7 +181,7 @@ public class IceAndFireChestCavityTypeManager {
         ));
 
     // 独眼巨人
-    public static final ChestCavityType CYCLOPS = ChestCavityTypeManager.register("cyclops")
+    public static final ChestCavityType CYCLOPS = register("cyclops")
         .set6RowsSize()
         .setFirstRow(0, InitItem.MUSCLE.get())
         .setFirstRow(1, InitItem.RIB.get())
@@ -241,7 +242,6 @@ public class IceAndFireChestCavityTypeManager {
      * 注册冰与火 Mod 所有实体的胸腔类型
      */
     public static void registerEntities(ChestCavityRegisterEvent event) {
-
         // 火龙
         event.registerEntity(IafEntities.FIRE_DRAGON.get(), FIRE_DRAGON);
         // 冰龙
@@ -304,5 +304,9 @@ public class IceAndFireChestCavityTypeManager {
             return !dragon.isSkeletal();
         }
         return false;
+    }
+
+    private static ChestCavityType register(String path) {
+        return ChestCavityTypeManager.register(ResourceLocation.fromNamespaceAndPath("iceandfire", path));
     }
 }

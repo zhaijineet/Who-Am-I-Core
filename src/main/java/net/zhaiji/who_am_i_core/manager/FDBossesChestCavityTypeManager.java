@@ -1,6 +1,7 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import com.finderfeed.fdbosses.init.BossEntities;
+import net.minecraft.resources.ResourceLocation;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.manager.ChestCavityTypeManager;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public class FDBossesChestCavityTypeManager {
     // 王国
-    public static final ChestCavityType MALKUTH = ChestCavityTypeManager.register("fdbosses_malkuth")
+    public static final ChestCavityType MALKUTH = register("malkuth")
         .setFirstRow(4, FDBossesOrgans.MALKUTH.get())
         .addValueBonuses(FDBossesOrgans.MALKUTH.get(), Map.of(
             InitAttribute.NERVES, 1.0,
@@ -20,7 +21,7 @@ public class FDBossesChestCavityTypeManager {
         ));
 
     // 严厉
-    public static final ChestCavityType GEBURAH = ChestCavityTypeManager.register("fdbosses_geburah")
+    public static final ChestCavityType GEBURAH = register("geburah")
         .setFirstRow(4, FDBossesOrgans.GEBURAH.get())
         .addValueBonuses(FDBossesOrgans.GEBURAH.get(), Map.of(
             InitAttribute.NERVES, 1.0,
@@ -29,7 +30,7 @@ public class FDBossesChestCavityTypeManager {
         ));
 
     // 慈悲
-    public static final ChestCavityType CHESED = ChestCavityTypeManager.register("fdbosses_chesed")
+    public static final ChestCavityType CHESED = register("chesed")
         .setFirstRow(4, FDBossesOrgans.CHESED.get())
         .addValueBonuses(FDBossesOrgans.CHESED.get(), Map.of(
             InitAttribute.BREATH_CAPACITY, 1.0,
@@ -37,7 +38,7 @@ public class FDBossesChestCavityTypeManager {
         ));
 
     // 火焰王国战士
-    public static final ChestCavityType FIRE_MALKUTH_WARRIOR = ChestCavityTypeManager.register("fire_malkuth_warrior")
+    public static final ChestCavityType FIRE_MALKUTH_WARRIOR = register("fire_malkuth_warrior")
         .setFirstRow(4, FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART.get())
         .addValueBonuses(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART.get(), Map.of(
             InitAttribute.NERVES, 1.0,
@@ -46,7 +47,7 @@ public class FDBossesChestCavityTypeManager {
         ));
 
     // 冰霜王国战士
-    public static final ChestCavityType ICE_MALKUTH_WARRIOR = ChestCavityTypeManager.register("ice_malkuth_warrior")
+    public static final ChestCavityType ICE_MALKUTH_WARRIOR = register("ice_malkuth_warrior")
         .setFirstRow(4, FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART.get())
         .addValueBonuses(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART.get(), Map.of(
             InitAttribute.NERVES, 1.0,
@@ -72,5 +73,9 @@ public class FDBossesChestCavityTypeManager {
 
         // TODO 审判之鸟
         event.registerEntity(BossEntities.JUDGEMENT_BIRD.get(), ChestCavityTypeManager.ANIMAL);
+    }
+
+    private static ChestCavityType register(String path) {
+        return ChestCavityTypeManager.register(ResourceLocation.fromNamespaceAndPath("fdbosses", path));
     }
 }

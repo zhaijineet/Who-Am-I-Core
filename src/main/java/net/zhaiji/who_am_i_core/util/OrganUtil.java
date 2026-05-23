@@ -117,16 +117,6 @@ public class OrganUtil {
     }
 
     /**
-     * 武器伤害倍率
-     * TODO 不好计算攻击是主手还是副手
-     *
-     * @return 武器伤害倍率
-     */
-    public static float getWeaponDamageMultiplier(LivingEntity entity) {
-        return 1;
-    }
-
-    /**
      * 根据法术流派获取对应的染料物品
      *
      * @param schoolType 法术流派

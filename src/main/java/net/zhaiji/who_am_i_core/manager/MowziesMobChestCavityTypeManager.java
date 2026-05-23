@@ -1,15 +1,15 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
+import net.minecraft.resources.ResourceLocation;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.manager.ChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 
 public class MowziesMobChestCavityTypeManager {
-    // ==================== 衰老胸腔 ====================
-    // 衰老系通用模板，属性较弱但结构完整
-    public static final ChestCavityType AGED = ChestCavityTypeManager.register("aged")
+    // 衰老胸腔
+    public static final ChestCavityType AGED = register("aged")
         .setFirstRow(0, MowziesMobOrgans.AGED_MUSCLE.get())
         .setFirstRow(1, MowziesMobOrgans.AGED_RIB.get())
         .setFirstRow(2, MowziesMobOrgans.AGED_APPENDIX.get())
@@ -37,68 +37,65 @@ public class MowziesMobChestCavityTypeManager {
         .setThirdRow(7, MowziesMobOrgans.AGED_MUSCLE.get())
         .setThirdRow(8, MowziesMobOrgans.AGED_MUSCLE.get());
 
-    // ==================== 铁甲巨兽胸腔 ====================
-    // 机械巨兽，使用铁傀儡底座承载护心镜
-    public static final ChestCavityType WROUGHTNAUT = ChestCavityTypeManager.register("wroughtnaut")
+    // 钢铁守护者
+    public static final ChestCavityType WROUGHTNAUT = register("wroughtnaut")
         .copyWith(ChestCavityTypeManager.IRON_GOLEM)
         .setFirstRow(4, MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
 
-    // ==================== 乌姆塔纳祭司胸腔 ====================
-    // 胸中新星(心) / 制御棒(阑尾)，其余衰老器官
-    public static final ChestCavityType UMVUTHI = ChestCavityTypeManager.register("umvuthi")
+    // 太阳鸟
+    public static final ChestCavityType UMVUTHI = register("umvuthi")
         .copyWith(AGED)
         .setFirstRow(2, MowziesMobOrgans.CONTROL_ROD.get())
         .setFirstRow(4, MowziesMobOrgans.CHEST_NOVA.get());
 
-    // ==================== 泥峭胸腔 ====================
-    // 禅心(心) / 泥峭铭文板(胃) / 活性泥峭棒(阑尾) / 泥峭核心(特殊位)，其余衰老器官
-    public static final ChestCavityType BLUFF = ChestCavityTypeManager.register("bluff")
+    // 泥峭胸腔
+    public static final ChestCavityType BLUFF = register("bluff")
         .copyWith(AGED)
         .setFirstRow(2, MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
-        .setFirstRow(4, MowziesMobOrgans.ZEN_HEART.get())
-        .setFirstRow(6, MowziesMobOrgans.BLUFF_CORE.get())
+        .setFirstRow(4, MowziesMobOrgans.BLUFF_CORE.get())
         .setThirdRow(4, MowziesMobOrgans.BLUFF_TABLET.get());
 
     /**
      *注册 Mowzie's Mobs 所有实体的胸腔类型
      */
     public static void registerEntities(ChestCavityRegisterEvent event) {
-        // --- 衰老系（通用） ---
-        // 巨噬叶
+        // TODO 巨噬叶
         event.registerEntity(EntityHandler.FOLIAATH.get(), AGED);
-        // 巨噬叶幼苗
+        // TODO 巨噬叶幼苗
         event.registerEntity(EntityHandler.BABY_FOLIAATH.get(), AGED);
         // 霜冻巨兽
-        event.registerEntity(EntityHandler.FROSTMAW.get(), AGED);
+        event.registerEntity(EntityHandler.FROSTMAW.get(), ChestCavityTypeManager.ANIMAL);
         // 荧光浮灯
-        event.registerEntity(EntityHandler.LANTERN.get(), AGED);
+        event.registerEntity(EntityHandler.LANTERN.get(), ChestCavityTypeManager.SMALL_ANIMAL);
         // 岩壳居蟹
-        event.registerEntity(EntityHandler.GROTTOL.get(), AGED);
+        event.registerEntity(EntityHandler.GROTTOL.get(), ChestCavityTypeManager.SMALL_ANIMAL);
         // 飞蛇
-        event.registerEntity(EntityHandler.NAGA.get(), AGED);
+        event.registerEntity(EntityHandler.NAGA.get(), ChestCavityTypeManager.CARNIVORE);
         // 雕刻家-通臂大师
         event.registerEntity(EntityHandler.SCULPTOR.get(), AGED);
 
-        // --- 乌姆塔纳随从 ---
         // 乌姆塔纳猛禽
-        event.registerEntity(EntityHandler.UMVUTHANA_RAPTOR.get(), AGED);
+        event.registerEntity(EntityHandler.UMVUTHANA_RAPTOR.get(), ChestCavityTypeManager.ANIMAL);
         // 乌姆塔纳食人鹤
-        event.registerEntity(EntityHandler.UMVUTHANA_CRANE.get(), AGED);
+        event.registerEntity(EntityHandler.UMVUTHANA_CRANE.get(), ChestCavityTypeManager.ANIMAL);
         // 乌姆塔纳追随者
-        event.registerEntity(EntityHandler.UMVUTHANA_MINION.get(), AGED);
+        event.registerEntity(EntityHandler.UMVUTHANA_MINION.get(), ChestCavityTypeManager.ANIMAL);
         // 乌姆塔纳猛禽追随者
-        event.registerEntity(EntityHandler.UMVUTHANA_FOLLOWER_TO_RAPTOR.get(), AGED);
+        event.registerEntity(EntityHandler.UMVUTHANA_FOLLOWER_TO_RAPTOR.get(), ChestCavityTypeManager.ANIMAL);
         // 乌姆塔纳追随者
-        event.registerEntity(EntityHandler.UMVUTHANA_FOLLOWER_TO_PLAYER.get(), AGED);
+        event.registerEntity(EntityHandler.UMVUTHANA_FOLLOWER_TO_PLAYER.get(), ChestCavityTypeManager.ANIMAL);
         // 乌姆塔纳食人鹤追随者
-        event.registerEntity(EntityHandler.UMVUTHANA_CRANE_TO_PLAYER.get(), AGED);
+        event.registerEntity(EntityHandler.UMVUTHANA_CRANE_TO_PLAYER.get(), ChestCavityTypeManager.ANIMAL);
 
-        // --- 有专属器官的特殊实体 ---
-        // 钢铁守护者
+        // TODO 钢铁守护者
         event.registerEntity(EntityHandler.WROUGHTNAUT.get(), WROUGHTNAUT);
-        // 太阳鸟-乌姆武提
+        // TODO 太阳鸟-乌姆武提
         event.registerEntity(EntityHandler.UMVUTHI.get(), UMVUTHI);
-        // 泥峭人
+        // TODO 泥峭人
         event.registerEntity(EntityHandler.BLUFF.get(), BLUFF);
+    }
+
+    private static ChestCavityType register(String path) {
+        return ChestCavityTypeManager.register(ResourceLocation.fromNamespaceAndPath("mowziesmobs", path));
     }
 }

@@ -10,9 +10,9 @@ import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 import java.util.function.Supplier;
 
 public class IronSpellOrgans {
-    // ==================== 死灵法师器官 ====================
+    // ==================== 亡灵术士器官 ====================
 
-    // 死灵法师脊柱
+    // 亡灵术士脊柱
     public static final Supplier<Item> NECROMANCER_SPINE = WAICItem.ITEM.register(
         "necromancer_spine",
         () -> Organ.builder()
@@ -21,7 +21,7 @@ public class IronSpellOrgans {
             .build()
     );
 
-    // 死灵法师肋骨
+    // 亡灵术士肋骨
     public static final Supplier<Item> NECROMANCER_RIB = WAICItem.ITEM.register(
         "necromancer_rib",
         () -> Organ.builder()
@@ -35,6 +35,7 @@ public class IronSpellOrgans {
     public static final Supplier<Item> PRIMORDIAL_FLAME = WAICItem.ITEM.register(
         "primordial_flame",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 5)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 5)
             .build()
     );
@@ -56,6 +57,7 @@ public class IronSpellOrgans {
     public static final Supplier<Item> CORRUPTED_SOUL_LANTERN = WAICItem.ITEM.register(
         "corrupted_soul_lantern",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
             .build()
     );
 

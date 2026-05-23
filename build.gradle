@@ -161,9 +161,11 @@ dependencies {
     implementation "curse.maven:playeranimator-658587:7389814"
     // knight lib
     implementation "curse.maven:knight-lib-1105855:6942154"
+    // iron lib
+    implementation "curse.maven:irons-lib-1492763:7907336"
 
     // Chest Cavity Beyond
-    implementation "curse.maven:chest-cavity-beyond-1427715:8118464"
+    implementation "curse.maven:chest-cavity-beyond-1427715:8127197"
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物
@@ -173,7 +175,7 @@ dependencies {
     // 逆卡巴拉(FDBosses)
     implementation "curse.maven:qliphoth-awakening-1271707:7653113"
     // 铁魔法
-    implementation "curse.maven:irons-spells-n-spellbooks-855414:7691161"
+    implementation "curse.maven:irons-spells-n-spellbooks-855414:7907341"
     // AnvilCraft
     implementation "curse.maven:anvilcraft-986251:7754185"
     // 车万女仆

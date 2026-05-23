@@ -575,43 +575,43 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 
     private void clothOrgansTags() {
         tag(ItemTagManager.ORGANS).add(
-            WAICOrgans.CLOTH_TEDDY_BEAR.get(),
-            WAICOrgans.CLOTH_HEART.get(),
-            WAICOrgans.CLOTH_LUNG.get(),
-            WAICOrgans.CLOTH_LIVER.get(),
-            WAICOrgans.CLOTH_INTESTINE.get(),
-            WAICOrgans.CLOTH_STOMACH.get(),
-            WAICOrgans.CLOTH_KIDNEY.get(),
-            WAICOrgans.CLOTH_SPLEEN.get(),
-            WAICOrgans.CLOTH_SPINE.get(),
-            WAICOrgans.CLOTH_RIB.get(),
-            WAICOrgans.CLOTH_MUSCLE.get(),
-            WAICOrgans.CLOTH_APPENDIX.get()
+            CompanionsOrgans.CLOTH_TEDDY_BEAR.get(),
+            CompanionsOrgans.CLOTH_HEART.get(),
+            CompanionsOrgans.CLOTH_LUNG.get(),
+            CompanionsOrgans.CLOTH_LIVER.get(),
+            CompanionsOrgans.CLOTH_INTESTINE.get(),
+            CompanionsOrgans.CLOTH_STOMACH.get(),
+            CompanionsOrgans.CLOTH_KIDNEY.get(),
+            CompanionsOrgans.CLOTH_SPLEEN.get(),
+            CompanionsOrgans.CLOTH_SPINE.get(),
+            CompanionsOrgans.CLOTH_RIB.get(),
+            CompanionsOrgans.CLOTH_MUSCLE.get(),
+            CompanionsOrgans.CLOTH_APPENDIX.get()
         );
-        tag(ItemTagManager.SPECIAL).add(WAICOrgans.CLOTH_TEDDY_BEAR.get());
-        tag(ItemTagManager.HEART).add(WAICOrgans.CLOTH_HEART.get());
-        tag(ItemTagManager.LUNG).add(WAICOrgans.CLOTH_LUNG.get());
-        tag(ItemTagManager.LIVER).add(WAICOrgans.CLOTH_LIVER.get());
-        tag(ItemTagManager.INTESTINE).add(WAICOrgans.CLOTH_INTESTINE.get());
-        tag(ItemTagManager.STOMACH).add(WAICOrgans.CLOTH_STOMACH.get());
-        tag(ItemTagManager.KIDNEY).add(WAICOrgans.CLOTH_KIDNEY.get());
-        tag(ItemTagManager.SPLEEN).add(WAICOrgans.CLOTH_SPLEEN.get());
-        tag(ItemTagManager.SPINE).add(WAICOrgans.CLOTH_SPINE.get());
-        tag(ItemTagManager.RIB).add(WAICOrgans.CLOTH_RIB.get());
-        tag(ItemTagManager.MUSCLE).add(WAICOrgans.CLOTH_MUSCLE.get());
-        tag(ItemTagManager.APPENDIX).add(WAICOrgans.CLOTH_APPENDIX.get());
+        tag(ItemTagManager.SPECIAL).add(CompanionsOrgans.CLOTH_TEDDY_BEAR.get());
+        tag(ItemTagManager.HEART).add(CompanionsOrgans.CLOTH_HEART.get());
+        tag(ItemTagManager.LUNG).add(CompanionsOrgans.CLOTH_LUNG.get());
+        tag(ItemTagManager.LIVER).add(CompanionsOrgans.CLOTH_LIVER.get());
+        tag(ItemTagManager.INTESTINE).add(CompanionsOrgans.CLOTH_INTESTINE.get());
+        tag(ItemTagManager.STOMACH).add(CompanionsOrgans.CLOTH_STOMACH.get());
+        tag(ItemTagManager.KIDNEY).add(CompanionsOrgans.CLOTH_KIDNEY.get());
+        tag(ItemTagManager.SPLEEN).add(CompanionsOrgans.CLOTH_SPLEEN.get());
+        tag(ItemTagManager.SPINE).add(CompanionsOrgans.CLOTH_SPINE.get());
+        tag(ItemTagManager.RIB).add(CompanionsOrgans.CLOTH_RIB.get());
+        tag(ItemTagManager.MUSCLE).add(CompanionsOrgans.CLOTH_MUSCLE.get());
+        tag(ItemTagManager.APPENDIX).add(CompanionsOrgans.CLOTH_APPENDIX.get());
         tag(WAICItemTagManager.CLOTH).add(
-            WAICOrgans.CLOTH_HEART.get(),
-            WAICOrgans.CLOTH_LUNG.get(),
-            WAICOrgans.CLOTH_LIVER.get(),
-            WAICOrgans.CLOTH_INTESTINE.get(),
-            WAICOrgans.CLOTH_STOMACH.get(),
-            WAICOrgans.CLOTH_KIDNEY.get(),
-            WAICOrgans.CLOTH_SPLEEN.get(),
-            WAICOrgans.CLOTH_SPINE.get(),
-            WAICOrgans.CLOTH_RIB.get(),
-            WAICOrgans.CLOTH_MUSCLE.get(),
-            WAICOrgans.CLOTH_APPENDIX.get()
+            CompanionsOrgans.CLOTH_HEART.get(),
+            CompanionsOrgans.CLOTH_LUNG.get(),
+            CompanionsOrgans.CLOTH_LIVER.get(),
+            CompanionsOrgans.CLOTH_INTESTINE.get(),
+            CompanionsOrgans.CLOTH_STOMACH.get(),
+            CompanionsOrgans.CLOTH_KIDNEY.get(),
+            CompanionsOrgans.CLOTH_SPLEEN.get(),
+            CompanionsOrgans.CLOTH_SPINE.get(),
+            CompanionsOrgans.CLOTH_RIB.get(),
+            CompanionsOrgans.CLOTH_MUSCLE.get(),
+            CompanionsOrgans.CLOTH_APPENDIX.get()
         );
     }
 

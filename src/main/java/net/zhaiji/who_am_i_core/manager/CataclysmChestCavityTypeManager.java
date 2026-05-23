@@ -2,6 +2,7 @@ package net.zhaiji.who_am_i_core.manager;
 
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModItems;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class CataclysmChestCavityTypeManager {
     // ==================== 利维坦胸腔 ====================
     // 海洋巨兽，保留鱼鳃/鱼骨/脊柱的核心结构
-    public static final ChestCavityType LEVIATHAN = ChestCavityTypeManager.register("leviathan")
+    public static final ChestCavityType LEVIATHAN = register("leviathan")
         .copyWith(ChestCavityTypeManager.AQUATIC)
         .setFirstRow(0, CataclysmOrgans.LEVIATHAN_MUSCLE.get())
         .setFirstRow(1, CataclysmOrgans.LEVIATHAN_FISHBONE.get())
@@ -40,7 +41,7 @@ public class CataclysmChestCavityTypeManager {
 
     // ==================== 下界合金巨兽胸腔 ====================
     // 机械巨兽，使用铁傀儡底座承载炉心/回路/熔炉
-    public static final ChestCavityType NETHERITE_MONSTROSITY = ChestCavityTypeManager.register("netherite_monstrosity")
+    public static final ChestCavityType NETHERITE_MONSTROSITY = register("netherite_monstrosity")
         .copyWith(ChestCavityTypeManager.IRON_GOLEM)
         .setFirstRow(4, CataclysmOrgans.MONSTROSITY_CORE.get())
         .setSecondRow(4, CataclysmOrgans.MONSTROSITY_CIRCUIT.get())
@@ -48,7 +49,7 @@ public class CataclysmChestCavityTypeManager {
 
     // ==================== 焰魔胸腔 ====================
     // 火焰构装，使用烈焰底座承载不灭薪火与焰魔甲胄
-    public static final ChestCavityType IGNIS = ChestCavityTypeManager.register("ignis")
+    public static final ChestCavityType IGNIS = register("ignis")
         .copyWith(ChestCavityTypeManager.BLAZE)
         .setFirstRow(1, CataclysmOrgans.IGNITED_RIB_PLATING.get())
         .setFirstRow(2, CataclysmOrgans.BLAZING_VISAGE.get())
@@ -60,7 +61,7 @@ public class CataclysmChestCavityTypeManager {
 
     // ==================== 斯库拉胸腔 ====================
     // 两栖海怪，保留潮汐灯/风暴脊柱/风暴肋骨
-    public static final ChestCavityType SCYLLA = ChestCavityTypeManager.register("scylla")
+    public static final ChestCavityType SCYLLA = register("scylla")
         .copyWith(ChestCavityTypeManager.AQUATIC)
         .setFirstRow(1, CataclysmOrgans.STORM_RIB.get())
         .setFirstRow(4, CataclysmOrgans.TIDAL_LANTERN.get())
@@ -70,7 +71,7 @@ public class CataclysmChestCavityTypeManager {
         .setSecondRow(7, CataclysmOrgans.STORM_RIB.get());
 
     // 末影守卫
-    public static final ChestCavityType ENDER_GUARDIAN = ChestCavityTypeManager.register("cataclysm_ender_guardian")
+    public static final ChestCavityType ENDER_GUARDIAN = register("ender_guardian")
         .setFirstRow(1, CataclysmOrgans.GUARDIAN_STONE.get())
         .setFirstRow(2, Items.PURPUR_BLOCK)
         .setFirstRow(3, Items.PURPUR_BLOCK)
@@ -101,7 +102,7 @@ public class CataclysmChestCavityTypeManager {
         ));
 
     // 末影傀儡
-    public static final ChestCavityType ENDER_GOLEM = ChestCavityTypeManager.register("cataclysm_ender_golem")
+    public static final ChestCavityType ENDER_GOLEM = register("ender_golem")
         .setFirstRow(3, Items.CRYING_OBSIDIAN)
         .setFirstRow(4, ModItems.VOID_CORE.get())
         .setFirstRow(5, Items.CRYING_OBSIDIAN)
@@ -127,7 +128,7 @@ public class CataclysmChestCavityTypeManager {
 
     // ==================== 咒骸胸腔 ====================
     // 骸骨系巨大亡灵
-    public static final ChestCavityType APTRGANGR = ChestCavityTypeManager.register("aptrgangr")
+    public static final ChestCavityType APTRGANGR = register("aptrgangr")
         .copyWith(ChestCavityTypeManager.SKELETON)
         .setFirstRow(1, CataclysmOrgans.APTRGANGR_RIB.get())
         .setFirstRow(7, CataclysmOrgans.APTRGANGR_RIB.get())
@@ -137,7 +138,7 @@ public class CataclysmChestCavityTypeManager {
 
     // ==================== 咒翼灵骸胸腔 ====================
     // 以凋零骷髅骨架为底，承载咒翼灵骸的魂心与封印石板
-    public static final ChestCavityType MALEDICTUS = ChestCavityTypeManager.register("maledictus")
+    public static final ChestCavityType MALEDICTUS = register("maledictus")
         .copyWith(ChestCavityTypeManager.WITHER_SKELETON)
         .setFirstRow(1, CataclysmOrgans.MALEDICTUS_RIB.get())
         .setFirstRow(2, CataclysmOrgans.PHANTOM_SHARD.get())
@@ -150,7 +151,7 @@ public class CataclysmChestCavityTypeManager {
 
     // ==================== 先驱者胸腔 ====================
     // 远古工厂系机械体，使用铁傀儡底座承载核心部件
-    public static final ChestCavityType HARBINGER = ChestCavityTypeManager.register("harbinger")
+    public static final ChestCavityType HARBINGER = register("harbinger")
         .copyWith(ChestCavityTypeManager.IRON_GOLEM)
         .setFirstRow(1, CataclysmOrgans.REINFORCED_FRAME.get())
         .setFirstRow(2, CataclysmOrgans.TACTICAL_DISK.get())
@@ -164,14 +165,14 @@ public class CataclysmChestCavityTypeManager {
 
     // ==================== 燃烧亡魂胸腔 ====================
     // 亡灵火焰体，使用亡灵底座承载咒魂心脏
-    public static final ChestCavityType IGNITED_REVENANT = ChestCavityTypeManager.register("ignited_revenant")
+    public static final ChestCavityType IGNITED_REVENANT = register("ignited_revenant")
         .copyWith(ChestCavityTypeManager.UNDEAD)
         .setFirstRow(2, CataclysmOrgans.PHANTOM_SHARD.get())
         .setFirstRow(4, CataclysmOrgans.PHANTOM_HEART.get());
 
     // ==================== 远古遗骸胸腔 ====================
     // 沙漠巨兽残骸，使用食肉动物底座承载封印石板
-    public static final ChestCavityType ANCIENT_REMNANT = ChestCavityTypeManager.register("ancient_remnant")
+    public static final ChestCavityType ANCIENT_REMNANT = register("ancient_remnant")
         .copyWith(ChestCavityTypeManager.CARNIVORE)
         .setFirstRow(4, CataclysmOrgans.SEALING_STONE_SLAB.get());
 
@@ -179,7 +180,6 @@ public class CataclysmChestCavityTypeManager {
      * 注册灾变 Mod 所有实体的胸腔类型
      */
     public static void registerEntities(ChestCavityRegisterEvent event) {
-        // --- Boss / 旗舰实体 ---
         // 利维坦
         event.registerEntity(ModEntities.THE_LEVIATHAN.get(), LEVIATHAN);
         // 下界合金巨兽
@@ -201,7 +201,6 @@ public class CataclysmChestCavityTypeManager {
         // 远古遗魂
         event.registerEntity(ModEntities.ANCIENT_REMNANT.get(), ANCIENT_REMNANT);
 
-        // --- 非 Boss / 变体实体 ---
         // 炽燃狂魂
         event.registerEntity(ModEntities.IGNITED_BERSERKER.get(), ChestCavityTypeManager.UNDEAD);
         // 紫水晶巨蟹
@@ -260,5 +259,9 @@ public class CataclysmChestCavityTypeManager {
         event.registerEntity(ModEntities.THE_WATCHER.get(), ChestCavityTypeManager.IRON_GOLEM);
         // 徘徊者
         event.registerEntity(ModEntities.THE_PROWLER.get(), ChestCavityTypeManager.IRON_GOLEM);
+    }
+
+    private static ChestCavityType register(String path) {
+        return ChestCavityTypeManager.register(ResourceLocation.fromNamespaceAndPath("cataclysm", path));
     }
 }

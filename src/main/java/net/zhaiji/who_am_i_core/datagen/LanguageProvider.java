@@ -56,6 +56,45 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.LOOTING, "Looting");
         addAttribute(WAICAttribute.FORTUNE, "Fortune");
 
+        addAttributeDescription(WAICAttribute.HEAL,
+            "Restores health equal to attribute value every second"
+        );
+        addAttributeDescription(WAICAttribute.BLOCK,
+            "Reduces incoming damage by a flat amount",
+            "Can reduce damage to zero but not below"
+        );
+        addAttributeDescription(WAICAttribute.COUNTER_ATTACK,
+            "Deals thorns damage to the attacker when hit",
+            "Does not trigger on self-damage or thorns damage"
+        );
+        addAttributeDescription(WAICAttribute.MELEE_DAMAGE,
+            "Adds flat bonus damage when hit by melee attacks"
+        );
+        addAttributeDescription(WAICAttribute.RANGED_DAMAGE,
+            "Adds flat bonus damage when hit by ranged attacks"
+        );
+        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE,
+            "Adds flat bonus damage when hit by magic attacks"
+        );
+        addAttributeDescription(WAICAttribute.TEMPERATURE,
+            "Affects various organ effects that scale with temperature"
+        );
+        addAttributeDescription(WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
+            "Final multiplier for melee damage, default 100%"
+        );
+        addAttributeDescription(WAICAttribute.RANGED_DAMAGE_PERCENTAGE,
+            "Final multiplier for ranged damage, default 100%"
+        );
+        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE,
+            "Final multiplier for magic damage, default 100%"
+        );
+        addAttributeDescription(WAICAttribute.LOOTING,
+            "Adds extra levels to Looting enchantment effect"
+        );
+        addAttributeDescription(WAICAttribute.FORTUNE,
+            "Adds extra levels to Fortune enchantment effect"
+        );
+
         add(WAICDamageTagManager.IS_MELEE, "Melee");
         addWAICTagTranslationsEN();
 
@@ -119,6 +158,45 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "魔法伤害百分比");
         addAttribute(WAICAttribute.LOOTING, "抢夺");
         addAttribute(WAICAttribute.FORTUNE, "时运");
+
+        addAttributeDescription(WAICAttribute.HEAL,
+            "每秒回复等同于属性值的生命值"
+        );
+        addAttributeDescription(WAICAttribute.BLOCK,
+            "等值减少受到的伤害",
+            "可将伤害减至零但不会低于零"
+        );
+        addAttributeDescription(WAICAttribute.COUNTER_ATTACK,
+            "受到伤害时对攻击者造成等值荆棘伤害",
+            "自伤和荆棘伤害不会触发反击"
+        );
+        addAttributeDescription(WAICAttribute.MELEE_DAMAGE,
+            "受到近战攻击时额外增加等值伤害"
+        );
+        addAttributeDescription(WAICAttribute.RANGED_DAMAGE,
+            "受到远程攻击时额外增加等值伤害"
+        );
+        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE,
+            "受到魔法攻击时额外增加等值伤害"
+        );
+        addAttributeDescription(WAICAttribute.TEMPERATURE,
+            "影响多种与温度相关的器官效果"
+        );
+        addAttributeDescription(WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
+            "近战伤害的最终倍率，默认100%"
+        );
+        addAttributeDescription(WAICAttribute.RANGED_DAMAGE_PERCENTAGE,
+            "远程伤害的最终倍率，默认100%"
+        );
+        addAttributeDescription(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE,
+            "魔法伤害的最终倍率，默认100%"
+        );
+        addAttributeDescription(WAICAttribute.LOOTING,
+            "额外增加抢夺附魔的等效等级"
+        );
+        addAttributeDescription(WAICAttribute.FORTUNE,
+            "额外增加时运附魔的等效等级"
+        );
 
         add(WAICDamageTagManager.IS_MELEE, "近战");
         addWAICTagTranslationsZH();
@@ -931,57 +1009,57 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     // ==================== 布织器官 ====================
 
     private void clothOrgansEN() {
-        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "Cloth Teddy Bear");
-        addOrganDescription(WAICOrgans.CLOTH_TEDDY_BEAR, "A patchwork teddy bear stitched from cloth and thread");
+        addItem(CompanionsOrgans.CLOTH_TEDDY_BEAR, "Cloth Teddy Bear");
+        addOrganDescription(CompanionsOrgans.CLOTH_TEDDY_BEAR, "A patchwork teddy bear stitched from cloth and thread");
         addOrganPassiveEffect(
-            WAICOrgans.CLOTH_TEDDY_BEAR,
+            CompanionsOrgans.CLOTH_TEDDY_BEAR,
             "When chest cavity closes, wool items in the chest are converted into random cloth organs"
         );
         addOrganActiveSkill(
-            WAICOrgans.CLOTH_TEDDY_BEAR,
+            CompanionsOrgans.CLOTH_TEDDY_BEAR,
             "Consume wool stored in the teddy bear to heal",
             "Each wool restores 4 + cloth organ count HP"
         );
-        addOrganActiveSkillSimple(WAICOrgans.CLOTH_TEDDY_BEAR, "Consume wool to heal");
+        addOrganActiveSkillSimple(CompanionsOrgans.CLOTH_TEDDY_BEAR, "Consume wool to heal");
 
-        addItem(WAICOrgans.CLOTH_HEART, "Cloth Heart");
-        addItem(WAICOrgans.CLOTH_LUNG, "Cloth Lung");
-        addItem(WAICOrgans.CLOTH_LIVER, "Cloth Liver");
-        addItem(WAICOrgans.CLOTH_INTESTINE, "Cloth Intestine");
-        addItem(WAICOrgans.CLOTH_STOMACH, "Cloth Stomach");
-        addItem(WAICOrgans.CLOTH_KIDNEY, "Cloth Kidney");
-        addItem(WAICOrgans.CLOTH_SPLEEN, "Cloth Spleen");
-        addItem(WAICOrgans.CLOTH_SPINE, "Cloth Spine");
-        addItem(WAICOrgans.CLOTH_RIB, "Cloth Rib");
-        addItem(WAICOrgans.CLOTH_MUSCLE, "Cloth Muscle");
-        addItem(WAICOrgans.CLOTH_APPENDIX, "Cloth Appendix");
+        addItem(CompanionsOrgans.CLOTH_HEART, "Cloth Heart");
+        addItem(CompanionsOrgans.CLOTH_LUNG, "Cloth Lung");
+        addItem(CompanionsOrgans.CLOTH_LIVER, "Cloth Liver");
+        addItem(CompanionsOrgans.CLOTH_INTESTINE, "Cloth Intestine");
+        addItem(CompanionsOrgans.CLOTH_STOMACH, "Cloth Stomach");
+        addItem(CompanionsOrgans.CLOTH_KIDNEY, "Cloth Kidney");
+        addItem(CompanionsOrgans.CLOTH_SPLEEN, "Cloth Spleen");
+        addItem(CompanionsOrgans.CLOTH_SPINE, "Cloth Spine");
+        addItem(CompanionsOrgans.CLOTH_RIB, "Cloth Rib");
+        addItem(CompanionsOrgans.CLOTH_MUSCLE, "Cloth Muscle");
+        addItem(CompanionsOrgans.CLOTH_APPENDIX, "Cloth Appendix");
     }
 
     private void clothOrgansZH() {
-        addItem(WAICOrgans.CLOTH_TEDDY_BEAR, "布织泰迪熊");
-        addOrganDescription(WAICOrgans.CLOTH_TEDDY_BEAR, "用布料与线缝制的拼布泰迪熊");
+        addItem(CompanionsOrgans.CLOTH_TEDDY_BEAR, "布织泰迪熊");
+        addOrganDescription(CompanionsOrgans.CLOTH_TEDDY_BEAR, "用布料与线缝制的拼布泰迪熊");
         addOrganPassiveEffect(
-            WAICOrgans.CLOTH_TEDDY_BEAR,
+            CompanionsOrgans.CLOTH_TEDDY_BEAR,
             "胸腔关闭时将羊毛转换为随机布织器官"
         );
         addOrganActiveSkill(
-            WAICOrgans.CLOTH_TEDDY_BEAR,
+            CompanionsOrgans.CLOTH_TEDDY_BEAR,
             "消耗布织泰迪熊中的羊毛回复生命",
             "每个羊毛回复 4 + 布织器官数量 点生命"
         );
-        addOrganActiveSkillSimple(WAICOrgans.CLOTH_TEDDY_BEAR, "消耗羊毛回复生命");
+        addOrganActiveSkillSimple(CompanionsOrgans.CLOTH_TEDDY_BEAR, "消耗羊毛回复生命");
 
-        addItem(WAICOrgans.CLOTH_HEART, "布织心脏");
-        addItem(WAICOrgans.CLOTH_LUNG, "布织肺脏");
-        addItem(WAICOrgans.CLOTH_LIVER, "布织肝脏");
-        addItem(WAICOrgans.CLOTH_INTESTINE, "布织肠子");
-        addItem(WAICOrgans.CLOTH_STOMACH, "布织胃");
-        addItem(WAICOrgans.CLOTH_KIDNEY, "布织肾脏");
-        addItem(WAICOrgans.CLOTH_SPLEEN, "布织脾脏");
-        addItem(WAICOrgans.CLOTH_SPINE, "布织脊柱");
-        addItem(WAICOrgans.CLOTH_RIB, "布织肋骨");
-        addItem(WAICOrgans.CLOTH_MUSCLE, "布织肌肉");
-        addItem(WAICOrgans.CLOTH_APPENDIX, "布织阑尾");
+        addItem(CompanionsOrgans.CLOTH_HEART, "布织心脏");
+        addItem(CompanionsOrgans.CLOTH_LUNG, "布织肺脏");
+        addItem(CompanionsOrgans.CLOTH_LIVER, "布织肝脏");
+        addItem(CompanionsOrgans.CLOTH_INTESTINE, "布织肠子");
+        addItem(CompanionsOrgans.CLOTH_STOMACH, "布织胃");
+        addItem(CompanionsOrgans.CLOTH_KIDNEY, "布织肾脏");
+        addItem(CompanionsOrgans.CLOTH_SPLEEN, "布织脾脏");
+        addItem(CompanionsOrgans.CLOTH_SPINE, "布织脊柱");
+        addItem(CompanionsOrgans.CLOTH_RIB, "布织肋骨");
+        addItem(CompanionsOrgans.CLOTH_MUSCLE, "布织肌肉");
+        addItem(CompanionsOrgans.CLOTH_APPENDIX, "布织阑尾");
     }
 
     // ==================== 猩红器官 ====================
@@ -2426,6 +2504,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void addAttribute(Holder<Attribute> attribute, String value) {
         add(attribute.value().getDescriptionId(), value);
+    }
+
+    private void addAttributeDescription(Holder<Attribute> attribute, String... lines) {
+        String base = attribute.value().getDescriptionId() + ".description.";
+        for (int i = 0; i < lines.length; i++) {
+            add(base + i, lines[i]);
+        }
     }
 
     @Override
