@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "chestcavitybeyond:animal_heart"
+    },
+    "H": {
+      "item": "chestcavitybeyond:heart"
+    },
+    "N": {
+      "item": "companions:needle"
+    }
+  },
+  "pattern": [
+    "HNA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:frankenstein_heart"
+  }
+}

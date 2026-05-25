@@ -20,9 +20,14 @@ public class DataGenHandler {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
+        // 配方（单一入口，内部分派到各模组 Provider）
+        generator.addProvider(event.includeServer(), new RecipeProvider(packOutput, lookupProvider));
+
+        // 标签
         generator.addProvider(event.includeServer(), new ItemTagProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new DamageTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
+        // 客户端
         generator.addProvider(event.includeClient(), new ItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new LanguageProvider(packOutput, LanguageProvider.EN_US));
         generator.addProvider(event.includeClient(), new LanguageProvider(packOutput, LanguageProvider.ZH_CN));

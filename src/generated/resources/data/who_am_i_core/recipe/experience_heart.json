@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:experience_bottle"
+    },
+    "S": {
+      "item": "companions:soul_gem"
+    }
+  },
+  "pattern": [
+    " B ",
+    "BSB",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:experience_heart"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_burning_ashes": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cataclysm:burning_ashes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:wrath"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_burning_ashes"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:wrath"
+    ]
+  }
+}

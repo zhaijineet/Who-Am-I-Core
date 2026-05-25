@@ -37,6 +37,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
                     .predicate(WhoAmICore.of("frankenstein_heart_super_active"), 1.0F)
                     .model(getExistingFile(modLoc("item/frankenstein_heart_super_active")))
                     .end();
+            } else if (item == WAICOrgans.SWORD_BONE.get()) {
+                handheldItem(item);
             } else {
                 basicItem(item);
             }

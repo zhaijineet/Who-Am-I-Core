@@ -1,0 +1,16 @@
+{
+  "type": "anvilcraft:stamping",
+  "ingredients": [
+    {
+      "items": "minecraft:carved_pumpkin"
+    },
+    {
+      "items": "minecraft:mace"
+    }
+  ],
+  "results": [
+    {
+      "id": "who_am_i_core:squash"
+    }
+  ]
+}

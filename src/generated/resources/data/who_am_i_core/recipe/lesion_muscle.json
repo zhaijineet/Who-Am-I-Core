@@ -1,0 +1,16 @@
+{
+  "type": "anvilcraft:time_warp",
+  "ingredients": [
+    {
+      "items": "chestcavitybeyond:muscle"
+    },
+    {
+      "items": "anvilcraft:uranium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "who_am_i_core:lesion_muscle"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "anvilcraft:cursed_gold_ingot"
+  },
+  "base": {
+    "item": "chestcavitybeyond:lung"
+  },
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:cursed_gold_lung"
+  },
+  "template": {
+    "item": "anvilcraft:ember_metal_upgrade_smithing_template"
+  }
+}

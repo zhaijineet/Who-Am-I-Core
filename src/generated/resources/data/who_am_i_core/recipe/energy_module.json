@@ -1,0 +1,16 @@
+{
+  "type": "anvilcraft:stamping",
+  "ingredients": [
+    {
+      "items": "anvilcraft:capacitor"
+    },
+    {
+      "items": "anvilcraft:power_converter_small"
+    }
+  ],
+  "results": [
+    {
+      "id": "who_am_i_core:energy_module"
+    }
+  ]
+}

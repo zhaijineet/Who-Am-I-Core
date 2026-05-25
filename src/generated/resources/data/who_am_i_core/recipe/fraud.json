@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "iceandfire:dread_shard"
+    },
+    "K": {
+      "item": "chestcavitybeyond:fireproof_kidney"
+    },
+    "S": {
+      "item": "iceandfire:siren_tear"
+    }
+  },
+  "pattern": [
+    " S ",
+    "DKD",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:fraud"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "cataclysm:burning_ashes"
+    },
+    "U": {
+      "item": "chestcavitybeyond:fireproof_muscle"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MUM",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:violence"
+  }
+}

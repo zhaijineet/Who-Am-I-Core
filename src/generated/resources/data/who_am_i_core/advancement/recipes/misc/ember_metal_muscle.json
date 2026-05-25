@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ember_metal_muscle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "anvilcraft:ember_metal_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:ember_metal_muscle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ember_metal_muscle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:ember_metal_muscle"
+    ]
+  }
+}

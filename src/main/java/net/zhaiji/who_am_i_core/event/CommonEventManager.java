@@ -23,11 +23,13 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Added);
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Remove);
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Expired);
-        gameBus.addListener(CommonEventHandler::handlerPlayerXpPickup);
-        gameBus.addListener(CommonEventHandler::handlerPlayerLevelChange);
+        gameBus.addListener(CommonEventHandler::handlerPlayerXpEvent$PickupXp);
+        gameBus.addListener(CommonEventHandler::handlerPlayer$LevelChange);
         gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
         gameBus.addListener(CommonEventHandler::handlerCriticalHitEvent);
         gameBus.addListener(CommonEventHandler::handlerTradeWithVillagerEvent);
         gameBus.addListener(CommonEventHandler::handlerPlayerContainerEvent$Open);
+        gameBus.addListener(CommonEventHandler::handlerPlayerInteract$RightClickBlock);
+        gameBus.addListener(CommonEventHandler::handlerPlayerInteract$EntityInteract);
     }
 }

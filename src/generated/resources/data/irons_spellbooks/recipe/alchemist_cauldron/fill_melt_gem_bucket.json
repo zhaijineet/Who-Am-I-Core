@@ -1,0 +1,16 @@
+{
+  "type": "irons_spellbooks:alchemist_cauldron_fill",
+  "fluid": {
+    "amount": 1000,
+    "id": "anvilcraft:melt_gem"
+  },
+  "input": {
+    "item": "anvilcraft:melt_gem_bucket"
+  },
+  "mustFitAll": false,
+  "result": {
+    "count": 1,
+    "id": "minecraft:bucket"
+  },
+  "sound": "minecraft:item.bucket.empty"
+}

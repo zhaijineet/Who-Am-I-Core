@@ -3,11 +3,16 @@ package net.zhaiji.who_am_i_core.event;
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
 import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
+import dev.xylonity.companions.common.entity.companion.TeddyEntity;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -16,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -26,6 +32,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
 import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
@@ -33,6 +40,7 @@ import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.manager.AttributeDisplayManager;
+import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
@@ -47,6 +55,7 @@ import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
+import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
@@ -395,7 +404,7 @@ public class CommonEventHandler {
     /**
      * 经验之心：从经验球获取的经验 ×（胸腔中魔法器官数量 + 1）倍率
      */
-    public static void handlerPlayerXpPickup(PlayerXpEvent.PickupXp event) {
+    public static void handlerPlayerXpEvent$PickupXp(PlayerXpEvent.PickupXp event) {
         Player player = event.getEntity();
         if (player.level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(player);
@@ -409,7 +418,7 @@ public class CommonEventHandler {
     /**
      * 经验之心：当玩家等级变化时，更新经验之心的健康值属性
      */
-    public static void handlerPlayerLevelChange(PlayerXpEvent.LevelChange event) {
+    public static void handlerPlayer$LevelChange(PlayerXpEvent.LevelChange event) {
         Player player = event.getEntity();
         if (player.level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(player);
@@ -469,5 +478,59 @@ public class CommonEventHandler {
     public static void handlerPlayerContainerEvent$Open(PlayerContainerEvent.Open event) {
         Player player = event.getEntity();
         WAICOrganUtil.fraudTradeDiscount(player, event.getContainer());
+    }
+
+    /**
+     * 脊柱骨质器官在砂轮上打磨为剑骨头
+     * 玩家手持同时拥有 {@link ItemTagManager#SPINE} 和 {@link ItemTagManager#BONE} 标签的物品
+     * 右键砂轮时，消耗该物品并给予剑骨头。
+     */
+    public static void handlerPlayerInteract$RightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        Level level = event.getLevel();
+        if (level.isClientSide()) return;
+        if (!level.getBlockState(event.getPos()).is(Blocks.GRINDSTONE)) return;
+        Player player = event.getEntity();
+        InteractionHand hand = event.getHand();
+        ItemStack heldItem = player.getItemInHand(hand);
+        if (!heldItem.is(ItemTagManager.SPINE) || !heldItem.is(ItemTagManager.BONE)) return;
+        ItemStack swordBone = new ItemStack(WAICOrgans.SWORD_BONE.get());
+        heldItem.shrink(1);
+        if (heldItem.isEmpty()) {
+            // 消耗后原槽位变空，剑骨头放回原位（手中）
+            player.setItemInHand(hand, swordBone);
+        } else if (!player.getInventory().add(swordBone)) {
+            // 消耗后仍有剩余，剑骨头放入背包
+            player.drop(swordBone, false);
+        }
+        // 播放砂轮音效
+        level.playSound(null, event.getPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        // 取消事件，阻止打开砂轮 GUI
+        event.setCanceled(true);
+    }
+
+    /**
+     * 布织泰迪熊获取：使用剪刀对泰迪（Companions 模组的生物）右键，
+     * 将实体转化为布织泰迪熊器官物品。
+     */
+    public static void handlerPlayerInteract$EntityInteract(PlayerInteractEvent.EntityInteract event) {
+        Level level = event.getLevel();
+        if (level.isClientSide()) return;
+        // 检查目标实体是否是未认主的泰迪
+        if (!(event.getTarget() instanceof TeddyEntity teddy) || teddy.isTame()) return;
+        Player player = event.getEntity();
+        InteractionHand hand = event.getHand();
+        ItemStack heldItem = player.getItemInHand(hand);
+        // 检查手持物品是否是剪刀
+        if (!heldItem.is(Items.SHEARS)) return;
+        // 给予玩家
+        teddy.spawnAtLocation(CompanionsOrgans.CLOTH_TEDDY_BEAR.get().getDefaultInstance());
+        // 播放剪刀音效
+        level.playSound(null, teddy.blockPosition(), SoundEvents.SHEEP_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
+        // 移除泰迪实体（不触发死亡掉落）
+        teddy.discard();
+        // 消耗剪刀耐久
+        heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+        event.setCancellationResult(InteractionResult.SUCCESS);
+        event.setCanceled(true);
     }
 }

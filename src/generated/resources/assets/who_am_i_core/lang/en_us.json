@@ -376,6 +376,7 @@
   "organ.who_am_i_core.crimson_appendix.active_skill.simple.0": "Consumes blood to heal",
   "organ.who_am_i_core.crimson_heart.passive_effect.0": "+100 blood capacity",
   "organ.who_am_i_core.crimson_heart.passive_effect.1": "Converts healing into blood storage at 5× rate",
+  "organ.who_am_i_core.crimson_liver.passive_effect.0": "Consumes 10 blood when casting blood spells to increase spell level by 2",
   "organ.who_am_i_core.current_rib.passive_effect.0": "Consumes charge to block incoming damage",
   "organ.who_am_i_core.current_rib.passive_effect.1": "10 charge blocks 1 damage, up to 4 points",
   "organ.who_am_i_core.current_rib.passive_effect.2": "A paired Current Rib on the opposite side halves the cost",
@@ -713,7 +714,6 @@
   "tag.item.who_am_i_core.mechanical": "Mechanical",
   "tag.item.who_am_i_core.monstrosity": "Monstrosity",
   "tag.item.who_am_i_core.nine_hell": "Nine Hell",
-  "tag.item.who_am_i_core.pontiff": "Pontiff",
   "tag.item.who_am_i_core.summon": "Summon",
   "tag.item.who_am_i_core.unique": "Unique"
 }

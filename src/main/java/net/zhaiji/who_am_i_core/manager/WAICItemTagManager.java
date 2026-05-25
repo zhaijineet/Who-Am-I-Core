@@ -37,8 +37,6 @@ public class WAICItemTagManager {
     public static final TagKey<Item> MONSTROSITY = register("monstrosity", 0xFF555555, 15);
     // 蛋糕
     public static final TagKey<Item> CAKE = register("cake", 0xFFFF55FF, 10);
-    // 教宗
-    public static final TagKey<Item> PONTIFF = register("pontiff", 0xFFFFAA00, 5);
     // 逆卡巴拉
     public static final TagKey<Item> QLIPHOTH = register("qliphoth", 0xFFAA00AA, 2);
     // 九狱

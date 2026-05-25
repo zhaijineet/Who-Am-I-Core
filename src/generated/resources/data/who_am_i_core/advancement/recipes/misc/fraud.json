@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_siren_tear": {
+      "conditions": {
+        "items": [
+          {
+            "items": "iceandfire:siren_tear"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:fraud"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_siren_tear"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:fraud"
+    ]
+  }
+}

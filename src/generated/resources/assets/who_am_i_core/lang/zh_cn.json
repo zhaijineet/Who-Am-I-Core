@@ -376,6 +376,7 @@
   "organ.who_am_i_core.crimson_appendix.active_skill.simple.0": "消耗血液回复生命",
   "organ.who_am_i_core.crimson_heart.passive_effect.0": "+100 血液上限",
   "organ.who_am_i_core.crimson_heart.passive_effect.1": "将治疗量以5倍比率转化为血液存储",
+  "organ.who_am_i_core.crimson_liver.passive_effect.0": "释放猩红法术时，消耗10点血液，使法术等级+2",
   "organ.who_am_i_core.current_rib.passive_effect.0": "消耗电荷抵消受到的伤害",
   "organ.who_am_i_core.current_rib.passive_effect.1": "每10电荷抵消1点伤害,抵消上限4点",
   "organ.who_am_i_core.current_rib.passive_effect.2": "对称位置存在另一根导流肋骨时消耗减半",
@@ -712,7 +713,6 @@
   "tag.item.who_am_i_core.mechanical": "机械",
   "tag.item.who_am_i_core.monstrosity": "巨兽",
   "tag.item.who_am_i_core.nine_hell": "九狱",
-  "tag.item.who_am_i_core.pontiff": "教宗",
   "tag.item.who_am_i_core.summon": "召唤",
   "tag.item.who_am_i_core.unique": "唯一"
 }

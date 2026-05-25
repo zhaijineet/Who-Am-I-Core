@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "companions:demon_flesh"
+    },
+    "M": {
+      "item": "companions:mutant_flesh"
+    },
+    "S": {
+      "item": "chestcavitybeyond:fireproof_stomach"
+    }
+  },
+  "pattern": [
+    " M ",
+    "DSD",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:gluttony"
+  }
+}

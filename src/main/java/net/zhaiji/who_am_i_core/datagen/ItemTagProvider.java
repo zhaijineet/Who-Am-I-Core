@@ -978,7 +978,6 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CataclysmOrgans.IGNITED_RIB_PLATING.get(),
             CataclysmOrgans.BLAZING_VISAGE.get()
         );
-        tag(WAICItemTagManager.MECHANICAL).add(CataclysmOrgans.BLAZING_VISAGE.get());
 
         // 下界合金巨兽系列
         tag(ItemTagManager.ORGANS).add(
@@ -1111,18 +1110,6 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.LIVER).add(CompanionsOrgans.PONTIFF_LIVER.get());
         tag(ItemTagManager.APPENDIX).add(CompanionsOrgans.PONTIFF_APPENDIX.get());
         tag(ItemTagManager.MUSCLE).add(CompanionsOrgans.PONTIFF_MUSCLE.get());
-        tag(WAICItemTagManager.PONTIFF).add(
-            CompanionsOrgans.PONTIFF_HEART.get(),
-            CompanionsOrgans.PONTIFF_LUNG.get(),
-            CompanionsOrgans.PONTIFF_STOMACH.get(),
-            CompanionsOrgans.PONTIFF_INTESTINE.get(),
-            CompanionsOrgans.PONTIFF_KIDNEY.get(),
-            CompanionsOrgans.PONTIFF_SPLEEN.get(),
-            CompanionsOrgans.PONTIFF_LIVER.get(),
-            CompanionsOrgans.PONTIFF_APPENDIX.get(),
-            CompanionsOrgans.PONTIFF_MUSCLE.get()
-        );
-
         // 蛋糕系列
         tag(ItemTagManager.ORGANS).add(
             CompanionsOrgans.CAKE_HEART.get(),

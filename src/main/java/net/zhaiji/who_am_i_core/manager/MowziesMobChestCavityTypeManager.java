@@ -42,17 +42,6 @@ public class MowziesMobChestCavityTypeManager {
         .setThirdRow(7, MowziesMobOrgans.AGED_MUSCLE.get())
         .setThirdRow(8, MowziesMobOrgans.AGED_MUSCLE.get());
 
-    // 钢铁守护者
-    public static final ChestCavityType WROUGHTNAUT = register("wroughtnaut")
-        .setSecondRow(4, MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get())
-
-        .addValueBonuses(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get(), Map.of(
-            InitAttribute.HEALTH, 1.0,
-            InitAttribute.NERVES, 1.0,
-            InitAttribute.BREATH_CAPACITY, 1.0,
-            InitAttribute.BREATH_RECOVERY, 1.0
-        ));
-
     // 太阳鸟
     public static final ChestCavityType UMVUTHI = register("umvuthi")
         .setSecondRow(4, MowziesMobOrgans.CHEST_NOVA.get())
@@ -142,7 +131,7 @@ public class MowziesMobChestCavityTypeManager {
         event.registerEntity(EntityHandler.UMVUTHANA_CRANE_TO_PLAYER.get(), ChestCavityTypeManager.ANIMAL);
 
         // 钢铁守护者
-        event.registerEntity(EntityHandler.WROUGHTNAUT.get(), WROUGHTNAUT);
+        event.registerEntity(EntityHandler.WROUGHTNAUT.get(), ChestCavityTypeManager.HUMAN);
         // 太阳鸟-乌姆武提
         event.registerEntity(EntityHandler.UMVUTHI.get(), UMVUTHI);
         // 泥峭人

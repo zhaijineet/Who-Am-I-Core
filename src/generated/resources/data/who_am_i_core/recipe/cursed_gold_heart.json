@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "anvilcraft:cursed_gold_ingot"
+  },
+  "base": {
+    "item": "chestcavitybeyond:heart"
+  },
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:cursed_gold_heart"
+  },
+  "template": {
+    "item": "anvilcraft:ember_metal_upgrade_smithing_template"
+  }
+}

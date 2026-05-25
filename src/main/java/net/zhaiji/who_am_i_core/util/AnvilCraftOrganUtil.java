@@ -139,6 +139,7 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumHeartModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.HEALTH);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -146,6 +147,7 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumLungModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.BREATH_RECOVERY, InitAttribute.BREATH_CAPACITY, InitAttribute.ENDURANCE);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -153,6 +155,7 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumSpineModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.NERVES, InitAttribute.DEFENSE);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -163,6 +166,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.DIGESTION);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -173,6 +177,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.NUTRITION);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -183,6 +188,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.FILTRATION);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -193,6 +199,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.METABOLISM);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -200,6 +207,7 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumLiverModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.DETOXIFICATION);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -210,6 +218,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, Attributes.LUCK);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -217,6 +226,7 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumRibModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.DEFENSE);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -227,5 +237,6 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.STRENGTH, InitAttribute.SPEED);
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 }

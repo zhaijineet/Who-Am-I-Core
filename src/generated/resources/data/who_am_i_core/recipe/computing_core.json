@@ -1,0 +1,16 @@
+{
+  "type": "anvilcraft:stamping",
+  "ingredients": [
+    {
+      "items": "anvilcraft:circuit_board"
+    },
+    {
+      "items": "anvilcraft:disk"
+    }
+  ],
+  "results": [
+    {
+      "id": "who_am_i_core:computing_core"
+    }
+  ]
+}

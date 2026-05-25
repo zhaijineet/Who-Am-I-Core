@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "chestcavitybeyond:organs/bone"
+    },
+    {
+      "item": "iceandfire:ectoplasm"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:haunted_bone"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "anvilcraft:cursed_gold_ingot"
+    },
+    "L": {
+      "item": "chestcavitybeyond:fireproof_lung"
+    }
+  },
+  "pattern": [
+    " G ",
+    "GLG",
+    " G "
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:greed"
+  }
+}

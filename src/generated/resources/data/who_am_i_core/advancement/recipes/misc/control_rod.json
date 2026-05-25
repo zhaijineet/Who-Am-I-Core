@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chest_nova": {
+      "conditions": {
+        "items": [
+          {
+            "items": "who_am_i_core:chest_nova"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:control_rod"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chest_nova"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:control_rod"
+    ]
+  }
+}

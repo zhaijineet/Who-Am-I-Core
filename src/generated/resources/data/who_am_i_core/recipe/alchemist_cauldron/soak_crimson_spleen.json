@@ -1,0 +1,14 @@
+{
+  "type": "irons_spellbooks:alchemist_cauldron_brew",
+  "base_fluid": {
+    "amount": 1000,
+    "id": "irons_spellbooks:blood"
+  },
+  "byproduct": {
+    "id": "who_am_i_core:crimson_spleen"
+  },
+  "input": {
+    "item": "chestcavitybeyond:spleen"
+  },
+  "results": []
+}

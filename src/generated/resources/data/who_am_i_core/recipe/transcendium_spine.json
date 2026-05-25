@@ -1,0 +1,23 @@
+{
+  "type": "anvilcraft:two_to_one_smithing",
+  "inputs": [
+    {
+      "items": "who_am_i_core:frost_metal_spine"
+    },
+    {
+      "items": "who_am_i_core:ember_metal_spine"
+    }
+  ],
+  "material": {
+    "items": "anvilcraft:multiphase_transcendium"
+  },
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "who_am_i_core:transcendium_spine"
+    }
+  },
+  "template": {
+    "items": "anvilcraft:two_to_one_smithing_template"
+  }
+}

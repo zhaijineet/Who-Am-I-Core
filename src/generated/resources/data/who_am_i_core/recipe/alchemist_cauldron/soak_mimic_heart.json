@@ -1,0 +1,14 @@
+{
+  "type": "irons_spellbooks:alchemist_cauldron_brew",
+  "base_fluid": {
+    "amount": 1000,
+    "id": "irons_spellbooks:timeless_slurry"
+  },
+  "byproduct": {
+    "id": "who_am_i_core:mimic_heart"
+  },
+  "input": {
+    "item": "who_am_i_core:crimson_heart"
+  },
+  "results": []
+}

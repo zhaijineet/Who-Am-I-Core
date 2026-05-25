@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "chestcavitybeyond:fireproof_appendix"
+    },
+    "V": {
+      "item": "cataclysm:void_jaw"
+    }
+  },
+  "pattern": [
+    " V ",
+    "VAV",
+    " V "
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:limbo"
+  }
+}

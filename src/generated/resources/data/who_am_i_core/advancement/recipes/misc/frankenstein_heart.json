@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_needle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "companions:needle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:frankenstein_heart"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_needle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:frankenstein_heart"
+    ]
+  }
+}

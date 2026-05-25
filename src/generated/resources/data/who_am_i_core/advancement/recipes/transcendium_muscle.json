@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:transcendium_muscle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_transcendium_muscle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "anvilcraft:multiphase_transcendium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_transcendium_muscle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:transcendium_muscle"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "anvilcraft:stamping",
+  "ingredients": [
+    {
+      "items": "who_am_i_core:royal_steel_spine"
+    },
+    {
+      "items": "anvilcraft:power_converter_small"
+    }
+  ],
+  "results": [
+    {
+      "id": "who_am_i_core:conductive_spine"
+    }
+  ]
+}

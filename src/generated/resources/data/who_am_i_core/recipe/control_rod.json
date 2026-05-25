@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "anvilcraft:circuit_board"
+    },
+    "L": {
+      "item": "anvilcraft:lead_ingot"
+    },
+    "N": {
+      "item": "who_am_i_core:chest_nova"
+    },
+    "T": {
+      "item": "anvilcraft:tungsten_ingot"
+    }
+  },
+  "pattern": [
+    "L L",
+    "TNT",
+    "LCL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:control_rod"
+  }
+}

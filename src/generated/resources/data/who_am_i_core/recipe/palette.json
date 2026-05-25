@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "irons_spellbooks:arcane_essence"
+    },
+    "B": {
+      "tag": "c:dyes/blue"
+    },
+    "G": {
+      "tag": "c:dyes/green"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "R": {
+      "tag": "c:dyes/red"
+    },
+    "Y": {
+      "tag": "c:dyes/yellow"
+    }
+  },
+  "pattern": [
+    "AGA",
+    "BPY",
+    "ARA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:palette"
+  }
+}

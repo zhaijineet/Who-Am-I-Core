@@ -18,6 +18,8 @@ version = mod_version
 group = mod_group_id
 
 repositories {
+    mavenLocal()
+    mavenCentral()
     // Add here additional repositories if required by some of the dependencies below.
     maven {
         url "https://maven.ryanliptak.com/"
@@ -40,6 +42,21 @@ repositories {
         url "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
+        }
+    }
+    maven { // Anvil Lib
+        name = "Cjsah Maven"
+        url = "https://server.cjsah.net:1002/maven/"
+        content {
+            includeGroup "dev.anvilcraft.lib"
+            includeGroup "dev.dubhe"
+        }
+    }
+    maven { // Registrate Fork
+        name = "Ithundxr Maven"
+        url = "https://maven.ithundxr.dev/snapshots"
+        content {
+            includeGroup "com.tterrag.registrate"
         }
     }
 }
@@ -163,6 +180,11 @@ dependencies {
     implementation "curse.maven:knight-lib-1105855:6942154"
     // iron lib
     implementation "curse.maven:irons-lib-1492763:7907336"
+    // anvil lib
+    implementation("dev.anvilcraft.lib:anvillib-neoforge-1.21.1:1.4.0+build.188")
+    interfaceInjectionData("dev.anvilcraft.lib:anvillib-neoforge-1.21.1:1.4.0+build.188")
+
+    api "com.tterrag.registrate:Registrate:MC1.21-1.3.0+62"
 
     // Chest Cavity Beyond
     implementation "curse.maven:chest-cavity-beyond-1427715:8127197"
@@ -177,7 +199,8 @@ dependencies {
     // 铁魔法
     implementation "curse.maven:irons-spells-n-spellbooks-855414:7907341"
     // AnvilCraft
-    implementation "curse.maven:anvilcraft-986251:7754185"
+    implementation("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.2+hotfix.1685") { transitive = false }
+    interfaceInjectionData("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.2+hotfix.1685") { transitive = false }
     // 车万女仆
     implementation "curse.maven:touhou-little-maid-355044:7510722"
     // 同伴！

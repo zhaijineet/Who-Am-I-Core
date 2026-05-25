@@ -1107,6 +1107,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_KIDNEY, "Crimson Kidney");
         addItem(WAICOrgans.CRIMSON_SPLEEN, "Crimson Spleen");
         addItem(WAICOrgans.CRIMSON_LIVER, "Crimson Liver");
+        addOrganPassiveEffect(
+            WAICOrgans.CRIMSON_LIVER,
+            "Consumes 10 blood when casting blood spells to increase spell level by 2"
+        );
         addItem(WAICOrgans.CRIMSON_APPENDIX, "Crimson Appendix");
         addOrganActiveSkill(
             WAICOrgans.CRIMSON_APPENDIX,
@@ -1130,6 +1134,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_KIDNEY, "猩红肾脏");
         addItem(WAICOrgans.CRIMSON_SPLEEN, "猩红脾脏");
         addItem(WAICOrgans.CRIMSON_LIVER, "猩红肝脏");
+        addOrganPassiveEffect(
+            WAICOrgans.CRIMSON_LIVER,
+            "释放猩红法术时，消耗10点血液，使法术等级+2"
+        );
         addItem(WAICOrgans.CRIMSON_APPENDIX, "猩红阑尾");
         addOrganActiveSkill(
             WAICOrgans.CRIMSON_APPENDIX,
@@ -1585,7 +1593,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.CLOTH, "Cloth");
         add(WAICItemTagManager.MONSTROSITY, "Monstrosity");
         add(WAICItemTagManager.CAKE, "Cake");
-        add(WAICItemTagManager.PONTIFF, "Pontiff");
         add(WAICItemTagManager.NINE_HELL, "Nine Hell");
     }
 
@@ -1605,7 +1612,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.CLOTH, "布织");
         add(WAICItemTagManager.MONSTROSITY, "巨兽");
         add(WAICItemTagManager.CAKE, "蛋糕");
-        add(WAICItemTagManager.PONTIFF, "教宗");
         add(WAICItemTagManager.NINE_HELL, "九狱");
     }
 

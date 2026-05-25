@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:limbo"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_void_jaw": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cataclysm:void_jaw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_void_jaw"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:limbo"
+    ]
+  }
+}

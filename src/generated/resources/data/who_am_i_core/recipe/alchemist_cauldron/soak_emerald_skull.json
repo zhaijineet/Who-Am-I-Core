@@ -1,0 +1,14 @@
+{
+  "type": "irons_spellbooks:alchemist_cauldron_brew",
+  "base_fluid": {
+    "amount": 1000,
+    "id": "anvilcraft:melt_gem"
+  },
+  "byproduct": {
+    "id": "who_am_i_core:emerald_skull"
+  },
+  "input": {
+    "tag": "minecraft:skulls"
+  },
+  "results": []
+}

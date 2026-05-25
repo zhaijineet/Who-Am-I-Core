@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "anvilcraft:ember_metal_ingot"
+  },
+  "base": {
+    "item": "who_am_i_core:royal_steel_spine"
+  },
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:ember_metal_spine"
+  },
+  "template": {
+    "item": "anvilcraft:ember_metal_upgrade_smithing_template"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "chestcavitybeyond:fireproof_heart"
+    },
+    "D": {
+      "item": "irons_spellbooks:divine_soulshard"
+    },
+    "G": {
+      "item": "companions:soul_gem"
+    },
+    "N": {
+      "item": "cataclysm:chain_of_soul_binding"
+    }
+  },
+  "pattern": [
+    " D ",
+    "GCG",
+    " N "
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:treachery"
+  }
+}

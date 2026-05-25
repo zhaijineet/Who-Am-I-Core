@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-23T23:30:32.1593001	Item Models: who_am_i_core
+// 1.21.1	2026-05-25T19:25:57.9984256	Item Models: who_am_i_core
 8283484ecf38282771d69218c709db27171c4e87 assets/who_am_i_core/models/item/active_bluff_rod.json
 186572bea26e109251a49787eaf1212709b65ea2 assets/who_am_i_core/models/item/aged_appendix.json
 8c24f22e8362dd9ef7aa78f455cd4eb56baf44f8 assets/who_am_i_core/models/item/aged_heart.json
@@ -246,7 +246,7 @@ c3bb8b1a5a8c741e4e59ce88c53c43310de6a014 assets/who_am_i_core/models/item/storm_
 9fbaed3774ad47e7b5bf9814167ab1791d4487d8 assets/who_am_i_core/models/item/straight_intestine.json
 6c0b521555db321f3a02ea7bc5b4a23b120d3425 assets/who_am_i_core/models/item/strange_eyeball.json
 c8685a4e13bcb5cf3bcfb6f734f33c046cae86b3 assets/who_am_i_core/models/item/strange_mechanical_eyeball.json
-03e2b704c119aa6f33cfbbc747b1dae4a081d1c9 assets/who_am_i_core/models/item/sword_bone.json
+45d89247648b8c1623f2c97fbf2c38cfc66702aa assets/who_am_i_core/models/item/sword_bone.json
 86c7f1ba0cf1f60da3717f30f8899108be41e16a assets/who_am_i_core/models/item/tactical_disk.json
 686a92d95483a7b84f7c77c5d73c0a8b6128a169 assets/who_am_i_core/models/item/tidal_lantern.json
 b1a65d0429bbc7042d201d9d625d0355ad072a80 assets/who_am_i_core/models/item/transcendium_appendix.json
