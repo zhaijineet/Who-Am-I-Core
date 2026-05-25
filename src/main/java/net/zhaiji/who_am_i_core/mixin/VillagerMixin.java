@@ -92,15 +92,14 @@ public abstract class VillagerMixin extends AbstractVillager {
      * 原版每次只升一级，10倍经验可能让 villagerXp 远超当前升级线，
      * 在原版升级时机处连续升级直到不再满足条件
      */
-    @Inject(
+    @Redirect(
         method = "customServerAiStep",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/npc/Villager;increaseMerchantCareer()V",
-            shift = At.Shift.AFTER
+            target = "Lnet/minecraft/world/entity/npc/Villager;increaseMerchantCareer()V"
         )
     )
-    public void whoAmICore$customServerAiStep(CallbackInfo ci) {
+    public void whoAmICore$customServerAiStep(Villager instance) {
         while (shouldIncreaseLevel()) {
             increaseMerchantCareer();
         }
