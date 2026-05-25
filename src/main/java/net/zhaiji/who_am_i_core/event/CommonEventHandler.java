@@ -31,10 +31,8 @@ import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
-import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
@@ -463,21 +461,6 @@ public class CommonEventHandler {
     public static void handlerCriticalHitEvent(CriticalHitEvent event) {
         Player player = event.getEntity();
         WAICOrganUtil.violenceCriticalHit(player, event);
-    }
-
-    /**
-     * 欺诈（肾脏）：交易完成时额外经验 + 不缺货
-     */
-    public static void handlerTradeWithVillagerEvent(TradeWithVillagerEvent event) {
-        WAICOrganUtil.fraudTradeComplete(event.getEntity(), event.getMerchantOffer());
-    }
-
-    /**
-     * 欺诈（肾脏）：打开交易界面时打折
-     */
-    public static void handlerPlayerContainerEvent$Open(PlayerContainerEvent.Open event) {
-        Player player = event.getEntity();
-        WAICOrganUtil.fraudTradeDiscount(player, event.getContainer());
     }
 
     /**

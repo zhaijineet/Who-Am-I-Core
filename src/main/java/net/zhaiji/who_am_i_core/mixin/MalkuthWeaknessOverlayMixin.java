@@ -25,7 +25,7 @@ public abstract class MalkuthWeaknessOverlayMixin {
      * 免疫状态标记：tickClient 中设置，render 中使用。
      */
     @Unique
-    private static boolean isImmune = false;
+    private static boolean whoAmICore$isImmune = false;
 
     /**
      * 在 tickClient 末尾检测免疫状态并设置标记。
@@ -33,25 +33,25 @@ public abstract class MalkuthWeaknessOverlayMixin {
      */
     @Inject(
         method = "tickClient",
-        at = @At("TAIL")
+        at = @At("RETURN")
     )
     private static void whoAmICore$checkImmuneState(ClientTickEvent.Pre event, CallbackInfo ci) {
         Player player = FDClientHelpers.getClientPlayer();
         if (player == null) {
-            isImmune = false;
+            whoAmICore$isImmune = false;
             return;
         }
         ChestCavityData data = ChestCavityUtil.getData(player);
         boolean hasFire = data.hasOrgan(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART.get());
         boolean hasIce = data.hasOrgan(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART.get());
         if (!hasFire && !hasIce) {
-            isImmune = false;
+            whoAmICore$isImmune = false;
             return;
         }
         MalkuthAttackType weakTo = MalkuthWeaknessHandler.getWeakTo(player);
         boolean fireImmune = hasFire && weakTo.isFire();
         boolean iceImmune = hasIce && weakTo.isIce();
-        isImmune = hasFire && hasIce || fireImmune || iceImmune;
+        whoAmICore$isImmune = hasFire && hasIce || fireImmune || iceImmune;
     }
 
     @Shadow
@@ -103,7 +103,7 @@ public abstract class MalkuthWeaknessOverlayMixin {
         float a,
         int renderAmount
     ) {
-        if (isImmune && renderAmount >= 2) {
+        if (whoAmICore$isImmune && renderAmount >= 2) {
             // 免疫时跳过冰/火圆环绘制
             return;
         }

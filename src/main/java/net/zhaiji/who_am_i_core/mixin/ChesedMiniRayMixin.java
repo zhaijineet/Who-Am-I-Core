@@ -37,7 +37,7 @@ public abstract class ChesedMiniRayMixin extends Entity {
         at = @At("HEAD"),
         cancellable = true
     )
-    private void whoAmICore$hurtTarget(LivingEntity owner, LivingEntity target, CallbackInfo ci) {
+    public void whoAmICore$hurtTarget(LivingEntity owner, LivingEntity target, CallbackInfo ci) {
         if (!item.is(FDBossesOrgans.CHESED.get())) return;
 
         // 使用玩家最大生命值 × 33% 作为伤害

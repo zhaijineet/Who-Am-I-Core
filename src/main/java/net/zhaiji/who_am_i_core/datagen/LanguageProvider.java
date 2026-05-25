@@ -955,7 +955,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRAUD, "Fraud");
         addOrganPassiveEffect(
             WAICOrgans.FRAUD,
-            "Gain 10× trade experience",
+            "Both parties gain 10× trade experience",
             "Villager trade discount",
             "Villager trades never run out of stock"
         );
@@ -1023,7 +1023,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRAUD, "欺诈");
         addOrganPassiveEffect(
             WAICOrgans.FRAUD,
-            "获得10倍交易经验",
+            "交易双方获得10倍经验",
             "村民交易获得折扣",
             "村民交易不缺货"
         );

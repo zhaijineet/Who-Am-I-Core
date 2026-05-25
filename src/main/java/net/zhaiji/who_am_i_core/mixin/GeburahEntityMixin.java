@@ -25,7 +25,7 @@ public abstract class GeburahEntityMixin extends FDLivingEntity {
     }
 
     @Override
-    protected void dropCustomDeathLoot(ServerLevel level, DamageSource damageSource, boolean recentlyHit) {
+    public void dropCustomDeathLoot(ServerLevel level, DamageSource damageSource, boolean recentlyHit) {
         super.dropCustomDeathLoot(level, damageSource, recentlyHit);
         GeburahEntity self = (GeburahEntity) (Object) this;
         if (ChestCavityUtil.getData(self).hasOrgan(FDBossesOrgans.GEBURAH.get())) {

@@ -25,7 +25,7 @@ public abstract class MalkuthEntityMixin extends FDMob {
     }
 
     @Override
-    protected void dropCustomDeathLoot(ServerLevel level, DamageSource damageSource, boolean recentlyHit) {
+    public void dropCustomDeathLoot(ServerLevel level, DamageSource damageSource, boolean recentlyHit) {
         super.dropCustomDeathLoot(level, damageSource, recentlyHit);
         MalkuthEntity self = (MalkuthEntity) (Object) this;
         if (ChestCavityUtil.getData(self).hasOrgan(FDBossesOrgans.MALKUTH.get())) {

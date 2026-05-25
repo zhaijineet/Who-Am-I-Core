@@ -24,7 +24,7 @@ public abstract class EntityWroughtnautMixin extends MowzieLLibraryEntity {
     }
 
     @Override
-    protected void dropAllDeathLoot(@NotNull ServerLevel level, @NotNull DamageSource source) {
+    public void dropAllDeathLoot(@NotNull ServerLevel level, @NotNull DamageSource source) {
         if (!this.dropAfterDeathAnim || this.deathTime > 0) {
             super.dropAllDeathLoot(level, source);
             spawnAtLocation(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());

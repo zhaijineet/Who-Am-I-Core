@@ -28,7 +28,7 @@ public abstract class DisappearAbilityMixin extends SimpleAnimationAbility<Entit
         method = "tickUsing",
         at = @At("RETURN")
     )
-    private void who_am_i_core$start(CallbackInfo ci) {
+    public void who_am_i_core$start(CallbackInfo ci) {
         if (getTicksInUse() == 60) {
             EntitySculptor sculptor = getUser();
             sculptor.spawnAtLocation(MowziesMobOrgans.ZEN_HEART.get().getDefaultInstance(), 1.2F);

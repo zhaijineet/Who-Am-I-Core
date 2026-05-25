@@ -24,8 +24,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -1009,52 +1007,9 @@ public class WAICOrganUtil {
 
     /**
      * 欺诈 modifier：过滤属性动态调整（基础 2 - N）
-     * 交易效果通过事件处理（CommonEventHandler 中 TradeWithVillagerEvent / PlayerContainerEvent）
      */
     public static void fraudModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         modifiers.put(InitAttribute.FILTRATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
-    }
-
-    /**
-     * 欺诈交易效果 - 交易完成时（在 TradeWithVillagerEvent 中调用）
-     * N≥1: 交易额外经验
-     * N≥3: 交易不缺货（重置使用次数）
-     */
-    public static void fraudTradeComplete(Player player, MerchantOffer offer) {
-        ChestCavityData data = ChestCavityUtil.getData(player);
-        if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return;
-        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
-
-        // 额外经验
-        player.giveExperiencePoints(offer.getXp() * 10);
-        if (n >= 3) {
-            // 不缺货：重置使用次数
-            offer.resetUses();
-        }
-    }
-
-    /**
-     * 欺诈交易打折（在 PlayerContainerEvent.Open 中调用）
-     * N≥2: 交易打折 30%×(N-1)
-     * <p>
-     * 仿照原版村庄英雄的打折方式：直接 addToSpecialPriceDiff 追加折扣。
-     * 原版在 startTrading 时已先 resetSpecialPrices 清零，再 updateSpecialPrices 施加声望/村庄英雄折扣，
-     * 此事件在之后触发，直接追加即可。关闭交易时由原版 resetSpecialPrices 自动还原。
-     * </p>
-     */
-    public static void fraudTradeDiscount(Player player, AbstractContainerMenu container) {
-        ChestCavityData data = ChestCavityUtil.getData(player);
-        if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return;
-        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
-        if (n < 2) return;
-
-        if (container instanceof MerchantMenu merchantMenu) {
-            double discountRate = 0.3 * (n - 1);
-            for (MerchantOffer offer : merchantMenu.getOffers()) {
-                int discount = (int) Math.floor(discountRate * offer.getBaseCostA().getCount());
-                offer.addToSpecialPriceDiff(-Math.max(discount, 1));
-            }
-        }
     }
 
     /**

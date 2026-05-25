@@ -7,9 +7,9 @@
     "ChesedEntityMixin",
     "ChesedMiniRayMixin",
     "ChestCavityDataMixin",
+    "DisappearAbilityMixin",
     "EnchantedCountIncreaseFunctionMixin",
     "EntityUmvuthanaFollowerToPlayerMixin",
-    "DisappearAbilityMixin",
     "EntityWroughtnautMixin",
     "GeburahEntityMixin",
     "ItemStackMixin",
@@ -18,8 +18,11 @@
     "MalkuthEntityMixin",
     "MalkuthWeaknessHandlerMixin",
     "MalkuthWeaknessOverlayMixin",
+    "MerchantContainerMixin",
+    "MerchantResultSlotMixin",
     "PlayerMixin",
-    "PoisonMobEffectMixin"
+    "PoisonMobEffectMixin",
+    "VillagerMixin"
   ],
   "client": [],
   "injectors": {

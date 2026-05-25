@@ -27,8 +27,6 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerPlayer$LevelChange);
         gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
         gameBus.addListener(CommonEventHandler::handlerCriticalHitEvent);
-        gameBus.addListener(CommonEventHandler::handlerTradeWithVillagerEvent);
-        gameBus.addListener(CommonEventHandler::handlerPlayerContainerEvent$Open);
         gameBus.addListener(CommonEventHandler::handlerPlayerInteract$RightClickBlock);
         gameBus.addListener(CommonEventHandler::handlerPlayerInteract$EntityInteract);
     }

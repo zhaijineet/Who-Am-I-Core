@@ -33,7 +33,7 @@ public class MalkuthCannonEntityMixin {
             target = "Lcom/finderfeed/fdbosses/content/entities/malkuth_boss/MalkuthWeaknessHandler;isWeakTo(Lnet/minecraft/world/entity/player/Player;Lcom/finderfeed/fdbosses/content/entities/malkuth_boss/MalkuthAttackType;)Z"
         )
     )
-    private boolean whoAmICore$allowImmuneToUseCannon(Player player, MalkuthAttackType attackType) {
+    public boolean whoAmICore$allowImmuneToUseCannon(Player player, MalkuthAttackType attackType) {
         if (MalkuthWeaknessHandler.isWeakTo(player, attackType)) return true;
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (attackType.isFire() && data.hasOrgan(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART.get())) return true;
