@@ -1,0 +1,13 @@
+{
+  "type": "anvilcraft:stamping",
+  "ingredients": [
+    {
+      "items": "chestcavitybeyond:chest_opener"
+    }
+  ],
+  "results": [
+    {
+      "id": "who_am_i_core:petite_chest_opener"
+    }
+  ]
+}

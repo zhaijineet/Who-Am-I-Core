@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-25T22:26:54.3077602	Recipes
+// 1.21.1	2026-05-26T19:24:46.6060808	Recipes
 d1d2752e553f8374331028ced3c2d764233a36be data/irons_spellbooks/recipe/alchemist_cauldron/fill_melt_gem_bucket.json
 b1632de4659bd654518ffe0f970514b1b3daa7d8 data/who_am_i_core/advancement/recipes/charged_muscle.json
 4e77929c5400324957b77d05f526d94f5bea7494 data/who_am_i_core/advancement/recipes/computing_core.json
@@ -37,6 +37,7 @@ babe0c791e13c4a38f4d8828c0c95b5234d35e51 data/who_am_i_core/advancement/recipes/
 db81f0cd11ce9d3b219519ffc2d2dc3cd4958970 data/who_am_i_core/advancement/recipes/misc/treachery.json
 574f55e700c2180b179c4ac16ea8e781c1887f1f data/who_am_i_core/advancement/recipes/misc/violence.json
 cd405856215c7bfeb223965f9fc9b3af722da15a data/who_am_i_core/advancement/recipes/misc/wrath.json
+5deb78751632c67a7d06dc31a66990de9de5e57b data/who_am_i_core/advancement/recipes/petite_chest_opener.json
 e61c2e66cf72e91cce2fe3c15d82631c7777469f data/who_am_i_core/advancement/recipes/squash.json
 9182846d32b62e8b54795312bf2a6199fcbdc8f7 data/who_am_i_core/advancement/recipes/transcendium_appendix.json
 15531912015706eea946e904528d477c14664ad9 data/who_am_i_core/advancement/recipes/transcendium_muscle.json
@@ -104,6 +105,7 @@ fdf998449806418b849ad8c86966901e8094d588 data/who_am_i_core/recipe/lesion_muscle
 85ece554df30f122d6f9bd3549b7b3f396333dda data/who_am_i_core/recipe/limbo.json
 0cc3c296bf18aaf51af1725add52bfa20e337bcb data/who_am_i_core/recipe/lust.json
 e8744e9a17306238f491a23db796942c5acb0575 data/who_am_i_core/recipe/palette.json
+689b6149d0998fec5d9dbceb255ecff561390964 data/who_am_i_core/recipe/petite_chest_opener.json
 23c6c364b7de7459f3178c473b0b4d763c8e7914 data/who_am_i_core/recipe/royal_steel_appendix.json
 9aba1843289d49c35136a308667629167b0b3f96 data/who_am_i_core/recipe/royal_steel_muscle.json
 ed3a1b48ff57f192ff59cdab5ef6e9c582bd4843 data/who_am_i_core/recipe/royal_steel_rib.json

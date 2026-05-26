@@ -19,6 +19,7 @@ import net.minecraft.world.level.ItemLike;
 import net.zhaiji.chestcavitybeyond.register.InitItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
+import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.concurrent.CompletableFuture;
@@ -39,6 +40,7 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
         cyberneticOrganRecipes(output);
         squashRecipe(output);
         lesionOrganRecipes(output);
+        petiteChestOpenerRecipe(output);
     }
 
     // 皇家钢器官
@@ -274,5 +276,13 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
             .result(result)
             .unlockedBy(getHasName(result), criterion)
             .save(output, WhoAmICore.of(getItemName(result)));
+    }
+
+    // 娇小开胸器：冲压开胸器 → 娇小开胸器
+    private void petiteChestOpenerRecipe(RecipeOutput output) {
+        StampingRecipe.builder()
+            .requires(InitItem.CHEST_OPENER.get())
+            .result(WAICItem.PETITE_CHEST_OPENER.get())
+            .save(output, WhoAmICore.of(getItemName(WAICItem.PETITE_CHEST_OPENER.get())));
     }
 }

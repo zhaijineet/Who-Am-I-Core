@@ -1594,6 +1594,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.MONSTROSITY, "Monstrosity");
         add(WAICItemTagManager.CAKE, "Cake");
         add(WAICItemTagManager.NINE_HELL, "Nine Hell");
+        add(WAICItemTagManager.QLIPHOTH, "Qliphoth");
     }
 
     private void addWAICTagTranslationsZH() {
@@ -1613,6 +1614,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.MONSTROSITY, "巨兽");
         add(WAICItemTagManager.CAKE, "蛋糕");
         add(WAICItemTagManager.NINE_HELL, "九狱");
+        add(WAICItemTagManager.QLIPHOTH, "逆卡巴拉");
     }
 
     // ==================== FDBosses 逆卡巴拉器官 ====================
