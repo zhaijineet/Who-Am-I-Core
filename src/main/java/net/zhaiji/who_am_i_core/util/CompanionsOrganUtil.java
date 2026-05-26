@@ -122,7 +122,7 @@ public class CompanionsOrganUtil {
         HolinessStartProjectile star = CompanionsEntities.HOLINESS_STAR.get().create(level);
         if (star == null) return false;
 
-        star.setPos(entity.getEyePosition());
+        star.setPos(entity.getEyePosition().add(0, -0.4, 0));
         star.setOwner(entity);
         star.setTarget(target);
         star.setRed(isPositiveTemp);

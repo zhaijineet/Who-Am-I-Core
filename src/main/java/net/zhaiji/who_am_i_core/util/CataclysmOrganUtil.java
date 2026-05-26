@@ -41,6 +41,7 @@ import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
+import net.zhaiji.who_am_i_core.task.DeathLensTask;
 
 
 public class CataclysmOrganUtil {
@@ -358,13 +359,16 @@ public class CataclysmOrganUtil {
             entity.getX(),
             entity.getEyeY() - 0.5,
             entity.getZ(),
-            entity.getYRot(),
-            entity.getXRot(),
+            (float) ((entity.yHeadRot + 90) * Math.PI / 180.0D),  // yaw：度→弧度，与 Harbinger/Prowler 一致
+            (float) (-entity.getXRot() * Math.PI / 180.0D),        // pitch：度→弧度
             12,    // duration：预热20tick后，12 tick 的活跃伤害窗口
             6.0F,          // damage：基础伤害
             6.0F           // Hpdamage：目标最大生命 6%（×0.01 后在内部使用）
         );
         level.addFreshEntity(laser);
+
+        // 通过 CCB Task 系统让激光跟随玩家位置和朝向
+        context.data().addTask(new DeathLensTask(laser));
 
         // 激光音效
         level.playSound(
