@@ -1,7 +1,6 @@
 package net.zhaiji.who_am_i_core.datagen.recipe;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;

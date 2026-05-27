@@ -29,7 +29,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
@@ -1035,7 +1034,7 @@ public class WAICOrganUtil {
         float percent = n >= 3 ? 0.09F : (n == 2 ? 0.04F : 0.01F);
         float bonusDamage = target.getMaxHealth() * percent;
         if (bonusDamage > 0) {
-            target.hurt(target.damageSources().mobAttack(context.entity()), bonusDamage);
+            damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
         }
     }
 

@@ -1,8 +1,8 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import io.redspace.ironsspellbooks.registries.EntityRegistry;
-import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.manager.ChestCavityTypeManager;

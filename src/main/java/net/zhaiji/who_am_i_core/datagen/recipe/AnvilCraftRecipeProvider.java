@@ -19,8 +19,8 @@ import net.minecraft.world.level.ItemLike;
 import net.zhaiji.chestcavitybeyond.register.InitItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
-import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICItem;
 
 import java.util.concurrent.CompletableFuture;
 

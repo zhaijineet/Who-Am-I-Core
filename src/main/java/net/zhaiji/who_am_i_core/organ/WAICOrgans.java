@@ -16,7 +16,6 @@ import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
-import net.zhaiji.who_am_i_core.item.ClothTeddyBearItem;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
 import net.zhaiji.who_am_i_core.register.WAICItem;

@@ -5,12 +5,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 
 import java.util.concurrent.CompletableFuture;
-
-import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 
 public class MowziesMobRecipeProvider extends RecipeProvider {
     public MowziesMobRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

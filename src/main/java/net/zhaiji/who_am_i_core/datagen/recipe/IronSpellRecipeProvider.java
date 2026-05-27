@@ -1,11 +1,11 @@
 package net.zhaiji.who_am_i_core.datagen.recipe;
 
+import com.github.tartaricacid.touhoulittlemaid.init.InitItems;
 import dev.dubhe.anvilcraft.init.block.ModFluids;
 import dev.dubhe.anvilcraft.init.item.ModItems;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.BrewAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.FillAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.registries.FluidRegistry;
-import com.github.tartaricacid.touhoulittlemaid.init.InitItems;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
