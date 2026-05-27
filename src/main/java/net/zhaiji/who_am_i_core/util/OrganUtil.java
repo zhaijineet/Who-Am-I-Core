@@ -185,8 +185,8 @@ public class OrganUtil {
      */
     public static boolean isInChest(LivingEntity entity, ItemStack stack) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        for (ItemStack organ : data.getOrgans()) {
-            if (organ == stack) {
+        for (int i = 0; i < data.getSlots(); i++) {
+            if (data.getStackInSlot(i) == stack) {
                 return true;
             }
         }
@@ -274,9 +274,9 @@ public class OrganUtil {
         if (!isIce && !isFire) return getOriginalTemperature(context.entity());
         double iceTotal = 0;
         double fireTotal = 0;
-        List<ItemStack> organs = context.data().getOrgans();
-        for (int slot = 0; slot < organs.size(); slot++) {
-            ItemStack stack = organs.get(slot);
+        int totalSlots = context.data().getSlots();
+        for (int slot = 0; slot < totalSlots; slot++) {
+            ItemStack stack = context.data().getStackInSlot(slot);
             ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
                 context.data(),
                 context.entity(),
@@ -315,7 +315,7 @@ public class OrganUtil {
     }
 
     private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {
-        ItemStack stack = context.data().getOrgans().get(slot);
+        ItemStack stack = context.data().getStackInSlot(slot);
         if (stack.isEmpty()) return 0;
         // 使用静态上下文，只读取 addValueAttribute 的静态温度值，不触发动态 modifier，避免递归
         ChestCavitySlotContext slotContext = new ChestCavitySlotContext(

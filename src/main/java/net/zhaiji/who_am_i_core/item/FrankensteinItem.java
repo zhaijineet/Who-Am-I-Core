@@ -131,7 +131,7 @@ public class FrankensteinItem extends BundleItem {
         // 更新器官属性
         ChestCavityData data = ChestCavityUtil.getData(player);
         int index = -1;
-        for (int i = 0; i < data.getOrgans().size(); i++) {
+        for (int i = 0; i < data.getSlots(); i++) {
             if (stack == data.getStackInSlot(i)) {
                 index = i;
             }

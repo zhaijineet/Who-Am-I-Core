@@ -206,7 +206,8 @@ public class WAICOrganUtil {
      */
     private static List<ItemStack> collectInkBottles(ChestCavityData data) {
         List<ItemStack> inkBottles = new ArrayList<>();
-        for (ItemStack organ : data.getOrgans()) {
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack organ = data.getStackInSlot(i);
             if (organ.is(WAICOrgans.INK_BOTTLE.get())) {
                 inkBottles.add(organ);
             }
@@ -259,14 +260,15 @@ public class WAICOrganUtil {
         Item targetDye = OrganUtil.getDyeItemForSchool(schoolType);
         if (targetDye == Items.AIR) return false;
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        for (ItemStack organ : data.getOrgans()) {
+        for (int i = 0; i < data.getSlots(); i++) {
+            ItemStack organ = data.getStackInSlot(i);
             if (organ.is(WAICOrgans.PALETTE.get())) {
                 BundleContents contents = organ.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
                 // 创建可变副本并找到染料索引
                 int targetIndex = -1;
-                for (int i = 0; i < contents.size(); i++) {
-                    if (contents.getItemUnsafe(i).is(targetDye)) {
-                        targetIndex = i;
+                for (int index = 0; index < contents.size(); index++) {
+                    if (contents.getItemUnsafe(index).is(targetDye)) {
+                        targetIndex = index;
                         break;
                     }
                 }
