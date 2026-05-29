@@ -116,106 +116,100 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 向墨水瓶插入墨水，多瓶依次填充
-     *
-     * @param data     胸腔数据
-     * @param amount   要插入的墨水量（必须 >= 0）
-     * @param capacity 墨水瓶容量
-     * @param simulate 是否模拟（true 时不修改数据）
-     * @return 实际插入量
+     * 获取墨水瓶容量 = 墨水器官数量 × 1000
      */
-    public static int insertInkToBottle(ChestCavityData data, int amount, int capacity, boolean simulate) {
-        if (amount <= 0 || capacity <= 0) return 0;
-        List<ItemStack> inkBottles = collectInkBottles(data);
-        if (inkBottles.isEmpty()) return 0;
-        int inserted = 0;
-        for (ItemStack inkBottle : inkBottles) {
-            CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-            CompoundTag tag = customData.copyTag();
-            int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
-            int space = Math.max(0, capacity - currentInk);
-            int toInsert = Math.max(0, Math.min(amount - inserted, space));
-            if (toInsert == 0) continue;
-            if (!simulate) {
-                tag.putInt("ink", currentInk + toInsert);
-                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-            }
-            inserted += toInsert;
-            if (inserted >= amount) break;
-        }
-        return inserted;
+    public static int getInkCapacity(ChestCavityData data) {
+        return data.getOrganCount(WAICItemTagManager.INK) * 1000;
     }
 
     /**
-     * 向墨水瓶插入墨水，默认容量 1000
-     *
-     * @param data     胸腔数据
-     * @param amount   要插入的墨水量（必须 >= 0）
-     * @param simulate 是否模拟
-     * @return 实际插入量
+     * 获取胸腔中第一个墨水瓶，未找到则返回 ItemStack.EMPTY
      */
-    public static int insertInkToBottle(ChestCavityData data, int amount, boolean simulate) {
-        return insertInkToBottle(data, amount, 1000, simulate);
-    }
-
-    /**
-     * 从墨水瓶抽取墨水，多瓶依次抽取
-     *
-     * @param data     胸腔数据
-     * @param amount   要抽取的墨水量（必须 >= 0）
-     * @param capacity 墨水瓶容量
-     * @param simulate 是否模拟（true 时不修改数据）
-     * @return 实际抽取量
-     */
-    public static int extractInkToBottle(ChestCavityData data, int amount, int capacity, boolean simulate) {
-        if (amount <= 0) return 0;
-        List<ItemStack> inkBottles = collectInkBottles(data);
-        if (inkBottles.isEmpty()) return 0;
-        int extracted = 0;
-        for (ItemStack inkBottle : inkBottles) {
-            CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-            CompoundTag tag = customData.copyTag();
-            int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
-            int toExtract = Math.max(0, Math.min(amount - extracted, currentInk));
-            if (toExtract == 0) continue;
-            if (!simulate) {
-                tag.putInt("ink", currentInk - toExtract);
-                inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-            }
-            extracted += toExtract;
-            if (extracted >= amount) break;
-        }
-        return extracted;
-    }
-
-    /**
-     * 从墨水瓶抽取墨水，默认容量 1000
-     *
-     * @param data     胸腔数据
-     * @param amount   要抽取的墨水量（必须 >= 0）
-     * @param simulate 是否模拟
-     * @return 实际抽取量
-     */
-    public static int extractInkToBottle(ChestCavityData data, int amount, boolean simulate) {
-        return extractInkToBottle(data, amount, 1000, simulate);
-    }
-
-    /**
-     * 收集胸腔中所有墨水瓶物品
-     */
-    private static List<ItemStack> collectInkBottles(ChestCavityData data) {
-        List<ItemStack> inkBottles = new ArrayList<>();
+    private static ItemStack getFirstInkBottle(ChestCavityData data) {
         for (int i = 0; i < data.getSlots(); i++) {
             ItemStack organ = data.getStackInSlot(i);
             if (organ.is(WAICOrgans.INK_BOTTLE.get())) {
-                inkBottles.add(organ);
+                return organ;
             }
         }
-        return inkBottles;
+        return ItemStack.EMPTY;
     }
 
     /**
-     * 饮用墨水，最高存储1000点
+     * 向墨水瓶插入墨水，只操作第一个检测到的墨水瓶，容量为墨水器官数量×1000
+     *
+     * @param data     胸腔数据
+     * @param amount   要插入的墨水量（必须 >= 0）
+     * @param simulate 是否模拟（true 时不修改数据）
+     * @return 实际插入量
+     */
+    public static int insertInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+        if (amount <= 0) return 0;
+        int capacity = getInkCapacity(data);
+        if (capacity <= 0) return 0;
+        ItemStack inkBottle = getFirstInkBottle(data);
+        if (inkBottle.isEmpty()) return 0;
+        CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = customData.copyTag();
+        int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+        int space = Math.max(0, capacity - currentInk);
+        int toInsert = Math.max(0, Math.min(amount, space));
+        if (toInsert > 0 && !simulate) {
+            tag.putInt("ink", currentInk + toInsert);
+            inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        }
+        return toInsert;
+    }
+
+    /**
+     * 从墨水瓶抽取墨水，只操作第一个检测到的墨水瓶
+     *
+     * @param data     胸腔数据
+     * @param amount   要抽取的墨水量（必须 >= 0）
+     * @param simulate 是否模拟（true 时不修改数据）
+     * @return 实际抽取量
+     */
+    public static int extractInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+        if (amount <= 0) return 0;
+        ItemStack inkBottle = getFirstInkBottle(data);
+        if (inkBottle.isEmpty()) return 0;
+        CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = customData.copyTag();
+        int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+        int toExtract = Math.max(0, Math.min(amount, currentInk));
+        if (toExtract > 0 && !simulate) {
+            tag.putInt("ink", currentInk - toExtract);
+            inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        }
+        return toExtract;
+    }
+
+    /**
+     * 墨水瓶：其他器官变化时，检查墨水是否超出容量，超出则截断
+     *
+     * @param context      墨水瓶自身的上下文
+     * @param changedIndex 变化的器官槽位索引
+     * @param oldStack     旧器官
+     * @param newStack     新器官
+     */
+    public static void inkBottleOtherOrganChange(ChestCavitySlotContext context, int changedIndex, ItemStack oldStack, ItemStack newStack) {
+        boolean oldIsInk = oldStack.is(WAICItemTagManager.INK);
+        boolean newIsInk = newStack.is(WAICItemTagManager.INK);
+        if (oldIsInk == newIsInk) return;
+        ChestCavityData data = context.data();
+        int capacity = getInkCapacity(data);
+        ItemStack inkBottle = context.stack();
+        CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = customData.copyTag();
+        int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+        if (currentInk > capacity) {
+            tag.putInt("ink", capacity);
+            inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+        }
+    }
+
+    /**
+     * 饮用墨水，容量为墨水器官数量×1000
      */
     public static ItemStack drinkInk(LivingEntity entity, ItemStack stack, UseCondition condition) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
@@ -281,7 +275,7 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 墨水肌肉技能：挨打时为墨水瓶添加墨水
+     * 墨水肌肉技能：挨打时为墨水瓶添加墨水（伤害值的10倍）
      *
      * @param context         胸腔槽位上下文
      * @param source          伤害源
@@ -291,7 +285,7 @@ public class WAICOrganUtil {
         if (OrganUtil.isSelfDamage(context.entity(), source)) return;
         float damage = damageContainer.getNewDamage();
         if (damage <= 0) return;
-        insertInkToBottle(context.data(), (int) damage, false);
+        insertInkToBottle(context.data(), (int) (damage * 10), false);
     }
 
     /**
@@ -456,17 +450,38 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 猩红心脏安装：增加 100 点血液上限
+     * 猩红心脏被动：器官变化时更新血液容量
+     * <p>
+     * 血液容量增量 = 猩红器官数量 × 100
+     * 使用先减旧值再加新值的增量方式
+     * </p>
+     *
+     * @param data     胸腔数据
+     * @param entity   实体
+     * @param oldStack 变化前的器官
+     * @param newStack 变化后的器官
      */
-    public static void crimsonHeartAdded(ChestCavitySlotContext context) {
-        HumoursData.addMaxBlood(context.entity(), 100);
-    }
-
-    /**
-     * 猩红心脏移除：收回 100 点血液上限
-     */
-    public static void crimsonHeartRemoved(ChestCavitySlotContext context) {
-        HumoursData.addMaxBlood(context.entity(), -100);
+    public static void crimsonHeartOrganChange(ChestCavityData data, LivingEntity entity, ItemStack oldStack, ItemStack newStack) {
+        boolean oldIsCrimson = oldStack.is(WAICItemTagManager.CRIMSON);
+        boolean newIsCrimson = newStack.is(WAICItemTagManager.CRIMSON);
+        if (!oldIsCrimson && !newIsCrimson) return;
+        // 变化后猩红器官数量（数据已更新）
+        int crimsonCountAfter = data.getOrganCount(WAICItemTagManager.CRIMSON);
+        // 变化前猩红器官数量 = 变化后 - 新增 + 移除
+        int crimsonCountBefore = crimsonCountAfter - (newIsCrimson ? 1 : 0) + (oldIsCrimson ? 1 : 0);
+        // 变化后是否有心脏
+        boolean hasHeartAfter = data.hasOrgan(WAICOrgans.CRIMSON_HEART.get());
+        boolean oldIsHeart = oldStack.is(WAICOrgans.CRIMSON_HEART.get());
+        boolean newIsHeart = newStack.is(WAICOrgans.CRIMSON_HEART.get());
+        // 变化前是否有心脏：变后有则除非本次新增，变后无则只有本次移除
+        boolean hasHeartBefore = hasHeartAfter ? !newIsHeart : oldIsHeart;
+        // 先减旧容量，再加新容量
+        int bonusBefore = hasHeartBefore ? crimsonCountBefore * 100 : 0;
+        int bonusAfter = hasHeartAfter ? crimsonCountAfter * 100 : 0;
+        int delta = bonusAfter - bonusBefore;
+        if (delta != 0) {
+            HumoursData.addMaxBlood(entity, delta);
+        }
     }
 
     /**

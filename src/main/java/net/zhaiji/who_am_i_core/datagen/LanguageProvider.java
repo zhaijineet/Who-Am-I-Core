@@ -676,7 +676,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.INK_MUSCLE, "Ink Muscle");
         addOrganDescription(WAICOrgans.INK_MUSCLE, "Muscle fibers steeped in dark ink");
-        addOrganPassiveEffect(WAICOrgans.INK_MUSCLE, "When damaged, adds ink equal to the damage taken into the Ink Bottle");
+        addOrganPassiveEffect(WAICOrgans.INK_MUSCLE, "When damaged, adds ink equal to 10 times the damage taken into the Ink Bottle");
 
         addItem(WAICOrgans.INK_APPENDIX, "Ink Appendix");
         addOrganDescription(WAICOrgans.INK_APPENDIX, "A vestigial organ darkened by ink");
@@ -684,8 +684,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.INK_BOTTLE, "Ink Bottle");
         addOrganDescription(WAICOrgans.INK_BOTTLE, "A glass vessel filled with dark, viscous ink");
-        addOrganPassiveEffect(WAICOrgans.INK_BOTTLE, "Stores ink");
-        add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "Ink: %s/1000");
+        addOrganPassiveEffect(WAICOrgans.INK_BOTTLE, "Can drink ink and store it, each ink organ in the chest cavity adds 1000 to ink capacity");
+        add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "Ink: %s/%s");
 
         addItem(WAICOrgans.NIB, "Nib");
         addOrganDescription(WAICOrgans.NIB, "A precision-crafted pen tip");
@@ -710,7 +710,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.INK_MUSCLE, "墨水肌肉");
         addOrganDescription(WAICOrgans.INK_MUSCLE, "浸泡在浓墨中的肌肉纤维");
-        addOrganPassiveEffect(WAICOrgans.INK_MUSCLE, "受到伤害时，将等同于伤害值的墨水注入墨水瓶");
+        addOrganPassiveEffect(WAICOrgans.INK_MUSCLE, "受到伤害时，将等同于伤害值10倍的墨水注入墨水瓶");
 
         addItem(WAICOrgans.INK_APPENDIX, "墨水阑尾");
         addOrganDescription(WAICOrgans.INK_APPENDIX, "一根被墨水浸染的退化器官");
@@ -718,8 +718,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.INK_BOTTLE, "墨水瓶");
         addOrganDescription(WAICOrgans.INK_BOTTLE, "盛满深黑粘稠墨水的玻璃容器");
-        addOrganPassiveEffect(WAICOrgans.INK_BOTTLE, "储存墨水");
-        add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "墨水: %s/1000");
+        addOrganPassiveEffect(WAICOrgans.INK_BOTTLE, "可以饮用墨水并储存，胸腔内每有一个墨水器官+1000容量上限");
+        add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "墨水: %s/%s");
 
         addItem(WAICOrgans.NIB, "钢笔尖");
         addOrganDescription(WAICOrgans.NIB, "一枚精密打磨的笔尖");
@@ -1098,7 +1098,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_HEART, "Crimson Heart");
         addOrganPassiveEffect(
             WAICOrgans.CRIMSON_HEART,
-            "+100 blood capacity",
+            "Each crimson organ in chest cavity grants +100 blood capacity",
             "Converts healing into blood storage at 5× rate"
         );
         addItem(WAICOrgans.CRIMSON_LUNG, "Crimson Lung");
@@ -1109,7 +1109,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_LIVER, "Crimson Liver");
         addOrganPassiveEffect(
             WAICOrgans.CRIMSON_LIVER,
-            "Consumes 10 blood when casting blood spells to increase spell level by 2"
+            "Consumes 10 blood when casting blood spells to increase spell level by 1"
         );
         addItem(WAICOrgans.CRIMSON_APPENDIX, "Crimson Appendix");
         addOrganActiveSkill(
@@ -1125,7 +1125,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_HEART, "猩红心脏");
         addOrganPassiveEffect(
             WAICOrgans.CRIMSON_HEART,
-            "+100 血液上限",
+            "胸腔内每有一个猩红器官+100血液上限",
             "将治疗量以5倍比率转化为血液存储"
         );
         addItem(WAICOrgans.CRIMSON_LUNG, "猩红肺脏");
@@ -1136,7 +1136,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_LIVER, "猩红肝脏");
         addOrganPassiveEffect(
             WAICOrgans.CRIMSON_LIVER,
-            "释放猩红法术时，消耗10点血液，使法术等级+2"
+            "释放猩红法术时，消耗10点血液，使法术等级+1"
         );
         addItem(WAICOrgans.CRIMSON_APPENDIX, "猩红阑尾");
         addOrganActiveSkill(
@@ -1588,7 +1588,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.FIRE, "Fire");
         add(WAICItemTagManager.ICE, "Ice");
         add(WAICItemTagManager.LESION, "Lesion");
+        add(WAICItemTagManager.CRIMSON, "Crimson");
         add(WAICItemTagManager.CURSED, "Cursed");
+        add(WAICItemTagManager.INK, "Ink");
         add(WAICItemTagManager.EMBER, "Ember");
         add(WAICItemTagManager.CLOTH, "Cloth");
         add(WAICItemTagManager.MONSTROSITY, "Monstrosity");
@@ -1608,7 +1610,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.FIRE, "炽焰");
         add(WAICItemTagManager.ICE, "冰霜");
         add(WAICItemTagManager.LESION, "病变");
+        add(WAICItemTagManager.CRIMSON, "猩红");
         add(WAICItemTagManager.CURSED, "诅咒");
+        add(WAICItemTagManager.INK, "墨水");
         add(WAICItemTagManager.EMBER, "余烬");
         add(WAICItemTagManager.CLOTH, "布织");
         add(WAICItemTagManager.MONSTROSITY, "巨兽");

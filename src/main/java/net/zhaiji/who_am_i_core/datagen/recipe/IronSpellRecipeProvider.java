@@ -76,6 +76,15 @@ public class IronSpellRecipeProvider extends RecipeProvider {
 
     // 墨水器官：对应物品 + 1000mb 普通墨水 → 墨水器官
     private void inkOrganRecipes(RecipeOutput output) {
+        brewInk(output, InitItem.HEART.get(), WAICOrgans.INK_HEART.get());
+        brewInk(output, InitItem.LUNG.get(), WAICOrgans.INK_LUNG.get());
+        brewInk(output, InitItem.SPINE.get(), WAICOrgans.INK_SPINE.get());
+        brewInk(output, InitItem.STOMACH.get(), WAICOrgans.INK_STOMACH.get());
+        brewInk(output, InitItem.INTESTINE.get(), WAICOrgans.INK_INTESTINE.get());
+        brewInk(output, InitItem.KIDNEY.get(), WAICOrgans.INK_KIDNEY.get());
+        brewInk(output, InitItem.SPLEEN.get(), WAICOrgans.INK_SPLEEN.get());
+        brewInk(output, InitItem.LIVER.get(), WAICOrgans.INK_LIVER.get());
+        brewInk(output, InitItem.RIB.get(), WAICOrgans.INK_RIB.get());
         brewInk(output, InitItem.APPENDIX.get(), WAICOrgans.INK_APPENDIX.get());
         brewInk(output, InitItem.MUSCLE.get(), WAICOrgans.INK_MUSCLE.get());
         brewInk(output, ItemRegistry.ARCANE_INGOT.get(), WAICOrgans.NIB.get());

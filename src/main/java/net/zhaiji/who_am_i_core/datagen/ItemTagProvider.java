@@ -377,6 +377,22 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.INK_MUSCLE.get());
         tag(ItemTagManager.APPENDIX).add(WAICOrgans.INK_APPENDIX.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.INK_BOTTLE.get());
+        tag(WAICItemTagManager.UNIQUE).add(WAICOrgans.INK_BOTTLE.get());
+        tag(WAICItemTagManager.INK).add(
+            WAICOrgans.INK_HEART.get(),
+            WAICOrgans.INK_LUNG.get(),
+            WAICOrgans.INK_SPINE.get(),
+            WAICOrgans.INK_STOMACH.get(),
+            WAICOrgans.INK_INTESTINE.get(),
+            WAICOrgans.INK_KIDNEY.get(),
+            WAICOrgans.INK_SPLEEN.get(),
+            WAICOrgans.INK_LIVER.get(),
+            WAICOrgans.INK_RIB.get(),
+            WAICOrgans.INK_MUSCLE.get(),
+            WAICOrgans.INK_APPENDIX.get(),
+            WAICOrgans.INK_BOTTLE.get(),
+            WAICOrgans.NIB.get()
+        );
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.NIB.get());
         tag(WAICItemTagManager.UNIQUE).add(WAICOrgans.NIB.get());
         tag(WAICItemTagManager.MAGIC).add(WAICOrgans.NIB.get());
@@ -454,6 +470,17 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
     // ==================== 猩红器官 ====================
 
     private void crimsonOrgansTags() {
+        tag(WAICItemTagManager.CRIMSON).add(
+            WAICOrgans.CRIMSON_HEART.get(),
+            WAICOrgans.CRIMSON_LUNG.get(),
+            WAICOrgans.CRIMSON_STOMACH.get(),
+            WAICOrgans.CRIMSON_INTESTINE.get(),
+            WAICOrgans.CRIMSON_KIDNEY.get(),
+            WAICOrgans.CRIMSON_SPLEEN.get(),
+            WAICOrgans.CRIMSON_LIVER.get(),
+            WAICOrgans.CRIMSON_APPENDIX.get(),
+            WAICOrgans.CRIMSON_MUSCLE.get()
+        );
         tag(ItemTagManager.ORGANS).add(
             WAICOrgans.CRIMSON_HEART.get(),
             WAICOrgans.CRIMSON_LUNG.get(),

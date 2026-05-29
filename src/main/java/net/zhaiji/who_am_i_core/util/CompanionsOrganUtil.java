@@ -14,7 +14,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,8 +45,7 @@ public class CompanionsOrganUtil {
     public static void pontiffHeartHurt(ChestCavitySlotContext context, DamageSource damageSource, DamageContainer damageContainer) {
         LivingEntity entity = context.entity();
         if (OrganUtil.isSelfDamage(entity, damageSource)) return;
-        if (!(entity instanceof Player player)) return;
-        if (OrganSkillUtil.hasCooldown(player, context.stack())) return;
+        if (OrganSkillUtil.hasCooldown(entity, context.stack())) return;
         if (entity.getHealth() > entity.getMaxHealth() * 0.3F) return;
         // 触发圣化变身
         entity.heal(entity.getMaxHealth() * 0.5F);
@@ -56,7 +54,7 @@ public class CompanionsOrganUtil {
         entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 1));
 
         // 设置 3 分钟冷却
-        OrganSkillUtil.addCooldown(player, context.stack(), 3 * 60 * 20);
+        OrganSkillUtil.addCooldown(entity, context.stack(), 3 * 60 * 20);
     }
 
     /**

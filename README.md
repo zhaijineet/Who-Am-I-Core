@@ -10,7 +10,7 @@
 - **ModDevGradle**：2.0.140
 - **Parchment Mappings**：2024.11.17
 - **Java**：21
-- **版本**：1.0.2
+- **版本**：1.0.5
 
 前置模组：**Chest Cavity Beyond**（胸腔：超越），本模组为 CCB 的 Addon，核心机制是为不提供胸腔的原版/其他 mod 的生物添加可植入胸腔的器官。
 
@@ -266,7 +266,7 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 - **MAGIC** — 魔法器官（经验之心倍率、胸中新星不烧毁）
 - **MECHANICAL** — 机械器官（胸中新星不烧毁）
 - **SUMMON** — 召唤类
-- **UNIQUE** — 唯一被动
+- **UNIQUE** — 唯一
 - **FIRE_DRAGON** / **ICE_DRAGON** / **LIGHTNING_DRAGON** — 龙种聚合标签
 - **FIRE** — 炽焰元素（火龙 + 余烬金属 + 火焰王国）
 - **ICE** — 冰霜元素（冰龙 + 悚怖 + 浮霜 + 冰霜王国）

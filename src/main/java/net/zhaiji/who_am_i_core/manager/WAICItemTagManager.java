@@ -27,6 +27,10 @@ public class WAICItemTagManager {
     public static final TagKey<Item> ICE = register("ice", 0xFF00AAAA, 49);
     // 病变
     public static final TagKey<Item> LESION = register("lesion", 0xFF00AA00, 40);
+    // 猩红
+    public static final TagKey<Item> CRIMSON = register("crimson", 0xFFAA0000, 35);
+    // 墨水
+    public static final TagKey<Item> INK = register("ink", 0xFFC20060, 34);
     // 诅咒
     public static final TagKey<Item> CURSED = register("cursed", 0xFFFFAA00, 30);
     // 余烬

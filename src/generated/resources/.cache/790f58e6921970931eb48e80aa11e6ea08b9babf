@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-25T22:18:38.1962048	Tags for minecraft:item mod id who_am_i_core
+// 1.21.1	2026-05-30T03:18:33.9164186	Tags for minecraft:item mod id who_am_i_core
 ffbd0b58b3eeefed73caa7615dfa32ab780bdd2d data/chestcavitybeyond/tags/item/chest_openers.json
 6417928cfffdd9bef3f5ba246f3bcc5b4c72c869 data/chestcavitybeyond/tags/item/organs.json
 46c8b37880a5298aad4002ffb40e3b9e18454de6 data/chestcavitybeyond/tags/item/organs/appendix.json
@@ -15,12 +15,14 @@ b61588664539244df75fa8ae4b34e2932cb2d4b0 data/chestcavitybeyond/tags/item/organs
 b0c1deec93d058cb28041c7880b528ebb02b4c13 data/chestcavitybeyond/tags/item/organs/stomach.json
 effdba38003716dca40d0d8565679213f0ea5029 data/who_am_i_core/tags/item/cake.json
 7128c238f0d592f33d0babe706d137c21cc57962 data/who_am_i_core/tags/item/cloth.json
+382a87670c665e9d2002b8e2fb480a0ccf12921e data/who_am_i_core/tags/item/crimson.json
 c32e751c738f189df5c2ce1d19404ff77b0d71d6 data/who_am_i_core/tags/item/cursed.json
 7534deac0d70469aba09c3439711a804dfdfd25c data/who_am_i_core/tags/item/ember.json
 dd13b5ec85aa98d74ae38cd1451315a23e1cf1c8 data/who_am_i_core/tags/item/fire.json
 6c66b2e63efb93ea3f728d284a4e2aac251c1870 data/who_am_i_core/tags/item/fire_dragon.json
 bac8b8752b9ce3cb690854583dd00e793e81ce0d data/who_am_i_core/tags/item/ice.json
 037474d4e6d328bfe54a10e52940d00546ee3060 data/who_am_i_core/tags/item/ice_dragon.json
+4f7d19019ad339b7135a09163f5eb14b3cd11591 data/who_am_i_core/tags/item/ink.json
 4470346b3c65a66522318aca29d2d07e774009e4 data/who_am_i_core/tags/item/lesion.json
 bbbdafc91bf753f51db26c93e4c6d8768f3abadf data/who_am_i_core/tags/item/lightning_dragon.json
 1f869b48c725db8d37d08a85b897b2da07d828fc data/who_am_i_core/tags/item/magic.json
@@ -29,4 +31,4 @@ b8c1bb4184284d1d541fe7d0928fcd8716051655 data/who_am_i_core/tags/item/monstrosit
 2b2f1773c3231d50468f824f15699129132188f7 data/who_am_i_core/tags/item/nine_hell.json
 09d30f5459d30978a3aff76cb0687906139e2c7f data/who_am_i_core/tags/item/qliphoth.json
 c1e793e55c2c391a64d272d8e779e19d6d538f77 data/who_am_i_core/tags/item/summon.json
-19bf96a5a065766a8bd06459a2d607a93fa789df data/who_am_i_core/tags/item/unique.json
+f87bd67518489e7d8b36b5b28c878523eedeeb3a data/who_am_i_core/tags/item/unique.json

@@ -72,7 +72,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_HEART = WAICItem.ITEM.register(
         "ink_heart",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.HEALTH, 1.25)
             .build()
     );
 
@@ -80,7 +80,9 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_LUNG = WAICItem.ITEM.register(
         "ink_lung",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.25)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.25)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.25)
             .build()
     );
 
@@ -88,7 +90,8 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_SPINE = WAICItem.ITEM.register(
         "ink_spine",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.NERVES, 1.25)
+            .addValueAttribute(InitAttribute.DEFENSE, 0.625)
             .build()
     );
 
@@ -96,7 +99,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_STOMACH = WAICItem.ITEM.register(
         "ink_stomach",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.DIGESTION, 1.25)
             .build()
     );
 
@@ -104,7 +107,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_INTESTINE = WAICItem.ITEM.register(
         "ink_intestine",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.NUTRITION, 1.25)
             .build()
     );
 
@@ -112,7 +115,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_KIDNEY = WAICItem.ITEM.register(
         "ink_kidney",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.FILTRATION, 1.25)
             .build()
     );
 
@@ -120,7 +123,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_SPLEEN = WAICItem.ITEM.register(
         "ink_spleen",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.METABOLISM, 1.25)
             .build()
     );
 
@@ -128,7 +131,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_LIVER = WAICItem.ITEM.register(
         "ink_liver",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 1.25)
             .build()
     );
 
@@ -136,7 +139,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_RIB = WAICItem.ITEM.register(
         "ink_rib",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.UNFINISHED_TOOLTIP)
+            .addValueAttribute(InitAttribute.DEFENSE, 1.25)
             .build()
     );
 
@@ -144,13 +147,16 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_BOTTLE = WAICItem.ITEM.register(
         "ink_bottle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 1)
+            .addValueAttribute(AttributeRegistry.MAX_MANA, 100)
+            .otherChange(WAICOrganUtil::inkBottleOtherOrganChange)
             .tooltip(OrganTooltip.builder()
                 .afterPassiveEffect((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
+                    if (index == -1) return List.of();
                     CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
                     int value = tag.contains("ink") ? tag.getInt("ink") : 0;
+                    int capacity = WAICOrganUtil.getInkCapacity(data);
                     return List.of(Component.literal(TooltipUtil.DEFAULT_PREFIX)
-                        .append(Component.translatable(INK_BOTTLE_INK_TRANSLATION, value)));
+                        .append(Component.translatable(INK_BOTTLE_INK_TRANSLATION, value, capacity)));
                 })
                 .build()
             )
@@ -161,7 +167,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_APPENDIX = WAICItem.ITEM.register(
         "ink_appendix",
         () -> Organ.builder()
-            .addValueAttribute(Attributes.LUCK, 1)
+            .addValueAttribute(Attributes.LUCK, 1.25)
             .skill(WAICOrganUtil::inkAppendixSkill)
             .cooldown(20 * 10)
             .build()
@@ -171,8 +177,8 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_MUSCLE = WAICItem.ITEM.register(
         "ink_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 1)
-            .addValueAttribute(InitAttribute.SPEED, 1)
+            .addValueAttribute(InitAttribute.STRENGTH, 1.25)
+            .addValueAttribute(InitAttribute.SPEED, 1.25)
             .hurt(WAICOrganUtil::inkMuscleSkill)
             .build()
     );
@@ -844,8 +850,6 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(AttributeRegistry.BLOOD_SPELL_POWER, 1)
             .heal(WAICOrganUtil::crimsonHeartHeal)
-            .added(WAICOrganUtil::crimsonHeartAdded)
-            .removed(WAICOrganUtil::crimsonHeartRemoved)
             .build()
     );
 

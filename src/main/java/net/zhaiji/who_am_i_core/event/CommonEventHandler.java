@@ -157,16 +157,19 @@ public class CommonEventHandler {
     }
 
     /**
-     * 当胸腔中的器官被移除时，检查是否是乌姆塔纳面具
-     * 如果是，通知对应的任务移除召唤的生物
+     * 器官更换事件处理
      */
     public static void handlerOrganChangeEvent(OrganChangeEvent event) {
         if (event.getEntity().level().isClientSide()) return;
-        // 检查被移除的是否是乌姆塔纳面具
-        if (!(event.getOldStack().getItem() instanceof ItemUmvuthanaMask)) return;
-        // 通知 ChestNovaTask 移除对应槽位的生物
-        event.getData().getFirstTaskIf(task -> task instanceof ChestNovaTask)
-            .ifPresent(task -> ((ChestNovaTask) task).onMaskRemoved(event.getIndex()));
+
+        // 乌姆塔纳面具移除通知
+        if (event.getOldStack().getItem() instanceof ItemUmvuthanaMask) {
+            event.getData().getFirstTaskIf(task -> task instanceof ChestNovaTask)
+                .ifPresent(task -> ((ChestNovaTask) task).onMaskRemoved(event.getIndex()));
+        }
+
+        // 猩红心脏被动：血液容量 = 猩红器官数量 × 100
+        WAICOrganUtil.crimsonHeartOrganChange(event.getData(), event.getEntity(), event.getOldStack(), event.getNewStack());
     }
 
     /**
@@ -330,7 +333,7 @@ public class CommonEventHandler {
         if (data.hasOrgan(WAICOrgans.CRIMSON_LIVER.get())) {
             if (event.getSchoolType() == SchoolRegistry.BLOOD.get()) {
                 if (HumoursData.extractBlood(entity, 10, false) >= 10) {
-                    event.setSpellLevel(event.getSpellLevel() + 2);
+                    event.setSpellLevel(event.getSpellLevel() + 1);
                 }
             }
         }
