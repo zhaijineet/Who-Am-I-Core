@@ -18,16 +18,15 @@ public class MowziesMobRecipeProvider extends RecipeProvider {
 
     @Override
     public void buildRecipes(RecipeOutput recipeOutput) {
-        // 制御棒：胸中新星 + 铅锭（辐射屏蔽）+ 钨锭（高熔点外壳）+ 电路板（控制逻辑）
+        // 制御棒：铅锭（辐射屏蔽）+ 钨锭（高熔点外壳）+ 电路板（控制逻辑）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MowziesMobOrgans.CONTROL_ROD.get())
-            .pattern("L L")
-            .pattern("TNT")
+            .pattern(" T ")
             .pattern("LCL")
-            .define('N', MowziesMobOrgans.CHEST_NOVA.get())
+            .pattern(" T ")
             .define('C', ModItems.CIRCUIT_BOARD)
             .define('T', ModItems.TUNGSTEN_INGOT)
             .define('L', ModItems.LEAD_INGOT)
-            .unlockedBy(getHasName(MowziesMobOrgans.CHEST_NOVA.get()), has(MowziesMobOrgans.CHEST_NOVA.get()))
+            .unlockedBy(getHasName(ModItems.CIRCUIT_BOARD), has(ModItems.CIRCUIT_BOARD))
             .save(recipeOutput);
     }
 }

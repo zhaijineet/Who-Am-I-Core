@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chest_nova": {
+    "has_circuit_board": {
       "conditions": {
         "items": [
           {
-            "items": "who_am_i_core:chest_nova"
+            "items": "anvilcraft:circuit_board"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_chest_nova"
+      "has_circuit_board"
     ]
   ],
   "rewards": {

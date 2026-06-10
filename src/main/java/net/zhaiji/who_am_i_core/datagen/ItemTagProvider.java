@@ -128,6 +128,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(MowziesMobOrgans.AGED_HEART.get());
         tag(ItemTagManager.LUNG).add(MowziesMobOrgans.AGED_LUNG.get());
         tag(ItemTagManager.SPINE).add(MowziesMobOrgans.AGED_SPINE.get());
+        tag(ItemTagManager.BONE).add(MowziesMobOrgans.AGED_SPINE.get());
         tag(ItemTagManager.STOMACH).add(MowziesMobOrgans.AGED_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(MowziesMobOrgans.AGED_INTESTINE.get());
         tag(ItemTagManager.KIDNEY).add(MowziesMobOrgans.AGED_KIDNEY.get());
@@ -135,6 +136,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.LIVER).add(MowziesMobOrgans.AGED_LIVER.get());
         tag(ItemTagManager.APPENDIX).add(MowziesMobOrgans.AGED_APPENDIX.get());
         tag(ItemTagManager.RIB).add(MowziesMobOrgans.AGED_RIB.get());
+        tag(ItemTagManager.BONE).add(MowziesMobOrgans.AGED_RIB.get());
         tag(ItemTagManager.MUSCLE).add(MowziesMobOrgans.AGED_MUSCLE.get());
     }
 
@@ -161,6 +163,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(IceAndFireOrgans.FIRE_DRAGON_HEART.get());
         tag(ItemTagManager.LUNG).add(IceAndFireOrgans.FIRE_DRAGON_LUNG.get());
         tag(ItemTagManager.SPINE).add(IceAndFireOrgans.FIRE_DRAGON_SPINE.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.FIRE_DRAGON_SPINE.get());
         tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.FIRE_DRAGON_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.FIRE_DRAGON_INTESTINE.get());
         tag(ItemTagManager.KIDNEY).add(IceAndFireOrgans.FIRE_DRAGON_KIDNEY.get());
@@ -170,6 +173,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(WAICItemTagManager.MAGIC).add(IceAndFireOrgans.FIRE_DRAGON_GEM.get());
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC.get());
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.FIRE_DRAGON_RIB.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.FIRE_DRAGON_RIB.get());
         tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.FIRE_DRAGON_MUSCLE.get());
         tag(WAICItemTagManager.FIRE).add(
             IceAndFireOrgans.FIRE_DRAGON_HEART.get(),
@@ -218,6 +222,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(IceAndFireOrgans.ICE_DRAGON_HEART.get());
         tag(ItemTagManager.LUNG).add(IceAndFireOrgans.ICE_DRAGON_LUNG.get());
         tag(ItemTagManager.SPINE).add(IceAndFireOrgans.ICE_DRAGON_SPINE.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.ICE_DRAGON_SPINE.get());
         tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.ICE_DRAGON_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.ICE_DRAGON_INTESTINE.get());
         tag(ItemTagManager.KIDNEY).add(IceAndFireOrgans.ICE_DRAGON_KIDNEY.get());
@@ -227,6 +232,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(WAICItemTagManager.MAGIC).add(IceAndFireOrgans.ICE_DRAGON_GEM.get());
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC.get());
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.ICE_DRAGON_RIB.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.ICE_DRAGON_RIB.get());
         tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.ICE_DRAGON_MUSCLE.get());
         tag(WAICItemTagManager.ICE).add(
             IceAndFireOrgans.ICE_DRAGON_HEART.get(),
@@ -275,6 +281,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(IceAndFireOrgans.LIGHTNING_DRAGON_HEART.get());
         tag(ItemTagManager.LUNG).add(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG.get());
         tag(ItemTagManager.SPINE).add(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE.get());
         tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE.get());
         tag(ItemTagManager.KIDNEY).add(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY.get());
@@ -284,6 +291,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(WAICItemTagManager.MAGIC).add(IceAndFireOrgans.LIGHTNING_DRAGON_GEM.get());
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC.get());
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.LIGHTNING_DRAGON_RIB.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.LIGHTNING_DRAGON_RIB.get());
         tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE.get());
         tag(WAICItemTagManager.LIGHTNING_DRAGON).add(
             IceAndFireOrgans.LIGHTNING_DRAGON_HEART.get(),
@@ -311,7 +319,9 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WAICOrgans.FLESH_IDOL.get()
         );
         tag(ItemTagManager.RIB).add(WAICOrgans.HAUNTED_BONE.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.HAUNTED_BONE.get());
         tag(ItemTagManager.SPINE).add(WAICOrgans.SWORD_BONE.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.SWORD_BONE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.STRAIGHT_INTESTINE.get());
         tag(WAICItemTagManager.UNIQUE).add(WAICOrgans.STRAIGHT_INTESTINE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.SQUASH.get());
@@ -368,12 +378,14 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(WAICOrgans.INK_HEART.get());
         tag(ItemTagManager.LUNG).add(WAICOrgans.INK_LUNG.get());
         tag(ItemTagManager.SPINE).add(WAICOrgans.INK_SPINE.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.INK_SPINE.get());
         tag(ItemTagManager.STOMACH).add(WAICOrgans.INK_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(WAICOrgans.INK_INTESTINE.get());
         tag(ItemTagManager.KIDNEY).add(WAICOrgans.INK_KIDNEY.get());
         tag(ItemTagManager.SPLEEN).add(WAICOrgans.INK_SPLEEN.get());
         tag(ItemTagManager.LIVER).add(WAICOrgans.INK_LIVER.get());
         tag(ItemTagManager.RIB).add(WAICOrgans.INK_RIB.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.INK_RIB.get());
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.INK_MUSCLE.get());
         tag(ItemTagManager.APPENDIX).add(WAICOrgans.INK_APPENDIX.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.INK_BOTTLE.get());
@@ -418,6 +430,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(WAICOrgans.PIGMENT_HEART.get());
         tag(ItemTagManager.LUNG).add(WAICOrgans.PIGMENT_LUNG.get());
         tag(ItemTagManager.SPINE).add(WAICOrgans.PIGMENT_SPINE.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.PIGMENT_SPINE.get());
         tag(ItemTagManager.STOMACH).add(WAICOrgans.PIGMENT_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(WAICOrgans.PIGMENT_INTESTINE.get());
         tag(ItemTagManager.KIDNEY).add(WAICOrgans.PIGMENT_KIDNEY.get());
@@ -425,6 +438,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.LIVER).add(WAICOrgans.PIGMENT_LIVER.get());
         tag(ItemTagManager.APPENDIX).add(WAICOrgans.PIGMENT_APPENDIX.get());
         tag(ItemTagManager.RIB).add(WAICOrgans.PIGMENT_RIB.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.PIGMENT_RIB.get());
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.PIGMENT_MUSCLE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.PALETTE.get());
         tag(WAICItemTagManager.UNIQUE).add(WAICOrgans.PALETTE.get());
@@ -706,7 +720,9 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.FROSTBURN_SOUL.get());
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.DREAD_PHYLACTERY.get());
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.DREAD_RIB.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.DREAD_RIB.get());
         tag(ItemTagManager.SPINE).add(IceAndFireOrgans.DREAD_SPINE.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.DREAD_SPINE.get());
         tag(WAICItemTagManager.ICE).add(
             IceAndFireOrgans.BITTER_FLESH.get(),
             IceAndFireOrgans.ICE_SHARD.get(),
@@ -734,11 +750,13 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(WAICItemTagManager.UNIQUE).add(IceAndFireOrgans.HYDRA_HEART.get());
         tag(ItemTagManager.LUNG).add(IceAndFireOrgans.HYDRA_LUNG.get());
         tag(ItemTagManager.SPINE).add(IceAndFireOrgans.HYDRA_SPINE.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.HYDRA_SPINE.get());
         tag(WAICItemTagManager.UNIQUE).add(IceAndFireOrgans.HYDRA_SPINE.get());
         tag(ItemTagManager.STOMACH).add(IceAndFireOrgans.HYDRA_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(IceAndFireOrgans.HYDRA_INTESTINE.get());
         tag(ItemTagManager.SPLEEN).add(IceAndFireOrgans.HYDRA_SPLEEN.get());
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.HYDRA_RIB.get());
+        tag(ItemTagManager.BONE).add(IceAndFireOrgans.HYDRA_RIB.get());
         tag(WAICItemTagManager.UNIQUE).add(IceAndFireOrgans.HYDRA_RIB.get());
         tag(ItemTagManager.MUSCLE).add(IceAndFireOrgans.HYDRA_MUSCLE.get());
         tag(WAICItemTagManager.UNIQUE).add(IceAndFireOrgans.HYDRA_MUSCLE.get());
@@ -923,6 +941,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.HEART).add(WAICOrgans.FANTASTICAL_HEART.get());
         tag(ItemTagManager.LUNG).add(WAICOrgans.FANTASTICAL_LUNG.get());
         tag(ItemTagManager.SPINE).add(WAICOrgans.FANTASTICAL_SPINE.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.FANTASTICAL_SPINE.get());
         tag(ItemTagManager.STOMACH).add(WAICOrgans.FANTASTICAL_STOMACH.get());
         tag(ItemTagManager.INTESTINE).add(WAICOrgans.FANTASTICAL_INTESTINE.get());
         tag(ItemTagManager.KIDNEY).add(WAICOrgans.FANTASTICAL_KIDNEY.get());
@@ -930,6 +949,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.LIVER).add(WAICOrgans.FANTASTICAL_LIVER.get());
         tag(ItemTagManager.APPENDIX).add(WAICOrgans.FANTASTICAL_APPENDIX.get());
         tag(ItemTagManager.RIB).add(WAICOrgans.FANTASTICAL_RIB.get());
+        tag(ItemTagManager.BONE).add(WAICOrgans.FANTASTICAL_RIB.get());
         tag(ItemTagManager.MUSCLE).add(WAICOrgans.FANTASTICAL_MUSCLE.get());
     }
 
@@ -952,7 +972,9 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.STOMACH).add(CataclysmOrgans.LEVIATHAN_STOMACH.get());
         tag(ItemTagManager.LUNG).add(CataclysmOrgans.LEVIATHAN_GILL.get());
         tag(ItemTagManager.SPINE).add(CataclysmOrgans.LEVIATHAN_SPINE.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.LEVIATHAN_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.LEVIATHAN_FISHBONE.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.LEVIATHAN_FISHBONE.get());
 
         // 魂尸系列
         tag(ItemTagManager.ORGANS).add(
@@ -960,7 +982,9 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CataclysmOrgans.DRAUGR_RIB.get()
         );
         tag(ItemTagManager.SPINE).add(CataclysmOrgans.DRAUGR_SPINE.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.DRAUGR_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.DRAUGR_RIB.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.DRAUGR_RIB.get());
 
         // 咒翼灵骸系列
         tag(ItemTagManager.ORGANS).add(
@@ -971,7 +995,9 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CataclysmOrgans.SEALING_STONE_SLAB.get()
         );
         tag(ItemTagManager.SPINE).add(CataclysmOrgans.MALEDICTUS_SPINE.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.MALEDICTUS_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.MALEDICTUS_RIB.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.MALEDICTUS_RIB.get());
         tag(ItemTagManager.HEART).add(CataclysmOrgans.PHANTOM_HEART.get());
         tag(ItemTagManager.SPECIAL).add(CataclysmOrgans.PHANTOM_SHARD.get());
         tag(ItemTagManager.SPECIAL).add(CataclysmOrgans.SEALING_STONE_SLAB.get());
@@ -988,8 +1014,10 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         );
         tag(ItemTagManager.SPECIAL).add(CataclysmOrgans.TIDAL_LANTERN.get());
         tag(ItemTagManager.SPINE).add(CataclysmOrgans.STORM_SPINE.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.STORM_SPINE.get());
         tag(WAICItemTagManager.UNIQUE).add(CataclysmOrgans.STORM_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.STORM_RIB.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.STORM_RIB.get());
 
         // 焰魔系列
         tag(ItemTagManager.ORGANS).add(
@@ -1082,7 +1110,9 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             IronSpellOrgans.NECROMANCER_RIB.get()
         );
         tag(ItemTagManager.SPINE).add(IronSpellOrgans.NECROMANCER_SPINE.get());
+        tag(ItemTagManager.BONE).add(IronSpellOrgans.NECROMANCER_SPINE.get());
         tag(ItemTagManager.RIB).add(IronSpellOrgans.NECROMANCER_RIB.get());
+        tag(ItemTagManager.BONE).add(IronSpellOrgans.NECROMANCER_RIB.get());
 
         // 原初受火者
         tag(ItemTagManager.ORGANS).add(IronSpellOrgans.PRIMORDIAL_FLAME.get());
@@ -1107,9 +1137,11 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(WAICItemTagManager.UNIQUE).add(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get());
         tag(WAICItemTagManager.MAGIC).add(IronSpellOrgans.CORRUPTED_SOUL_LANTERN.get());
         tag(ItemTagManager.SPINE).add(IronSpellOrgans.DEAD_KING_SPINE.get());
+        tag(ItemTagManager.BONE).add(IronSpellOrgans.DEAD_KING_SPINE.get());
         tag(WAICItemTagManager.UNIQUE).add(IronSpellOrgans.DEAD_KING_SPINE.get());
         tag(WAICItemTagManager.MAGIC).add(IronSpellOrgans.DEAD_KING_SPINE.get());
         tag(ItemTagManager.RIB).add(IronSpellOrgans.DEAD_KING_RIB.get());
+        tag(ItemTagManager.BONE).add(IronSpellOrgans.DEAD_KING_RIB.get());
         tag(WAICItemTagManager.MAGIC).add(IronSpellOrgans.DEAD_KING_RIB.get());
     }
 

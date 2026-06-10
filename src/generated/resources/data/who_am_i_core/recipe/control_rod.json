@@ -8,17 +8,14 @@
     "L": {
       "item": "anvilcraft:lead_ingot"
     },
-    "N": {
-      "item": "who_am_i_core:chest_nova"
-    },
     "T": {
       "item": "anvilcraft:tungsten_ingot"
     }
   },
   "pattern": [
-    "L L",
-    "TNT",
-    "LCL"
+    " T ",
+    "LCL",
+    " T "
   ],
   "result": {
     "count": 1,
