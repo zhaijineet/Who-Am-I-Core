@@ -3,9 +3,19 @@ package net.zhaiji.who_am_i_core.datagen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
+import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
+import net.zhaiji.chestcavitybeyond.manager.AttributeDisplayManager;
 import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.manager.CataclysmChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.CompanionsChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.FDBossesChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.IceAndFireChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.IronSpellChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.MowziesMobChestCavityTypeManager;
+import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
@@ -55,6 +65,60 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "Magic Damage Percentage");
         addAttribute(WAICAttribute.LOOTING, "Looting");
         addAttribute(WAICAttribute.FORTUNE, "Fortune");
+
+        addChestCavityTypeName(WAICChestCavityTypeManager.FANTASTICAL, "Fantastical");
+
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.FIRE_DRAGON, "Fire Dragon");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.ICE_DRAGON, "Ice Dragon");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.LIGHTNING_DRAGON, "Lightning Dragon");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.HYDRA, "Hydra");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.DREAD_SKELETON, "Dread Skeleton");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.DREAD_UNDEAD, "Dread Undead");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.DREAD_LICH, "Dread Lich");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.GHOST, "Ghost");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.CYCLOPS, "Cyclops");
+
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.AGED, "Aged");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.UMVUTHI, "Umvuthi");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.BLUFF, "Bluff");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.LANTERN, "Lantern");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.FOLIAATH, "Foliaath");
+
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.MALKUTH, "Malkuth");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.GEBURAH, "Geburah");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.CHESED, "Chesed");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.FIRE_MALKUTH_WARRIOR, "Fire Malkuth Warrior");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.ICE_MALKUTH_WARRIOR, "Ice Malkuth Warrior");
+
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.LEVIATHAN, "Leviathan");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.NETHERITE_MONSTROSITY, "Netherite Monstrosity");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.NETHERITE_MINISTROSITY, "Netherite Ministrosity");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNIS, "Ignis");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.CORAL_GOLEM, "Coral Golem");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.CORALSSUS, "Coralssus");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.SCYLLA, "Scylla");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.ENDER_GUARDIAN, "Ender Guardian");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.ENDER_GOLEM, "Ender Golem");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.DRAUGR, "Draugr");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.MALEDICTUS, "Maledictus");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.HARBINGER, "Harbinger");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.PROWLER, "Prowler");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.WATCHER, "Watcher");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_REVENANT, "Ignited Revenant");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_BERSERKER, "Ignited Berserker");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.CATACLYSM_AMPHIBIOUS, "Amphibious");
+
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.DEAD_KING, "Dead King");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "Necromancer");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.FIRE_BOSS, "Primordial Flame");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.CURSED_ARMOR_STAND, "Cursed Armor Stand");
+
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.PONTIFF, "Pontiff");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.CLOTH, "Cloth");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.CAKE, "Cake");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.SHADE, "Shade");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.LIVING_CANDLE, "Living Candle");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.DINAMO, "Dinamo");
 
         addAttributeDescription(
             WAICAttribute.HEAL,
@@ -107,6 +171,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             "Adds extra levels to Fortune enchantment effect"
         );
 
+        addAttributeValueEffect(WAICAttribute.HEAL, "Heals %s HP per second");
+        addAttributeValueEffect(WAICAttribute.BLOCK, "Reduces damage by %s");
+        addAttributeValueEffect(WAICAttribute.COUNTER_ATTACK, "Deals %s thorns damage to attacker");
+        addAttributeValueEffect(WAICAttribute.MELEE_DAMAGE, "Adds %s melee damage");
+        addAttributeValueEffect(WAICAttribute.RANGED_DAMAGE, "Adds %s ranged damage");
+        addAttributeValueEffect(WAICAttribute.MAGIC_DAMAGE, "Adds %s magic damage");
+        addAttributeValueEffect(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, "Melee final multiplier: %s%%");
+        addAttributeValueEffect(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, "Ranged final multiplier: %s%%");
+        addAttributeValueEffect(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "Magic final multiplier: %s%%");
+        addAttributeValueEffect(WAICAttribute.LOOTING, "Looting level: %s");
+        addAttributeValueEffect(WAICAttribute.FORTUNE, "Fortune level: %s");
+
         add(WAICDamageTagManager.IS_MELEE, "Melee");
         addWAICTagTranslationsEN();
 
@@ -147,6 +223,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         cataclysmOrgansEN();
         ironSpellOrgansEN();
         companionsOrgansEN();
+
+        add("message.who_am_i_core.trophy.power_draw", "You drew power from the trophy");
+        add("message.who_am_i_core.trophy.power_return", "You returned the trophy's power");
+        add("message.who_am_i_core.trophy.duplicate", "Cannot draw power from the same trophy again");
+        add("message.who_am_i_core.trophy.max_level", "Already at maximum expansion");
+        add("message.who_am_i_core.trophy.not_used", "This trophy's power has not been drawn");
+
+        add("tooltip.who_am_i_core.trophy.draw", "Right-click to draw power and expand chest cavity");
+        add("tooltip.who_am_i_core.trophy.return", "Crouch + Right-click to return power and shrink chest cavity");
+        add("tooltip.who_am_i_core.trophy.unique", "Each trophy can only be drawn once");
     }
 
     public void Chinese() {
@@ -170,6 +256,60 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "魔法伤害百分比");
         addAttribute(WAICAttribute.LOOTING, "抢夺");
         addAttribute(WAICAttribute.FORTUNE, "时运");
+
+        addChestCavityTypeName(WAICChestCavityTypeManager.FANTASTICAL, "幻想种");
+
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.FIRE_DRAGON, "火龙");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.ICE_DRAGON, "冰龙");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.LIGHTNING_DRAGON, "电龙");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.HYDRA, "九头蛇");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.DREAD_SKELETON, "悚怖骷髅");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.DREAD_UNDEAD, "悚怖亡灵");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.DREAD_LICH, "悚怖尸巫");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.GHOST, "幽灵");
+        addChestCavityTypeName(IceAndFireChestCavityTypeManager.CYCLOPS, "独眼巨人");
+
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.AGED, "衰老");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.UMVUTHI, "太阳鸟");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.BLUFF, "泥峭");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.LANTERN, "荧光浮灯");
+        addChestCavityTypeName(MowziesMobChestCavityTypeManager.FOLIAATH, "巨噬叶");
+
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.MALKUTH, "王国");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.GEBURAH, "严厉");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.CHESED, "慈悲");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.FIRE_MALKUTH_WARRIOR, "火焰王国战士");
+        addChestCavityTypeName(FDBossesChestCavityTypeManager.ICE_MALKUTH_WARRIOR, "冰霜王国战士");
+
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.LEVIATHAN, "利维坦");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.NETHERITE_MONSTROSITY, "下界合金巨兽");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.NETHERITE_MINISTROSITY, "下界合金幼兽");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNIS, "焰魔");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.CORAL_GOLEM, "珊瑚傀儡");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.CORALSSUS, "珊瑚巨像");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.SCYLLA, "斯库拉");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.ENDER_GUARDIAN, "末影守卫");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.ENDER_GOLEM, "末影傀儡");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.DRAUGR, "魂尸");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.MALEDICTUS, "咒翼灵骸");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.HARBINGER, "先驱者");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.PROWLER, "徘徊者");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.WATCHER, "观测者");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_REVENANT, "炽燃遗魂");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_BERSERKER, "炽燃狂魂");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.CATACLYSM_AMPHIBIOUS, "两栖");
+
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.DEAD_KING, "死者之王");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "死灵法师");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.FIRE_BOSS, "原初之火");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.CURSED_ARMOR_STAND, "诅咒盔甲架");
+
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.PONTIFF, "教宗");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.CLOTH, "布制");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.CAKE, "蛋糕");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.SHADE, "暗影");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.LIVING_CANDLE, "活体蜡烛");
+        addChestCavityTypeName(CompanionsChestCavityTypeManager.DINAMO, "电纳魔");
 
         addAttributeDescription(
             WAICAttribute.HEAL,
@@ -222,6 +362,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             "额外增加时运附魔的等效等级"
         );
 
+        addAttributeValueEffect(WAICAttribute.HEAL, "每秒回复%s点生命值");
+        addAttributeValueEffect(WAICAttribute.BLOCK, "减免%s点伤害");
+        addAttributeValueEffect(WAICAttribute.COUNTER_ATTACK, "对攻击者造成%s点反击伤害");
+        addAttributeValueEffect(WAICAttribute.MELEE_DAMAGE, "增加%s点近战伤害");
+        addAttributeValueEffect(WAICAttribute.RANGED_DAMAGE, "增加%s点远程伤害");
+        addAttributeValueEffect(WAICAttribute.MAGIC_DAMAGE, "增加%s点魔法伤害");
+        addAttributeValueEffect(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, "近战最终倍率：%s%%");
+        addAttributeValueEffect(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, "远程最终倍率：%s%%");
+        addAttributeValueEffect(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "魔法最终倍率：%s%%");
+        addAttributeValueEffect(WAICAttribute.LOOTING, "抢夺等级：%s");
+        addAttributeValueEffect(WAICAttribute.FORTUNE, "时运等级：%s");
+
         add(WAICDamageTagManager.IS_MELEE, "近战");
         addWAICTagTranslationsZH();
 
@@ -262,6 +414,16 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         cataclysmOrgansZH();
         ironSpellOrgansZH();
         companionsOrgansZH();
+
+        add("message.who_am_i_core.trophy.power_draw", "您汲取了奖杯的力量");
+        add("message.who_am_i_core.trophy.power_return", "您归还了奖杯的力量");
+        add("message.who_am_i_core.trophy.duplicate", "不能重复汲取相同奖杯的力量");
+        add("message.who_am_i_core.trophy.max_level", "已达到最大扩容等级");
+        add("message.who_am_i_core.trophy.not_used", "尚未汲取该奖杯的力量");
+
+        add("tooltip.who_am_i_core.trophy.draw", "右键点击汲取力量，扩容胸腔");
+        add("tooltip.who_am_i_core.trophy.return", "蹲下+右键归还力量，缩小胸腔");
+        add("tooltip.who_am_i_core.trophy.unique", "每个奖杯只能汲取一次力量");
     }
 
     // ==================== Mowzie's Mobs 特殊器官 ====================
@@ -516,27 +678,59 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "Ice Dragon Muscle");
 
         // Lightning Dragon
+        String lightningCharge = "Generates 0.1 charge/tick for Energy Modules";
+        String lightningChargeOverload = "Generated charge can exceed the cap by 50%";
+        String lightningChargeSimple = "Generates charge for Energy Modules";
+
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "Lightning Dragon Heart");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "Lightning Dragon Lung");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "Lightning Dragon Spine");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "Lightning Dragon Stomach");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "Lightning Dragon Intestine");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "Lightning Dragon Kidney");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "Lightning Dragon Spleen");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "Lightning Dragon Liver");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, lightningChargeSimple);
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "Lightning Dragon Gem");
         addOrganPassiveEffect(
             IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
             "Lightning spell power increases with lightning dragon organs in chest",
-            "Each lightning dragon organ grants +5% lightning spell power"
+            "Each lightning dragon organ grants +5% lightning spell power",
+            lightningCharge,
+            lightningChargeOverload
         );
         addOrganPassiveEffectSimple(
             IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
-            "Lightning spell power scales with lightning dragon organ count"
+            "Lightning spell power scales with lightning dragon organ count",
+            lightningChargeSimple
         );
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Lightning Dragon Breath Sac");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
+            lightningCharge,
+            lightningChargeOverload
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
+            lightningChargeSimple
+        );
         addOrganActiveSkill(
             IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
             "Sprays lightning forward for 5 seconds",
@@ -546,7 +740,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Sprays lightning forward");
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "Lightning Dragon Rib");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, lightningChargeSimple);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "Lightning Dragon Muscle");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, lightningCharge, lightningChargeOverload);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, lightningChargeSimple);
     }
 
     private void dragonOrgansZH() {
@@ -611,24 +809,59 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "冰龙肌肉");
 
         // 电龙
+        String lightningChargeZH = "每 tick 为蓄能模块产出 0.1 电荷";
+        String lightningChargeOverloadZH = "产生的电荷可超出上限50%";
+        String lightningChargeSimpleZH = "为蓄能模块产出电荷";
+
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, "电龙心脏");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_HEART, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, "电龙肺脏");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_LUNG, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, "电龙脊柱");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_SPINE, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, "电龙胃");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_STOMACH, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, "电龙肠子");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_INTESTINE, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, "电龙肾脏");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_KIDNEY, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, "电龙脾脏");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_SPLEEN, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, "电龙肝脏");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_LIVER, lightningChargeSimpleZH);
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "电龙宝玉");
         addOrganPassiveEffect(
             IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
             "闪电法术强度随胸腔内电龙器官数量增加",
-            "每增加一个电龙器官提升5%闪电法术强度"
+            "每增加一个电龙器官提升5%闪电法术强度",
+            lightningChargeZH,
+            lightningChargeOverloadZH
         );
-        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "闪电法术强度随电龙器官数量提升");
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
+            "闪电法术强度随电龙器官数量提升",
+            lightningChargeSimpleZH
+        );
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "电龙吐息袋");
+        addOrganPassiveEffect(
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
+            lightningChargeZH,
+            lightningChargeOverloadZH
+        );
+        addOrganPassiveEffectSimple(
+            IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
+            lightningChargeSimpleZH
+        );
         addOrganActiveSkill(
             IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
             "向前方喷射闪电，持续5秒",
@@ -638,7 +871,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "向前方喷射闪电");
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "电龙肋骨");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, lightningChargeSimpleZH);
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, "电龙肌肉");
+        addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, lightningChargeZH, lightningChargeOverloadZH);
+        addOrganPassiveEffectSimple(IceAndFireOrgans.LIGHTNING_DRAGON_MUSCLE, lightningChargeSimpleZH);
     }
 
     // ==================== 拟态器官 ====================
@@ -684,7 +921,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         addItem(WAICOrgans.INK_BOTTLE, "Ink Bottle");
         addOrganDescription(WAICOrgans.INK_BOTTLE, "A glass vessel filled with dark, viscous ink");
-        addOrganPassiveEffect(WAICOrgans.INK_BOTTLE, "Can drink ink and store it, each ink organ in the chest cavity adds 1000 to ink capacity");
+        addOrganPassiveEffect(
+            WAICOrgans.INK_BOTTLE,
+            "Can drink ink and store it, each ink organ in the chest cavity adds 1000 to ink capacity"
+        );
         add(WAICOrgans.INK_BOTTLE_INK_TRANSLATION, "Ink: %s/%s");
 
         addItem(WAICOrgans.NIB, "Nib");
@@ -1174,8 +1414,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.CHARGED_MUSCLE,
             "Generates 1 charge per tick while sprinting",
-            "Sprint-generated charge can exceed cap by 50%",
-            "Excess charge drains at 1 per tick"
+            "Sprint-generated charge can exceed cap by 50%"
         );
         addOrganPassiveEffectSimple(WAICOrgans.CHARGED_MUSCLE, "Generates charge while sprinting");
 
@@ -1194,7 +1433,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "Consumes charge to enter Overload");
 
         addItem(WAICOrgans.ENERGY_MODULE, "Energy Module");
-        addOrganPassiveEffect(WAICOrgans.ENERGY_MODULE, "+500 charge capacity");
+        addOrganPassiveEffect(
+            WAICOrgans.ENERGY_MODULE,
+            "+500 charge capacity",
+            "Excess charge drains at 1 per tick"
+        );
         add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "Charge: %s/%s");
     }
 
@@ -1222,8 +1465,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.CHARGED_MUSCLE,
             "冲刺时每 tick 产生 1 电荷",
-            "冲刺产生的电荷可超出上限50%",
-            "超出上限的电荷每 tick 衰减1点"
+            "冲刺产生的电荷可超出上限50%"
         );
         addOrganPassiveEffectSimple(WAICOrgans.CHARGED_MUSCLE, "冲刺时产生电荷");
 
@@ -1242,7 +1484,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkillSimple(WAICOrgans.CONDUCTIVE_SPINE, "消耗电荷进入超频");
 
         addItem(WAICOrgans.ENERGY_MODULE, "蓄能模块");
-        addOrganPassiveEffect(WAICOrgans.ENERGY_MODULE, "+500点电荷容量");
+        addOrganPassiveEffect(
+            WAICOrgans.ENERGY_MODULE,
+            "+500点电荷容量",
+            "超出上限的电荷每 tick 衰减1点"
+        );
         add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "电荷: %s/%s");
     }
 
@@ -1435,8 +1681,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_SPINE,
             "Prevents death when holding at least 10 seconds of poison",
-            "Recovers to 10% max health on revival",
-            "Poison level increases by one and duration is halved"
+            "Recovers to 10% max health on revival, poison level increases by one and duration is halved"
         );
 
         addItem(IceAndFireOrgans.HYDRA_STOMACH, "Hydra Stomach");
@@ -2517,28 +2762,32 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     }
 
     private void addOrganPassiveEffect(Supplier<Item> item, String... lines) {
-        String base = "organ." + WhoAmICore.MOD_ID + "." + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + ".passive_effect.";
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item.get());
+        String base = "organ." + key.getNamespace() + "." + key.getPath() + ".passive_effect.";
         for (int i = 0; i < lines.length; i++) {
             add(base + i, lines[i]);
         }
     }
 
     private void addOrganPassiveEffectSimple(Supplier<Item> item, String... lines) {
-        String base = "organ." + WhoAmICore.MOD_ID + "." + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + ".passive_effect.simple.";
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item.get());
+        String base = "organ." + key.getNamespace() + "." + key.getPath() + ".passive_effect.simple.";
         for (int i = 0; i < lines.length; i++) {
             add(base + i, lines[i]);
         }
     }
 
     private void addOrganActiveSkill(Supplier<Item> item, String... lines) {
-        String base = "organ." + WhoAmICore.MOD_ID + "." + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + ".active_skill.";
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item.get());
+        String base = "organ." + key.getNamespace() + "." + key.getPath() + ".active_skill.";
         for (int i = 0; i < lines.length; i++) {
             add(base + i, lines[i]);
         }
     }
 
     private void addOrganActiveSkillSimple(Supplier<Item> item, String... lines) {
-        String base = "organ." + WhoAmICore.MOD_ID + "." + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + ".active_skill.simple.";
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(item.get());
+        String base = "organ." + key.getNamespace() + "." + key.getPath() + ".active_skill.simple.";
         for (int i = 0; i < lines.length; i++) {
             add(base + i, lines[i]);
         }
@@ -2553,6 +2802,14 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         for (int i = 0; i < lines.length; i++) {
             add(base + i, lines[i]);
         }
+    }
+
+    private void addAttributeValueEffect(Holder<Attribute> attribute, String value) {
+        add(AttributeDisplayManager.getValueEffectKey(attribute), value);
+    }
+
+    private void addChestCavityTypeName(ChestCavityType type, String name) {
+        add(WAICChestCavityTypeManager.getTranslationKey(type), name);
     }
 
     @Override

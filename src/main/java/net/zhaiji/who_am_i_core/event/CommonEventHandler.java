@@ -2,12 +2,14 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
+import com.finderfeed.fdbosses.init.BossBlocks;
 import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
 import dev.xylonity.companions.common.entity.companion.TeddyEntity;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -22,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -33,6 +36,7 @@ import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
+import net.zhaiji.chestcavitybeyond.api.ChestCavitySize;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
@@ -41,6 +45,7 @@ import net.zhaiji.chestcavitybeyond.manager.AttributeDisplayManager;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.CataclysmChestCavityTypeManager;
@@ -52,6 +57,7 @@ import net.zhaiji.who_am_i_core.manager.MowziesMobChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
@@ -68,6 +74,8 @@ import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+
+import java.util.function.DoublePredicate;
 
 public class CommonEventHandler {
     /**
@@ -141,19 +149,126 @@ public class CommonEventHandler {
         event.registerEntity(InitEntities.MAID.get(), WAICChestCavityTypeManager.FANTASTICAL);
         event.registerEntity(InitEntities.FAIRY.get(), WAICChestCavityTypeManager.FANTASTICAL);
 
-        // 注册属性显示信息到 CCB 属性查询系统
-        AttributeDisplayManager.register(WAICAttribute.HEAL, 40);
-        AttributeDisplayManager.register(WAICAttribute.BLOCK, 30);
-        AttributeDisplayManager.register(WAICAttribute.COUNTER_ATTACK, 30);
-        AttributeDisplayManager.register(WAICAttribute.MELEE_DAMAGE, 30);
-        AttributeDisplayManager.register(WAICAttribute.RANGED_DAMAGE, 30);
-        AttributeDisplayManager.register(WAICAttribute.MAGIC_DAMAGE, 30);
+        // 注册属性显示信息到 CCB 属性查询系统（带动态效果描述）
+
+        // 值 ≤ 0 时隐藏（适用于"需要 > 0 才生效"的属性）
+        DoublePredicate HIDE_WHEN_NOT_POSITIVE = value -> value <= 0;
+
+        // HEAL — 每秒回复等同属性值的生命值
+        AttributeDisplayManager.register(
+            WAICAttribute.HEAL, 40, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.HEAL);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.HEAL),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
+        // BLOCK — 等值减伤
+        AttributeDisplayManager.register(
+            WAICAttribute.BLOCK, 30, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.BLOCK);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.BLOCK),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
+        // COUNTER_ATTACK — 受击反击
+        AttributeDisplayManager.register(
+            WAICAttribute.COUNTER_ATTACK, 30, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.COUNTER_ATTACK);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.COUNTER_ATTACK),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
+        // MELEE_DAMAGE — 近战加伤
+        AttributeDisplayManager.register(
+            WAICAttribute.MELEE_DAMAGE, 30, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.MELEE_DAMAGE);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.MELEE_DAMAGE),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
+        // RANGED_DAMAGE — 远程加伤
+        AttributeDisplayManager.register(
+            WAICAttribute.RANGED_DAMAGE, 30, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.RANGED_DAMAGE);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.RANGED_DAMAGE),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
+        // MAGIC_DAMAGE — 魔法加伤
+        AttributeDisplayManager.register(
+            WAICAttribute.MAGIC_DAMAGE, 30, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.MAGIC_DAMAGE);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.MAGIC_DAMAGE),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
+        // TEMPERATURE — 纯计算属性，无动态效果描述
         AttributeDisplayManager.register(WAICAttribute.TEMPERATURE, 25);
-        AttributeDisplayManager.register(WAICAttribute.MELEE_DAMAGE_PERCENTAGE, 0);
-        AttributeDisplayManager.register(WAICAttribute.RANGED_DAMAGE_PERCENTAGE, 0);
-        AttributeDisplayManager.register(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, 0);
-        AttributeDisplayManager.register(WAICAttribute.LOOTING, 0);
-        AttributeDisplayManager.register(WAICAttribute.FORTUNE, 0);
+        // MELEE_DAMAGE_PERCENTAGE — 近战最终倍率
+        AttributeDisplayManager.register(
+            WAICAttribute.MELEE_DAMAGE_PERCENTAGE, 0, entity -> {
+                double current = ChestCavityUtil.getData(entity).getCurrentValue(WAICAttribute.MELEE_DAMAGE_PERCENTAGE);
+                double percent = current * 100;
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.MELEE_DAMAGE_PERCENTAGE),
+                    TooltipUtil.formatAttributeValue(percent)
+                );
+            }
+        );
+        // RANGED_DAMAGE_PERCENTAGE — 远程最终倍率
+        AttributeDisplayManager.register(
+            WAICAttribute.RANGED_DAMAGE_PERCENTAGE, 0, entity -> {
+                double current = ChestCavityUtil.getData(entity).getCurrentValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
+                double percent = current * 100;
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.RANGED_DAMAGE_PERCENTAGE),
+                    TooltipUtil.formatAttributeValue(percent)
+                );
+            }
+        );
+        // MAGIC_DAMAGE_PERCENTAGE — 魔法最终倍率
+        AttributeDisplayManager.register(
+            WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, 0, entity -> {
+                double current = ChestCavityUtil.getData(entity).getCurrentValue(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE);
+                double percent = current * 100;
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE),
+                    TooltipUtil.formatAttributeValue(percent)
+                );
+            }
+        );
+        // LOOTING — 抢夺等级
+        AttributeDisplayManager.register(
+            WAICAttribute.LOOTING, 0, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.LOOTING);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.LOOTING),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
+        // FORTUNE — 时运等级
+        AttributeDisplayManager.register(
+            WAICAttribute.FORTUNE, 0, HIDE_WHEN_NOT_POSITIVE, entity -> {
+                double diff = ChestCavityUtil.getData(entity).getDifferenceValue(WAICAttribute.FORTUNE);
+                return Component.translatable(
+                    AttributeDisplayManager.getValueEffectKey(WAICAttribute.FORTUNE),
+                    TooltipUtil.formatAttributeValue(diff)
+                );
+            }
+        );
     }
 
     /**
@@ -467,30 +582,97 @@ public class CommonEventHandler {
     }
 
     /**
-     * 脊柱骨质器官在砂轮上打磨为剑骨头
-     * 玩家手持同时拥有 {@link ItemTagManager#SPINE} 和 {@link ItemTagManager#BONE} 标签的物品
-     * 右键砂轮时，消耗该物品并给予剑骨头。
+     * 右键方块事件处理
+     * <ul>
+     *   <li>砂轮打磨：脊柱骨质器官 → 剑骨头</li>
+     *   <li>逆卡巴拉奖杯：扩容/缩小胸腔（临时方案）</li>
+     * </ul>
+     * <p>
+     * RightClickBlock 在客户端会遍历主手和副手，只有 cancel 事件才能阻止副手触发。
+     * </p>
+     * <p>
+     * 因此客户端也必须 cancel，但不能执行服务端逻辑（修改数据等）。
+     * </p>
      */
     public static void handlerPlayerInteract$RightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Level level = event.getLevel();
-        if (level.isClientSide()) return;
-        if (!level.getBlockState(event.getPos()).is(Blocks.GRINDSTONE)) return;
+        BlockState state = level.getBlockState(event.getPos());
         Player player = event.getEntity();
-        InteractionHand hand = event.getHand();
-        ItemStack heldItem = player.getItemInHand(hand);
-        if (!heldItem.is(ItemTagManager.SPINE) || !heldItem.is(ItemTagManager.BONE)) return;
-        ItemStack swordBone = new ItemStack(WAICOrgans.SWORD_BONE.get());
-        heldItem.shrink(1);
-        if (heldItem.isEmpty()) {
-            // 消耗后原槽位变空，剑骨头放回原位（手中）
-            player.setItemInHand(hand, swordBone);
-        } else if (!player.getInventory().add(swordBone)) {
-            // 消耗后仍有剩余，剑骨头放入背包
-            player.drop(swordBone, false);
+
+        // 砂轮打磨脊柱骨质器官为剑骨头
+        if (state.is(Blocks.GRINDSTONE)) {
+            InteractionHand hand = event.getHand();
+            ItemStack heldItem = player.getItemInHand(hand);
+            if (!heldItem.is(ItemTagManager.SPINE) || !heldItem.is(ItemTagManager.BONE) || heldItem.is(WAICOrgans.SWORD_BONE.get())) return;
+            if (!level.isClientSide()) {
+                ItemStack swordBone = new ItemStack(WAICOrgans.SWORD_BONE.get());
+                heldItem.shrink(1);
+                if (heldItem.isEmpty()) {
+                    player.setItemInHand(hand, swordBone);
+                } else if (!player.getInventory().add(swordBone)) {
+                    player.drop(swordBone, false);
+                }
+                level.playSound(null, event.getPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            event.setCanceled(true);
+            return;
         }
-        // 播放砂轮音效
-        level.playSound(null, event.getPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-        // 取消事件，阻止打开砂轮 GUI
+
+        // 逆卡巴拉奖杯：扩容/缩小胸腔（临时方案）
+        int flag;
+        if (state.is(BossBlocks.CHESED_TROPHY.get())) {
+            flag = IChestCavityData.BIT_CHESED;
+        } else if (state.is(BossBlocks.GEBURAH_TROPHY.get())) {
+            flag = IChestCavityData.BIT_GEBURAH;
+        } else if (state.is(BossBlocks.MALKUTH_TROPHY.get())) {
+            flag = IChestCavityData.BIT_MALKUTH;
+        } else {
+            return;
+        }
+
+        // 客户端也需要 cancel，阻止副手重复触发；服务端执行实际逻辑
+        if (level.isClientSide()) {
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            event.setCanceled(true);
+            return;
+        }
+
+        IChestCavityData trophyData = (IChestCavityData) ChestCavityUtil.getData(player);
+
+        if (player.isShiftKeyDown()) {
+            if (!trophyData.isTrophyUsed(flag)) {
+                player.displayClientMessage(Component.translatable("message.who_am_i_core.trophy.not_used"), true);
+                event.setCancellationResult(InteractionResult.FAIL);
+                event.setCanceled(true);
+                return;
+            }
+            trophyData.setTrophyUsed(flag, false);
+        } else {
+            if (trophyData.isTrophyUsed(flag)) {
+                player.displayClientMessage(Component.translatable("message.who_am_i_core.trophy.duplicate"), true);
+                event.setCancellationResult(InteractionResult.FAIL);
+                event.setCanceled(true);
+                return;
+            }
+            if (trophyData.getExpansionLevel() >= 3) {
+                player.displayClientMessage(Component.translatable("message.who_am_i_core.trophy.max_level"), true);
+                event.setCancellationResult(InteractionResult.FAIL);
+                event.setCanceled(true);
+                return;
+            }
+            trophyData.setTrophyUsed(flag, true);
+        }
+
+        ChestCavityUtil.getData(player).resize(ChestCavitySize.byId(trophyData.getExpansionLevel()));
+        player.displayClientMessage(
+            Component.translatable(
+                player.isShiftKeyDown()
+                ? "message.who_am_i_core.trophy.power_return"
+                : "message.who_am_i_core.trophy.power_draw"
+            ), true
+        );
+        event.setCancellationResult(InteractionResult.SUCCESS);
         event.setCanceled(true);
     }
 

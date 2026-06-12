@@ -128,16 +128,14 @@ public class FrankensteinItem extends BundleItem {
             stack.set(DataComponents.BUNDLE_CONTENTS, new BundleContents(newItems));
         }
 
-        // 更新器官属性
+        // 仅当弗兰肯斯坦心脏在胸腔中时更新属性
         ChestCavityData data = ChestCavityUtil.getData(player);
-        int index = -1;
         for (int i = 0; i < data.getSlots(); i++) {
             if (stack == data.getStackInSlot(i)) {
-                index = i;
+                OrganAttributeUtil.updateOrganAttributeModifier(data, player, i, oldStack, stack);
+                break;
             }
         }
-        OrganAttributeUtil.updateOrganAttributeModifier(data, player, index, oldStack, stack);
-
         return true;
     }
 

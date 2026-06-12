@@ -151,15 +151,15 @@ public class WAICRecipeProvider extends RecipeProvider {
             .unlockedBy(getHasName(burningAshes), has(burningAshes))
             .save(recipeOutput);
 
-        // 第8层 · 欺诈（肾脏）：抗火肾脏 + 塞壬之泪 + 悚怖碎片
+        // 第8层 · 欺诈（肾脏）：抗火肾脏 + 鹦鹉螺壳 + 悚怖碎片
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, WAICOrgans.FRAUD.get())
             .pattern(" S ")
             .pattern("DKD")
             .pattern(" S ")
             .define('K', InitItem.FIREPROOF_KIDNEY.get())
-            .define('S', IafItems.SIREN_TEAR.get())
+            .define('S', Items.NAUTILUS_SHELL)
             .define('D', IafItems.DREAD_SHARD.get())
-            .unlockedBy(getHasName(IafItems.SIREN_TEAR.get()), has(IafItems.SIREN_TEAR.get()))
+            .unlockedBy(getHasName(Items.NAUTILUS_SHELL), has(Items.NAUTILUS_SHELL))
             .save(recipeOutput);
 
         // 第9层 · 背叛（心脏）：抗火心脏 + 灵魂宝石 + 神圣灵魂碎片 + 缚魂之链

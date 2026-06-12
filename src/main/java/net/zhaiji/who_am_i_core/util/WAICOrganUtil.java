@@ -724,13 +724,24 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 蓄能模块 tick：超载衰减
+     * 蓄能模块 tick：电龙器官产电 + 超载衰减
+     * <p>
+     * 每个电龙器官每 tick 产出 0.1 电荷，多个蓄能模块均等分担产电份额。
+     * 产出的电荷可超出基础上限 50%（与充能肌束一致）。
+     * 超出基础上限的电荷以 1/tick 的速率自然衰减。
+     * </p>
      */
     public static void energyModuleTick(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
         LivingEntity entity = context.entity();
         List<ItemStack> modules = collectEnergyModules(data);
         if (modules.isEmpty()) return;
+        // 电龙器官被动产电
+        int lightningCount = data.getOrganCount(WAICItemTagManager.LIGHTNING_DRAGON);
+        if (lightningCount > 0) {
+            insertCharge(data, lightningCount * 0.1F, false);
+        }
+        // 超载衰减
         float charge = getCharge(modules);
         float maxCharge = getMaxCharge(modules);
         if (charge > maxCharge) {

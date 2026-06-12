@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.manager;
 
+import net.minecraft.network.chat.Component;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.manager.ChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.WhoAmICore;
@@ -34,6 +35,26 @@ public class WAICChestCavityTypeManager {
         .setThirdRow(6, WAICOrgans.FANTASTICAL_INTESTINE.get())
         .setThirdRow(7, WAICOrgans.FANTASTICAL_MUSCLE.get())
         .setThirdRow(8, WAICOrgans.FANTASTICAL_MUSCLE.get());
+
+    /**
+     * 获取胸腔类型的翻译键
+     *
+     * @param type 胸腔类型
+     * @return 翻译键
+     */
+    public static String getTranslationKey(ChestCavityType type) {
+        return "chest_cavity_type." + type.getId().getNamespace() + "." + type.getId().getPath();
+    }
+
+    /**
+     * 获取胸腔类型的翻译组件
+     *
+     * @param type 胸腔类型
+     * @return 国际化的胸腔类型名称
+     */
+    public static Component getTranslatedName(ChestCavityType type) {
+        return Component.translatable(getTranslationKey(type));
+    }
 
     private static ChestCavityType register(String path) {
         return ChestCavityTypeManager.register(WhoAmICore.of(path));

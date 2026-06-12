@@ -1,6 +1,8 @@
 package net.zhaiji.who_am_i_core.mixin;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -9,16 +11,22 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChestCavityData.class)
-public abstract class ChestCavityDataMixin {
+public abstract class ChestCavityDataMixin implements IChestCavityData {
+    @Unique
+    private int trophyFlags = 0;
+
     @Shadow
     @Nullable
     public abstract LivingEntity getOwner();
@@ -61,6 +69,44 @@ public abstract class ChestCavityDataMixin {
                 int hungerAmp = (cursedCount - 5) / 9;
                 owner.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, hungerAmp));
             }
+        }
+    }
+
+    @Override
+    public boolean isTrophyUsed(int flag) {
+        return (trophyFlags & flag) != 0;
+    }
+
+    @Override
+    public void setTrophyUsed(int flag, boolean used) {
+        if (used) {
+            trophyFlags |= flag;
+        } else {
+            trophyFlags &= ~flag;
+        }
+    }
+
+    @Override
+    public int getExpansionLevel() {
+        return Integer.bitCount(trophyFlags);
+    }
+
+    @Inject(
+        method = "serializeNBT(Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/CompoundTag;",
+        at = @At("RETURN")
+    )
+    private void who_am_i_core$serializeNBT(HolderLookup.Provider provider, CallbackInfoReturnable<CompoundTag> cir) {
+        cir.getReturnValue().putInt("trophyFlags", trophyFlags);
+    }
+
+    @Inject(
+        method = "deserializeNBT(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/nbt/CompoundTag;)V",
+        at = @At("RETURN")
+    )
+    private void who_am_i_core$deserializeNBT(HolderLookup.Provider provider, CompoundTag tag, CallbackInfo ci) {
+        // 优先读取新格式
+        if (tag.contains("trophyFlags")) {
+            trophyFlags = tag.getInt("trophyFlags");
         }
     }
 }

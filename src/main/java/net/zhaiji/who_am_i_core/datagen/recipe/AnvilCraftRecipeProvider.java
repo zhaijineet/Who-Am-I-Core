@@ -23,6 +23,7 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class AnvilCraftRecipeProvider extends RecipeProvider {
     public AnvilCraftRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -40,6 +41,7 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
         cyberneticOrganRecipes(output);
         squashRecipe(output);
         lesionOrganRecipes(output);
+        elderOrganRecipes(output);
         petiteChestOpenerRecipe(output);
     }
 
@@ -276,6 +278,38 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
             .result(result)
             .unlockedBy(getHasName(result), criterion)
             .save(output, WhoAmICore.of(getItemName(result)));
+    }
+
+    // 远古器官：普通器官 → 时移 → 远古器官
+    private void elderOrganRecipes(RecipeOutput output) {
+        elderTimeWarp(output, InitItem.HEART, InitItem.ELDER_HEART);
+        elderTimeWarp(output, InitItem.LUNG, InitItem.ELDER_LUNG);
+        elderTimeWarp(output, InitItem.GILL, InitItem.ELDER_GILL);
+        elderTimeWarp(output, InitItem.APPENDIX, InitItem.ELDER_APPENDIX);
+        elderTimeWarp(output, InitItem.LIVER, InitItem.ELDER_LIVER);
+        elderTimeWarp(output, InitItem.SPLEEN, InitItem.ELDER_SPLEEN);
+        elderTimeWarp(output, InitItem.KIDNEY, InitItem.ELDER_KIDNEY);
+        elderTimeWarp(output, InitItem.STOMACH, InitItem.ELDER_STOMACH);
+        elderTimeWarp(output, InitItem.MUSCLE, InitItem.ELDER_MUSCLE);
+        elderTimeWarp(output, InitItem.FISH_MUSCLE, InitItem.ELDER_FISH_MUSCLE);
+        elderTimeWarp(output, InitItem.SPINE, InitItem.ELDER_SPINE);
+        elderTimeWarp(output, InitItem.RIB, InitItem.ELDER_RIB);
+        elderTimeWarp(output, InitItem.FISH_SPINE, InitItem.ELDER_FISH_SPINE);
+        elderTimeWarp(output, InitItem.FISH_BONE, InitItem.ELDER_FISH_BONE);
+        elderTimeWarp(output, InitItem.INTESTINE, InitItem.ELDER_INTESTINE);
+        elderTimeWarp(output, InitItem.FISH_INTESTINE, InitItem.ELDER_FISH_INTESTINE);
+        elderTimeWarp(output, InitItem.MANA_REACTOR, InitItem.ELDER_MANA_REACTOR);
+        elderTimeWarp(output, InitItem.GUARDIAN_EYE, InitItem.ELDER_GUARDIAN_EYE);
+    }
+
+    private void elderTimeWarp(
+        RecipeOutput output, Supplier<Item> base, Supplier<Item> result
+    ) {
+        TimeWarpRecipe.builder()
+            .requires(base.get())
+            .result(result.get())
+            .unlockedBy(getHasName(result.get()), has(base.get()))
+            .save(output, WhoAmICore.of(getItemName(result.get())));
     }
 
     // 娇小开胸器：冲压开胸器 → 娇小开胸器

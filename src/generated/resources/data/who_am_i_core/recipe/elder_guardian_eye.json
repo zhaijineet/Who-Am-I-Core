@@ -1,0 +1,13 @@
+{
+  "type": "anvilcraft:time_warp",
+  "ingredients": [
+    {
+      "items": "chestcavitybeyond:guardian_eye"
+    }
+  ],
+  "results": [
+    {
+      "id": "chestcavitybeyond:elder_guardian_eye"
+    }
+  ]
+}

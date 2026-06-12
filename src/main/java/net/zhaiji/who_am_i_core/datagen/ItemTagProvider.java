@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
@@ -322,6 +323,8 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.BONE).add(WAICOrgans.HAUNTED_BONE.get());
         tag(ItemTagManager.SPINE).add(WAICOrgans.SWORD_BONE.get());
         tag(ItemTagManager.BONE).add(WAICOrgans.SWORD_BONE.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(WAICOrgans.SWORD_BONE.get());
+        tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).add(WAICOrgans.SWORD_BONE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.STRAIGHT_INTESTINE.get());
         tag(WAICItemTagManager.UNIQUE).add(WAICOrgans.STRAIGHT_INTESTINE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.SQUASH.get());

@@ -1,0 +1,13 @@
+{
+  "type": "anvilcraft:time_warp",
+  "ingredients": [
+    {
+      "items": "chestcavitybeyond:fish_muscle"
+    }
+  ],
+  "results": [
+    {
+      "id": "chestcavitybeyond:elder_fish_muscle"
+    }
+  ]
+}

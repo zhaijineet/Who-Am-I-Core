@@ -22,5 +22,6 @@ public class ClientEventManager {
     public static void gameBusListener(IEventBus gameBus) {
         gameBus.addListener(ClientEventHandler::handlerComputeFovModifierEvent);
         gameBus.addListener(EventPriority.LOW, ClientEventHandler::handlerMovementInputUpdateEvent);
+        gameBus.addListener(ClientEventHandler::handlerItemTooltipEvent);
     }
 }

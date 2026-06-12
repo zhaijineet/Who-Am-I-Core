@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nautilus_shell": {
+    "has_elder_fish_spine": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:nautilus_shell"
+            "items": "chestcavitybeyond:fish_spine"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "who_am_i_core:fraud"
+        "recipe": "who_am_i_core:elder_fish_spine"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_nautilus_shell"
+      "has_elder_fish_spine"
     ]
   ],
   "rewards": {
     "recipes": [
-      "who_am_i_core:fraud"
+      "who_am_i_core:elder_fish_spine"
     ]
   }
 }

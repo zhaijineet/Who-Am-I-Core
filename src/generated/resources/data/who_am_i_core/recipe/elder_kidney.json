@@ -1,0 +1,13 @@
+{
+  "type": "anvilcraft:time_warp",
+  "ingredients": [
+    {
+      "items": "chestcavitybeyond:kidney"
+    }
+  ],
+  "results": [
+    {
+      "id": "chestcavitybeyond:elder_kidney"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "anvilcraft:time_warp",
+  "ingredients": [
+    {
+      "items": "chestcavitybeyond:mana_reactor"
+    }
+  ],
+  "results": [
+    {
+      "id": "chestcavitybeyond:elder_mana_reactor"
+    }
+  ]
+}

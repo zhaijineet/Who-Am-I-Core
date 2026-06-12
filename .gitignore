@@ -27,3 +27,4 @@ repo
 .narrafork/
 .worktrees/
 src/generated/resources/.cache/
+libs/

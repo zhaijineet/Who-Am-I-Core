@@ -52,12 +52,15 @@ repositories {
             includeGroup "dev.dubhe"
         }
     }
-    maven { // Registrate Fork
+    maven {
         name = "Ithundxr Maven"
         url = "https://maven.ithundxr.dev/snapshots"
         content {
             includeGroup "com.tterrag.registrate"
         }
+    }
+    flatDir {
+        dirs 'libs'
     }
 }
 
@@ -153,7 +156,8 @@ configurations {
 
 dependencies {
     // JEI
-    localRuntime "mezz.jei:jei-1.21.1-neoforge:19.27.0.340"
+    compileOnly("mezz.jei:jei-1.21.1-neoforge-api:19.27.0.340")
+    runtimeOnly("mezz.jei:jei-1.21.1-neoforge:19.27.0.340")
     // 苹果皮
     localRuntime "squeek.appleskin:appleskin-neoforge:mc1.21-3.0.8"
     // Jade
@@ -184,8 +188,9 @@ dependencies {
 
     api "com.tterrag.registrate:Registrate:MC1.21-1.3.0+62"
 
-    // Chest Cavity Beyond
-    implementation "curse.maven:chest-cavity-beyond-1427715:8155568"
+    // Chest Cavity Beyond（curse maven爆炸了，临时改成本地依赖）
+    // implementation "curse.maven:chest-cavity-beyond-1427715:8235385"
+    implementation 'blank:chestcavitybeyond_neoforge_1.21.1:1.6.1'
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物
