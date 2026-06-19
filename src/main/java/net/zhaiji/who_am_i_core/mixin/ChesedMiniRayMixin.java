@@ -40,7 +40,7 @@ public abstract class ChesedMiniRayMixin extends Entity {
     public void whoAmICore$hurtTarget(LivingEntity owner, LivingEntity target, CallbackInfo ci) {
         if (!item.is(FDBossesOrgans.CHESED.get())) return;
 
-        // 使用玩家最大生命值 × 33% 作为伤害
+        // 使用自身最大生命值 × 33% 作为伤害
         float damage = owner.getMaxHealth() * 0.33F;
 
         DamageSource damageSource = whoAmICore$self().level().damageSources().mobAttack(owner);

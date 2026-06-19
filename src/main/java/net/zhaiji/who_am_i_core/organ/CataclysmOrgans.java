@@ -5,15 +5,16 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICPlayerSkillUtil;
 
 import java.util.function.Supplier;
 
 public class CataclysmOrgans {
-    // ==================== 利维坦器官 ====================
-
     // 利维坦心脏
     public static final Supplier<Item> LEVIATHAN_HEART = WAICItem.ITEM.register(
         "leviathan_heart",
@@ -79,8 +80,6 @@ public class CataclysmOrgans {
             .build()
     );
 
-    // ==================== 魂尸器官 ====================
-
     // 魂尸脊柱
     public static final Supplier<Item> DRAUGR_SPINE = WAICItem.ITEM.register(
         "draugr_spine",
@@ -97,8 +96,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
             .build()
     );
-
-    // ==================== 咒翼灵骸器官 ====================
 
     // 咒翼灵骸脊柱
     public static final Supplier<Item> MALEDICTUS_SPINE = WAICItem.ITEM.register(
@@ -124,6 +121,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
             .attack(CataclysmOrganUtil::phantomHeartAttack)
+            .tooltip(WAICTooltipManager.PHANTOM_HEART_TOOLTIP)
             .build()
     );
 
@@ -143,12 +141,12 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-            .skill(CataclysmOrganUtil::sealingStoneSlabSkill)
+            .skill(WAICPlayerSkillUtil::sealingStoneSlab)
+            .goalSkill(WAICGoalSkillUtil.sealingStoneSlabGoalSkill())
             .cooldown(300)
+            .tooltip(WAICTooltipManager.SEALING_STONE_SLAB_TOOLTIP)
             .build()
     );
-
-    // ==================== 斯库拉器官 ====================
 
     // 涛浪提灯
     public static final Supplier<Item> TIDAL_LANTERN = WAICItem.ITEM.register(
@@ -158,6 +156,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.WATER_BREATH, 2)
             .baseMultipliedAttribute(NeoForgeMod.SWIM_SPEED, 0.5)
             .attack(CataclysmOrganUtil::tidalLanternAttack)
+            .tooltip(WAICTooltipManager.TIDAL_LANTERN_TOOLTIP)
             .build()
     );
 
@@ -167,6 +166,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .tooltip(WAICTooltipManager.STORM_SPINE_TOOLTIP)
             .build()
     );
 
@@ -179,8 +179,6 @@ public class CataclysmOrgans {
             .removed(CataclysmOrganUtil::stormRibRemoved)
             .build()
     );
-
-    // ==================== 焰魔器官 ====================
 
     // 不灭薪火
     public static final Supplier<Item> UNDYING_EMBER = WAICItem.ITEM.register(
@@ -210,10 +208,9 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NERVES, 1)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .attack(CataclysmOrganUtil::blazingVisageAttack)
+            .tooltip(WAICTooltipManager.BLAZING_VISAGE_TOOLTIP)
             .build()
     );
-
-    // ==================== 下界合金巨兽器官 ====================
 
     // 巨兽炉心
     public static final Supplier<Item> MONSTROSITY_CORE = WAICItem.ITEM.register(
@@ -237,8 +234,10 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
-            .skill(CataclysmOrganUtil::monstrosityCircuitSkill)
+            .skill(WAICPlayerSkillUtil::monstrosityCircuit)
+            .goalSkill(WAICGoalSkillUtil.monstrosityCircuitGoalSkill())
             .cooldown(160)
+            .tooltip(WAICTooltipManager.MONSTROSITY_CIRCUIT_TOOLTIP)
             .build()
     );
 
@@ -250,10 +249,9 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NUTRITION, 1)
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
+            .tooltip(WAICTooltipManager.MONSTROSITY_FURNACE_TOOLTIP)
             .build()
     );
-
-    // ==================== 远古工厂器官 ====================
 
     // 战术磁盘
     public static final Supplier<Item> TACTICAL_DISK = WAICItem.ITEM.register(
@@ -279,6 +277,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2)
             .tick(CataclysmOrganUtil::powerCellTick)
+            .tooltip(WAICTooltipManager.POWER_CELL_TOOLTIP)
             .build()
     );
 
@@ -298,8 +297,10 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 5)
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 2)
-            .skill(CataclysmOrganUtil::mechanicalStarSkill)
+            .skill(WAICPlayerSkillUtil::mechanicalStar)
+            .goalSkill(WAICGoalSkillUtil.mechanicalStarGoalSkill())
             .cooldown(160)
+            .tooltip(WAICTooltipManager.MECHANICAL_STAR_TOOLTIP)
             .build()
     );
 
@@ -307,12 +308,12 @@ public class CataclysmOrgans {
     public static final Supplier<Item> DEATH_LENS = WAICItem.ITEM.register(
         "death_lens",
         () -> Organ.builder()
-            .skill(CataclysmOrganUtil::deathLensSkill)
+            .skill(WAICPlayerSkillUtil::deathLens)
+            .goalSkill(WAICGoalSkillUtil.deathLensGoalSkill())
             .cooldown(300)
+            .tooltip(WAICTooltipManager.DEATH_LENS_TOOLTIP)
             .build()
     );
-
-    // ==================== 末影守卫器官 ====================
 
     // 守卫石块
     public static final Supplier<Item> GUARDIAN_STONE = WAICItem.ITEM.register(
@@ -329,8 +330,10 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2.5)
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
-            .skill(CataclysmOrganUtil::voidCrystalSpineSkill)
+            .skill(WAICPlayerSkillUtil::voidCrystalSpine)
+            .goalSkill(WAICGoalSkillUtil.voidCrystalSpineGoalSkill())
             .cooldown(300)
+            .tooltip(WAICTooltipManager.VOID_CRYSTAL_SPINE_TOOLTIP)
             .build()
     );
 

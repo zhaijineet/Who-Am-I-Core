@@ -7,8 +7,11 @@ import net.minecraft.world.item.component.BundleContents;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.item.ClothTeddyBearItem;
+import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.CompanionsOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICPlayerSkillUtil;
 
 import java.util.function.Supplier;
 
@@ -19,6 +22,7 @@ public class CompanionsOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 4)
             .hurt(CompanionsOrganUtil::pontiffHeartHurt)
+            .tooltip(WAICTooltipManager.PONTIFF_HEART_TOOLTIP)
             .build()
     );
 
@@ -26,9 +30,9 @@ public class CompanionsOrgans {
     public static final Supplier<Item> PONTIFF_LUNG = WAICItem.ITEM.register(
         "pontiff_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
-            .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 3)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
+            .addValueAttribute(InitAttribute.ENDURANCE, 3)
             .build()
     );
 
@@ -36,7 +40,7 @@ public class CompanionsOrgans {
     public static final Supplier<Item> PONTIFF_STOMACH = WAICItem.ITEM.register(
         "pontiff_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 4)
+            .addValueAttribute(InitAttribute.DIGESTION, 3)
             .build()
     );
 
@@ -44,7 +48,7 @@ public class CompanionsOrgans {
     public static final Supplier<Item> PONTIFF_INTESTINE = WAICItem.ITEM.register(
         "pontiff_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 4)
+            .addValueAttribute(InitAttribute.NUTRITION, 3)
             .build()
     );
 
@@ -52,7 +56,7 @@ public class CompanionsOrgans {
     public static final Supplier<Item> PONTIFF_KIDNEY = WAICItem.ITEM.register(
         "pontiff_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 4)
+            .addValueAttribute(InitAttribute.FILTRATION, 3)
             .build()
     );
 
@@ -61,7 +65,8 @@ public class CompanionsOrgans {
         "pontiff_spleen",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 4)
-            .skill(CompanionsOrganUtil::pontiffSpleenSkill)
+            .skill(WAICPlayerSkillUtil::pontiffSpleen)
+            .goalSkill(WAICGoalSkillUtil.pontiffSpleenGoalSkill())
             .cooldown(200)
             .build()
     );
@@ -81,7 +86,8 @@ public class CompanionsOrgans {
         "pontiff_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2)
-            .skill(CompanionsOrganUtil::pontiffAppendixSkill)
+            .skill(WAICPlayerSkillUtil::pontiffAppendix)
+            .goalSkill(WAICGoalSkillUtil.pontiffAppendixGoalSkill())
             .cooldown(160)
             .build()
     );
@@ -96,8 +102,6 @@ public class CompanionsOrgans {
             .build()
     );
 
-    // ==================== 蛋糕器官 ====================
-
     // 蛋糕心脏
     public static final Supplier<Item> CAKE_HEART = WAICItem.ITEM.register(
         "cake_heart",
@@ -110,9 +114,9 @@ public class CompanionsOrgans {
     public static final Supplier<Item> CAKE_LUNG = WAICItem.ITEM.register(
         "cake_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
-            .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
+            .addValueAttribute(InitAttribute.ENDURANCE, 2)
             .build()
     );
 
@@ -132,15 +136,14 @@ public class CompanionsOrgans {
             .build()
     );
 
-    // ==================== 布织器官系列 ====================
-
     // 布织泰迪熊
     public static final Supplier<Item> CLOTH_TEDDY_BEAR = WAICItem.ITEM.register(
         "cloth_teddy_bear",
         () -> Organ.builder(ClothTeddyBearItem::new)
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
             .cooldown(100)
-            .skill(CompanionsOrganUtil::clothTeddyBearSkill)
+            .skill(WAICPlayerSkillUtil::clothTeddyBear)
+            .goalSkill(WAICGoalSkillUtil.clothTeddyBearGoalSkill())
             .chestCavityClose(CompanionsOrganUtil::clothTeddyBearChestCavityClose)
             .build()
     );

@@ -7,21 +7,16 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
@@ -126,31 +121,13 @@ public class MowziesMobOrganUtil {
         });
     }
 
-    /**
-     * 泥峭核心 - 技能
-     */
-    public static boolean bluffCoreSkill(ChestCavitySlotContext slotContext) {
+    // 泥峭核心 — 吃泥土方块（底层逻辑，接收方块坐标）
+    public static boolean bluffCore(ChestCavitySlotContext slotContext, BlockPos pos) {
         LivingEntity entity = slotContext.entity();
-        // 射线检测泥土方块
-        Vec3 from = entity.getEyePosition();
-        Vec3 to = from.add(entity.getLookAngle()
-            .normalize()
-            .scale(entity.getAttribute(Attributes.BLOCK_INTERACTION_RANGE).getValue()));
-        ClipContext clipContext = new ClipContext(
-            from, to,
-            ClipContext.Block.OUTLINE,
-            ClipContext.Fluid.NONE,
-            CollisionContext.empty()
-        );
         Level level = entity.level();
-        BlockHitResult hitResult = level.clip(clipContext);
-        if (hitResult.getType() != HitResult.Type.BLOCK) return false;
-        BlockPos pos = hitResult.getBlockPos();
         BlockState blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
-        // 检查是否为泥土方块
         if (!isDirtBlock(block)) return false;
-        // 播放音效和粒子效果
         eatDirt(entity, block.asItem().getDefaultInstance());
         level.levelEvent(2001, pos, Block.getId(blockState));
         level.removeBlock(pos, false);

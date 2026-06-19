@@ -7,11 +7,13 @@ import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 
 import java.util.List;
 
 public class IronSpellOrganUtil {
+
     /**
      * 腐败魂灯灵魂收割：死亡实体 16 格内所有拥有腐败魂灯的 LivingEntity 均分黑胆汁
      */
@@ -35,13 +37,15 @@ public class IronSpellOrganUtil {
     }
 
     /**
-     * 尸王脊柱：消耗等额黑胆汁吸收最高50%伤害
+     * 尸王脊柱：消耗等额黑胆汁吸收最高80%伤害
+     * 吸收上限随魔法器官数量缩放
      * 返回实际吸收的伤害值，应加入 block
      */
     public static float deadKingSpineHurt(LivingEntity entity, float damage) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         if (!data.hasOrgan(IronSpellOrgans.DEAD_KING_SPINE.get())) return 0;
-        float maxAbsorb = damage * 0.5F;
+        int magicCount = data.getOrganCount(WAICItemTagManager.MAGIC);
+        float maxAbsorb = damage * Math.min(0.8F, 0.3F + magicCount * 0.03F);
         float available = HumoursData.get(entity).getBlackBile();
         float toAbsorb = Math.min(maxAbsorb, available);
         if (toAbsorb > 0) {

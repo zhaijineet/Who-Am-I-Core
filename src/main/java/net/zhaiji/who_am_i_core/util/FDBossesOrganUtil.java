@@ -11,16 +11,19 @@ import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 
 public class FDBossesOrganUtil {
+
     /**
      * 慈悲被动：闪电射线
      * <p>
-     * 攻击时召唤Chesed闪电射线追踪目标，造成玩家最大生命值33%的伤害并施加感电效果。
+     * 攻击时召唤Chesed闪电射线追踪目标，造成自身最大生命值33%的伤害并施加感电效果。
      * 冷却3秒（60tick），通过 OrganSkillUtil 检测和设置冷却。
      * </p>
      */
     public static void chesedAttack(
-        ChestCavitySlotContext context, LivingEntity target,
-        DamageSource source, DamageContainer damageContainer
+        ChestCavitySlotContext context,
+        LivingEntity target,
+        DamageSource source,
+        DamageContainer damageContainer
     ) {
         if (OrganUtil.isSelfDamage(target, source)) return;
 
@@ -58,6 +61,4 @@ public class FDBossesOrganUtil {
             damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
         }
     }
-
-
 }

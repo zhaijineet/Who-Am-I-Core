@@ -20,7 +20,9 @@ public class WAICItemTagManager {
     // 冰龙
     public static final TagKey<Item> ICE_DRAGON = register("ice_dragon", 0xFF55FFFF, 59);
     // 电龙
-    public static final TagKey<Item> LIGHTNING_DRAGON = register("lightning_dragon", 0xFFFFFF55, 58);
+    public static final TagKey<Item> LIGHTNING_DRAGON = register("lightning_dragon", 0xFFE27CCC, 58);
+    // 电荷
+    public static final TagKey<Item> CHARGE = register("charge", 0xFF00DFFF, 55);
     // 炽焰
     public static final TagKey<Item> FIRE = register("fire", 0xFFFFAA00, 50);
     // 冰霜
@@ -45,6 +47,10 @@ public class WAICItemTagManager {
     public static final TagKey<Item> QLIPHOTH = register("qliphoth", 0xFFAA00AA, 2);
     // 九狱
     public static final TagKey<Item> NINE_HELL = register("nine_hell", 0xFFAA00AA, 1);
+    // 教宗
+    public static final TagKey<Item> PONTIFF = register("pontiff", 0xFFFFDDAA, 4);
+    // 斯库拉
+    public static final TagKey<Item> SCYLLA = register("scylla", 0xFF2266AA, 5);
 
     /**
      * 创建 WAIC namespace 的 TagKey 并注册到 CCB 的 ItemTagManager

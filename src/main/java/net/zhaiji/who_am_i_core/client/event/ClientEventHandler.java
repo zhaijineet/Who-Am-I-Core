@@ -9,15 +9,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import java.util.List;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
@@ -29,6 +28,8 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICEntity;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
+
+import java.util.List;
 
 public class ClientEventHandler {
     /**
@@ -132,10 +133,10 @@ public class ClientEventHandler {
             (stack, level, entity, seed) -> {
                 if (entity instanceof LivingEntity living && OrganUtil.isInChest(living, stack)) {
                     return
-                        living.hasEffect(WAICEffect.FIRE_DRAGON_POWER) &&
-                        living.hasEffect(WAICEffect.ICE_DRAGON_POWER) &&
-                        living.hasEffect(WAICEffect.LIGHTNING_DRAGON_POWER) ||
-                        living.hasEffect(WAICEffect.DRAGON_POWER) ? 1.0F : 0.0F;
+                        living.hasEffect(WAICEffect.FIRE_DRAGON_POWER)
+                        && living.hasEffect(WAICEffect.ICE_DRAGON_POWER)
+                        && living.hasEffect(WAICEffect.LIGHTNING_DRAGON_POWER)
+                        || living.hasEffect(WAICEffect.DRAGON_POWER) ? 1.0F : 0.0F;
                 }
                 return 0.0F;
             }

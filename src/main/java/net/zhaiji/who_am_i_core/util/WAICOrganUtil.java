@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -136,6 +137,19 @@ public class WAICOrganUtil {
     }
 
     /**
+     * 判断指定墨水瓶是否是胸腔中激活的（第一个）墨水瓶
+     *
+     * @param data  胸腔数据
+     * @param index 当前墨水瓶槽位索引（-1 表示未在胸腔中）
+     * @param stack 当前墨水瓶 ItemStack
+     * @return true 表示该墨水瓶参与墨水存储/抽取
+     */
+    public static boolean isInkBottleActive(ChestCavityData data, int index, ItemStack stack) {
+        if (data == null || index == -1) return false;
+        return getFirstInkBottle(data) == stack;
+    }
+
+    /**
      * 向墨水瓶插入墨水，只操作第一个检测到的墨水瓶，容量为墨水器官数量×1000
      *
      * @param data     胸腔数据
@@ -143,7 +157,7 @@ public class WAICOrganUtil {
      * @param simulate 是否模拟（true 时不修改数据）
      * @return 实际插入量
      */
-    public static int insertInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+    public static float insertInkToBottle(ChestCavityData data, float amount, boolean simulate) {
         if (amount <= 0) return 0;
         int capacity = getInkCapacity(data);
         if (capacity <= 0) return 0;
@@ -151,11 +165,11 @@ public class WAICOrganUtil {
         if (inkBottle.isEmpty()) return 0;
         CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         CompoundTag tag = customData.copyTag();
-        int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
-        int space = Math.max(0, capacity - currentInk);
-        int toInsert = Math.max(0, Math.min(amount, space));
+        float currentInk = tag.contains("ink") ? tag.getFloat("ink") : 0;
+        float space = Math.max(0, capacity - currentInk);
+        float toInsert = Math.max(0, Math.min(amount, space));
         if (toInsert > 0 && !simulate) {
-            tag.putInt("ink", currentInk + toInsert);
+            tag.putFloat("ink", currentInk + toInsert);
             inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         }
         return toInsert;
@@ -169,16 +183,16 @@ public class WAICOrganUtil {
      * @param simulate 是否模拟（true 时不修改数据）
      * @return 实际抽取量
      */
-    public static int extractInkToBottle(ChestCavityData data, int amount, boolean simulate) {
+    public static float extractInkToBottle(ChestCavityData data, float amount, boolean simulate) {
         if (amount <= 0) return 0;
         ItemStack inkBottle = getFirstInkBottle(data);
         if (inkBottle.isEmpty()) return 0;
         CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         CompoundTag tag = customData.copyTag();
-        int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
-        int toExtract = Math.max(0, Math.min(amount, currentInk));
+        float currentInk = tag.contains("ink") ? tag.getFloat("ink") : 0;
+        float toExtract = Math.max(0, Math.min(amount, currentInk));
         if (toExtract > 0 && !simulate) {
-            tag.putInt("ink", currentInk - toExtract);
+            tag.putFloat("ink", currentInk - toExtract);
             inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         }
         return toExtract;
@@ -201,9 +215,9 @@ public class WAICOrganUtil {
         ItemStack inkBottle = context.stack();
         CustomData customData = inkBottle.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         CompoundTag tag = customData.copyTag();
-        int currentInk = tag.contains("ink") ? tag.getInt("ink") : 0;
+        float currentInk = tag.contains("ink") ? tag.getFloat("ink") : 0;
         if (currentInk > capacity) {
-            tag.putInt("ink", capacity);
+            tag.putFloat("ink", capacity);
             inkBottle.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         }
     }
@@ -215,7 +229,7 @@ public class WAICOrganUtil {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         if (!(stack.getItem() instanceof InkItem inkItem)) return stack;
 
-        int value = switch (inkItem.getRarity()) {
+        float value = switch (inkItem.getRarity()) {
             case COMMON -> 1;
             case UNCOMMON -> 5;
             case RARE -> 25;
@@ -275,7 +289,7 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 墨水肌肉技能：挨打时为墨水瓶添加墨水（伤害值的10倍）
+     * 墨水肌肉技能：挨打时为墨水瓶添加墨水（伤害值的 (5 + 墨水器官数 × 0.5) 倍）
      *
      * @param context         胸腔槽位上下文
      * @param source          伤害源
@@ -285,7 +299,8 @@ public class WAICOrganUtil {
         if (OrganUtil.isSelfDamage(context.entity(), source)) return;
         float damage = damageContainer.getNewDamage();
         if (damage <= 0) return;
-        insertInkToBottle(context.data(), (int) (damage * 10), false);
+        float conversionRate = 5.0F + context.data().getOrganCount(WAICItemTagManager.INK) * 0.5F;
+        insertInkToBottle(context.data(), damage * conversionRate, false);
     }
 
     /**
@@ -304,7 +319,7 @@ public class WAICOrganUtil {
      * 墨水不足时有墨水就全耗，只回复实际消耗掉的墨水量
      * 没有墨水或法力已满时不触发也不冷却
      */
-    public static boolean inkAppendixSkill(ChestCavitySlotContext context) {
+    public static boolean inkAppendix(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
         LivingEntity entity = context.entity();
 
@@ -317,7 +332,7 @@ public class WAICOrganUtil {
         if (manaToRestore <= 0) return false; // 法力已满，不触发
 
         // 消耗墨水，返回实际抽取量
-        int actualExtracted = extractInkToBottle(data, (int) manaToRestore, false);
+        float actualExtracted = extractInkToBottle(data, manaToRestore, false);
         if (actualExtracted <= 0) return false;
 
         // 回复法力
@@ -352,8 +367,6 @@ public class WAICOrganUtil {
         modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
     }
 
-    // ==================== 病变器官 ====================
-
     /**
      * 病变心脏 modifier：每有一个负面效果+1健康，每有一个正面效果-1健康
      */
@@ -380,7 +393,7 @@ public class WAICOrganUtil {
      * 病变心脏技能：将自身所有效果传播给10格范围内的所有LivingEntity
      * 冷却时间10秒（200tick）
      */
-    public static boolean lesionHeartSkill(ChestCavitySlotContext context) {
+    public static boolean lesionHeart(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         Collection<MobEffectInstance> effects = entity.getActiveEffects();
         if (effects.isEmpty()) return false;
@@ -437,8 +450,6 @@ public class WAICOrganUtil {
         }
     }
 
-    // ==================== 猩红器官 ====================
-
     /**
      * 猩红心脏泣血：每次受到治疗时，将治疗量 ×5 转化为血液存储
      */
@@ -446,7 +457,7 @@ public class WAICOrganUtil {
         LivingEntity entity = context.entity();
         if (HumoursData.get(entity).isBloodFull()) return;
         float amount = event.getAmount();
-        HumoursData.insertBlood(entity, amount * 5, false);
+        HumoursData.insertBlood(entity, amount * (3.0F + (float) (entity.getAttributeValue(InitAttribute.METABOLISM) * 0.2)), false);
     }
 
     /**
@@ -495,13 +506,13 @@ public class WAICOrganUtil {
      * @param context 胸腔槽位上下文
      * @return true 触发冷却
      */
-    public static boolean crimsonAppendixSkill(ChestCavitySlotContext context) {
+    public static boolean crimsonAppendix(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
 
-        float missingHP = entity.getMaxHealth() - entity.getHealth();
-        if (missingHP <= 0) return false;
+        float missingHealth = entity.getMaxHealth() - entity.getHealth();
+        if (missingHealth <= 0) return false;
 
-        float bloodNeeded = missingHP * 5;
+        float bloodNeeded = missingHealth * 5;
         float actualBlood = HumoursData.extractBlood(entity, bloodNeeded, false);
         if (actualBlood <= 0) return false;
 
@@ -543,8 +554,6 @@ public class WAICOrganUtil {
         event.setCanceled(true);
     }
 
-    // ==================== 电荷系统 ====================
-
     /**
      * 收集胸腔中所有蓄能模块
      */
@@ -570,11 +579,11 @@ public class WAICOrganUtil {
      * 获取电荷总量（已有模块列表）
      */
     public static float getCharge(List<ItemStack> modules) {
-        float total = 0;
+        float totalCharge = 0;
         for (ItemStack module : modules) {
-            total += getModuleCharge(module);
+            totalCharge += getModuleCharge(module);
         }
-        return total;
+        return totalCharge;
     }
 
     /**
@@ -623,33 +632,54 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 向蓄能模块中插入电荷（按比例分配到各模块）
+     * 向蓄能模块中插入电荷
+     * <p>
+     * 两阶段分配：
+     * Phase 1：所有模块先填到基础容量 500
+     * Phase 2（仅当 canOvercharge=true）：从第一个模块开始顺序超载充能到 750，然后下一个
+     * </p>
+     *
+     * @param canOvercharge 是否允许超载（超出基础容量 500）
      */
-    public static float insertCharge(ChestCavityData data, float amount, boolean simulate) {
+    public static float insertCharge(ChestCavityData data, float amount, boolean canOvercharge, boolean simulate) {
         if (amount <= 0) return 0;
         List<ItemStack> modules = collectEnergyModules(data);
         if (modules.isEmpty()) return 0;
 
-        float effectiveMax = getEffectiveMaxCharge(modules);
+        float globalMax = canOvercharge ? getEffectiveMaxCharge(modules) : getMaxCharge(modules);
         float currentCharge = getCharge(modules);
-        float canInsert = Math.max(0, effectiveMax - currentCharge);
+        float canInsert = Math.max(0, globalMax - currentCharge);
         float toInsert = Math.min(amount, canInsert);
 
         if (toInsert <= 0) return 0;
         if (simulate) return toInsert;
 
-        float maxPerModule = effectiveMax / modules.size();
         float remaining = toInsert;
+
+        // Phase 1: 所有模块填到基础容量 500
         for (ItemStack module : modules) {
-            float moduleCharge = getModuleCharge(module);
-            float moduleCanInsert = Math.max(0, maxPerModule - moduleCharge);
-            float insert = Math.min(remaining, moduleCanInsert);
-            if (insert > 0) {
-                setModuleCharge(module, moduleCharge + insert);
-                remaining -= insert;
-            }
             if (remaining <= 0) break;
+            float moduleCharge = getModuleCharge(module);
+            if (moduleCharge < 500) {
+                float fill = Math.min(remaining, 500 - moduleCharge);
+                setModuleCharge(module, moduleCharge + fill);
+                remaining -= fill;
+            }
         }
+
+        // Phase 2: 顺序超载充能（仅当允许超载）
+        if (canOvercharge) {
+            for (ItemStack module : modules) {
+                if (remaining <= 0) break;
+                float moduleCharge = getModuleCharge(module);
+                if (moduleCharge < 750) {
+                    float fill = Math.min(remaining, 750 - moduleCharge);
+                    setModuleCharge(module, moduleCharge + fill);
+                    remaining -= fill;
+                }
+            }
+        }
+
         return toInsert - remaining;
     }
 
@@ -710,7 +740,7 @@ public class WAICOrganUtil {
         if (extracted > 0 && !simulate && data.hasOrgan(WAICOrgans.CURRENT_RIB.get())) {
             float refundChance = isOverloadMode(entity) ? 0.5f : 0.25f;
             if (entity.getRandom().nextFloat() < refundChance) {
-                insertCharge(data, extracted, false);
+                insertCharge(data, extracted, true, false);
             }
         }
         return extracted;
@@ -724,46 +754,36 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 蓄能模块 tick：电龙器官产电 + 超载衰减
+     * 蓄能模块 tick：超载自衰减
      * <p>
-     * 每个电龙器官每 tick 产出 0.1 电荷，多个蓄能模块均等分担产电份额。
-     * 产出的电荷可超出基础上限 50%（与充能肌束一致）。
-     * 超出基础上限的电荷以 1/tick 的速率自然衰减。
+     * 只处理自己的 ItemStack，如果自身电荷超过基础容量 500，
+     * 每 tick 衰减 1 点。
      * </p>
      */
     public static void energyModuleTick(ChestCavitySlotContext context) {
-        ChestCavityData data = context.data();
-        LivingEntity entity = context.entity();
-        List<ItemStack> modules = collectEnergyModules(data);
-        if (modules.isEmpty()) return;
-        // 电龙器官被动产电
-        int lightningCount = data.getOrganCount(WAICItemTagManager.LIGHTNING_DRAGON);
-        if (lightningCount > 0) {
-            insertCharge(data, lightningCount * 0.1F, false);
-        }
-        // 超载衰减
-        float charge = getCharge(modules);
-        float maxCharge = getMaxCharge(modules);
-        if (charge > maxCharge) {
-            float drain = Math.min(1.0F, charge - maxCharge);
-            extractCharge(data, entity, drain, false);
+        ItemStack stack = context.stack();
+        float charge = getModuleCharge(stack);
+        if (charge > 500) {
+            float drain = Math.min(1.0F, charge - 500);
+            setModuleCharge(stack, charge - drain);
         }
     }
 
     /**
      * 演算核心 tick：信号再生
+     * <p>
+     * 每 tick 回复 1 点电荷，不超过基础容量上限（500 × 蓄能模块数量）。
+     * </p>
      */
     public static void computingCoreTick(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
         LivingEntity entity = context.entity();
         if (isOverloadMode(entity)) return;
-        List<ItemStack> modules = collectEnergyModules(data);
-        if (modules.isEmpty()) return;
-        float charge = getCharge(modules);
-        float maxCharge = getMaxCharge(modules);
-        if (charge < maxCharge) {
-            float toRegen = Math.min(1.0f, maxCharge - charge);
-            insertCharge(data, toRegen, false);
+        float totalCharge = getCharge(data);
+        float baseMax = getMaxCharge(data);
+        if (totalCharge < baseMax) {
+            float toRegen = Math.min(1.0f, baseMax - totalCharge);
+            insertCharge(data, toRegen, false, false);
         }
     }
 
@@ -774,14 +794,24 @@ public class WAICOrganUtil {
         ChestCavityData data = context.data();
         LivingEntity entity = context.entity();
         if (!entity.isSprinting()) return;
-        insertCharge(data, 1, false);
+        insertCharge(data, 1, true, false);
+    }
+
+    /**
+     * 电龙器官 tick：蓄能产电
+     * <p>
+     * 每个电龙器官每 tick 产出 0.1 电荷。
+     * </p>
+     */
+    public static void lightningDragonChargeTick(ChestCavitySlotContext context) {
+        insertCharge(context.data(), 0.1F, true, false);
     }
 
     /**
      * 传导链节主动技能：激活超频模式
      * 消耗当前总电荷的一半，持续时间等于消耗电荷量（tick）
      */
-    public static boolean conductiveSpineSkill(ChestCavitySlotContext context) {
+    public static boolean conductiveSpine(ChestCavitySlotContext context) {
         ChestCavityData data = context.data();
         LivingEntity entity = context.entity();
         List<ItemStack> modules = collectEnergyModules(data);
@@ -836,8 +866,6 @@ public class WAICOrganUtil {
         return blockPoints;
     }
 
-    // ==================== 九狱器官通用 ====================
-
     /**
      * 获取胸腔中九狱器官的数量
      */
@@ -857,8 +885,6 @@ public class WAICOrganUtil {
         }
     }
 
-    // ==================== 灵薄（阑尾）====================
-
     /**
      * 灵薄 modifier：幸运属性动态调整（基础 2 - N）
      */
@@ -873,12 +899,9 @@ public class WAICOrganUtil {
         if (!(context.entity() instanceof ServerPlayer serverPlayer)) return;
         // 每 20 tick（1秒）触发一次
         if (serverPlayer.tickCount % 20 != 0) return;
-        int n = getNineHellCount(context);
-        int xp = n * n;
-        serverPlayer.giveExperiencePoints(xp);
+        int nineHellCount = getNineHellCount(context);
+        serverPlayer.giveExperiencePoints(nineHellCount * nineHellCount);
     }
-
-    // ==================== 色欲（肠子）====================
 
     /**
      * 色欲 modifier：营养属性动态调整（基础 2 - N）
@@ -897,16 +920,13 @@ public class WAICOrganUtil {
         DamageContainer damageContainer
     ) {
         if (OrganUtil.isSelfDamage(target, source)) return;
-        int n = getNineHellCount(context);
-        float healPercent = n >= 3 ? 0.6F : (n == 2 ? 0.3F : 0.1F);
-        float damage = damageContainer.getNewDamage();
-        float healAmount = damage * healPercent;
+        int nineHellCount = getNineHellCount(context);
+        float healPercent = nineHellCount >= 3 ? 0.6F : (nineHellCount == 2 ? 0.3F : 0.1F);
+        float healAmount = damageContainer.getNewDamage() * healPercent;
         if (healAmount > 0) {
             context.entity().heal(healAmount);
         }
     }
-
-    // ==================== 暴食（胃）====================
 
     /**
      * 暴食 modifier：消化属性动态调整（基础 2 - N）
@@ -923,23 +943,23 @@ public class WAICOrganUtil {
     public static void gluttonyEatEffect(LivingEntity entity, ChestCavityData data, ItemStack food) {
         if (!data.hasOrgan(WAICOrgans.GLUTTONY.get())) return;
 
-        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
-        if (n < 2) return;
+        int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        if (nineHellCount < 2) return;
 
         FoodProperties foodProperties = food.get(DataComponents.FOOD);
         if (foodProperties == null) return;
         int nutrition = foodProperties.nutrition();
 
         // 效果2：吸收生命值（黄心），上限 N × 20
-        float absorptionToAdd = Math.min((float) nutrition * n, n * 20.0F);
+        float absorptionToAdd = Math.min((float) nutrition * nineHellCount, nineHellCount * 20.0F);
         if (absorptionToAdd > 0) {
             float currentAbsorption = entity.getAbsorptionAmount();
             entity.setAbsorptionAmount(currentAbsorption + absorptionToAdd);
         }
 
         // 效果3：额外生命回复
-        if (n >= 3) {
-            entity.heal(n);
+        if (nineHellCount >= 3) {
+            entity.heal(nineHellCount);
         }
     }
 
@@ -947,12 +967,12 @@ public class WAICOrganUtil {
      * 贪婪 modifier：呼吸恢复/容量/耐力动态调整（基础 2 - N）+ 抢夺/时运
      */
     public static void greedModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        int n = getNineHellCount(context);
-        modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
-        modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
-        modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        int nineHellCount = getNineHellCount(context);
+        modifiers.put(InitAttribute.BREATH_RECOVERY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
+        modifiers.put(InitAttribute.BREATH_CAPACITY, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
+        modifiers.put(InitAttribute.ENDURANCE, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
         // 抢夺 + 时运（叠加式）
-        int bonus = n >= 3 ? 6 : (n == 2 ? 3 : 1);
+        int bonus = nineHellCount >= 3 ? 6 : (nineHellCount == 2 ? 3 : 1);
         modifiers.put(WAICAttribute.LOOTING, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
         modifiers.put(WAICAttribute.FORTUNE, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
     }
@@ -961,10 +981,10 @@ public class WAICOrganUtil {
      * 愤怒 modifier：解毒属性动态调整（基础 2 - N）+ 力量/速度（叠加式）
      */
     public static void wrathModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        int n = getNineHellCount(context);
-        modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        int nineHellCount = getNineHellCount(context);
+        modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
         // 力量 + 速度（叠加式）
-        int bonus = n >= 3 ? 6 : (n == 2 ? 3 : 1);
+        int bonus = nineHellCount >= 3 ? 6 : (nineHellCount == 2 ? 3 : 1);
         modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
         modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
     }
@@ -987,14 +1007,14 @@ public class WAICOrganUtil {
         ChestCavityData data = ChestCavityUtil.getData(entity);
         if (!data.hasOrgan(WAICOrgans.HERESY.get())) return;
 
-        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
         IMobEffectInstance iEffect = (IMobEffectInstance) effectInstance;
 
         // 药水持续时间延长，罪业1：+50%（×1.5），罪业2：+150%（×2.5），罪业3：+150%（×2.5）
-        iEffect.setDuration(duration -> (int) (duration * (n >= 2 ? 2.5 : 1.5)), entity);
+        iEffect.setDuration(duration -> (int) (duration * (nineHellCount >= 2 ? 2.5 : 1.5)), entity);
 
         // 药水等级 +1
-        if (n >= 3) {
+        if (nineHellCount >= 3) {
             iEffect.setAmplifier(effectInstance.getAmplifier() + 1, entity);
         }
     }
@@ -1004,9 +1024,9 @@ public class WAICOrganUtil {
      * 暴击效果通过事件处理（CommonEventHandler 中 CriticalHitEvent）
      */
     public static void violenceModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        int n = getNineHellCount(context);
-        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
-        modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - n));
+        int nineHellCount = getNineHellCount(context);
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
+        modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
     }
 
     /**
@@ -1018,16 +1038,16 @@ public class WAICOrganUtil {
     public static void violenceCriticalHit(Player player, CriticalHitEvent event) {
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (!data.hasOrgan(WAICOrgans.VIOLENCE.get())) return;
-        int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
 
-        if (n >= 3) {
+        if (nineHellCount >= 3) {
             // 永远暴击 + 暴击伤害 ×4
             event.setCriticalHit(true);
             event.setDamageMultiplier(6.0F);
         } else {
             // 暴击伤害 ×2
             if (event.isCriticalHit()) {
-                event.setDamageMultiplier(n == 2 ? 6F : 3F);
+                event.setDamageMultiplier(nineHellCount == 2 ? 6F : 3F);
             }
         }
     }
@@ -1056,9 +1076,8 @@ public class WAICOrganUtil {
         DamageContainer damageContainer
     ) {
         if (OrganUtil.isSelfDamage(target, source)) return;
-        int n = getNineHellCount(context);
-        float percent = n >= 3 ? 0.09F : (n == 2 ? 0.04F : 0.01F);
-        float bonusDamage = target.getMaxHealth() * percent;
+        int nineHellCount = getNineHellCount(context);
+        float bonusDamage = target.getMaxHealth() * (nineHellCount >= 3 ? 0.09F : (nineHellCount == 2 ? 0.04F : 0.01F));
         if (bonusDamage > 0) {
             damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
         }
@@ -1071,11 +1090,12 @@ public class WAICOrganUtil {
      * 当清除的是「罪人」效果时，额外减少1层罪孽。
      * </p>
      */
-    public static boolean fleshIdolSkill(ChestCavitySlotContext context) {
+    public static boolean fleshIdol(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         if (entity.level().isClientSide()) return false;
 
         float health = entity.getHealth();
+        List<Holder<MobEffect>> toRemove = new ArrayList<>();
         for (MobEffectInstance effect : entity.getActiveEffects()) {
             if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
                 health /= 2;
@@ -1085,8 +1105,11 @@ public class WAICOrganUtil {
                     sins.setSinnedTimes(Math.max(0, sins.getSinnedTimes() - 1));
                     PlayerSins.setPlayerSins(player, sins);
                 }
-                entity.removeEffect(effect.getEffect());
+                toRemove.add(effect.getEffect());
             }
+        }
+        for (Holder<MobEffect> effect : toRemove) {
+            entity.removeEffect(effect);
         }
         entity.setHealth(Math.max(1, health));
         return true;

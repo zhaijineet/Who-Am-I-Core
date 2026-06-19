@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.organ;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
@@ -10,8 +11,6 @@ import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 import java.util.function.Supplier;
 
 public class IronSpellOrgans {
-    // ==================== 亡灵术士器官 ====================
-
     // 亡灵术士脊柱
     public static final Supplier<Item> NECROMANCER_SPINE = WAICItem.ITEM.register(
         "necromancer_spine",
@@ -29,8 +28,6 @@ public class IronSpellOrgans {
             .build()
     );
 
-    // ==================== 提洛斯回响·原初受火者器官 ====================
-
     // 原初之火
     public static final Supplier<Item> PRIMORDIAL_FLAME = WAICItem.ITEM.register(
         "primordial_flame",
@@ -40,8 +37,6 @@ public class IronSpellOrgans {
             .build()
     );
 
-    // ==================== 高位唤魔者器官 ====================
-
     // 绿宝石头骨
     public static final Supplier<Item> EMERALD_SKULL = WAICItem.ITEM.register(
         "emerald_skull",
@@ -50,8 +45,6 @@ public class IronSpellOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .build()
     );
-
-    // ==================== 死者之王器官 ====================
 
     // 腐败魂灯 - 灵魂收割被动在 CommonEventHandler 的 LivingDeathEvent 中处理
     public static final Supplier<Item> CORRUPTED_SOUL_LANTERN = WAICItem.ITEM.register(
@@ -67,6 +60,7 @@ public class IronSpellOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .tooltip(WAICTooltipManager.DEAD_KING_SPINE_TOOLTIP)
             .build()
     );
 

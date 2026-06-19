@@ -4,25 +4,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
+import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
-import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
+import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICPlayerSkillUtil;
 
 import java.util.function.Supplier;
 
 public class MowziesMobOrgans {
-    /**
-     * 钢铁守护者的护心镜
-     *
-     * <pre>
-     * #金属 #传说 #唯一被动
-     *
-     * -80%最终移动速度
-     * 移除FOV的修改
-     * 抵挡来自正面的实体的攻击
-     * 攻击后的3秒内不能移动
-     * </pre>
-     */
+    // 钢铁守护者的护心镜
     public static final Supplier<Item> FERROUS_WROUGHTNAUT_HEART_MIRROR = WAICItem.ITEM.register(
         "ferrous_wroughtnaut_heart_mirror",
         () -> Organ.builder()
@@ -33,15 +24,7 @@ public class MowziesMobOrgans {
             .build()
     );
 
-    /**
-     * 胸中新星
-     * <pre>
-     * #魔法 #召唤 #传说 #唯一被动
-     * 当胸腔关闭时，烧毁周围3x3范围内的器官（机械系和魔法系器官除外）
-     * 周围3x3范围内的乌姆塔纳面具会召唤对应的追随者
-     * 面具会为主人提供其药水效果
-     * </pre>
-     */
+    // 胸中新星
     public static final Supplier<Item> CHEST_NOVA = WAICItem.ITEM.register(
         "chest_nova",
         () -> Organ.builder()
@@ -53,21 +36,11 @@ public class MowziesMobOrgans {
             .build()
     );
 
-    /**
-     * 制御棒
-     *
-     * <pre>
-     * #机械 #传说 #唯一被动
-     *
-     * 当制御棒在胸中新星的3x3范围内时：
-     * - 乌姆塔纳追随者重新召唤冷却时间从30秒缩短为10秒
-     * - 面具也会给追随者提供效果
-     * </pre>
-     */
+    // 制御棒
     public static final Supplier<Item> CONTROL_ROD = WAICItem.ITEM.register(
         "control_rod",
         () -> Organ.builder()
-            .tooltip(WAICTooltipUtil.CONTROL_ROD_TOOLTIP)
+            .tooltip(WAICTooltipManager.CONTROL_ROD_TOOLTIP)
             .build()
     );
 
@@ -163,14 +136,7 @@ public class MowziesMobOrgans {
             .build()
     );
 
-    /**
-     * 禅心
-     * <pre>
-     * 生命值+3，防御+1.5，击退抗性+100%，跳跃力+2
-     * 磐石之躯：免疫摔落伤害
-     * 地卜亲和：拥有大地祝福效果时，伤害减免50%
-     * </pre>
-     */
+    // 禅心
     public static final Supplier<Item> ZEN_HEART = WAICItem.ITEM.register(
         "zen_heart",
         () -> Organ.builder()
@@ -181,44 +147,29 @@ public class MowziesMobOrgans {
             .build()
     );
 
-    /**
-     * 泥峭铭文板
-     * <pre>
-     * #魔法
-     * 右键长按食用泥土物品，恢复饥饿值并获得吸收效果
-     * </pre>
-     */
+    // 泥峭铭文板
     public static final Supplier<Item> BLUFF_TABLET = WAICItem.ITEM.register(
         "bluff_tablet",
         () -> Organ.builder()
             .build()
     );
 
-    /**
-     * 活性泥峭棒
-     * <pre>
-     * #魔法
-     * 右键长按食用泥土物品，恢复饥饿值并增加饱和度
-     * </pre>
-     */
+    // 活性泥峭棒
     public static final Supplier<Item> ACTIVE_BLUFF_ROD = WAICItem.ITEM.register(
         "active_bluff_rod",
         () -> Organ.builder()
             .build()
     );
 
-    public static void register() {
-    }    /**
-     * 泥峭核心
-     * <pre>
-     * #魔法
-     * 食用视线方向的泥土方块
-     * </pre>
-     */
+    // 泥峭核心
     public static final Supplier<Item> BLUFF_CORE = WAICItem.ITEM.register(
         "bluff_core",
         () -> Organ.builder()
-            .skill(MowziesMobOrganUtil::bluffCoreSkill)
+            .skill(WAICPlayerSkillUtil::bluffCore)
+            .goalSkill(WAICGoalSkillUtil.bluffCoreGoalSkill())
             .build()
     );
+
+    public static void register() {
+    }
 }

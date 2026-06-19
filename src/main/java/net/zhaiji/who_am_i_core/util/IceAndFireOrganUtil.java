@@ -16,12 +16,14 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
 import net.zhaiji.who_am_i_core.task.HydraLungBreathTask;
 
 public class IceAndFireOrganUtil {
+
     /**
      * 取消指定类型的吐息任务
      */
@@ -57,21 +59,21 @@ public class IceAndFireOrganUtil {
     /**
      * 火龙吐息
      */
-    public static boolean fireDragonBreathSacSkill(ChestCavitySlotContext context) {
+    public static boolean fireDragonBreathSac(ChestCavitySlotContext context) {
         return addBreathTask(context.data(), DragonBreathCastingTask.BreathType.FIRE_BREATH, WAICItemTagManager.FIRE_DRAGON);
     }
 
     /**
      * 冰龙吐息
      */
-    public static boolean iceDragonBreathSacSkill(ChestCavitySlotContext context) {
+    public static boolean iceDragonBreathSac(ChestCavitySlotContext context) {
         return addBreathTask(context.data(), DragonBreathCastingTask.BreathType.ICE_BREATH, WAICItemTagManager.ICE_DRAGON);
     }
 
     /**
      * 电龙吐息
      */
-    public static boolean lightningDragonBreathSacSkill(ChestCavitySlotContext context) {
+    public static boolean lightningDragonBreathSac(ChestCavitySlotContext context) {
         return addBreathTask(context.data(), DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON);
     }
 
@@ -81,7 +83,7 @@ public class IceAndFireOrganUtil {
      * 消耗中毒效果，释放吐息
      * </p>
      */
-    public static boolean hydraLungSkill(ChestCavitySlotContext context) {
+    public static boolean hydraLung(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
         if (poison == null || poison.getDuration() <= 0) return false;
@@ -104,8 +106,10 @@ public class IceAndFireOrganUtil {
         if (!data.hasOrgan(IceAndFireOrgans.HYDRA_SPINE.get())) return false;
         MobEffectInstance poisonEffect = entity.getEffect(MobEffects.POISON);
         if (poisonEffect == null || poisonEffect.getDuration() < 200) return false;
-        // 回复10%血量
-        entity.setHealth(entity.getMaxHealth() * 0.1F);
+        // 冷却中则不复活
+        if (OrganSkillUtil.hasCooldown(entity, IceAndFireOrgans.HYDRA_SPINE.get())) return false;
+        // 回复生命：基础 5% + 代谢属性缩放
+        entity.setHealth(entity.getMaxHealth() * (0.05F + (float) (entity.getAttributeValue(InitAttribute.METABOLISM) * 0.005)));
         int currentAmplifier = poisonEffect.getAmplifier();
         // 移除旧中毒效果，添加新效果
         // 必须先移除，否则当新效果结束后会恢复旧效果
@@ -116,8 +120,10 @@ public class IceAndFireOrganUtil {
             poisonEffect.getDuration() / 2,
             // 提升中毒等级（最高5级）
             // 如果等级本身大于5级，就保留原等级
-            Math.min(currentAmplifier + 1, Math.max(currentAmplifier, 4))
+            currentAmplifier < 4 ? currentAmplifier + 1 : currentAmplifier
         ));
+        // 设置 3 分钟冷却
+        OrganSkillUtil.addCooldown(entity, IceAndFireOrgans.HYDRA_SPINE.get(), 3 * 60 * 20);
         return true;
     }
 
@@ -237,17 +243,8 @@ public class IceAndFireOrganUtil {
         float healthRatio = entity.getHealth() / entity.getMaxHealth();
         if (healthRatio > 0.5) return;
 
-        int healMultiplier;
-        if (healthRatio <= 0.1) {
-            healMultiplier = 10;
-        } else if (healthRatio <= 0.2) {
-            healMultiplier = 5;
-        } else {
-            healMultiplier = 3;
-        }
-
         int amplifier = poison.getAmplifier() + 1;
-        float healAmount = amplifier * healMultiplier;
+        float healAmount = amplifier * (1.0F - healthRatio) * 10;
         int consumeDuration = Math.min((int) Math.ceil(healAmount), poison.getDuration());
 
         entity.heal(Math.min(healAmount, consumeDuration));
@@ -287,7 +284,7 @@ public class IceAndFireOrganUtil {
     }
 
     /**
-     * 悚怖脊柱攻击效果 - 根据局部温度负值造成缓慢
+     * 悚怖脊柱攻击效果 - 温度 ≥ 0 时施加兜底缓慢 I，温度 &lt; 0 时随局部温度绝对值提升等级
      */
     public static void dreadSpineAttack(
         ChestCavitySlotContext context,
@@ -297,8 +294,14 @@ public class IceAndFireOrganUtil {
     ) {
         if (OrganUtil.isSelfDamage(target, source)) return;
         double localTemp = OrganUtil.getLocalTemperature(context);
-        int slownessLevel = (int) Math.max(0, (Math.abs(localTemp) - 1) / 2);
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 3 * 20, slownessLevel));
+        int slownessLevel;
+        if (localTemp >= 0) {
+            slownessLevel = 0; // 兜底缓慢 I（amplifier=0）
+        } else {
+            slownessLevel = (int) ((Math.abs(localTemp) - 1) / 2);
+        }
+        int duration = 40 + context.data().getOrganCount(WAICItemTagManager.ICE) * 10;
+        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, slownessLevel));
     }
 
     /**

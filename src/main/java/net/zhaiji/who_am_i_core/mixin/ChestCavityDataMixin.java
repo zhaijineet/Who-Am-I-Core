@@ -43,6 +43,7 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
     )
     public void whoAmICore$tick(CallbackInfo ci) {
         LivingEntity owner = getOwner();
+        if (owner == null) return;
         int tickCount = owner.tickCount;
         if (owner.level().isClientSide() || tickCount % 20 != 0) return;
         // 应用治愈属性效果，每秒回复治愈等量的生命值

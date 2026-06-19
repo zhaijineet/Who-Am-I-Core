@@ -5,7 +5,9 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,8 +37,9 @@ import java.util.Map;
 public class OrganUtil {
     /**
      * 计算周围8个位置的槽位索引，越界槽位自动排除
+     *
      * @param slotIndex 当前槽位索引
-     * @param maxSlots 胸腔总槽位数（27/36/45/54）
+     * @param maxSlots  胸腔总槽位数（27/36/45/54）
      */
     public static List<Integer> getAdjacentSlots(int slotIndex, int maxSlots) {
         List<Integer> result = new ArrayList<>();
@@ -256,6 +259,28 @@ public class OrganUtil {
     }
 
     /**
+     * 获取以指定槽位为中心的九宫格内局部温度（tooltip 专用重载）
+     * <p>
+     * 复用 {@link #getLocalTemperature(ChestCavitySlotContext)} 的完整逻辑：
+     * index &gt;= 0 时遍历该器官周围九宫格（中心 + 8 邻）累加温度；
+     * index == -1 时只取物品自身静态温度（模拟未放入胸腔的预览）。
+     * 器官自身的温度属性在两条路径下都会被计入，无需调用方手动补加。
+     * </p>
+     * TODO 由于之后会改CCB那边的逻辑可传入ChestCavitySlotContext，所以此为临时方法，详情请看{@link net.zhaiji.who_am_i_core.manager.WAICTooltipManager}
+     *
+     * @param data  胸腔数据（可为 null，此时退化为只取物品静态温度）
+     * @param index 槽位索引，-1 表示器官未在胸腔中
+     * @param stack 器官物品
+     * @return 九宫格内器官贡献的局部温度总和
+     */
+    public static double getLocalTemperature(ChestCavityData data, int index, ItemStack stack) {
+        if (data == null) {
+            return getStackTemperature(ChestCavityUtil.createContext(null, index, stack));
+        }
+        return getLocalTemperature(ChestCavityUtil.createContext(data, index, stack));
+    }
+
+    /**
      * 王国器官的局部温度聚合
      * <p>
      * 遍历胸腔内所有器官，根据物品标签判断温度方向：
@@ -356,4 +381,14 @@ public class OrganUtil {
         if (directEntity instanceof LivingEntity living && living == target) return true;
         return false;
     }
+
+    /**
+     * 获取器官数量（当器官不在胸腔中时，模拟+1）
+     */
+    public static int getOrganCountWithSelf(LivingEntity entity, TagKey<Item> tag, int index) {
+        int organCount = ChestCavityUtil.getData(entity).getOrganCount(tag);
+        if (index == -1) organCount++;
+        return organCount;
+    }
+
 }

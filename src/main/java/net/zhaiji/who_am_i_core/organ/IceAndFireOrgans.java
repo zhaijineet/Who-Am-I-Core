@@ -7,14 +7,17 @@ import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICPlayerSkillUtil;
 
 import java.util.function.Supplier;
 
 public class IceAndFireOrgans {
-    // ==================== 火龙器官 ====================
     // 火龙心脏
     public static final Supplier<Item> FIRE_DRAGON_HEART = IafItems.FIRE_DRAGON_HEART;
 
@@ -115,7 +118,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_BREATH_SAC = WAICItem.ITEM.register(
         "fire_dragon_breath_sac",
         () -> Organ.builder()
-            .skill(IceAndFireOrganUtil::fireDragonBreathSacSkill)
+            .skill(WAICPlayerSkillUtil::fireDragonBreathSac)
+            .goalSkill(WAICGoalSkillUtil.fireDragonBreathSacGoalSkill())
             .skillOnCooldown(IceAndFireOrganUtil::fireDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
@@ -143,7 +147,6 @@ public class IceAndFireOrgans {
             .build()
     );
 
-    // ==================== 冰龙器官 ====================
     // 冰龙心脏
     public static final Supplier<Item> ICE_DRAGON_HEART = IafItems.ICE_DRAGON_HEART;
 
@@ -243,7 +246,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_BREATH_SAC = WAICItem.ITEM.register(
         "ice_dragon_breath_sac",
         () -> Organ.builder()
-            .skill(IceAndFireOrganUtil::iceDragonBreathSacSkill)
+            .skill(WAICPlayerSkillUtil::iceDragonBreathSac)
+            .goalSkill(WAICGoalSkillUtil.iceDragonBreathSacGoalSkill())
             .skillOnCooldown(IceAndFireOrganUtil::iceDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
@@ -271,7 +275,6 @@ public class IceAndFireOrgans {
             .build()
     );
 
-    // ==================== 电龙器官 ====================
     // 电龙心脏
     public static final Supplier<Item> LIGHTNING_DRAGON_HEART = IafItems.LIGHTNING_DRAGON_HEART;
 
@@ -283,6 +286,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
             .addValueAttribute(InitAttribute.ENDURANCE, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -293,6 +297,7 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -302,6 +307,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -311,6 +317,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -320,6 +327,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -329,6 +337,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -338,6 +347,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -357,6 +367,7 @@ public class IceAndFireOrgans {
                     OrganAttributeUtil.updateSlotOrganAttribute(context);
                 }
             })
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -364,10 +375,12 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_BREATH_SAC = WAICItem.ITEM.register(
         "lightning_dragon_breath_sac",
         () -> Organ.builder()
-            .skill(IceAndFireOrganUtil::lightningDragonBreathSacSkill)
+            .skill(WAICPlayerSkillUtil::lightningDragonBreathSac)
+            .goalSkill(WAICGoalSkillUtil.lightningDragonBreathSacGoalSkill())
             .skillOnCooldown(IceAndFireOrganUtil::lightningDragonBreathSacOnCooldown)
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -377,6 +390,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
@@ -386,10 +400,10 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 2)
             .addValueAttribute(InitAttribute.SPEED, 2.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
 
-    // ==================== 悚怖器官 ====================
     // 苦寒血肉
     public static final Supplier<Item> BITTER_FLESH = WAICItem.ITEM.register(
         "bitter_flesh",
@@ -445,10 +459,10 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
             .attack(IceAndFireOrganUtil::dreadSpineAttack)
+            .tooltip(WAICTooltipManager.DREAD_SPINE_TOOLTIP)
             .build()
     );
 
-    // ==================== 九头蛇器官 ====================
     // 九头蛇心脏
     public static final Supplier<Item> HYDRA_HEART = IafItems.HYDRA_HEART;
 
@@ -459,7 +473,8 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
             .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
-            .skill(IceAndFireOrganUtil::hydraLungSkill)
+            .skill(WAICPlayerSkillUtil::hydraLung)
+            .goalSkill(WAICGoalSkillUtil.hydraLungGoalSkill())
             .cooldown(20)
             .build()
     );
@@ -470,6 +485,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 1.75)
             .addValueAttribute(InitAttribute.DEFENSE, 0.875)
+            .tooltip(WAICTooltipManager.HYDRA_SPINE_TOOLTIP)
             .build()
     );
 
@@ -496,6 +512,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 1.5)
             .tick(IceAndFireOrganUtil::hydraSpleenTick)
+            .tooltip(WAICTooltipManager.HYDRA_SPLEEN_TOOLTIP)
             .build()
     );
 
@@ -536,6 +553,7 @@ public class IceAndFireOrgans {
         Organ.builder(IafItems.LIGHTNING_DRAGON_HEART.get())
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
+            .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build();
         // 九头蛇心脏
         Organ.builder(IafItems.HYDRA_HEART.get())

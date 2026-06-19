@@ -14,17 +14,15 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
@@ -39,7 +37,9 @@ public class CompanionsOrganUtil {
      * 教宗心脏 — 圣化变身（hurt 回调）
      * <p>
      * 受伤后血量 ≤ 30% 时触发：
-     * 回复 50% 最大生命，获得力量II + 抗性II + 速度II（15秒）
+     * 回复 30% + 教宗器官数 × 3% 最大生命
+     * 获得力量 / 抗性 / 速度（等级随教宗器官数递增，每 2 件 +1 级，封顶 III）
+     * 持续时间 200tick + 教宗器官数 × 20tick
      * 冷却 3 分钟（3600 tick），通过玩家物品冷却机制管理
      */
     public static void pontiffHeartHurt(ChestCavitySlotContext context, DamageSource damageSource, DamageContainer damageContainer) {
@@ -47,11 +47,20 @@ public class CompanionsOrganUtil {
         if (OrganUtil.isSelfDamage(entity, damageSource)) return;
         if (OrganSkillUtil.hasCooldown(entity, context.stack())) return;
         if (entity.getHealth() > entity.getMaxHealth() * 0.3F) return;
-        // 触发圣化变身
-        entity.heal(entity.getMaxHealth() * 0.5F);
-        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 300, 1));
-        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, 1));
-        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 1));
+
+        int pontiffCount = ChestCavityUtil.getData(entity).getOrganCount(WAICItemTagManager.PONTIFF);
+
+        // 回血量：基础 30% + 每器官 3%
+        entity.heal(entity.getMaxHealth() * (0.3F + pontiffCount * 0.03F));
+
+        // 效果等级：每2件+1级，封顶III级（1-2件=I，3-4件=II，5+件=III）
+        // 同步作用于力量、抗性、速度三个效果
+        int amplifier = Math.min((pontiffCount - 1) / 2, 2);
+        // 持续时间：基础 200tick + 每器官 20tick
+        int duration = 200 + pontiffCount * 20;
+        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, duration, amplifier));
+        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, duration, amplifier));
+        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, duration, amplifier));
 
         // 设置 3 分钟冷却
         OrganSkillUtil.addCooldown(entity, context.stack(), 3 * 60 * 20);
@@ -62,7 +71,7 @@ public class CompanionsOrganUtil {
      * <p>
      * 以自身为中心释放向外扩展的火环
      */
-    public static boolean pontiffSpleenSkill(ChestCavitySlotContext context) {
+    public static boolean pontiffSpleen(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         Level level = entity.level();
 
@@ -99,35 +108,24 @@ public class CompanionsOrganUtil {
         return true;
     }
 
-    /**
-     * 教宗阑尾 — 圣星裁决（skill 回调）
-     * <p>
-     * 投掷追踪最近敌人的星弹（使用 Companions 的 HolinessStartProjectile）
-     * 正温度 → 红色星（点燃）；负温度/无温度 → 蓝色星（冻结）
-     */
-    public static boolean pontiffAppendixSkill(ChestCavitySlotContext context) {
+    // 教宗阑尾 — 圣星裁决（底层逻辑，接收明确目标）
+    public static boolean pontiffAppendix(ChestCavitySlotContext context, LivingEntity target) {
         LivingEntity entity = context.entity();
         Level level = entity.level();
-
-        // 视线索敌：沿视线方向射线检测，只命中玩家正在看的实体
-        int distance = 16;
-        HitResult hitResult = ProjectileUtil.getHitResultOnViewVector(entity, checkEntity -> checkEntity != entity, distance);
-        if (!(hitResult instanceof EntityHitResult entityHitResult)) return false;
-        if (!(entityHitResult.getEntity() instanceof LivingEntity target)) return false;
 
         boolean isPositiveTemp = OrganUtil.getEffectiveTemperature(entity) >= 0;
 
         HolinessStartProjectile star = CompanionsEntities.HOLINESS_STAR.get().create(level);
         if (star == null) return false;
 
-        star.setPos(entity.getEyePosition().add(0, -0.4, 0));
+        star.setPos(entity.getX(), entity.getY() + OrganSkillUtil.effectiveEyeHeight(entity) * 0.75F, entity.getZ()); // ≈ 玩家眼高(1.62)下 0.4 格
         star.setOwner(entity);
         star.setTarget(target);
         star.setRed(isPositiveTemp);
         star.setNoGravity(true);
 
-        Vec3 dir = target.getEyePosition().subtract(entity.getEyePosition()).normalize().scale(HolinessStartProjectile.SPEED);
-        star.setDeltaMovement(dir);
+        Vec3 direction = target.getEyePosition().subtract(entity.getEyePosition()).normalize().scale(HolinessStartProjectile.SPEED);
+        star.setDeltaMovement(direction);
         level.addFreshEntity(star);
 
         return true;
@@ -258,12 +256,12 @@ public class CompanionsOrganUtil {
      * @param context 胸腔槽位上下文
      * @return true 触发冷却
      */
-    public static boolean clothTeddyBearSkill(ChestCavitySlotContext context) {
+    public static boolean clothTeddyBear(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         if (entity.level().isClientSide()) return false;
 
-        int missingHP = (int) (entity.getMaxHealth() - entity.getHealth());
-        if (missingHP <= 0) return false;
+        int missingHealth = (int) (entity.getMaxHealth() - entity.getHealth());
+        if (missingHealth <= 0) return false;
 
         int clothCount = context.data().getOrganCount(WAICItemTagManager.CLOTH);
 
@@ -282,7 +280,7 @@ public class CompanionsOrganUtil {
         int healPerWool = 4 + clothCount;
 
         // 计算恢复满血所需的羊毛数量（向上取整）
-        int woolNeeded = (missingHP + healPerWool - 1) / healPerWool;
+        int woolNeeded = (missingHealth + healPerWool - 1) / healPerWool;
         int woolToUse = Math.min(woolNeeded, totalWool);
 
         int actualHeal = woolToUse * healPerWool;

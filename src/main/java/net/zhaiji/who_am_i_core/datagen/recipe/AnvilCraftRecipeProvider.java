@@ -55,6 +55,13 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
         smithingTransform(output, template, InitItem.MUSCLE.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_MUSCLE.get(), criterion);
         smithingTransform(output, template, InitItem.SPINE.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_SPINE.get(), criterion);
         smithingTransform(output, template, InitItem.APPENDIX.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_APPENDIX.get(), criterion);
+        smithingTransform(output, template, InitItem.HEART.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_HEART.get(), criterion);
+        smithingTransform(output, template, InitItem.LUNG.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_LUNG.get(), criterion);
+        smithingTransform(output, template, InitItem.STOMACH.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_STOMACH.get(), criterion);
+        smithingTransform(output, template, InitItem.INTESTINE.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_INTESTINE.get(), criterion);
+        smithingTransform(output, template, InitItem.KIDNEY.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_KIDNEY.get(), criterion);
+        smithingTransform(output, template, InitItem.SPLEEN.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_SPLEEN.get(), criterion);
+        smithingTransform(output, template, InitItem.LIVER.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_LIVER.get(), criterion);
     }
 
     // 诅咒金器官
@@ -105,6 +112,62 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
             AnvilCraftOrgans.ROYAL_STEEL_APPENDIX.get(),
             addition,
             AnvilCraftOrgans.EMBER_METAL_APPENDIX.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_HEART.get(),
+            addition,
+            AnvilCraftOrgans.EMBER_METAL_HEART.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_LUNG.get(),
+            addition,
+            AnvilCraftOrgans.EMBER_METAL_LUNG.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_STOMACH.get(),
+            addition,
+            AnvilCraftOrgans.EMBER_METAL_STOMACH.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_INTESTINE.get(),
+            addition,
+            AnvilCraftOrgans.EMBER_METAL_INTESTINE.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_KIDNEY.get(),
+            addition,
+            AnvilCraftOrgans.EMBER_METAL_KIDNEY.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_SPLEEN.get(),
+            addition,
+            AnvilCraftOrgans.EMBER_METAL_SPLEEN.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_LIVER.get(),
+            addition,
+            AnvilCraftOrgans.EMBER_METAL_LIVER.get(),
             criterion
         );
     }

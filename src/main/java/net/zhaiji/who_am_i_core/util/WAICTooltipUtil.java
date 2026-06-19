@@ -3,20 +3,22 @@ package net.zhaiji.who_am_i_core.util;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BundleContents;
-import net.zhaiji.chestcavitybeyond.api.OrganTooltip;
 import net.zhaiji.chestcavitybeyond.api.TooltipsKeyContext;
-import net.zhaiji.chestcavitybeyond.api.function.OrganTooltipConsumer;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
-import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
-import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.ArrayList;
@@ -27,95 +29,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class WAICTooltipUtil {
-    /**
-     * 完全覆盖器官工具提示，仅显示「仍未完成」信息
-     */
-    public static final OrganTooltipConsumer UNFINISHED_TOOLTIP = (data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-        List<Component> components = List.of(Component.literal(TooltipUtil.DEFAULT_PREFIX)
-            .append(Component.translatable("organ.who_am_i_core.unfinished"))
-            .withStyle(ChatFormatting.GRAY));
-        TooltipUtil.simpleTooltipAdd(tooltipComponents, components);
-    };
-
-    /**
-     * 九狱器官工具提示
-     * <p>
-     * 根据胸腔中九狱器官数量动态显示被动效果的激活状态：
-     * 已激活效果白色，未激活效果暗灰色。顶部有共用提示行说明激活条件。
-     * </p>
-     */
-    public static final OrganTooltipConsumer NINE_HELL_TOOLTIP = OrganTooltip.builder()
-        .passiveEffect((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-            List<Component> result = new ArrayList<>();
-            // 计算九狱器官数量
-            int count = data.getOrganCount(WAICItemTagManager.NINE_HELL);
-            if (index == -1) count++;
-            // 共用提示行（灰色 + • 前缀）
-            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX).append(Component.translatable("organ.who_am_i_core.nine_hell.hint")));
-            // 复用 CCB 的 detailed 分支逻辑（九狱器官无 simple 简略文本）
-            List<Component> lines = TooltipUtil.addSimpleOrDetailedLines(
-                stack,
-                "passive_effect",
-                TooltipUtil.isDetailedMode(keyContext),
-                TooltipUtil.DEFAULT_PREFIX
-            );
-            // 按数量给未激活效果加暗灰色
-            for (int i = 0; i < lines.size(); i++) {
-                if (i >= count) {
-                    lines.set(i, lines.get(i).copy().withStyle(ChatFormatting.DARK_GRAY));
-                }
-            }
-            result.addAll(lines);
-            return result;
-        })
-        .build();
-
-    /**
-     * 制御棒工具提示
-     * <p>
-     * 第一行为条件提示（始终灰色），后续效果行根据制御棒是否在胸中新星相邻槽位来决定颜色：
-     * 已激活白色，未激活暗灰色。
-     * </p>
-     */
-    public static final OrganTooltipConsumer CONTROL_ROD_TOOLTIP = OrganTooltip.builder()
-        .passiveEffect((data, index, stack, keyContext, context, tooltipComponents, tooltipFlag) -> {
-            List<Component> result = new ArrayList<>();
-            // 条件提示行
-            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
-                .append(Component.translatable("organ.who_am_i_core.control_rod.hint")));
-            // 判断制御棒是否在胸中新星的相邻槽位
-            boolean active = false;
-            if (index >= 0) {
-                for (int i = 0; i < data.getSlots(); i++) {
-                    if (data.getStackInSlot(i).is(MowziesMobOrgans.CHEST_NOVA.get())) {
-                        List<Integer> adjacent = OrganUtil.getAdjacentSlots(i, data.getSlots());
-                        if (adjacent.contains(index)) {
-                            active = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            boolean detailed = TooltipUtil.isDetailedMode(keyContext);
-            // 复用 CCB 的 detailed 分支逻辑
-            List<Component> lines = TooltipUtil.addSimpleOrDetailedLines(
-                stack,
-                "passive_effect",
-                detailed,
-                TooltipUtil.DEFAULT_PREFIX
-            );
-            // 第一行是条件提示，跳过它（上面已经手动添加了灰色的条件行）
-            // 剩余行为效果行，根据激活状态着色
-            for (int i = 0; i < lines.size(); i++) {
-                if (!active) {
-                    lines.set(i, lines.get(i).copy().withStyle(ChatFormatting.DARK_GRAY));
-                }
-            }
-            result.addAll(lines);
-            return result;
-        })
-        .build();
-
     /**
      * 全部染料物品有序列表（用于 detailed 模式遍历显示）
      */
@@ -148,7 +61,7 @@ public class WAICTooltipUtil {
     }
 
     /**
-     * 调色盘染料统计 — TooltipSectionFunction 版本
+     * 调色盘染料统计
      * <p>
      * Simple 模式：只显示数量 > 0 的染料
      * Detailed 模式（按 Shift 或配置开启）：显示全部 9 种染料，数量为 0 的也显示
@@ -218,5 +131,99 @@ public class WAICTooltipUtil {
             );
         }
         return List.of();
+    }
+
+    /**
+     * 纯注入工具：将 FormulaValue 注入到描述文本的 %s 占位符中
+     * <p>
+     * 内部仅根据 detailed 判断使用 simple 还是 detailed/active_skill 翻译键前缀，
+     * 然后按 values 的行号注入对应 FormulaValue。
+     * 调用方负责根据 detailed 构造对应的 Map（simple 和 detailed 描述结构可能不对称）。
+     * </p>
+     *
+     * @param stack    物品栈
+     * @param baseType 段落类型 "passive_effect" 或 "active_skill"
+     * @param detailed 是否详细模式
+     * @param entity   实体（null 则 FormulaValue 显示 "?"）
+     * @param ctrl 是否按下 Ctrl（展开公式）
+     * @param values   行号 → FormulaValue 列表，由调用方按当前描述结构构造，可为 null
+     */
+    public static List<Component> dynamicEffectLines(
+        ItemStack stack,
+        String baseType,
+        boolean detailed,
+        LivingEntity entity,
+        boolean ctrl,
+        Map<Integer, List<FormulaValue>> values
+    ) {
+        boolean useSimple = !detailed && TooltipUtil.hasTranslation(
+            TooltipUtil.getBaseKey(stack) + "." + baseType + ".simple.0"
+        );
+        String effectiveType = useSimple ? baseType + ".simple" : baseType;
+        String baseKey = TooltipUtil.getBaseKey(stack) + "." + effectiveType + ".";
+
+        List<Component> result = new ArrayList<>();
+        int i = 0;
+        String key;
+        while (TooltipUtil.hasTranslation(key = baseKey + i)) {
+            List<FormulaValue> lineValues = values != null ? values.get(i) : null;
+            if (lineValues != null && !lineValues.isEmpty()) {
+                Object[] componentArgs = lineValues.stream()
+                    .map(formulaValue -> formulaValue.buildComponent(entity, ctrl))
+                    .toArray();
+                result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                    .append(Component.translatable(key, componentArgs)));
+            } else {
+                result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                    .append(Component.translatable(key)));
+            }
+            i++;
+        }
+        return result;
+    }
+
+    /**
+     * Ctrl 提示行 — 显示「按住 [Ctrl] 查看公式」
+     * <p>
+     * 参考 CCB ShiftHint 的三段式实现，颜色随 Ctrl 状态变化。
+     * </p>
+     */
+    public static List<Component> ctrlHint(TooltipsKeyContext keyContext) {
+        boolean ctrl = keyContext.isKeyCtrlDown();
+        return List.of(
+            Component.empty()
+                .append(Component.translatable("tooltip.who_am_i_core.ctrl_hint.0").withStyle(ChatFormatting.GRAY))
+                .append(Component.translatable("tooltip.who_am_i_core.ctrl_hint.1")
+                    .withStyle(ctrl ? ChatFormatting.YELLOW : ChatFormatting.DARK_GRAY))
+                .append(Component.translatable("tooltip.who_am_i_core.ctrl_hint.2").withStyle(ChatFormatting.GRAY))
+        );
+    }
+
+    /**
+     * 不换行空格操作符
+     */
+    public static MutableComponent formulaOperator(String operator) {
+        return Component.literal("\u00A0" + operator + "\u00A0");
+    }
+
+    /**
+     * 属性名
+     */
+    public static MutableComponent attributeName(Holder<Attribute> attribute) {
+        return Component.translatable(attribute.value().getDescriptionId());
+    }
+
+    /**
+     * 标签名
+     */
+    public static MutableComponent tagName(TagKey<Item> tag) {
+        return ItemTagManager.getTagDisplayName(tag);
+    }
+
+    /**
+     * 标签器官数量名（包裹 tag 显示名，形如「机械器官数量」）
+     */
+    public static MutableComponent tagOrganCountName(TagKey<Item> tag) {
+        return Component.translatable("formula.who_am_i_core.tag_organ_count", tagName(tag));
     }
 }

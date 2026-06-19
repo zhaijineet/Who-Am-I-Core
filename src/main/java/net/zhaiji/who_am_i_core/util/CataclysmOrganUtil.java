@@ -5,7 +5,7 @@ import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Phantom_Halberd_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Void_Rune_Entity;
-import com.github.L_Ender.cataclysm.entity.projectile.Wither_Howitzer_Entity;
+import com.github.L_Ender.cataclysm.entity.projectile.Wither_Homing_Missile_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModSounds;
@@ -28,7 +28,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
@@ -36,6 +35,7 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
@@ -77,6 +77,8 @@ public class CataclysmOrganUtil {
                 double spawnY = entity.getY();
                 double spawnZ = entity.getZ();
 
+                int waveDuration = 60 + context.data().getOrganCount(WAICItemTagManager.SCYLLA) * 20;
+
                 // 召唤3波水浪，以攻击者朝向为中心，扇形分布
                 float[] angles = {
                     -30.0F,
@@ -84,7 +86,7 @@ public class CataclysmOrganUtil {
                     30.0F
                 };
                 for (float angleOffset : angles) {
-                    Wave_Entity wave = new Wave_Entity(level, entity, 80, extracted);
+                    Wave_Entity wave = new Wave_Entity(level, entity, waveDuration, extracted);
                     float waveYRot = yRot + angleOffset;
                     wave.setPos(spawnX, spawnY, spawnZ);
                     wave.setYRot(waveYRot);
@@ -96,10 +98,8 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 风暴脊柱减伤技能（唯一效果）
-     * 通过 CommonEventHandler 中的全局事件调用，hasOrgan 保证多脊柱只生效一次
-     * 1. 如果粘液已满，返回 0（失效）
-     * 2. 吸收伤害的20%转化为粘液，单次上限10点
+     * 风暴脊柱减伤技能（唯一效果，通过 CommonEventHandler 全局事件调用）
+     * 吸收伤害（比例与上限随防御属性缩放）转化为粘液，粘液满时失效
      *
      * @return 吸收的伤害值，应加入 block
      */
@@ -110,7 +110,10 @@ public class CataclysmOrganUtil {
         // 粘液达到上限时失效
         if (HumoursData.get(entity).isPhlegmFull()) return 0;
 
-        float absorbAmount = Math.max(damage * 0.2F, 10.0F);
+        float absorbAmount = Math.min(
+            damage * (0.15F + (float) (entity.getAttributeValue(InitAttribute.DEFENSE) * 0.005)),
+            5.0F + (float) (entity.getAttributeValue(InitAttribute.DEFENSE) * 0.5)
+        );
 
         // 转化为粘液（静态方法自动同步）
         HumoursData.insertPhlegm(entity, absorbAmount, false);
@@ -138,9 +141,11 @@ public class CataclysmOrganUtil {
      * 不灭薪火属性修饰符 - 全局温度的平方根的力量
      */
     public static void undyingEmberModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double temp = OrganUtil.getEffectiveTemperature(context.entity());
-        if (context.index() == -1) temp += 9;
-        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(temp))));
+        double temperature = OrganUtil.getEffectiveTemperature(context.entity());
+        if (context.index() == -1) temperature += 9;
+        // 提取符号 × 绝对值开方：正温度→正力量（增益），负温度→负力量（冰火冲突代价）
+        double strength = Math.signum(temperature) * Math.floor(Math.sqrt(Math.abs(temperature)));
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), strength));
     }
 
     /**
@@ -148,7 +153,9 @@ public class CataclysmOrganUtil {
      */
     public static void ignitedRibPlatingModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         double localTemp = OrganUtil.getLocalTemperature(context);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), Math.floor(Math.sqrt(localTemp))));
+        // 同不灭薪火：负温度→负格挡（减益）
+        double block = Math.signum(localTemp) * Math.floor(Math.sqrt(Math.abs(localTemp)));
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), block));
     }
 
     /**
@@ -164,9 +171,9 @@ public class CataclysmOrganUtil {
         LivingEntity entity = context.entity();
         if (OrganUtil.isSelfDamage(target, source)) return;
 
-        // 根据局部温度计算回血量
+        // 根据局部温度计算回血量（负温度时保底 0，完全不回血）
         double localTemp = OrganUtil.getLocalTemperature(context);
-        float healAmount = 2.0F + (float) Math.floor(localTemp * 0.5);
+        float healAmount = Math.max(0, 1.0F + (float) Math.floor(localTemp * 0.5));
 
         // 若有炽热烙印，回血量翻倍
         if (target.getEffect(ModEffect.EFFECTBLAZING_BRAND) != null) {
@@ -202,23 +209,22 @@ public class CataclysmOrganUtil {
         LivingEntity entity = context.entity();
         if (entity.level().isClientSide()) return;
         if (entity.tickCount % 20 != 0) return;
-        double temp = OrganUtil.getEffectiveTemperature(entity);
-        if (temp > 0) {
-            HumoursData.insertYellowBile(entity, (float) (temp * 0.05), false);
+        double temperature = OrganUtil.getEffectiveTemperature(entity);
+        if (temperature > 0) {
+            HumoursData.insertYellowBile(entity, (float) (temperature * 0.05), false);
         }
     }
 
     /**
-     * 巨兽熔炉 — 饮用岩浆桶
-     * 增加100点黄胆汁，根据巨兽器官数量施加巨兽之力效果，恢复饱食度
+     * 巨兽熔炉 — 饮用岩浆桶：恢复饥饿值与饱和度，固定增加 100 黄胆汁，获得骇人之恶（时长与等级随巨兽器官数量）
      */
     public static ItemStack drinkLava(LivingEntity entity, ItemStack stack, UseCondition condition) {
         if (entity.isShiftKeyDown()) return stack;
 
-        HumoursData.insertYellowBile(entity, 100, false);
         ChestCavityData data = ChestCavityUtil.getData(entity);
         int count = data.getOrganCount(WAICItemTagManager.MONSTROSITY);
-        entity.addEffect(new MobEffectInstance(ModEffect.EFFECTMONSTROUS, 60 * 20, count - 1));
+        HumoursData.insertYellowBile(entity, 100, false);
+        entity.addEffect(new MobEffectInstance(ModEffect.EFFECTMONSTROUS, 600 + count * 200, count - 1));
 
         if (entity instanceof Player player) {
             player.getFoodData().eat(20, 0.5F);
@@ -234,7 +240,7 @@ public class CataclysmOrganUtil {
      * 巨兽回路 — 地震践踏
      * 消耗100点黄胆汁，AoE伤害+击飞（对齐 Cataclysm 原版下界合金巨兽撼地猛击）
      */
-    public static boolean monstrosityCircuitSkill(ChestCavitySlotContext context) {
+    public static boolean monstrosityCircuit(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
 
         // 模拟提取100点黄胆汁，检查是否足够
@@ -257,8 +263,8 @@ public class CataclysmOrganUtil {
             1.0F + entity.getRandom().nextFloat() * 0.1F
         );
 
-        double temp = OrganUtil.getEffectiveTemperature(entity);
-        float baseDamage = consumed + (float) (temp * 2);
+        double temperature = OrganUtil.getEffectiveTemperature(entity);
+        float damage = Math.max(0, 20 + (float) temperature * 0.01F * entity.getMaxHealth());
 
         // AoE伤害：半径6.25格（对齐原版 EarthQuake(6.25D)）
         DamageSource damagesource = level.damageSources().mobAttack(entity);
@@ -272,8 +278,7 @@ public class CataclysmOrganUtil {
                 target.igniteForSeconds(6);
             }
 
-            float bonusHpDamage = target.getMaxHealth() * 0.05F;
-            boolean hurtSuccess = target.hurt(damagesource, baseDamage + bonusHpDamage);
+            boolean hurtSuccess = target.hurt(damagesource, damage);
 
             if (hurtSuccess) {
                 // 击飞（对齐原版 launch 公式：XZpower=2.0, Ypower=0.6）
@@ -308,37 +313,35 @@ public class CataclysmOrganUtil {
 
     /**
      * 蓄能电芯 — 自动修复
-     * 每 40 tick（2秒），若未满血，回复 1 点 HP
+     * 每秒（20 tick），若未满血，回复 0.5 + 机械器官数量×0.05 点 HP
      */
     public static void powerCellTick(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        if (entity.tickCount % 40 != 0) return;
+        if (entity.tickCount % 20 != 0) return;
         if (entity.getHealth() < entity.getMaxHealth() || entity instanceof Player player && player.isHurt()) {
-            entity.heal(1.0F);
+            int mechanicalCount = context.data().getOrganCount(WAICItemTagManager.MECHANICAL);
+            if (context.index() == -1) mechanicalCount++;
+            entity.heal(0.5F + mechanicalCount * 0.05F);
         }
     }
 
-    /**
-     * 机械之星 — 凋零榴弹
-     * 向视线方向发射一枚凋零榴弹（对齐先驱者 LaunchGoal 逻辑）
-     * 命中后产生爆炸 + 凋零烟雾区域
-     */
-    public static boolean mechanicalStarSkill(ChestCavitySlotContext context) {
+    // 机械之星 — 凋零追踪导弹（底层逻辑，追踪指定目标）
+    public static boolean mechanicalStar(ChestCavitySlotContext context, LivingEntity target) {
         LivingEntity entity = context.entity();
         Level level = entity.level();
 
-        Vec3 look = entity.getLookAngle();
+        // 伤害 = 5 × (1 + 机械器官数 × 0.1)
+        int mechanicalCount = OrganUtil.getOrganCountWithSelf(entity, WAICItemTagManager.MECHANICAL, context.index());
+        float damage = 5.0F * (1 + mechanicalCount * 0.1F);
 
-        // 发射凋零榴弹（对齐先驱者 LaunchGoal 的 howitzer 创建方式）
-        Wither_Howitzer_Entity howitzer = new Wither_Howitzer_Entity(
-            ModEntities.WITHER_HOWITZER.get(), level, entity);
-        howitzer.setPos(entity.getX(), entity.getEyeY() - 0.5, entity.getZ());
-        howitzer.setRadius(3.0F);
-        howitzer.shoot(look.x, look.y, look.z, 0.6F, 60);
-        level.addFreshEntity(howitzer);
+        Wither_Homing_Missile_Entity missile = new Wither_Homing_Missile_Entity(
+            entity, entity.getLookAngle(), level,
+            damage,
+            target);
+        missile.setPos(entity.getX(), entity.getY() + OrganSkillUtil.effectiveEyeHeight(entity) * 0.69F, entity.getZ());
+        level.addFreshEntity(missile);
 
-        // 发射音效
-        level.playSound(null, entity, ModSounds.ROCKET_LAUNCH.get(), SoundSource.PLAYERS, 1.5F, 1.0F);
+        level.playSound(null, entity, ModSounds.ROCKET_LAUNCH.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
         return true;
     }
@@ -348,22 +351,29 @@ public class CataclysmOrganUtil {
      * 向视线方向发射一道死亡激光束
      * 安全特性：默认不点火（setFire=false），不破坏常规方块
      */
-    public static boolean deathLensSkill(ChestCavitySlotContext context) {
+    public static boolean deathLens(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         Level level = entity.level();
+
+        // 基础伤害 = 4 × (1 + 机械器官数 × 0.1)
+        // 生命百分比 = 3 × (1 + 机械器官数 × 0.1)（×0.01 后在内部使用）
+        int mechanicalCount = OrganUtil.getOrganCountWithSelf(entity, WAICItemTagManager.MECHANICAL, context.index());
+        float seriesMultiplier = 1 + mechanicalCount * 0.1F;
+        float baseDamage = 4.0F * seriesMultiplier;
+        float healthPercent = 3.0F * seriesMultiplier;
 
         Death_Laser_Beam_Entity laser = new Death_Laser_Beam_Entity(
             ModEntities.DEATH_LASER_BEAM.get(),
             level,
             entity,
             entity.getX(),
-            entity.getEyeY() - 0.5,
+            entity.getY() + OrganSkillUtil.effectiveEyeHeight(entity) * 0.69F,
             entity.getZ(),
-            (float) ((entity.yHeadRot + 90) * Math.PI / 180.0D),  // yaw：度→弧度，与 Harbinger/Prowler 一致
-            (float) (-entity.getXRot() * Math.PI / 180.0D),        // pitch：度→弧度
-            12,    // duration：预热20tick后，12 tick 的活跃伤害窗口
-            6.0F,          // damage：基础伤害
-            6.0F           // Hpdamage：目标最大生命 6%（×0.01 后在内部使用）
+            (float) ((entity.yHeadRot + 90) * Math.PI / 180.0D),
+            (float) (-entity.getXRot() * Math.PI / 180.0D),
+            12,
+            baseDamage,
+            healthPercent
         );
         level.addFreshEntity(laser);
 
@@ -387,7 +397,7 @@ public class CataclysmOrganUtil {
      * 虚空晶脊 — 虚空践踏
      * 以自身为中心召唤三环虚空符文阵，与 Boss Ender_Guardian_Entity.StompAttack() 一致
      */
-    public static boolean voidCrystalSpineSkill(ChestCavitySlotContext context) {
+    public static boolean voidCrystalSpine(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
 
         if (!entity.onGround()) return false;
@@ -407,31 +417,38 @@ public class CataclysmOrganUtil {
         // 震屏
         ScreenShake_Entity.ScreenShake(level, entity.position(), 10, 0.1f, 0, 5);
 
-        double d0 = entity.getY();
-        double d1 = entity.getY() + 1.0D;
-        float angle2 = 0.01745329251F * entity.yBodyRot;
+        double groundY = entity.getY();
+        double headY = entity.getY() + 1.0D;
+        float bodyAngle = 0.01745329251F * entity.yBodyRot;
+
+        // 符文伤害 = 10 × (1 + 魔法器官数 × 0.1)
+        int magicCount = OrganUtil.getOrganCountWithSelf(entity, WAICItemTagManager.MAGIC, context.index());
+        float runeDamage = 10.0F * (1 + magicCount * 0.1F);
 
         // 内环：6个符文，半径1.5，延迟3 tick
         for (int k = 0; k < 6; ++k) {
-            float f2 = angle2 + (float) k * (float) Math.PI * 2.0F / 6.0F + ((float) Math.PI * 2F / 5F);
-            spawnVoidRune(level, entity.getX() + Mth.cos(f2) * 1.5D, entity.getZ() + Mth.sin(f2) * 1.5D,
-                d0, d1, f2, 0, 16.0F, entity
+            float innerAngle = bodyAngle + (float) k * (float) Math.PI * 2.0F / 6.0F + ((float) Math.PI * 2F / 5F);
+            spawnVoidRune(
+                level, entity.getX() + Mth.cos(innerAngle) * 1.5D, entity.getZ() + Mth.sin(innerAngle) * 1.5D,
+                groundY, headY, innerAngle, 0, runeDamage, entity
             );
         }
 
         // 中环：12个符文，半径2.5，延迟7 tick
         for (int k = 0; k < 12; ++k) {
-            float f3 = angle2 + (float) k * (float) Math.PI * 2.0F / 11.0F + ((float) Math.PI * 2F / 10F);
-            spawnVoidRune(level, entity.getX() + Mth.cos(f3) * 2.5D, entity.getZ() + Mth.sin(f3) * 2.5D,
-                d0, d1, f3, 7, 16.0F, entity
+            float middleAngle = bodyAngle + (float) k * (float) Math.PI * 2.0F / 11.0F + ((float) Math.PI * 2F / 10F);
+            spawnVoidRune(
+                level, entity.getX() + Mth.cos(middleAngle) * 2.5D, entity.getZ() + Mth.sin(middleAngle) * 2.5D,
+                groundY, headY, middleAngle, 7, runeDamage, entity
             );
         }
 
         // 外环：14个符文，半3.5，延迟15 tick
         for (int k = 0; k < 14; ++k) {
-            float f4 = angle2 + (float) k * (float) Math.PI * 2.0F / 14.0F + ((float) Math.PI * 2F / 20F);
-            spawnVoidRune(level, entity.getX() + Mth.cos(f4) * 3.5D, entity.getZ() + Mth.sin(f4) * 3.5D,
-                d0, d1, f4, 12, 16.0F, entity
+            float outerAngle = bodyAngle + (float) k * (float) Math.PI * 2.0F / 14.0F + ((float) Math.PI * 2F / 20F);
+            spawnVoidRune(
+                level, entity.getX() + Mth.cos(outerAngle) * 3.5D, entity.getZ() + Mth.sin(outerAngle) * 3.5D,
+                groundY, headY, outerAngle, 12, runeDamage, entity
             );
         }
 
@@ -446,8 +463,8 @@ public class CataclysmOrganUtil {
         float rotation, int delay, float damage, LivingEntity caster
     ) {
         BlockPos blockpos = BlockPos.containing(x, maxY, z);
-        boolean flag = false;
-        double d0 = 0.0D;
+        boolean foundGround = false;
+        double groundOffset = 0.0D;
 
         do {
             BlockPos blockpos1 = blockpos.below();
@@ -457,20 +474,20 @@ public class CataclysmOrganUtil {
                     BlockState blockstate1 = level.getBlockState(blockpos);
                     VoxelShape voxelshape = blockstate1.getCollisionShape(level, blockpos);
                     if (!voxelshape.isEmpty()) {
-                        d0 = voxelshape.max(Direction.Axis.Y);
+                        groundOffset = voxelshape.max(Direction.Axis.Y);
                     }
                 }
-                flag = true;
+                foundGround = true;
                 break;
             }
             blockpos = blockpos.below();
         } while (blockpos.getY() >= Mth.floor(minY));
 
-        if (flag) {
+        if (foundGround) {
             level.addFreshEntity(
                 new Void_Rune_Entity(
                     level, x,
-                    d0 + (double) blockpos.getY(),
+                    groundOffset + (double) blockpos.getY(),
                     z,
                     rotation,
                     delay,
@@ -496,15 +513,14 @@ public class CataclysmOrganUtil {
         if (OrganUtil.isSelfDamage(target, source)) return;
         if (!entity.isSprinting()) return;
 
-        float currentDamage = damageContainer.getNewDamage();
-        damageContainer.setNewDamage(currentDamage * 1.25F);
+        damageContainer.setNewDamage(damageContainer.getNewDamage() * (1.15F + (float) (entity.getAttributeValue(InitAttribute.STRENGTH) * 0.005)));
     }
 
     /**
      * 封印石板 — 破封·幻戟阵
      * 在前方扇形范围召唤5道幻影战戟从地面依次刺出
      */
-    public static boolean sealingStoneSlabSkill(ChestCavitySlotContext context) {
+    public static boolean sealingStoneSlab(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         if (!entity.onGround()) return false;
 
@@ -525,6 +541,8 @@ public class CataclysmOrganUtil {
 
         // 扇形5道幻影战戟
         float baseYRot = entity.getYRot() * ((float) Math.PI / 180F);
+        // 每道战戟伤害 = 8 + 力量属性 × 0.5
+        float halberdDamage = 8.0F + (float) (entity.getAttributeValue(InitAttribute.STRENGTH) * 0.5);
         float[] angleOffsets = {
             -24.0F,
             -12.0F,
@@ -541,7 +559,7 @@ public class CataclysmOrganUtil {
             double spawnX = entity.getX() + Mth.cos(angleRad) * 2.0D;
             double spawnZ = entity.getZ() + Mth.sin(angleRad) * 2.0D;
 
-            spawnPhantomHalberd(level, spawnX, entity.getY(), spawnZ, angleRad, warmupDelay, entity, 12.0F);
+            spawnPhantomHalberd(level, spawnX, entity.getY(), spawnZ, angleRad, warmupDelay, entity, halberdDamage);
         }
 
         return true;

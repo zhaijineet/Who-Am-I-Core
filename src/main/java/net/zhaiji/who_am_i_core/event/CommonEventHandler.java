@@ -4,12 +4,14 @@ import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
 import com.finderfeed.fdbosses.init.BossBlocks;
 import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
+import com.iafenvoy.iceandfire.entity.MultipartPartEntity;
 import dev.xylonity.companions.common.entity.companion.TeddyEntity;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -17,6 +19,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,6 +28,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -75,6 +79,7 @@ import net.zhaiji.who_am_i_core.util.MowziesMobOrganUtil;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
+import java.util.UUID;
 import java.util.function.DoublePredicate;
 
 public class CommonEventHandler {
@@ -99,6 +104,29 @@ public class CommonEventHandler {
     public static void handlerChestCavityRegisterEvent(ChestCavityRegisterEvent event) {
         event.registerTask(ChestNovaTask.TYPE, ChestNovaTask::new);
         event.registerTask(StraightIntestineTask.TYPE, StraightIntestineTask::new);
+
+        // 注册 Ice and Fire 多碰撞箱子部件解析器
+        // IaF 的 MultipartPartEntity（龙、海蟒、九头蛇、独眼巨人的子部件）不继承 NeoForge PartEntity，
+        event.registerTargetResolver(entity -> {
+            if (entity instanceof MultipartPartEntity part) {
+                UUID parentId = part.getParentId();
+                if (parentId == null) return null;
+                Level level = entity.level();
+                // 服务端
+                if (level instanceof ServerLevel serverLevel) {
+                    Entity parent = serverLevel.getEntity(parentId);
+                    return parent instanceof LivingEntity livingEntity ? livingEntity : null;
+                }
+                // 客户端：父子实体位置相邻，遍历附近实体匹配 UUID
+                AABB searchBox = entity.getBoundingBox().inflate(16);
+                for (Entity nearbyEntity : level.getEntities(entity, searchBox, targetEntity -> true)) {
+                    if (parentId.equals(nearbyEntity.getUUID()) && nearbyEntity instanceof LivingEntity livingEntity) {
+                        return livingEntity;
+                    }
+                }
+            }
+            return null;
+        });
 
         // 注册可食用条件
         // 泥峭器官可食用泥土

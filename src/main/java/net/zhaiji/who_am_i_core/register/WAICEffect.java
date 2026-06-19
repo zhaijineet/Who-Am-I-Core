@@ -25,7 +25,7 @@ public class WAICEffect {
 
     public static final Holder<MobEffect> LIGHTNING_DRAGON_POWER = EFFECT.register(
         "lightning_dragon_power",
-        () -> new DragonPowerEffect(MobEffectCategory.BENEFICIAL, 0xFFFF00)
+        () -> new DragonPowerEffect(MobEffectCategory.BENEFICIAL, 0xE27CCC)
     );
 
     public static final Holder<MobEffect> DRAGON_POWER = EFFECT.register(
