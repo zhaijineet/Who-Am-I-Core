@@ -331,7 +331,7 @@ public class CataclysmOrganUtil {
         Level level = entity.level();
 
         // 伤害 = 5 × (1 + 机械器官数 × 0.1)
-        int mechanicalCount = OrganUtil.getOrganCountWithSelf(entity, WAICItemTagManager.MECHANICAL, context.index());
+        int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
         float damage = 5.0F * (1 + mechanicalCount * 0.1F);
 
         Wither_Homing_Missile_Entity missile = new Wither_Homing_Missile_Entity(
@@ -357,7 +357,7 @@ public class CataclysmOrganUtil {
 
         // 基础伤害 = 4 × (1 + 机械器官数 × 0.1)
         // 生命百分比 = 3 × (1 + 机械器官数 × 0.1)（×0.01 后在内部使用）
-        int mechanicalCount = OrganUtil.getOrganCountWithSelf(entity, WAICItemTagManager.MECHANICAL, context.index());
+        int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
         float seriesMultiplier = 1 + mechanicalCount * 0.1F;
         float baseDamage = 4.0F * seriesMultiplier;
         float healthPercent = 3.0F * seriesMultiplier;
@@ -422,7 +422,7 @@ public class CataclysmOrganUtil {
         float bodyAngle = 0.01745329251F * entity.yBodyRot;
 
         // 符文伤害 = 10 × (1 + 魔法器官数 × 0.1)
-        int magicCount = OrganUtil.getOrganCountWithSelf(entity, WAICItemTagManager.MAGIC, context.index());
+        int magicCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MAGIC);
         float runeDamage = 10.0F * (1 + magicCount * 0.1F);
 
         // 内环：6个符文，半径1.5，延迟3 tick

@@ -7,7 +7,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,35 +28,11 @@ import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class OrganUtil {
-    /**
-     * 计算周围8个位置的槽位索引，越界槽位自动排除
-     *
-     * @param slotIndex 当前槽位索引
-     * @param maxSlots  胸腔总槽位数（27/36/45/54）
-     */
-    public static List<Integer> getAdjacentSlots(int slotIndex, int maxSlots) {
-        List<Integer> result = new ArrayList<>();
-        int col = slotIndex % 9;
-        int row = slotIndex / 9;
-        int maxRow = maxSlots / 9 - 1;
-        for (int dr = -1; dr <= 1; dr++) {
-            for (int dc = -1; dc <= 1; dc++) {
-                if (dr == 0 && dc == 0) continue;
-                int r = row + dr;
-                int c = col + dc;
-                if (r < 0 || r > maxRow || c < 0 || c > 8) continue;
-                result.add(r * 9 + c);
-            }
-        }
-        return result;
-    }
-
     /**
      * 获取物品的总附魔等级
      */
@@ -80,7 +55,9 @@ public class OrganUtil {
 
     /**
      * 根据实体的幸运属性进行判定次数计算
-     * 每5点幸运值获得1次判定，余数部分每点有20%几率获得额外判定
+     * <p>
+     * 每 5 点幸运值获得 1 次判定，余数部分每点有 20% 几率获得额外判定。
+     * </p>
      *
      * @param entity 实体，用于获取幸运属性
      * @return 判定次数
@@ -90,7 +67,7 @@ public class OrganUtil {
         if (luck <= 0) return luck;
         int count = luck / 5;
         int remainder = luck % 5;
-        // 余数部分按每点20%几率额外获得1次判定
+        // 余数部分按每点 20% 几率额外获得 1 次判定
         if (remainder > 0 && entity.getRandom().nextFloat() < remainder * 0.2F) {
             count++;
         }
@@ -107,7 +84,7 @@ public class OrganUtil {
     public static boolean rollResult(LivingEntity entity, float chance) {
         int rollChance = rollChance(entity);
         if (rollChance <= 0) {
-            // 幸运低，每低一点减少判定20%几率，如果够幸运，应该是有成功的可能性的
+            // 幸运低，每低一点减少判定 20% 几率，如果够幸运，应该是有成功的可能性的
             return entity.getRandom().nextFloat() < Math.clamp(chance - rollChance * 0.2F, 0.001F, 1.0F);
         } else {
             for (int i = 0; i < rollChance; i++) {
@@ -123,7 +100,7 @@ public class OrganUtil {
      * 根据法术流派获取对应的染料物品
      *
      * @param schoolType 法术流派
-     * @return 对应的染料物品，如果没有对应染料则返回null
+     * @return 对应的染料物品，如果没有对应染料则返回 AIR
      */
     public static Item getDyeItemForSchool(SchoolType schoolType) {
         ResourceLocation id = schoolType.getId();
@@ -143,7 +120,7 @@ public class OrganUtil {
      * 从弗兰肯斯坦心脏的 BundleContents 中聚合所有内部心脏器官的属性修饰符
      * <p>
      * 遍历收纳袋中存储的所有心脏物品，获取每个心脏的 IOrgan 属性修饰符，
-     * 将相同属性+相同操作类型的修饰符合并为一个，值相加。
+     * 将相同属性 + 相同操作类型的修饰符合并为一个，值相加。
      * </p>
      *
      * @param context   当前弗兰肯斯坦心脏的槽位上下文
@@ -229,11 +206,11 @@ public class OrganUtil {
      * 空槽位视为温度 0，跳过不计。
      * </p>
      *
-     * @param context 当前槽位上下文
+     * @param context 当前槽位上下文，index 为 -1 时只取物品自身静态温度
      * @return 九宫格内器官贡献的局部温度总和
      */
     public static double getLocalTemperature(ChestCavitySlotContext context) {
-        if (context.data().hasOrgan(FDBossesOrgans.MALKUTH.get())) {
+        if (context.data() != null && context.data().hasOrgan(FDBossesOrgans.MALKUTH.get())) {
             return getMalkuthLocalTemperature(context);
         }
         int center = context.index();
@@ -248,7 +225,7 @@ public class OrganUtil {
             );
             return getStackTemperature(staticContext);
         }
-        List<Integer> adjacent = getAdjacentSlots(center, context.data().getSlots());
+        List<Integer> adjacent = ChestCavityUtil.getAdjacentSlots(center, context.data().getSlots());
         double total = 0;
         // 中心 + 遍历相邻 8 格
         total += collectTemperatureFromSlot(context, center);
@@ -259,35 +236,13 @@ public class OrganUtil {
     }
 
     /**
-     * 获取以指定槽位为中心的九宫格内局部温度（tooltip 专用重载）
-     * <p>
-     * 复用 {@link #getLocalTemperature(ChestCavitySlotContext)} 的完整逻辑：
-     * index &gt;= 0 时遍历该器官周围九宫格（中心 + 8 邻）累加温度；
-     * index == -1 时只取物品自身静态温度（模拟未放入胸腔的预览）。
-     * 器官自身的温度属性在两条路径下都会被计入，无需调用方手动补加。
-     * </p>
-     * TODO 由于之后会改CCB那边的逻辑可传入ChestCavitySlotContext，所以此为临时方法，详情请看{@link net.zhaiji.who_am_i_core.manager.WAICTooltipManager}
-     *
-     * @param data  胸腔数据（可为 null，此时退化为只取物品静态温度）
-     * @param index 槽位索引，-1 表示器官未在胸腔中
-     * @param stack 器官物品
-     * @return 九宫格内器官贡献的局部温度总和
-     */
-    public static double getLocalTemperature(ChestCavityData data, int index, ItemStack stack) {
-        if (data == null) {
-            return getStackTemperature(ChestCavityUtil.createContext(null, index, stack));
-        }
-        return getLocalTemperature(ChestCavityUtil.createContext(data, index, stack));
-    }
-
-    /**
      * 王国器官的局部温度聚合
      * <p>
      * 遍历胸腔内所有器官，根据物品标签判断温度方向：
      * </p>
      * <pre>
-     *   仅有 ICE 标签 → 取负温度（温度 < 0 的部分）
-     *   仅有 FIRE 标签 → 取正温度（温度 > 0 的部分）
+     *   仅有 ICE 标签 → 取负温度（温度小于 0 的部分）
+     *   仅有 FIRE 标签 → 取正温度（温度大于 0 的部分）
      *   同时拥有 ICE 和 FIRE → 取绝对值最高的温度值
      *   两者皆无 → 返回原始胸腔温度
      * </pre>
@@ -339,10 +294,15 @@ public class OrganUtil {
         return 0;
     }
 
+    /**
+     * 收集指定槽位物品的静态温度
+     * <p>
+     * 使用静态上下文，只读取 addValueAttribute 的静态温度值，不触发动态 modifier，避免递归。
+     * </p>
+     */
     private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {
         ItemStack stack = context.data().getStackInSlot(slot);
         if (stack.isEmpty()) return 0;
-        // 使用静态上下文，只读取 addValueAttribute 的静态温度值，不触发动态 modifier，避免递归
         ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
             null,
             null,
@@ -351,15 +311,6 @@ public class OrganUtil {
             stack
         );
         return getStackTemperature(slotContext);
-    }
-
-    /**
-     * 获取对称槽位索引（胸腔 N×9，镜像列：0↔8, 1↔7, 2↔6, 3↔5, 4不变）
-     */
-    public static int getSymmetricRibIndex(int index) {
-        int row = index / 9;
-        int col = index % 9;
-        return row * 9 + (8 - col);
     }
 
     /**
@@ -381,14 +332,4 @@ public class OrganUtil {
         if (directEntity instanceof LivingEntity living && living == target) return true;
         return false;
     }
-
-    /**
-     * 获取器官数量（当器官不在胸腔中时，模拟+1）
-     */
-    public static int getOrganCountWithSelf(LivingEntity entity, TagKey<Item> tag, int index) {
-        int organCount = ChestCavityUtil.getData(entity).getOrganCount(tag);
-        if (index == -1) organCount++;
-        return organCount;
-    }
-
 }

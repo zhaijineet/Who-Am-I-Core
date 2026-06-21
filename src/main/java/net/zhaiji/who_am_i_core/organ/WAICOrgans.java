@@ -277,7 +277,7 @@ public class WAICOrgans {
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
             .tooltip(
                 OrganTooltip.builder()
-                    .shiftHint(WAICTooltipUtil::paletteShiftHint)
+                    .hint(WAICTooltipUtil::paletteHint)
                     .afterActiveSkill(WAICTooltipUtil::paletteDyeSection)
                     .build()
             )
@@ -924,8 +924,8 @@ public class WAICOrgans {
             .tick(WAICOrganUtil::energyModuleTick)
             .tooltip(
                 OrganTooltip.builder()
-                    .afterPassiveEffect((data, index, stack, keyContext, context, tooltipComponents, flag) -> {
-                        float charge = WAICOrganUtil.getModuleCharge(stack);
+                    .afterPassiveEffect((slotContext, keyContext, context, tooltipComponents, flag) -> {
+                        float charge = WAICOrganUtil.getModuleCharge(slotContext.stack());
                         return List.of(Component.literal(TooltipUtil.DEFAULT_PREFIX).append(
                             Component.translatable(ENERGY_MODULE_CHARGE_TRANSLATION, (int) charge, 500)));
                     })

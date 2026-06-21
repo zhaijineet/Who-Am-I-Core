@@ -20,10 +20,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.api.task.ISerializableTask;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.mixinapi.IEntityUmvuthanaFollowerToPlayer;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
-import net.zhaiji.who_am_i_core.util.OrganUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +77,7 @@ public class ChestNovaTask implements ISerializableTask {
     public ChestNovaTask(ChestCavityData data, int novaSlot) {
         this.data = data;
         this.novaSlot = novaSlot;
-        adjacentSlots = OrganUtil.getAdjacentSlots(novaSlot, data.getSlots());
+        adjacentSlots = ChestCavityUtil.getAdjacentSlots(novaSlot, data.getSlots());
     }
 
     /**
@@ -91,7 +91,7 @@ public class ChestNovaTask implements ISerializableTask {
     public ChestNovaTask(ChestCavityData data, HolderLookup.Provider provider, CompoundTag nbt) {
         this.data = data;
         this.novaSlot = nbt.getInt("novaSlot");
-        this.adjacentSlots = OrganUtil.getAdjacentSlots(novaSlot, data.getSlots());
+        this.adjacentSlots = ChestCavityUtil.getAdjacentSlots(novaSlot, data.getSlots());
         // 反序列化 cooldowns
         CompoundTag cooldownsTag = nbt.getCompound("cooldowns");
         for (String key : cooldownsTag.getAllKeys()) {

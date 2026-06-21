@@ -233,11 +233,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("tooltip.who_am_i_core.trophy.draw", "Right-click to draw power and expand chest cavity");
         add("tooltip.who_am_i_core.trophy.return", "Crouch + Right-click to return power and shrink chest cavity");
         add("tooltip.who_am_i_core.trophy.unique", "Each trophy can only be drawn once");
-
-        // Ctrl 提示翻译
-        add("tooltip.who_am_i_core.ctrl_hint.0", "Hold [");
-        add("tooltip.who_am_i_core.ctrl_hint.1", "Ctrl");
-        add("tooltip.who_am_i_core.ctrl_hint.2", "] for formula");
     }
 
     public void Chinese() {
@@ -429,11 +424,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("tooltip.who_am_i_core.trophy.draw", "右键点击汲取力量，扩容胸腔");
         add("tooltip.who_am_i_core.trophy.return", "蹲下+右键归还力量，缩小胸腔");
         add("tooltip.who_am_i_core.trophy.unique", "每个奖杯只能汲取一次力量");
-
-        // Ctrl 提示翻译
-        add("tooltip.who_am_i_core.ctrl_hint.0", "按住[");
-        add("tooltip.who_am_i_core.ctrl_hint.1", "Ctrl");
-        add("tooltip.who_am_i_core.ctrl_hint.2", "]查看公式");
     }
 
     // ==================== Mowzie's Mobs 特殊器官 ====================
@@ -1862,7 +1852,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.PONTIFF, "Pontiff");
         add(WAICItemTagManager.SCYLLA, "Scylla");
 
-        add("formula.who_am_i_core.tag_organ_count", "%s Organ Count");
         add("formula.who_am_i_core.max_health", "Max Health");
         add("formula.who_am_i_core.current_health_ratio", "Current Health Ratio");
         add("formula.who_am_i_core.effective_temperature", "Effective Temperature");
@@ -1893,7 +1882,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.PONTIFF, "教宗");
         add(WAICItemTagManager.SCYLLA, "斯库拉");
 
-        add("formula.who_am_i_core.tag_organ_count", "%s器官数量");
         add("formula.who_am_i_core.max_health", "最大生命值");
         add("formula.who_am_i_core.current_health_ratio", "当前生命值比例");
         add("formula.who_am_i_core.effective_temperature", "全局温度");

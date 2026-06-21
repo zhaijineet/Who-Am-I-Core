@@ -93,7 +93,6 @@
   "formula.who_am_i_core.effective_temperature": "全局温度",
   "formula.who_am_i_core.local_temperature": "局部温度",
   "formula.who_am_i_core.max_health": "最大生命值",
-  "formula.who_am_i_core.tag_organ_count": "%s器官数量",
   "item.iceandfire.fire_dragon_heart": "火龙心脏",
   "item.iceandfire.hydra_heart": "九头蛇心脏",
   "item.iceandfire.ice_dragon_heart": "冰龙心脏",
@@ -861,9 +860,6 @@
   "tag.item.who_am_i_core.scylla": "斯库拉",
   "tag.item.who_am_i_core.summon": "召唤",
   "tag.item.who_am_i_core.unique": "唯一",
-  "tooltip.who_am_i_core.ctrl_hint.0": "按住[",
-  "tooltip.who_am_i_core.ctrl_hint.1": "Ctrl",
-  "tooltip.who_am_i_core.ctrl_hint.2": "]查看公式",
   "tooltip.who_am_i_core.trophy.draw": "右键点击汲取力量，扩容胸腔",
   "tooltip.who_am_i_core.trophy.return": "蹲下+右键归还力量，缩小胸腔",
   "tooltip.who_am_i_core.trophy.unique": "每个奖杯只能汲取一次力量"

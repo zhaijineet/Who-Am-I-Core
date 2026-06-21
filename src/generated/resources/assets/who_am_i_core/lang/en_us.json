@@ -93,7 +93,6 @@
   "formula.who_am_i_core.effective_temperature": "Effective Temperature",
   "formula.who_am_i_core.local_temperature": "Local Temperature",
   "formula.who_am_i_core.max_health": "Max Health",
-  "formula.who_am_i_core.tag_organ_count": "%s Organ Count",
   "item.iceandfire.fire_dragon_heart": "Fire Dragon Heart",
   "item.iceandfire.hydra_heart": "Hydra Heart",
   "item.iceandfire.ice_dragon_heart": "Ice Dragon Heart",
@@ -861,9 +860,6 @@
   "tag.item.who_am_i_core.scylla": "Scylla",
   "tag.item.who_am_i_core.summon": "Summon",
   "tag.item.who_am_i_core.unique": "Unique",
-  "tooltip.who_am_i_core.ctrl_hint.0": "Hold [",
-  "tooltip.who_am_i_core.ctrl_hint.1": "Ctrl",
-  "tooltip.who_am_i_core.ctrl_hint.2": "] for formula",
   "tooltip.who_am_i_core.trophy.draw": "Right-click to draw power and expand chest cavity",
   "tooltip.who_am_i_core.trophy.return": "Crouch + Right-click to return power and shrink chest cavity",
   "tooltip.who_am_i_core.trophy.unique": "Each trophy can only be drawn once"

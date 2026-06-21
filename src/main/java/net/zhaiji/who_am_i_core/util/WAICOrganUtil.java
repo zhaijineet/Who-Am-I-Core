@@ -828,7 +828,7 @@ public class WAICOrganUtil {
      * 检查对称位置是否存在导流肋骨
      */
     public static boolean hasSymmetricCurrentRib(ChestCavityData data, int index) {
-        int symmetricIndex = OrganUtil.getSymmetricRibIndex(index);
+        int symmetricIndex = ChestCavityUtil.getMirrorSlotIndex(index);
         if (symmetricIndex == index) return false;
         if (symmetricIndex < 0 || symmetricIndex >= data.getSlots()) return false;
         ItemStack symmetricStack = data.getStackInSlot(symmetricIndex);
