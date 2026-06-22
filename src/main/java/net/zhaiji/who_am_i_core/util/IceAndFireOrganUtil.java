@@ -334,8 +334,7 @@ public class IceAndFireOrganUtil {
         Holder<Attribute> attribute,
         TagKey<Item> organTag
     ) {
-        int count = context.data().getOrganCount(organTag);
-        if (context.index() == -1) count++;
+        int count = ChestCavityUtil.getOrganCountWithSelf(context, organTag);
         modifiers.put(attribute, OrganAttributeUtil.createAddValueModifier(context.id(), count * 0.05));
     }
 

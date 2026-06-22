@@ -125,6 +125,7 @@ public class CompanionsOrgans {
         "cake_stomach",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .tooltip(WAICTooltipManager.CAKE_STOMACH_TOOLTIP)
             .build()
     );
 
@@ -145,6 +146,7 @@ public class CompanionsOrgans {
             .skill(WAICPlayerSkillUtil::clothTeddyBear)
             .goalSkill(WAICGoalSkillUtil.clothTeddyBearGoalSkill())
             .chestCavityClose(CompanionsOrganUtil::clothTeddyBearChestCavityClose)
+            .tooltip(WAICTooltipManager.CLOTH_TEDDY_BEAR_TOOLTIP)
             .build()
     );
 

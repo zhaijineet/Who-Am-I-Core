@@ -651,10 +651,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC,
             "Sprays fire forward for 5 seconds",
-            "Damage and range scale with fire dragon organ count",
-            "Caps at 10 fire dragon organs"
+            "Continuously deals %s damage to enemies in range",
+            "Damage scales with fire dragon organ count, caps at %s"
         );
-        addOrganActiveSkillSimple(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Sprays fire forward");
+        addOrganActiveSkillSimple(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Sprays fire forward, continuously dealing %s damage");
 
         addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "Fire Dragon Rib");
         addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "Fire Dragon Muscle");
@@ -681,10 +681,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             IceAndFireOrgans.ICE_DRAGON_BREATH_SAC,
             "Sprays ice forward for 5 seconds",
-            "Damage and range scale with ice dragon organ count",
-            "Caps at 10 ice dragon organs"
+            "Continuously deals %s damage to enemies in range",
+            "Damage scales with ice dragon organ count, caps at %s"
         );
-        addOrganActiveSkillSimple(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Sprays ice forward");
+        addOrganActiveSkillSimple(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Sprays ice forward, continuously dealing %s damage");
 
         addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "Ice Dragon Rib");
         addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "Ice Dragon Muscle");
@@ -746,10 +746,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
             "Sprays lightning forward for 5 seconds",
-            "Damage and range scale with lightning dragon organ count",
-            "Caps at 10 lightning dragon organs"
+            "Continuously deals %s damage to enemies in range",
+            "Damage scales with lightning dragon organ count, caps at %s"
         );
-        addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Sprays lightning forward");
+        addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Sprays lightning forward, continuously dealing %s damage");
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "Lightning Dragon Rib");
         addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, lightningCharge, lightningChargeOverload);
@@ -782,10 +782,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC,
             "向前方喷射火焰，持续5秒",
-            "伤害和范围随火龙器官数量增加",
-            "最多计入10个火龙器官"
+            "对范围内敌人持续造成%s点伤害",
+            "伤害随火龙器官数量增加，最多计入%s个"
         );
-        addOrganActiveSkillSimple(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "向前方喷射火焰");
+        addOrganActiveSkillSimple(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "向前方喷射火焰，持续造成%s点伤害");
 
         addItem(IceAndFireOrgans.FIRE_DRAGON_RIB, "火龙肋骨");
         addItem(IceAndFireOrgans.FIRE_DRAGON_MUSCLE, "火龙肌肉");
@@ -812,10 +812,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             IceAndFireOrgans.ICE_DRAGON_BREATH_SAC,
             "向前方喷射冰霜，持续5秒",
-            "伤害和范围随冰龙器官数量增加",
-            "最多计入10个冰龙器官"
+            "对范围内敌人持续造成%s点伤害",
+            "伤害随冰龙器官数量增加，最多计入%s个"
         );
-        addOrganActiveSkillSimple(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "向前方喷射冰霜");
+        addOrganActiveSkillSimple(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "向前方喷射冰霜，持续造成%s点伤害");
 
         addItem(IceAndFireOrgans.ICE_DRAGON_RIB, "冰龙肋骨");
         addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "冰龙肌肉");
@@ -877,10 +877,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC,
             "向前方喷射闪电，持续5秒",
-            "伤害和范围随电龙器官数量增加",
-            "最多计入10个电龙器官"
+            "对范围内敌人持续造成%s点伤害",
+            "伤害随电龙器官数量增加，最多计入%s个"
         );
-        addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "向前方喷射闪电");
+        addOrganActiveSkillSimple(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "向前方喷射闪电，持续造成%s点伤害");
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, "电龙肋骨");
         addOrganPassiveEffect(IceAndFireOrgans.LIGHTNING_DRAGON_RIB, lightningChargeZH, lightningChargeOverloadZH);
@@ -1302,9 +1302,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             CompanionsOrgans.CLOTH_TEDDY_BEAR,
             "Consume wool stored in the teddy bear to heal",
-            "Each wool restores 4 + cloth organ count HP"
+            "Each wool restores %s HP"
         );
-        addOrganActiveSkillSimple(CompanionsOrgans.CLOTH_TEDDY_BEAR, "Consume wool to heal");
+        addOrganActiveSkillSimple(CompanionsOrgans.CLOTH_TEDDY_BEAR, "Consumes wool to restore %s HP");
 
         addItem(CompanionsOrgans.CLOTH_HEART, "Cloth Heart");
         addItem(CompanionsOrgans.CLOTH_LUNG, "Cloth Lung");
@@ -1328,10 +1328,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
         addOrganActiveSkill(
             CompanionsOrgans.CLOTH_TEDDY_BEAR,
-            "消耗布织泰迪熊中的羊毛回复生命",
-            "每个羊毛回复 4 + 布织器官数量 点生命"
+            "消耗布织泰迪熊中的羊毛回复生命值",
+            "每个羊毛回复%s点生命值"
         );
-        addOrganActiveSkillSimple(CompanionsOrgans.CLOTH_TEDDY_BEAR, "消耗羊毛回复生命");
+        addOrganActiveSkillSimple(CompanionsOrgans.CLOTH_TEDDY_BEAR, "消耗羊毛回复%s点生命值");
 
         addItem(CompanionsOrgans.CLOTH_HEART, "布织心脏");
         addItem(CompanionsOrgans.CLOTH_LUNG, "布织肺脏");
@@ -1978,23 +1978,22 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void cursedGoldOrgansEN() {
         String effect0 = "Cursed organs in the chest impose stacking penalties";
-        String effect1 = "1 or more organs inflict Weakness";
-        String effect2 = "3 or more organs inflict Slowness";
-        String effect3 = "5 or more organs inflict Hunger";
-        String effect4 = "Effect amplifiers scale with cursed organ count";
+        String effect1 = "1 or more organs inflict Weakness, currently level %s";
+        String effect2 = "3 or more organs inflict Slowness, currently level %s";
+        String effect3 = "5 or more organs inflict Hunger, currently level %s";
         String simple = "Cursed organs in the chest impose stacking debuffs";
 
         addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "Cursed Gold Heart");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_HEART, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_HEART, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_HEART, simple);
         addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "Cursed Gold Lung");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LUNG, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LUNG, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LUNG, simple);
         addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "Cursed Gold Liver");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LIVER, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LIVER, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LIVER, simple);
         addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "Cursed Gold Intestine");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, simple);
     }
 
@@ -2146,23 +2145,22 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void cursedGoldOrgansZH() {
         String effect0 = "胸腔中的诅咒器官会叠加惩罚效果";
-        String effect1 = "1个及以上施加虚弱";
-        String effect2 = "3个及以上施加缓慢";
-        String effect3 = "5个及以上施加饥饿";
-        String effect4 = "效果等级随诅咒器官数量递增";
+        String effect1 = "1个及以上施加虚弱，当前%s级";
+        String effect2 = "3个及以上施加缓慢，当前%s级";
+        String effect3 = "5个及以上施加饥饿，当前%s级";
         String simple = "胸腔中诅咒器官叠加惩罚效果";
 
         addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "诅咒金心脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_HEART, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_HEART, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_HEART, simple);
         addItem(AnvilCraftOrgans.CURSED_GOLD_LUNG, "诅咒金肺脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LUNG, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LUNG, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LUNG, simple);
         addItem(AnvilCraftOrgans.CURSED_GOLD_LIVER, "诅咒金肝脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LIVER, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_LIVER, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_LIVER, simple);
         addItem(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, "诅咒金肠子");
-        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, effect0, effect1, effect2, effect3, effect4);
+        addOrganPassiveEffect(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, effect0, effect1, effect2, effect3);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.CURSED_GOLD_INTESTINE, simple);
     }
 
@@ -2409,9 +2407,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_FURNACE,
             "Allows drinking lava buckets",
-            "Restores all hunger and saturation and grants 100 yellow bile, grants Monstrous effect for %s seconds"
+            "Restores all hunger and saturation and grants 100 yellow bile, grants Monstrous effect at level %s for 60 seconds"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "Allows drinking lava for yellow bile and buffs");
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "Allows drinking lava for yellow bile and level %s Monstrous buff lasting 60 seconds");
 
         // 远古工厂系列
         addItem(CataclysmOrgans.TACTICAL_DISK, "Tactical Disk");
@@ -2544,9 +2542,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_FURNACE,
             "允许饮用岩浆桶",
-            "恢复所有饥饿值与饱和度并获得100黄胆汁，获得%s秒骇人之恶效果"
+            "恢复所有饥饿值与饱和度并获得100黄胆汁，获得%s级骇人之恶效果，持续60秒"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆获取黄胆汁和增益");
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆获取黄胆汁和%s级骇人之恶效果，持续60秒");
 
         // 远古工厂系列
         addItem(CataclysmOrgans.TACTICAL_DISK, "战术磁盘");
@@ -2751,12 +2749,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CompanionsOrgans.CAKE_STOMACH, "Cake Stomach");
         addOrganPassiveEffect(
             CompanionsOrgans.CAKE_STOMACH,
-            "Eating food grants Sweetness that heals nearby entities",
-            "Each eat adds levels equal to cake organ count and resets duration"
+            "Eating food grants Sweetness, restoring 1 HP per second to non-hostile entities within 16 blocks",
+            "Each eat adds %s level(s) and resets duration"
         );
         addOrganPassiveEffectSimple(
             CompanionsOrgans.CAKE_STOMACH,
-            "Eating food grants Sweetness that heals nearby entities"
+            "Eating food stacks %s level(s) of Sweetness and heals nearby entities"
         );
 
         addItem(CompanionsOrgans.CAKE_LIVER, "Cake Liver");
@@ -2819,12 +2817,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CompanionsOrgans.CAKE_STOMACH, "蛋糕胃");
         addOrganPassiveEffect(
             CompanionsOrgans.CAKE_STOMACH,
-            "食用食物获得甜蜜效果治疗周围生物",
-            "每次食用叠加等级等于蛋糕器官数并重置持续时长"
+            "食用食物获得甜蜜，每秒为周围16格内非敌对生物恢复1点生命值",
+            "每次食用叠加%s级并重置持续时长"
         );
         addOrganPassiveEffectSimple(
             CompanionsOrgans.CAKE_STOMACH,
-            "食用食物获得可叠加的甜蜜效果治疗周围生物"
+            "食用食物叠加%s级甜蜜效果，并治疗周围生物"
         );
 
         addItem(CompanionsOrgans.CAKE_LIVER, "蛋糕肝脏");

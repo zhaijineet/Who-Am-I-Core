@@ -4,6 +4,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
@@ -27,8 +28,12 @@ public class SweetnessEffect extends MobEffect {
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity.level().isClientSide()) return true;
 
-        // 甜蜜效果的核心：为周围 16 格范围内的生物回复
-        List<LivingEntity> nearbyEntities = entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(16));
+        // 甜蜜效果的核心：为周围 16 格范围内的生物回复，排除敌对生物
+        List<LivingEntity> nearbyEntities = entity.level().getEntitiesOfClass(
+            LivingEntity.class,
+            entity.getBoundingBox().inflate(16),
+            livingEntity -> !(livingEntity instanceof Enemy)
+        );
 
         for (LivingEntity nearby : nearbyEntities) {
             nearby.heal(1.0F);

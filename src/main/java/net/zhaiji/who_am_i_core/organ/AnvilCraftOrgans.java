@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.item.EnchantableOrganItem;
+import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
@@ -111,6 +112,7 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2.0)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .tooltip(WAICTooltipManager.CURSED_GOLD_TOOLTIP)
             .build()
     );
 
@@ -123,6 +125,7 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .tooltip(WAICTooltipManager.CURSED_GOLD_TOOLTIP)
             .build()
     );
 
@@ -133,6 +136,7 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.DETOXIFICATION, 2.0)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .tooltip(WAICTooltipManager.CURSED_GOLD_TOOLTIP)
             .build()
     );
 
@@ -143,6 +147,7 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.NUTRITION, 2.0)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
+            .tooltip(WAICTooltipManager.CURSED_GOLD_TOOLTIP)
             .build()
     );
 

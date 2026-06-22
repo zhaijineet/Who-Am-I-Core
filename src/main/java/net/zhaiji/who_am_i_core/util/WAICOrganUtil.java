@@ -870,9 +870,7 @@ public class WAICOrganUtil {
      * 获取胸腔中九狱器官的数量
      */
     private static int getNineHellCount(ChestCavitySlotContext context) {
-        int count = context.data().getOrganCount(WAICItemTagManager.NINE_HELL);
-        if (context.index() == -1) count++;
-        return count;
+        return ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.NINE_HELL);
     }
 
     /**

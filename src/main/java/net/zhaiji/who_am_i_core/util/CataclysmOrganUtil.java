@@ -224,15 +224,15 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 巨兽熔炉 — 饮用岩浆桶：恢复饥饿值与饱和度，固定增加 100 黄胆汁，获得骇人之恶（时长与等级随巨兽器官数量）
+     * 巨兽熔炉 — 饮用岩浆桶：恢复饥饿值与饱和度，固定增加 100 黄胆汁，获得骇人之恶（60秒，等级随巨兽器官数量，每个巨兽器官+1级）
      */
     public static ItemStack drinkLava(LivingEntity entity, ItemStack stack, UseCondition condition) {
         if (entity.isShiftKeyDown()) return stack;
 
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        int count = data.getOrganCount(WAICItemTagManager.MONSTROSITY);
+        int monstrosityCount = data.getOrganCount(WAICItemTagManager.MONSTROSITY);
         HumoursData.insertYellowBile(entity, 100, false);
-        entity.addEffect(new MobEffectInstance(ModEffect.EFFECTMONSTROUS, 600 + count * 200, count - 1));
+        entity.addEffect(new MobEffectInstance(ModEffect.EFFECTMONSTROUS, 60 * 20, Math.max(0, monstrosityCount - 1)));
 
         if (entity instanceof Player player) {
             player.getFoodData().eat(20, 0.5F);

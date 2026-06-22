@@ -38,15 +38,22 @@ public class DragonBreathCastingTask implements IChestCavityTask {
     public DragonBreathCastingTask(ChestCavityData data, BreathType breathType, int spellLevel) {
         this.data = data;
         this.breathType = breathType;
-        damage = switch (breathType) {
-            case FIRE_BREATH -> ((FireBreathSpell) SpellRegistry.FIRE_BREATH_SPELL.get()).getDamage(spellLevel, data.getOwner());
-            case ICE_BREATH -> ((ConeOfColdSpell) SpellRegistry.CONE_OF_COLD_SPELL.get()).getDamage(spellLevel, data.getOwner());
-            case LIGHTNING_BREATH -> ((ElectrocuteSpell) SpellRegistry.ELECTROCUTE_SPELL.get()).getDamage(spellLevel, data.getOwner());
-        };
+        damage = getDamage(breathType, spellLevel, data.getOwner());
         soundEvent = switch (breathType) {
             case FIRE_BREATH -> SoundRegistry.FIRE_BREATH_LOOP.get();
             case ICE_BREATH -> SoundRegistry.CONE_OF_COLD_LOOP.get();
             case LIGHTNING_BREATH -> SoundRegistry.ELECTROCUTE_LOOP.get();
+        };
+    }
+
+    /**
+     * 获取指定吐息类型在给定法术等级和施法者下的实际伤害值
+     */
+    public static float getDamage(BreathType breathType, int spellLevel, LivingEntity caster) {
+        return switch (breathType) {
+            case FIRE_BREATH -> ((FireBreathSpell) SpellRegistry.FIRE_BREATH_SPELL.get()).getDamage(spellLevel, caster);
+            case ICE_BREATH -> ((ConeOfColdSpell) SpellRegistry.CONE_OF_COLD_SPELL.get()).getDamage(spellLevel, caster);
+            case LIGHTNING_BREATH -> ((ElectrocuteSpell) SpellRegistry.ELECTROCUTE_SPELL.get()).getDamage(spellLevel, caster);
         };
     }
 

@@ -124,6 +124,7 @@ public class IceAndFireOrgans {
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
+            .tooltip(WAICTooltipManager.FIRE_DRAGON_BREATH_SAC_TOOLTIP)
             .build()
     );
 
@@ -252,6 +253,7 @@ public class IceAndFireOrgans {
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .addValueAttribute(WAICAttribute.TEMPERATURE, -1)
+            .tooltip(WAICTooltipManager.ICE_DRAGON_BREATH_SAC_TOOLTIP)
             .build()
     );
 
@@ -381,6 +383,7 @@ public class IceAndFireOrgans {
             .cooldown(10 * 20)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
+            .tooltip(WAICTooltipManager.LIGHTNING_DRAGON_BREATH_SAC_TOOLTIP)
             .build()
     );
 

@@ -1,10 +1,16 @@
 package net.zhaiji.who_am_i_core.manager;
 
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.DynamicValues;
 import net.zhaiji.chestcavitybeyond.api.FormulaValue;
@@ -15,6 +21,7 @@ import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 
@@ -409,7 +416,7 @@ public class WAICTooltipManager {
             context -> {
                 int pontiffCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.PONTIFF);
                 return Component.empty()
-                    .append(Component.literal("min(3,"))
+                    .append(Component.literal("min(3,\u00A0"))
                     .append(Component.literal("floor(("))
                     .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.PONTIFF))
                     .append(Component.literal(String.valueOf(pontiffCount)))
@@ -803,35 +810,292 @@ public class WAICTooltipManager {
     }
 
     /**
-     * 巨兽熔炉 — 骇人之恶时长随巨兽器官数量缩放（黄胆汁固定 100）
+     * 巨兽熔炉 — 骇人之恶等级随巨兽器官数量缩放（时长固定 60 秒，黄胆汁固定 100）
      */
     public static final OrganTooltipConsumer MONSTROSITY_FURNACE_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.split(
-            // simple 描述不含 %s
-            Map.of(),
-            // detailed line 1 含动态 %s（秒数）
-            Map.of(1, List.of(buildMonstrosityFurnaceFormulaValue()))
+            // simple 单段含 1 个 %s 在 line 0：等级
+            Map.of(0, List.of(buildMonstrosityFurnaceLevelFormulaValue())),
+            // detailed line 1 含动态 %s（等级）
+            Map.of(1, List.of(buildMonstrosityFurnaceLevelFormulaValue()))
         ))
         .build();
 
     /**
-     * 构建 巨兽熔炉 FormulaValue
+     * 构建巨兽熔炉 骇人之恶等级 FormulaValue 显示等级 = 巨兽器官数量（amplifier = count - 1，等级 = amplifier + 1 = count）
      */
-    private static FormulaValue buildMonstrosityFurnaceFormulaValue() {
+    private static FormulaValue buildMonstrosityFurnaceLevelFormulaValue() {
         return new FormulaValue(
             context -> {
                 int monstrosityCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MONSTROSITY);
-                return Component.literal(String.valueOf(30 + monstrosityCount * 10));
+                return Component.literal(String.valueOf(monstrosityCount));
             },
             context -> {
                 int monstrosityCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MONSTROSITY);
                 return Component.empty()
-                    .append(Component.literal("30"))
-                    .append(TooltipUtil.formulaOperator("+"))
                     .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.MONSTROSITY))
-                    .append(Component.literal(String.valueOf(monstrosityCount)))
+                    .append(Component.literal(String.valueOf(monstrosityCount)));
+            }
+        );
+    }
+
+    /**
+     * 火龙吐息袋 — 伤害随火龙器官数量缩放，计入器官数上限 10
+     */
+    public static final OrganTooltipConsumer FIRE_DRAGON_BREATH_SAC_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.split(
+            // simple 单段含 1 个 %s 在 line 0：伤害
+            Map.of(0, List.of(buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType.FIRE_BREATH, WAICItemTagManager.FIRE_DRAGON))),
+            // detailed line 1 含伤害 %s，line 2 含器官数 %s
+            Map.of(
+                1, List.of(buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType.FIRE_BREATH, WAICItemTagManager.FIRE_DRAGON)),
+                2, List.of(buildDragonBreathSacFormulaValue(WAICItemTagManager.FIRE_DRAGON))
+            )
+        ))
+        .build();
+
+    /**
+     * 冰龙吐息袋 — 伤害随冰龙器官数量缩放，计入器官数上限 10
+     */
+    public static final OrganTooltipConsumer ICE_DRAGON_BREATH_SAC_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.split(
+            // simple 单段含 1 个 %s 在 line 0：伤害
+            Map.of(0, List.of(buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType.ICE_BREATH, WAICItemTagManager.ICE_DRAGON))),
+            // detailed line 1 含伤害 %s，line 2 含器官数 %s
+            Map.of(
+                1, List.of(buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType.ICE_BREATH, WAICItemTagManager.ICE_DRAGON)),
+                2, List.of(buildDragonBreathSacFormulaValue(WAICItemTagManager.ICE_DRAGON))
+            )
+        ))
+        .build();
+
+    /**
+     * 电龙吐息袋 — 伤害随电龙器官数量缩放，计入器官数上限 10
+     */
+    public static final OrganTooltipConsumer LIGHTNING_DRAGON_BREATH_SAC_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.split(
+            // simple 单段含 1 个 %s 在 line 0：伤害
+            Map.of(0, List.of(buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON))),
+            // detailed line 1 含伤害 %s，line 2 含器官数 %s
+            Map.of(
+                1, List.of(buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON)),
+                2, List.of(buildDragonBreathSacFormulaValue(WAICItemTagManager.LIGHTNING_DRAGON))
+            )
+        ))
+        .build();
+
+    /**
+     * 构建龙吐息袋计入器官数 FormulaValue，公式为 min(对应龙器官数, 10)
+     */
+    private static FormulaValue buildDragonBreathSacFormulaValue(TagKey<Item> dragonTag) {
+        return new FormulaValue(
+            context -> {
+                int count = ChestCavityUtil.getOrganCountWithSelf(context, dragonTag);
+                return Component.literal(String.valueOf(Math.min(10, count)));
+            },
+            context -> {
+                int count = ChestCavityUtil.getOrganCountWithSelf(context, dragonTag);
+                return Component.empty()
+                    .append(Component.literal("min(10,\u00A0"))
+                    .append(TooltipUtil.tagOrganCountName(dragonTag))
+                    .append(Component.literal(String.valueOf(count)))
+                    .append(Component.literal(")"));
+            }
+        );
+    }
+
+    /**
+     * 构建龙吐息袋伤害 FormulaValue
+     * <p>
+     * 伤害由 Iron's Spells 法术系统的 getDamage 计算，公式为 1 + 基础值 × 通用法术强度 × 学派法术强度 × 0.75
+     * </p>
+     */
+    private static FormulaValue buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType breathType, TagKey<Item> dragonTag) {
+        return new FormulaValue(
+            context -> {
+                LivingEntity entity = context.entity();
+                int count = Math.min(10, ChestCavityUtil.getOrganCountWithSelf(context, dragonTag));
+                float damage = DragonBreathCastingTask.getDamage(breathType, count, entity);
+                return Component.literal(TooltipUtil.formatAttributeValue(damage));
+            },
+            context -> {
+                LivingEntity entity = context.entity();
+                int count = Math.min(10, ChestCavityUtil.getOrganCountWithSelf(context, dragonTag));
+                double spellPower = entity.getAttributeValue(AttributeRegistry.SPELL_POWER);
+                Holder<Attribute> schoolAttribute = switch (breathType) {
+                    case FIRE_BREATH -> AttributeRegistry.FIRE_SPELL_POWER;
+                    case ICE_BREATH -> AttributeRegistry.ICE_SPELL_POWER;
+                    case LIGHTNING_BREATH -> AttributeRegistry.LIGHTNING_SPELL_POWER;
+                };
+                double schoolPower = entity.getAttributeValue(schoolAttribute);
+                MutableComponent baseValueComponent;
+                if (breathType == DragonBreathCastingTask.BreathType.LIGHTNING_BREATH) {
+                    baseValueComponent = Component.empty()
+                        .append(TooltipUtil.tagOrganCountName(dragonTag))
+                        .append(Component.literal(String.valueOf(count)));
+                } else {
+                    baseValueComponent = Component.empty()
+                        .append(Component.literal("("))
+                        .append(TooltipUtil.tagOrganCountName(dragonTag))
+                        .append(Component.literal(String.valueOf(count)))
+                        .append(TooltipUtil.formulaOperator("-"))
+                        .append(Component.literal("1"))
+                        .append(Component.literal(")"));
+                }
+                return Component.empty()
+                    .append(Component.literal("1"))
+                    .append(TooltipUtil.formulaOperator("+"))
+                    .append(baseValueComponent)
                     .append(TooltipUtil.formulaOperator("×"))
-                    .append(Component.literal("10"));
+                    .append(TooltipUtil.attributeName(AttributeRegistry.SPELL_POWER))
+                    .append(Component.literal(TooltipUtil.formatAttributeValue(spellPower)))
+                    .append(TooltipUtil.formulaOperator("×"))
+                    .append(TooltipUtil.attributeName(schoolAttribute))
+                    .append(Component.literal(TooltipUtil.formatAttributeValue(schoolPower)))
+                    .append(TooltipUtil.formulaOperator("×"))
+                    .append(Component.literal("0.75"));
+            }
+        );
+    }
+
+    /**
+     * 蛋糕胃 — 甜蜜效果叠加等级随蛋糕器官数量缩放
+     */
+    public static final OrganTooltipConsumer CAKE_STOMACH_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            // simple 单段含 1 个 %s 在 line 0：等级
+            Map.of(0, List.of(buildCakeStomachFormulaValue())),
+            // detailed 含动态 %s 在 line 1
+            Map.of(1, List.of(buildCakeStomachFormulaValue()))
+        ))
+        .build();
+
+    /**
+     * 构建蛋糕胃 FormulaValue，公式为蛋糕器官数
+     */
+    private static FormulaValue buildCakeStomachFormulaValue() {
+        return new FormulaValue(
+            context -> {
+                int cakeCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.CAKE);
+                return Component.literal(String.valueOf(cakeCount));
+            },
+            context -> {
+                int cakeCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.CAKE);
+                return Component.empty()
+                    .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.CAKE))
+                    .append(Component.literal(String.valueOf(cakeCount)));
+            }
+        );
+    }
+
+    /**
+     * 布织泰迪熊 — 每个羊毛回血随布织器官数量缩放
+     */
+    public static final OrganTooltipConsumer CLOTH_TEDDY_BEAR_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.split(
+            // simple 单段含 1 个 %s 在 line 0：回血
+            Map.of(0, List.of(buildClothTeddyBearFormulaValue())),
+            // detailed 含动态 %s 在 line 1
+            Map.of(1, List.of(buildClothTeddyBearFormulaValue()))
+        ))
+        .build();
+
+    /**
+     * 构建布织泰迪熊 FormulaValue，公式为 4 + 布织器官数
+     */
+    private static FormulaValue buildClothTeddyBearFormulaValue() {
+        return new FormulaValue(
+            context -> {
+                int clothCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.CLOTH);
+                return Component.literal(TooltipUtil.formatAttributeValue(4 + clothCount));
+            },
+            context -> {
+                int clothCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.CLOTH);
+                return Component.empty()
+                    .append(Component.literal("4"))
+                    .append(TooltipUtil.formulaOperator("+"))
+                    .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.CLOTH))
+                    .append(Component.literal(String.valueOf(clothCount)));
+            }
+        );
+    }
+
+    /**
+     * 诅咒金器官 — 虚弱/缓慢/饥饿等级随诅咒器官数量阶梯式递增（四个诅咒金器官共用）
+     */
+    public static final OrganTooltipConsumer CURSED_GOLD_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            // simple 无动态段
+            Map.of(),
+            // detailed line 1/2/3 分别含虚弱/缓慢/饥饿等级 %s
+            Map.of(
+                1, List.of(buildCursedGoldWeaknessFormulaValue()),
+                2, List.of(buildCursedGoldSlownessFormulaValue()),
+                3, List.of(buildCursedGoldHungerFormulaValue())
+            )
+        ))
+        .build();
+
+    /**
+     * 构建诅咒金虚弱等级 FormulaValue
+     * <p>
+     * 阈值 1，每 5 个 +1 级；等级 = floor((count - 1) / 5) + 1；未达阈值显示灰色 /
+     * </p>
+     */
+    private static FormulaValue buildCursedGoldWeaknessFormulaValue() {
+        return buildCursedGoldStepFormulaValue(1, 5);
+    }
+
+    /**
+     * 构建诅咒金缓慢等级 FormulaValue
+     * <p>
+     * 阈值 3，每 6 个 +1 级；等级 = floor((count - 3) / 6) + 1；未达阈值显示灰色 /
+     * </p>
+     */
+    private static FormulaValue buildCursedGoldSlownessFormulaValue() {
+        return buildCursedGoldStepFormulaValue(3, 6);
+    }
+
+    /**
+     * 构建诅咒金饥饿等级 FormulaValue
+     * <p>
+     * 阈值 5，每 9 个 +1 级；等级 = floor((count - 5) / 9) + 1；未达阈值显示灰色 /
+     * </p>
+     */
+    private static FormulaValue buildCursedGoldHungerFormulaValue() {
+        return buildCursedGoldStepFormulaValue(5, 9);
+    }
+
+    /**
+     * 构建诅咒金阶梯式惩罚效果等级 FormulaValue
+     *
+     * @param threshold 触发阈值（诅咒器官数下限）
+     * @param step      每多少个器官提升 1 级
+     */
+    private static FormulaValue buildCursedGoldStepFormulaValue(int threshold, int step) {
+        return new FormulaValue(
+            context -> {
+                int cursedCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.CURSED);
+                if (cursedCount < threshold) {
+                    return Component.literal("/").withStyle(ChatFormatting.DARK_GRAY);
+                }
+                int amplifier = (cursedCount - threshold) / step;
+                return Component.literal(String.valueOf(amplifier + 1));
+            },
+            context -> {
+                int cursedCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.CURSED);
+                return Component.empty()
+                    .append(Component.literal("floor(("))
+                    .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.CURSED))
+                    .append(Component.literal(String.valueOf(cursedCount)))
+                    .append(TooltipUtil.formulaOperator("-"))
+                    .append(Component.literal(String.valueOf(threshold)))
+                    .append(Component.literal(")"))
+                    .append(TooltipUtil.formulaOperator("÷"))
+                    .append(Component.literal(String.valueOf(step)))
+                    .append(Component.literal(")"))
+                    .append(TooltipUtil.formulaOperator("+"))
+                    .append(Component.literal("1"));
             }
         );
     }
