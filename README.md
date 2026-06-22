@@ -10,7 +10,7 @@
 - **ModDevGradle**：2.0.140
 - **Parchment Mappings**：2024.11.17
 - **Java**：21
-- **版本**：1.0.8
+- **版本**：1.0.9
 
 前置模组：**Chest Cavity Beyond**（胸腔：超越），本模组为 CCB 的 Addon，核心机制是为不提供胸腔的原版/其他 mod 的生物添加可植入胸腔的器官。
 

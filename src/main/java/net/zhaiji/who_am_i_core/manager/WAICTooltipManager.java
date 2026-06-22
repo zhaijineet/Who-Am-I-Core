@@ -665,36 +665,36 @@ public class WAICTooltipManager {
     }
 
     /**
-     * 机械之星 — 导弹伤害随机械器官数量缩放
+     * 机械之星 — 导弹数量随机械器官数量动态变化（单发伤害固定 8 点）
      */
     public static final OrganTooltipConsumer MECHANICAL_STAR_TOOLTIP = OrganTooltip.builder()
         .dynamicActiveSkill(slotContext -> DynamicValues.split(
-            // simple 和 detailed 都是单 %s，行号差异：detailed 在 line 1，simple 在 line 0
-            Map.of(0, List.of(buildMechanicalStarFormulaValue())),
-            Map.of(1, List.of(buildMechanicalStarFormulaValue()))
+            // simple：line 0 含 %s
+            Map.of(0, List.of(buildMechanicalStarCountFormulaValue())),
+            // detailed：line 0/1/2 共三行，%s 在 line 1
+            Map.of(1, List.of(buildMechanicalStarCountFormulaValue()))
         ))
         .build();
 
     /**
-     * 构建 机械之星 FormulaValue，公式为 5 × (1 + 机械器官数 × 0.1)
+     * 构建 机械之星导弹数量 FormulaValue，公式为 1 + floor(机械器官数 / 3)
      */
-    private static FormulaValue buildMechanicalStarFormulaValue() {
+    private static FormulaValue buildMechanicalStarCountFormulaValue() {
         return new FormulaValue(
             context -> {
                 int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
-                return Component.literal(TooltipUtil.formatAttributeValue(5.0F * (1 + mechanicalCount * 0.1F)));
+                return Component.literal(TooltipUtil.formatAttributeValue(1 + mechanicalCount / 3));
             },
             context -> {
                 int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
                 return Component.empty()
-                    .append(Component.literal("5"))
-                    .append(TooltipUtil.formulaOperator("×"))
-                    .append(Component.literal("(1"))
+                    .append(Component.literal("1"))
                     .append(TooltipUtil.formulaOperator("+"))
+                    .append(Component.literal("("))
                     .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.MECHANICAL))
                     .append(Component.literal(String.valueOf(mechanicalCount)))
-                    .append(TooltipUtil.formulaOperator("×"))
-                    .append(Component.literal("0.1)"));
+                    .append(TooltipUtil.formulaOperator("÷"))
+                    .append(Component.literal("3)"));
             }
         );
     }

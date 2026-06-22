@@ -130,6 +130,8 @@ neoForge {
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             logLevel = org.slf4j.event.Level.DEBUG
+
+            systemProperty('terminal.jline', 'true')
         }
     }
 
@@ -162,6 +164,8 @@ dependencies {
     localRuntime "squeek.appleskin:appleskin-neoforge:mc1.21-3.0.8"
     // Jade
     localRuntime "maven.modrinth:jade:15.10.5+neoforge"
+    // patchouli
+    implementation "curse.maven:patchouli-306770:7730942"
     // gecko lib
     implementation "curse.maven:geckolib-388172:7707149"
     // uranus
@@ -190,7 +194,7 @@ dependencies {
 
     // Chest Cavity Beyond
     // implementation "curse.maven:chest-cavity-beyond-1427715:8279924"
-     implementation 'blank:chestcavitybeyond_neoforge_1.21.1:1.8.1'
+     implementation 'blank:chestcavitybeyond_neoforge_1.21.1:1.8.2'
     // 冰火传说
     implementation "curse.maven:iceandfire-ce-1040076:7524985"
     // mowzie的生物

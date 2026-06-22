@@ -32,6 +32,8 @@ import java.util.Optional;
  * 最多只能放入 2 个器官（按槽位数计算，不受堆叠数影响）。
  * </p>
  * TODO 自己写一个BundleContents
+ * 警告：当弗兰肯斯坦肋骨实现后，可能会造成焰魔肋甲触发无限递归（以及可能出现的同类型情况，需要规避）。
+ * 详见 OrganUtil.aggregateFrankensteinHeartAttributes 与 CataclysmOrganUtil.ignitedRibPlatingModifier。
  */
 public class FrankensteinItem extends BundleItem {
     public static final int MAX_ORGANS = 2;

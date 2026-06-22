@@ -15,9 +15,7 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
  * <p>
  * 食用食物后3秒（60 ticks），在实体位置掉落该食物
  * </p>
- * <p>
  * 注意：30%几率检测在事件处理器中进行，只有触发才会创建此Task
- * </p>
  */
 public class StraightIntestineTask implements ISerializableTask {
     public static final ResourceLocation TYPE = WhoAmICore.of("straight_intestine");
@@ -58,9 +56,7 @@ public class StraightIntestineTask implements ISerializableTask {
     @Override
     public void onRemoved(LivingEntity entity) {
         // 延迟结束，掉落物品
-        if (!entity.level().isClientSide()) {
-            entity.spawnAtLocation(food);
-        }
+        entity.spawnAtLocation(food);
     }
 
     @Override

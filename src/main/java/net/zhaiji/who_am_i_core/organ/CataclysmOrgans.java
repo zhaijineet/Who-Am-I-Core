@@ -257,8 +257,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> TACTICAL_DISK = WAICItem.ITEM.register(
         "tactical_disk",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 2)
-            .modifier((context, modifiers) -> CataclysmOrganUtil.ancientFactoryModifier(context, modifiers, InitAttribute.HEALTH))
+            .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.HEALTH, 2))
             .build()
     );
 
@@ -285,8 +284,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> COMPUTE_CHIP = WAICItem.ITEM.register(
         "compute_chip",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 1.5)
-            .modifier((context, modifiers) -> CataclysmOrganUtil.ancientFactoryModifier(context, modifiers, InitAttribute.NERVES))
+            .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.NERVES, 1.5))
             .build()
     );
 

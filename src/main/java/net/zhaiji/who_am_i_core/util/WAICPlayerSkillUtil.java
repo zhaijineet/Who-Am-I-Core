@@ -114,7 +114,7 @@ public class WAICPlayerSkillUtil {
         Vec3 from = entity.getEyePosition();
         Vec3 to = from.add(entity.getLookAngle()
             .normalize()
-            .scale(entity.getAttribute(Attributes.BLOCK_INTERACTION_RANGE).getValue()));
+            .scale(entity.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE)));
         ClipContext clipContext = new ClipContext(
             from, to,
             ClipContext.Block.OUTLINE,

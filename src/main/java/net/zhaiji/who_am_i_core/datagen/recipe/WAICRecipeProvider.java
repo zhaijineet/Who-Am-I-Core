@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
@@ -74,9 +75,8 @@ public class WAICRecipeProvider extends RecipeProvider {
 
     private void nineHellOrganRecipes(RecipeOutput recipeOutput) {
         // Cataclysm 物品引用（与 AnvilCraft ModItems 命名冲突，使用全限定名）
-        var voidJaw = com.github.L_Ender.cataclysm.init.ModItems.VOID_JAW.get();
-        var burningAshes = com.github.L_Ender.cataclysm.init.ModItems.BURNING_ASHES.get();
-        var chainOfSoulBinding = com.github.L_Ender.cataclysm.init.ModItems.CHAIN_OF_SOUL_BINDING.get();
+        Item voidJaw = com.github.L_Ender.cataclysm.init.ModItems.VOID_JAW.get();
+        Item burningAshes = com.github.L_Ender.cataclysm.init.ModItems.BURNING_ASHES.get();
 
         // 第1层 · 灵薄（阑尾）：抗火阑尾 + 虚空之颚
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, WAICOrgans.LIMBO.get())
@@ -162,7 +162,7 @@ public class WAICRecipeProvider extends RecipeProvider {
             .unlockedBy(getHasName(Items.NAUTILUS_SHELL), has(Items.NAUTILUS_SHELL))
             .save(recipeOutput);
 
-        // 第9层 · 背叛（心脏）：抗火心脏 + 灵魂宝石 + 神圣灵魂碎片 + 缚魂之链
+        // 第9层 · 背叛（心脏）：抗火心脏 + 灵魂宝石 + 神圣灵魂碎片 + 下界之星
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, WAICOrgans.TREACHERY.get())
             .pattern(" D ")
             .pattern("GCG")
@@ -170,7 +170,7 @@ public class WAICRecipeProvider extends RecipeProvider {
             .define('C', InitItem.FIREPROOF_HEART.get())
             .define('G', CompanionsItems.SOUL_GEM.get())
             .define('D', ItemRegistry.DIVINE_SOULSHARD.get())
-            .define('N', chainOfSoulBinding)
+            .define('N', Items.NETHER_STAR)
             .unlockedBy(getHasName(ItemRegistry.DIVINE_SOULSHARD.get()), has(ItemRegistry.DIVINE_SOULSHARD.get()))
             .save(recipeOutput);
     }

@@ -821,7 +821,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_DRAGON_MUSCLE, "冰龙肌肉");
 
         // 电龙
-        String lightningChargeZH = "每 tick 为蓄能模块产出 0.1 电荷";
+        String lightningChargeZH = "每tick为蓄能模块产出0.1电荷";
         String lightningChargeOverloadZH = "产生的电荷可超出上限50%";
         String lightningChargeSimpleZH = "为蓄能模块产出电荷";
 
@@ -1461,7 +1461,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.COMPUTING_CORE, "演算核心");
         addOrganPassiveEffect(
             WAICOrgans.COMPUTING_CORE,
-            "每 tick 回复 1 点电荷",
+            "每tick回复1点电荷",
             "不超过最大电荷上限"
         );
         addOrganPassiveEffectSimple(WAICOrgans.COMPUTING_CORE, "持续回复电荷");
@@ -1480,7 +1480,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CHARGED_MUSCLE, "充能肌束");
         addOrganPassiveEffect(
             WAICOrgans.CHARGED_MUSCLE,
-            "冲刺时每 tick 产生 1 电荷",
+            "冲刺时每tick产生1电荷",
             "冲刺产生的电荷可超出上限50%"
         );
         addOrganPassiveEffectSimple(WAICOrgans.CHARGED_MUSCLE, "冲刺时产生电荷");
@@ -1503,7 +1503,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.ENERGY_MODULE,
             "+500点电荷容量",
-            "超出上限的电荷每 tick 衰减1点"
+            "超出上限的电荷每tick衰减1点"
         );
         add(WAICOrgans.ENERGY_MODULE_CHARGE_TRANSLATION, "电荷: %s/%s");
     }
@@ -2434,10 +2434,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MECHANICAL_STAR, "Mechanical Star");
         addOrganActiveSkill(
             CataclysmOrgans.MECHANICAL_STAR,
-            "Locks onto a target in sight and fires a homing missile",
-            "Deals %s damage points on hit"
+            "Locks onto a target in sight and fires homing missiles",
+            "Fires a salvo of %s missiles",
+            "Each missile deals 8 damage on hit"
         );
-        addOrganActiveSkillSimple(CataclysmOrgans.MECHANICAL_STAR, "Fires a homing missile, dealing %s damage on hit");
+        addOrganActiveSkillSimple(CataclysmOrgans.MECHANICAL_STAR, "Fires %s homing missiles, dealing 8 damage each on hit");
         addItem(CataclysmOrgans.DEATH_LENS, "Death Lens");
         addOrganActiveSkill(
             CataclysmOrgans.DEATH_LENS,
@@ -2569,9 +2570,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             CataclysmOrgans.MECHANICAL_STAR,
             "锁定视线方向的敌人发射追踪导弹",
-            "命中后造成%s点伤害"
+            "连续发射共%s枚导弹",
+            "每枚命中造成8点伤害"
         );
-        addOrganActiveSkillSimple(CataclysmOrgans.MECHANICAL_STAR, "发射追踪导弹，命中造成%s点伤害");
+        addOrganActiveSkillSimple(CataclysmOrgans.MECHANICAL_STAR, "连续发射%s枚追踪导弹，每枚命中造成8点伤害");
         addItem(CataclysmOrgans.DEATH_LENS, "死亡透镜");
         addOrganActiveSkill(
             CataclysmOrgans.DEATH_LENS,

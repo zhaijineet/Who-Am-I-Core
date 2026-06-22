@@ -29,5 +29,6 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerCriticalHitEvent);
         gameBus.addListener(CommonEventHandler::handlerPlayerInteract$RightClickBlock);
         gameBus.addListener(CommonEventHandler::handlerPlayerInteract$EntityInteract);
+        gameBus.addListener(CommonEventHandler::handlerMaidAndItemTransformEvent$ToMaid);
     }
 }

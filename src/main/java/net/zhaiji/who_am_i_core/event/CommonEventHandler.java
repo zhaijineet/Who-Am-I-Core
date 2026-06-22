@@ -3,6 +3,8 @@ package net.zhaiji.who_am_i_core.event;
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
 import com.finderfeed.fdbosses.init.BossBlocks;
+import com.github.tartaricacid.touhoulittlemaid.api.event.MaidAndItemTransformEvent;
+import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
 import com.iafenvoy.iceandfire.entity.MultipartPartEntity;
 import dev.xylonity.companions.common.entity.companion.TeddyEntity;
@@ -10,6 +12,8 @@ import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.item.InkItem;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -61,6 +65,7 @@ import net.zhaiji.who_am_i_core.manager.MowziesMobChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.mixin.AttachmentHolderAccessor;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
@@ -297,6 +302,9 @@ public class CommonEventHandler {
                 );
             }
         );
+
+        // 注册只读静态温度的器官（其 modifier 调用 getLocalTemperature 会形成无限递归）
+        OrganUtil.STATIC_TEMPERATURE_ONLY.add(CataclysmOrgans.IGNITED_RIB_PLATING.get());
     }
 
     /**
@@ -728,5 +736,19 @@ public class CommonEventHandler {
         heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         event.setCancellationResult(InteractionResult.SUCCESS);
         event.setCanceled(true);
+    }
+
+    /**
+     * 修复神龛复活女仆时丢失的attachment
+     * <p>
+     * 魂符和照片也会触发本事件，但它们走Entity.load，NeoForge原生已处理attachment，此处对它们是幂等无副作用的重复反序列化
+     * </p>
+     */
+    public static void handlerMaidAndItemTransformEvent$ToMaid(MaidAndItemTransformEvent.ToMaid event) {
+        EntityMaid maid = event.getMaid();
+        CompoundTag data = event.getData();
+        if (!data.contains("neoforge:attachments", Tag.TAG_COMPOUND)) return;
+        CompoundTag attachmentsTag = data.getCompound("neoforge:attachments");
+        ((AttachmentHolderAccessor) maid).deserializeInternal(maid.registryAccess(), attachmentsTag);
     }
 }

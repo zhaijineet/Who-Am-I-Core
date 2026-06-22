@@ -5,7 +5,6 @@ import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Phantom_Halberd_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Void_Rune_Entity;
-import com.github.L_Ender.cataclysm.entity.projectile.Wither_Homing_Missile_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModSounds;
@@ -31,6 +30,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
+import net.zhaiji.chestcavitybeyond.api.function.OrganModifierConsumer;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
@@ -42,6 +42,7 @@ import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.DeathLensTask;
+import net.zhaiji.who_am_i_core.task.MechanicalStarTask;
 
 
 public class CataclysmOrganUtil {
@@ -150,6 +151,13 @@ public class CataclysmOrganUtil {
 
     /**
      * 焰魔肋甲属性修饰符 - 局部温度的平方根的格挡
+     * <p>
+     * 警告：本 modifier 调用 getLocalTemperature 遍历胸腔槽位，会形成无限递归链
+     * 当前由 {@link OrganUtil#STATIC_TEMPERATURE_ONLY} 对焰魔肋甲降级属性获取为静态。
+     * 警告：当将来实现了全套的弗兰肯斯坦器官效果（收纳袋可装焰魔肋甲等任意器官），
+     * 弗兰肯斯坦心脏的 getAttributeModifiers 调用链可能绕过上述保护，再次出现无限递归。
+     * 根治需温度系统整体重构（见 OrganUtil.getStackTemperature 的 TODO）。
+     * </p>
      */
     public static void ignitedRibPlatingModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         double localTemp = OrganUtil.getLocalTemperature(context);
@@ -299,16 +307,14 @@ public class CataclysmOrganUtil {
      * 远古工厂器官 modifier - 机械器官数量的平方根加成
      *
      * @param primaryAttribute 要加成的主属性
+     * @param baseValue        基础加值
      */
-    public static void ancientFactoryModifier(
-        ChestCavitySlotContext context,
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers,
-        Holder<Attribute> primaryAttribute
-    ) {
-        int count = context.data().getOrganCount(WAICItemTagManager.MECHANICAL);
-        if (context.index() == -1) count++;
-        double bonus = Math.floor(Math.sqrt(count * 2));
-        modifiers.put(primaryAttribute, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+    public static OrganModifierConsumer ancientFactoryModifier(Holder<Attribute> primaryAttribute, double baseValue) {
+        return (context, modifiers) -> {
+            int count = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
+            double bonus = baseValue + Math.floor(Math.sqrt(count * 2));
+            modifiers.put(primaryAttribute, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
+        };
     }
 
     /**
@@ -319,29 +325,25 @@ public class CataclysmOrganUtil {
         LivingEntity entity = context.entity();
         if (entity.tickCount % 20 != 0) return;
         if (entity.getHealth() < entity.getMaxHealth() || entity instanceof Player player && player.isHurt()) {
-            int mechanicalCount = context.data().getOrganCount(WAICItemTagManager.MECHANICAL);
-            if (context.index() == -1) mechanicalCount++;
+            int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
             entity.heal(0.5F + mechanicalCount * 0.05F);
         }
     }
 
-    // 机械之星 — 凋零追踪导弹（底层逻辑，追踪指定目标）
+    /**
+     * 机械之星 — 凋零追踪导弹连发（底层逻辑，追踪指定目标）
+     * <p>
+     * 导弹数量随机械器官数动态变化：1 + floor(机械器官数 / 3)；
+     * 每枚伤害固定 8 点；每 10 tick 发射一枚。
+     * </p>
+     */
     public static boolean mechanicalStar(ChestCavitySlotContext context, LivingEntity target) {
-        LivingEntity entity = context.entity();
-        Level level = entity.level();
-
-        // 伤害 = 5 × (1 + 机械器官数 × 0.1)
         int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
-        float damage = 5.0F * (1 + mechanicalCount * 0.1F);
+        int missileCount = 1 + mechanicalCount / 3;
 
-        Wither_Homing_Missile_Entity missile = new Wither_Homing_Missile_Entity(
-            entity, entity.getLookAngle(), level,
-            damage,
-            target);
-        missile.setPos(entity.getX(), entity.getY() + OrganSkillUtil.effectiveEyeHeight(entity) * 0.69F, entity.getZ());
-        level.addFreshEntity(missile);
-
-        level.playSound(null, entity, ModSounds.ROCKET_LAUNCH.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        // 若已有同类型任务在跑则先移除，避免创造模式/异常重叠调用导致双倍连发
+        context.data().removeTaskIf(task -> task instanceof MechanicalStarTask);
+        context.data().addTask(new MechanicalStarTask(missileCount, 8.0F, target));
 
         return true;
     }
