@@ -418,6 +418,7 @@
   "organ.who_am_i_core.cake_liver.passive_effect.0": "甜蜜等级达到2时每秒消耗1级清除1个随机负面效果",
   "organ.who_am_i_core.cake_stomach.passive_effect.0": "食用食物获得甜蜜，每秒为周围16格内非敌对生物恢复1点生命值",
   "organ.who_am_i_core.cake_stomach.passive_effect.1": "每次食用叠加%s级并重置持续时长",
+  "organ.who_am_i_core.cake_stomach.passive_effect.2": "玩家每秒额外恢复1饥饿值和1饱和度",
   "organ.who_am_i_core.cake_stomach.passive_effect.simple.0": "食用食物叠加%s级甜蜜效果，并治疗周围生物",
   "organ.who_am_i_core.charged_muscle.passive_effect.0": "冲刺时每tick产生1电荷",
   "organ.who_am_i_core.charged_muscle.passive_effect.1": "冲刺产生的电荷可超出上限50%",

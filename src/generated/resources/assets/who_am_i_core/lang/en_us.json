@@ -418,6 +418,7 @@
   "organ.who_am_i_core.cake_liver.passive_effect.0": "Sweetness level 2 or above consumes 1 level per second to remove 1 random harmful effect",
   "organ.who_am_i_core.cake_stomach.passive_effect.0": "Eating food grants Sweetness, restoring 1 HP per second to non-hostile entities within 16 blocks",
   "organ.who_am_i_core.cake_stomach.passive_effect.1": "Each eat adds %s level(s) and resets duration",
+  "organ.who_am_i_core.cake_stomach.passive_effect.2": "Players additionally restore 1 food and 1 saturation per second",
   "organ.who_am_i_core.cake_stomach.passive_effect.simple.0": "Eating food stacks %s level(s) of Sweetness and heals nearby entities",
   "organ.who_am_i_core.charged_muscle.passive_effect.0": "Generates 1 charge per tick while sprinting",
   "organ.who_am_i_core.charged_muscle.passive_effect.1": "Sprint-generated charge can exceed cap by 50%",

@@ -2750,7 +2750,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             CompanionsOrgans.CAKE_STOMACH,
             "Eating food grants Sweetness, restoring 1 HP per second to non-hostile entities within 16 blocks",
-            "Each eat adds %s level(s) and resets duration"
+            "Each eat adds %s level(s) and resets duration",
+            "Players additionally restore 1 food and 1 saturation per second"
         );
         addOrganPassiveEffectSimple(
             CompanionsOrgans.CAKE_STOMACH,
@@ -2818,7 +2819,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             CompanionsOrgans.CAKE_STOMACH,
             "食用食物获得甜蜜，每秒为周围16格内非敌对生物恢复1点生命值",
-            "每次食用叠加%s级并重置持续时长"
+            "每次食用叠加%s级并重置持续时长",
+            "玩家每秒额外恢复1点饥饿值与1点饱和度"
         );
         addOrganPassiveEffectSimple(
             CompanionsOrgans.CAKE_STOMACH,
