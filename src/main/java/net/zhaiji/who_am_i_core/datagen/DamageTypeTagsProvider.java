@@ -4,11 +4,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
+import net.zhaiji.who_am_i_core.register.WAICDamageType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -30,5 +32,9 @@ public class DamageTypeTagsProvider extends TagsProvider<DamageType> {
                 .add(DamageTypes.PLAYER_ATTACK)    // 玩家攻击
                 .add(DamageTypes.MOB_ATTACK)       // 生物攻击
                 .add(DamageTypes.THORNS);          // 荆棘反伤
+
+        // 投射物伤害标签
+        this.tag(DamageTypeTags.IS_PROJECTILE)
+                .add(WAICDamageType.RAILGUN);      // 电磁炮
     }
 }

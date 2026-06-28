@@ -22,8 +22,10 @@ import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
+import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -1105,4 +1107,37 @@ public class WAICTooltipManager {
             }
         );
     }
+
+    // ==================== 电磁炮 ====================
+
+    /**
+     * 电磁炮伤害乘数公式：(1 + 机械器官数 × 0.15)，超频时 ×2
+     */
+    private static final FormulaValue RAILGUN_DAMAGE_FORMULA_VALUE = new FormulaValue(
+        context -> Component.literal(TooltipUtil.formatAttributeValue(AnvilCraftOrganUtil.getRailgunDamageMultiplier(context))),
+        context -> {
+            int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
+            MutableComponent formula = Component.empty()
+                .append(Component.literal("(1"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.MECHANICAL))
+                .append(Component.literal(String.valueOf(mechanicalCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("0.15)"));
+            if (WAICOrganUtil.isOverloadMode(context.entity())) {
+                formula.append(TooltipUtil.formulaOperator("×")).append(Component.literal("2"));
+            }
+            return formula;
+        }
+    );
+
+    /**
+     * 电磁炮 — 动态伤害乘数 + 弹药列表（afterActiveSkill 挂载）
+     */
+    public static final OrganTooltipConsumer RAILGUN_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.same(
+            Map.of(0, List.of(RAILGUN_DAMAGE_FORMULA_VALUE))
+        ))
+        .afterActiveSkill(WAICTooltipUtil::railgunAmmoSection)
+        .build();
 }

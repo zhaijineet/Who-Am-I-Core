@@ -568,22 +568,6 @@ public class CommonEventHandler {
     }
 
     /**
-     * 经验之心：当玩家等级变化时，更新经验之心的健康值属性
-     */
-    public static void handlerPlayer$LevelChange(PlayerXpEvent.LevelChange event) {
-        Player player = event.getEntity();
-        if (player.level().isClientSide()) return;
-        ChestCavityData data = ChestCavityUtil.getData(player);
-        for (int i = 0; i < data.getSlots(); i++) {
-            ItemStack stack = data.getStackInSlot(i);
-            if (stack.isEmpty()) continue;
-            if (stack.is(WAICOrgans.EXPERIENCE_HEART.get())) {
-                OrganAttributeUtil.updateSlotOrganAttribute(ChestCavityUtil.createContext(data, i, stack));
-            }
-        }
-    }
-
-    /**
      * 直肠子：30% 几率在 3 秒后掉落一份相同食物
      * 暴食：N≥2获得黄心 + N≥3回复生命
      * 蛋糕胃：食用食物时给予甜蜜效果，等级 = 蛋糕器官数量，可叠加，每次重置 30 秒
@@ -641,7 +625,7 @@ public class CommonEventHandler {
             ItemStack heldItem = player.getItemInHand(hand);
             if (!heldItem.is(ItemTagManager.SPINE) || !heldItem.is(ItemTagManager.BONE) || heldItem.is(WAICOrgans.SWORD_BONE.get())) return;
             if (!level.isClientSide()) {
-                ItemStack swordBone = new ItemStack(WAICOrgans.SWORD_BONE.get());
+                ItemStack swordBone = WAICOrgans.SWORD_BONE.get().getDefaultInstance();
                 heldItem.shrink(1);
                 if (heldItem.isEmpty()) {
                     player.setItemInHand(hand, swordBone);

@@ -13,6 +13,8 @@ import net.minecraft.world.item.component.BundleContents;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.api.TooltipsKeyContext;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
+import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.manager.RailgunAmmoManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.ArrayList;
@@ -23,6 +25,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class WAICTooltipUtil {
+    // 电磁炮弹药列表
+    public static final String RAILGUN_AMMO_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".railgun.ammo";
+
     /**
      * 全部染料物品有序列表，用于 detailed 模式遍历显示
      */
@@ -120,5 +125,34 @@ public class WAICTooltipUtil {
             Component.translatable(TooltipUtil.PREFIX + "tooltip.hint.shift")
                 .withStyle(keyContext.isKeyShiftDown() ? ChatFormatting.YELLOW : ChatFormatting.DARK_GRAY)
         ).withStyle(ChatFormatting.GRAY));
+    }
+
+    /**
+     * 电磁炮弹药列表段落
+     * <p>
+     * Detailed 模式（Shift）展示所有可用弹药及计算后的最终伤害。
+     * Simple 模式不显示弹药列表。
+     * </p>
+     */
+    public static List<Component> railgunAmmoSection(
+        ChestCavitySlotContext slotContext,
+        TooltipsKeyContext keyContext,
+        Item.TooltipContext context,
+        List<Component> tooltipComponents,
+        TooltipFlag tooltipFlag
+    ) {
+        if (!TooltipUtil.isDetailedMode(keyContext)) return List.of();
+        float multiplier = AnvilCraftOrganUtil.getRailgunDamageMultiplier(slotContext);
+        List<Component> result = new ArrayList<>();
+        for (Map.Entry<Item, Float> entry : RailgunAmmoManager.getAmmoEntries()) {
+            float finalDamage = entry.getValue() * multiplier;
+            result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
+                .append(Component.translatable(
+                    RAILGUN_AMMO_TRANSLATION,
+                    entry.getKey().getDescription(),
+                    TooltipUtil.formatAttributeValue(finalDamage)
+                )));
+        }
+        return result;
     }
 }

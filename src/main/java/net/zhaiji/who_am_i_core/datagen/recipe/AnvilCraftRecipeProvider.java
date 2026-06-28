@@ -39,6 +39,7 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
         frostMetalOrganRecipes(output);
         transcendiumOrganRecipes(output);
         cyberneticOrganRecipes(output);
+        railgunRecipe(output);
         squashRecipe(output);
         lesionOrganRecipes(output);
         elderOrganRecipes(output);
@@ -286,6 +287,14 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
             .requires(ModBlocks.POWER_CONVERTER_SMALL)
             .result(WAICOrgans.ENERGY_MODULE.get())
             .save(output, WhoAmICore.of(getItemName(WAICOrgans.ENERGY_MODULE.get())));
+    }
+
+    // 加速环 → 电磁炮器官
+    private void railgunRecipe(RecipeOutput output) {
+        StampingRecipe.builder()
+            .requires(ModBlocks.ACCELERATION_RING)
+            .result(AnvilCraftOrgans.RAILGUN.get())
+            .save(output, WhoAmICore.of(getItemName(AnvilCraftOrgans.RAILGUN.get())));
     }
 
     /**

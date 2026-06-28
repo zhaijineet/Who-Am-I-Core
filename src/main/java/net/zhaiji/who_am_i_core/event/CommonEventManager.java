@@ -24,7 +24,6 @@ public class CommonEventManager {
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Remove);
         gameBus.addListener(CommonEventHandler::handlerMobEffectEvent$Expired);
         gameBus.addListener(CommonEventHandler::handlerPlayerXpEvent$PickupXp);
-        gameBus.addListener(CommonEventHandler::handlerPlayer$LevelChange);
         gameBus.addListener(CommonEventHandler::handlerLivingEntityUseItemEvent$Finish);
         gameBus.addListener(CommonEventHandler::handlerCriticalHitEvent);
         gameBus.addListener(CommonEventHandler::handlerPlayerInteract$RightClickBlock);

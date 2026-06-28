@@ -9,6 +9,9 @@ import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
+import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
+import net.zhaiji.who_am_i_core.util.WAICPlayerSkillUtil;
 
 import java.util.function.Supplier;
 
@@ -427,6 +430,17 @@ public class AnvilCraftOrgans {
         "transcendium_muscle",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumMuscleModifier)
+            .build()
+    );
+
+    // 电磁炮
+    public static final Supplier<Item> RAILGUN = WAICItem.ITEM.register(
+        "railgun",
+        () -> Organ.builder()
+            .skill(WAICPlayerSkillUtil::railgun)
+            .goalSkill(WAICGoalSkillUtil.railgunGoalSkill())
+            .cooldown(context -> WAICOrganUtil.isOverloadMode(context.entity()) ? 10 : 20)
+            .tooltip(WAICTooltipManager.RAILGUN_TOOLTIP)
             .build()
     );
 

@@ -520,7 +520,7 @@ public class CataclysmOrganUtil {
 
     /**
      * 封印石板 — 破封·幻戟阵
-     * 在前方扇形范围召唤5道幻影战戟从地面依次刺出
+     * 以自身为中心呈螺旋状召唤多道幻影战戟从地面依次刺出，对齐断魂战戟 StrikeWindmillHalberd
      */
     public static boolean sealingStoneSlab(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
@@ -541,30 +541,50 @@ public class CataclysmOrganUtil {
         // 震屏
         ScreenShake_Entity.ScreenShake(level, entity.position(), 15, 0.2f, 0, 10);
 
-        // 扇形5道幻影战戟
-        float baseYRot = entity.getYRot() * ((float) Math.PI / 180F);
         // 每道战戟伤害 = 8 + 力量属性 × 0.5
         float halberdDamage = 8.0F + (float) (entity.getAttributeValue(InitAttribute.STRENGTH) * 0.5);
-        float[] angleOffsets = {
-            -24.0F,
-            -12.0F,
-            0.0F,
-            12.0F,
-            24.0F
-        };
 
-        for (int i = 0; i < angleOffsets.length; i++) {
-            float angleRad = baseYRot + angleOffsets[i] * ((float) Math.PI / 180F);
-            int warmupDelay = i * 3;
-
-            // 计算戟的位置：从玩家前方2格处
-            double spawnX = entity.getX() + Mth.cos(angleRad) * 2.0D;
-            double spawnZ = entity.getZ() + Mth.sin(angleRad) * 2.0D;
-
-            spawnPhantomHalberd(level, spawnX, entity.getY(), spawnZ, angleRad, warmupDelay, entity, halberdDamage);
-        }
+        // 螺旋幻影战戟阵
+        strikeWindmillHalberd(level, entity, 7, 5, 1.0D, 1.0D, 0.2D, 1, halberdDamage);
 
         return true;
+    }
+
+    /**
+     * 螺旋幻影战戟阵生成方法，对齐断魂战戟 StrikeWindmillHalberd 的螺旋扩散逻辑，额外增加动态伤害参数
+     */
+    private static void strikeWindmillHalberd(
+        Level level,
+        LivingEntity caster,
+        int numberOfBranches,
+        int halberdsPerBranch,
+        double initialRadius,
+        double radiusIncrement,
+        double curveFactor,
+        int delay,
+        float damage
+    ) {
+        float angleIncrement = (float) (2 * Math.PI / numberOfBranches);
+        for (int branch = 0; branch < numberOfBranches; ++branch) {
+            float baseAngle = angleIncrement * branch;
+            for (int i = 0; i < halberdsPerBranch; ++i) {
+                double currentRadius = initialRadius + i * radiusIncrement;
+                float currentAngle = (float) (baseAngle + i * angleIncrement / initialRadius + i * curveFactor);
+
+                double xOffset = currentRadius * Math.cos(currentAngle);
+                double zOffset = currentRadius * Math.sin(currentAngle);
+
+                double spawnX = caster.getX() + xOffset;
+                double spawnZ = caster.getZ() + zOffset;
+                int currentDelay = delay * (i + 1);
+
+                spawnPhantomHalberd(
+                    level, spawnX,
+                    caster.getY() - 5.0D, caster.getY() + 3.0D,
+                    spawnZ, currentAngle, currentDelay, caster, damage
+                );
+            }
+        }
     }
 
     /**
@@ -572,10 +592,9 @@ public class CataclysmOrganUtil {
      * 从指定位置向下搜索地面，在地面生成幻影战戟
      */
     private static void spawnPhantomHalberd(
-        Level level, double x, double minY, double z,
+        Level level, double x, double minY, double maxY, double z,
         float rotation, int delay, LivingEntity caster, float damage
     ) {
-        double maxY = minY + 3.0D;
         BlockPos blockpos = BlockPos.containing(x, maxY, z);
         boolean foundGround = false;
         double groundOffset = 0.0D;
@@ -594,7 +613,7 @@ public class CataclysmOrganUtil {
                 break;
             }
             blockpos = blockpos.below();
-        } while (blockpos.getY() >= Mth.floor(minY));
+        } while (blockpos.getY() >= Mth.floor(minY) - 1);
 
         if (foundGround) {
             level.addFreshEntity(

@@ -2,7 +2,9 @@ package net.zhaiji.who_am_i_core.util;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -11,6 +13,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
+import net.zhaiji.who_am_i_core.manager.RailgunAmmoManager;
 
 public class WAICPlayerSkillUtil {
     // 火龙吐息
@@ -125,5 +128,23 @@ public class WAICPlayerSkillUtil {
         BlockHitResult hitResult = level.clip(clipContext);
         if (hitResult.getType() != HitResult.Type.BLOCK) return false;
         return MowziesMobOrganUtil.bluffCore(context, hitResult.getBlockPos());
+    }
+
+    // 电磁炮 — 从手中取金属粒发射
+    public static boolean railgun(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        ItemStack mainHand = entity.getMainHandItem();
+        ItemStack offHand = entity.getOffhandItem();
+        ItemStack ammoStack = RailgunAmmoManager.isValidAmmo(mainHand) ? mainHand
+            : RailgunAmmoManager.isValidAmmo(offHand) ? offHand
+            : ItemStack.EMPTY;
+        if (ammoStack.isEmpty()) return false;
+
+        if (!AnvilCraftOrganUtil.fireRailgun(context, ammoStack)) return false;
+
+        if (!(entity instanceof Player player && player.isCreative())) {
+            ammoStack.shrink(1);
+        }
+        return true;
     }
 }

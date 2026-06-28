@@ -4,6 +4,7 @@ import com.finderfeed.fdbosses.init.BossBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -74,6 +75,7 @@ public class ClientEventHandler {
      */
     public static void handlerEntityRenderersEvent$RegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(WAICEntity.HYDRA_VENOM_BREATH.get(), NoopRenderer::new);
+        event.registerEntityRenderer(WAICEntity.RAILGUN_PROJECTILE.get(), ThrownItemRenderer::new);
     }
 
     /**

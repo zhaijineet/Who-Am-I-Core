@@ -368,6 +368,20 @@ public class WAICOrganUtil {
     }
 
     /**
+     * 经验之心：当玩家经验等级变化时，刷新所有经验之心器官的属性修饰符
+     */
+    public static void updateExperienceHeartAttribute(Player player) {
+        ChestCavityData chestCavityData = ChestCavityUtil.getData(player);
+        for (int i = 0; i < chestCavityData.getSlots(); i++) {
+            ItemStack stack = chestCavityData.getStackInSlot(i);
+            if (stack.isEmpty()) continue;
+            if (stack.is(WAICOrgans.EXPERIENCE_HEART.get())) {
+                OrganAttributeUtil.updateSlotOrganAttribute(ChestCavityUtil.createContext(chestCavityData, i, stack));
+            }
+        }
+    }
+
+    /**
      * 病变心脏 modifier：每有一个负面效果+1健康，每有一个正面效果-1健康
      */
     public static void lesionHeartModifier(

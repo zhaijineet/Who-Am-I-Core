@@ -7,6 +7,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.entity.HydraVenomBreathProjectile;
+import net.zhaiji.who_am_i_core.entity.RailgunProjectileEntity;
 
 /**
  * 实体注册类
@@ -28,5 +29,17 @@ public class WAICEntity {
             .sized(1f, 1f)
             .clientTrackingRange(64)
             .build(WhoAmICore.of("hydra_venom_breath").toString())
+    );
+
+    /**
+     * 电磁炮弹射物实体类型
+     */
+    public static final DeferredHolder<EntityType<?>, EntityType<RailgunProjectileEntity>> RAILGUN_PROJECTILE = ENTITY.register(
+        "railgun_projectile",
+        () -> EntityType.Builder
+            .<RailgunProjectileEntity>of(RailgunProjectileEntity::new, MobCategory.MISC)
+            .sized(0.25f, 0.25f)
+            .clientTrackingRange(64)
+            .build(WhoAmICore.of("railgun_projectile").toString())
     );
 }

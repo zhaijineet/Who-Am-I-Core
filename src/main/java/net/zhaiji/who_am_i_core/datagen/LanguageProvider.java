@@ -30,6 +30,7 @@ import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICCreativeModeTab;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 import java.util.function.Supplier;
 
@@ -219,6 +220,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         emberMetalOrgansEN();
         frostMetalOrgansEN();
         transcendiumOrgansEN();
+        railgunEN();
         fantasticalOrgansEN();
         cataclysmOrgansEN();
         ironSpellOrgansEN();
@@ -410,6 +412,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         emberMetalOrgansZH();
         frostMetalOrgansZH();
         transcendiumOrgansZH();
+        railgunZH();
         fantasticalOrgansZH();
         cataclysmOrgansZH();
         ironSpellOrgansZH();
@@ -2125,6 +2128,36 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffectSimple(AnvilCraftOrgans.TRANSCENDIUM_MUSCLE, simple);
     }
 
+    // ==================== 电磁炮 ====================
+
+    private void railgunEN() {
+        addItem(AnvilCraftOrgans.RAILGUN, "Railgun");
+        addOrganActiveSkill(
+            AnvilCraftOrgans.RAILGUN,
+            "Consumes 100 charge to fire a metal nugget from hand at %s damage multiplier",
+            "Overload mode doubles damage and halves cooldown",
+            "Hold Shift to view ammo list"
+        );
+        addOrganActiveSkillSimple(AnvilCraftOrgans.RAILGUN, "Fires metal nuggets from hand at %s damage multiplier, consuming 100 charge");
+        add(WAICTooltipUtil.RAILGUN_AMMO_TRANSLATION, "%s: %s damage");
+        add("death.attack.who_am_i_core.railgun", "%1$s was shot by %2$s with a railgun");
+        add("death.attack.who_am_i_core.railgun.item", "%1$s was shot by %2$s with a railgun");
+    }
+
+    private void railgunZH() {
+        addItem(AnvilCraftOrgans.RAILGUN, "电磁炮");
+        addOrganActiveSkill(
+            AnvilCraftOrgans.RAILGUN,
+            "消耗100电荷，以%s伤害倍率将手中的金属粒发射出去",
+            "超频模式下伤害翻倍，冷却减半",
+            "按住Shift查看弹药列表"
+        );
+        addOrganActiveSkillSimple(AnvilCraftOrgans.RAILGUN, "消耗100电荷发射手中金属粒，伤害倍率%s");
+        add(WAICTooltipUtil.RAILGUN_AMMO_TRANSLATION, "%s：%s伤害");
+        add("death.attack.who_am_i_core.railgun", "%1$s被%2$s用电磁炮射杀");
+        add("death.attack.who_am_i_core.railgun.item", "%1$s被%2$s用电磁炮射杀");
+    }
+
     // ==================== AnvilCraft 皇家钢器官 ====================
 
     private void royalSteelOrgansZH() {
@@ -2350,10 +2383,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.SEALING_STONE_SLAB, "Sealing Stone Slab");
         addOrganActiveSkill(
             CataclysmOrgans.SEALING_STONE_SLAB,
-            "Summons 5 phantom halberds in a fan shape",
+            "Summons a spiral array of phantom halberds around the self",
             "Each deals %s magic damage points"
         );
-        addOrganActiveSkillSimple(CataclysmOrgans.SEALING_STONE_SLAB, "Summons phantom halberds in a fan, dealing %s damage each");
+        addOrganActiveSkillSimple(CataclysmOrgans.SEALING_STONE_SLAB, "Summons a spiral phantom halberd array, dealing %s damage each");
 
         // 斯库拉系列
         addItem(CataclysmOrgans.TIDAL_LANTERN, "Tidal Lantern");
@@ -2485,10 +2518,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.SEALING_STONE_SLAB, "封印石板");
         addOrganActiveSkill(
             CataclysmOrgans.SEALING_STONE_SLAB,
-            "在前方扇形范围召唤5道幻影战戟",
+            "以自身为中心螺旋召唤幻影战戟阵",
             "每道造成%s点魔法伤害"
         );
-        addOrganActiveSkillSimple(CataclysmOrgans.SEALING_STONE_SLAB, "扇形范围召唤幻影战戟，每道造成%s点伤害");
+        addOrganActiveSkillSimple(CataclysmOrgans.SEALING_STONE_SLAB, "螺旋召唤幻影战戟阵，每道造成%s点伤害");
 
         // 斯库拉系列
         addItem(CataclysmOrgans.TIDAL_LANTERN, "涛浪提灯");

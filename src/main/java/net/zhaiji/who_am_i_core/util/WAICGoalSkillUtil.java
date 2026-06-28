@@ -194,4 +194,12 @@ public class WAICGoalSkillUtil {
             )
         ).build();
     }
+
+    // 电磁炮 — 远程发射金属粒
+    public static GoalSkillMetadata railgunGoalSkill() {
+        return GoalSkillMetadata.targetedAttack(
+            GoalSkillMetadata::defaultRange,
+            AnvilCraftOrganUtil::railgunGoal
+        ).build();
+    }
 }
