@@ -25,7 +25,7 @@ public class AnvilCraftOrganUtil {
 
     /**
      * 浮霜器官的通用 modifier 模式
-     * 基础值 1.0 + 附魔加成，同时添加等额负温度
+     * 基础值 1.0 + 附魔加成
      */
     @SafeVarargs
     private static void frostMetalBaseModifier(
@@ -37,7 +37,6 @@ public class AnvilCraftOrganUtil {
         for (Holder<Attribute> attribute : primaryAttributes) {
             modifiers.put(attribute, OrganAttributeUtil.createAddValueModifier(context.id(), value));
         }
-        modifiers.put(WAICAttribute.TEMPERATURE, OrganAttributeUtil.createAddValueModifier(context.id(), -value));
     }
 
     /**

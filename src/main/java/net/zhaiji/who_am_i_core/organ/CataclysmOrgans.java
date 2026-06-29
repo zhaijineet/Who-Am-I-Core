@@ -6,7 +6,6 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
-import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
@@ -119,7 +118,6 @@ public class CataclysmOrgans {
         "phantom_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
             .attack(CataclysmOrganUtil::phantomHeartAttack)
             .tooltip(WAICTooltipManager.PHANTOM_HEART_TOOLTIP)
             .build()
@@ -129,7 +127,6 @@ public class CataclysmOrgans {
     public static final Supplier<Item> PHANTOM_SHARD = WAICItem.ITEM.register(
         "phantom_shard",
         () -> Organ.builder()
-            .addValueAttribute(WAICAttribute.TEMPERATURE, -2)
             .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .addValueAttribute(InitAttribute.LEAPING, 2)
             .build()
@@ -185,7 +182,6 @@ public class CataclysmOrgans {
         "undying_ember",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 9)
             .modifier(CataclysmOrganUtil::undyingEmberModifier)
             .build()
     );
@@ -196,7 +192,6 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
             .build()
     );
@@ -206,7 +201,6 @@ public class CataclysmOrgans {
         "blazing_visage",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 1)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 1)
             .attack(CataclysmOrganUtil::blazingVisageAttack)
             .tooltip(WAICTooltipManager.BLAZING_VISAGE_TOOLTIP)
             .build()
@@ -219,7 +213,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 5)
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 1)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
             .added(CataclysmOrganUtil::monstrosityCoreAdded)
             .removed(CataclysmOrganUtil::monstrosityCoreRemoved)
             .tick(CataclysmOrganUtil::monstrosityCoreTick)
@@ -233,7 +226,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NERVES, 2)
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
             .skill(WAICPlayerSkillUtil::monstrosityCircuit)
             .goalSkill(WAICGoalSkillUtil.monstrosityCircuitGoalSkill())
             .cooldown(160)
@@ -248,7 +240,6 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DIGESTION, 2)
             .addValueAttribute(InitAttribute.NUTRITION, 1)
             .addValueAttribute(InitAttribute.HEALTH, 2)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 2)
             .tooltip(WAICTooltipManager.MONSTROSITY_FURNACE_TOOLTIP)
             .build()
     );

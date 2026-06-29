@@ -159,7 +159,6 @@ public class AnvilCraftOrgans {
         "ember_metal_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -169,7 +168,6 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 3)
             .addValueAttribute(InitAttribute.SPEED, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -179,7 +177,6 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 3)
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -188,7 +185,6 @@ public class AnvilCraftOrgans {
         "ember_metal_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -197,7 +193,6 @@ public class AnvilCraftOrgans {
         "ember_metal_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -208,7 +203,6 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 3)
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
             .addValueAttribute(InitAttribute.ENDURANCE, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -217,7 +211,6 @@ public class AnvilCraftOrgans {
         "ember_metal_stomach",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -226,7 +219,6 @@ public class AnvilCraftOrgans {
         "ember_metal_intestine",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -235,7 +227,6 @@ public class AnvilCraftOrgans {
         "ember_metal_kidney",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -244,7 +235,6 @@ public class AnvilCraftOrgans {
         "ember_metal_spleen",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 
@@ -253,7 +243,6 @@ public class AnvilCraftOrgans {
         "ember_metal_liver",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 3)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 3)
             .build()
     );
 

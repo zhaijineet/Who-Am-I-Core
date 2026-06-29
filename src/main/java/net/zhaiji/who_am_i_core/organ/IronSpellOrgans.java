@@ -4,7 +4,6 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
-import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 
@@ -33,7 +32,6 @@ public class IronSpellOrgans {
         "primordial_flame",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
-            .addValueAttribute(WAICAttribute.TEMPERATURE, 5)
             .build()
     );
 

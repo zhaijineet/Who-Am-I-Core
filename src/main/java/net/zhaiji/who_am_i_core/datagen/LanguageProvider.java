@@ -54,7 +54,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "Lightning Dragon Blood Preparation");
         addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "Dragon Blood Preparation");
 
-        addAttribute(WAICAttribute.TEMPERATURE, "Temperature");
         addAttribute(WAICAttribute.BLOCK, "Block");
         addAttribute(WAICAttribute.COUNTER_ATTACK, "Counter Attack");
         addAttribute(WAICAttribute.HEAL, "Heal");
@@ -148,10 +147,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttributeDescription(
             WAICAttribute.MAGIC_DAMAGE,
             "Adds flat bonus damage when hit by magic attacks"
-        );
-        addAttributeDescription(
-            WAICAttribute.TEMPERATURE,
-            "Affects various organ effects that scale with temperature"
         );
         addAttributeDescription(
             WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
@@ -248,7 +243,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "电龙血药剂");
         addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "龙血药剂组");
 
-        addAttribute(WAICAttribute.TEMPERATURE, "温度");
         addAttribute(WAICAttribute.BLOCK, "格挡");
         addAttribute(WAICAttribute.COUNTER_ATTACK, "反击");
         addAttribute(WAICAttribute.HEAL, "治疗");
@@ -342,10 +336,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttributeDescription(
             WAICAttribute.MAGIC_DAMAGE,
             "受到魔法攻击时额外增加等值伤害"
-        );
-        addAttributeDescription(
-            WAICAttribute.TEMPERATURE,
-            "影响多种与温度相关的器官效果"
         );
         addAttributeDescription(
             WAICAttribute.MELEE_DAMAGE_PERCENTAGE,
@@ -1604,30 +1594,30 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_SHARD, "Ice Shard");
         addOrganPassiveEffect(
             IceAndFireOrgans.ICE_SHARD,
-            "Provides 0.05 health per point of absolute global temperature"
+            "Provides 0.05 health per ice organ, reduced by fire organs"
         );
         addItem(IceAndFireOrgans.FROSTBURN_SOUL, "Frostburn Soul");
         addOrganPassiveEffect(
             IceAndFireOrgans.FROSTBURN_SOUL,
-            "Provides 0.15 health per point of absolute global temperature"
+            "Provides 0.15 health per ice organ, reduced by fire organs"
         );
         addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "Dread Phylactery");
         addOrganPassiveEffect(
             IceAndFireOrgans.DREAD_PHYLACTERY,
-            "Provides 0.25 health per point of absolute global temperature",
+            "Provides 0.25 health per ice organ, reduced by fire organs",
             "On attack converts target Slowness into freeze damage and removes it",
             "Damage equals remaining Slowness seconds multiplied by level plus one",
             "Infinite Slowness results in lethal damage"
         );
         addOrganPassiveEffectSimple(
             IceAndFireOrgans.DREAD_PHYLACTERY,
-            "Cold grants health and converts Slowness to freeze damage on attack"
+            "Ice organs grant health and convert Slowness to freeze damage, reduced by fire organs"
         );
         addItem(IceAndFireOrgans.DREAD_RIB, "Dread Rib");
         addItem(IceAndFireOrgans.DREAD_SPINE, "Dread Spine");
         addOrganPassiveEffect(
             IceAndFireOrgans.DREAD_SPINE,
-            "Attacks apply Slowness for %1$s, Slowness level %2$s"
+            "Attacks apply Slowness for %1$s, Slowness level %2$s, reduced by fire organs, level based on ice organs within 3×3 range around own slot"
         );
     }
 
@@ -1636,30 +1626,30 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_SHARD, "冰魂残片");
         addOrganPassiveEffect(
             IceAndFireOrgans.ICE_SHARD,
-            "每点全局温度绝对值提供0.05健康"
+            "每个冰霜器官提供0.05健康，受炽焰器官抵消"
         );
         addItem(IceAndFireOrgans.FROSTBURN_SOUL, "冻结魂火");
         addOrganPassiveEffect(
             IceAndFireOrgans.FROSTBURN_SOUL,
-            "每点全局温度绝对值提供0.15健康"
+            "每个冰霜器官提供0.15健康，受炽焰器官抵消"
         );
         addItem(IceAndFireOrgans.DREAD_PHYLACTERY, "悚怖命匣");
         addOrganPassiveEffect(
             IceAndFireOrgans.DREAD_PHYLACTERY,
-            "每点全局温度绝对值提供0.25健康",
+            "每个冰霜器官提供0.25健康，受炽焰器官抵消",
             "攻击时将目标的缓慢效果转化为冰霜伤害并移除",
             "伤害等于缓慢剩余秒数乘以缓慢等级加一",
             "无限时长的缓慢造成致命伤害"
         );
         addOrganPassiveEffectSimple(
             IceAndFireOrgans.DREAD_PHYLACTERY,
-            "低温提供健康并将缓慢转化为冰霜伤害"
+            "冰霜器官提供健康并将缓慢转化为冰霜伤害，受炽焰器官抵消"
         );
         addItem(IceAndFireOrgans.DREAD_RIB, "悚怖肋骨");
         addItem(IceAndFireOrgans.DREAD_SPINE, "悚怖脊柱");
         addOrganPassiveEffect(
             IceAndFireOrgans.DREAD_SPINE,
-            "攻击时施加持续 %1$s 的缓慢，缓慢等级 %2$s"
+            "攻击时施加持续%1$s的缓慢，缓慢等级%2$s，受炽焰器官抵消，等级以自身槽位为中心3×3范围的冰霜器官计算"
         );
     }
 
@@ -1862,8 +1852,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         add("formula.who_am_i_core.max_health", "Max Health");
         add("formula.who_am_i_core.current_health_ratio", "Current Health Ratio");
-        add("formula.who_am_i_core.effective_temperature", "Effective Temperature");
-        add("formula.who_am_i_core.local_temperature", "Local Temperature");
+        add("formula.who_am_i_core.fire_count", "Fire");
+        add("formula.who_am_i_core.ice_count", "Ice");
+        add("formula.who_am_i_core.local_fire_count", "Local Fire");
+        add("formula.who_am_i_core.local_ice_count", "Local Ice");
     }
 
     private void addWAICTagTranslationsZH() {
@@ -1893,8 +1885,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         add("formula.who_am_i_core.max_health", "最大生命值");
         add("formula.who_am_i_core.current_health_ratio", "当前生命值比例");
-        add("formula.who_am_i_core.effective_temperature", "全局温度");
-        add("formula.who_am_i_core.local_temperature", "局部温度");
+        add("formula.who_am_i_core.fire_count", "炽焰");
+        add("formula.who_am_i_core.ice_count", "冰霜");
+        add("formula.who_am_i_core.local_fire_count", "局部炽焰");
+        add("formula.who_am_i_core.local_ice_count", "局部冰霜");
     }
 
     // ==================== FDBosses 逆卡巴拉器官 ====================
@@ -1909,10 +1903,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.MALKUTH, "Malkuth");
         addOrganPassiveEffect(
             FDBossesOrgans.MALKUTH,
-            "Global temperature is always 0",
-            "Local temperature in the chest cavity becomes the sum of global positive and negative temperatures"
+            "When counting fire organs, ice organs are also counted",
+            "When counting ice organs, fire organs are also counted"
         );
-        addOrganPassiveEffectSimple(FDBossesOrgans.MALKUTH, "Neutralizes global temperature and amplifies local temperature");
+        addOrganPassiveEffectSimple(FDBossesOrgans.MALKUTH, "Fire and ice organs count towards each other instead of canceling out");
 
         addItem(FDBossesOrgans.CHESED, "Chesed");
         addOrganPassiveEffect(
@@ -1942,10 +1936,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(FDBossesOrgans.MALKUTH, "王国");
         addOrganPassiveEffect(
             FDBossesOrgans.MALKUTH,
-            "全局温度始终为0",
-            "胸腔的局部温度等于全局温度正负之和"
+            "计算炽焰器官数量时也计入冰霜器官数量",
+            "计算冰霜器官数量时也计入炽焰器官数量"
         );
-        addOrganPassiveEffectSimple(FDBossesOrgans.MALKUTH, "中和全局温度并放大局部温度");
+        addOrganPassiveEffectSimple(FDBossesOrgans.MALKUTH, "装备后炽焰与冰霜器官互相计入，不再互相抵消");
 
         addItem(FDBossesOrgans.CHESED, "慈悲");
         addOrganPassiveEffect(
@@ -2053,41 +2047,40 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     private void frostMetalOrgansEN() {
         String effect0 = "Base attribute value is 1 plus enchantment bonus";
         String effect1 = "Enchantment bonus equals the square root of total enchantment levels rounded down";
-        String effect2 = "Also adds equal negative temperature";
         String simple = "Converts enchantments into organ attributes";
 
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "Frost Metal Heart");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_HEART, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_HEART, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_HEART, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "Frost Metal Lung");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LUNG, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LUNG, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LUNG, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "Frost Metal Spine");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPINE, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPINE, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPINE, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "Frost Metal Stomach");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_STOMACH, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_STOMACH, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_STOMACH, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "Frost Metal Intestine");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_INTESTINE, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_INTESTINE, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_INTESTINE, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "Frost Metal Kidney");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_KIDNEY, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_KIDNEY, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_KIDNEY, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "Frost Metal Spleen");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPLEEN, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPLEEN, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPLEEN, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "Frost Metal Liver");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LIVER, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LIVER, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LIVER, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "Frost Metal Appendix");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_APPENDIX, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_APPENDIX, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_APPENDIX, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_RIB, "Frost Metal Rib");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_RIB, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_RIB, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_RIB, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "Frost Metal Muscle");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_MUSCLE, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_MUSCLE, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_MUSCLE, simple);
     }
 
@@ -2206,9 +2199,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     // ==================== AnvilCraft 余烬金属器官 ====================
 
     private void emberMetalOrgansZH() {
-        String effect0 = "每个器官抵消 25% 火焰伤害";
+        String effect0 = "每个器官抵消25%火焰伤害";
         String effect1 = "回复抵消伤害等量的生命值";
-        String simple = "每个器官将 25% 火焰伤害转化为治疗";
+        String simple = "每个器官将25%火焰伤害转化为治疗";
 
         addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "余烬金属肋骨");
         addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_RIB, effect0, effect1);
@@ -2250,41 +2243,40 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     private void frostMetalOrgansZH() {
         String effect0 = "基础属性值为1加上附魔加成";
         String effect1 = "附魔加成等于附魔等级总和的平方根向下取整";
-        String effect2 = "同时添加等额的负温度";
         String simple = "将附魔转化为器官属性";
 
         addItem(AnvilCraftOrgans.FROST_METAL_HEART, "浮霜金属心脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_HEART, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_HEART, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_HEART, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_LUNG, "浮霜金属肺脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LUNG, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LUNG, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LUNG, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_SPINE, "浮霜金属脊柱");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPINE, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPINE, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPINE, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_STOMACH, "浮霜金属胃");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_STOMACH, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_STOMACH, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_STOMACH, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_INTESTINE, "浮霜金属肠子");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_INTESTINE, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_INTESTINE, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_INTESTINE, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_KIDNEY, "浮霜金属肾脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_KIDNEY, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_KIDNEY, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_KIDNEY, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_SPLEEN, "浮霜金属脾脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPLEEN, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_SPLEEN, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_SPLEEN, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_LIVER, "浮霜金属肝脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LIVER, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_LIVER, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_LIVER, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_APPENDIX, "浮霜金属阑尾");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_APPENDIX, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_APPENDIX, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_APPENDIX, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_RIB, "浮霜金属肋骨");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_RIB, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_RIB, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_RIB, simple);
         addItem(AnvilCraftOrgans.FROST_METAL_MUSCLE, "浮霜金属肌肉");
-        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_MUSCLE, effect0, effect1, effect2);
+        addOrganPassiveEffect(AnvilCraftOrgans.FROST_METAL_MUSCLE, effect0, effect1);
         addOrganPassiveEffectSimple(AnvilCraftOrgans.FROST_METAL_MUSCLE, simple);
     }
 
@@ -2414,27 +2406,27 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 焰魔系列
         addItem(CataclysmOrgans.UNDYING_EMBER, "Undying Ember");
-        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "Grants Strength based on the square root of absolute global temperature, negative temperature reduces Strength instead");
+        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "Fire and ice organs cancel out, grants Strength based on the square root of the resulting fire organ count, becomes a penalty when negative");
         addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "Ignited Rib Plating");
-        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "Grants Block equal to the square root of absolute local temperature, negative temperature reduces Block instead");
+        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "Fire and ice organs cancel out, grants Block based on the square root of fire organs within 3×3 range around own slot, becomes a penalty when negative");
         addItem(CataclysmOrgans.BLAZING_VISAGE, "Blazing Visage");
         addOrganPassiveEffect(
             CataclysmOrgans.BLAZING_VISAGE,
             "Melee attacks apply Blazing Brand for 5 seconds",
             "Blazing Brand reduces target armor and toughness by 20%",
-            "Heals %s HP on hit based on local temperature",
+            "Heals %s HP on hit based on fire organs within 3×3 range around own slot, reduced by ice organs",
             "Healing is doubled if target already has Blazing Brand"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.BLAZING_VISAGE, "Melee attacks apply Blazing Brand and heal %s HP based on temperature");
+        addOrganPassiveEffectSimple(CataclysmOrgans.BLAZING_VISAGE, "Melee attacks apply Blazing Brand and heal %s HP based on fire organs within 3×3 range around own slot, reduced by ice organs");
 
         // 下界合金巨兽系列
         addItem(CataclysmOrgans.MONSTROSITY_CORE, "Monstrosity Core");
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_CORE,
             "+100 yellow bile capacity",
-            "Generates yellow bile from positive temperature every second"
+            "Generates 0.05 yellow bile per fire organ every second, reduced by ice organs"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_CORE, "Generates yellow bile from temperature");
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_CORE, "Generates yellow bile from fire organs, reduced by ice organs");
         addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Monstrosity Circuit");
         addOrganActiveSkill(
             CataclysmOrgans.MONSTROSITY_CIRCUIT,
@@ -2561,31 +2553,31 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
         addOrganPassiveEffectSimple(CataclysmOrgans.STORM_SPINE, "受伤时吸收%1$s的伤害转化为粘液，吸收上限为%2$s点");
         addItem(CataclysmOrgans.STORM_RIB, "风暴肋骨");
-        addOrganPassiveEffect(CataclysmOrgans.STORM_RIB, "+10 粘液上限");
+        addOrganPassiveEffect(CataclysmOrgans.STORM_RIB, "+10粘液上限");
 
         // 焰魔系列
         addItem(CataclysmOrgans.UNDYING_EMBER, "不灭薪火");
-        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "根据全局温度绝对值的平方根提供力量加成，负温度为减益");
+        addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "炽焰与冰霜互相抵消，根据抵消后的炽焰器官数平方根提供力量加成，为负值时变为减益");
         addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "焰魔肋甲");
-        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "根据局部温度绝对值的平方根提供格挡加成，负温度为减益");
+        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "炽焰与冰霜互相抵消，根据抵消后以自身槽位为中心3×3范围内的炽焰器官数平方根提供格挡加成，为负值时变为减益");
         addItem(CataclysmOrgans.BLAZING_VISAGE, "炽面甲");
         addOrganPassiveEffect(
             CataclysmOrgans.BLAZING_VISAGE,
             "近战攻击施加5秒炽热烙印",
             "炽热烙印降低目标20%护甲与韧性",
-            "命中时根据局部温度回复%s点生命值",
+            "命中时根据以自身槽位为中心3×3范围内的炽焰器官数量回复%s点生命值，受冰霜器官抵消",
             "目标已有炽热烙印时回复量翻倍"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.BLAZING_VISAGE, "近战施加炽热烙印并回复%s点生命");
+        addOrganPassiveEffectSimple(CataclysmOrgans.BLAZING_VISAGE, "近战施加炽热烙印，并根据自身槽位为中心3×3范围内的炽焰器官数回复%s点生命，受冰霜器官抵消");
 
         // 下界合金巨兽系列
         addItem(CataclysmOrgans.MONSTROSITY_CORE, "巨兽炉心");
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_CORE,
-            "+100 黄胆汁上限",
-            "每秒根据正温度生成黄胆汁"
+            "+100黄胆汁上限",
+            "炽焰器官每秒生成0.05黄胆汁，受冰霜器官抵消"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_CORE, "根据温度生成黄胆汁");
+        addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_CORE, "根据炽焰器官生成黄胆汁，受冰霜器官抵消");
         addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "巨兽回路");
         addOrganActiveSkill(
             CataclysmOrgans.MONSTROSITY_CIRCUIT,
@@ -2761,7 +2753,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IronSpellOrgans.DEAD_KING_RIB, "尸王肋骨");
         addOrganPassiveEffect(
             IronSpellOrgans.DEAD_KING_RIB,
-            "+10 黑胆汁上限"
+            "+10黑胆汁上限"
         );
     }
 
@@ -2803,8 +2795,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             CompanionsOrgans.PONTIFF_APPENDIX,
             "Launches a tracking star at the target in sight",
-            "Positive temperature creates a red star that ignites",
-            "Negative temperature creates a blue star that freezes"
+            "Creates a red star that ignites when fire organs are not fewer than ice organs",
+            "Creates a blue star that freezes when fire organs are fewer than ice organs"
         );
         addOrganActiveSkillSimple(
             CompanionsOrgans.PONTIFF_APPENDIX,
@@ -2872,8 +2864,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganActiveSkill(
             CompanionsOrgans.PONTIFF_APPENDIX,
             "向视线中的目标发射追踪星弹",
-            "正温度发射点燃的红色星弹",
-            "负温度发射冻结的蓝色星弹"
+            "炽焰数≥冰霜数时发射点燃的红色星弹",
+            "炽焰数<冰霜数时发射冻结的蓝色星弹"
         );
         addOrganActiveSkillSimple(
             CompanionsOrgans.PONTIFF_APPENDIX,

@@ -140,36 +140,27 @@ public class CataclysmOrganUtil {
     // ==================== 焰魔器官 ====================
 
     /**
-     * 不灭薪火属性修饰符 - 全局温度的平方根的力量
+     * 不灭薪火属性修饰符 - 全局炽焰器官数量的平方根的力量，冰火冲突时为负值减益
      */
     public static void undyingEmberModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double temperature = OrganUtil.getEffectiveTemperature(context.entity());
-        if (context.index() == -1) temperature += 9;
-        // 提取符号 × 绝对值开方：正温度→正力量（增益），负温度→负力量（冰火冲突代价）
-        double strength = Math.signum(temperature) * Math.floor(Math.sqrt(Math.abs(temperature)));
+        int fireOrganCount = OrganUtil.getFireOrganCount(context);
+        // 提取符号 × 绝对值开方：正值→正力量（增益），负值→负力量（冰火冲突代价）
+        double strength = Math.signum(fireOrganCount) * Math.floor(Math.sqrt(Math.abs(fireOrganCount)));
         modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), strength));
     }
 
     /**
-     * 焰魔肋甲属性修饰符 - 局部温度的平方根的格挡
-     * <p>
-     * 警告：本 modifier 调用 getLocalTemperature 遍历胸腔槽位，会形成无限递归链
-     * 当前由 {@link OrganUtil#STATIC_TEMPERATURE_ONLY} 对焰魔肋甲降级属性获取为静态。
-     * 警告：当将来实现了全套的弗兰肯斯坦器官效果（收纳袋可装焰魔肋甲等任意器官），
-     * 弗兰肯斯坦心脏的 getAttributeModifiers 调用链可能绕过上述保护，再次出现无限递归。
-     * 根治需温度系统整体重构（见 OrganUtil.getStackTemperature 的 TODO）。
-     * </p>
+     * 焰魔肋甲属性修饰符 - 局部炽焰器官数量的平方根的格挡，冰火冲突时为负值减益
      */
     public static void ignitedRibPlatingModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double localTemp = OrganUtil.getLocalTemperature(context);
-        // 同不灭薪火：负温度→负格挡（减益）
-        double block = Math.signum(localTemp) * Math.floor(Math.sqrt(Math.abs(localTemp)));
+        int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
+        double block = Math.signum(localFireOrganCount) * Math.floor(Math.sqrt(Math.abs(localFireOrganCount)));
         modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), block));
     }
 
     /**
      * 炽面甲 — 炽热烙印攻击回调
-     * 近战命中施加炽热烙印效果，根据局部温度回血
+     * 近战命中施加炽热烙印效果，根据局部炽焰器官数量回血
      */
     public static void blazingVisageAttack(
         ChestCavitySlotContext context,
@@ -180,9 +171,9 @@ public class CataclysmOrganUtil {
         LivingEntity entity = context.entity();
         if (OrganUtil.isSelfDamage(target, source)) return;
 
-        // 根据局部温度计算回血量（负温度时保底 0，完全不回血）
-        double localTemp = OrganUtil.getLocalTemperature(context);
-        float healAmount = Math.max(0, 1.0F + (float) Math.floor(localTemp * 0.5));
+        // 根据局部炽焰器官数量计算回血量（冰火冲突时为负值，max 兜底为 0）
+        int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
+        float healAmount = Math.max(0, 1.0F + (float) Math.floor(localFireOrganCount * 0.5));
 
         // 若有炽热烙印，回血量翻倍
         if (target.getEffect(ModEffect.EFFECTBLAZING_BRAND) != null) {
@@ -212,15 +203,15 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 巨兽炉心tick回调：每20 tick将温度转化为黄胆汁
+     * 巨兽炉心tick回调：每20 tick将炽焰器官数量转化为黄胆汁
      */
     public static void monstrosityCoreTick(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
         if (entity.level().isClientSide()) return;
         if (entity.tickCount % 20 != 0) return;
-        double temperature = OrganUtil.getEffectiveTemperature(entity);
-        if (temperature > 0) {
-            HumoursData.insertYellowBile(entity, (float) (temperature * 0.05), false);
+        int fireOrganCount = OrganUtil.getFireOrganCount(context);
+        if (fireOrganCount > 0) {
+            HumoursData.insertYellowBile(entity, fireOrganCount * 0.05F, false);
         }
     }
 
@@ -272,8 +263,8 @@ public class CataclysmOrganUtil {
             1.0F + entity.getRandom().nextFloat() * 0.1F
         );
 
-        double temperature = OrganUtil.getEffectiveTemperature(entity);
-        float damage = Math.max(0, 20 + (float) temperature * 0.01F * entity.getMaxHealth());
+        int fireOrganCount = OrganUtil.getFireOrganCount(context);
+        float damage = Math.max(0, 20 + fireOrganCount * 0.01F * entity.getMaxHealth());
 
         // AoE伤害：半径6.25格（对齐原版 EarthQuake(6.25D)）
         DamageSource damagesource = level.damageSources().mobAttack(entity);

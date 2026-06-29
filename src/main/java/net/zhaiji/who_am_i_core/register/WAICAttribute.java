@@ -12,9 +12,6 @@ import net.zhaiji.who_am_i_core.WhoAmICore;
 public class WAICAttribute {
     public static final DeferredRegister<Attribute> ATTRIBUTE = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, WhoAmICore.MOD_ID);
 
-    // 温度
-    public static final Holder<Attribute> TEMPERATURE = registerRangedAttribute("temperature");
-
     // 格挡 - 等值减少伤害
     public static final Holder<Attribute> BLOCK = registerRangedAttribute("block");
 

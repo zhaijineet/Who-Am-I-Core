@@ -247,8 +247,6 @@ public class CommonEventHandler {
                 );
             }
         );
-        // TEMPERATURE — 纯计算属性，无动态效果描述
-        AttributeDisplayManager.register(WAICAttribute.TEMPERATURE, 25);
         // MELEE_DAMAGE_PERCENTAGE — 近战最终倍率
         AttributeDisplayManager.register(
             WAICAttribute.MELEE_DAMAGE_PERCENTAGE, 0, entity -> {
@@ -302,9 +300,6 @@ public class CommonEventHandler {
                 );
             }
         );
-
-        // 注册只读静态温度的器官（其 modifier 调用 getLocalTemperature 会形成无限递归）
-        OrganUtil.STATIC_TEMPERATURE_ONLY.add(CataclysmOrgans.IGNITED_RIB_PLATING.get());
     }
 
     /**

@@ -7,6 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,20 +27,12 @@ import net.zhaiji.chestcavitybeyond.manager.OrganManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
-import net.zhaiji.who_am_i_core.register.WAICAttribute;
 
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class OrganUtil {
-    /**
-     * 只读静态温度的器官集合（其 modifier 调用 getLocalTemperature 会形成无限递归，需降级为静态读取）
-     */
-    public static final Set<Item> STATIC_TEMPERATURE_ONLY = new HashSet<>();
-
     /**
      * 获取物品的总附魔等级
      */
@@ -129,13 +122,6 @@ public class OrganUtil {
      * 遍历收纳袋中存储的所有心脏物品，获取每个心脏的 IOrgan 属性修饰符，
      * 将相同属性 + 相同操作类型的修饰符合并为一个，值相加。
      * </p>
-     * <p>
-     * 警告：当将来实现了全套的弗兰肯斯坦器官效果（允许收纳袋装入肋骨等非心脏器官），
-     * 若收纳袋中装入焰魔肋甲，此处用动态上下文调用 getAttributeModifiers 会触发
-     * ignitedRibPlatingModifier → getLocalTemperature → 遍历胸腔 → 可能再次回到弗兰肯斯坦心脏
-     * 的 getAttributeModifiers，形成无限递归。当前由 {@link #getStackTemperature} 的焰魔肋甲
-     * 静态降级保护，但弗兰肯斯坦侧未独立防护。根治需温度系统整体重构（见 getStackTemperature 的 TODO）。
-     * </p>
      *
      * @param context   当前弗兰肯斯坦心脏的槽位上下文
      * @param modifiers 需要填充的属性修饰符集合
@@ -188,157 +174,119 @@ public class OrganUtil {
     }
 
     /**
-     * 获取实体的原始全局温度
-     *
-     * @param entity 实体
-     * @return 实体的温度属性值，无任何修改
-     */
-    public static double getOriginalTemperature(LivingEntity entity) {
-        return entity.getAttributeValue(WAICAttribute.TEMPERATURE);
-    }
-
-    /**
-     * 获取实体的有效全局温度
+     * 获取槽位上下文对应的全局炽焰器官数量
      * <p>
-     * 若实体拥有王国器官，温度强制为 0；否则返回原始温度。
+     * 无王国时，冰霜器官会抵消炽焰器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
+     * index 为 -1 时按自身标签补偿。
      * </p>
      *
-     * @param entity 实体
-     * @return 经过器官修正后的有效温度
+     * @param context 槽位上下文
+     * @return 炽焰器官数量（可为负）
      */
-    public static double getEffectiveTemperature(LivingEntity entity) {
-        if (ChestCavityUtil.getData(entity).hasOrgan(FDBossesOrgans.MALKUTH.get())) {
-            return 0;
-        }
-        return getOriginalTemperature(entity);
+    public static int getFireOrganCount(ChestCavitySlotContext context) {
+        return getGlobalDualTagCount(context, WAICItemTagManager.FIRE, WAICItemTagManager.ICE);
     }
 
     /**
-     * 获取以指定槽位为中心的九宫格内局部温度
+     * 获取槽位上下文对应的全局冰霜器官数量
      * <p>
-     * 遍历中心槽位及相邻 8 格，累加每个有效槽位中器官通过属性修饰符贡献的温度值。
-     * 空槽位视为温度 0，跳过不计。
+     * 无王国时，炽焰器官会抵消冰霜器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
+     * index 为 -1 时按自身标签补偿。
      * </p>
      *
-     * @param context 当前槽位上下文，index 为 -1 时只取物品自身静态温度
-     * @return 九宫格内器官贡献的局部温度总和
+     * @param context 槽位上下文
+     * @return 冰霜器官数量（可为负）
      */
-    public static double getLocalTemperature(ChestCavitySlotContext context) {
-        if (context.data() != null && context.data().hasOrgan(FDBossesOrgans.MALKUTH.get())) {
-            return getMalkuthLocalTemperature(context);
-        }
-        int center = context.index();
-        if (center < 0) {
-            // 物品不在胸腔中，只取静态属性温度（不触发动态 modifier，避免递归）
-            ChestCavitySlotContext staticContext = new ChestCavitySlotContext(
-                null,
-                null,
-                context.id(),
-                context.index(),
-                context.stack()
-            );
-            return getStackTemperature(staticContext);
-        }
-        List<Integer> adjacent = ChestCavityUtil.getAdjacentSlots(center, context.data().getSlots());
-        double total = 0;
-        // 中心 + 遍历相邻 8 格
-        total += collectTemperatureFromSlot(context, center);
-        for (int slot : adjacent) {
-            total += collectTemperatureFromSlot(context, slot);
-        }
-        return total;
+    public static int getIceOrganCount(ChestCavitySlotContext context) {
+        return getGlobalDualTagCount(context, WAICItemTagManager.ICE, WAICItemTagManager.FIRE);
     }
 
     /**
-     * 王国器官的局部温度聚合
-     * <p>
-     * 遍历胸腔内所有器官，根据物品标签判断温度方向：
-     * </p>
-     * <pre>
-     *   仅有 ICE 标签 → 取负温度（温度小于 0 的部分）
-     *   仅有 FIRE 标签 → 取正温度（温度大于 0 的部分）
-     *   同时拥有 ICE 和 FIRE → 取绝对值最高的温度值
-     *   两者皆无 → 返回原始胸腔温度
-     * </pre>
+     * 统计全局主标签器官数，无王国时减去副标签器官数，有王国时加上副标签器官数；index 为 -1 时按自身标签补偿
      */
-    private static double getMalkuthLocalTemperature(ChestCavitySlotContext context) {
-        ItemStack caller = context.stack();
-        boolean isIce = caller.is(WAICItemTagManager.ICE);
-        boolean isFire = caller.is(WAICItemTagManager.FIRE);
-        if (!isIce && !isFire) return getOriginalTemperature(context.entity());
-        double iceTotal = 0;
-        double fireTotal = 0;
-        int totalSlots = context.data().getSlots();
-        for (int slot = 0; slot < totalSlots; slot++) {
-            ItemStack stack = context.data().getStackInSlot(slot);
-            ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
-                context.data(),
-                context.entity(),
-                context.id(),
-                slot,
-                stack
-            );
-            double temperature = getStackTemperature(slotContext);
-            if (temperature < 0) iceTotal += temperature;
-            if (temperature > 0) fireTotal += temperature;
+    private static int getGlobalDualTagCount(ChestCavitySlotContext context, TagKey<Item> primaryTag, TagKey<Item> secondaryTag) {
+        ChestCavityData data = context.data();
+        if (data == null) {
+            // data 为 null 时无法查胸腔，只看自身（按无王国抵消处理）
+            return (context.stack().is(primaryTag) ? 1 : 0) - (context.stack().is(secondaryTag) ? 1 : 0);
         }
-        if (isIce && isFire) {
-            return Math.abs(iceTotal) >= fireTotal ? iceTotal : fireTotal;
-        } else if (isIce) {
-            return iceTotal;
-        } else {
-            return fireTotal;
-        }
-    }
-
-    // TODO[温度系统重构] getStackTemperature 经过 getAttributeModifiers 会触发 dynamic modifier，
-    //   若 modifier 中调用 getLocalTemperature 会形成无限递归。当前对 STATIC_TEMPERATURE_ONLY 集合中的器官降级为静态读取。
-    //   根治需让温度查询独立于 modifier 路径，涉及注册表/CCB 数据结构/乘算语义等问题，待整体重构。
-    /**
-     * 获取器官物品的温度属性值
-     *
-     * @param context 槽位上下文（stack 为目标器官物品）
-     * @return 温度属性值，无温度属性则返回 0
-     */
-    public static double getStackTemperature(ChestCavitySlotContext context) {
-        IOrgan organ = ChestCavityUtil.getOrganCap(context.stack());
-        if (organ == OrganManager.EMPTY_ORGAN) return 0;
-        // STATIC_TEMPERATURE_ONLY 中的器官（如焰魔肋甲）其 modifier 调用 getLocalTemperature 会形成无限递归。
-        // 当以动态上下文（data/entity 非空）读取时，降级为静态上下文（不触发 modifier），只读静态温度。
-        if (STATIC_TEMPERATURE_ONLY.contains(context.stack().getItem()) && context.data() != null && context.entity() != null) {
-            context = new ChestCavitySlotContext(
-                null,
-                null,
-                context.id(),
-                context.index(),
-                context.stack()
-            );
-        }
-        for (Map.Entry<Holder<Attribute>, AttributeModifier> entry : organ.getAttributeModifiers(context).entries()) {
-            if (entry.getKey().equals(WAICAttribute.TEMPERATURE)) {
-                return entry.getValue().amount();
+        int primaryCount = data.getOrganCount(primaryTag);
+        int secondaryCount = data.getOrganCount(secondaryTag);
+        boolean hasMalkuth = data.hasOrgan(FDBossesOrgans.MALKUTH.get());
+        int count = hasMalkuth ? primaryCount + secondaryCount : primaryCount - secondaryCount;
+        if (context.index() < 0) {
+            if (context.stack().is(primaryTag)) count += 1;
+            if (hasMalkuth) {
+                if (context.stack().is(secondaryTag)) count += 1;
+            } else {
+                if (context.stack().is(secondaryTag)) count -= 1;
             }
         }
-        return 0;
+        return count;
     }
 
     /**
-     * 收集指定槽位物品的静态温度
+     * 获取以指定槽位为中心的九宫格内局部炽焰器官数量
      * <p>
-     * 使用静态上下文，只读取 addValueAttribute 的静态温度值，不触发动态 modifier，避免递归。
+     * 无王国时，九宫格内冰霜器官会抵消炽焰器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
+     * index 为 -1 或 data 为 null 时只取自身是否为对应标签。
      * </p>
+     *
+     * @param context 当前槽位上下文
+     * @return 九宫格内炽焰器官数量（可为负）
      */
-    private static double collectTemperatureFromSlot(ChestCavitySlotContext context, int slot) {
-        ItemStack stack = context.data().getStackInSlot(slot);
-        if (stack.isEmpty()) return 0;
-        ChestCavitySlotContext slotContext = new ChestCavitySlotContext(
-            null,
-            null,
-            context.id(),
-            slot,
-            stack
-        );
-        return getStackTemperature(slotContext);
+    public static int getLocalFireOrganCount(ChestCavitySlotContext context) {
+        return getLocalDualTagCount(context, WAICItemTagManager.FIRE, WAICItemTagManager.ICE);
+    }
+
+    /**
+     * 获取以指定槽位为中心的九宫格内局部冰霜器官数量
+     * <p>
+     * 无王国时，九宫格内炽焰器官会抵消冰霜器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
+     * index 为 -1 或 data 为 null 时只取自身是否为对应标签。
+     * </p>
+     *
+     * @param context 当前槽位上下文
+     * @return 九宫格内冰霜器官数量（可为负）
+     */
+    public static int getLocalIceOrganCount(ChestCavitySlotContext context) {
+        return getLocalDualTagCount(context, WAICItemTagManager.ICE, WAICItemTagManager.FIRE);
+    }
+
+    /**
+     * 统计九宫格内主标签器官数，无王国时减去副标签器官数，有王国时加上副标签器官数
+     */
+    private static int getLocalDualTagCount(ChestCavitySlotContext context, TagKey<Item> primaryTag, TagKey<Item> secondaryTag) {
+        ChestCavityData data = context.data();
+        boolean hasMalkuth = data != null && data.hasOrgan(FDBossesOrgans.MALKUTH.get());
+        int center = context.index();
+        if (center < 0 || data == null) {
+            int self = (context.stack().is(primaryTag) ? 1 : 0) - (context.stack().is(secondaryTag) ? 1 : 0);
+            if (hasMalkuth) {
+                // 自身同时计入双标签
+                self = (context.stack().is(primaryTag) ? 1 : 0) + (context.stack().is(secondaryTag) ? 1 : 0);
+            }
+            return self;
+        }
+        int primaryInSlots = countTagInSlots(context, primaryTag);
+        int secondaryInSlots = countTagInSlots(context, secondaryTag);
+        return hasMalkuth ? primaryInSlots + secondaryInSlots : primaryInSlots - secondaryInSlots;
+    }
+
+    /**
+     * 统计指定槽位及其相邻 8 格中匹配某标签的器官数量
+     */
+    private static int countTagInSlots(ChestCavitySlotContext context, TagKey<Item> tag) {
+        int center = context.index();
+        int totalSlots = context.data().getSlots();
+        int count = 0;
+        ItemStack centerStack = context.data().getStackInSlot(center);
+        if (centerStack.is(tag)) count++;
+        for (int slot : ChestCavityUtil.getAdjacentSlots(center, totalSlots)) {
+            ItemStack stack = context.data().getStackInSlot(slot);
+            if (stack.is(tag)) count++;
+        }
+        return count;
     }
 
     /**

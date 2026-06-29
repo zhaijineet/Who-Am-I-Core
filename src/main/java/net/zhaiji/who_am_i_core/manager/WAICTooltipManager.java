@@ -249,29 +249,30 @@ public class WAICTooltipManager {
         .build();
 
     /**
-     * 炽面甲命中回血公式：1 + floor(局部温度 × 0.5)（局部温度：index>=0 遍历九宫格，index==-1 只取自身）
+     * 炽面甲命中回血公式：max(0, 1 + floor(局部炽焰器官数 × 0.5))
+     * <p>局部炽焰器官数：以自身槽位为中心3×3范围内炽焰减冰霜的差值，可为负</p>
      */
     private static final FormulaValue BLAZING_VISAGE_FORMULA_VALUE = new FormulaValue(
         context -> {
-            double temperature = OrganUtil.getLocalTemperature(context);
+            int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
             return Component.literal(TooltipUtil.formatAttributeValue(
-                Math.max(0, 1.0F + (float) Math.floor(temperature * 0.5))));
+                Math.max(0, 1.0F + (float) Math.floor(localFireOrganCount * 0.5))));
         },
         context -> {
-            double temperature = OrganUtil.getLocalTemperature(context);
+            int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
             return Component.empty()
                 .append(Component.literal("1"))
                 .append(TooltipUtil.formulaOperator("+"))
                 .append(Component.literal("floor("))
-                .append(Component.translatable("formula.who_am_i_core.local_temperature"))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(temperature)))
+                .append(Component.translatable("formula.who_am_i_core.local_fire_count"))
+                .append(Component.literal(String.valueOf(localFireOrganCount)))
                 .append(TooltipUtil.formulaOperator("×"))
                 .append(Component.literal("0.5)"));
         }
     );
 
     /**
-     * 炽面甲 — 命中回血随温度缩放
+     * 炽面甲 — 命中回血随局部炽焰器官数量缩放
      */
     public static final OrganTooltipConsumer BLAZING_VISAGE_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.split(
@@ -522,19 +523,20 @@ public class WAICTooltipManager {
         .build();
 
     /**
-     * 悚怖脊柱缓慢持续公式：40 + 冰霜器官数 × 10
+     * 悚怖脊柱缓慢持续公式：max(0, 40 + 冰霜器官数 × 10)
+     * <p>冰霜器官数：冰霜减炽焰的差值，可为负</p>
      */
     private static final FormulaValue DREAD_SPINE_DURATION_FORMULA_VALUE = new FormulaValue(
         context -> {
-            int iceCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.ICE);
-            return Component.literal(String.valueOf(40 + iceCount * 10));
+            int iceCount = OrganUtil.getIceOrganCount(context);
+            return Component.literal(String.valueOf(Math.max(0, 40 + iceCount * 10)));
         },
         context -> {
-            int iceCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.ICE);
+            int iceCount = OrganUtil.getIceOrganCount(context);
             return Component.empty()
                 .append(Component.literal("40"))
                 .append(TooltipUtil.formulaOperator("+"))
-                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.ICE))
+                .append(Component.translatable("formula.who_am_i_core.ice_count"))
                 .append(Component.literal(String.valueOf(iceCount)))
                 .append(TooltipUtil.formulaOperator("×"))
                 .append(Component.literal("10"));
@@ -542,38 +544,38 @@ public class WAICTooltipManager {
     );
 
     /**
-     * 悚怖脊柱缓慢等级公式：局部温度 < 0 时 floor((|局部温度| - 1) ÷ 2) + 1，否则 1（按 MC 显示惯例 = amplifier + 1）
+     * 悚怖脊柱缓慢等级公式：局部冰霜器官数 ≤ 0 时为 1，否则 floor((局部冰霜器官数 - 1) ÷ 2) + 1（按 MC 显示惯例 = amplifier + 1）
      */
     private static final FormulaValue DREAD_SPINE_LEVEL_FORMULA_VALUE = new FormulaValue(
         context -> {
-            double localTemp = OrganUtil.getLocalTemperature(context);
-            int amplifier = localTemp >= 0 ? 0 : (int) ((Math.abs(localTemp) - 1) / 2);
+            int localIceOrganCount = OrganUtil.getLocalIceOrganCount(context);
+            int amplifier = localIceOrganCount <= 0 ? 0 : (localIceOrganCount - 1) / 2;
             return Component.literal(String.valueOf(amplifier + 1));
         },
         context -> {
-            double localTemp = OrganUtil.getLocalTemperature(context);
+            int localIceOrganCount = OrganUtil.getLocalIceOrganCount(context);
             return Component.empty()
-                .append(Component.translatable("formula.who_am_i_core.local_temperature"))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(localTemp)))
-                .append(TooltipUtil.formulaOperator("<"))
+                .append(Component.translatable("formula.who_am_i_core.local_ice_count"))
+                .append(Component.literal(String.valueOf(localIceOrganCount)))
+                .append(TooltipUtil.formulaOperator("≤"))
                 .append(Component.literal("0"))
                 .append(Component.literal("\u00A0?\u00A0"))
-                .append(Component.literal("floor((|"))
-                .append(Component.translatable("formula.who_am_i_core.local_temperature"))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(Math.abs(localTemp))))
-                .append(Component.literal("|"))
+                .append(Component.literal("1"))
+                .append(Component.literal("\u00A0:\u00A0"))
+                .append(Component.literal("floor(("))
+                .append(Component.translatable("formula.who_am_i_core.local_ice_count"))
+                .append(Component.literal(String.valueOf(localIceOrganCount)))
                 .append(TooltipUtil.formulaOperator("-"))
                 .append(Component.literal("1)"))
                 .append(TooltipUtil.formulaOperator("÷"))
                 .append(Component.literal("2)"))
                 .append(TooltipUtil.formulaOperator("+"))
-                .append(Component.literal("1"))
-                .append(Component.literal("\u00A0:\u00A01"));
+                .append(Component.literal("1"));
         }
     );
 
     /**
-     * 悚怖脊柱 — 缓慢持续随冰霜器官数量缩放，缓慢等级随局部负温度绝对值缩放
+     * 悚怖脊柱 — 缓慢持续随冰霜器官数量缩放，缓慢等级随局部冰霜器官数量缩放
      */
     public static final OrganTooltipConsumer DREAD_SPINE_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
@@ -765,23 +767,21 @@ public class WAICTooltipManager {
         .build();
 
     /**
-     * 巨兽回路伤害公式：20 + 有效温度 × 1% × 最大生命（自身温度属性 +2 需在 index==-1 时补加）
+     * 巨兽回路伤害公式：20 + 炽焰器官数 × 1% × 最大生命
      */
     private static final FormulaValue MONSTROSITY_CIRCUIT_FORMULA_VALUE = new FormulaValue(
         context -> {
-            double temperature = OrganUtil.getEffectiveTemperature(context.entity());
-            if (context.index() == -1) temperature += 2;
+            int fireOrganCount = OrganUtil.getFireOrganCount(context);
             return Component.literal(TooltipUtil.formatAttributeValue(
-                Math.max(0, 20 + (float) temperature * 0.01F * context.entity().getMaxHealth())));
+                Math.max(0, 20 + fireOrganCount * 0.01F * context.entity().getMaxHealth())));
         },
         context -> {
-            double temperature = OrganUtil.getEffectiveTemperature(context.entity());
-            if (context.index() == -1) temperature += 2;
+            int fireOrganCount = OrganUtil.getFireOrganCount(context);
             return Component.empty()
                 .append(Component.literal("20"))
                 .append(TooltipUtil.formulaOperator("+"))
-                .append(Component.translatable("formula.who_am_i_core.effective_temperature"))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(temperature)))
+                .append(Component.translatable("formula.who_am_i_core.fire_count"))
+                .append(Component.literal(String.valueOf(fireOrganCount)))
                 .append(TooltipUtil.formulaOperator("×"))
                 .append(Component.literal("1%"))
                 .append(TooltipUtil.formulaOperator("×"))
@@ -791,7 +791,7 @@ public class WAICTooltipManager {
     );
 
     /**
-     * 巨兽回路 — 伤害随温度和自身最大生命值缩放
+     * 巨兽回路 — 伤害随炽焰器官数量和自身最大生命值缩放
      */
     public static final OrganTooltipConsumer MONSTROSITY_CIRCUIT_TOOLTIP = OrganTooltip.builder()
         .dynamicActiveSkill(slotContext -> DynamicValues.split(

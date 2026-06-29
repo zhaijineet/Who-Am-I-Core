@@ -113,7 +113,15 @@ public class CompanionsOrganUtil {
         LivingEntity entity = context.entity();
         Level level = entity.level();
 
-        boolean isPositiveTemp = OrganUtil.getEffectiveTemperature(entity) >= 0;
+        // 直接比原始 FIRE/ICE 标签计数，绕过 Malkuth 的双向计数（否则两者都为 fire+ice，差值恒为 0）
+        ChestCavityData data = context.data();
+        int fireRaw = data != null
+            ? data.getOrganCount(WAICItemTagManager.FIRE)
+            : (context.stack().is(WAICItemTagManager.FIRE) ? 1 : 0);
+        int iceRaw = data != null
+            ? data.getOrganCount(WAICItemTagManager.ICE)
+            : (context.stack().is(WAICItemTagManager.ICE) ? 1 : 0);
+        boolean isFireDominant = fireRaw >= iceRaw;
 
         HolinessStartProjectile star = CompanionsEntities.HOLINESS_STAR.get().create(level);
         if (star == null) return false;
@@ -121,7 +129,7 @@ public class CompanionsOrganUtil {
         star.setPos(entity.getX(), entity.getY() + OrganSkillUtil.effectiveEyeHeight(entity) * 0.75F, entity.getZ()); // ≈ 玩家眼高(1.62)下 0.4 格
         star.setOwner(entity);
         star.setTarget(target);
-        star.setRed(isPositiveTemp);
+        star.setRed(isFireDominant);
         star.setNoGravity(true);
 
         Vec3 direction = target.getEyePosition().subtract(entity.getEyePosition()).normalize().scale(HolinessStartProjectile.SPEED);

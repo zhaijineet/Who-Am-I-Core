@@ -284,7 +284,7 @@ public class IceAndFireOrganUtil {
     }
 
     /**
-     * 悚怖脊柱攻击效果 - 温度 ≥ 0 时施加兜底缓慢 I，温度 &lt; 0 时随局部温度绝对值提升等级
+     * 悚怖脊柱攻击效果 - 局部冰霜器官数为 0 时施加兜底缓慢 I，否则随局部冰霜器官数提升等级
      */
     public static void dreadSpineAttack(
         ChestCavitySlotContext context,
@@ -293,32 +293,26 @@ public class IceAndFireOrganUtil {
         DamageContainer damageContainer
     ) {
         if (OrganUtil.isSelfDamage(target, source)) return;
-        double localTemp = OrganUtil.getLocalTemperature(context);
-        int slownessLevel;
-        if (localTemp >= 0) {
-            slownessLevel = 0; // 兜底缓慢 I（amplifier=0）
-        } else {
-            slownessLevel = (int) ((Math.abs(localTemp) - 1) / 2);
-        }
-        int duration = 40 + context.data().getOrganCount(WAICItemTagManager.ICE) * 10;
+        int localIceOrganCount = OrganUtil.getLocalIceOrganCount(context);
+        int slownessLevel = localIceOrganCount <= 0 ? 0 : (localIceOrganCount - 1) / 2;
+        int duration = 40 + OrganUtil.getIceOrganCount(context) * 10;
+        // 原版 addEffect 不拦截 duration<=0，此处主动拦截避免施加无效效果
+        if (duration <= 0) return;
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, slownessLevel));
     }
 
     /**
-     * 冰系器官温度健康 modifier 通用方法
+     * 冰霜系器官健康 modifier 通用方法
      *
-     * @param selfTemperature 器官自身的温度贡献（index==-1时补偿）
-     * @param multiplier      温度→健康的乘数系数
+     * @param multiplier 每个冰霜器官提供的健康乘数系数
      */
     public static void coldHealthModifier(
         ChestCavitySlotContext context,
         Multimap<Holder<Attribute>, AttributeModifier> modifiers,
-        double selfTemperature,
         double multiplier
     ) {
-        double temp = OrganUtil.getEffectiveTemperature(context.entity());
-        if (context.index() == -1) temp -= selfTemperature;
-        double healthBonus = temp * -multiplier;
+        int iceOrganCount = OrganUtil.getIceOrganCount(context);
+        double healthBonus = iceOrganCount * multiplier;
         modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
     }
 

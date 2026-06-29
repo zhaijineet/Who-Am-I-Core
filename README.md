@@ -100,7 +100,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 │
 ├── register/
 │   ├── WAICAttachment.java    # Attachment 注册器（四体液 HUMOURS）
-│   ├── WAICAttribute.java     # 自定义属性注册器（TEMPERATURE, BLOCK, COUNTER_ATTACK, HEAL, MELEE_DAMAGE, RANGED_DAMAGE, MAGIC_DAMAGE, 各种百分比属性, LOOTING, FORTUNE）
+│   ├── WAICAttribute.java     # 自定义属性注册器（BLOCK, COUNTER_ATTACK, HEAL, MELEE_DAMAGE, RANGED_DAMAGE, MAGIC_DAMAGE, 各种百分比属性, LOOTING, FORTUNE）
 │   ├── WAICCreativeModeTab.java  # 创造模式标签页
 │   ├── WAICEffect.java        # 药水效果注册器（4种龙之力）
 │   ├── WAICEntity.java        # 实体注册器（九头蛇毒物吐息）
@@ -113,7 +113,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 │   └── StraightIntestineTask.java  # 直肠子掉落食物任务
 │
 └── util/
-    ├── OrganUtil.java              # 跨 mod 通用工具（邻接槽位计算、无情机制、温度系统、弗兰肯斯坦聚合、几率判定等）
+    ├── OrganUtil.java              # 跨 mod 通用工具（邻接槽位计算、无情机制、冰火器官系统、弗兰肯斯坦聚合、几率判定等）
     ├── WAICOrganUtil.java          # WAIC 器官工具类（墨水、病变、经验之心、布织泰迪熊、猩红、九狱、电荷系统、FDBosses 等）
     ├── WAICTooltipUtil.java        # 工具提示生成工具
     ├── AnvilCraftOrganUtil.java    # AnvilCraft 器官工具类（浮霜金属、超限合金）
@@ -182,7 +182,6 @@ src/main/java/net/zhaiji/who_am_i_core/
 ## 自定义属性系统
 
 ### RangedAttribute（整数范围）
-- **TEMPERATURE** — 温度，用于龙类和无情的温度机制
 - **BLOCK** — 格挡，等值减少伤害
 - **COUNTER_ATTACK** — 反击，受伤时对攻击者造成荆棘伤害
 - **HEAL** — 治疗，定期恢复生命值
@@ -213,15 +212,17 @@ src/main/java/net/zhaiji/who_am_i_core/
 
 ---
 
-## 温度系统
+## 冰火器官系统
 
-温度是全局属性，通过 TEMPERATURE 属性值控制：
-- 火龙器官 → 正温度（+1 或 +2）
-- 冰龙器官/悚怖 → 负温度（-1 或 -2）
-- 王国器官（MALKUTH）→ 全局温度强制为 0
-- `getEffectiveTemperature()` — 获取有效全局温度（malkuth 则为 0）
-- `getLocalTemperature(slotContext)` — 获取以某槽位为中心的九宫格内局部温度
-- 温度影响：冰魂残片、冻结魂火、悚怖命匣根据全局负温度提供健康加成
+冰火系统通过 FIRE / ICE 物品标签的器官数量计算，不使用连续属性值：
+- 火龙/余烬金属/焰魔/原初受火者 → FIRE 标签
+- 冰龙/悚怖/浮霜金属/幻影 → ICE 标签
+- 无王国时，炽焰与冰霜互相抵消（差值可为负，弱势方给负加成作为冲突惩罚）
+- 王国器官（MALKUTH）→ 双向计数（炽焰与冰霜互相计入，不再抵消）
+- `getFireOrganCount(context)` — 炽焰抵消冰霜后的数量（无王国: fire-ice，有王国: fire+ice）
+- `getIceOrganCount(context)` — 冰霜抵消炽焰后的数量（同上对称）
+- `getLocalFireOrganCount(context)` / `getLocalIceOrganCount(context)` — 九宫格局部版本（以自身槽位为中心3×3范围）
+- 影响：不灭薪火/焰魔肋甲（signum×sqrt(abs)）、炽面甲/巨兽回路（max(0,...)）、冰魂残片/冻结魂火/悚怖命匣（线性）、悚怖脊柱、教宗阑尾（正负判定）
 
 ---
 
@@ -338,7 +339,7 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 | Ice and Fire: CE            | 龙类器官、九头蛇、悚怖            | 1040076       |
 | Mowzie's Mobs               | 乌姆塔纳、泥峭、衰老器官           | 250498        |
 | Cataclysm（灾变）               | 利维坦、冥行武弁、斯库拉           | 551586        |
-| FDBosses（逆卡巴拉）              | 王国器官（Malkuth 温度系统）     | 1271707       |
+| FDBosses（逆卡巴拉）              | 王国器官（Malkuth 冰火双向计数） | 1271707       |
 | Iron's Spells 'n Spellbooks | 墨水、法术流派、死灵法师           | 855414        |
 | AnvilCraft                  | 金属器官（浮霜/超限/诅咒金/余烬/皇家钢） | 986251        |
 | Touhou Little Maid          | 车万女仆                   | 355044        |
@@ -356,8 +357,10 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 - `mercilessBonus(ChestCavitySlotContext)` — `floor(sqrt(总附魔等级))`，浮霜和超限的核心机制
 - `rollChance(entity)` — 幸运判定次数：每 5 点幸运 = 1 次，余数每点 20% 几率
 - `rollResult(entity, chance)` — 幸运加权概率判定
-- `getEffectiveTemperature(entity)` — 有效全局温度（王国则为 0）
-- `getLocalTemperature(slotContext)` — 九宫格内局部温度总和
+- `getFireOrganCount(context)` — 全局炽焰抵消冰霜后的数量（可为负，王国时双向计数）
+- `getIceOrganCount(context)` — 全局冰霜抵消炽焰后的数量（同上对称）
+- `getLocalFireOrganCount(context)` — 以自身槽位为中心3×3范围内炽焰抵消冰霜后的数量
+- `getLocalIceOrganCount(context)` — 以自身槽位为中心3×3范围内冰霜抵消炽焰后的数量
 - `aggregateFrankensteinHeartAttributes(context, modifiers)` — 弗兰肯斯坦心脏聚合内部器官属性
 - `isInChest(entity, stack)` — 引用比较判断是否在胸腔中
 - `getSymmetricRibIndex(int index)` — 获取对称槽位索引
