@@ -51,6 +51,8 @@ public class WAICItemTagManager {
     public static final TagKey<Item> PONTIFF = register("pontiff", 0xFFFFDDAA, 4);
     // 斯库拉
     public static final TagKey<Item> SCYLLA = register("scylla", 0xFF2266AA, 5);
+    // 遗魂
+    public static final TagKey<Item> REMNANT = register("remnant", 0xFFD9B366, 6);
 
     /**
      * 创建 WAIC namespace 的 TagKey 并注册到 CCB 的 ItemTagManager

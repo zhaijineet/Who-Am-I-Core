@@ -108,6 +108,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_REVENANT, "Ignited Revenant");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_BERSERKER, "Ignited Berserker");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.CATACLYSM_AMPHIBIOUS, "Amphibious");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.REMNANT, "Remnant");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.KOBOLETON, "Koboleton");
 
         addChestCavityTypeName(IronSpellChestCavityTypeManager.DEAD_KING, "Dead King");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "Necromancer");
@@ -300,6 +302,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_REVENANT, "炽燃遗魂");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.IGNITED_BERSERKER, "炽燃狂魂");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.CATACLYSM_AMPHIBIOUS, "两栖");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.REMNANT, "遗魂");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.KOBOLETON, "骸龙");
 
         addChestCavityTypeName(IronSpellChestCavityTypeManager.DEAD_KING, "死者之王");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "死灵法师");
@@ -1854,6 +1858,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.QLIPHOTH, "Qliphoth");
         add(WAICItemTagManager.PONTIFF, "Pontiff");
         add(WAICItemTagManager.SCYLLA, "Scylla");
+        add(WAICItemTagManager.REMNANT, "Remnant");
 
         add("formula.who_am_i_core.max_health", "Max Health");
         add("formula.who_am_i_core.current_health_ratio", "Current Health Ratio");
@@ -1884,6 +1889,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.QLIPHOTH, "逆卡巴拉");
         add(WAICItemTagManager.PONTIFF, "教宗");
         add(WAICItemTagManager.SCYLLA, "斯库拉");
+        add(WAICItemTagManager.REMNANT, "遗魂");
 
         add("formula.who_am_i_core.max_health", "最大生命值");
         add("formula.who_am_i_core.current_health_ratio", "当前生命值比例");
@@ -2490,6 +2496,22 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             "Outer ring has 14 runes at radius 3.5"
         );
         addOrganActiveSkillSimple(CataclysmOrgans.VOID_CRYSTAL_SPINE, "Summons void rune rings, each rune dealing %s damage");
+
+        // Ancient Remnant series
+        addItem(CataclysmOrgans.SAND_GLAZE_HEART, "Sand-Glaze Heart");
+        addOrganActiveSkill(
+            CataclysmOrgans.SAND_GLAZE_HEART,
+            "Summons 3 sandstorm tornadoes orbiting the self",
+            "Lasts %s seconds, dealing 7 magic damage every 3 ticks",
+            "Applies 10 seconds of Curse of the Desert on hit"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.SAND_GLAZE_HEART, "Summons 3 sandstorm tornadoes lasting %s seconds");
+        addOrganPassiveEffect(
+            CataclysmOrgans.SAND_GLAZE_HEART,
+            "Deals %s extra damage to targets with Curse of the Desert"
+        );
+        addItem(CataclysmOrgans.REMNANT_SPINE, "Remnant Spine");
+        addItem(CataclysmOrgans.REMNANT_RIB, "Remnant Rib");
     }
 
     private void cataclysmOrgansZH() {
@@ -2625,6 +2647,22 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             "外环14枚符文半径3.5"
         );
         addOrganActiveSkillSimple(CataclysmOrgans.VOID_CRYSTAL_SPINE, "召唤虚空符文阵，每符文造成%s点伤害");
+
+        // 远古遗魂系列
+        addItem(CataclysmOrgans.SAND_GLAZE_HEART, "沙釉心脏");
+        addOrganActiveSkill(
+            CataclysmOrgans.SAND_GLAZE_HEART,
+            "以自身为中心召唤3个沙暴龙卷风环绕",
+            "持续%s秒，每3tick造成7点魔法伤害",
+            "命中施加10秒沙漠诅咒效果"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.SAND_GLAZE_HEART, "召唤3个沙暴龙卷风，持续%s秒");
+        addOrganPassiveEffect(
+            CataclysmOrgans.SAND_GLAZE_HEART,
+            "对带有沙漠诅咒效果的目标额外造成%s伤害"
+        );
+        addItem(CataclysmOrgans.REMNANT_SPINE, "遗魂脊柱");
+        addItem(CataclysmOrgans.REMNANT_RIB, "遗魂肋骨");
     }
 
     // ==================== IronSpell 器官 ====================

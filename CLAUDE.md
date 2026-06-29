@@ -29,3 +29,23 @@
 - Iron's Spells：`E:\Mod Project\irons-spells-n-spellbooks`
 - Touhou Little Maid：`E:\Mod Project\TouhouLittleMaid`
 - Companions：`E:\Mod Project\Companions`
+
+---
+
+## Mixin 编写规范
+
+1. **类声明**：`public abstract class XxxMixin`
+   - 需要访问父类 protected 成员（如 `Entity#tickCount`、`Entity#moveTo`、`level()`）时，`extends 目标类的父类` 并提供匹配的 `public` 构造器透传 super
+   - 仅用 @Shadow、无需访问 protected 成员时可省略 extends
+
+2. **自身引用**：在 @Inject / @Redirect / @ModifyArg 等注入方法中，若需要将 `this` 强转回目标类传给外部方法，统一定义 `@Unique whoAmICore$self()` 辅助方法返回 `(目标类)(Object)this`，禁止内联强转（@Override 覆写父类方法的死亡掉落类 mixin 除外，那种场景用局部变量 `XxxEntity self = (XxxEntity)(Object)this`）
+
+3. **方法命名**：注入/重定向方法统一用 `whoAmICore$<原名>` 或 `whoAmICore$<原名>$<用途>` 前缀；同一原方法多处注入用 `$用途` 区分
+
+4. **@Shadow**：保留原可见性，字段按需加 `@Final`；方法用 `abstract`；`@Nullable` 等注解跟随原声明
+
+5. **@Inject**：`method` 带完整签名（泛型/重载必需），`at` 明确，需要提前返回时 `cancellable = true`；参数表完整匹配原方法 + CallbackInfo / CallbackInfoReturnable；回调参数命名用 `ci` / `cir`
+
+6. **注册**：`who_am_i_core.mixins.json` 的 `mixins` 数组按字母序插入；客户端专用进 `client` 数组
+
+7. **命名一致性**：注入方法可见性首选 `public`（对齐 ChesedMiniRayMixin / LivingEntityMixin / PlayerMixin）；static 原方法对应 static 注入

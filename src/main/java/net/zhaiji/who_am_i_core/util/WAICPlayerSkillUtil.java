@@ -86,6 +86,11 @@ public class WAICPlayerSkillUtil {
         return CataclysmOrganUtil.voidCrystalSpine(context);
     }
 
+    // 沙釉心脏 — 沙暴怒吼
+    public static boolean sandGlazeHeart(ChestCavitySlotContext context) {
+        return CataclysmOrganUtil.sandGlazeHeart(context);
+    }
+
     // 墨水阑尾 — 消耗墨水回复法力
     public static boolean inkAppendix(ChestCavitySlotContext context) {
         return WAICOrganUtil.inkAppendix(context);

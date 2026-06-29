@@ -117,6 +117,13 @@ public class WAICGoalSkillUtil {
         ).canUse((mob, skillEntry) -> mob.onGround()).build();
     }
 
+    // 沙釉心脏 — 沙暴怒吼
+    public static GoalSkillMetadata sandGlazeHeartGoalSkill() {
+        return GoalSkillMetadata.aoeAttack(
+            (goalContext, slotContext) -> CataclysmOrganUtil.sandGlazeHeart(slotContext)
+        ).build();
+    }
+
     // 墨水阑尾 — 消耗墨水回复法力
     public static GoalSkillMetadata inkAppendixGoalSkill() {
         return GoalSkillMetadata.recovery(

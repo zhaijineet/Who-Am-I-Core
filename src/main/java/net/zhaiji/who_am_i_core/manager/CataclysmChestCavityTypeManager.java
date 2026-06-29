@@ -294,6 +294,37 @@ public class CataclysmChestCavityTypeManager {
             InitAttribute.BREATH_RECOVERY, 1.0
         ));
 
+    // 遗魂胸腔（远古遗魂、现世遗魂）
+    public static final ChestCavityType REMNANT = register("remnant")
+        .copyWith(ChestCavityTypeManager.SKELETON)
+        .setFirstRow(1, CataclysmOrgans.REMNANT_RIB.get())
+        .setFirstRow(4, CataclysmOrgans.SAND_GLAZE_HEART.get())
+        .setFirstRow(7, CataclysmOrgans.REMNANT_RIB.get())
+        .setSecondRow(1, CataclysmOrgans.REMNANT_RIB.get())
+        .setSecondRow(4, CataclysmOrgans.REMNANT_SPINE.get())
+        .setSecondRow(7, CataclysmOrgans.REMNANT_RIB.get())
+        .addValueBonuses(CataclysmOrgans.REMNANT_SPINE.get(), Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0,
+            InitAttribute.WATER_BREATH, 1.0
+        ));
+
+    // 骸龙胸腔（瓦吉特、骸龙、骸龙斗士）
+    public static final ChestCavityType KOBOLETON = register("koboleton")
+        .copyWith(ChestCavityTypeManager.SKELETON)
+        .setFirstRow(1, CataclysmOrgans.REMNANT_RIB.get())
+        .setFirstRow(7, CataclysmOrgans.REMNANT_RIB.get())
+        .setSecondRow(1, CataclysmOrgans.REMNANT_RIB.get())
+        .setSecondRow(4, CataclysmOrgans.REMNANT_SPINE.get())
+        .setSecondRow(7, CataclysmOrgans.REMNANT_RIB.get())
+        .addValueBonuses(CataclysmOrgans.REMNANT_SPINE.get(), Map.of(
+            InitAttribute.HEALTH, 1.0,
+            InitAttribute.BREATH_CAPACITY, 1.0,
+            InitAttribute.BREATH_RECOVERY, 1.0,
+            InitAttribute.WATER_BREATH, 1.0
+        ));
+
     /**
      * 注册灾变 Mod 所有实体的胸腔类型
      */
@@ -374,15 +405,15 @@ public class CataclysmChestCavityTypeManager {
         event.registerEntity(ModEntities.THE_PROWLER.get(), PROWLER);
 
         // 远古遗魂
-        event.registerEntity(ModEntities.ANCIENT_REMNANT.get(), ChestCavityTypeManager.SKELETON);
+        event.registerEntity(ModEntities.ANCIENT_REMNANT.get(), REMNANT);
         // 现世遗魂
-        event.registerEntity(ModEntities.MODERN_REMNANT.get(), ChestCavityTypeManager.SKELETON);
+        event.registerEntity(ModEntities.MODERN_REMNANT.get(), REMNANT);
         // 骸龙
-        event.registerEntity(ModEntities.KOBOLETON.get(), ChestCavityTypeManager.SKELETON);
+        event.registerEntity(ModEntities.KOBOLETON.get(), KOBOLETON);
         // 骸龙斗士
-        event.registerEntity(ModEntities.KOBOLEDIATOR.get(), ChestCavityTypeManager.SKELETON);
+        event.registerEntity(ModEntities.KOBOLEDIATOR.get(), KOBOLETON);
         // 瓦吉特
-        event.registerEntity(ModEntities.WADJET.get(), ChestCavityTypeManager.SKELETON);
+        event.registerEntity(ModEntities.WADJET.get(), KOBOLETON);
     }
 
     private static ChestCavityType register(String path) {

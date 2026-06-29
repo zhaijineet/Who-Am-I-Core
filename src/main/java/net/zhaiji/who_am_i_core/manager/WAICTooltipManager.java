@@ -1140,4 +1140,62 @@ public class WAICTooltipManager {
         ))
         .afterActiveSkill(WAICTooltipUtil::railgunAmmoSection)
         .build();
+
+    /**
+     * 沙釉心脏沙暴持续公式：(300 + 遗魂器官数 × 100) ÷ 20（单位秒）
+     */
+    private static final FormulaValue SAND_GLAZE_HEART_DURATION_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
+            return Component.literal(String.valueOf((300 + remnantCount * 100) / 20));
+        },
+        context -> {
+            int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
+            return Component.empty()
+                .append(Component.literal("("))
+                .append(Component.literal("300"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.REMNANT))
+                .append(Component.literal(String.valueOf(remnantCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("100)"))
+                .append(TooltipUtil.formulaOperator("÷"))
+                .append(Component.literal("20"));
+        }
+    );
+
+    /**
+     * 沙釉心脏诅咒榨取倍率公式：30% + 遗魂器官数 × 5%
+     */
+    private static final FormulaValue SAND_GLAZE_HEART_BONUS_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
+            return Component.literal(String.format("%.0f%%", (0.3F + remnantCount * 0.05F) * 100));
+        },
+        context -> {
+            int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
+            return Component.empty()
+                .append(Component.literal("("))
+                .append(Component.literal("30"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.REMNANT))
+                .append(Component.literal(String.valueOf(remnantCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("5)%"));
+        }
+    );
+
+    /**
+     * 沙釉心脏 — 持续时间随遗魂器官数量缩放（主动），伤害倍率随遗魂器官数量缩放（被动）
+     */
+    public static final OrganTooltipConsumer SAND_GLAZE_HEART_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.split(
+            Map.of(0, List.of(SAND_GLAZE_HEART_DURATION_FORMULA_VALUE)),
+            Map.of(1, List.of(SAND_GLAZE_HEART_DURATION_FORMULA_VALUE))
+        ))
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            Map.of(),
+            Map.of(0, List.of(SAND_GLAZE_HEART_BONUS_FORMULA_VALUE))
+        ))
+        .build();
 }

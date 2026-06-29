@@ -335,6 +335,37 @@ public class CataclysmOrgans {
             .build()
     );
 
+    // 沙釉心脏
+    public static final Supplier<Item> SAND_GLAZE_HEART = WAICItem.ITEM.register(
+        "sand_glaze_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.NERVES, 1)
+            .skill(WAICPlayerSkillUtil::sandGlazeHeart)
+            .goalSkill(WAICGoalSkillUtil.sandGlazeHeartGoalSkill())
+            .cooldown(400)
+            .attack(CataclysmOrganUtil::sandGlazeHeartAttack)
+            .tooltip(WAICTooltipManager.SAND_GLAZE_HEART_TOOLTIP)
+            .build()
+    );
+
+    // 遗魂脊柱
+    public static final Supplier<Item> REMNANT_SPINE = WAICItem.ITEM.register(
+        "remnant_spine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .build()
+    );
+
+    // 遗魂肋骨
+    public static final Supplier<Item> REMNANT_RIB = WAICItem.ITEM.register(
+        "remnant_rib",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .build()
+    );
+
     public static void register() {
     }
 }

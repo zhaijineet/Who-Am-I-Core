@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.util;
 
+import com.github.L_Ender.cataclysm.entity.effect.Sandstorm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
@@ -627,6 +628,61 @@ public class CataclysmOrganUtil {
                     damage
                 )
             );
+        }
+    }
+
+    // ==================== 远古遗魂器官 ====================
+
+    /**
+     * 沙釉心脏 — 沙暴怒吼
+     * 召唤3个沙暴龙卷风环绕自身，持续 300 + 遗魂器官数 × 100 tick
+     */
+    public static boolean sandGlazeHeart(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        Level level = entity.level();
+        int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
+        int lifespan = 300 + remnantCount * 100;
+
+        for (int i = 0; i < 3; i++) {
+            float angle = i * Mth.PI / 1.5F;
+            double spawnX = entity.getX() + (Mth.cos(angle) * 8);
+            double spawnY = entity.getY();
+            double spawnZ = entity.getZ() + (Mth.sin(angle) * 8);
+            Sandstorm_Entity projectile = new Sandstorm_Entity(level, spawnX, spawnY, spawnZ, lifespan, angle, entity);
+            level.addFreshEntity(projectile);
+        }
+
+        level.playSound(
+            null,
+            entity,
+            ModSounds.REMNANT_ROAR.get(),
+            SoundSource.PLAYERS,
+            3.0F,
+            1.0F
+        );
+
+        return true;
+    }
+
+    /**
+     * 沙釉心脏 — 诅咒榨取
+     * 攻击持有沙漠诅咒的目标时，额外造成原伤害 ×（30% + 遗魂器官数 × 5%）的伤害
+     */
+    public static void sandGlazeHeartAttack(
+        ChestCavitySlotContext context,
+        LivingEntity target,
+        DamageSource source,
+        DamageContainer damageContainer
+    ) {
+        if (OrganUtil.isSelfDamage(target, source)) return;
+        if (target.getEffect(ModEffect.EFFECTCURSE_OF_DESERT) == null) return;
+
+        int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
+        float multiplier = 0.3F + remnantCount * 0.05F;
+        float currentDamage = damageContainer.getNewDamage();
+        float extraDamage = currentDamage * multiplier;
+        if (extraDamage > 0) {
+            damageContainer.setNewDamage(currentDamage + extraDamage);
         }
     }
 }

@@ -96,7 +96,7 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         method = "serializeNBT(Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/CompoundTag;",
         at = @At("RETURN")
     )
-    private void who_am_i_core$serializeNBT(HolderLookup.Provider provider, CallbackInfoReturnable<CompoundTag> cir) {
+    private void whoAmICore$serializeNBT(HolderLookup.Provider provider, CallbackInfoReturnable<CompoundTag> cir) {
         cir.getReturnValue().putInt("trophyFlags", trophyFlags);
     }
 
@@ -104,7 +104,7 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         method = "deserializeNBT(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/nbt/CompoundTag;)V",
         at = @At("RETURN")
     )
-    private void who_am_i_core$deserializeNBT(HolderLookup.Provider provider, CompoundTag tag, CallbackInfo ci) {
+    private void whoAmICore$deserializeNBT(HolderLookup.Provider provider, CompoundTag tag, CallbackInfo ci) {
         // 优先读取新格式
         if (tag.contains("trophyFlags")) {
             trophyFlags = tag.getInt("trophyFlags");

@@ -1220,6 +1220,23 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CataclysmOrgans.GUARDIAN_STONE.get(),
             CataclysmOrgans.VOID_CRYSTAL_SPINE.get()
         );
+
+        // 远古遗魂系列
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.SAND_GLAZE_HEART.get(),
+            CataclysmOrgans.REMNANT_SPINE.get(),
+            CataclysmOrgans.REMNANT_RIB.get()
+        );
+        tag(ItemTagManager.HEART).add(CataclysmOrgans.SAND_GLAZE_HEART.get());
+        tag(ItemTagManager.SPINE).add(CataclysmOrgans.REMNANT_SPINE.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.REMNANT_SPINE.get());
+        tag(ItemTagManager.RIB).add(CataclysmOrgans.REMNANT_RIB.get());
+        tag(ItemTagManager.BONE).add(CataclysmOrgans.REMNANT_RIB.get());
+        tag(WAICItemTagManager.REMNANT).add(
+            CataclysmOrgans.SAND_GLAZE_HEART.get(),
+            CataclysmOrgans.REMNANT_SPINE.get(),
+            CataclysmOrgans.REMNANT_RIB.get()
+        );
     }
 
     // ==================== IronSpell 器官 ====================
