@@ -96,6 +96,7 @@ public class IceAndFireOrgans {
                 AttributeRegistry.FIRE_SPELL_POWER,
                 WAICItemTagManager.FIRE_DRAGON
             ))
+            .refreshOnOrganChange()
             .build()
     );
 
@@ -209,6 +210,7 @@ public class IceAndFireOrgans {
                 AttributeRegistry.ICE_SPELL_POWER,
                 WAICItemTagManager.ICE_DRAGON
             ))
+            .refreshOnOrganChange()
             .build()
     );
 
@@ -330,6 +332,7 @@ public class IceAndFireOrgans {
                 AttributeRegistry.LIGHTNING_SPELL_POWER,
                 WAICItemTagManager.LIGHTNING_DRAGON
             ))
+            .refreshOnOrganChange()
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
@@ -382,6 +385,7 @@ public class IceAndFireOrgans {
         "ice_shard",
         () -> Organ.builder()
             .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 0.05))
+            .refreshOnOrganChange()
             .build()
     );
 
@@ -390,6 +394,7 @@ public class IceAndFireOrgans {
         "frostburn_soul",
         () -> Organ.builder()
             .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 0.15))
+            .refreshOnOrganChange()
             .build()
     );
 
@@ -398,6 +403,7 @@ public class IceAndFireOrgans {
         "dread_phylactery",
         () -> Organ.builder()
             .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 0.25))
+            .refreshOnOrganChange()
             .attack(IceAndFireOrganUtil::dreadPhylacteryAttack)
             .build()
     );

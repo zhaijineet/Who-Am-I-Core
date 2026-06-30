@@ -183,6 +183,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 3)
             .modifier(CataclysmOrganUtil::undyingEmberModifier)
+            .refreshOnOrganChange()
             .build()
     );
 
@@ -192,6 +193,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
             .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
+            .refreshOnOrganChange()
             .build()
     );
 
@@ -248,6 +250,7 @@ public class CataclysmOrgans {
         "tactical_disk",
         () -> Organ.builder()
             .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.HEALTH, 2))
+            .refreshOnOrganChange()
             .build()
     );
 
@@ -275,6 +278,7 @@ public class CataclysmOrgans {
         "compute_chip",
         () -> Organ.builder()
             .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.NERVES, 1.5))
+            .refreshOnOrganChange()
             .build()
     );
 
