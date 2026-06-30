@@ -41,7 +41,6 @@ import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
-import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.DeathLensTask;
 import net.zhaiji.who_am_i_core.task.MechanicalStarTask;
 
@@ -150,12 +149,11 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 焰魔肋甲属性修饰符 - 局部炽焰器官数量的平方根的格挡，冰火冲突时为负值减益
+     * 焰魔肋甲属性修饰符 - 以自身槽位为中心3×3范围内的炽焰器官数量直接作为防御加成，冰火冲突时为负值减益
      */
     public static void ignitedRibPlatingModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
-        double block = Math.signum(localFireOrganCount) * Math.floor(Math.sqrt(Math.abs(localFireOrganCount)));
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), block));
+        modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), localFireOrganCount));
     }
 
     /**
@@ -350,11 +348,11 @@ public class CataclysmOrganUtil {
         Level level = entity.level();
 
         // 基础伤害 = 4 × (1 + 机械器官数 × 0.1)
-        // 生命百分比 = 3 × (1 + 机械器官数 × 0.1)（×0.01 后在内部使用）
+        // 生命百分比 = (1 + 机械器官数 × 0.1)%
         int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
         float seriesMultiplier = 1 + mechanicalCount * 0.1F;
         float baseDamage = 4.0F * seriesMultiplier;
-        float healthPercent = 3.0F * seriesMultiplier;
+        float healthPercent = seriesMultiplier;
 
         Death_Laser_Beam_Entity laser = new Death_Laser_Beam_Entity(
             ModEntities.DEATH_LASER_BEAM.get(),
@@ -365,7 +363,7 @@ public class CataclysmOrganUtil {
             entity.getZ(),
             (float) ((entity.yHeadRot + 90) * Math.PI / 180.0D),
             (float) (-entity.getXRot() * Math.PI / 180.0D),
-            12,
+            40,
             baseDamage,
             healthPercent
         );

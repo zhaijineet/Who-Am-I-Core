@@ -888,16 +888,6 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 九狱器官共用 otherChange 回调
-     * 当其他槽位的器官变化涉及九狱器官时，重新计算当前器官的属性
-     */
-    public static void nineHellOtherChange(ChestCavitySlotContext context, int changedIndex, ItemStack oldStack, ItemStack newStack) {
-        if (newStack.is(WAICItemTagManager.NINE_HELL) || oldStack.is(WAICItemTagManager.NINE_HELL)) {
-            OrganAttributeUtil.updateSlotOrganAttribute(context);
-        }
-    }
-
-    /**
      * 灵薄 modifier：幸运属性动态调整（基础 2 - N）
      */
     public static void limboModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {

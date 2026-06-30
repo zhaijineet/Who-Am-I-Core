@@ -430,12 +430,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
             "Removes FOV modification",
-            "Blocks entity attacks from the front",
+            "Grants Block equal to Strength ÷ 2",
             "Cannot move for 3 seconds after attacking"
         );
         addOrganPassiveEffectSimple(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
-            "Blocks frontal attacks but restricts movement after attacking"
+            "Grants Block based on Strength ÷ 2, but restricts movement after attacking"
         );
 
         addItem(MowziesMobOrgans.CHEST_NOVA, "Chest Nova");
@@ -466,12 +466,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
             "移除FOV修改",
-            "抵挡来自正面的实体攻击",
+            "根据力量÷2提供格挡",
             "攻击后3秒内不能移动"
         );
         addOrganPassiveEffectSimple(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
-            "抵挡正面攻击但攻击后无法移动"
+            "根据力量÷2提供格挡，但攻击后无法移动"
         );
 
         addItem(MowziesMobOrgans.CHEST_NOVA, "胸中新星");
@@ -2408,7 +2408,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.UNDYING_EMBER, "Undying Ember");
         addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "Fire and ice organs cancel out, grants Strength based on the square root of the resulting fire organ count, becomes a penalty when negative");
         addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "Ignited Rib Plating");
-        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "Fire and ice organs cancel out, grants Block based on the square root of fire organs within 3×3 range around own slot, becomes a penalty when negative");
+        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "Fire and ice organs cancel out, grants Defense equal to fire organ count within 3×3 range around own slot, becomes a penalty when negative");
         addItem(CataclysmOrgans.BLAZING_VISAGE, "Blazing Visage");
         addOrganPassiveEffect(
             CataclysmOrgans.BLAZING_VISAGE,
@@ -2559,7 +2559,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.UNDYING_EMBER, "不灭薪火");
         addOrganPassiveEffect(CataclysmOrgans.UNDYING_EMBER, "炽焰与冰霜互相抵消，根据抵消后的炽焰器官数平方根提供力量加成，为负值时变为减益");
         addItem(CataclysmOrgans.IGNITED_RIB_PLATING, "焰魔肋甲");
-        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "炽焰与冰霜互相抵消，根据抵消后以自身槽位为中心3×3范围内的炽焰器官数平方根提供格挡加成，为负值时变为减益");
+        addOrganPassiveEffect(CataclysmOrgans.IGNITED_RIB_PLATING, "炽焰与冰霜互相抵消，以自身槽位为中心3×3范围内每个炽焰器官提供1点防御，为负值时变为减益");
         addItem(CataclysmOrgans.BLAZING_VISAGE, "炽面甲");
         addOrganPassiveEffect(
             CataclysmOrgans.BLAZING_VISAGE,

@@ -19,7 +19,7 @@ public class MowziesMobOrgans {
         () -> Organ.builder()
             // -80%最终移动速度
             .totalMultipliedAttribute(Attributes.MOVEMENT_SPEED, -0.8)
-            .incomingDamage(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorIncomingDamage)
+            .modifier(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorModifier)
             .attack(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorAttack)
             .build()
     );

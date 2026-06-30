@@ -640,25 +640,22 @@ public class WAICTooltipManager {
     );
 
     /**
-     * 死亡透镜生命百分比公式：(3 × (1 + 机械器官数 × 0.1))%
+     * 死亡透镜生命百分比公式：(1 + 机械器官数 × 0.1)%
      */
     private static final FormulaValue DEATH_LENS_HEALTH_PERCENT_FORMULA_VALUE = new FormulaValue(
         context -> {
             int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
-            return Component.literal(String.format("%.1f", 3.0F * (1 + mechanicalCount * 0.1F)) + "%");
+            return Component.literal(String.format("%.1f", 1.0F + mechanicalCount * 0.1F) + "%");
         },
         context -> {
             int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
             return Component.empty()
-                .append(Component.literal("("))
-                .append(Component.literal("3"))
-                .append(TooltipUtil.formulaOperator("×"))
                 .append(Component.literal("(1"))
                 .append(TooltipUtil.formulaOperator("+"))
                 .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.MECHANICAL))
                 .append(Component.literal(String.valueOf(mechanicalCount)))
                 .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("0.1))%"));
+                .append(Component.literal("0.1)%"));
         }
     );
 

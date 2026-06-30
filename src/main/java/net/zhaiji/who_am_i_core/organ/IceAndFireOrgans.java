@@ -5,7 +5,6 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
-import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
@@ -97,11 +96,6 @@ public class IceAndFireOrgans {
                 AttributeRegistry.FIRE_SPELL_POWER,
                 WAICItemTagManager.FIRE_DRAGON
             ))
-            .otherChange((context, changedIndex, oldStack, newStack) -> {
-                if (newStack.is(WAICItemTagManager.FIRE_DRAGON) || oldStack.is(WAICItemTagManager.FIRE_DRAGON)) {
-                    OrganAttributeUtil.updateSlotOrganAttribute(context);
-                }
-            })
             .build()
     );
 
@@ -215,11 +209,6 @@ public class IceAndFireOrgans {
                 AttributeRegistry.ICE_SPELL_POWER,
                 WAICItemTagManager.ICE_DRAGON
             ))
-            .otherChange((context, changedIndex, oldStack, newStack) -> {
-                if (newStack.is(WAICItemTagManager.ICE_DRAGON) || oldStack.is(WAICItemTagManager.ICE_DRAGON)) {
-                    OrganAttributeUtil.updateSlotOrganAttribute(context);
-                }
-            })
             .build()
     );
 
@@ -341,11 +330,6 @@ public class IceAndFireOrgans {
                 AttributeRegistry.LIGHTNING_SPELL_POWER,
                 WAICItemTagManager.LIGHTNING_DRAGON
             ))
-            .otherChange((context, changedIndex, oldStack, newStack) -> {
-                if (newStack.is(WAICItemTagManager.LIGHTNING_DRAGON) || oldStack.is(WAICItemTagManager.LIGHTNING_DRAGON)) {
-                    OrganAttributeUtil.updateSlotOrganAttribute(context);
-                }
-            })
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );

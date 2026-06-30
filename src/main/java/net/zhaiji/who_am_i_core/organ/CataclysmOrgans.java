@@ -190,7 +190,6 @@ public class CataclysmOrgans {
     public static final Supplier<Item> IGNITED_RIB_PLATING = WAICItem.ITEM.register(
         "ignited_rib_plating",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
             .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
             .build()

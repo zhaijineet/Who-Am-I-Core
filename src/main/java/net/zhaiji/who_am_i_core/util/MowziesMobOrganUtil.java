@@ -1,12 +1,14 @@
 package net.zhaiji.who_am_i_core.util;
 
-import com.bobmowzie.mowziesmobs.server.sound.MMSounds;
+import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.Holder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -16,67 +18,44 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 
 import java.util.List;
 
 public class MowziesMobOrganUtil {
     /**
-     * 钢铁守护者护心镜 - 受到伤害前
+     * 钢铁守护者护心镜 - 属性修饰符：根据力量提供格挡（力量 / 2）
      */
-    public static void ferrousWroughtnautHeartMirrorIncomingDamage(ChestCavitySlotContext slotContext, LivingIncomingDamageEvent event) {
-        LivingEntity entity = slotContext.entity();
-        DamageSource source = event.getSource();
-        // 只抵挡来自实体的伤害
-        if (source.getEntity() == null) return;
-        // 排除自伤
-        if (OrganUtil.isSelfDamage(entity, source)) return;
-        // 检查伤害方向是否来自前方
-        Vec3 sourcePosition = source.getSourcePosition();
-        if (sourcePosition != null) {
-            Vec3 viewVector = entity.calculateViewVector(0.0F, entity.getYHeadRot());
-            Vec3 toEntity = sourcePosition.vectorTo(entity.position());
-            Vec3 damageDirection = new Vec3(toEntity.x, 0.0, toEntity.z).normalize();
-            // 当点积小于0时，伤害来自前方
-            if (damageDirection.dot(viewVector) < 0) {
-                // 播放钢铁守护者的抵挡音效
-                entity.level().playSound(
-                    null,
-                    entity.getOnPos(),
-                    MMSounds.ENTITY_WROUGHT_UNDAMAGED.get(),
-                    SoundSource.PLAYERS,
-                    0.4F,
-                    2.0F
-                );
-                // 取消伤害
-                event.setCanceled(true);
-            }
-        }
+    public static void ferrousWroughtnautHeartMirrorModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        double strength = context.entity().getAttributeValue(InitAttribute.STRENGTH);
+        double block = strength / 2;
+        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), block));
     }
 
     /**
      * 钢铁守护者护心镜 - 攻击
      */
     public static void ferrousWroughtnautHeartMirrorAttack(
-        ChestCavitySlotContext slotContext,
-        LivingEntity entity,
+        ChestCavitySlotContext context,
+        LivingEntity target,
         DamageSource source,
         DamageContainer damageContainer
     ) {
-        LivingEntity livingEntity = slotContext.entity();
+        LivingEntity entity = context.entity();
         // 玩家加冷却，实体直接加缓慢5
-        if (livingEntity instanceof Player player) {
-            player.getCooldowns().addCooldown(slotContext.stack().getItem(), 20 * 3);
+        if (entity instanceof Player player) {
+            player.getCooldowns().addCooldown(context.stack().getItem(), 20 * 3);
         } else {
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 4));
+            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 4));
         }
     }
 
