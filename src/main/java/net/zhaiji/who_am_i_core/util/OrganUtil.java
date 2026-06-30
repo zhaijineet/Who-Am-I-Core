@@ -21,9 +21,8 @@ import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
-import net.zhaiji.chestcavitybeyond.api.capability.IOrgan;
+import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
-import net.zhaiji.chestcavitybeyond.manager.OrganManager;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
@@ -119,7 +118,7 @@ public class OrganUtil {
     /**
      * 从弗兰肯斯坦心脏的 BundleContents 中聚合所有内部心脏器官的属性修饰符
      * <p>
-     * 遍历收纳袋中存储的所有心脏物品，获取每个心脏的 IOrgan 属性修饰符，
+     * 遍历收纳袋中存储的所有心脏物品，获取每个心脏的 Organ 属性修饰符，
      * 将相同属性 + 相同操作类型的修饰符合并为一个，值相加。
      * </p>
      *
@@ -134,11 +133,10 @@ public class OrganUtil {
         // 使用 Map 按 (属性, 操作类型) 分组合并值
         Map<Map.Entry<Holder<Attribute>, AttributeModifier.Operation>, Double> merged = new LinkedHashMap<>();
         for (ItemStack stack : contents.itemsCopy()) {
-            IOrgan organ = ChestCavityUtil.getOrganCap(stack);
-            if (organ != OrganManager.EMPTY_ORGAN) {
+            Organ organ = ChestCavityUtil.getOrganCap(stack);
+            if (organ != Organ.EMPTY) {
                 ChestCavitySlotContext organContext = new ChestCavitySlotContext(
                     context.data(),
-                    context.entity(),
                     context.id(),
                     context.index(),
                     stack

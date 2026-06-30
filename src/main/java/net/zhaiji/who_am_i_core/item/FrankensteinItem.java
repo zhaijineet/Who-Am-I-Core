@@ -134,7 +134,7 @@ public class FrankensteinItem extends BundleItem {
         ChestCavityData data = ChestCavityUtil.getData(player);
         for (int i = 0; i < data.getSlots(); i++) {
             if (stack == data.getStackInSlot(i)) {
-                OrganAttributeUtil.updateOrganAttributeModifier(data, player, i, oldStack, stack);
+                OrganAttributeUtil.updateOrganAttributeModifier(data, i, oldStack, stack);
                 break;
             }
         }
