@@ -18,7 +18,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -35,6 +34,7 @@ import net.zhaiji.chestcavitybeyond.api.function.OrganModifierConsumer;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.EntityRelationUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganSkillUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
@@ -267,10 +267,10 @@ public class CataclysmOrganUtil {
         // AoE伤害：半径6.25格（对齐原版 EarthQuake(6.25D)）
         DamageSource damagesource = level.damageSources().mobAttack(entity);
         AABB aabb = entity.getBoundingBox().inflate(6.25);
-        for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, aabb, target -> target != entity)) {
-            // 不伤害主人的驯服宠物
-            if (target instanceof TamableAnimal tamable && tamable.isOwnedBy(entity)) continue;
-
+        for (LivingEntity target : level.getEntitiesOfClass(
+            LivingEntity.class, aabb,
+            target -> EntityRelationUtil.shouldAoeDamage(entity, target)
+        )) {
             // 骇人之恶点燃（对齐原版 berserk 点燃，用 EFFECTMONSTROUS 替代狂暴状态）
             if (entity.getEffect(ModEffect.EFFECTMONSTROUS) != null) {
                 target.igniteForSeconds(6);

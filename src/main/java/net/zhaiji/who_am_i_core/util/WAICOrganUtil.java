@@ -19,7 +19,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -42,6 +41,7 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.chestcavitybeyond.util.EntityRelationUtil;
 import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
@@ -413,7 +413,8 @@ public class WAICOrganUtil {
         if (effects.isEmpty()) return false;
         AABB aabb = entity.getBoundingBox().inflate(10);
         List<LivingEntity> targets = entity.level().getEntitiesOfClass(
-            LivingEntity.class, aabb, target -> target != entity
+            LivingEntity.class, aabb,
+            target -> EntityRelationUtil.shouldAoeSpread(entity, target)
         );
         for (LivingEntity target : targets) {
             for (MobEffectInstance instance : effects) {
@@ -553,8 +554,7 @@ public class WAICOrganUtil {
         List<LivingEntity> targets = level.getEntitiesOfClass(
             LivingEntity.class,
             searchBox,
-            target -> target != entity
-                      && !(target instanceof TamableAnimal tamable && entity instanceof Player player && tamable.isOwnedBy(player))
+            target -> EntityRelationUtil.shouldAoeSpread(entity, target)
         );
 
         // 平分摔落伤害
