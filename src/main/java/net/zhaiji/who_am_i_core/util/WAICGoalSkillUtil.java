@@ -209,4 +209,13 @@ public class WAICGoalSkillUtil {
             AnvilCraftOrganUtil::railgunGoal
         ).build();
     }
+
+    // ==================== 紫水晶巨蟹器官 ====================
+
+    // 花岩核心 — 晶簇环爆
+    public static GoalSkillMetadata bloomStoneCoreGoalSkill() {
+        return GoalSkillMetadata.aoeAttack(
+            (goalContext, slotContext) -> CataclysmOrganUtil.bloomStoneCore(slotContext)
+        ).build();
+    }
 }

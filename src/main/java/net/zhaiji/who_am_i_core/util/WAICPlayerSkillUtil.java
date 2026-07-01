@@ -152,4 +152,11 @@ public class WAICPlayerSkillUtil {
         }
         return true;
     }
+
+    // ==================== 紫水晶巨蟹器官 ====================
+
+    // 花岩核心 — 晶簇环爆
+    public static boolean bloomStoneCore(ChestCavitySlotContext context) {
+        return CataclysmOrganUtil.bloomStoneCore(context);
+    }
 }

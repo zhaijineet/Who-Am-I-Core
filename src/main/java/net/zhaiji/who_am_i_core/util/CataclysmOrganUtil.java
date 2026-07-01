@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.util;
 import com.github.L_Ender.cataclysm.entity.effect.Sandstorm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import com.github.L_Ender.cataclysm.entity.projectile.Amethyst_Cluster_Projectile_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Phantom_Halberd_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Void_Rune_Entity;
@@ -673,5 +674,48 @@ public class CataclysmOrganUtil {
         if (extraDamage > 0) {
             damageContainer.setNewDamage(currentDamage + extraDamage);
         }
+    }
+
+    // ==================== 紫水晶巨蟹器官 ====================
+
+    /**
+     * 苔化紫水晶 — 苔晶蕴防
+     * 每种不同的魔法器官提供 0.5 点防御
+     */
+    public static void mossyAmethystModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int distinctCount = ChestCavityUtil.getDistinctOrganTypeCountWithSelf(context, WAICItemTagManager.MAGIC);
+        modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), distinctCount * 0.5));
+    }
+
+    /**
+     * 花岩核心 — 晶簇环爆
+     * 以自身为中心环形发射 16 发紫水晶簇投射物（参考 Bloom_Stone_Pauldrons，弹幕密度加倍）
+     */
+    public static boolean bloomStoneCore(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        Level level = entity.level();
+
+        float damage = 3.0F + (float) (entity.getAttributeValue(InitAttribute.DEFENSE) * 0.4F);
+
+        for (int i = 0; i < 16; i++) {
+            float throwAngle = i * Mth.PI / 8F;
+            double spawnX = entity.getX() + Mth.cos(throwAngle);
+            double spawnY = entity.getY() + (entity.getBbHeight() * 0.5D);
+            double spawnZ = entity.getZ() + Mth.sin(throwAngle);
+
+            double velocityX = Mth.cos(throwAngle);
+            double velocityY = entity.getRandom().nextFloat() * 0.3F;
+            double velocityZ = Mth.sin(throwAngle);
+            double horizontalSpeed = Mth.sqrt((float) (velocityX * velocityX + velocityZ * velocityZ));
+
+            Amethyst_Cluster_Projectile_Entity projectile = new Amethyst_Cluster_Projectile_Entity(
+                ModEntities.AMETHYST_CLUSTER_PROJECTILE.get(), level, entity, damage
+            );
+            projectile.moveTo(spawnX, spawnY, spawnZ, i * 11.25F, entity.getXRot());
+            projectile.shoot(velocityX, velocityY + horizontalSpeed * 0.2F, velocityZ, 0.8F, 1.0F);
+            level.addFreshEntity(projectile);
+        }
+
+        return true;
     }
 }

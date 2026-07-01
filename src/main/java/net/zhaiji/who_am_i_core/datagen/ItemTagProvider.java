@@ -98,12 +98,10 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.BLUFF_TABLET.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.BLUFF_TABLET.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.BLUFF_TABLET.get());
-        tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.BLUFF_TABLET.get());
 
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
-        tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get());
     }
 
     // ==================== 雕刻家—通臂大师器官 ====================
@@ -1236,6 +1234,41 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             CataclysmOrgans.SAND_GLAZE_HEART.get(),
             CataclysmOrgans.REMNANT_SPINE.get(),
             CataclysmOrgans.REMNANT_RIB.get()
+        );
+
+        // 紫水晶巨蟹系列
+        tag(ItemTagManager.ORGANS).add(
+            CataclysmOrgans.BLOOM_STONE_HEART.get(),
+            CataclysmOrgans.BLOOM_STONE_LUNG.get(),
+            CataclysmOrgans.BLOOM_STONE_STOMACH.get(),
+            CataclysmOrgans.BLOOM_STONE_INTESTINE.get(),
+            CataclysmOrgans.BLOOM_STONE_CAECUM.get(),
+            CataclysmOrgans.BLOOM_STONE_MUSCLE.get(),
+            CataclysmOrgans.BLOOM_STONE_CORE.get(),
+            CataclysmOrgans.MOSSY_AMETHYST.get()
+        );
+        tag(ItemTagManager.HEART).add(CataclysmOrgans.BLOOM_STONE_HEART.get());
+        tag(ItemTagManager.LUNG).add(CataclysmOrgans.BLOOM_STONE_LUNG.get());
+        tag(ItemTagManager.STOMACH).add(
+            CataclysmOrgans.BLOOM_STONE_STOMACH.get(),
+            CataclysmOrgans.BLOOM_STONE_CAECUM.get()
+        );
+        tag(ItemTagManager.INTESTINE).add(CataclysmOrgans.BLOOM_STONE_INTESTINE.get());
+        tag(ItemTagManager.MUSCLE).add(CataclysmOrgans.BLOOM_STONE_MUSCLE.get());
+        tag(ItemTagManager.HEART).add(CataclysmOrgans.BLOOM_STONE_CORE.get());
+        tag(ItemTagManager.SPECIAL).add(
+            CataclysmOrgans.BLOOM_STONE_CORE.get(),
+            CataclysmOrgans.MOSSY_AMETHYST.get()
+        );
+        tag(WAICItemTagManager.MAGIC).add(
+            CataclysmOrgans.BLOOM_STONE_HEART.get(),
+            CataclysmOrgans.BLOOM_STONE_LUNG.get(),
+            CataclysmOrgans.BLOOM_STONE_STOMACH.get(),
+            CataclysmOrgans.BLOOM_STONE_INTESTINE.get(),
+            CataclysmOrgans.BLOOM_STONE_CAECUM.get(),
+            CataclysmOrgans.BLOOM_STONE_MUSCLE.get(),
+            CataclysmOrgans.BLOOM_STONE_CORE.get(),
+            CataclysmOrgans.MOSSY_AMETHYST.get()
         );
     }
 

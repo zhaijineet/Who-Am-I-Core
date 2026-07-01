@@ -360,6 +360,90 @@ public class CataclysmOrgans {
             .build()
     );
 
+    // 花岩心脏
+    public static final Supplier<Item> BLOOM_STONE_HEART = WAICItem.ITEM.register(
+        "bloom_stone_heart",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.FILTRATION, 2)
+            .build()
+    );
+
+    // 花岩肺脏
+    public static final Supplier<Item> BLOOM_STONE_LUNG = WAICItem.ITEM.register(
+        "bloom_stone_lung",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 3)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
+            .addValueAttribute(InitAttribute.ENDURANCE, 3)
+            .addValueAttribute(InitAttribute.METABOLISM, 1)
+            .build()
+    );
+
+    // 花岩胃
+    public static final Supplier<Item> BLOOM_STONE_STOMACH = WAICItem.ITEM.register(
+        "bloom_stone_stomach",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .addValueAttribute(InitAttribute.NUTRITION, 1)
+            .addValueAttribute(InitAttribute.METABOLISM, 1)
+            .build()
+    );
+
+    // 花岩肠
+    public static final Supplier<Item> BLOOM_STONE_INTESTINE = WAICItem.ITEM.register(
+        "bloom_stone_intestine",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 1)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 1)
+            .build()
+    );
+
+    // 花岩盲囊
+    public static final Supplier<Item> BLOOM_STONE_CAECUM = WAICItem.ITEM.register(
+        "bloom_stone_caecum",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 1)
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .build()
+    );
+
+    // 花岩肌肉
+    public static final Supplier<Item> BLOOM_STONE_MUSCLE = WAICItem.ITEM.register(
+        "bloom_stone_muscle",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.STRENGTH, 2)
+            .addValueAttribute(InitAttribute.SPEED, 5)
+            .build()
+    );
+
+    // 花岩核心
+    public static final Supplier<Item> BLOOM_STONE_CORE = WAICItem.ITEM.register(
+        "bloom_stone_core",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 1)
+            .skill(WAICPlayerSkillUtil::bloomStoneCore)
+            .goalSkill(WAICGoalSkillUtil.bloomStoneCoreGoalSkill())
+            .cooldown(200)
+            .tooltip(WAICTooltipManager.BLOOM_STONE_CORE_TOOLTIP)
+            .build()
+    );
+
+    // 苔化紫水晶
+    public static final Supplier<Item> MOSSY_AMETHYST = WAICItem.ITEM.register(
+        "mossy_amethyst",
+        () -> Organ.builder()
+            .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
+            .modifier(CataclysmOrganUtil::mossyAmethystModifier)
+            .refreshOnOrganChange()
+            .tooltip(WAICTooltipManager.MOSSY_AMETHYST_TOOLTIP)
+            .build()
+    );
+
     public static void register() {
     }
 }

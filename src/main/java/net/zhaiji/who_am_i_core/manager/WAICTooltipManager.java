@@ -1195,4 +1195,64 @@ public class WAICTooltipManager {
             Map.of(0, List.of(SAND_GLAZE_HEART_BONUS_FORMULA_VALUE))
         ))
         .build();
+
+    /**
+     * 苔化紫水晶防御公式：不同种类的魔法器官数 × 0.5
+     */
+    private static final FormulaValue MOSSY_AMETHYST_DEFENSE_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int distinctCount = ChestCavityUtil.getDistinctOrganTypeCountWithSelf(context, WAICItemTagManager.MAGIC);
+            return Component.literal(TooltipUtil.formatAttributeValue(distinctCount * 0.5F));
+        },
+        context -> {
+            int distinctCount = ChestCavityUtil.getDistinctOrganTypeCountWithSelf(context, WAICItemTagManager.MAGIC);
+            return Component.empty()
+                .append(TooltipUtil.tagOrganTypeCountName(WAICItemTagManager.MAGIC))
+                .append(Component.literal(String.valueOf(distinctCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("0.5"));
+        }
+    );
+
+    /**
+     * 苔化紫水晶 — 每种不同的魔法器官提供 0.5 点防御
+     */
+    public static final OrganTooltipConsumer MOSSY_AMETHYST_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            Map.of(),
+            Map.of(0, List.of(MOSSY_AMETHYST_DEFENSE_FORMULA_VALUE))
+        ))
+        .build();
+
+    /**
+     * 花岩核心环爆单发伤害公式：3 + 防御 × 0.4（自身防御属性 +1 需在 index==-1 时补加）
+     */
+    private static final FormulaValue BLOOM_STONE_CORE_DAMAGE_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
+            if (context.index() == -1) defense += 1;
+            return Component.literal(TooltipUtil.formatAttributeValue(3.0F + (float) (defense * 0.4)));
+        },
+        context -> {
+            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
+            if (context.index() == -1) defense += 1;
+            return Component.empty()
+                .append(Component.literal("3"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(TooltipUtil.attributeName(InitAttribute.DEFENSE))
+                .append(Component.literal(TooltipUtil.formatAttributeValue(defense)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("0.4"));
+        }
+    );
+
+    /**
+     * 花岩核心 — 晶簇环爆单发伤害随防御缩放
+     */
+    public static final OrganTooltipConsumer BLOOM_STONE_CORE_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.split(
+            Map.of(0, List.of(BLOOM_STONE_CORE_DAMAGE_FORMULA_VALUE)),
+            Map.of(1, List.of(BLOOM_STONE_CORE_DAMAGE_FORMULA_VALUE))
+        ))
+        .build();
 }

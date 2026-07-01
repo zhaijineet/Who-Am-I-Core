@@ -325,6 +325,37 @@ public class CataclysmChestCavityTypeManager {
             InitAttribute.WATER_BREATH, 1.0
         ));
 
+    // 紫水晶巨蟹胸腔（节肢生物换皮 + 花岩核心 + 苔化紫水晶）
+    public static final ChestCavityType AMETHYST_CRAB = register("amethyst_crab")
+        .copyWith(ChestCavityTypeManager.ARTHROPOD)
+        .setFirstRow(0, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setFirstRow(1, CataclysmOrgans.BLOOM_STONE_CAECUM.get())
+        .setFirstRow(2, CataclysmOrgans.MOSSY_AMETHYST.get())
+        .setFirstRow(3, CataclysmOrgans.BLOOM_STONE_LUNG.get())
+        .setFirstRow(4, CataclysmOrgans.BLOOM_STONE_HEART.get())
+        .setFirstRow(5, CataclysmOrgans.BLOOM_STONE_LUNG.get())
+        .setFirstRow(6, CataclysmOrgans.MOSSY_AMETHYST.get())
+        .setFirstRow(7, CataclysmOrgans.BLOOM_STONE_CAECUM.get())
+        .setFirstRow(8, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setSecondRow(0, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setSecondRow(1, CataclysmOrgans.MOSSY_AMETHYST.get())
+        .setSecondRow(2, CataclysmOrgans.MOSSY_AMETHYST.get())
+        .setSecondRow(3, CataclysmOrgans.BLOOM_STONE_INTESTINE.get())
+        .setSecondRow(4, CataclysmOrgans.BLOOM_STONE_CORE.get())
+        .setSecondRow(5, CataclysmOrgans.BLOOM_STONE_INTESTINE.get())
+        .setSecondRow(6, CataclysmOrgans.MOSSY_AMETHYST.get())
+        .setSecondRow(7, CataclysmOrgans.MOSSY_AMETHYST.get())
+        .setSecondRow(8, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setThirdRow(0, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setThirdRow(1, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setThirdRow(2, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setThirdRow(3, CataclysmOrgans.BLOOM_STONE_INTESTINE.get())
+        .setThirdRow(4, CataclysmOrgans.BLOOM_STONE_STOMACH.get())
+        .setThirdRow(5, CataclysmOrgans.BLOOM_STONE_INTESTINE.get())
+        .setThirdRow(6, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setThirdRow(7, CataclysmOrgans.BLOOM_STONE_MUSCLE.get())
+        .setThirdRow(8, CataclysmOrgans.BLOOM_STONE_MUSCLE.get());
+
     /**
      * 注册灾变 Mod 所有实体的胸腔类型
      */
@@ -334,7 +365,7 @@ public class CataclysmChestCavityTypeManager {
         // 幼年利维坦
         event.registerEntity(ModEntities.THE_BABY_LEVIATHAN.get(), LEVIATHAN);
         // 紫水晶巨蟹
-        event.registerEntity(ModEntities.AMETHYST_CRAB.get(), ChestCavityTypeManager.ANIMAL);
+        event.registerEntity(ModEntities.AMETHYST_CRAB.get(), AMETHYST_CRAB);
         // 渊灵
         event.registerEntity(ModEntities.DEEPLING.get(), ChestCavityTypeManager.SALTWATER);
         // 渊灵蛮兵

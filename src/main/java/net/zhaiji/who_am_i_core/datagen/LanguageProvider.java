@@ -109,6 +109,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addChestCavityTypeName(CataclysmChestCavityTypeManager.CATACLYSM_AMPHIBIOUS, "Amphibious");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.REMNANT, "Remnant");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.KOBOLETON, "Koboleton");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.AMETHYST_CRAB, "Amethyst Crab");
 
         addChestCavityTypeName(IronSpellChestCavityTypeManager.DEAD_KING, "Dead King");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "Necromancer");
@@ -298,6 +299,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addChestCavityTypeName(CataclysmChestCavityTypeManager.CATACLYSM_AMPHIBIOUS, "两栖");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.REMNANT, "遗魂");
         addChestCavityTypeName(CataclysmChestCavityTypeManager.KOBOLETON, "骸龙");
+        addChestCavityTypeName(CataclysmChestCavityTypeManager.AMETHYST_CRAB, "紫水晶巨蟹");
 
         addChestCavityTypeName(IronSpellChestCavityTypeManager.DEAD_KING, "死者之王");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "死灵法师");
@@ -2504,6 +2506,26 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
         addItem(CataclysmOrgans.REMNANT_SPINE, "Remnant Spine");
         addItem(CataclysmOrgans.REMNANT_RIB, "Remnant Rib");
+
+        // 紫水晶巨蟹系列
+        addItem(CataclysmOrgans.BLOOM_STONE_HEART, "Bloom Stone Heart");
+        addItem(CataclysmOrgans.BLOOM_STONE_LUNG, "Bloom Stone Lung");
+        addItem(CataclysmOrgans.BLOOM_STONE_STOMACH, "Bloom Stone Stomach");
+        addItem(CataclysmOrgans.BLOOM_STONE_INTESTINE, "Bloom Stone Intestine");
+        addItem(CataclysmOrgans.BLOOM_STONE_CAECUM, "Bloom Stone Caecum");
+        addItem(CataclysmOrgans.BLOOM_STONE_MUSCLE, "Bloom Stone Muscle");
+        addItem(CataclysmOrgans.BLOOM_STONE_CORE, "Bloom Stone Core");
+        addOrganActiveSkill(
+            CataclysmOrgans.BLOOM_STONE_CORE,
+            "Fires 16 amethyst cluster projectiles in a ring",
+            "Each dealing %s damage (scales with Defense)"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.BLOOM_STONE_CORE, "Fires a ring of amethyst clusters, each dealing %s damage");
+        addItem(CataclysmOrgans.MOSSY_AMETHYST, "Mossy Amethyst");
+        addOrganPassiveEffect(
+            CataclysmOrgans.MOSSY_AMETHYST,
+            "Each distinct type of magic organ grants %s defense"
+        );
     }
 
     private void cataclysmOrgansZH() {
@@ -2655,6 +2677,26 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
         addItem(CataclysmOrgans.REMNANT_SPINE, "遗魂脊柱");
         addItem(CataclysmOrgans.REMNANT_RIB, "遗魂肋骨");
+
+        // 紫水晶巨蟹系列
+        addItem(CataclysmOrgans.BLOOM_STONE_HEART, "花岩心脏");
+        addItem(CataclysmOrgans.BLOOM_STONE_LUNG, "花岩肺脏");
+        addItem(CataclysmOrgans.BLOOM_STONE_STOMACH, "花岩胃");
+        addItem(CataclysmOrgans.BLOOM_STONE_INTESTINE, "花岩肠");
+        addItem(CataclysmOrgans.BLOOM_STONE_CAECUM, "花岩盲囊");
+        addItem(CataclysmOrgans.BLOOM_STONE_MUSCLE, "花岩肌肉");
+        addItem(CataclysmOrgans.BLOOM_STONE_CORE, "花岩核心");
+        addOrganActiveSkill(
+            CataclysmOrgans.BLOOM_STONE_CORE,
+            "以自身为中心发射16发紫水晶簇投射物",
+            "每发造成%s伤害（随防御加成）"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.BLOOM_STONE_CORE, "环形发射紫水晶簇，每发造成%s伤害");
+        addItem(CataclysmOrgans.MOSSY_AMETHYST, "苔化紫水晶");
+        addOrganPassiveEffect(
+            CataclysmOrgans.MOSSY_AMETHYST,
+            "每种不同的魔法器官提供%s点防御"
+        );
     }
 
     // ==================== IronSpell 器官 ====================
