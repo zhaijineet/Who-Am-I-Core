@@ -403,11 +403,10 @@
   "item.who_am_i_core.wrath": "愤怒",
   "item.who_am_i_core.zen_heart": "禅心",
   "itemGroup.who_am_i_core": "我非我",
-  "message.who_am_i_core.trophy.duplicate": "不能重复汲取相同奖杯的力量",
-  "message.who_am_i_core.trophy.max_level": "已达到最大扩容等级",
-  "message.who_am_i_core.trophy.not_used": "尚未汲取该奖杯的力量",
-  "message.who_am_i_core.trophy.power_draw": "您汲取了奖杯的力量",
-  "message.who_am_i_core.trophy.power_return": "您归还了奖杯的力量",
+  "message.who_am_i_core.dragon_blood.already_used": "已注射过此龙血药剂",
+  "message.who_am_i_core.dragon_blood.group_draw": "您注射了完全龙血药剂，胸腔直接扩至最大",
+  "message.who_am_i_core.dragon_blood.max_level": "已达到最大扩容等级",
+  "message.who_am_i_core.dragon_blood.power_draw": "您注射了此龙血药剂，胸腔扩容",
   "organ.iceandfire.hydra_heart.passive_effect.0": "免疫中毒伤害",
   "organ.iceandfire.hydra_heart.passive_effect.1": "获得与中毒相同等级的再生效果",
   "organ.iceandfire.hydra_heart.passive_effect.simple.0": "免疫中毒伤害并将其转化为再生",
@@ -879,7 +878,6 @@
   "tag.item.who_am_i_core.scylla": "斯库拉",
   "tag.item.who_am_i_core.summon": "召唤",
   "tag.item.who_am_i_core.unique": "唯一",
-  "tooltip.who_am_i_core.trophy.draw": "右键点击汲取力量，扩容胸腔",
-  "tooltip.who_am_i_core.trophy.return": "蹲下+右键归还力量，缩小胸腔",
-  "tooltip.who_am_i_core.trophy.unique": "每个奖杯只能汲取一次力量"
+  "tooltip.who_am_i_core.dragon_blood.draw": "右键注射此龙血药剂，胸腔扩容",
+  "tooltip.who_am_i_core.dragon_blood.group_draw": "右键注射完全龙血药剂，胸腔直接扩至最大"
 }

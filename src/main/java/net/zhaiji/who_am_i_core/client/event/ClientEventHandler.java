@@ -1,15 +1,11 @@
 package net.zhaiji.who_am_i_core.client.event;
 
-import com.finderfeed.fdbosses.init.BossBlocks;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -17,7 +13,6 @@ import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
@@ -29,8 +24,6 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICEntity;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
-
-import java.util.List;
 
 public class ClientEventHandler {
     /**
@@ -91,22 +84,6 @@ public class ClientEventHandler {
      */
     public static void handlerRegisterGuiLayersEvent(RegisterGuiLayersEvent event) {
         event.registerBelow(VanillaGuiLayers.HOTBAR, HumoursOverlay.HUMOURS_HUD, HumoursOverlay::render);
-    }
-
-    /**
-     * 逆卡巴拉奖杯 tooltip：告诉玩家如何操作
-     */
-    public static void handlerItemTooltipEvent(ItemTooltipEvent event) {
-        ItemStack stack = event.getItemStack();
-        if (!stack.is(BossBlocks.CHESED_TROPHY.get().asItem())
-            && !stack.is(BossBlocks.GEBURAH_TROPHY.get().asItem())
-            && !stack.is(BossBlocks.MALKUTH_TROPHY.get().asItem())) {
-            return;
-        }
-        List<Component> tooltip = event.getToolTip();
-        tooltip.add(1, Component.translatable("tooltip.who_am_i_core.trophy.draw").withStyle(ChatFormatting.GOLD));
-        tooltip.add(2, Component.translatable("tooltip.who_am_i_core.trophy.return").withStyle(ChatFormatting.GOLD));
-        tooltip.add(3, Component.translatable("tooltip.who_am_i_core.trophy.unique").withStyle(ChatFormatting.GOLD));
     }
 
     /**

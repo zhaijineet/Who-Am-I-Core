@@ -2,7 +2,6 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
-import com.finderfeed.fdbosses.init.BossBlocks;
 import com.github.tartaricacid.touhoulittlemaid.api.event.MaidAndItemTransformEvent;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
@@ -44,7 +43,6 @@ import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerXpEvent;
-import net.zhaiji.chestcavitybeyond.api.ChestCavitySize;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganChangeEvent;
 import net.zhaiji.chestcavitybeyond.api.event.OrganRegisterEvent;
@@ -66,7 +64,6 @@ import net.zhaiji.who_am_i_core.manager.WAICChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.WAICDamageTagManager;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.mixin.AttachmentHolderAccessor;
-import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.CompanionsOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
@@ -597,15 +594,9 @@ public class CommonEventHandler {
     }
 
     /**
-     * 右键方块事件处理
-     * <ul>
-     *   <li>砂轮打磨：脊柱骨质器官 → 剑骨头</li>
-     *   <li>逆卡巴拉奖杯：扩容/缩小胸腔（临时方案）</li>
-     * </ul>
+     * 右键方块事件处理：砂轮打磨脊柱骨质器官 → 剑骨头
      * <p>
-     * RightClickBlock 在客户端会遍历主手和副手，只有 cancel 事件才能阻止副手触发。
-     * </p>
-     * <p>
+     * RightClickBlock 在客户端会遍历主手和副手，只有 cancel 事件才能阻止副手触发，
      * 因此客户端也必须 cancel，但不能执行服务端逻辑（修改数据等）。
      * </p>
      */
@@ -633,62 +624,6 @@ public class CommonEventHandler {
             event.setCanceled(true);
             return;
         }
-
-        // 逆卡巴拉奖杯：扩容/缩小胸腔（临时方案）
-        int flag;
-        if (state.is(BossBlocks.CHESED_TROPHY.get())) {
-            flag = IChestCavityData.BIT_CHESED;
-        } else if (state.is(BossBlocks.GEBURAH_TROPHY.get())) {
-            flag = IChestCavityData.BIT_GEBURAH;
-        } else if (state.is(BossBlocks.MALKUTH_TROPHY.get())) {
-            flag = IChestCavityData.BIT_MALKUTH;
-        } else {
-            return;
-        }
-
-        // 客户端也需要 cancel，阻止副手重复触发；服务端执行实际逻辑
-        if (level.isClientSide()) {
-            event.setCancellationResult(InteractionResult.SUCCESS);
-            event.setCanceled(true);
-            return;
-        }
-
-        IChestCavityData trophyData = (IChestCavityData) ChestCavityUtil.getData(player);
-
-        if (player.isShiftKeyDown()) {
-            if (!trophyData.isTrophyUsed(flag)) {
-                player.displayClientMessage(Component.translatable("message.who_am_i_core.trophy.not_used"), true);
-                event.setCancellationResult(InteractionResult.FAIL);
-                event.setCanceled(true);
-                return;
-            }
-            trophyData.setTrophyUsed(flag, false);
-        } else {
-            if (trophyData.isTrophyUsed(flag)) {
-                player.displayClientMessage(Component.translatable("message.who_am_i_core.trophy.duplicate"), true);
-                event.setCancellationResult(InteractionResult.FAIL);
-                event.setCanceled(true);
-                return;
-            }
-            if (trophyData.getExpansionLevel() >= 3) {
-                player.displayClientMessage(Component.translatable("message.who_am_i_core.trophy.max_level"), true);
-                event.setCancellationResult(InteractionResult.FAIL);
-                event.setCanceled(true);
-                return;
-            }
-            trophyData.setTrophyUsed(flag, true);
-        }
-
-        ChestCavityUtil.getData(player).resize(ChestCavitySize.byId(trophyData.getExpansionLevel()));
-        player.displayClientMessage(
-            Component.translatable(
-                player.isShiftKeyDown()
-                ? "message.who_am_i_core.trophy.power_return"
-                : "message.who_am_i_core.trophy.power_draw"
-            ), true
-        );
-        event.setCancellationResult(InteractionResult.SUCCESS);
-        event.setCanceled(true);
     }
 
     /**

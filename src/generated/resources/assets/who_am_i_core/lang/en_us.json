@@ -403,11 +403,10 @@
   "item.who_am_i_core.wrath": "Wrath",
   "item.who_am_i_core.zen_heart": "Zen Heart",
   "itemGroup.who_am_i_core": "Who Am I",
-  "message.who_am_i_core.trophy.duplicate": "Cannot draw power from the same trophy again",
-  "message.who_am_i_core.trophy.max_level": "Already at maximum expansion",
-  "message.who_am_i_core.trophy.not_used": "This trophy's power has not been drawn",
-  "message.who_am_i_core.trophy.power_draw": "You drew power from the trophy",
-  "message.who_am_i_core.trophy.power_return": "You returned the trophy's power",
+  "message.who_am_i_core.dragon_blood.already_used": "This dragon blood preparation has already been injected",
+  "message.who_am_i_core.dragon_blood.group_draw": "You injected the full dragon blood preparation, chest cavity fully expanded",
+  "message.who_am_i_core.dragon_blood.max_level": "Already at maximum expansion",
+  "message.who_am_i_core.dragon_blood.power_draw": "You injected this dragon blood preparation, chest cavity expanded",
   "organ.iceandfire.hydra_heart.passive_effect.0": "Immune to poison damage",
   "organ.iceandfire.hydra_heart.passive_effect.1": "Gains regeneration at the same level as current poison",
   "organ.iceandfire.hydra_heart.passive_effect.simple.0": "Immune to poison damage and converts it into regeneration",
@@ -879,7 +878,6 @@
   "tag.item.who_am_i_core.scylla": "Scylla",
   "tag.item.who_am_i_core.summon": "Summon",
   "tag.item.who_am_i_core.unique": "Unique",
-  "tooltip.who_am_i_core.trophy.draw": "Right-click to draw power and expand chest cavity",
-  "tooltip.who_am_i_core.trophy.return": "Crouch + Right-click to return power and shrink chest cavity",
-  "tooltip.who_am_i_core.trophy.unique": "Each trophy can only be drawn once"
+  "tooltip.who_am_i_core.dragon_blood.draw": "Right-click to inject this dragon blood preparation, expand chest cavity",
+  "tooltip.who_am_i_core.dragon_blood.group_draw": "Right-click to inject the full dragon blood preparation, expand chest cavity to maximum"
 }

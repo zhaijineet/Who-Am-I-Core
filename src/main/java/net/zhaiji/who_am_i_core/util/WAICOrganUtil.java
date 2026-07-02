@@ -80,7 +80,7 @@ public class WAICOrganUtil {
         Level level = data.getOwner().level();
         if (level.isClientSide()) return;
         List<Integer> emptySlots = new ArrayList<>();
-        for (int i = 0; i < 27; i++) {
+        for (int i = 0; i < data.getSlots(); i++) {
             if (data.getStackInSlot(i).isEmpty()) {
                 emptySlots.add(i);
             }
@@ -94,6 +94,7 @@ public class WAICOrganUtil {
         int targetSlot = emptySlots.get(level.random.nextInt(emptySlots.size()));
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         data.setStackInSlot(targetSlot, stack);
+        data.sync();
     }
 
     /**

@@ -9,6 +9,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
+import net.zhaiji.chestcavitybeyond.api.ChestCavitySize;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
@@ -22,10 +23,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mixin(ChestCavityData.class)
 public abstract class ChestCavityDataMixin implements IChestCavityData {
     @Unique
-    private int trophyFlags = 0;
+    private int dragonBloodFlags = 0;
 
     @Shadow
     @Nullable
@@ -36,6 +40,9 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
 
     @Shadow
     public abstract int getOrganCount(TagKey<Item> tag);
+
+    @Shadow
+    public abstract ChestCavitySize getSize();
 
     @Inject(
         method = "tick",
@@ -73,41 +80,77 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         }
     }
 
-    @Override
-    public boolean isTrophyUsed(int flag) {
-        return (trophyFlags & flag) != 0;
-    }
-
-    @Override
-    public void setTrophyUsed(int flag, boolean used) {
-        if (used) {
-            trophyFlags |= flag;
-        } else {
-            trophyFlags &= ~flag;
+    /**
+     * 新生成的实体初始化器官后，若其胸腔类型默认 size 大于 ROW_3，按差值随机补齐等量的龙血 bit，使扩容等级与 size 等级一致
+     */
+    @Inject(
+        method = "init",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/zhaiji/chestcavitybeyond/attachment/ChestCavityData;sync()V"
+        )
+    )
+    public void whoAmICore$init(CallbackInfo ci) {
+        LivingEntity owner = getOwner();
+        if (owner == null) return;
+        int targetLevel = getSize().getId();
+        int currentLevel = getExpansionLevel();
+        if (currentLevel >= targetLevel) return;
+        List<Integer> candidates = new ArrayList<>(3);
+        if ((dragonBloodFlags & IChestCavityData.BIT_FIRE_DRAGON) == 0) candidates.add(IChestCavityData.BIT_FIRE_DRAGON);
+        if ((dragonBloodFlags & IChestCavityData.BIT_ICE_DRAGON) == 0) candidates.add(IChestCavityData.BIT_ICE_DRAGON);
+        if ((dragonBloodFlags & IChestCavityData.BIT_LIGHTNING_DRAGON) == 0) candidates.add(IChestCavityData.BIT_LIGHTNING_DRAGON);
+        for (int i = currentLevel; i < targetLevel && !candidates.isEmpty(); i++) {
+            int pickIndex = owner.level().getRandom().nextInt(candidates.size());
+            dragonBloodFlags |= candidates.remove(pickIndex);
         }
     }
 
     @Override
+    public boolean isDragonBloodUsed(int flag) {
+        return (dragonBloodFlags & flag) != 0;
+    }
+
+    @Override
+    public int getDragonBloodFlags() {
+        return dragonBloodFlags;
+    }
+
+    @Override
+    public void setDragonBloodFlags(int flags) {
+        dragonBloodFlags = flags;
+    }
+
+    @Override
     public int getExpansionLevel() {
-        return Integer.bitCount(trophyFlags);
+        return Integer.bitCount(dragonBloodFlags);
     }
 
     @Inject(
         method = "serializeNBT(Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/CompoundTag;",
         at = @At("RETURN")
     )
-    private void whoAmICore$serializeNBT(HolderLookup.Provider provider, CallbackInfoReturnable<CompoundTag> cir) {
-        cir.getReturnValue().putInt("trophyFlags", trophyFlags);
+    public void whoAmICore$serializeNBT(HolderLookup.Provider provider, CallbackInfoReturnable<CompoundTag> cir) {
+        cir.getReturnValue().putInt("dragonBloodFlags", dragonBloodFlags);
     }
 
     @Inject(
         method = "deserializeNBT(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/nbt/CompoundTag;)V",
         at = @At("RETURN")
     )
-    private void whoAmICore$deserializeNBT(HolderLookup.Provider provider, CompoundTag tag, CallbackInfo ci) {
-        // 优先读取新格式
+    public void whoAmICore$deserializeNBT(HolderLookup.Provider provider, CompoundTag tag, CallbackInfo ci) {
+        // 优先读取新字段
+        if (tag.contains("dragonBloodFlags")) {
+            dragonBloodFlags = tag.getInt("dragonBloodFlags");
+            return;
+        }
+        // TODO 1.2.0 删除：旧存档以 trophyFlags 存储 boss 奖杯扩容标记，位值复用映射如下
+        //   旧 BIT_CHESED(1)    → 新 BIT_FIRE_DRAGON(1)
+        //   旧 BIT_GEBURAH(2)   → 新 BIT_ICE_DRAGON(2)
+        //   旧 BIT_MALKUTH(4)   → 新 BIT_LIGHTNING_DRAGON(4)
+        // 仅保留扩容等级，具体来源语义不迁移
         if (tag.contains("trophyFlags")) {
-            trophyFlags = tag.getInt("trophyFlags");
+            dragonBloodFlags = tag.getInt("trophyFlags");
         }
     }
 }

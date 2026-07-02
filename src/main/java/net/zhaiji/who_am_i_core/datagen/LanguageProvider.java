@@ -224,15 +224,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         ironSpellOrgansEN();
         companionsOrgansEN();
 
-        add("message.who_am_i_core.trophy.power_draw", "You drew power from the trophy");
-        add("message.who_am_i_core.trophy.power_return", "You returned the trophy's power");
-        add("message.who_am_i_core.trophy.duplicate", "Cannot draw power from the same trophy again");
-        add("message.who_am_i_core.trophy.max_level", "Already at maximum expansion");
-        add("message.who_am_i_core.trophy.not_used", "This trophy's power has not been drawn");
+        add("message.who_am_i_core.dragon_blood.power_draw", "You injected this dragon blood preparation, chest cavity expanded");
+        add("message.who_am_i_core.dragon_blood.already_used", "This dragon blood preparation has already been injected");
+        add("message.who_am_i_core.dragon_blood.max_level", "Already at maximum expansion");
+        add("message.who_am_i_core.dragon_blood.group_draw", "You injected the full dragon blood preparation, chest cavity fully expanded");
 
-        add("tooltip.who_am_i_core.trophy.draw", "Right-click to draw power and expand chest cavity");
-        add("tooltip.who_am_i_core.trophy.return", "Crouch + Right-click to return power and shrink chest cavity");
-        add("tooltip.who_am_i_core.trophy.unique", "Each trophy can only be drawn once");
+        add("tooltip.who_am_i_core.dragon_blood.draw", "Right-click to inject this dragon blood preparation, expand chest cavity");
+        add("tooltip.who_am_i_core.dragon_blood.group_draw", "Right-click to inject the full dragon blood preparation, expand chest cavity to maximum");
     }
 
     public void Chinese() {
@@ -414,15 +412,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         ironSpellOrgansZH();
         companionsOrgansZH();
 
-        add("message.who_am_i_core.trophy.power_draw", "您汲取了奖杯的力量");
-        add("message.who_am_i_core.trophy.power_return", "您归还了奖杯的力量");
-        add("message.who_am_i_core.trophy.duplicate", "不能重复汲取相同奖杯的力量");
-        add("message.who_am_i_core.trophy.max_level", "已达到最大扩容等级");
-        add("message.who_am_i_core.trophy.not_used", "尚未汲取该奖杯的力量");
+        add("message.who_am_i_core.dragon_blood.power_draw", "您注射了此龙血药剂，胸腔扩容");
+        add("message.who_am_i_core.dragon_blood.already_used", "已注射过此龙血药剂");
+        add("message.who_am_i_core.dragon_blood.max_level", "已达到最大扩容等级");
+        add("message.who_am_i_core.dragon_blood.group_draw", "您注射了完全龙血药剂，胸腔直接扩至最大");
 
-        add("tooltip.who_am_i_core.trophy.draw", "右键点击汲取力量，扩容胸腔");
-        add("tooltip.who_am_i_core.trophy.return", "蹲下+右键归还力量，缩小胸腔");
-        add("tooltip.who_am_i_core.trophy.unique", "每个奖杯只能汲取一次力量");
+        add("tooltip.who_am_i_core.dragon_blood.draw", "右键注射此龙血药剂，胸腔扩容");
+        add("tooltip.who_am_i_core.dragon_blood.group_draw", "右键注射完全龙血药剂，胸腔直接扩至最大");
     }
 
     // ==================== Mowzie's Mobs 特殊器官 ====================

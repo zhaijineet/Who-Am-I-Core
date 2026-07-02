@@ -8,6 +8,7 @@
     "ChesedEntityMixin",
     "ChesedMiniRayMixin",
     "ChestCavityDataMixin",
+    "ChestCavityDataSyncHandlerMixin",
     "DisappearAbilityMixin",
     "DragonBaseEntityMixin",
     "EnchantedCountIncreaseFunctionMixin",
