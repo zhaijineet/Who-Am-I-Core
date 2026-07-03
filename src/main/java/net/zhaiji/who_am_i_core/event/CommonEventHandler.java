@@ -54,6 +54,7 @@ import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
+import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
 import net.zhaiji.who_am_i_core.manager.CataclysmChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.CompanionsChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.FDBossesChestCavityTypeManager;
@@ -595,10 +596,6 @@ public class CommonEventHandler {
 
     /**
      * 右键方块事件处理：砂轮打磨脊柱骨质器官 → 剑骨头
-     * <p>
-     * RightClickBlock 在客户端会遍历主手和副手，只有 cancel 事件才能阻止副手触发，
-     * 因此客户端也必须 cancel，但不能执行服务端逻辑（修改数据等）。
-     * </p>
      */
     public static void handlerPlayerInteract$RightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Level level = event.getLevel();
@@ -627,26 +624,34 @@ public class CommonEventHandler {
     }
 
     /**
-     * 布织泰迪熊获取：使用剪刀对泰迪（Companions 模组的生物）右键，
-     * 将实体转化为布织泰迪熊器官物品。
+     * 龙血药剂：潜行对实体时取消精确交互，让 Item.use() 通过射线检测接管
+     */
+    public static void handlerPlayerInteract$EntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
+        if (DragonBloodPreparationItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())) {
+            event.setCanceled(true);
+        }
+    }
+
+    /**
+     * 龙血药剂取消交互 + 布织泰迪熊获取
      */
     public static void handlerPlayerInteract$EntityInteract(PlayerInteractEvent.EntityInteract event) {
+        if (DragonBloodPreparationItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())) {
+            event.setCanceled(true);
+            return;
+        }
+
         Level level = event.getLevel();
         if (level.isClientSide()) return;
-        // 检查目标实体是否是未认主的泰迪
+        // 布织泰迪熊：检查目标实体是否是未认主的泰迪
         if (!(event.getTarget() instanceof TeddyEntity teddy) || teddy.isTame()) return;
         Player player = event.getEntity();
         InteractionHand hand = event.getHand();
         ItemStack heldItem = player.getItemInHand(hand);
-        // 检查手持物品是否是剪刀
         if (!heldItem.is(Items.SHEARS)) return;
-        // 给予玩家
         teddy.spawnAtLocation(CompanionsOrgans.CLOTH_TEDDY_BEAR.get().getDefaultInstance());
-        // 播放剪刀音效
         level.playSound(null, teddy.blockPosition(), SoundEvents.SHEEP_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
-        // 移除泰迪实体（不触发死亡掉落）
         teddy.discard();
-        // 消耗剪刀耐久
         heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         event.setCancellationResult(InteractionResult.SUCCESS);
         event.setCanceled(true);

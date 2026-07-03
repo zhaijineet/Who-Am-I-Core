@@ -30,7 +30,7 @@ public class MerchantContainerMixin {
             target = "Lnet/minecraft/world/item/trading/MerchantOffer;getXp()I"
         )
     )
-    public int whoAmICore$redirectFutureXp(MerchantOffer offer) {
+    public int whoAmICore$updateSellItem(MerchantOffer offer) {
         Player player = merchant.getTradingPlayer();
         if (player != null) {
             ChestCavityData data = ChestCavityUtil.getData(player);

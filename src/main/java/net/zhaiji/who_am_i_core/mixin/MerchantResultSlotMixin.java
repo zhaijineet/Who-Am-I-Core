@@ -42,7 +42,7 @@ public class MerchantResultSlotMixin {
             target = "Lnet/minecraft/world/item/trading/MerchantOffer;getXp()I"
         )
     )
-    private int whoAmICore$onTake$villagerXp(MerchantOffer offer) {
+    private int whoAmICore$onTake$redirect(MerchantOffer offer) {
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (data.hasOrgan(WAICOrgans.FRAUD.get())) {
             return offer.getXp() * 10;
@@ -57,7 +57,7 @@ public class MerchantResultSlotMixin {
         method = "onTake",
         at = @At("RETURN")
     )
-    public void whoAmICore$onTake$resetUses(Player player, ItemStack stack, CallbackInfo ci) {
+    public void whoAmICore$onTake$inject(Player player, ItemStack stack, CallbackInfo ci) {
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return;
         int n = data.getOrganCount(WAICItemTagManager.NINE_HELL);

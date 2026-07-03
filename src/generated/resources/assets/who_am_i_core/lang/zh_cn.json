@@ -404,9 +404,13 @@
   "item.who_am_i_core.zen_heart": "禅心",
   "itemGroup.who_am_i_core": "我非我",
   "message.who_am_i_core.dragon_blood.already_used": "已注射过此龙血药剂",
-  "message.who_am_i_core.dragon_blood.group_draw": "您注射了完全龙血药剂，胸腔直接扩至最大",
+  "message.who_am_i_core.dragon_blood.group_draw": "你注射了所有龙血药剂，胸腔直接扩至最大",
   "message.who_am_i_core.dragon_blood.max_level": "已达到最大扩容等级",
-  "message.who_am_i_core.dragon_blood.power_draw": "您注射了此龙血药剂，胸腔扩容",
+  "message.who_am_i_core.dragon_blood.other_already_used": "%s已注射过此龙血药剂",
+  "message.who_am_i_core.dragon_blood.other_group_draw": "你对%s注射了所有龙血药剂，其胸腔直接扩至最大",
+  "message.who_am_i_core.dragon_blood.other_max_level": "%s已达到最大扩容等级",
+  "message.who_am_i_core.dragon_blood.other_power_draw": "你对%s注射了此龙血药剂，其胸腔扩容",
+  "message.who_am_i_core.dragon_blood.power_draw": "你注射了此龙血药剂，胸腔扩容",
   "organ.iceandfire.hydra_heart.passive_effect.0": "免疫中毒伤害",
   "organ.iceandfire.hydra_heart.passive_effect.1": "获得与中毒相同等级的再生效果",
   "organ.iceandfire.hydra_heart.passive_effect.simple.0": "免疫中毒伤害并将其转化为再生",
@@ -878,6 +882,8 @@
   "tag.item.who_am_i_core.scylla": "斯库拉",
   "tag.item.who_am_i_core.summon": "召唤",
   "tag.item.who_am_i_core.unique": "唯一",
-  "tooltip.who_am_i_core.dragon_blood.draw": "右键注射此龙血药剂，胸腔扩容",
-  "tooltip.who_am_i_core.dragon_blood.group_draw": "右键注射完全龙血药剂，胸腔直接扩至最大"
+  "tooltip.who_am_i_core.dragon_blood.draw.0": "右键注射此龙血药剂，胸腔扩容",
+  "tooltip.who_am_i_core.dragon_blood.draw.1": "潜行右键可对其他生物注射",
+  "tooltip.who_am_i_core.dragon_blood.group_draw.0": "右键注射所有龙血药剂，胸腔直接扩至最大",
+  "tooltip.who_am_i_core.dragon_blood.group_draw.1": "潜行右键可对其他生物注射"
 }

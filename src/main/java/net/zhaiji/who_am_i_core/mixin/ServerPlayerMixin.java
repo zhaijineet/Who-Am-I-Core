@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.mixin;
 
+import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -10,8 +11,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import com.mojang.authlib.GameProfile;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends Player {
@@ -29,7 +28,7 @@ public abstract class ServerPlayerMixin extends Player {
      * 该方法不触发任何事件，在此主动刷新经验之心属性。
      */
     @Inject(method = "setExperienceLevels(I)V", at = @At("RETURN"))
-    public void whoAmICore$onSetExperienceLevels(int level, CallbackInfo ci) {
+    public void whoAmICore$setExperienceLevels(int level, CallbackInfo ci) {
         WAICOrganUtil.updateExperienceHeartAttribute(whoAmICore$self());
     }
 }

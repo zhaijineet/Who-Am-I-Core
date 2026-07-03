@@ -209,7 +209,7 @@ dependencies {
     implementation("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.2+hotfix.1685") { transitive = false }
     interfaceInjectionData("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.2+hotfix.1685") { transitive = false }
     // 车万女仆
-    implementation "curse.maven:touhou-little-maid-355044:7510722"
+    implementation "curse.maven:touhou-little-maid-355044:8061852"
     // 同伴！
     implementation "curse.maven:companions-mod-1300341:7558671"
     // 生活调味料：胡萝卜版

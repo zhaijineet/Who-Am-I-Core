@@ -5,7 +5,6 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,7 +27,6 @@ import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.FDBossesOrgans;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OrganUtil {

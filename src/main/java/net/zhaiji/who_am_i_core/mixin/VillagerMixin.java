@@ -61,7 +61,7 @@ public abstract class VillagerMixin extends AbstractVillager {
             target = "Lnet/minecraft/world/item/trading/MerchantOffer;getXp()I"
         )
     )
-    public int whoAmICore$rewardTradeXp$villagerXp(MerchantOffer offer) {
+    public int whoAmICore$rewardTradeXp$redirect(MerchantOffer offer) {
         int fraudCount = whoAmICore$getFraudCount();
         if (fraudCount > 0) {
             return offer.getXp() * 10;
@@ -80,7 +80,7 @@ public abstract class VillagerMixin extends AbstractVillager {
         ),
         index = 4
     )
-    public int whoAmICore$rewardTradeXp$playerXp(int value) {
+    public int whoAmICore$rewardTradeXp$modifyArg(int value) {
         int fraudCount = whoAmICore$getFraudCount();
         if (fraudCount > 0) {
             return value * 10;

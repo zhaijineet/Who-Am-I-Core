@@ -35,7 +35,7 @@ public abstract class MalkuthWeaknessOverlayMixin {
         method = "tickClient",
         at = @At("RETURN")
     )
-    private static void whoAmICore$checkImmuneState(ClientTickEvent.Pre event, CallbackInfo ci) {
+    private static void whoAmICore$tickClient(ClientTickEvent.Pre event, CallbackInfo ci) {
         Player player = FDClientHelpers.getClientPlayer();
         if (player == null) {
             whoAmICore$isImmune = false;
@@ -77,15 +77,14 @@ public abstract class MalkuthWeaknessOverlayMixin {
             target = "()Lorg/joml/Vector3f;"
         )
     )
-    public Vector3f whoAmICore$whiteBaseRing() {
+    public Vector3f whoAmICore$render$redirect$new() {
         return new Vector3f(1.0f, 1.0f, 1.0f);
     }
 
     /**
      * 拦截 drawCircle 调用，当免疫时将冰/火圆环的 alpha 强制设为 0。
-     * 基础圆环 renderAmount=1，冰/火圆环 renderAmount=2 或 3。
-     * 只有冰/火圆环（renderAmount >= 2）被屏蔽，基础圆环保留。
-     * 底部横条和屏幕边缘粒子不受影响（它们在 drawCircle 调用之前已经绘制/生成）。
+     * 只有冰/火圆环被屏蔽，基础圆环保留。
+     * 底部横条和屏幕边缘粒子不受影响
      */
     @Redirect(
         method = "render",
@@ -94,7 +93,7 @@ public abstract class MalkuthWeaknessOverlayMixin {
             target = "Lcom/finderfeed/fdbosses/client/overlay/MalkuthWeaknessOverlay;drawCircle(Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lcom/mojang/blaze3d/vertex/PoseStack;FFFI)V"
         )
     )
-    public void whoAmICore$hideColoredCircles(
+    public void whoAmICore$render$redirect$invoke(
         Vector3f c1,
         Vector3f c2,
         PoseStack matrices,
@@ -104,7 +103,7 @@ public abstract class MalkuthWeaknessOverlayMixin {
         int renderAmount
     ) {
         if (whoAmICore$isImmune && renderAmount >= 2) {
-            // 免疫时跳过冰/火圆环绘制
+            // renderAmount: 1=基础圆环, 2/3=冰火圆环
             return;
         }
         drawCircle(c1, c2, matrices, radius, innerRadius, a, renderAmount);

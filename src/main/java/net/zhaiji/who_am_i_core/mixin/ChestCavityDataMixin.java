@@ -14,7 +14,6 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,10 +29,8 @@ import java.util.List;
 public abstract class ChestCavityDataMixin implements IChestCavityData {
     @Unique
     private int dragonBloodFlags = 0;
-
     @Shadow
-    @Nullable
-    public abstract LivingEntity getOwner();
+    private LivingEntity owner;
 
     @Shadow
     public abstract double getCurrentValue(Holder<Attribute> attribute);
@@ -44,12 +41,46 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
     @Shadow
     public abstract ChestCavitySize getSize();
 
+    /**
+     * 任意来源调整胸腔容量前（道具、指令等），按目标等级随机补齐或退移龙血 bit，
+     * 使扩容等级标记始终与实际 size 一致。
+     */
+    @Inject(
+        method = "resize(Lnet/zhaiji/chestcavitybeyond/api/ChestCavitySize;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/zhaiji/chestcavitybeyond/attachment/ChestCavityData;updateSize(Lnet/zhaiji/chestcavitybeyond/api/ChestCavitySize;)V"
+        )
+    )
+    public void whoAmICore$resize(ChestCavitySize newSize, CallbackInfo ci) {
+        int currentLevel = getExpansionLevel();
+        int targetLevel = newSize.getId();
+        if (currentLevel == targetLevel) return;
+        List<Integer> candidates = new ArrayList<>();
+        if (currentLevel < targetLevel) {
+            if ((dragonBloodFlags & IChestCavityData.BIT_FIRE_DRAGON) == 0) candidates.add(IChestCavityData.BIT_FIRE_DRAGON);
+            if ((dragonBloodFlags & IChestCavityData.BIT_ICE_DRAGON) == 0) candidates.add(IChestCavityData.BIT_ICE_DRAGON);
+            if ((dragonBloodFlags & IChestCavityData.BIT_LIGHTNING_DRAGON) == 0) candidates.add(IChestCavityData.BIT_LIGHTNING_DRAGON);
+            for (int i = currentLevel; i < targetLevel && !candidates.isEmpty(); i++) {
+                int pickIndex = owner.level().getRandom().nextInt(candidates.size());
+                dragonBloodFlags |= candidates.remove(pickIndex);
+            }
+        } else {
+            if ((dragonBloodFlags & IChestCavityData.BIT_FIRE_DRAGON) != 0) candidates.add(IChestCavityData.BIT_FIRE_DRAGON);
+            if ((dragonBloodFlags & IChestCavityData.BIT_ICE_DRAGON) != 0) candidates.add(IChestCavityData.BIT_ICE_DRAGON);
+            if ((dragonBloodFlags & IChestCavityData.BIT_LIGHTNING_DRAGON) != 0) candidates.add(IChestCavityData.BIT_LIGHTNING_DRAGON);
+            for (int i = targetLevel; i < currentLevel && !candidates.isEmpty(); i++) {
+                int pickIndex = owner.level().getRandom().nextInt(candidates.size());
+                dragonBloodFlags &= ~candidates.remove(pickIndex);
+            }
+        }
+    }
+
     @Inject(
         method = "tick",
         at = @At("HEAD")
     )
     public void whoAmICore$tick(CallbackInfo ci) {
-        LivingEntity owner = getOwner();
         if (owner == null) return;
         int tickCount = owner.tickCount;
         if (owner.level().isClientSide() || tickCount % 20 != 0) return;
@@ -91,12 +122,10 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         )
     )
     public void whoAmICore$init(CallbackInfo ci) {
-        LivingEntity owner = getOwner();
-        if (owner == null) return;
         int targetLevel = getSize().getId();
         int currentLevel = getExpansionLevel();
         if (currentLevel >= targetLevel) return;
-        List<Integer> candidates = new ArrayList<>(3);
+        List<Integer> candidates = new ArrayList<>();
         if ((dragonBloodFlags & IChestCavityData.BIT_FIRE_DRAGON) == 0) candidates.add(IChestCavityData.BIT_FIRE_DRAGON);
         if ((dragonBloodFlags & IChestCavityData.BIT_ICE_DRAGON) == 0) candidates.add(IChestCavityData.BIT_ICE_DRAGON);
         if ((dragonBloodFlags & IChestCavityData.BIT_LIGHTNING_DRAGON) == 0) candidates.add(IChestCavityData.BIT_LIGHTNING_DRAGON);

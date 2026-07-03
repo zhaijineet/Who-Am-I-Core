@@ -36,7 +36,7 @@ public abstract class SandstormEntityMixin extends Entity {
         method = "updateMotion",
         at = @At("RETURN")
     )
-    public void whoAmICore$updateMotion$followAnyLivingCaster(CallbackInfo ci) {
+    public void whoAmICore$updateMotion(CallbackInfo ci) {
         LivingEntity owner = getCaster();
         if (owner == null || owner instanceof Player || owner instanceof Ancient_Remnant_Entity) {
             return;

@@ -227,10 +227,17 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("message.who_am_i_core.dragon_blood.power_draw", "You injected this dragon blood preparation, chest cavity expanded");
         add("message.who_am_i_core.dragon_blood.already_used", "This dragon blood preparation has already been injected");
         add("message.who_am_i_core.dragon_blood.max_level", "Already at maximum expansion");
-        add("message.who_am_i_core.dragon_blood.group_draw", "You injected the full dragon blood preparation, chest cavity fully expanded");
+        add("message.who_am_i_core.dragon_blood.group_draw", "You injected all dragon blood preparation, chest cavity fully expanded");
 
-        add("tooltip.who_am_i_core.dragon_blood.draw", "Right-click to inject this dragon blood preparation, expand chest cavity");
-        add("tooltip.who_am_i_core.dragon_blood.group_draw", "Right-click to inject the full dragon blood preparation, expand chest cavity to maximum");
+        add("message.who_am_i_core.dragon_blood.other_power_draw", "You injected this dragon blood preparation into %s, chest cavity expanded");
+        add("message.who_am_i_core.dragon_blood.other_already_used", "%s has already been injected with this dragon blood preparation");
+        add("message.who_am_i_core.dragon_blood.other_max_level", "%s is already at maximum expansion");
+        add("message.who_am_i_core.dragon_blood.other_group_draw", "You injected all dragon blood preparation into %s, chest cavity fully expanded");
+
+        add("tooltip.who_am_i_core.dragon_blood.draw.0", "Right-click to inject this dragon blood preparation, expand chest cavity");
+        add("tooltip.who_am_i_core.dragon_blood.draw.1", "Shift-right-click to inject into other creatures");
+        add("tooltip.who_am_i_core.dragon_blood.group_draw.0", "Right-click to inject all dragon blood preparation, expand chest cavity to maximum");
+        add("tooltip.who_am_i_core.dragon_blood.group_draw.1", "Shift-right-click to inject into other creatures");
     }
 
     public void Chinese() {
@@ -412,13 +419,20 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         ironSpellOrgansZH();
         companionsOrgansZH();
 
-        add("message.who_am_i_core.dragon_blood.power_draw", "您注射了此龙血药剂，胸腔扩容");
+        add("message.who_am_i_core.dragon_blood.power_draw", "你注射了此龙血药剂，胸腔扩容");
         add("message.who_am_i_core.dragon_blood.already_used", "已注射过此龙血药剂");
         add("message.who_am_i_core.dragon_blood.max_level", "已达到最大扩容等级");
-        add("message.who_am_i_core.dragon_blood.group_draw", "您注射了完全龙血药剂，胸腔直接扩至最大");
+        add("message.who_am_i_core.dragon_blood.group_draw", "你注射了所有龙血药剂，胸腔直接扩至最大");
 
-        add("tooltip.who_am_i_core.dragon_blood.draw", "右键注射此龙血药剂，胸腔扩容");
-        add("tooltip.who_am_i_core.dragon_blood.group_draw", "右键注射完全龙血药剂，胸腔直接扩至最大");
+        add("message.who_am_i_core.dragon_blood.other_power_draw", "你对%s注射了此龙血药剂，其胸腔扩容");
+        add("message.who_am_i_core.dragon_blood.other_already_used", "%s已注射过此龙血药剂");
+        add("message.who_am_i_core.dragon_blood.other_max_level", "%s已达到最大扩容等级");
+        add("message.who_am_i_core.dragon_blood.other_group_draw", "你对%s注射了所有龙血药剂，其胸腔直接扩至最大");
+
+        add("tooltip.who_am_i_core.dragon_blood.draw.0", "右键注射此龙血药剂，胸腔扩容");
+        add("tooltip.who_am_i_core.dragon_blood.draw.1", "潜行右键可对其他生物注射");
+        add("tooltip.who_am_i_core.dragon_blood.group_draw.0", "右键注射所有龙血药剂，胸腔直接扩至最大");
+        add("tooltip.who_am_i_core.dragon_blood.group_draw.1", "潜行右键可对其他生物注射");
     }
 
     // ==================== Mowzie's Mobs 特殊器官 ====================

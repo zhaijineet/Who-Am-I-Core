@@ -21,7 +21,7 @@ public abstract class ChestCavityDataSyncHandlerMixin {
         method = "write(Lnet/minecraft/network/RegistryFriendlyByteBuf;Lnet/zhaiji/chestcavitybeyond/attachment/ChestCavityData;Z)V",
         at = @At("RETURN")
     )
-    public void whoAmICore$appendDragonBloodFlags(
+    public void whoAmICore$write(
         RegistryFriendlyByteBuf buf, ChestCavityData attachment, boolean initialSync, CallbackInfo ci
     ) {
         buf.writeInt(((IChestCavityData) attachment).getDragonBloodFlags());
@@ -31,7 +31,7 @@ public abstract class ChestCavityDataSyncHandlerMixin {
         method = "read(Lnet/neoforged/neoforge/attachment/IAttachmentHolder;Lnet/minecraft/network/RegistryFriendlyByteBuf;Lnet/zhaiji/chestcavitybeyond/attachment/ChestCavityData;)Lnet/zhaiji/chestcavitybeyond/attachment/ChestCavityData;",
         at = @At("RETURN")
     )
-    public void whoAmICore$applyDragonBloodFlags(
+    public void whoAmICore$read(
         IAttachmentHolder holder, RegistryFriendlyByteBuf buf,
         @Nullable ChestCavityData previousValue, CallbackInfoReturnable<ChestCavityData> cir
     ) {

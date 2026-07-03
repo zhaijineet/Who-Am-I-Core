@@ -33,7 +33,7 @@ public abstract class PlayerMixin extends LivingEntity {
      * 血液满时不拦截，正常返回。
      */
     @Inject(method = "isHurt", at = @At("HEAD"), cancellable = true)
-    public void whoAmICore$crimsonIsHurt(CallbackInfoReturnable<Boolean> cir) {
+    public void whoAmICore$isHurt(CallbackInfoReturnable<Boolean> cir) {
         Player player = whoAmICore$self();
         // 检查是否拥有猩红心脏且血液未满
         if (ChestCavityUtil.getData(player).hasOrgan(WAICOrgans.CRIMSON_HEART.get()) && !HumoursData.get(player).isBloodFull()) {
@@ -48,7 +48,7 @@ public abstract class PlayerMixin extends LivingEntity {
      * </p>
      */
     @Inject(method = "giveExperienceLevels(I)V", at = @At("RETURN"))
-    public void whoAmICore$onGiveExperienceLevels(int levels, CallbackInfo ci) {
+    public void whoAmICore$giveExperienceLevels(int levels, CallbackInfo ci) {
         if (level().isClientSide()) return;
         WAICOrganUtil.updateExperienceHeartAttribute(whoAmICore$self());
     }

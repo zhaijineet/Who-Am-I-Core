@@ -404,8 +404,12 @@
   "item.who_am_i_core.zen_heart": "Zen Heart",
   "itemGroup.who_am_i_core": "Who Am I",
   "message.who_am_i_core.dragon_blood.already_used": "This dragon blood preparation has already been injected",
-  "message.who_am_i_core.dragon_blood.group_draw": "You injected the full dragon blood preparation, chest cavity fully expanded",
+  "message.who_am_i_core.dragon_blood.group_draw": "You injected all dragon blood preparation, chest cavity fully expanded",
   "message.who_am_i_core.dragon_blood.max_level": "Already at maximum expansion",
+  "message.who_am_i_core.dragon_blood.other_already_used": "%s has already been injected with this dragon blood preparation",
+  "message.who_am_i_core.dragon_blood.other_group_draw": "You injected all dragon blood preparation into %s, chest cavity fully expanded",
+  "message.who_am_i_core.dragon_blood.other_max_level": "%s is already at maximum expansion",
+  "message.who_am_i_core.dragon_blood.other_power_draw": "You injected this dragon blood preparation into %s, chest cavity expanded",
   "message.who_am_i_core.dragon_blood.power_draw": "You injected this dragon blood preparation, chest cavity expanded",
   "organ.iceandfire.hydra_heart.passive_effect.0": "Immune to poison damage",
   "organ.iceandfire.hydra_heart.passive_effect.1": "Gains regeneration at the same level as current poison",
@@ -878,6 +882,8 @@
   "tag.item.who_am_i_core.scylla": "Scylla",
   "tag.item.who_am_i_core.summon": "Summon",
   "tag.item.who_am_i_core.unique": "Unique",
-  "tooltip.who_am_i_core.dragon_blood.draw": "Right-click to inject this dragon blood preparation, expand chest cavity",
-  "tooltip.who_am_i_core.dragon_blood.group_draw": "Right-click to inject the full dragon blood preparation, expand chest cavity to maximum"
+  "tooltip.who_am_i_core.dragon_blood.draw.0": "Right-click to inject this dragon blood preparation, expand chest cavity",
+  "tooltip.who_am_i_core.dragon_blood.draw.1": "Shift-right-click to inject into other creatures",
+  "tooltip.who_am_i_core.dragon_blood.group_draw.0": "Right-click to inject all dragon blood preparation, expand chest cavity to maximum",
+  "tooltip.who_am_i_core.dragon_blood.group_draw.1": "Shift-right-click to inject into other creatures"
 }
