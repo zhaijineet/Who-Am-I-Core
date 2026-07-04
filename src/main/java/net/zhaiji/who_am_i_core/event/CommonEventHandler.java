@@ -54,6 +54,7 @@ import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
+import net.zhaiji.who_am_i_core.item.BodySwapperItem;
 import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
 import net.zhaiji.who_am_i_core.manager.CataclysmChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.CompanionsChestCavityTypeManager;
@@ -332,8 +333,13 @@ public class CommonEventHandler {
             event.setCanceled(true);
             return;
         }
-        // 腐败魂灯：灵魂收割
+        // 腐败魂灯
         IronSpellOrganUtil.corruptedSoulLanternSoulHarvest(entity, level);
+        // 一般实体死了不复活，一般不需要清空当前体液值
+        // 不确定那些可以复活宠物的mod是怎么操作的，会不会继承这个attachment，但我决定还是加一个守卫
+        if (entity instanceof Player) {
+            HumoursData.clearCurrentValues(entity);
+        }
     }
 
     /**
@@ -624,19 +630,21 @@ public class CommonEventHandler {
     }
 
     /**
-     * 龙血药剂：潜行对实体时取消精确交互，让 Item.use() 通过射线检测接管
+     * 龙血药剂与躯体交换器取消精确交互，让 Item.use() 通过射线检测接管
      */
     public static void handlerPlayerInteract$EntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
-        if (DragonBloodPreparationItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())) {
+        if (DragonBloodPreparationItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())
+            || BodySwapperItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())) {
             event.setCanceled(true);
         }
     }
 
     /**
-     * 龙血药剂取消交互 + 布织泰迪熊获取
+     * 龙血药剂与躯体交换器取消交互 + 布织泰迪熊获取
      */
     public static void handlerPlayerInteract$EntityInteract(PlayerInteractEvent.EntityInteract event) {
-        if (DragonBloodPreparationItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())) {
+        if (DragonBloodPreparationItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())
+            || BodySwapperItem.shouldCancelEntityInteract(event.getEntity(), event.getHand(), event.getTarget())) {
             event.setCanceled(true);
             return;
         }

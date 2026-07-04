@@ -17,6 +17,7 @@ public class WAICAttachment {
         "humours",
         () -> AttachmentType.serializable(HumoursData::new)
             .sync(HumoursData.STREAM_CODEC)
+            .copyOnDeath()
             .build()
     );
 }

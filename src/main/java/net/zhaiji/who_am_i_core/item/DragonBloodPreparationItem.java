@@ -36,8 +36,7 @@ public class DragonBloodPreparationItem extends Item {
      */
     public static boolean shouldCancelEntityInteract(Player player, InteractionHand hand, Entity target) {
         if (!player.isShiftKeyDown()) return false;
-        ItemStack stack = player.getItemInHand(hand);
-        return stack.getItem() instanceof DragonBloodPreparationItem && TargetResolver.resolve(target) instanceof LivingEntity;
+        return player.getItemInHand(hand).getItem() instanceof DragonBloodPreparationItem && TargetResolver.resolve(target) instanceof LivingEntity;
     }
 
     @Override

@@ -298,6 +298,15 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         entity.setData(WAICAttachment.HUMOURS, data);
     }
 
+    /**
+     * 清空所有体液的当前值，保留上限
+     */
+    public static void clearCurrentValues(LivingEntity entity) {
+        HumoursData data = get(entity);
+        data.clearCurrentValues();
+        entity.setData(WAICAttachment.HUMOURS, data);
+    }
+
     // ===== 血液 =====
 
     public float getMaxBlood() {
@@ -602,7 +611,12 @@ public class HumoursData implements INBTSerializable<CompoundTag> {
         return toDrain;
     }
 
-    // ===== 汇总查询 =====
+    private void clearCurrentValues() {
+        blood = 0;
+        yellowBile = 0;
+        blackBile = 0;
+        phlegm = 0;
+    }
 
     public boolean isAnyHumourEmpty() {
         return blood <= 0 || yellowBile <= 0 || blackBile <= 0 || phlegm <= 0;

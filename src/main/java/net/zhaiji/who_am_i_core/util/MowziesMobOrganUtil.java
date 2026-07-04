@@ -77,8 +77,6 @@ public class MowziesMobOrganUtil {
             // 烧毁器官
             data.setStackInSlot(slot, ItemStack.EMPTY);
         }
-        // 烧毁循环通过 setStackInSlot 修改了 stacks 时，需同步到客户端
-        data.sync();
         // 检查是否已有 ChestNovaTask，并且 task 不会被删除
         if (data.hasTaskIf(task -> task instanceof ChestNovaTask && !task.canRemove(slotContext.entity()))) {
             return;

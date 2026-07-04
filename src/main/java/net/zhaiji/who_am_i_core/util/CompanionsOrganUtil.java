@@ -250,7 +250,6 @@ public class CompanionsOrganUtil {
                 }
             }
         }
-        data.sync();
     }
 
     /**

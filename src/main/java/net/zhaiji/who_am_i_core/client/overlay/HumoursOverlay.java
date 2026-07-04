@@ -37,12 +37,7 @@ public class HumoursOverlay {
         if (WhoAmIClientConfig.hudVisibility == HudVisibility.NEVER) return;
 
         // 如果设置为"有体液时显示"，检查玩家当前是否持有任何体液
-        if (WhoAmIClientConfig.hudVisibility == HudVisibility.HAS_HUMOURS) {
-            if (data.getBlood() <= 0 && data.getYellowBile() <= 0
-                && data.getBlackBile() <= 0 && data.getPhlegm() <= 0) {
-                return;
-            }
-        }
+        if (WhoAmIClientConfig.hudVisibility == HudVisibility.HAS_HUMOURS && data.isAllHumourEmpty()) return;
 
         int screenWidth = minecraft.getWindow().getGuiScaledWidth();
         int screenHeight = minecraft.getWindow().getGuiScaledHeight();

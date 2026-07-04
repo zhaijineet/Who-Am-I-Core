@@ -15,7 +15,7 @@ import java.util.List;
 public class IronSpellOrganUtil {
 
     /**
-     * 腐败魂灯灵魂收割：死亡实体 16 格内所有拥有腐败魂灯的 LivingEntity 均分黑胆汁
+     * 腐败魂灯
      */
     public static void corruptedSoulLanternSoulHarvest(LivingEntity dead, Level level) {
         float totalBile = dead.getMaxHealth();

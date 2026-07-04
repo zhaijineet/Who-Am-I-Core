@@ -94,7 +94,6 @@ public class WAICOrganUtil {
         int targetSlot = emptySlots.get(level.random.nextInt(emptySlots.size()));
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         data.setStackInSlot(targetSlot, stack);
-        data.sync();
     }
 
     /**

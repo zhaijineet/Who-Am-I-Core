@@ -2,9 +2,11 @@ package net.zhaiji.who_am_i_core.register;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.zhaiji.chestcavitybeyond.item.ChestOpenerItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
+import net.zhaiji.who_am_i_core.item.BodySwapperItem;
 import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
@@ -21,13 +23,12 @@ import java.util.function.Supplier;
 public class WAICItem {
     public static final DeferredRegister<Item> ITEM = DeferredRegister.create(BuiltInRegistries.ITEM, WhoAmICore.MOD_ID);
 
-    // ==================== 娇小开胸器 ====================
+    // 娇小开胸器
     public static final Supplier<Item> PETITE_CHEST_OPENER = ITEM.register(
         "petite_chest_opener",
         () -> new ChestOpenerItem(new Item.Properties().stacksTo(1), 1.0F)
     );
 
-    // ==================== 龙血药剂 ====================
     // 火龙血药剂
     public static final Supplier<Item> FIRE_DRAGON_BLOOD_PREPARATION = ITEM.register(
         "fire_dragon_blood_preparation",
@@ -62,6 +63,12 @@ public class WAICItem {
             new Item.Properties(),
             0
         )
+    );
+
+    // 躯体交换器
+    public static final Supplier<Item> BODY_SWAPPER = ITEM.register(
+        "body_swapper",
+        () -> new BodySwapperItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON))
     );
 
     static {
