@@ -117,6 +117,13 @@ public class WAICGoalSkillUtil {
         ).canUse((mob, skillEntry) -> mob.onGround()).build();
     }
 
+    // 利维坦鳃 — 深海怒吼
+    public static GoalSkillMetadata leviathanGillGoalSkill() {
+        return GoalSkillMetadata.aoeAttack(
+            (goalContext, slotContext) -> CataclysmOrganUtil.leviathanGill(slotContext)
+        ).build();
+    }
+
     // 沙釉心脏 — 沙暴怒吼
     public static GoalSkillMetadata sandGlazeHeartGoalSkill() {
         return GoalSkillMetadata.aoeAttack(

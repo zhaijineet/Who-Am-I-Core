@@ -58,6 +58,10 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
             .addValueAttribute(InitAttribute.WATER_BREATH, 2)
             .addValueAttribute(InitAttribute.ENDURANCE, 2)
+            .skill(WAICPlayerSkillUtil::leviathanGill)
+            .goalSkill(WAICGoalSkillUtil.leviathanGillGoalSkill())
+            .cooldown(200)
+            .tooltip(WAICTooltipManager.LEVIATHAN_GILL_TOOLTIP)
             .build()
     );
 

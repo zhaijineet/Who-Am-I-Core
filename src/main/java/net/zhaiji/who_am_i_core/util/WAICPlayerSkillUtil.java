@@ -86,6 +86,11 @@ public class WAICPlayerSkillUtil {
         return CataclysmOrganUtil.voidCrystalSpine(context);
     }
 
+    // 利维坦鳃 — 深海怒吼
+    public static boolean leviathanGill(ChestCavitySlotContext context) {
+        return CataclysmOrganUtil.leviathanGill(context);
+    }
+
     // 沙釉心脏 — 沙暴怒吼
     public static boolean sandGlazeHeart(ChestCavitySlotContext context) {
         return CataclysmOrganUtil.sandGlazeHeart(context);

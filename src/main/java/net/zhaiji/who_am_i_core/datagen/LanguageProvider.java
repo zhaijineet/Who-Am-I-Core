@@ -1877,6 +1877,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.PONTIFF, "Pontiff");
         add(WAICItemTagManager.SCYLLA, "Scylla");
         add(WAICItemTagManager.REMNANT, "Remnant");
+        add(WAICItemTagManager.LEVIATHAN, "Leviathan");
 
         add("formula.who_am_i_core.max_health", "Max Health");
         add("formula.who_am_i_core.current_health_ratio", "Current Health Ratio");
@@ -1884,6 +1885,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("formula.who_am_i_core.ice_count", "Ice");
         add("formula.who_am_i_core.local_fire_count", "Local Fire");
         add("formula.who_am_i_core.local_ice_count", "Local Ice");
+        add("formula.who_am_i_core.in_water", "In Water");
     }
 
     private void addWAICTagTranslationsZH() {
@@ -1910,6 +1912,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.PONTIFF, "教宗");
         add(WAICItemTagManager.SCYLLA, "斯库拉");
         add(WAICItemTagManager.REMNANT, "遗魂");
+        add(WAICItemTagManager.LEVIATHAN, "利维坦");
 
         add("formula.who_am_i_core.max_health", "最大生命值");
         add("formula.who_am_i_core.current_health_ratio", "当前生命值比例");
@@ -1917,6 +1920,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("formula.who_am_i_core.ice_count", "冰霜");
         add("formula.who_am_i_core.local_fire_count", "局部炽焰");
         add("formula.who_am_i_core.local_ice_count", "局部冰霜");
+        add("formula.who_am_i_core.in_water", "在水中");
     }
 
     // ==================== FDBosses 逆卡巴拉器官 ====================
@@ -2390,6 +2394,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "Leviathan Intestine");
         addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "Leviathan Stomach");
         addItem(CataclysmOrgans.LEVIATHAN_GILL, "Leviathan Gill");
+        addOrganActiveSkill(
+            CataclysmOrgans.LEVIATHAN_GILL,
+            "Triggers a shockwave around you",
+            "Deals %2$s damage within a %1$s-block radius and inflicts Darkness for 5s",
+            "Empowered while submerged in water"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.LEVIATHAN_GILL, "Triggers a shockwave, dealing %2$s damage within %1$s blocks and inflicting Darkness");
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "Leviathan Spine");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "Leviathan Fishbone");
 
@@ -2561,6 +2572,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.LEVIATHAN_INTESTINE, "利维坦肠子");
         addItem(CataclysmOrgans.LEVIATHAN_STOMACH, "利维坦胃");
         addItem(CataclysmOrgans.LEVIATHAN_GILL, "利维坦鳃");
+        addOrganActiveSkill(
+            CataclysmOrgans.LEVIATHAN_GILL,
+            "以自身为中心引发震荡",
+            "在%1$s格范围内造成%2$s点伤害，施加5秒黑暗",
+            "在水中释放时获得加成"
+        );
+        addOrganActiveSkillSimple(CataclysmOrgans.LEVIATHAN_GILL, "引发震荡，在%1$s格范围内造成%2$s点伤害并施加黑暗");
         addItem(CataclysmOrgans.LEVIATHAN_SPINE, "利维坦脊柱");
         addItem(CataclysmOrgans.LEVIATHAN_FISHBONE, "利维坦鱼骨");
 

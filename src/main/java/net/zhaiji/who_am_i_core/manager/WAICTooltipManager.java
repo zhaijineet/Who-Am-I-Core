@@ -31,13 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * WAIC 器官工具提示集合
- * <p>
- * 动态数值器官统一通过 {@link OrganTooltip.Builder#dynamicPassiveEffect} / {@link OrganTooltip.Builder#dynamicActiveSkill}
- * 接入 CCB 的 Ctrl 公式提示管线，Ctrl 提示行由 CCB 自动挂载。
- * </p>
- */
 public class WAICTooltipManager {
     /**
      * 完全覆盖器官工具提示，仅显示「仍未完成」信息
@@ -202,14 +195,12 @@ public class WAICTooltipManager {
             return Component.literal(String.format("%.1f", bonus) + "%");
         },
         context -> Component.empty()
-            .append(Component.literal("("))
-            .append(Component.literal("15"))
+            .append(Component.literal("(15"))
             .append(TooltipUtil.formulaOperator("+"))
             .append(TooltipUtil.attributeName(InitAttribute.STRENGTH))
             .append(Component.literal(TooltipUtil.formatAttributeValue(context.entity().getAttributeValue(InitAttribute.STRENGTH))))
             .append(TooltipUtil.formulaOperator("×"))
-            .append(Component.literal("0.5"))
-            .append(Component.literal(")%"))
+            .append(Component.literal("0.5)%"))
     );
 
     /**
@@ -297,14 +288,12 @@ public class WAICTooltipManager {
             double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
             if (context.index() == -1) defense += 1;
             return Component.empty()
-                .append(Component.literal("("))
-                .append(Component.literal("15"))
+                .append(Component.literal("(15"))
                 .append(TooltipUtil.formulaOperator("+"))
                 .append(TooltipUtil.attributeName(InitAttribute.DEFENSE))
                 .append(Component.literal(TooltipUtil.formatAttributeValue(defense)))
                 .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("0.5"))
-                .append(Component.literal(")%"));
+                .append(Component.literal("0.5)%"));
         }
     );
 
@@ -386,14 +375,12 @@ public class WAICTooltipManager {
         context -> {
             int pontiffCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.PONTIFF);
             return Component.empty()
-                .append(Component.literal("("))
-                .append(Component.literal("30"))
+                .append(Component.literal("(30"))
                 .append(TooltipUtil.formulaOperator("+"))
                 .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.PONTIFF))
                 .append(Component.literal(String.valueOf(pontiffCount)))
                 .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("3"))
-                .append(Component.literal(")%"));
+                .append(Component.literal("3)%"));
         }
     );
 
@@ -409,8 +396,7 @@ public class WAICTooltipManager {
         context -> {
             int pontiffCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.PONTIFF);
             return Component.empty()
-                .append(Component.literal("min(3,\u00A0"))
-                .append(Component.literal("floor(("))
+                .append(Component.literal("min(3," + TooltipUtil.NON_BREAKING_SPACE + "floor(("))
                 .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.PONTIFF))
                 .append(Component.literal(String.valueOf(pontiffCount)))
                 .append(TooltipUtil.formulaOperator("+"))
@@ -559,9 +545,9 @@ public class WAICTooltipManager {
                 .append(Component.literal(String.valueOf(localIceOrganCount)))
                 .append(TooltipUtil.formulaOperator("≤"))
                 .append(Component.literal("0"))
-                .append(Component.literal("\u00A0?\u00A0"))
+                .append(TooltipUtil.formulaOperator("?"))
                 .append(Component.literal("1"))
-                .append(Component.literal("\u00A0:\u00A0"))
+                .append(TooltipUtil.formulaOperator(":"))
                 .append(Component.literal("floor(("))
                 .append(Component.translatable("formula.who_am_i_core.local_ice_count"))
                 .append(Component.literal(String.valueOf(localIceOrganCount)))
@@ -596,7 +582,7 @@ public class WAICTooltipManager {
         context -> {
             int magicCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MAGIC);
             return Component.empty()
-                .append(Component.literal("min(80,\u00A030"))
+                .append(Component.literal("min(80," + TooltipUtil.NON_BREAKING_SPACE + "30"))
                 .append(TooltipUtil.formulaOperator("+"))
                 .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.MAGIC))
                 .append(Component.literal(String.valueOf(magicCount)))
@@ -920,7 +906,7 @@ public class WAICTooltipManager {
             context -> {
                 int count = ChestCavityUtil.getOrganCountWithSelf(context, dragonTag);
                 return Component.empty()
-                    .append(Component.literal("min(10,\u00A0"))
+                    .append(Component.literal("min(10," + TooltipUtil.NON_BREAKING_SPACE))
                     .append(TooltipUtil.tagOrganCountName(dragonTag))
                     .append(Component.literal(String.valueOf(count)))
                     .append(Component.literal(")"));
@@ -963,8 +949,7 @@ public class WAICTooltipManager {
                         .append(TooltipUtil.tagOrganCountName(dragonTag))
                         .append(Component.literal(String.valueOf(count)))
                         .append(TooltipUtil.formulaOperator("-"))
-                        .append(Component.literal("1"))
-                        .append(Component.literal(")"));
+                        .append(Component.literal("1)"));
                 }
                 return Component.empty()
                     .append(Component.literal("1"))
@@ -1149,8 +1134,7 @@ public class WAICTooltipManager {
         context -> {
             int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
             return Component.empty()
-                .append(Component.literal("("))
-                .append(Component.literal("300"))
+                .append(Component.literal("(300"))
                 .append(TooltipUtil.formulaOperator("+"))
                 .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.REMNANT))
                 .append(Component.literal(String.valueOf(remnantCount)))
@@ -1172,8 +1156,7 @@ public class WAICTooltipManager {
         context -> {
             int remnantCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.REMNANT);
             return Component.empty()
-                .append(Component.literal("("))
-                .append(Component.literal("30"))
+                .append(Component.literal("(30"))
                 .append(TooltipUtil.formulaOperator("+"))
                 .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.REMNANT))
                 .append(Component.literal(String.valueOf(remnantCount)))
@@ -1253,6 +1236,76 @@ public class WAICTooltipManager {
         .dynamicActiveSkill(slotContext -> DynamicValues.split(
             Map.of(0, List.of(BLOOM_STONE_CORE_DAMAGE_FORMULA_VALUE)),
             Map.of(1, List.of(BLOOM_STONE_CORE_DAMAGE_FORMULA_VALUE))
+        ))
+        .build();
+
+    /**
+     * 利维坦鳃咆哮半径公式：6 + 利维坦器官数 × 0.5 + (水中 ? 2 : 0)
+     */
+    private static final FormulaValue LEVIATHAN_GILL_RADIUS_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int count = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.LEVIATHAN);
+            boolean inWater = context.entity().isInWater();
+            return Component.literal(TooltipUtil.formatAttributeValue(
+                6.0F + count * 0.5F + (inWater ? 2.0F : 0.0F)
+            ));
+        },
+        context -> {
+            int count = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.LEVIATHAN);
+            return Component.empty()
+                .append(Component.literal("6"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.LEVIATHAN))
+                .append(Component.literal(String.valueOf(count)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("0.5"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(Component.literal("("))
+                .append(Component.translatable("formula.who_am_i_core.in_water"))
+                .append(TooltipUtil.formulaOperator("?"))
+                .append(Component.literal("2"))
+                .append(TooltipUtil.formulaOperator(":"))
+                .append(Component.literal("0)"));
+        }
+    );
+
+    /**
+     * 利维坦鳃咆哮伤害公式：(6 + 利维坦器官数 × 1.5) × (水中 ? 1.5 : 1)
+     */
+    private static final FormulaValue LEVIATHAN_GILL_DAMAGE_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int count = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.LEVIATHAN);
+            boolean inWater = context.entity().isInWater();
+            return Component.literal(TooltipUtil.formatAttributeValue(
+                (6.0F + count * 1.5F) * (inWater ? 1.5F : 1.0F)
+            ));
+        },
+        context -> {
+            int count = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.LEVIATHAN);
+            return Component.empty()
+                .append(Component.literal("(6"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.LEVIATHAN))
+                .append(Component.literal(String.valueOf(count)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("1.5)"))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("("))
+                .append(Component.translatable("formula.who_am_i_core.in_water"))
+                .append(TooltipUtil.formulaOperator("?"))
+                .append(Component.literal("1.5"))
+                .append(TooltipUtil.formulaOperator(":"))
+                .append(Component.literal("1)"));
+        }
+    );
+
+    /**
+     * 利维坦鳃 — 咆哮范围与伤害随利维坦器官数量缩放，水中释放时获得加成
+     */
+    public static final OrganTooltipConsumer LEVIATHAN_GILL_TOOLTIP = OrganTooltip.builder()
+        .dynamicActiveSkill(slotContext -> DynamicValues.split(
+            Map.of(0, List.of(LEVIATHAN_GILL_RADIUS_FORMULA_VALUE, LEVIATHAN_GILL_DAMAGE_FORMULA_VALUE)),
+            Map.of(1, List.of(LEVIATHAN_GILL_RADIUS_FORMULA_VALUE, LEVIATHAN_GILL_DAMAGE_FORMULA_VALUE))
         ))
         .build();
 }

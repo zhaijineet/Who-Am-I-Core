@@ -3,8 +3,8 @@ package net.zhaiji.who_am_i_core.manager;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.zhaiji.chestcavitybeyond.ChestCavityBeyond;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
-import net.zhaiji.who_am_i_core.WhoAmICore;
 
 public class WAICItemTagManager {
     // 魔法
@@ -53,12 +53,14 @@ public class WAICItemTagManager {
     public static final TagKey<Item> SCYLLA = register("scylla", 0xFF2266AA, 5);
     // 遗魂
     public static final TagKey<Item> REMNANT = register("remnant", 0xFFD9B366, 6);
+    // 利维坦
+    public static final TagKey<Item> LEVIATHAN = register("leviathan", 0xFF6622AA, 7);
 
     /**
-     * 创建 WAIC namespace 的 TagKey 并注册到 CCB 的 ItemTagManager
+     * 创建 CCB namespace 的 TagKey 并注册到 CCB 的 ItemTagManager
      */
     private static TagKey<Item> register(String name, int color, int priority) {
-        TagKey<Item> tagKey = ItemTags.create(WhoAmICore.of(name));
+        TagKey<Item> tagKey = ItemTags.create(ChestCavityBeyond.of(name));
         ItemTagManager.register(tagKey, color, priority);
         return tagKey;
     }

@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.util;
 
+import com.github.L_Ender.cataclysm.client.particle.Options.RoarParticleOptions;
 import com.github.L_Ender.cataclysm.entity.effect.Sandstorm_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
@@ -14,10 +15,12 @@ import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -47,6 +50,65 @@ import net.zhaiji.who_am_i_core.task.MechanicalStarTask;
 
 
 public class CataclysmOrganUtil {
+    // ==================== 利维坦器官 ====================
+
+    /**
+     * 利维坦鳃 — 深海怒吼
+     * 以自身为中心引发震荡，AoE伤害+黑暗+击退，水中释放时获得加成
+     */
+    public static boolean leviathanGill(ChestCavitySlotContext context) {
+        LivingEntity entity = context.entity();
+        Level level = entity.level();
+
+        int count = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.LEVIATHAN);
+        boolean inWater = entity.isInWater();
+        float radius = 6.0F + count * 0.5F + (inWater ? 2.0F : 0.0F);
+        float damage = (6.0F + count * 1.5F) * (inWater ? 1.5F : 1.0F);
+
+        ScreenShake_Entity.ScreenShake(level, entity.position(), 30, 0.1F, 60, 10);
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(
+                new RoarParticleOptions(60, 102, 26, 204, 0.9F, 1F, 1.2F, 13F),
+                entity.getX(),
+                entity.getEyeY(),
+                entity.getZ(),
+                1,
+                0,
+                0,
+                0,
+                0
+            );
+        }
+        level.playSound(
+            null,
+            entity,
+            ModSounds.LEVIATHAN_ROAR.get(),
+            SoundSource.PLAYERS,
+            3F,
+            1F
+        );
+
+        // AoE 伤害 + 黑暗 + 击退
+        DamageSource damageSource = level.damageSources().mobAttack(entity);
+        AABB aabb = entity.getBoundingBox().inflate(radius);
+        for (LivingEntity target : level.getEntitiesOfClass(
+            LivingEntity.class,
+            aabb,
+            target -> EntityRelationUtil.shouldAoeDamage(entity, target)
+        )) {
+            if (target.hurt(damageSource, damage)) {
+                target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 100));
+                double dx = target.getX() - entity.getX();
+                double dz = target.getZ() - entity.getZ();
+                double dist = Math.max(dx * dx + dz * dz, 0.001D);
+                target.push(dx / dist * 5.0D, 0.3D, dz / dist * 5.0D);
+                target.hurtMarked = true;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * 涛浪提灯攻击回调
      * 1. 消耗所有当前粘液，增加等额伤害

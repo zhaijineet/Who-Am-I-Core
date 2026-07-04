@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(MalkuthCannonEntity.class)
-public class MalkuthCannonEntityMixin {
+public abstract class MalkuthCannonEntityMixin {
 
     /**
      * 允许拥有对应免疫心脏的玩家使用火炮。

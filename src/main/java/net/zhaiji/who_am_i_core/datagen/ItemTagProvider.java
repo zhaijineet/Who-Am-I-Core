@@ -1068,6 +1068,15 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.BONE).add(CataclysmOrgans.LEVIATHAN_SPINE.get());
         tag(ItemTagManager.RIB).add(CataclysmOrgans.LEVIATHAN_FISHBONE.get());
         tag(ItemTagManager.BONE).add(CataclysmOrgans.LEVIATHAN_FISHBONE.get());
+        tag(WAICItemTagManager.LEVIATHAN).add(
+            CataclysmOrgans.LEVIATHAN_HEART.get(),
+            CataclysmOrgans.LEVIATHAN_MUSCLE.get(),
+            CataclysmOrgans.LEVIATHAN_INTESTINE.get(),
+            CataclysmOrgans.LEVIATHAN_STOMACH.get(),
+            CataclysmOrgans.LEVIATHAN_GILL.get(),
+            CataclysmOrgans.LEVIATHAN_SPINE.get(),
+            CataclysmOrgans.LEVIATHAN_FISHBONE.get()
+        );
 
         // 魂尸系列
         tag(ItemTagManager.ORGANS).add(
