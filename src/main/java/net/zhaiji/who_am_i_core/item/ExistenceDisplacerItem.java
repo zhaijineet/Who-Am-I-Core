@@ -34,15 +34,15 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * 躯体交换器：长按交换玩家与目标实体的胸腔器官
+ * 存在置换器：长按交换玩家与目标实体的胸腔器官
  */
-public class BodySwapperItem extends Item {
+public class ExistenceDisplacerItem extends Item {
     /**
      * 玩家 UUID 到交换目标 UUID 的临时缓存，仅在 use 与 finishUsingItem/releaseUsing 之间持有
      */
     private static final Map<UUID, UUID> SWAP_TARGETS = new HashMap<>();
 
-    public BodySwapperItem(Properties properties) {
+    public ExistenceDisplacerItem(Properties properties) {
         super(properties);
     }
 
@@ -50,7 +50,7 @@ public class BodySwapperItem extends Item {
      * 判断是否应取消实体交互
      */
     public static boolean shouldCancelEntityInteract(Player player, InteractionHand hand, Entity target) {
-        return player.getItemInHand(hand).getItem() instanceof BodySwapperItem && TargetResolver.resolve(target) instanceof LivingEntity;
+        return player.getItemInHand(hand).getItem() instanceof ExistenceDisplacerItem && TargetResolver.resolve(target) instanceof LivingEntity;
     }
 
     /**
@@ -80,7 +80,7 @@ public class BodySwapperItem extends Item {
             if (!player.level().isClientSide()) {
                 player.displayClientMessage(
                     Component.translatable(
-                        "message.who_am_i_core.body_swapper.hostile_health_too_high",
+                        "message.who_am_i_core.existence_displacer.hostile_health_too_high",
                         target.getDisplayName()
                     ), true
                 );
@@ -190,7 +190,7 @@ public class BodySwapperItem extends Item {
         if (storedTargetUUID == null) return stack;
         LivingEntity currentTarget = findValidTarget(player, player.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE) * 1.5);
         if (currentTarget == null || !currentTarget.getUUID().equals(storedTargetUUID)) {
-            player.displayClientMessage(Component.translatable("message.who_am_i_core.body_swapper.target_lost"), true);
+            player.displayClientMessage(Component.translatable("message.who_am_i_core.existence_displacer.target_lost"), true);
             return stack;
         }
         if (!checkHealthLimit(player, currentTarget)) return stack;
@@ -221,8 +221,8 @@ public class BodySwapperItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("tooltip.who_am_i_core.body_swapper.0").withStyle(ChatFormatting.GOLD));
-        tooltipComponents.add(Component.translatable("tooltip.who_am_i_core.body_swapper.1").withStyle(ChatFormatting.GOLD));
-        tooltipComponents.add(Component.translatable("tooltip.who_am_i_core.body_swapper.2").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.add(Component.translatable("tooltip.who_am_i_core.existence_displacer.0").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.add(Component.translatable("tooltip.who_am_i_core.existence_displacer.1").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.add(Component.translatable("tooltip.who_am_i_core.existence_displacer.2").withStyle(ChatFormatting.GOLD));
     }
 }

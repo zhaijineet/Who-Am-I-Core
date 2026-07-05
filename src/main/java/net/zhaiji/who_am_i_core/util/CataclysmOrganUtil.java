@@ -53,7 +53,7 @@ public class CataclysmOrganUtil {
     // ==================== 利维坦器官 ====================
 
     /**
-     * 利维坦鳃 — 深海怒吼
+     * 利维坦鳃
      * 以自身为中心引发震荡，AoE伤害+黑暗+击退，水中释放时获得加成
      */
     public static boolean leviathanGill(ChestCavitySlotContext context) {
@@ -686,7 +686,7 @@ public class CataclysmOrganUtil {
     // ==================== 远古遗魂器官 ====================
 
     /**
-     * 沙釉心脏 — 沙暴怒吼
+     * 沙釉心脏
      * 召唤3个沙暴龙卷风环绕自身，持续 300 + 遗魂器官数 × 100 tick
      */
     public static boolean sandGlazeHeart(ChestCavitySlotContext context) {
@@ -717,7 +717,7 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 沙釉心脏 — 诅咒榨取
+     * 沙釉心脏
      * 攻击持有沙漠诅咒的目标时，额外造成原伤害 ×（30% + 遗魂器官数 × 5%）的伤害
      */
     public static void sandGlazeHeartAttack(
@@ -741,7 +741,7 @@ public class CataclysmOrganUtil {
     // ==================== 紫水晶巨蟹器官 ====================
 
     /**
-     * 苔化紫水晶 — 苔晶蕴防
+     * 苔化紫水晶
      * 每种不同的魔法器官提供 0.5 点防御
      */
     public static void mossyAmethystModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
@@ -750,8 +750,8 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 花岩核心 — 晶簇环爆
-     * 以自身为中心环形发射 16 发紫水晶簇投射物（参考 Bloom_Stone_Pauldrons，弹幕密度加倍）
+     * 花岩核心
+     * 以自身为中心环形发射 16 发紫水晶簇投射物
      */
     public static boolean bloomStoneCore(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();

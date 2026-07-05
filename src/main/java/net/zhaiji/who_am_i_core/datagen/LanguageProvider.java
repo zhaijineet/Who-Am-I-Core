@@ -53,7 +53,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "Ice Dragon Blood Preparation");
         addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "Lightning Dragon Blood Preparation");
         addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "Dragon Blood Preparation");
-        addItem(WAICItem.BODY_SWAPPER, "Body Swapper");
+        addItem(WAICItem.EXISTENCE_DISPLACER, "Existence Displacer");
 
         addAttribute(WAICAttribute.BLOCK, "Block");
         addAttribute(WAICAttribute.COUNTER_ATTACK, "Counter Attack");
@@ -240,11 +240,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("tooltip.who_am_i_core.dragon_blood.group_draw.0", "Right-click to inject all dragon blood preparation, expand chest cavity to maximum");
         add("tooltip.who_am_i_core.dragon_blood.group_draw.1", "Shift-right-click to inject into other creatures");
 
-        add("message.who_am_i_core.body_swapper.hostile_health_too_high", "%s's health is too high to swap");
-        add("message.who_am_i_core.body_swapper.target_lost", "Target lost");
-        add("tooltip.who_am_i_core.body_swapper.0", "Hold right-click on a creature in sight to swap chest cavity organs");
-        add("tooltip.who_am_i_core.body_swapper.1", "Hostile creatures and players require health below 30%, tamed and other creatures have no limit");
-        add("tooltip.who_am_i_core.body_swapper.2", "Both sides gain Darkness, Weakness, and Nausea for 3 seconds");
+        add("message.who_am_i_core.existence_displacer.hostile_health_too_high", "%s's health is too high to swap");
+        add("message.who_am_i_core.existence_displacer.target_lost", "Target lost");
+        add("tooltip.who_am_i_core.existence_displacer.0", "Hold right-click on a creature in sight to swap chest cavity organs");
+        add("tooltip.who_am_i_core.existence_displacer.1", "Hostile creatures and players require health below 30%, tamed and other creatures have no limit");
+        add("tooltip.who_am_i_core.existence_displacer.2", "Both sides gain Darkness, Weakness, and Nausea for 3 seconds");
     }
 
     public void Chinese() {
@@ -255,7 +255,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICItem.ICE_DRAGON_BLOOD_PREPARATION, "冰龙血药剂");
         addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "电龙血药剂");
         addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "龙血药剂组");
-        addItem(WAICItem.BODY_SWAPPER, "躯体交换器");
+        addItem(WAICItem.EXISTENCE_DISPLACER, "存在置换器");
 
         addAttribute(WAICAttribute.BLOCK, "格挡");
         addAttribute(WAICAttribute.COUNTER_ATTACK, "反击");
@@ -442,11 +442,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("tooltip.who_am_i_core.dragon_blood.group_draw.0", "右键注射所有龙血药剂，胸腔直接扩至最大");
         add("tooltip.who_am_i_core.dragon_blood.group_draw.1", "潜行右键可对其他生物注射");
 
-        add("message.who_am_i_core.body_swapper.hostile_health_too_high", "%s的血量过高，无法交换");
-        add("message.who_am_i_core.body_swapper.target_lost", "目标已丢失");
-        add("tooltip.who_am_i_core.body_swapper.0", "长按右键对视线内的生物交换胸腔内的器官");
-        add("tooltip.who_am_i_core.body_swapper.1", "敌对生物与玩家需血量低于30%，宠物与其他生物无限制");
-        add("tooltip.who_am_i_core.body_swapper.2", "交换后双方获得3秒黑暗、虚弱、反胃效果");
+        add("message.who_am_i_core.existence_displacer.hostile_health_too_high", "%s的血量过高，无法交换");
+        add("message.who_am_i_core.existence_displacer.target_lost", "目标已丢失");
+        add("tooltip.who_am_i_core.existence_displacer.0", "长按右键对视线内的生物交换胸腔内的器官");
+        add("tooltip.who_am_i_core.existence_displacer.1", "敌对生物与玩家需血量低于30%，宠物与其他生物无限制");
+        add("tooltip.who_am_i_core.existence_displacer.2", "交换后双方获得3秒黑暗、虚弱、反胃效果");
     }
 
     // ==================== Mowzie's Mobs 特殊器官 ====================

@@ -6,7 +6,7 @@ import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.zhaiji.chestcavitybeyond.item.ChestOpenerItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
-import net.zhaiji.who_am_i_core.item.BodySwapperItem;
+import net.zhaiji.who_am_i_core.item.ExistenceDisplacerItem;
 import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
@@ -65,10 +65,10 @@ public class WAICItem {
         )
     );
 
-    // 躯体交换器
-    public static final Supplier<Item> BODY_SWAPPER = ITEM.register(
-        "body_swapper",
-        () -> new BodySwapperItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON))
+    // 存在置换器
+    public static final Supplier<Item> EXISTENCE_DISPLACER = ITEM.register(
+        "existence_displacer",
+        () -> new ExistenceDisplacerItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON))
     );
 
     static {

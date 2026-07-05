@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "anvilcraft:cursed_gold_ingot"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "G G",
+    "GNG",
+    "G G"
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:existence_displacer"
+  }
+}

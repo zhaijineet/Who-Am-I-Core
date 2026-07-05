@@ -77,6 +77,16 @@ public class WAICRecipeProvider extends RecipeProvider {
             .unlockedBy(getHasName(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()), has(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()))
             .save(recipeOutput);
 
+        // 存在置换器：左右诅咒金锭，中间下界之星
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, WAICItem.EXISTENCE_DISPLACER.get())
+            .pattern("G G")
+            .pattern("GNG")
+            .pattern("G G")
+            .define('G', ModItems.CURSED_GOLD_INGOT)
+            .define('N', Items.NETHER_STAR)
+            .unlockedBy(getHasName(Items.NETHER_STAR), has(Items.NETHER_STAR))
+            .save(recipeOutput);
+
         nineHellOrganRecipes(recipeOutput);
     }
 

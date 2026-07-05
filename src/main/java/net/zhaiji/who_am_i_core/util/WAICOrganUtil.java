@@ -271,7 +271,6 @@ public class WAICOrganUtil {
             ItemStack organ = data.getStackInSlot(i);
             if (organ.is(WAICOrgans.PALETTE.get())) {
                 BundleContents contents = organ.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-                // 创建可变副本并找到染料索引
                 int targetIndex = -1;
                 for (int index = 0; index < contents.size(); index++) {
                     if (contents.getItemUnsafe(index).is(targetDye)) {
@@ -280,7 +279,17 @@ public class WAICOrganUtil {
                     }
                 }
                 if (targetIndex >= 0) {
-                    contents.getItemUnsafe(targetIndex).consume(1, entity);
+                    // BundleContents 不可变，必须构建新列表写回以更新 weight 并剔除 EMPTY 堆叠，否则序列化会抛异常
+                    List<ItemStack> newItems = new ArrayList<>();
+                    for (int index = 0; index < contents.size(); index++) {
+                        ItemStack stack = contents.getItemUnsafe(index).copy();
+                        if (index == targetIndex) {
+                            stack.consume(1, entity);
+                            if (stack.isEmpty()) continue;
+                        }
+                        newItems.add(stack);
+                    }
+                    organ.set(DataComponents.BUNDLE_CONTENTS, new BundleContents(newItems));
                     return true;
                 }
             }

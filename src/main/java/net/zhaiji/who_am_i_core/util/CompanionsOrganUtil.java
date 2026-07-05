@@ -293,15 +293,19 @@ public class CompanionsOrganUtil {
 
         int actualHeal = woolToUse * healPerWool;
 
-        // 扣除羊毛
-        for (int i = 0; i < contents.size() && woolToUse > 0; i++) {
-            ItemStack stack = contents.getItemUnsafe(i);
-            if (stack.is(ItemTags.WOOL)) {
+        // 扣除羊毛：BundleContents 不可变，必须构建新列表写回以更新 weight 并剔除 EMPTY 堆叠，否则序列化会抛异常
+        List<ItemStack> newItems = new ArrayList<>();
+        for (int i = 0; i < contents.size(); i++) {
+            ItemStack stack = contents.getItemUnsafe(i).copy();
+            if (stack.is(ItemTags.WOOL) && woolToUse > 0) {
                 int consume = Math.min(woolToUse, stack.getCount());
                 stack.consume(consume, entity);
                 woolToUse -= consume;
+                if (stack.isEmpty()) continue;
             }
+            newItems.add(stack);
         }
+        context.stack().set(DataComponents.BUNDLE_CONTENTS, new BundleContents(newItems));
 
         entity.heal(actualHeal);
         return true;
