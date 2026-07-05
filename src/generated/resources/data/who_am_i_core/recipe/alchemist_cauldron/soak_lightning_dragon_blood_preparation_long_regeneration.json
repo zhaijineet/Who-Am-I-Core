@@ -1,0 +1,20 @@
+{
+  "type": "irons_spellbooks:alchemist_cauldron_brew",
+  "base_fluid": {
+    "amount": 1000,
+    "components": {
+      "irons_spellbooks:potion_bottle_type": "regular",
+      "minecraft:potion_contents": {
+        "potion": "minecraft:long_regeneration"
+      }
+    },
+    "id": "irons_spellbooks:potion"
+  },
+  "byproduct": {
+    "id": "who_am_i_core:lightning_dragon_blood_preparation"
+  },
+  "input": {
+    "item": "iceandfire:lightning_dragon_blood"
+  },
+  "results": []
+}

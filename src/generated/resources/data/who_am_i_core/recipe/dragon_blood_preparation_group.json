@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "who_am_i_core:fire_dragon_blood_preparation"
+    },
+    {
+      "item": "who_am_i_core:ice_dragon_blood_preparation"
+    },
+    {
+      "item": "who_am_i_core:lightning_dragon_blood_preparation"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:dragon_blood_preparation_group"
+  }
+}

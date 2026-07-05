@@ -1,13 +1,17 @@
 package net.zhaiji.who_am_i_core.datagen.recipe;
 
 import com.github.tartaricacid.touhoulittlemaid.init.InitItems;
+import com.iafenvoy.iceandfire.registry.IafItems;
 import dev.dubhe.anvilcraft.init.block.ModFluids;
 import dev.dubhe.anvilcraft.init.item.ModItems;
+import io.redspace.ironsspellbooks.fluids.PotionFluid;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.BrewAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.FillAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.registries.FluidRegistry;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -15,11 +19,16 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.zhaiji.chestcavitybeyond.register.InitItem;
+import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICItem;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class IronSpellRecipeProvider extends RecipeProvider {
@@ -38,6 +47,26 @@ public class IronSpellRecipeProvider extends RecipeProvider {
         emeraldSkullRecipes(recipeOutput);
         woodenOrganRecipes(recipeOutput);
         brewCrimson(recipeOutput, InitItems.GARAGE_KIT.get(), WAICOrgans.FLESH_IDOL.get());
+        dragonBloodPreparationRecipes(recipeOutput);
+    }
+
+    // 龙血药剂：再生药水浸泡 IaF 龙血，三变体 × 三龙血 = 9 个浸泡配方
+    private void dragonBloodPreparationRecipes(RecipeOutput output) {
+        for (Holder<Potion> potion : List.of(Potions.REGENERATION, Potions.LONG_REGENERATION, Potions.STRONG_REGENERATION)) {
+            brewDragonBlood(output, potion, IafItems.FIRE_DRAGON_BLOOD.get(), WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get());
+            brewDragonBlood(output, potion, IafItems.ICE_DRAGON_BLOOD.get(), WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get());
+            brewDragonBlood(output, potion, IafItems.LIGHTNING_DRAGON_BLOOD.get(), WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get());
+        }
+    }
+
+    private void brewDragonBlood(RecipeOutput output, Holder<Potion> potion, Item reagent, Item result) {
+        String resultName = BuiltInRegistries.ITEM.getKey(result).getPath();
+        String potionName = BuiltInRegistries.POTION.getKey(potion.value()).getPath();
+        BrewAlchemistCauldronRecipe.builder()
+            .withInput(PotionFluid.of(1000, potion, PotionFluid.BottleType.REGULAR))
+            .withReagent(reagent)
+            .withByproduct(result)
+            .save(output, WhoAmICore.of("alchemist_cauldron/soak_" + resultName + "_" + potionName));
     }
 
     // 木质器官：器官 + 250mb 橡肤药水 → 木质器官
@@ -119,10 +148,10 @@ public class IronSpellRecipeProvider extends RecipeProvider {
     /**
      * 炼金锅浸泡配方：器官在血液中浸泡转化为猩红器官
      */
-    private void brewCrimson(RecipeOutput output, Item base, Item result) {
+    private void brewCrimson(RecipeOutput output, Item reagent, Item result) {
         BrewAlchemistCauldronRecipe.builder()
             .withInput(FluidRegistry.BLOOD, 1000)
-            .withReagent(base)
+            .withReagent(reagent)
             .withByproduct(result)
             .saveSoak(output);
     }
@@ -163,10 +192,10 @@ public class IronSpellRecipeProvider extends RecipeProvider {
     /**
      * 炼金锅浸泡配方：器官在橡肤药水中浸泡转化为木质器官
      */
-    private void brewOakskin(RecipeOutput output, Item base, Item result) {
+    private void brewOakskin(RecipeOutput output, Item reagent, Item result) {
         BrewAlchemistCauldronRecipe.builder()
             .withInput(FluidRegistry.OAKSKIN_ELIXIR_FLUID, 250)
-            .withReagent(base)
+            .withReagent(reagent)
             .withByproduct(result)
             .saveSoak(output);
     }

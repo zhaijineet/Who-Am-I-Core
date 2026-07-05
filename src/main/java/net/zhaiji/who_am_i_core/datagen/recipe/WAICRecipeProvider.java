@@ -18,6 +18,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitItem;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICItem;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -66,6 +67,14 @@ public class WAICRecipeProvider extends RecipeProvider {
             .requires(ItemTagManager.BONE)
             .requires(IafItems.ECTOPLASM.get())
             .unlockedBy(getHasName(IafItems.ECTOPLASM.get()), has(IafItems.ECTOPLASM.get()))
+            .save(recipeOutput);
+
+        // 龙血药剂组：火 + 冰 + 电 三种龙血药剂无序合成
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, WAICItem.DRAGON_BLOOD_PREPARATION_GROUP.get())
+            .requires(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get())
+            .requires(WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get())
+            .requires(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get())
+            .unlockedBy(getHasName(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()), has(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()))
             .save(recipeOutput);
 
         nineHellOrganRecipes(recipeOutput);
