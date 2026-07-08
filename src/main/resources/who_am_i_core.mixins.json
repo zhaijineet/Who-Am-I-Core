@@ -10,6 +10,7 @@
     "ChesedMiniRayMixin",
     "ChestCavityDataMixin",
     "ChestCavityDataSyncHandlerMixin",
+    "DamageUtilMixin",
     "DisappearAbilityMixin",
     "DragonBaseEntityMixin",
     "EnchantedCountIncreaseFunctionMixin",

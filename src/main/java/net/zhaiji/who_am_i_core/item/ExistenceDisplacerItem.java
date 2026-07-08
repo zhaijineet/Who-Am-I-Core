@@ -25,6 +25,7 @@ import net.zhaiji.chestcavitybeyond.api.ChestCavitySize;
 import net.zhaiji.chestcavitybeyond.api.TargetResolver;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.who_am_i_core.config.WhoAmIClientConfig;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,9 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * 存在置换器：长按交换玩家与目标实体的胸腔器官
- */
 public class ExistenceDisplacerItem extends Item {
     /**
      * 玩家 UUID 到交换目标 UUID 的临时缓存，仅在 use 与 finishUsingItem/releaseUsing 之间持有
@@ -159,7 +157,7 @@ public class ExistenceDisplacerItem extends Item {
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (level.isClientSide()) {
-            for (int i = 0; i < 2887; i++) {
+            for (int i = 0; i < WhoAmIClientConfig.existenceDisplacerParticleCount; i++) {
                 level.addParticle(
                     ParticleTypes.ENCHANT,
                     livingEntity.getX() + (level.random.nextDouble() - 0.5) * 10.0,

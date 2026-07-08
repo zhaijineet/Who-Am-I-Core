@@ -67,7 +67,7 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
 
     // 诅咒金器官
     private void cursedGoldOrganRecipes(RecipeOutput output) {
-        Ingredient template = Ingredient.of(ModItems.EMBER_METAL_UPGRADE_SMITHING_TEMPLATE);
+        Ingredient template = Ingredient.of(ModItems.ROYAL_STEEL_UPGRADE_SMITHING_TEMPLATE);
         Ingredient addition = Ingredient.of(ModItems.CURSED_GOLD_INGOT);
         Criterion<?> criterion = has(ModItems.CURSED_GOLD_INGOT);
 
