@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_active_bluff_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "who_am_i_core:active_bluff_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:bluff_rod"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_active_bluff_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:bluff_rod"
+    ]
+  }
+}

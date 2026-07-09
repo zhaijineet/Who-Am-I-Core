@@ -43,8 +43,7 @@ public abstract class VillagerMixin extends AbstractVillager {
      * 判断交易玩家是否拥有欺诈器官，是则返回九地狱数量，否则返回 0
      */
     @Unique
-    public int whoAmICore$getFraudCount() {
-        Player player = getTradingPlayer();
+    public int whoAmICore$getFraudCount(Player player) {
         if (player == null) return 0;
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (!data.hasOrgan(WAICOrgans.FRAUD.get())) return 0;
@@ -62,7 +61,7 @@ public abstract class VillagerMixin extends AbstractVillager {
         )
     )
     public int whoAmICore$rewardTradeXp$redirect(MerchantOffer offer) {
-        int fraudCount = whoAmICore$getFraudCount();
+        int fraudCount = whoAmICore$getFraudCount(getTradingPlayer());
         if (fraudCount > 0) {
             return offer.getXp() * 10;
         }
@@ -81,7 +80,7 @@ public abstract class VillagerMixin extends AbstractVillager {
         index = 4
     )
     public int whoAmICore$rewardTradeXp$modifyArg(int value) {
-        int fraudCount = whoAmICore$getFraudCount();
+        int fraudCount = whoAmICore$getFraudCount(getTradingPlayer());
         if (fraudCount > 0) {
             return value * 10;
         }
@@ -113,7 +112,7 @@ public abstract class VillagerMixin extends AbstractVillager {
         at = @At("RETURN")
     )
     public void whoAmICore$updateSpecialPrices(Player player, CallbackInfo ci) {
-        int n = whoAmICore$getFraudCount();
+        int n = whoAmICore$getFraudCount(player);
         if (n < 2) return;
         double discountRate = 0.3 * (n - 1);
         for (MerchantOffer offer : getOffers()) {

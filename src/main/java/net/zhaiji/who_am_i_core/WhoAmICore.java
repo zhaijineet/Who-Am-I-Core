@@ -14,6 +14,7 @@ import net.zhaiji.who_am_i_core.register.WAICCreativeModeTab;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICEntity;
 import net.zhaiji.who_am_i_core.register.WAICItem;
+import net.zhaiji.who_am_i_core.register.WAICRecipe;
 
 @Mod(WhoAmICore.MOD_ID)
 public class WhoAmICore {
@@ -30,6 +31,7 @@ public class WhoAmICore {
         WAICEntity.ENTITY.register(modEventBus);
         WAICEffect.EFFECT.register(modEventBus);
         WAICAttachment.ATTACHMENT_TYPE.register(modEventBus);
+        WAICRecipe.RECIPE_SERIALIZER.register(modEventBus);
 
         // 注册游戏事件处理器到 NeoForge 事件总线
         CommonEventManager.init(modEventBus, NeoForge.EVENT_BUS);

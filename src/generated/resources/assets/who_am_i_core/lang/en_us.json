@@ -465,6 +465,7 @@
   "organ.who_am_i_core.cloth_teddy_bear.active_skill.1": "Each wool restores %s HP",
   "organ.who_am_i_core.cloth_teddy_bear.active_skill.simple.0": "Consumes wool to restore %s HP",
   "organ.who_am_i_core.cloth_teddy_bear.description.0": "A patchwork teddy bear stitched from cloth and thread",
+  "organ.who_am_i_core.cloth_teddy_bear.description.1": "Use on a block to release a wild teddy",
   "organ.who_am_i_core.cloth_teddy_bear.passive_effect.0": "When chest cavity closes, wool items in the chest are converted into random cloth organs",
   "organ.who_am_i_core.compute_chip.passive_effect.0": "Each additional mechanical organ grants bonus nerves",
   "organ.who_am_i_core.compute_chip.passive_effect.1": "Bonus equals the square root of mechanical organ count times 2",

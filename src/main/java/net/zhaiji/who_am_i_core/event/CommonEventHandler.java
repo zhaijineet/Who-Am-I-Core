@@ -651,9 +651,10 @@ public class CommonEventHandler {
 
         Level level = event.getLevel();
         if (level.isClientSide()) return;
-        // 布织泰迪熊：检查目标实体是否是未认主的泰迪
-        if (!(event.getTarget() instanceof TeddyEntity teddy) || teddy.isTame()) return;
+        // 布织泰迪熊：未认主或主人是自己的泰迪可剪回器官
+        if (!(event.getTarget() instanceof TeddyEntity teddy)) return;
         Player player = event.getEntity();
+        if (teddy.isTame() && !teddy.isOwnedBy(player)) return;
         InteractionHand hand = event.getHand();
         ItemStack heldItem = player.getItemInHand(hand);
         if (!heldItem.is(Items.SHEARS)) return;

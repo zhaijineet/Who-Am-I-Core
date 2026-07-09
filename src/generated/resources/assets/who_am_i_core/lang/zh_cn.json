@@ -465,6 +465,7 @@
   "organ.who_am_i_core.cloth_teddy_bear.active_skill.1": "每个羊毛回复%s点生命值",
   "organ.who_am_i_core.cloth_teddy_bear.active_skill.simple.0": "消耗羊毛回复%s点生命值",
   "organ.who_am_i_core.cloth_teddy_bear.description.0": "用布料与线缝制的拼布泰迪熊",
+  "organ.who_am_i_core.cloth_teddy_bear.description.1": "右键方块可放出一只野生泰迪",
   "organ.who_am_i_core.cloth_teddy_bear.passive_effect.0": "胸腔关闭时将羊毛转换为随机布织器官",
   "organ.who_am_i_core.compute_chip.passive_effect.0": "每增加一个机械器官获得额外神经",
   "organ.who_am_i_core.compute_chip.passive_effect.1": "额外神经等于机械器官数乘2的平方根",

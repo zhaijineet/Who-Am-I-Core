@@ -148,10 +148,23 @@ public class MowziesMobOrgans {
             .build()
     );
 
+    // 泥峭核心
+    public static final Supplier<Item> BLUFF_CORE = WAICItem.ITEM.register(
+        "bluff_core",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(InitAttribute.NERVES, 0.5)
+            .skill(WAICPlayerSkillUtil::bluffCore)
+            .goalSkill(WAICGoalSkillUtil.bluffCoreGoalSkill())
+            .build()
+    );
+
     // 泥峭铭文板
     public static final Supplier<Item> BLUFF_TABLET = WAICItem.ITEM.register(
         "bluff_tablet",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.25)
             .build()
     );
 
@@ -159,15 +172,7 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> ACTIVE_BLUFF_ROD = WAICItem.ITEM.register(
         "active_bluff_rod",
         () -> Organ.builder()
-            .build()
-    );
-
-    // 泥峭核心
-    public static final Supplier<Item> BLUFF_CORE = WAICItem.ITEM.register(
-        "bluff_core",
-        () -> Organ.builder()
-            .skill(WAICPlayerSkillUtil::bluffCore)
-            .goalSkill(WAICGoalSkillUtil.bluffCoreGoalSkill())
+            .addValueAttribute(InitAttribute.STRENGTH, 2)
             .build()
     );
 

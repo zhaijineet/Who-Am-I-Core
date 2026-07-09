@@ -1317,7 +1317,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void clothOrgansEN() {
         addItem(CompanionsOrgans.CLOTH_TEDDY_BEAR, "Cloth Teddy Bear");
-        addOrganDescription(CompanionsOrgans.CLOTH_TEDDY_BEAR, "A patchwork teddy bear stitched from cloth and thread");
+        addOrganDescription(
+            CompanionsOrgans.CLOTH_TEDDY_BEAR,
+            "A patchwork teddy bear stitched from cloth and thread",
+            "Use on a block to release a wild teddy"
+        );
         addOrganPassiveEffect(
             CompanionsOrgans.CLOTH_TEDDY_BEAR,
             "When chest cavity closes, wool items in the chest are converted into random cloth organs"
@@ -1344,7 +1348,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void clothOrgansZH() {
         addItem(CompanionsOrgans.CLOTH_TEDDY_BEAR, "布织泰迪熊");
-        addOrganDescription(CompanionsOrgans.CLOTH_TEDDY_BEAR, "用布料与线缝制的拼布泰迪熊");
+        addOrganDescription(
+            CompanionsOrgans.CLOTH_TEDDY_BEAR,
+            "用布料与线缝制的拼布泰迪熊",
+            "右键方块可放出一只野生泰迪"
+        );
         addOrganPassiveEffect(
             CompanionsOrgans.CLOTH_TEDDY_BEAR,
             "胸腔关闭时将羊毛转换为随机布织器官"

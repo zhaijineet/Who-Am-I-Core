@@ -65,10 +65,6 @@ public class MowziesMobChestCavityTypeManager {
         .setThirdRow(3, MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
         .setThirdRow(4, MowziesMobOrgans.BLUFF_TABLET.get())
 
-        .addValueBonuses(MowziesMobOrgans.BLUFF_CORE.get(), Map.of(
-            InitAttribute.HEALTH, 1.0,
-            InitAttribute.NERVES, 1.0
-        ))
         .addValueBonuses(MowziesMobOrgans.BLUFF_TABLET.get(), Map.of(
             InitAttribute.BREATH_CAPACITY, 1.0,
             InitAttribute.BREATH_RECOVERY, 1.0
