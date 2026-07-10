@@ -20,7 +20,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_RIB = WAICItem.ITEM.register(
         "royal_steel_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2.0)
+            .addValueAttribute(InitAttribute.DEFENSE, 3.0)
             .build()
     );
 
@@ -28,8 +28,8 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_MUSCLE = WAICItem.ITEM.register(
         "royal_steel_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 2)
-            .addValueAttribute(InitAttribute.SPEED, 2)
+            .addValueAttribute(InitAttribute.STRENGTH, 3)
+            .addValueAttribute(InitAttribute.SPEED, 3)
             .build()
     );
 
@@ -37,8 +37,8 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_SPINE = WAICItem.ITEM.register(
         "royal_steel_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 3)
+            .addValueAttribute(InitAttribute.DEFENSE, 3)
             .build()
     );
 
@@ -46,7 +46,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_APPENDIX = WAICItem.ITEM.register(
         "royal_steel_appendix",
         () -> Organ.builder()
-            .addValueAttribute(Attributes.LUCK, 2)
+            .addValueAttribute(Attributes.LUCK, 3)
             .build()
     );
 
@@ -54,7 +54,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_HEART = WAICItem.ITEM.register(
         "royal_steel_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 3)
             .build()
     );
 
@@ -62,9 +62,9 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_LUNG = WAICItem.ITEM.register(
         "royal_steel_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
-            .addValueAttribute(InitAttribute.ENDURANCE, 2)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 3)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
+            .addValueAttribute(InitAttribute.ENDURANCE, 3)
             .build()
     );
 
@@ -72,7 +72,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_STOMACH = WAICItem.ITEM.register(
         "royal_steel_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 3)
             .build()
     );
 
@@ -80,7 +80,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_INTESTINE = WAICItem.ITEM.register(
         "royal_steel_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.NUTRITION, 3)
             .build()
     );
 
@@ -88,7 +88,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_KIDNEY = WAICItem.ITEM.register(
         "royal_steel_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 2)
+            .addValueAttribute(InitAttribute.FILTRATION, 3)
             .build()
     );
 
@@ -96,7 +96,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_SPLEEN = WAICItem.ITEM.register(
         "royal_steel_spleen",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 2)
+            .addValueAttribute(InitAttribute.METABOLISM, 3)
             .build()
     );
 
@@ -104,7 +104,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> ROYAL_STEEL_LIVER = WAICItem.ITEM.register(
         "royal_steel_liver",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 3)
             .build()
     );
 
@@ -158,7 +158,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_RIB = WAICItem.ITEM.register(
         "ember_metal_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 3)
+            .addValueAttribute(InitAttribute.DEFENSE, 5)
             .build()
     );
 
@@ -166,8 +166,8 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_MUSCLE = WAICItem.ITEM.register(
         "ember_metal_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 3)
-            .addValueAttribute(InitAttribute.SPEED, 3)
+            .addValueAttribute(InitAttribute.STRENGTH, 5)
+            .addValueAttribute(InitAttribute.SPEED, 5)
             .build()
     );
 
@@ -175,8 +175,8 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_SPINE = WAICItem.ITEM.register(
         "ember_metal_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 3)
-            .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .addValueAttribute(InitAttribute.NERVES, 5)
+            .addValueAttribute(InitAttribute.DEFENSE, 5)
             .build()
     );
 
@@ -184,7 +184,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_APPENDIX = WAICItem.ITEM.register(
         "ember_metal_appendix",
         () -> Organ.builder()
-            .addValueAttribute(Attributes.LUCK, 3)
+            .addValueAttribute(Attributes.LUCK, 5)
             .build()
     );
 
@@ -192,7 +192,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_HEART = WAICItem.ITEM.register(
         "ember_metal_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
             .build()
     );
 
@@ -200,9 +200,9 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_LUNG = WAICItem.ITEM.register(
         "ember_metal_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 3)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 3)
-            .addValueAttribute(InitAttribute.ENDURANCE, 3)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 5)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 5)
+            .addValueAttribute(InitAttribute.ENDURANCE, 5)
             .build()
     );
 
@@ -210,7 +210,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_STOMACH = WAICItem.ITEM.register(
         "ember_metal_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 3)
+            .addValueAttribute(InitAttribute.DIGESTION, 5)
             .build()
     );
 
@@ -218,7 +218,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_INTESTINE = WAICItem.ITEM.register(
         "ember_metal_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 3)
+            .addValueAttribute(InitAttribute.NUTRITION, 5)
             .build()
     );
 
@@ -226,7 +226,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_KIDNEY = WAICItem.ITEM.register(
         "ember_metal_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 3)
+            .addValueAttribute(InitAttribute.FILTRATION, 5)
             .build()
     );
 
@@ -234,7 +234,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_SPLEEN = WAICItem.ITEM.register(
         "ember_metal_spleen",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 3)
+            .addValueAttribute(InitAttribute.METABOLISM, 5)
             .build()
     );
 
@@ -242,7 +242,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> EMBER_METAL_LIVER = WAICItem.ITEM.register(
         "ember_metal_liver",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 3)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 5)
             .build()
     );
 

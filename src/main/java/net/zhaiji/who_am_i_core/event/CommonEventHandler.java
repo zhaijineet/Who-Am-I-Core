@@ -553,17 +553,15 @@ public class CommonEventHandler {
     }
 
     /**
-     * 经验之心：从经验球获取的经验 ×（胸腔中魔法器官数量 + 1）倍率
+     * 经验之心：从经验球获取的经验 ×2
      */
     public static void handlerPlayerXpEvent$PickupXp(PlayerXpEvent.PickupXp event) {
         Player player = event.getEntity();
         if (player.level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (!data.hasOrgan(WAICOrgans.EXPERIENCE_HEART.get())) return;
-        int magicCount = data.getOrganCount(WAICItemTagManager.MAGIC);
-        int multiplier = magicCount + 1;
         ExperienceOrb orb = event.getOrb();
-        orb.value = orb.value * multiplier;
+        orb.value = orb.value * 2;
     }
 
     /**

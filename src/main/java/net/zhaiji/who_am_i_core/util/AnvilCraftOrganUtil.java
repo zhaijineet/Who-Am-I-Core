@@ -25,7 +25,7 @@ public class AnvilCraftOrganUtil {
 
     /**
      * 浮霜器官的通用 modifier 模式
-     * 基础值 1.0 + 附魔加成
+     * 基础值 3.0 + 附魔加成
      */
     @SafeVarargs
     private static void frostMetalBaseModifier(
@@ -33,7 +33,7 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers,
         Holder<Attribute>... primaryAttributes
     ) {
-        double value = 1.0 + OrganUtil.mercilessBonus(context);
+        double value = 3.0 + OrganUtil.mercilessBonus(context);
         for (Holder<Attribute> attribute : primaryAttributes) {
             modifiers.put(attribute, OrganAttributeUtil.createAddValueModifier(context.id(), value));
         }
@@ -147,7 +147,6 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumHeartModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.HEALTH);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -155,7 +154,6 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumLungModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.BREATH_RECOVERY, InitAttribute.BREATH_CAPACITY, InitAttribute.ENDURANCE);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -163,7 +161,6 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumSpineModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.NERVES, InitAttribute.DEFENSE);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -174,7 +171,6 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.DIGESTION);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -185,7 +181,6 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.NUTRITION);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -196,7 +191,6 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.FILTRATION);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -207,7 +201,6 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.METABOLISM);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -215,7 +208,6 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumLiverModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.DETOXIFICATION);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -226,7 +218,6 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, Attributes.LUCK);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -234,7 +225,6 @@ public class AnvilCraftOrganUtil {
      */
     public static void transcendiumRibModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.DEFENSE);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**
@@ -245,7 +235,6 @@ public class AnvilCraftOrganUtil {
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.STRENGTH, InitAttribute.SPEED);
-        modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), 1.0));
     }
 
     /**

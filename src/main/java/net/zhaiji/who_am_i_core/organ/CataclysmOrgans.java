@@ -18,9 +18,9 @@ public class CataclysmOrgans {
     public static final Supplier<Item> LEVIATHAN_HEART = WAICItem.ITEM.register(
         "leviathan_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
-            .addValueAttribute(InitAttribute.WATER_BREATH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.WATER_BREATH, 4)
             .build()
     );
 
@@ -28,8 +28,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> LEVIATHAN_MUSCLE = WAICItem.ITEM.register(
         "leviathan_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 2.25)
-            .addValueAttribute(InitAttribute.SPEED, 1)
+            .addValueAttribute(InitAttribute.STRENGTH, 4.25)
+            .addValueAttribute(InitAttribute.SPEED, 2)
             .baseMultipliedAttribute(NeoForgeMod.SWIM_SPEED, 0.3)
             .build()
     );
@@ -38,7 +38,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> LEVIATHAN_INTESTINE = WAICItem.ITEM.register(
         "leviathan_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.NUTRITION, 4)
             .build()
     );
 
@@ -46,7 +46,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> LEVIATHAN_STOMACH = WAICItem.ITEM.register(
         "leviathan_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 4)
             .build()
     );
 
@@ -54,10 +54,10 @@ public class CataclysmOrgans {
     public static final Supplier<Item> LEVIATHAN_GILL = WAICItem.ITEM.register(
         "leviathan_gill",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
-            .addValueAttribute(InitAttribute.WATER_BREATH, 2)
-            .addValueAttribute(InitAttribute.ENDURANCE, 2)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 4)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 4)
+            .addValueAttribute(InitAttribute.WATER_BREATH, 4)
+            .addValueAttribute(InitAttribute.ENDURANCE, 4)
             .skill(WAICPlayerSkillUtil::leviathanGill)
             .goalSkill(WAICGoalSkillUtil.leviathanGillGoalSkill())
             .cooldown(200)
@@ -69,8 +69,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> LEVIATHAN_SPINE = WAICItem.ITEM.register(
         "leviathan_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .build()
     );
@@ -79,7 +79,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> LEVIATHAN_FISHBONE = WAICItem.ITEM.register(
         "leviathan_fishbone",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2.25)
+            .addValueAttribute(InitAttribute.DEFENSE, 4.25)
             .build()
     );
 
@@ -104,8 +104,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> MALEDICTUS_SPINE = WAICItem.ITEM.register(
         "maledictus_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .build()
     );
 
@@ -113,7 +113,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> MALEDICTUS_RIB = WAICItem.ITEM.register(
         "maledictus_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 4)
             .build()
     );
 
@@ -121,7 +121,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> PHANTOM_HEART = WAICItem.ITEM.register(
         "phantom_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
             .attack(CataclysmOrganUtil::phantomHeartAttack)
             .tooltip(WAICTooltipManager.PHANTOM_HEART_TOOLTIP)
             .build()
@@ -131,8 +131,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> PHANTOM_SHARD = WAICItem.ITEM.register(
         "phantom_shard",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
-            .addValueAttribute(InitAttribute.LEAPING, 2)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 5)
+            .addValueAttribute(InitAttribute.LEAPING, 4)
             .build()
     );
 
@@ -140,7 +140,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> SEALING_STONE_SLAB = WAICItem.ITEM.register(
         "sealing_stone_slab",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .skill(WAICPlayerSkillUtil::sealingStoneSlab)
             .goalSkill(WAICGoalSkillUtil.sealingStoneSlabGoalSkill())
@@ -153,8 +153,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> TIDAL_LANTERN = WAICItem.ITEM.register(
         "tidal_lantern",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 3)
-            .addValueAttribute(InitAttribute.WATER_BREATH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.WATER_BREATH, 4)
             .baseMultipliedAttribute(NeoForgeMod.SWIM_SPEED, 0.5)
             .attack(CataclysmOrganUtil::tidalLanternAttack)
             .tooltip(WAICTooltipManager.TIDAL_LANTERN_TOOLTIP)
@@ -165,8 +165,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> STORM_SPINE = WAICItem.ITEM.register(
         "storm_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .tooltip(WAICTooltipManager.STORM_SPINE_TOOLTIP)
             .build()
     );
@@ -175,7 +175,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> STORM_RIB = WAICItem.ITEM.register(
         "storm_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 4)
             .added(CataclysmOrganUtil::stormRibAdded)
             .removed(CataclysmOrganUtil::stormRibRemoved)
             .build()
@@ -185,7 +185,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> UNDYING_EMBER = WAICItem.ITEM.register(
         "undying_ember",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
             .modifier(CataclysmOrganUtil::undyingEmberModifier)
             .refreshOnOrganChange()
             .build()
@@ -205,7 +205,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> BLAZING_VISAGE = WAICItem.ITEM.register(
         "blazing_visage",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 1)
+            .addValueAttribute(InitAttribute.NERVES, 4)
             .attack(CataclysmOrganUtil::blazingVisageAttack)
             .tooltip(WAICTooltipManager.BLAZING_VISAGE_TOOLTIP)
             .build()
@@ -215,8 +215,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> MONSTROSITY_CORE = WAICItem.ITEM.register(
         "monstrosity_core",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 5)
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 7)
+            .addValueAttribute(InitAttribute.DEFENSE, 4)
             .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 1)
             .added(CataclysmOrganUtil::monstrosityCoreAdded)
             .removed(CataclysmOrganUtil::monstrosityCoreRemoved)
@@ -228,8 +228,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> MONSTROSITY_CIRCUIT = WAICItem.ITEM.register(
         "monstrosity_circuit",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 3)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .skill(WAICPlayerSkillUtil::monstrosityCircuit)
             .goalSkill(WAICGoalSkillUtil.monstrosityCircuitGoalSkill())
@@ -242,9 +242,9 @@ public class CataclysmOrgans {
     public static final Supplier<Item> MONSTROSITY_FURNACE = WAICItem.ITEM.register(
         "monstrosity_furnace",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 2)
-            .addValueAttribute(InitAttribute.NUTRITION, 1)
-            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 4)
+            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
             .tooltip(WAICTooltipManager.MONSTROSITY_FURNACE_TOOLTIP)
             .build()
     );
@@ -291,7 +291,7 @@ public class CataclysmOrgans {
         "mechanical_star",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 4)
             .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 2)
             .skill(WAICPlayerSkillUtil::mechanicalStar)
             .goalSkill(WAICGoalSkillUtil.mechanicalStarGoalSkill())
@@ -315,7 +315,7 @@ public class CataclysmOrgans {
     public static final Supplier<Item> GUARDIAN_STONE = WAICItem.ITEM.register(
         "guardian_stone",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 3)
+            .addValueAttribute(InitAttribute.DEFENSE, 5)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.1) // +10%
             .build()
     );
@@ -324,8 +324,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> VOID_CRYSTAL_SPINE = WAICItem.ITEM.register(
         "void_crystal_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2.5)
-            .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .addValueAttribute(InitAttribute.NERVES, 4.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 3)
             .skill(WAICPlayerSkillUtil::voidCrystalSpine)
             .goalSkill(WAICGoalSkillUtil.voidCrystalSpineGoalSkill())
             .cooldown(300)
@@ -337,8 +337,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> SAND_GLAZE_HEART = WAICItem.ITEM.register(
         "sand_glaze_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 2)
-            .addValueAttribute(InitAttribute.NERVES, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.NERVES, 2)
             .skill(WAICPlayerSkillUtil::sandGlazeHeart)
             .goalSkill(WAICGoalSkillUtil.sandGlazeHeartGoalSkill())
             .cooldown(400)

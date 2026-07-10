@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.datagen.recipe;
 
+import dev.dubhe.anvilcraft.api.data.ItemEnchantmentsData;
 import dev.dubhe.anvilcraft.init.block.ModBlocks;
 import dev.dubhe.anvilcraft.init.item.ModItems;
 import dev.dubhe.anvilcraft.recipe.anvil.wrap.StampingRecipe;
@@ -318,7 +319,11 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
         builder.material(material);
         builder.input(inputA);
         builder.input(inputB);
-        builder.result(result);
+        builder.resultMerge(
+            result,
+            ItemEnchantmentsData.enchantments(0),
+            ItemEnchantmentsData.enchantments(1)
+        );
         builder.unlockedBy(getHasName(result), criterion);
         builder.save(output, WhoAmICore.of(getItemName(result)));
     }

@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Villager 侧的欺诈效果 Mixin：
- * - rewardTradeXp 中 10 倍村民经验 + 10 倍经验球
+ * - rewardTradeXp 中 5 倍村民经验 + 5 倍经验球
  * - customServerAiStep 中连续升级
  * - updateSpecialPrices 中折扣
  * - 不再调用 resendOffersToTradingPlayer（xp 同步和 resetUses 由 MerchantResultSlotMixin 在双端各自处理）
@@ -51,7 +51,7 @@ public abstract class VillagerMixin extends AbstractVillager {
     }
 
     /**
-     * 有欺诈器官时，让村民获得总共 10 倍经验
+     * 有欺诈器官时，让村民获得总共 5 倍经验
      */
     @Redirect(
         method = "rewardTradeXp",
@@ -63,13 +63,13 @@ public abstract class VillagerMixin extends AbstractVillager {
     public int whoAmICore$rewardTradeXp$redirect(MerchantOffer offer) {
         int fraudCount = whoAmICore$getFraudCount(getTradingPlayer());
         if (fraudCount > 0) {
-            return offer.getXp() * 10;
+            return offer.getXp() * 5;
         }
         return offer.getXp();
     }
 
     /**
-     * 有欺诈器官时经验球数量 ×10
+     * 有欺诈器官时经验球数量 ×5
      */
     @ModifyArg(
         method = "rewardTradeXp",
@@ -82,13 +82,13 @@ public abstract class VillagerMixin extends AbstractVillager {
     public int whoAmICore$rewardTradeXp$modifyArg(int value) {
         int fraudCount = whoAmICore$getFraudCount(getTradingPlayer());
         if (fraudCount > 0) {
-            return value * 10;
+            return value * 5;
         }
         return value;
     }
 
     /**
-     * 原版每次只升一级，10倍经验可能让 villagerXp 远超当前升级线，
+     * 原版每次只升一级，5倍经验可能让 villagerXp 远超当前升级线，
      * 在原版升级时机处连续升级直到不再满足条件
      */
     @Redirect(

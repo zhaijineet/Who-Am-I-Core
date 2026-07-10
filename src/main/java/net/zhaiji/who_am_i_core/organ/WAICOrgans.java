@@ -36,7 +36,7 @@ public class WAICOrgans {
     public static final Supplier<Item> DIVINE_CORE = WAICItem.ITEM.register(
         "divine_core",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(AttributeRegistry.HOLY_SPELL_POWER, 1)
             .build()
     );
@@ -45,7 +45,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FROST_CORE = WAICItem.ITEM.register(
         "frost_core",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(AttributeRegistry.ICE_SPELL_POWER, 1)
             .build()
     );
@@ -54,7 +54,7 @@ public class WAICOrgans {
     public static final Supplier<Item> FLAME_CORE = WAICItem.ITEM.register(
         "flame_core",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(AttributeRegistry.FIRE_SPELL_POWER, 1)
             .build()
     );
@@ -63,7 +63,7 @@ public class WAICOrgans {
     public static final Supplier<Item> NATURE_CORE = WAICItem.ITEM.register(
         "nature_core",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 3)
             .addValueAttribute(AttributeRegistry.NATURE_SPELL_POWER, 1)
             .build()
     );
@@ -72,7 +72,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_HEART = WAICItem.ITEM.register(
         "ink_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1.25)
+            .addValueAttribute(InitAttribute.HEALTH, 2)
             .build()
     );
 
@@ -80,9 +80,9 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_LUNG = WAICItem.ITEM.register(
         "ink_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.25)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.25)
-            .addValueAttribute(InitAttribute.ENDURANCE, 1.25)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
+            .addValueAttribute(InitAttribute.ENDURANCE, 2)
             .build()
     );
 
@@ -90,8 +90,8 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_SPINE = WAICItem.ITEM.register(
         "ink_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 1.25)
-            .addValueAttribute(InitAttribute.DEFENSE, 0.625)
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
             .build()
     );
 
@@ -99,7 +99,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_STOMACH = WAICItem.ITEM.register(
         "ink_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 1.25)
+            .addValueAttribute(InitAttribute.DIGESTION, 2)
             .build()
     );
 
@@ -107,7 +107,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_INTESTINE = WAICItem.ITEM.register(
         "ink_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 1.25)
+            .addValueAttribute(InitAttribute.NUTRITION, 2)
             .build()
     );
 
@@ -115,7 +115,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_KIDNEY = WAICItem.ITEM.register(
         "ink_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 1.25)
+            .addValueAttribute(InitAttribute.FILTRATION, 2)
             .build()
     );
 
@@ -123,7 +123,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_SPLEEN = WAICItem.ITEM.register(
         "ink_spleen",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 1.25)
+            .addValueAttribute(InitAttribute.METABOLISM, 2)
             .build()
     );
 
@@ -131,7 +131,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_LIVER = WAICItem.ITEM.register(
         "ink_liver",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 1.25)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
             .build()
     );
 
@@ -139,7 +139,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_RIB = WAICItem.ITEM.register(
         "ink_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 1.25)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .build()
     );
 
@@ -157,8 +157,8 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_MUSCLE = WAICItem.ITEM.register(
         "ink_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 1.25)
-            .addValueAttribute(InitAttribute.SPEED, 1.25)
+            .addValueAttribute(InitAttribute.STRENGTH, 2)
+            .addValueAttribute(InitAttribute.SPEED, 2)
             .hurt(WAICOrganUtil::inkMuscleSkill)
             .tooltip(WAICTooltipManager.INK_MUSCLE_TOOLTIP)
             .build()
@@ -168,7 +168,7 @@ public class WAICOrgans {
     public static final Supplier<Item> INK_APPENDIX = WAICItem.ITEM.register(
         "ink_appendix",
         () -> Organ.builder()
-            .addValueAttribute(Attributes.LUCK, 1.25)
+            .addValueAttribute(Attributes.LUCK, 2)
             .skill(WAICPlayerSkillUtil::inkAppendix)
             .goalSkill(WAICGoalSkillUtil.inkAppendixGoalSkill())
             .cooldown(20 * 10)
@@ -179,6 +179,8 @@ public class WAICOrgans {
     public static final Supplier<Item> NIB = WAICItem.ITEM.register(
         "nib",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 1)
             .build()
     );
 
@@ -289,7 +291,7 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_HEART = WAICItem.ITEM.register(
         "wooden_heart",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 0.75)
+            .addValueAttribute(InitAttribute.HEALTH, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -298,9 +300,9 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_LUNG = WAICItem.ITEM.register(
         "wooden_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 0.75)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 0.75)
-            .addValueAttribute(InitAttribute.ENDURANCE, 0.75)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.75)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.75)
+            .addValueAttribute(InitAttribute.ENDURANCE, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -309,7 +311,7 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_STOMACH = WAICItem.ITEM.register(
         "wooden_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 0.75)
+            .addValueAttribute(InitAttribute.DIGESTION, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -318,7 +320,7 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_INTESTINE = WAICItem.ITEM.register(
         "wooden_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 0.75)
+            .addValueAttribute(InitAttribute.NUTRITION, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -327,7 +329,7 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_KIDNEY = WAICItem.ITEM.register(
         "wooden_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 0.75)
+            .addValueAttribute(InitAttribute.FILTRATION, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -336,7 +338,7 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_SPLEEN = WAICItem.ITEM.register(
         "wooden_spleen",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 0.75)
+            .addValueAttribute(InitAttribute.METABOLISM, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -345,7 +347,7 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_LIVER = WAICItem.ITEM.register(
         "wooden_liver",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 0.75)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -354,7 +356,7 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_APPENDIX = WAICItem.ITEM.register(
         "wooden_appendix",
         () -> Organ.builder()
-            .addValueAttribute(Attributes.LUCK, 0.75)
+            .addValueAttribute(Attributes.LUCK, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -363,8 +365,8 @@ public class WAICOrgans {
     public static final Supplier<Item> WOODEN_MUSCLE = WAICItem.ITEM.register(
         "wooden_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 0.75)
-            .addValueAttribute(InitAttribute.SPEED, 0.75)
+            .addValueAttribute(InitAttribute.STRENGTH, 1.75)
+            .addValueAttribute(InitAttribute.SPEED, 1.75)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );

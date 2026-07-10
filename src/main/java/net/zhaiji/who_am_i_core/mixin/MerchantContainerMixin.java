@@ -21,7 +21,7 @@ public class MerchantContainerMixin {
 
     /**
      * 用于交易界面的经验条预显示（提示交易后经验会涨多少）
-     * 当交易玩家拥有欺诈器官时，返回10倍值
+     * 当交易玩家拥有欺诈器官时，返回5倍值
      */
     @Redirect(
         method = "updateSellItem",
@@ -35,7 +35,7 @@ public class MerchantContainerMixin {
         if (player != null) {
             ChestCavityData data = ChestCavityUtil.getData(player);
             if (data.hasOrgan(WAICOrgans.FRAUD.get())) {
-                return offer.getXp() * 10;
+                return offer.getXp() * 5;
             }
         }
         return offer.getXp();

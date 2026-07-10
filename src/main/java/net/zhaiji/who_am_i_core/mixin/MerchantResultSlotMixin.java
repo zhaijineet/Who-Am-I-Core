@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * 在双端 onTake 中处理欺诈效果：
- * - 10倍经验（客户端和服务端各自独立累加，无需额外发包）
+ * - 5倍经验（客户端和服务端各自独立累加，无需额外发包）
  * - N≥3 时重置使用次数（双端各自 reset，客户端自行同步）
  */
 @Mixin(MerchantResultSlot.class)
@@ -45,7 +45,7 @@ public class MerchantResultSlotMixin {
     private int whoAmICore$onTake$redirect(MerchantOffer offer) {
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (data.hasOrgan(WAICOrgans.FRAUD.get())) {
-            return offer.getXp() * 10;
+            return offer.getXp() * 5;
         }
         return offer.getXp();
     }

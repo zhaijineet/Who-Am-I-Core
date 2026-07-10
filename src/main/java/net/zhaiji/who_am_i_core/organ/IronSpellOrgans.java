@@ -39,8 +39,8 @@ public class IronSpellOrgans {
     public static final Supplier<Item> EMERALD_SKULL = WAICItem.ITEM.register(
         "emerald_skull",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 3)
+            .addValueAttribute(InitAttribute.DEFENSE, 3)
             .build()
     );
 
@@ -48,7 +48,7 @@ public class IronSpellOrgans {
     public static final Supplier<Item> CORRUPTED_SOUL_LANTERN = WAICItem.ITEM.register(
         "corrupted_soul_lantern",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 4)
             .build()
     );
 
@@ -56,8 +56,8 @@ public class IronSpellOrgans {
     public static final Supplier<Item> DEAD_KING_SPINE = WAICItem.ITEM.register(
         "dead_king_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .tooltip(WAICTooltipManager.DEAD_KING_SPINE_TOOLTIP)
             .build()
     );
@@ -66,7 +66,7 @@ public class IronSpellOrgans {
     public static final Supplier<Item> DEAD_KING_RIB = WAICItem.ITEM.register(
         "dead_king_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 4)
             .added(IronSpellOrganUtil::deadKingRibAdded)
             .removed(IronSpellOrganUtil::deadKingRibRemoved)
             .build()

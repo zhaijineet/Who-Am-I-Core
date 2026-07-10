@@ -32,7 +32,7 @@ public class FDBossesOrgans {
     public static final Supplier<Item> MALKUTH = WAICItem.ITEM.register(
         "malkuth",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 3)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
             .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
             .addValueAttribute(InitAttribute.FROST_RESISTANCE, 5)
             .build()
@@ -42,9 +42,9 @@ public class FDBossesOrgans {
     public static final Supplier<Item> CHESED = WAICItem.ITEM.register(
         "chesed",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 3)
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .attack(FDBossesOrganUtil::chesedAttack)
             .build()
     );
@@ -53,9 +53,9 @@ public class FDBossesOrgans {
     public static final Supplier<Item> GEBURAH = WAICItem.ITEM.register(
         "geburah",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 3)
-            .addValueAttribute(InitAttribute.STRENGTH, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.STRENGTH, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .attack(FDBossesOrganUtil::geburahAttack)
             .build()
     );

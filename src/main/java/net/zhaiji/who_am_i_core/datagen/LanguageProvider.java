@@ -1232,7 +1232,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRAUD, "Fraud");
         addOrganPassiveEffect(
             WAICOrgans.FRAUD,
-            "Both parties gain 10× trade experience",
+            "Both parties gain 5× trade experience",
             "Villager trade discount",
             "Villager trades never run out of stock"
         );
@@ -1300,7 +1300,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.FRAUD, "欺诈");
         addOrganPassiveEffect(
             WAICOrgans.FRAUD,
-            "交易双方获得10倍经验",
+            "交易双方获得5倍经验",
             "村民交易获得折扣",
             "村民交易不缺货"
         );
@@ -1561,10 +1561,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.EXPERIENCE_HEART,
             "Every 10 experience levels grant +1 health",
-            "Experience from orbs gains a multiplier",
-            "Multiplier equals magic organs in chest + 1"
+            "Experience from orbs is doubled"
         );
-        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "Grants health from experience levels and boosts orb XP");
+        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "Grants health from experience levels and doubles orb XP");
 
         addItem(WAICOrgans.FLESH_IDOL, "Flesh Idol");
         addOrganDescription(WAICOrgans.FLESH_IDOL, "A grotesque idol carved from living flesh, pulsing with vital energy");
@@ -1601,10 +1600,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.EXPERIENCE_HEART,
             "每10级经验等级增加1点健康值",
-            "从经验球获取的经验获得额外倍率",
-            "倍率为胸腔中魔法器官数量加1"
+            "经验球获取的经验翻倍"
         );
-        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "经验等级转化为健康值，经验球获得额外倍率");
+        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "经验等级转化为健康值，经验球获取翻倍");
 
         addItem(WAICOrgans.FLESH_IDOL, "血肉偶像");
         addOrganDescription(WAICOrgans.FLESH_IDOL, "由活肉雕琢而成的怪诞偶像，脉动着生命能量");
@@ -2085,7 +2083,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     // ==================== AnvilCraft 浮霜金属器官 ====================
 
     private void frostMetalOrgansEN() {
-        String effect0 = "Base attribute value is 1 plus enchantment bonus";
+        String effect0 = "Base attribute value is 3 plus enchantment bonus";
         String effect1 = "Enchantment bonus equals the square root of total enchantment levels rounded down";
         String simple = "Converts enchantments into organ attributes";
 
@@ -2281,7 +2279,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     // ==================== AnvilCraft 浮霜金属器官 ====================
 
     private void frostMetalOrgansZH() {
-        String effect0 = "基础属性值为1加上附魔加成";
+        String effect0 = "基础属性值为3加上附魔加成";
         String effect1 = "附魔加成等于附魔等级总和的平方根向下取整";
         String simple = "将附魔转化为器官属性";
 

@@ -15,7 +15,24 @@
     "item": {
       "count": 1,
       "id": "who_am_i_core:transcendium_spine"
-    }
+    },
+    "modifiers": [
+      {
+        "type": "anvilcraft:merge_data",
+        "types": [
+          {
+            "type": "anvilcraft:item_enchantments",
+            "component": "minecraft:enchantments",
+            "input": 0
+          },
+          {
+            "type": "anvilcraft:item_enchantments",
+            "component": "minecraft:enchantments",
+            "input": 1
+          }
+        ]
+      }
+    ]
   },
   "template": {
     "items": "anvilcraft:two_to_one_smithing_template"

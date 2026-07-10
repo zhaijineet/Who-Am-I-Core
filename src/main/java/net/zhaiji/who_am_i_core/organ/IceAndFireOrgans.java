@@ -23,9 +23,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_LUNG = WAICItem.ITEM.register(
         "fire_dragon_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
-            .addValueAttribute(InitAttribute.ENDURANCE, 2)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 4)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 4)
+            .addValueAttribute(InitAttribute.ENDURANCE, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -34,8 +34,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_SPINE = WAICItem.ITEM.register(
         "fire_dragon_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -44,7 +44,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_STOMACH = WAICItem.ITEM.register(
         "fire_dragon_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -53,7 +53,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_INTESTINE = WAICItem.ITEM.register(
         "fire_dragon_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.NUTRITION, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -62,7 +62,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_KIDNEY = WAICItem.ITEM.register(
         "fire_dragon_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 2)
+            .addValueAttribute(InitAttribute.FILTRATION, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -71,7 +71,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_SPLEEN = WAICItem.ITEM.register(
         "fire_dragon_spleen",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 2)
+            .addValueAttribute(InitAttribute.METABOLISM, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -80,7 +80,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_LIVER = WAICItem.ITEM.register(
         "fire_dragon_liver",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -117,7 +117,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_RIB = WAICItem.ITEM.register(
         "fire_dragon_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build()
     );
@@ -126,8 +126,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> FIRE_DRAGON_MUSCLE = WAICItem.ITEM.register(
         "fire_dragon_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 2.25)
-            .addValueAttribute(InitAttribute.SPEED, 2)
+            .addValueAttribute(InitAttribute.STRENGTH, 4.25)
+            .addValueAttribute(InitAttribute.SPEED, 4)
             .build()
     );
 
@@ -138,9 +138,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_LUNG = WAICItem.ITEM.register(
         "ice_dragon_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
-            .addValueAttribute(InitAttribute.ENDURANCE, 2)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 4)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 4)
+            .addValueAttribute(InitAttribute.ENDURANCE, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
     );
@@ -149,8 +149,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_SPINE = WAICItem.ITEM.register(
         "ice_dragon_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1.25)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2.25)
             .build()
     );
 
@@ -158,7 +158,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_STOMACH = WAICItem.ITEM.register(
         "ice_dragon_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
     );
@@ -167,7 +167,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_INTESTINE = WAICItem.ITEM.register(
         "ice_dragon_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.NUTRITION, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
     );
@@ -176,7 +176,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_KIDNEY = WAICItem.ITEM.register(
         "ice_dragon_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 2)
+            .addValueAttribute(InitAttribute.FILTRATION, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
     );
@@ -185,7 +185,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_SPLEEN = WAICItem.ITEM.register(
         "ice_dragon_spleen",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 2)
+            .addValueAttribute(InitAttribute.METABOLISM, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
     );
@@ -194,7 +194,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_LIVER = WAICItem.ITEM.register(
         "ice_dragon_liver",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
     );
@@ -231,7 +231,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_RIB = WAICItem.ITEM.register(
         "ice_dragon_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2.25)
+            .addValueAttribute(InitAttribute.DEFENSE, 4.25)
             .build()
     );
 
@@ -239,8 +239,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> ICE_DRAGON_MUSCLE = WAICItem.ITEM.register(
         "ice_dragon_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 2)
-            .addValueAttribute(InitAttribute.SPEED, 2)
+            .addValueAttribute(InitAttribute.STRENGTH, 4)
+            .addValueAttribute(InitAttribute.SPEED, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build()
     );
@@ -252,9 +252,9 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_LUNG = WAICItem.ITEM.register(
         "lightning_dragon_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
-            .addValueAttribute(InitAttribute.ENDURANCE, 2)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 4)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 4)
+            .addValueAttribute(InitAttribute.ENDURANCE, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -264,8 +264,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_SPINE = WAICItem.ITEM.register(
         "lightning_dragon_spine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NERVES, 2)
-            .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -275,7 +275,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_STOMACH = WAICItem.ITEM.register(
         "lightning_dragon_stomach",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .addValueAttribute(InitAttribute.DIGESTION, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -285,7 +285,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_INTESTINE = WAICItem.ITEM.register(
         "lightning_dragon_intestine",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(InitAttribute.NUTRITION, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -295,7 +295,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_KIDNEY = WAICItem.ITEM.register(
         "lightning_dragon_kidney",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.FILTRATION, 2)
+            .addValueAttribute(InitAttribute.FILTRATION, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -305,7 +305,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_SPLEEN = WAICItem.ITEM.register(
         "lightning_dragon_spleen",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.METABOLISM, 2)
+            .addValueAttribute(InitAttribute.METABOLISM, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -315,7 +315,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_LIVER = WAICItem.ITEM.register(
         "lightning_dragon_liver",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
+            .addValueAttribute(InitAttribute.DETOXIFICATION, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -355,7 +355,7 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_RIB = WAICItem.ITEM.register(
         "lightning_dragon_rib",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(InitAttribute.DEFENSE, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
@@ -365,8 +365,8 @@ public class IceAndFireOrgans {
     public static final Supplier<Item> LIGHTNING_DRAGON_MUSCLE = WAICItem.ITEM.register(
         "lightning_dragon_muscle",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.STRENGTH, 2)
-            .addValueAttribute(InitAttribute.SPEED, 2.25)
+            .addValueAttribute(InitAttribute.STRENGTH, 4)
+            .addValueAttribute(InitAttribute.SPEED, 4.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );
@@ -503,17 +503,17 @@ public class IceAndFireOrgans {
     public static void setupOrgans() {
         // 火龙心脏
         Organ.builder(IafItems.FIRE_DRAGON_HEART.get())
-            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 4)
             .addValueAttribute(InitAttribute.STRENGTH, 0.25)
             .build();
         // 冰龙心脏
         Organ.builder(IafItems.ICE_DRAGON_HEART.get())
-            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .build();
         // 电龙心脏
         Organ.builder(IafItems.LIGHTNING_DRAGON_HEART.get())
-            .addValueAttribute(InitAttribute.HEALTH, 2)
+            .addValueAttribute(InitAttribute.HEALTH, 4)
             .addValueAttribute(InitAttribute.SPEED, 0.25)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build();

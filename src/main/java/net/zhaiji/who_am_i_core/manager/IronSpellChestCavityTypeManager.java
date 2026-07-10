@@ -8,6 +8,7 @@ import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
 import net.zhaiji.chestcavitybeyond.manager.ChestCavityTypeManager;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.organ.IronSpellOrgans;
+import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.Map;
 
@@ -54,6 +55,31 @@ public class IronSpellChestCavityTypeManager {
             InitAttribute.BREATH_RECOVERY, 0.5
         ));
 
+    // 牧师胸腔
+    public static final ChestCavityType PRIEST = register("priest")
+        .copyWith(ChestCavityTypeManager.HUMAN)
+        .setFirstRow(4, WAICOrgans.DIVINE_CORE.get());
+
+    // 炽焰术士胸腔
+    public static final ChestCavityType PYROMANCER = register("pyromancer")
+        .copyWith(ChestCavityTypeManager.HUMAN)
+        .setFirstRow(4, WAICOrgans.FLAME_CORE.get());
+
+    // 冰霜术士胸腔
+    public static final ChestCavityType CRYOMANCER = register("cryomancer")
+        .copyWith(ChestCavityTypeManager.HUMAN)
+        .setFirstRow(4, WAICOrgans.FROST_CORE.get());
+
+    // 药剂师胸腔
+    public static final ChestCavityType APOTHECARIST = register("apothecarist")
+        .copyWith(ChestCavityTypeManager.FIREPROOF)
+        .setFirstRow(4, WAICOrgans.NATURE_CORE.get());
+
+    // 高位唤魔者胸腔
+    public static final ChestCavityType ARCHEVOKER = register("archevoker")
+        .copyWith(ChestCavityTypeManager.HUMAN)
+        .setSecondRow(4, IronSpellOrgans.EMERALD_SKULL.get());
+
     /**
      * 注册铁魔法 Mod 所有实体的胸腔类型
      */
@@ -65,21 +91,21 @@ public class IronSpellChestCavityTypeManager {
         // 提洛斯回响·原初受火者
         event.registerEntity(EntityRegistry.FIRE_BOSS.get(), FIRE_BOSS);
         // 高位唤魔者
-        event.registerEntity(EntityRegistry.ARCHEVOKER.get(), ChestCavityTypeManager.HUMAN);
+        event.registerEntity(EntityRegistry.ARCHEVOKER.get(), ARCHEVOKER);
         // 炽焰术士
-        event.registerEntity(EntityRegistry.PYROMANCER.get(), ChestCavityTypeManager.HUMAN);
+        event.registerEntity(EntityRegistry.PYROMANCER.get(), PYROMANCER);
         // 冰霜术士
-        event.registerEntity(EntityRegistry.CRYOMANCER.get(), ChestCavityTypeManager.HUMAN);
+        event.registerEntity(EntityRegistry.CRYOMANCER.get(), CRYOMANCER);
         // 狩魔人卫道士
         event.registerEntity(EntityRegistry.MAGEHUNTER_VINDICATOR.get(), ChestCavityTypeManager.HUMAN);
         // 远古骑士
         event.registerEntity(EntityRegistry.KEEPER.get(), ChestCavityTypeManager.WITHER_SKELETON);
         // 药剂师
-        event.registerEntity(EntityRegistry.APOTHECARIST.get(), ChestCavityTypeManager.FIREPROOF);
+        event.registerEntity(EntityRegistry.APOTHECARIST.get(), APOTHECARIST);
         // 邪教徒
         event.registerEntity(EntityRegistry.CULTIST.get(), ChestCavityTypeManager.HUMAN);
         // 牧师
-        event.registerEntity(EntityRegistry.PRIEST.get(), ChestCavityTypeManager.HUMAN);
+        event.registerEntity(EntityRegistry.PRIEST.get(), PRIEST);
         // 测试法师
         event.registerEntity(EntityRegistry.DEBUG_WIZARD.get(), ChestCavityTypeManager.HUMAN);
 
