@@ -33,6 +33,26 @@ import java.util.List;
 
 public class MowziesMobOrganUtil {
     /**
+     * 荧光核心 tick：持续赋予发光与夜视
+     */
+    public static void glowingCoreTick(ChestCavitySlotContext context) {
+        if (context.entity().tickCount % 300 != 0) return;
+        applyGlowingEffects(context.entity());
+    }
+
+    /**
+     * 荧光核心 added：植入时立即生效一次，避免玩家疑惑初始未触发
+     */
+    public static void glowingCoreAdded(ChestCavitySlotContext context) {
+        applyGlowingEffects(context.entity());
+    }
+
+    private static void applyGlowingEffects(LivingEntity entity) {
+        entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 0, false, false));
+        entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 600, 0, false, false));
+    }
+
+    /**
      * 钢铁守护者护心镜 - 属性修饰符：根据力量提供格挡（力量 / 2）
      */
     public static void ferrousWroughtnautHeartMirrorModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {

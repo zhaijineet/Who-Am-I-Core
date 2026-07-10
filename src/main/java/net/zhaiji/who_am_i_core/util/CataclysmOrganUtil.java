@@ -70,7 +70,7 @@ public class CataclysmOrganUtil {
             serverLevel.sendParticles(
                 new RoarParticleOptions(60, 102, 26, 204, 0.9F, 1F, 1.2F, 13F),
                 entity.getX(),
-                entity.getEyeY(),
+                entity.getY(),
                 entity.getZ(),
                 1,
                 0,

@@ -37,5 +37,11 @@ public class MowziesMobRecipeProvider extends RecipeProvider {
             .requires(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
             .unlockedBy(getHasName(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get()), has(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get()))
             .save(recipeOutput, WhoAmICore.of(getItemName(ItemHandler.BLUFF_ROD.get())));
+
+        // 荧光核心 → 荧光果冻 ×2
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemHandler.GLOWING_JELLY.get(), 2)
+            .requires(MowziesMobOrgans.GLOWING_CORE.get())
+            .unlockedBy(getHasName(MowziesMobOrgans.GLOWING_CORE.get()), has(MowziesMobOrgans.GLOWING_CORE.get()))
+            .save(recipeOutput, WhoAmICore.of(getItemName(ItemHandler.GLOWING_JELLY.get())));
     }
 }

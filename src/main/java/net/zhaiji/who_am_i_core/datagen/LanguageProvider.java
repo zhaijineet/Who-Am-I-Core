@@ -116,6 +116,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "Necromancer");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.FIRE_BOSS, "Primordial Flame");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.CURSED_ARMOR_STAND, "Cursed Armor Stand");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.PRIEST, "Priest");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.PYROMANCER, "Pyromancer");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.CRYOMANCER, "Cryomancer");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.APOTHECARIST, "Apothecarist");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.ARCHEVOKER, "Archevoker");
 
         addChestCavityTypeName(CompanionsChestCavityTypeManager.PONTIFF, "Pontiff");
         addChestCavityTypeName(CompanionsChestCavityTypeManager.CLOTH, "Cloth");
@@ -318,6 +323,11 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addChestCavityTypeName(IronSpellChestCavityTypeManager.NECROMANCER, "死灵法师");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.FIRE_BOSS, "原初之火");
         addChestCavityTypeName(IronSpellChestCavityTypeManager.CURSED_ARMOR_STAND, "诅咒盔甲架");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.PRIEST, "牧师");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.PYROMANCER, "炽焰术士");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.CRYOMANCER, "冰霜术士");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.APOTHECARIST, "药剂师");
+        addChestCavityTypeName(IronSpellChestCavityTypeManager.ARCHEVOKER, "高位唤魔者");
 
         addChestCavityTypeName(CompanionsChestCavityTypeManager.PONTIFF, "教宗");
         addChestCavityTypeName(CompanionsChestCavityTypeManager.CLOTH, "布制");
@@ -485,6 +495,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             "Follower respawn cooldown reduced from 30s to 10s",
             "Masks also provide effects to followers"
         );
+
+        addItem(MowziesMobOrgans.GLOWING_CORE, "Glowing Core");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.GLOWING_CORE,
+            "Continuously grants Glowing and Night Vision"
+        );
     }
 
     private void mowziesMobSpecialOrgansZH() {
@@ -520,6 +536,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             MowziesMobOrgans.CONTROL_ROD,
             "追随者重新召唤冷却时间从30秒缩短为10秒",
             "面具也会给追随者提供效果"
+        );
+
+        addItem(MowziesMobOrgans.GLOWING_CORE, "荧光核心");
+        addOrganPassiveEffect(
+            MowziesMobOrgans.GLOWING_CORE,
+            "持续获得发光与夜视效果"
         );
     }
 
@@ -1651,6 +1673,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             IceAndFireOrgans.DREAD_SPINE,
             "Attacks apply Slowness for %1$s, Slowness level %2$s, reduced by fire organs, level based on ice organs within 3×3 range around own slot"
         );
+        addItem(IceAndFireOrgans.GHOST_FIRE, "Ghost Fire");
+        addOrganPassiveEffect(IceAndFireOrgans.GHOST_FIRE, "Grants flight and noclip");
     }
 
     private void dreadOrgansZH() {
@@ -1683,6 +1707,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             IceAndFireOrgans.DREAD_SPINE,
             "攻击时施加持续%1$s的缓慢，缓慢等级%2$s，受炽焰器官抵消，等级以自身槽位为中心3×3范围的冰霜器官计算"
         );
+        addItem(IceAndFireOrgans.GHOST_FIRE, "鬼火");
+        addOrganPassiveEffect(IceAndFireOrgans.GHOST_FIRE, "获得飞行与穿墙能力");
     }
 
     // ==================== 九头蛇器官 ====================

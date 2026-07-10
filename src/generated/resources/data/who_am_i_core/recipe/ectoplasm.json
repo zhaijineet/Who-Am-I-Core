@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "who_am_i_core:ghost_fire"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "iceandfire:ectoplasm"
+  }
+}

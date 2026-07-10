@@ -2,7 +2,6 @@ package net.zhaiji.who_am_i_core.manager;
 
 import com.iafenvoy.iceandfire.entity.DragonBaseEntity;
 import com.iafenvoy.iceandfire.registry.IafEntities;
-import com.iafenvoy.iceandfire.registry.IafItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -173,8 +172,8 @@ public class IceAndFireChestCavityTypeManager {
     // 幽灵
     public static final ChestCavityType GHOST = register("ghost")
         .setNeedHealth(false)
-        .setSecondRow(4, IafItems.ECTOPLASM.get())
-        .addValueBonuses(IafItems.ECTOPLASM.get(), Map.of(
+        .setSecondRow(4, IceAndFireOrgans.GHOST_FIRE.get())
+        .addValueBonuses(IceAndFireOrgans.GHOST_FIRE.get(), Map.of(
             InitAttribute.NERVES, 0.5,
             InitAttribute.BREATH_CAPACITY, 0.5,
             InitAttribute.BREATH_RECOVERY, 0.5

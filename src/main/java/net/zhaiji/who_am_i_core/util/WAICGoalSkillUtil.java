@@ -1,8 +1,5 @@
 package net.zhaiji.who_am_i_core.util;
 
-import com.iafenvoy.iceandfire.entity.FireDragonEntity;
-import com.iafenvoy.iceandfire.entity.IceDragonEntity;
-import com.iafenvoy.iceandfire.entity.LightningDragonEntity;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.core.component.DataComponents;
@@ -26,27 +23,21 @@ public class WAICGoalSkillUtil {
     public static GoalSkillMetadata fireDragonBreathSacGoalSkill() {
         return GoalSkillMetadata.attack(
             (goalContext, slotContext) -> IceAndFireOrganUtil.fireDragonBreathSac(slotContext)
-        )
-        .entityFilter(mob -> !(mob instanceof FireDragonEntity))
-        .build();
+        ).build();
     }
 
     // 冰龙吐息
     public static GoalSkillMetadata iceDragonBreathSacGoalSkill() {
         return GoalSkillMetadata.attack(
             (goalContext, slotContext) -> IceAndFireOrganUtil.iceDragonBreathSac(slotContext)
-        )
-        .entityFilter(mob -> !(mob instanceof IceDragonEntity))
-        .build();
+        ).build();
     }
 
     // 电龙吐息
     public static GoalSkillMetadata lightningDragonBreathSacGoalSkill() {
         return GoalSkillMetadata.attack(
             (goalContext, slotContext) -> IceAndFireOrganUtil.lightningDragonBreathSac(slotContext)
-        )
-        .entityFilter(mob -> !(mob instanceof LightningDragonEntity))
-        .build();
+        ).build();
     }
 
     // 九头蛇吐息（消耗中毒释放吐息）

@@ -3,6 +3,7 @@ package net.zhaiji.who_am_i_core.organ;
 import com.iafenvoy.iceandfire.registry.IafItems;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
@@ -424,6 +425,16 @@ public class IceAndFireOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 0.25)
             .attack(IceAndFireOrganUtil::dreadSpineAttack)
             .tooltip(WAICTooltipManager.DREAD_SPINE_TOOLTIP)
+            .build()
+    );
+
+    // 鬼火
+    public static final Supplier<Item> GHOST_FIRE = WAICItem.ITEM.register(
+        "ghost_fire",
+        () -> Organ.builder()
+            .addValueAttribute(NeoForgeMod.CREATIVE_FLIGHT, 1)
+            .totalMultipliedAttribute(InitAttribute.HEALTH, -0.8)
+            .totalMultipliedAttribute(InitAttribute.STRENGTH, -0.8)
             .build()
     );
 

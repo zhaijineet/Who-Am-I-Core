@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glowing_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "who_am_i_core:glowing_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:glowing_jelly"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glowing_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:glowing_jelly"
+    ]
+  }
+}

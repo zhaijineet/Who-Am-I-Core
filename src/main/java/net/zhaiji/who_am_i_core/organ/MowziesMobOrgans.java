@@ -176,6 +176,17 @@ public class MowziesMobOrgans {
             .build()
     );
 
+    // 荧光核心
+    public static final Supplier<Item> GLOWING_CORE = WAICItem.ITEM.register(
+        "glowing_core",
+        () -> Organ.builder()
+            .addValueAttribute(InitAttribute.HEALTH, 0.5)
+            .addValueAttribute(InitAttribute.NERVES, 0.5)
+            .tick(MowziesMobOrganUtil::glowingCoreTick)
+            .added(MowziesMobOrganUtil::glowingCoreAdded)
+            .build()
+    );
+
     public static void register() {
     }
 }

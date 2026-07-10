@@ -557,11 +557,9 @@ public class CommonEventHandler {
      */
     public static void handlerPlayerXpEvent$PickupXp(PlayerXpEvent.PickupXp event) {
         Player player = event.getEntity();
-        if (player.level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (!data.hasOrgan(WAICOrgans.EXPERIENCE_HEART.get())) return;
-        ExperienceOrb orb = event.getOrb();
-        orb.value = orb.value * 2;
+        player.giveExperiencePoints(event.getOrb().value);
     }
 
     /**
@@ -571,11 +569,8 @@ public class CommonEventHandler {
      */
     public static void handlerLivingEntityUseItemEvent$Finish(LivingEntityUseItemEvent.Finish event) {
         LivingEntity entity = event.getEntity();
-
         if (entity.level().isClientSide()) return;
-
         ItemStack food = event.getItem();
-
         if (!food.has(DataComponents.FOOD)) return;
 
         ChestCavityData data = ChestCavityUtil.getData(entity);

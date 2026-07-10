@@ -1,7 +1,6 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
-import com.bobmowzie.mowziesmobs.server.item.ItemHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.api.event.ChestCavityRegisterEvent;
@@ -72,11 +71,9 @@ public class MowziesMobChestCavityTypeManager {
 
     // 荧光浮灯
     public static final ChestCavityType LANTERN = register("lantern")
-        .setSecondRow(4, ItemHandler.GLOWING_JELLY.get())
+        .setSecondRow(4, MowziesMobOrgans.GLOWING_CORE.get())
 
-        .addValueBonuses(ItemHandler.GLOWING_JELLY.get(), Map.of(
-            InitAttribute.HEALTH, 1.0,
-            InitAttribute.NERVES, 1.0,
+        .addValueBonuses(MowziesMobOrgans.GLOWING_CORE.get(), Map.of(
             InitAttribute.BREATH_CAPACITY, 1.0,
             InitAttribute.BREATH_RECOVERY, 1.0
         ));

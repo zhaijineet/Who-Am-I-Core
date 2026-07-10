@@ -85,6 +85,10 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
         tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
+
+        // 荧光核心
+        tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.GLOWING_CORE.get());
+        tag(ItemTagManager.HEART).add(MowziesMobOrgans.GLOWING_CORE.get());
     }
 
     // ==================== 泥峭器官 ====================
@@ -751,12 +755,14 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             IceAndFireOrgans.FROSTBURN_SOUL.get(),
             IceAndFireOrgans.DREAD_PHYLACTERY.get(),
             IceAndFireOrgans.DREAD_RIB.get(),
-            IceAndFireOrgans.DREAD_SPINE.get()
+            IceAndFireOrgans.DREAD_SPINE.get(),
+            IceAndFireOrgans.GHOST_FIRE.get()
         );
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.BITTER_FLESH.get());
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.ICE_SHARD.get());
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.FROSTBURN_SOUL.get());
         tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.DREAD_PHYLACTERY.get());
+        tag(ItemTagManager.SPECIAL).add(IceAndFireOrgans.GHOST_FIRE.get());
         tag(ItemTagManager.RIB).add(IceAndFireOrgans.DREAD_RIB.get());
         tag(ItemTagManager.BONE).add(IceAndFireOrgans.DREAD_RIB.get());
         tag(ItemTagManager.SPINE).add(IceAndFireOrgans.DREAD_SPINE.get());

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ghost_fire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "who_am_i_core:ghost_fire"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "who_am_i_core:ectoplasm"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ghost_fire"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "who_am_i_core:ectoplasm"
+    ]
+  }
+}
