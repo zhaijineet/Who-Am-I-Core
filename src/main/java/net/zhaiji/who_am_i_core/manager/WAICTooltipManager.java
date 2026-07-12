@@ -10,6 +10,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.CustomData;
 import net.zhaiji.chestcavitybeyond.api.DynamicValues;
@@ -68,6 +69,34 @@ public class WAICTooltipManager {
             result.addAll(lines);
             return result;
         })
+        .build();
+
+    /**
+     * 经验之心健康值公式：floor(sqrt(经验等级))
+     */
+    private static final FormulaValue EXPERIENCE_HEART_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int level = context.entity() instanceof Player player ? player.experienceLevel : 0;
+            return Component.literal(String.valueOf(WAICOrganUtil.getExperienceHeartHealthBonus(level)));
+        },
+        context -> {
+            int level = context.entity() instanceof Player player ? player.experienceLevel : 0;
+            return Component.empty()
+                .append(Component.literal("floor(√("))
+                .append(Component.translatable("formula.who_am_i_core.experience_level"))
+                .append(Component.literal(": "))
+                .append(Component.literal(String.valueOf(level)))
+                .append(Component.literal("))"));
+        }
+    );
+
+    /**
+     * 经验之心 — 健康值随经验等级的平方根缩放
+     */
+    public static final OrganTooltipConsumer EXPERIENCE_HEART_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(EXPERIENCE_HEART_FORMULA_VALUE)
+        )))
         .build();
 
     /**
@@ -1044,10 +1073,7 @@ public class WAICTooltipManager {
      * 诅咒金器官 — 虚弱/缓慢/饥饿等级随诅咒器官数量阶梯式递增（四个诅咒金器官共用）
      */
     public static final OrganTooltipConsumer CURSED_GOLD_TOOLTIP = OrganTooltip.builder()
-        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
-            // simple 无动态段
-            Map.of(),
-            // detailed line 1/2/3 分别含虚弱/缓慢/饥饿等级 %s
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(
             Map.of(
                 1, List.of(CURSED_GOLD_WEAKNESS_FORMULA_VALUE),
                 2, List.of(CURSED_GOLD_SLOWNESS_FORMULA_VALUE),
@@ -1173,8 +1199,7 @@ public class WAICTooltipManager {
             Map.of(0, List.of(SAND_GLAZE_HEART_DURATION_FORMULA_VALUE)),
             Map.of(1, List.of(SAND_GLAZE_HEART_DURATION_FORMULA_VALUE))
         ))
-        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
-            Map.of(),
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(
             Map.of(0, List.of(SAND_GLAZE_HEART_BONUS_FORMULA_VALUE))
         ))
         .build();
@@ -1201,8 +1226,7 @@ public class WAICTooltipManager {
      * 苔化紫水晶 — 每种不同的魔法器官提供 0.5 点防御
      */
     public static final OrganTooltipConsumer MOSSY_AMETHYST_TOOLTIP = OrganTooltip.builder()
-        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
-            Map.of(),
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(
             Map.of(0, List.of(MOSSY_AMETHYST_DEFENSE_FORMULA_VALUE))
         ))
         .build();

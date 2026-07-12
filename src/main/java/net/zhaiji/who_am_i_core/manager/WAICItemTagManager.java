@@ -55,6 +55,8 @@ public class WAICItemTagManager {
     public static final TagKey<Item> REMNANT = register("remnant", 0xFFD9B366, 6);
     // 利维坦
     public static final TagKey<Item> LEVIATHAN = register("leviathan", 0xFF6622AA, 7);
+    // 泥峭
+    public static final TagKey<Item> BLUFF = register("bluff", 0xFF8B6C42, 8);
 
     /**
      * 创建 CCB namespace 的 TagKey 并注册到 CCB 的 ItemTagManager

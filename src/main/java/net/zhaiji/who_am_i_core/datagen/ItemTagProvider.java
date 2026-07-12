@@ -84,7 +84,6 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         // 钢铁守护者护心镜
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
         tag(ItemTagManager.SPECIAL).add(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
-        tag(WAICItemTagManager.UNIQUE).add(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get());
 
         // 荧光核心
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.GLOWING_CORE.get());
@@ -94,6 +93,12 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
     // ==================== 泥峭器官 ====================
 
     private void bluffOrgansTags() {
+        tag(WAICItemTagManager.BLUFF).add(
+            MowziesMobOrgans.BLUFF_CORE.get(),
+            MowziesMobOrgans.BLUFF_TABLET.get(),
+            MowziesMobOrgans.ACTIVE_BLUFF_ROD.get()
+        );
+
         tag(ItemTagManager.ORGANS).add(MowziesMobOrgans.BLUFF_CORE.get());
         tag(ItemTagManager.HEART).add(MowziesMobOrgans.BLUFF_CORE.get());
         tag(WAICItemTagManager.MAGIC).add(MowziesMobOrgans.BLUFF_CORE.get());
@@ -659,10 +664,12 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WAICOrgans.TREACHERY.get()
         );
         tag(WAICItemTagManager.UNIQUE).add(
+            WAICOrgans.LUST.get(),
             WAICOrgans.GLUTTONY.get(),
             WAICOrgans.HERESY.get(),
             WAICOrgans.VIOLENCE.get(),
-            WAICOrgans.FRAUD.get()
+            WAICOrgans.FRAUD.get(),
+            WAICOrgans.TREACHERY.get()
         );
     }
 

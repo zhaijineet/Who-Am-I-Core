@@ -572,7 +572,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             MowziesMobOrgans.BLUFF_TABLET,
             "Can eat dirt items",
             "Each tablet, gain 2 absorption hearts when eating dirt",
-            "Maximum absorption equals mud organ count times 8"
+            "Each mud organ grants 8 max absorption"
         );
 
         addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "Active Bluff Rod");
@@ -608,7 +608,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             MowziesMobOrgans.BLUFF_TABLET,
             "能够食用泥土物品",
             "每有一块铭文板，食用泥土时获得2点吸收生命值",
-            "吸收生命值上限为泥峭器官数量乘以8"
+            "每个泥峭器官提供8点最大吸收生命值上限"
         );
 
         addItem(MowziesMobOrgans.ACTIVE_BLUFF_ROD, "活性泥峭棒");
@@ -1213,15 +1213,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.LUST,
             "Attacks heal 10% of damage dealt",
-            "Attacks heal 20% of damage dealt",
-            "Attacks heal 30% of damage dealt"
+            "Attacks heal 10% of damage dealt",
+            "Attacks heal 10% of damage dealt"
         );
         addItem(WAICOrgans.GLUTTONY, "Gluttony");
         addOrganPassiveEffect(
             WAICOrgans.GLUTTONY,
-            "Eat at any time ignoring hunger, eating speed doubled",
-            "Eating grants absorption hearts equal to hunger value × nine-hell count, capped at count × 20",
-            "Eating additionally heals HP equal to nine-hell count"
+            "Eating speed doubled, each nine-hell organ grants 20 max absorption",
+            "Each meal grants absorption HP equal to hunger value × nine-hell count",
+            "Eat at any time ignoring hunger"
         );
         addItem(WAICOrgans.GREED, "Greed");
         addOrganPassiveEffect(
@@ -1233,9 +1233,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.WRATH, "Wrath");
         addOrganPassiveEffect(
             WAICOrgans.WRATH,
-            "+1 Strength and +1 Speed",
-            "+2 Strength and +2 Speed",
-            "+3 Strength and +3 Speed"
+            "+3 Strength and +3 Speed",
+            "+6 Strength and +6 Speed",
+            "+9 Strength and +9 Speed"
         );
         addItem(WAICOrgans.HERESY, "Heresy");
         addOrganPassiveEffect(
@@ -1262,8 +1262,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.TREACHERY,
             "Attacks deal 1% of target max health",
-            "Attacks deal 3% of target max health",
-            "Attacks deal 5% of target max health"
+            "Attacks deal 1% of target max health",
+            "Attacks deal 1% of target max health"
         );
     }
 
@@ -1281,15 +1281,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.LUST,
             "攻击回复造成伤害10%的生命",
-            "攻击回复造成伤害20%的生命",
-            "攻击回复造成伤害30%的生命"
+            "攻击回复造成伤害10%的生命",
+            "攻击回复造成伤害10%的生命"
         );
         addItem(WAICOrgans.GLUTTONY, "暴食");
         addOrganPassiveEffect(
             WAICOrgans.GLUTTONY,
-            "无视饥饿值限制，随时可以进食，食用速度翻倍",
-            "食用获得饥饿值×九狱器官数量的黄心，上限为九狱器官数量×20",
-            "食用额外回复九狱器官数量的生命值"
+            "食用速度翻倍，每个九狱器官提供20点最大吸收生命值上限",
+            "每次进食获得饥饿值×九狱器官数量的吸收生命值",
+            "无视饥饿值限制，随时可以进食"
         );
         addItem(WAICOrgans.GREED, "贪婪");
         addOrganPassiveEffect(
@@ -1301,9 +1301,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.WRATH, "愤怒");
         addOrganPassiveEffect(
             WAICOrgans.WRATH,
-            "+1力量与+1速度",
-            "+2力量与+2速度",
-            "+3力量与+3速度"
+            "+3力量与+3速度",
+            "+6力量与+6速度",
+            "+9力量与+9速度"
         );
         addItem(WAICOrgans.HERESY, "异端");
         addOrganPassiveEffect(
@@ -1330,8 +1330,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             WAICOrgans.TREACHERY,
             "攻击额外造成目标1%最大生命值伤害",
-            "攻击额外造成目标3%最大生命值伤害",
-            "攻击额外造成目标5%最大生命值伤害"
+            "攻击额外造成目标1%最大生命值伤害",
+            "攻击额外造成目标1%最大生命值伤害"
         );
     }
 
@@ -1580,12 +1580,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
 
         addItem(WAICOrgans.EXPERIENCE_HEART, "Experience Heart");
-        addOrganPassiveEffect(
-            WAICOrgans.EXPERIENCE_HEART,
-            "Every 10 experience levels grant +1 health",
-            "Experience from orbs is doubled"
-        );
-        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "Grants health from experience levels and doubles orb XP");
+        addOrganPassiveEffect(WAICOrgans.EXPERIENCE_HEART, "Grants %s health from experience levels and doubles orb XP");
 
         addItem(WAICOrgans.FLESH_IDOL, "Flesh Idol");
         addOrganDescription(WAICOrgans.FLESH_IDOL, "A grotesque idol carved from living flesh, pulsing with vital energy");
@@ -1619,12 +1614,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
 
         addItem(WAICOrgans.EXPERIENCE_HEART, "经验之心");
-        addOrganPassiveEffect(
-            WAICOrgans.EXPERIENCE_HEART,
-            "每10级经验等级增加1点健康值",
-            "经验球获取的经验翻倍"
-        );
-        addOrganPassiveEffectSimple(WAICOrgans.EXPERIENCE_HEART, "经验等级转化为健康值，经验球获取翻倍");
+        addOrganPassiveEffect(WAICOrgans.EXPERIENCE_HEART, "经验等级提供%s点健康值，经验球获取翻倍");
 
         addItem(WAICOrgans.FLESH_IDOL, "血肉偶像");
         addOrganDescription(WAICOrgans.FLESH_IDOL, "由活肉雕琢而成的怪诞偶像，脉动着生命能量");
@@ -1913,6 +1903,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         add("formula.who_am_i_core.max_health", "Max Health");
         add("formula.who_am_i_core.current_health_ratio", "Current Health Ratio");
+        add("formula.who_am_i_core.experience_level", "Experience Level");
         add("formula.who_am_i_core.fire_count", "Fire");
         add("formula.who_am_i_core.ice_count", "Ice");
         add("formula.who_am_i_core.local_fire_count", "Local Fire");
@@ -1948,6 +1939,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         add("formula.who_am_i_core.max_health", "最大生命值");
         add("formula.who_am_i_core.current_health_ratio", "当前生命值比例");
+        add("formula.who_am_i_core.experience_level", "经验等级");
         add("formula.who_am_i_core.fire_count", "炽焰");
         add("formula.who_am_i_core.ice_count", "冰霜");
         add("formula.who_am_i_core.local_fire_count", "局部炽焰");

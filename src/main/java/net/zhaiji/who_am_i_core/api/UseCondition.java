@@ -11,6 +11,7 @@ import net.zhaiji.who_am_i_core.api.function.UseFunction;
 import net.zhaiji.who_am_i_core.manager.UseConditionManager;
 
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -36,6 +37,10 @@ public class UseCondition {
     private final UseFunction onUse;
     private final Function<ItemStack, UseAnim> useAnimation;
     private final BiFunction<LivingEntity, ItemStack, Integer> useDuration;
+    /**
+     * 强制接管 use 的条件谓词，非 null 时按其返回值决定是否绕过原版 {@code Item.use} 检查（如 canEat）
+     */
+    private final BiPredicate<LivingEntity, ItemStack> forceStartUsingItemPredicate;
 //    @Nullable
 //    private final FoodProperties foodProperties;
 
@@ -47,6 +52,7 @@ public class UseCondition {
         this.onUse = builder.onUse;
         this.useAnimation = builder.useAnimation;
         this.useDuration = builder.useDuration;
+        this.forceStartUsingItemPredicate = builder.forceStartUsingItemPredicate;
 //        this.foodProperties = builder.foodProperties;
     }
 
@@ -81,6 +87,18 @@ public class UseCondition {
      */
     public boolean hasOnFinishUsingItem() {
         return onFinishUsingItem != null;
+    }
+
+    /**
+     * 是否在 use 阶段强制接管（绕过原版 {@code Item.use} 的检查，如 canEat）
+     * <p>
+     * 必须设置了 onFinishUsingItem，且未设置谓词时默认强制接管（保持原行为）；
+     * 设置谓词后按谓词返回值决定，为 false 则交还原版 use 判断。
+     * </p>
+     */
+    public boolean shouldForceStartUsingItem(LivingEntity entity, ItemStack stack) {
+        return onFinishUsingItem != null
+            && (forceStartUsingItemPredicate == null || forceStartUsingItemPredicate.test(entity, stack));
     }
 
     /**
@@ -147,6 +165,7 @@ public class UseCondition {
         private UseFunction onUse = null;
         private Function<ItemStack, UseAnim> useAnimation = DEFAULT_USE_ANIMATION;
         private BiFunction<LivingEntity, ItemStack, Integer> useDuration = DEFAULT_USE_DURATION;
+        private BiPredicate<LivingEntity, ItemStack> forceStartUsingItemPredicate = null;
 //        @Nullable
 //        private FoodProperties foodProperties = null;
 
@@ -205,6 +224,21 @@ public class UseCondition {
          */
         public Builder onFinishUsingItem(FinishUsingItemFunction onFinishUsingItem) {
             this.onFinishUsingItem = onFinishUsingItem;
+            return this;
+        }
+
+        /**
+         * 设置强制接管 use 的条件谓词
+         * <p>
+         * 设置 onFinishUsingItem 后默认匹配即绕过原版 {@code Item.use} 检查。
+         * 通过此谓词可按实体/物品状态决定是否绕过：返回 true 强制接管（绕过 canEat 等），
+         * 返回 false 则交还原版 use 判断。
+         * </p>
+         *
+         * @param forceStartUsingItemWhen 接管条件谓词
+         */
+        public Builder forceStartUsingItemWhen(BiPredicate<LivingEntity, ItemStack> forceStartUsingItemWhen) {
+            this.forceStartUsingItemPredicate = forceStartUsingItemWhen;
             return this;
         }
 
@@ -329,6 +363,9 @@ public class UseCondition {
          * 构建并注册可使用条件
          */
         public UseCondition build() {
+            if (onFinishUsingItem != null && onUse != null) {
+                throw new IllegalStateException("onFinishUsingItem and onUse are mutually exclusive");
+            }
             UseCondition useCondition = new UseCondition(this);
             UseConditionManager.register(useCondition);
             return useCondition;

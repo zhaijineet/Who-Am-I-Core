@@ -38,7 +38,6 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
-import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.EntityRelationUtil;
@@ -46,6 +45,7 @@ import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
+import net.zhaiji.who_am_i_core.mixinapi.IHeresyMobEffectInstance;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
@@ -361,18 +361,22 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 经验之心：每10级经验等级+1健康值
+     * 经验之心：根据经验等级返回健康值加成 = floor(sqrt(经验等级))
+     */
+    public static int getExperienceHeartHealthBonus(int level) {
+        return (int) Math.floor(Math.sqrt(Math.max(0, level)));
+    }
+
+    /**
+     * 经验之心 modifier：健康值随经验等级的平方根缩放
      */
     public static void experienceHeartModifier(
         ChestCavitySlotContext context,
         Multimap<Holder<Attribute>, AttributeModifier> modifiers
     ) {
         LivingEntity entity = context.entity();
-        int level = 0;
-        if (entity instanceof Player player) {
-            level = player.experienceLevel;
-        }
-        double healthBonus = Math.floor(level / 10.0);
+        int level = entity instanceof Player player ? player.experienceLevel : 0;
+        double healthBonus = getExperienceHeartHealthBonus(level);
         modifiers.put(InitAttribute.HEALTH, OrganAttributeUtil.createAddValueModifier(context.id(), healthBonus));
     }
 
@@ -922,34 +926,30 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 色欲 attack：攻击回复伤害 10%/30%/60% 生命（叠加式）
+     * 攻击者拥有色欲器官时，攻击回复造成伤害 10%/20%/30% 生命（N=1→10%, N=2→20%, N=3→30%）
      */
-    public static void lustAttack(
-        ChestCavitySlotContext context,
-        LivingEntity target,
-        DamageSource source,
-        DamageContainer damageContainer
-    ) {
-        if (OrganUtil.isSelfDamage(target, source)) return;
-        int nineHellCount = getNineHellCount(context);
-        float healPercent = nineHellCount >= 3 ? 0.6F : (nineHellCount == 2 ? 0.3F : 0.1F);
-        float healAmount = damageContainer.getNewDamage() * healPercent;
+    public static void lustAttack(LivingEntity attacker, float damage) {
+        ChestCavityData data = ChestCavityUtil.getData(attacker);
+        if (!data.hasOrgan(WAICOrgans.LUST.get())) return;
+        int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        float healPercent = Math.min(nineHellCount, 3) * 0.1F;
+        float healAmount = damage * healPercent;
         if (healAmount > 0) {
-            context.entity().heal(healAmount);
+            attacker.heal(healAmount);
         }
     }
 
     /**
-     * 暴食 modifier：消化属性动态调整（基础 2 - N）
+     * 暴食 modifier：消化属性动态调整（基础 2 - N）+ 吸收生命上限
      */
     public static void gluttonyModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - getNineHellCount(context)));
+        int nineHellCount = getNineHellCount(context);
+        modifiers.put(InitAttribute.DIGESTION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
+        modifiers.put(Attributes.MAX_ABSORPTION, OrganAttributeUtil.createAddValueModifier(context.id(), nineHellCount * 20));
     }
 
     /**
-     * 暴食食用效果（在 LivingEntityUseItemEvent.Finish 中调用）
-     * 效果2 (N≥2)：食用获得饥饿值×N的黄心（吸收生命值），上限N×20
-     * 效果3 (N≥3)：食用额外回复N点生命
+     * 暴食食用效果 N≥2 时食用获得饥饿值×N的吸收生命值
      */
     public static void gluttonyEatEffect(LivingEntity entity, ChestCavityData data, ItemStack food) {
         if (!data.hasOrgan(WAICOrgans.GLUTTONY.get())) return;
@@ -961,16 +961,10 @@ public class WAICOrganUtil {
         if (foodProperties == null) return;
         int nutrition = foodProperties.nutrition();
 
-        // 效果2：吸收生命值（黄心），上限 N × 20
-        float absorptionToAdd = Math.min((float) nutrition * nineHellCount, nineHellCount * 20.0F);
+        float absorptionToAdd = (float) nutrition * nineHellCount;
         if (absorptionToAdd > 0) {
             float currentAbsorption = entity.getAbsorptionAmount();
             entity.setAbsorptionAmount(currentAbsorption + absorptionToAdd);
-        }
-
-        // 效果3：额外生命回复
-        if (nineHellCount >= 3) {
-            entity.heal(nineHellCount);
         }
     }
 
@@ -989,13 +983,13 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 愤怒 modifier：解毒属性动态调整（基础 2 - N）+ 力量/速度（叠加式）
+     * 愤怒 modifier：解毒属性动态调整（基础 2 - N）+ 力量/速度（3/6/9）
      */
     public static void wrathModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         int nineHellCount = getNineHellCount(context);
         modifiers.put(InitAttribute.DETOXIFICATION, OrganAttributeUtil.createAddValueModifier(context.id(), 2 - nineHellCount));
-        // 力量 + 速度（叠加式）
-        int bonus = nineHellCount >= 3 ? 6 : (nineHellCount == 2 ? 3 : 1);
+        int cappedCount = Math.min(nineHellCount, 3);
+        int bonus = cappedCount * (cappedCount + 1) / 2 * 3;
         modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
         modifiers.put(InitAttribute.SPEED, OrganAttributeUtil.createAddValueModifier(context.id(), bonus));
     }
@@ -1019,14 +1013,15 @@ public class WAICOrganUtil {
         if (!data.hasOrgan(WAICOrgans.HERESY.get())) return;
 
         int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
-        IMobEffectInstance iEffect = (IMobEffectInstance) effectInstance;
+        IHeresyMobEffectInstance mobEffectInstance = (IHeresyMobEffectInstance) effectInstance;
 
         // 药水持续时间延长，罪业1：+50%（×1.5），罪业2：+150%（×2.5），罪业3：+150%（×2.5）
-        iEffect.setDuration(duration -> (int) (duration * (nineHellCount >= 2 ? 2.5 : 1.5)), entity);
+        mobEffectInstance.setDuration(duration -> (int) (duration * (nineHellCount >= 2 ? 2.5 : 1.5)), entity);
 
         // 药水等级 +1
-        if (nineHellCount >= 3) {
-            iEffect.setAmplifier(effectInstance.getAmplifier() + 1, entity);
+        if (nineHellCount >= 3 && !mobEffectInstance.isHeresyEnhanced()) {
+            mobEffectInstance.setAmplifier(effectInstance.getAmplifier() + 1, entity);
+            mobEffectInstance.setHeresyEnhanced(true);
         }
     }
 
@@ -1078,20 +1073,13 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 背叛 attack：攻击额外造成目标最大生命值 1%/4%/9% 伤害（叠加式）
+     * 攻击者拥有背叛器官时，攻击额外造成目标最大生命值 1%/2%/3% 伤害（N=1→1%, N=2→2%, N=3→3%）
      */
-    public static void treacheryAttack(
-        ChestCavitySlotContext context,
-        LivingEntity target,
-        DamageSource source,
-        DamageContainer damageContainer
-    ) {
-        if (OrganUtil.isSelfDamage(target, source)) return;
-        int nineHellCount = getNineHellCount(context);
-        float bonusDamage = target.getMaxHealth() * (nineHellCount >= 3 ? 0.09F : (nineHellCount == 2 ? 0.04F : 0.01F));
-        if (bonusDamage > 0) {
-            damageContainer.setNewDamage(damageContainer.getNewDamage() + bonusDamage);
-        }
+    public static float treacheryAttack(LivingEntity attacker, LivingEntity target) {
+        ChestCavityData data = ChestCavityUtil.getData(attacker);
+        if (!data.hasOrgan(WAICOrgans.TREACHERY.get())) return 0;
+        int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        return target.getMaxHealth() * (Math.min(nineHellCount, 3) * 0.01F);
     }
 
     /**

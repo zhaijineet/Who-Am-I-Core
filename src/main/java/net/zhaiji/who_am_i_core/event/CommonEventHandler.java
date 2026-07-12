@@ -23,7 +23,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -54,8 +53,8 @@ import net.zhaiji.chestcavitybeyond.util.OrganAttributeUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
-import net.zhaiji.who_am_i_core.item.ExistenceDisplacerItem;
 import net.zhaiji.who_am_i_core.item.DragonBloodPreparationItem;
+import net.zhaiji.who_am_i_core.item.ExistenceDisplacerItem;
 import net.zhaiji.who_am_i_core.manager.CataclysmChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.CompanionsChestCavityTypeManager;
 import net.zhaiji.who_am_i_core.manager.FDBossesChestCavityTypeManager;
@@ -142,7 +141,7 @@ public class CommonEventHandler {
             .build();
 
         // 暴食可以食用任何食物，且食用速度减半
-        // 优先级设低（范围宽），让更具体的条件优先匹配
+        // TODO 暴食 forceStartUsingItemWhen 绕过模组食物整个 Item.use，后续重构为仅绕过 canEat
         UseCondition.builder()
             .priority(-100)
             .matchesItem(stack -> stack.has(DataComponents.FOOD))
@@ -150,6 +149,7 @@ public class CommonEventHandler {
             // 不能直接使用stack的getUseDuration，会无限循环
             .onFinishUsingItem((entity, stack, useCondition) -> stack.getItem().finishUsingItem(stack, entity.level(), entity))
             .useDuration((entity, stack) -> stack.getItem().getUseDuration(stack, entity) / 2)
+            .forceStartUsingItemWhen((entity, stack) -> ChestCavityUtil.getData(entity).getOrganCount(WAICItemTagManager.NINE_HELL) >= 3)
             .build();
 
         // 墨水瓶器官可以饮用铁魔法的墨水
@@ -302,7 +302,7 @@ public class CommonEventHandler {
     }
 
     /**
-     * 器官更换事件处理
+     * @param event 器官更换事件
      */
     public static void handlerOrganChangeEvent(OrganChangeEvent event) {
         if (event.getEntity().level().isClientSide()) return;
@@ -318,17 +318,14 @@ public class CommonEventHandler {
     }
 
     /**
-     * 九头蛇脊柱复活机制
-     * 当实体死亡时，如果具有超过10秒的中毒效果，则恢复至10%血量并取消死亡
-     * 同时提升中毒等级并折半时间
-     * TODO 没有复活提示，考虑加不死图腾音效
+     * @param event 实体死亡事件
      */
     public static void handlerLivingDeathEvent(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         Level level = entity.level();
         if (level.isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        // 九头蛇脊柱复活技能
+        // 九头蛇脊柱复活技能 TODO 没有复活提示，考虑加不死图腾音效
         if (IceAndFireOrganUtil.hydraSpineSkill(entity, data)) {
             event.setCanceled(true);
             return;
@@ -425,24 +422,41 @@ public class CommonEventHandler {
             extraDamage += entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
         }
-        // 九头蛇肋骨效果（唯一）
+        // 九头蛇肋骨效果
         if (!isSelfDamage) block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
-        // 导流肋骨护盾（唯一）
+        // 导流肋骨护盾
         if (!isSelfDamage) block += WAICOrganUtil.currentRibShield(entity, damage);
-        // 九头蛇肌肉效果（唯一）
+        // 九头蛇肌肉效果
         if (!isSelfDamage && attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
-        // 尸王脊柱效果（唯一）
+        // 背叛效果
+        if (!isSelfDamage && attacker != null) extraDamage += WAICOrganUtil.treacheryAttack(attacker, entity);
+        // 尸王脊柱效果
         if (!isSelfDamage) block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
-        // 风暴脊柱效果（唯一）
+        // 风暴脊柱效果
         if (!isSelfDamage) block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
     }
 
     /**
-     * 钢笔尖：施法时消耗墨水增级
-     * 调色盘：施法时消耗对应颜色染料，增加法术等级
-     * 猩红肝脏：猩红法术消耗血液增级
+     * @param event 实体受伤后事件
+     */
+    public static void handlerLivingDamageEvent$Post(LivingDamageEvent.Post event) {
+        LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide()) return;
+        DamageSource source = event.getSource();
+        LivingEntity attacker = source.getEntity() instanceof LivingEntity attackerEntity
+                                ? attackerEntity
+                                : source.getDirectEntity() instanceof LivingEntity directEntity
+                                  ? directEntity
+                                  : null;
+        if (attacker == null) return;
+        if (OrganUtil.isSelfDamage(entity, source)) return;
+        WAICOrganUtil.lustAttack(attacker, event.getNewDamage());
+    }
+
+    /**
+     *  @param event 法术释放事件
      */
     public static void handlerSpellOnCastEvent(SpellOnCastEvent event) {
         LivingEntity entity = event.getEntity();
@@ -490,8 +504,6 @@ public class CommonEventHandler {
     }
 
     /**
-     * 病变心脏/肌肉：当效果添加或移除时，重新计算依赖效果的器官属性
-     *
      * @param event 效果添加事件
      */
     public static void handlerMobEffectEvent$Added(MobEffectEvent.Added event) {
@@ -513,8 +525,6 @@ public class CommonEventHandler {
     }
 
     /**
-     * 病变心脏/肌肉：当效果移除时，重新计算依赖效果的器官属性
-     *
      * @param event 效果移除事件
      */
     public static void handlerMobEffectEvent$Remove(MobEffectEvent.Remove event) {
@@ -533,8 +543,6 @@ public class CommonEventHandler {
     }
 
     /**
-     * 病变心脏/肌肉：当效果过期时，重新计算依赖效果的器官属性
-     *
      * @param event 效果过期事件
      */
     public static void handlerMobEffectEvent$Expired(MobEffectEvent.Expired event) {
@@ -553,19 +561,19 @@ public class CommonEventHandler {
     }
 
     /**
-     * 经验之心：从经验球获取的经验 ×2
+     * @param event 拾取经验球事件
      */
     public static void handlerPlayerXpEvent$PickupXp(PlayerXpEvent.PickupXp event) {
         Player player = event.getEntity();
         ChestCavityData data = ChestCavityUtil.getData(player);
         if (!data.hasOrgan(WAICOrgans.EXPERIENCE_HEART.get())) return;
+        // 因为 mixin 写起来太重，于是直接给玩家额外加一份经验
+        // 但如果有其他 mod 取消了事件（比本事件更低监听），就会导致经验重复获取，需要注意
         player.giveExperiencePoints(event.getOrb().value);
     }
 
     /**
-     * 直肠子：30% 几率在 3 秒后掉落一份相同食物
-     * 暴食：N≥2获得黄心 + N≥3回复生命
-     * 蛋糕胃：食用食物时给予甜蜜效果，等级 = 蛋糕器官数量，可叠加，每次重置 30 秒
+     * @param event 实体使用物品结束事件
      */
     public static void handlerLivingEntityUseItemEvent$Finish(LivingEntityUseItemEvent.Finish event) {
         LivingEntity entity = event.getEntity();
@@ -578,7 +586,7 @@ public class CommonEventHandler {
         // 直肠子效果
         WAICOrganUtil.straightIntestineEffect(entity, data, food);
 
-        // 暴食额外效果（黄心 + 生命回复）
+        // 暴食吸收生命值效果
         WAICOrganUtil.gluttonyEatEffect(entity, data, food);
 
         // 蛋糕胃：给予甜蜜效果
@@ -586,7 +594,7 @@ public class CommonEventHandler {
     }
 
     /**
-     * 暴力（肌肉）：暴击倍率增强 + 永远暴击
+     * @param event 暴击事件
      */
     public static void handlerCriticalHitEvent(CriticalHitEvent event) {
         Player player = event.getEntity();
@@ -594,7 +602,7 @@ public class CommonEventHandler {
     }
 
     /**
-     * 右键方块事件处理：砂轮打磨脊柱骨质器官 → 剑骨头
+     * @param event 玩家右键方块事件
      */
     public static void handlerPlayerInteract$RightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Level level = event.getLevel();

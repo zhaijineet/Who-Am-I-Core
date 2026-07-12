@@ -187,7 +187,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
             .modifier(CataclysmOrganUtil::undyingEmberModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .build()
     );
 
@@ -197,7 +197,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
             .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .build()
     );
 
@@ -254,7 +254,7 @@ public class CataclysmOrgans {
         "tactical_disk",
         () -> Organ.builder()
             .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.HEALTH, 2))
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .build()
     );
 
@@ -282,7 +282,7 @@ public class CataclysmOrgans {
         "compute_chip",
         () -> Organ.builder()
             .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.NERVES, 1.5))
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .build()
     );
 
@@ -443,7 +443,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
             .modifier(CataclysmOrganUtil::mossyAmethystModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.MOSSY_AMETHYST_TOOLTIP)
             .build()
     );

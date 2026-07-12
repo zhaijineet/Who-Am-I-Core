@@ -25,6 +25,7 @@
     "MalkuthWeaknessOverlayMixin",
     "MerchantContainerMixin",
     "MerchantResultSlotMixin",
+    "MobEffectInstanceMixin",
     "ModDispenserBehaviorMixin",
     "PlayerMixin",
     "PoisonMobEffectMixin",

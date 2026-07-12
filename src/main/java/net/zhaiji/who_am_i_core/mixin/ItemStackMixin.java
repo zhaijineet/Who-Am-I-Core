@@ -44,8 +44,8 @@ public abstract class ItemStackMixin {
         if (condition.isEmpty()) return;
 
         UseCondition useCondition = condition.get();
-        if (useCondition.hasOnFinishUsingItem()) {
-            // 持续使用路径：开始使用物品，等待完成后调用 finishUsingItem → onFinishUsingItem
+        if (useCondition.shouldForceStartUsingItem(player, whoAmICore$self())) {
+            // TODO forceStartUsingItem 绕过整个 Item.use 而非仅 canEat，对模组食物启动逻辑兼容性有限，后续重构 API
             player.startUsingItem(usedHand);
             cir.setReturnValue(InteractionResultHolder.consume(whoAmICore$self()));
         } else if (useCondition.hasOnUse()) {

@@ -377,7 +377,7 @@ public class WAICOrgans {
         () -> Organ.builder(properties -> new FrankensteinItem(properties, ItemTagManager.HEART))
             .properties(properties -> properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY))
             .modifier(OrganUtil::aggregateFrankensteinHeartAttributes)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .build()
     );
 
@@ -526,7 +526,7 @@ public class WAICOrgans {
         "limbo",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::limboModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tick(WAICOrganUtil::limboTick)
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
@@ -537,8 +537,7 @@ public class WAICOrgans {
         "lust",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::lustModifier)
-            .refreshOnOrganChange()
-            .attack(WAICOrganUtil::lustAttack)
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -548,7 +547,7 @@ public class WAICOrgans {
         "gluttony",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::gluttonyModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -558,7 +557,7 @@ public class WAICOrgans {
         "greed",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::greedModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -568,7 +567,7 @@ public class WAICOrgans {
         "wrath",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::wrathModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -578,7 +577,7 @@ public class WAICOrgans {
         "heresy",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::heresyModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -588,7 +587,7 @@ public class WAICOrgans {
         "violence",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::violenceModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -598,7 +597,7 @@ public class WAICOrgans {
         "fraud",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::fraudModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -608,8 +607,7 @@ public class WAICOrgans {
         "treachery",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::treacheryModifier)
-            .refreshOnOrganChange()
-            .attack(WAICOrganUtil::treacheryAttack)
+            .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );
@@ -817,6 +815,7 @@ public class WAICOrgans {
         "experience_heart",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::experienceHeartModifier)
+            .tooltip(WAICTooltipManager.EXPERIENCE_HEART_TOOLTIP)
             .build()
     );
 

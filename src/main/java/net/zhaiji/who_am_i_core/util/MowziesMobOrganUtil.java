@@ -9,6 +9,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -120,6 +121,21 @@ public class MowziesMobOrganUtil {
         });
     }
 
+    /**
+     * 统计泥峭系列器官数量
+     */
+    private static int getBluffOrganCount(ChestCavityData data) {
+        return data.getOrganCount(WAICItemTagManager.BLUFF);
+    }
+
+    /**
+     * 泥峭铭文板 modifier：为 MAX_ABSORPTION 提供上限
+     */
+    public static void bluffTabletModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        int bluffOrganCount = getBluffOrganCount(context.data());
+        modifiers.put(Attributes.MAX_ABSORPTION, OrganAttributeUtil.createAddValueModifier(context.id(), bluffOrganCount * 8));
+    }
+
     // 泥峭核心 — 吃泥土方块（底层逻辑，接收方块坐标）
     public static boolean bluffCore(ChestCavitySlotContext slotContext, BlockPos pos) {
         LivingEntity entity = slotContext.entity();
@@ -142,18 +158,11 @@ public class MowziesMobOrganUtil {
      */
     public static ItemStack eatDirt(LivingEntity entity, ItemStack dirt) {
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        // 铭文板吸收效果（非食物效果，保持直接设置）
+        // 铭文板吸收效果（非食物效果，保持直接设置），setAbsorptionAmount 会自动按 MAX_ABSORPTION 属性截断
         int tabletCount = data.getOrganCount(MowziesMobOrgans.BLUFF_TABLET.get());
         if (tabletCount > 0) {
-            int bluffOrganCount = data.getOrganCount(
-                organ -> organ.is(MowziesMobOrgans.BLUFF_CORE.get()) ||
-                         organ.is(MowziesMobOrgans.BLUFF_TABLET.get()) ||
-                         organ.is(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
-            );
-            int maxAbsorption = bluffOrganCount * 8;
             float currentAbsorption = entity.getAbsorptionAmount();
-            float newAbsorption = Math.min(currentAbsorption + tabletCount * 2, maxAbsorption);
-            entity.setAbsorptionAmount(newAbsorption);
+            entity.setAbsorptionAmount(currentAbsorption + tabletCount * 2);
         }
 
         // 构造 FoodProperties，走标准食物路径
@@ -185,11 +194,7 @@ public class MowziesMobOrganUtil {
      * 检查是否拥有泥峭器官
      */
     public static boolean hasBluffOrgan(LivingEntity entity) {
-        return ChestCavityUtil.getData(entity).hasOrgan(
-            organ -> organ.is(MowziesMobOrgans.BLUFF_CORE.get()) ||
-                     organ.is(MowziesMobOrgans.BLUFF_TABLET.get()) ||
-                     organ.is(MowziesMobOrgans.ACTIVE_BLUFF_ROD.get())
-        );
+        return getBluffOrganCount(ChestCavityUtil.getData(entity)) > 0;
     }
 
     /**

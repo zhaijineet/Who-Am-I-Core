@@ -20,7 +20,7 @@ public class MowziesMobOrgans {
             // -80%最终移动速度
             .totalMultipliedAttribute(Attributes.MOVEMENT_SPEED, -0.8)
             .modifier(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorModifier)
-            .refreshOnOrganChange()
+            .refreshDynamicAttribute()
             .attack(MowziesMobOrganUtil::ferrousWroughtnautHeartMirrorAttack)
             .build()
     );
@@ -165,6 +165,8 @@ public class MowziesMobOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.25)
+            .modifier(MowziesMobOrganUtil::bluffTabletModifier)
+            .refreshDynamicAttribute()
             .build()
     );
 

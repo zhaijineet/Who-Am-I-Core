@@ -123,9 +123,9 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> CURSED_GOLD_LUNG = WAICItem.ITEM.register(
         "cursed_gold_lung",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 1.5)
-            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 1.5)
-            .addValueAttribute(InitAttribute.ENDURANCE, 1.5)
+            .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
+            .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
+            .addValueAttribute(InitAttribute.ENDURANCE, 2)
             .addValueAttribute(WAICAttribute.LOOTING, 0.5)
             .addValueAttribute(WAICAttribute.FORTUNE, 0.5)
             .tooltip(WAICTooltipManager.CURSED_GOLD_TOOLTIP)
