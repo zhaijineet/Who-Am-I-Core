@@ -508,15 +508,13 @@ public class WAICOrganUtil {
         int crimsonCountAfter = data.getOrganCount(WAICItemTagManager.CRIMSON);
         // 变化前猩红器官数量 = 变化后 - 新增 + 移除
         int crimsonCountBefore = crimsonCountAfter - (newIsCrimson ? 1 : 0) + (oldIsCrimson ? 1 : 0);
-        // 变化后是否有心脏
-        boolean hasHeartAfter = data.hasOrgan(WAICOrgans.CRIMSON_HEART.get());
         boolean oldIsHeart = oldStack.is(WAICOrgans.CRIMSON_HEART.get());
         boolean newIsHeart = newStack.is(WAICOrgans.CRIMSON_HEART.get());
-        // 变化前是否有心脏：变后有则除非本次新增，变后无则只有本次移除
-        boolean hasHeartBefore = hasHeartAfter ? !newIsHeart : oldIsHeart;
+        int heartCountAfter = data.getOrganCount(WAICOrgans.CRIMSON_HEART.get());
+        int heartCountBefore = heartCountAfter - (newIsHeart ? 1 : 0) + (oldIsHeart ? 1 : 0);
         // 先减旧容量，再加新容量
-        int bonusBefore = hasHeartBefore ? crimsonCountBefore * 100 : 0;
-        int bonusAfter = hasHeartAfter ? crimsonCountAfter * 100 : 0;
+        int bonusBefore = heartCountBefore > 0 ? crimsonCountBefore * 100 : 0;
+        int bonusAfter = heartCountAfter > 0 ? crimsonCountAfter * 100 : 0;
         int delta = bonusAfter - bonusBefore;
         if (delta != 0) {
             HumoursData.addMaxBlood(entity, delta);
@@ -1107,6 +1105,7 @@ public class WAICOrganUtil {
                 toRemove.add(effect.getEffect());
             }
         }
+        if (toRemove.isEmpty()) return false;
         for (Holder<MobEffect> effect : toRemove) {
             entity.removeEffect(effect);
         }

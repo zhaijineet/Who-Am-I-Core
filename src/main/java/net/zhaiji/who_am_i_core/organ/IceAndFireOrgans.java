@@ -387,6 +387,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 0.05))
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.ICE_SHARD_TOOLTIP)
             .build()
     );
 
@@ -396,6 +397,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 0.15))
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.FROSTBURN_SOUL_TOOLTIP)
             .build()
     );
 
@@ -406,6 +408,7 @@ public class IceAndFireOrgans {
             .modifier((context, modifiers) -> IceAndFireOrganUtil.coldHealthModifier(context, modifiers, 0.25))
             .refreshDynamicAttribute()
             .attack(IceAndFireOrganUtil::dreadPhylacteryAttack)
+            .tooltip(WAICTooltipManager.DREAD_PHYLACTERY_TOOLTIP)
             .build()
     );
 

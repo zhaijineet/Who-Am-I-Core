@@ -830,8 +830,14 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.SPECIAL).add(FDBossesOrgans.MALKUTH.get());
         tag(ItemTagManager.SPECIAL).add(FDBossesOrgans.CHESED.get());
         tag(ItemTagManager.SPECIAL).add(FDBossesOrgans.GEBURAH.get());
-        tag(WAICItemTagManager.FIRE).add(FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART.get());
-        tag(WAICItemTagManager.ICE).add(FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART.get());
+        tag(WAICItemTagManager.FIRE).add(
+            FDBossesOrgans.FIRE_MALKUTH_WARRIOR_HEART.get(),
+            FDBossesOrgans.MALKUTH.get()
+        );
+        tag(WAICItemTagManager.ICE).add(
+            FDBossesOrgans.ICE_MALKUTH_WARRIOR_HEART.get(),
+            FDBossesOrgans.MALKUTH.get()
+        );
         tag(WAICItemTagManager.QLIPHOTH).add(
             FDBossesOrgans.MALKUTH.get(),
             FDBossesOrgans.CHESED.get(),

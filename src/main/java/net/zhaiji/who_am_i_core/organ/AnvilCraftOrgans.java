@@ -251,6 +251,7 @@ public class AnvilCraftOrgans {
         "frost_metal_heart",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalHeartModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -259,6 +260,7 @@ public class AnvilCraftOrgans {
         "frost_metal_lung",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalLungModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -267,6 +269,7 @@ public class AnvilCraftOrgans {
         "frost_metal_spine",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalSpineModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -275,6 +278,7 @@ public class AnvilCraftOrgans {
         "frost_metal_stomach",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalStomachModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -283,6 +287,7 @@ public class AnvilCraftOrgans {
         "frost_metal_intestine",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalIntestineModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -291,6 +296,7 @@ public class AnvilCraftOrgans {
         "frost_metal_kidney",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalKidneyModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -299,6 +305,7 @@ public class AnvilCraftOrgans {
         "frost_metal_spleen",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalSpleenModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -307,6 +314,7 @@ public class AnvilCraftOrgans {
         "frost_metal_liver",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalLiverModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -315,6 +323,7 @@ public class AnvilCraftOrgans {
         "frost_metal_appendix",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalAppendixModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -323,6 +332,7 @@ public class AnvilCraftOrgans {
         "frost_metal_rib",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalRibModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -331,6 +341,7 @@ public class AnvilCraftOrgans {
         "frost_metal_muscle",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::frostMetalMuscleModifier)
+            .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
     );
 
@@ -339,6 +350,7 @@ public class AnvilCraftOrgans {
         "transcendium_heart",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumHeartModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -347,6 +359,7 @@ public class AnvilCraftOrgans {
         "transcendium_lung",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumLungModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -355,6 +368,7 @@ public class AnvilCraftOrgans {
         "transcendium_spine",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumSpineModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -363,6 +377,7 @@ public class AnvilCraftOrgans {
         "transcendium_stomach",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumStomachModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -371,6 +386,7 @@ public class AnvilCraftOrgans {
         "transcendium_intestine",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumIntestineModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -379,6 +395,7 @@ public class AnvilCraftOrgans {
         "transcendium_kidney",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumKidneyModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -387,6 +404,7 @@ public class AnvilCraftOrgans {
         "transcendium_spleen",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumSpleenModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -395,6 +413,7 @@ public class AnvilCraftOrgans {
         "transcendium_liver",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumLiverModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -403,6 +422,7 @@ public class AnvilCraftOrgans {
         "transcendium_appendix",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumAppendixModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -411,6 +431,7 @@ public class AnvilCraftOrgans {
         "transcendium_rib",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumRibModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 
@@ -419,6 +440,7 @@ public class AnvilCraftOrgans {
         "transcendium_muscle",
         () -> Organ.builder(EnchantableOrganItem::new)
             .modifier(AnvilCraftOrganUtil::transcendiumMuscleModifier)
+            .tooltip(WAICTooltipManager.TRANSCENDIUM_TOOLTIP)
             .build()
     );
 

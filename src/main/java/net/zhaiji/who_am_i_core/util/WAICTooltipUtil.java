@@ -5,6 +5,8 @@ import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -12,9 +14,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BundleContents;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.api.TooltipsKeyContext;
+import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.RailgunAmmoManager;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 
 import java.util.ArrayList;
@@ -154,5 +158,60 @@ public class WAICTooltipUtil {
                 )));
         }
         return result;
+    }
+
+    public static MutableComponent globalFireOrganCountFormula(ChestCavitySlotContext context) {
+        return elementalOrganCountFormula(context, false, true);
+    }
+
+    public static MutableComponent globalIceOrganCountFormula(ChestCavitySlotContext context) {
+        return elementalOrganCountFormula(context, false, false);
+    }
+
+    public static MutableComponent localFireOrganCountFormula(ChestCavitySlotContext context) {
+        return elementalOrganCountFormula(context, true, true);
+    }
+
+    public static MutableComponent localIceOrganCountFormula(ChestCavitySlotContext context) {
+        return elementalOrganCountFormula(context, true, false);
+    }
+
+    private static MutableComponent elementalOrganCountFormula(
+        ChestCavitySlotContext context,
+        boolean local,
+        boolean fireFirst
+    ) {
+        TagKey<Item> firstTag = fireFirst ? WAICItemTagManager.FIRE : WAICItemTagManager.ICE;
+        TagKey<Item> secondTag = fireFirst ? WAICItemTagManager.ICE : WAICItemTagManager.FIRE;
+        Component firstName = local
+                              ? Component.translatable(fireFirst
+                                                       ? "formula.who_am_i_core.local_fire_count"
+                                                       : "formula.who_am_i_core.local_ice_count")
+                              : TooltipUtil.tagOrganCountName(firstTag);
+        Component secondName = local
+                               ? Component.translatable(fireFirst
+                                                        ? "formula.who_am_i_core.local_ice_count"
+                                                        : "formula.who_am_i_core.local_fire_count")
+                               : TooltipUtil.tagOrganCountName(secondTag);
+        int firstCount = getElementalOrganCountWithSelf(context, firstTag, local);
+        int secondCount = getElementalOrganCountWithSelf(context, secondTag, local);
+        return Component.empty()
+            .append(Component.literal("("))
+            .append(firstName)
+            .append(Component.literal(String.valueOf(firstCount)))
+            .append(TooltipUtil.formulaOperator(OrganUtil.usesAdditiveElementalOrganCounts(context) ? "+" : "-"))
+            .append(secondName)
+            .append(Component.literal(String.valueOf(secondCount)))
+            .append(Component.literal(")"));
+    }
+
+    private static int getElementalOrganCountWithSelf(
+        ChestCavitySlotContext context,
+        TagKey<Item> tag,
+        boolean local
+    ) {
+        return local
+               ? OrganUtil.getLocalOrganCountWithSelf(context, tag)
+               : ChestCavityUtil.getOrganCountWithSelf(context, tag);
     }
 }

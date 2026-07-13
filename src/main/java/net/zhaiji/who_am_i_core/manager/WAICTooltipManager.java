@@ -82,11 +82,10 @@ public class WAICTooltipManager {
         context -> {
             int level = context.entity() instanceof Player player ? player.experienceLevel : 0;
             return Component.empty()
-                .append(Component.literal("floor(√("))
+                .append(Component.literal("floor(√"))
                 .append(Component.translatable("formula.who_am_i_core.experience_level"))
-                .append(Component.literal(": "))
                 .append(Component.literal(String.valueOf(level)))
-                .append(Component.literal("))"));
+                .append(Component.literal(")"));
         }
     );
 
@@ -98,6 +97,37 @@ public class WAICTooltipManager {
             0, List.of(EXPERIENCE_HEART_FORMULA_VALUE)
         )))
         .build();
+
+    private static final FormulaValue FROST_METAL_ATTRIBUTE_FORMULA_VALUE = buildEnchantedOrganAttributeFormulaValue(3);
+
+    public static final OrganTooltipConsumer FROST_METAL_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            Map.of(),
+            Map.of(0, List.of(FROST_METAL_ATTRIBUTE_FORMULA_VALUE))
+        ))
+        .build();
+
+    private static final FormulaValue TRANSCENDIUM_ATTRIBUTE_FORMULA_VALUE = buildEnchantedOrganAttributeFormulaValue(5);
+
+    public static final OrganTooltipConsumer TRANSCENDIUM_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            Map.of(),
+            Map.of(0, List.of(TRANSCENDIUM_ATTRIBUTE_FORMULA_VALUE))
+        ))
+        .build();
+
+    private static FormulaValue buildEnchantedOrganAttributeFormulaValue(int baseValue) {
+        return new FormulaValue(
+            context -> Component.literal(TooltipUtil.formatAttributeValue(baseValue + OrganUtil.mercilessBonus(context))),
+            context -> Component.empty()
+                .append(Component.literal(String.valueOf(baseValue)))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(Component.literal("floor(√"))
+                .append(Component.translatable("formula.who_am_i_core.total_enchantment_levels"))
+                .append(Component.literal(String.valueOf(OrganUtil.getTotalEnchantmentLevels(context.stack()))))
+                .append(Component.literal(")"))
+        );
+    }
 
     /**
      * 制御棒
@@ -259,46 +289,30 @@ public class WAICTooltipManager {
         }
     );
 
-    /**
-     * 蓄能电芯 — 每秒回血随机械器官数量缩放
-     */
     public static final OrganTooltipConsumer POWER_CELL_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
             0, List.of(POWER_CELL_FORMULA_VALUE)
         )))
         .build();
 
-    /**
-     * 炽面甲命中回血公式：max(0, 1 + floor(局部炽焰器官数 × 0.5))
-     * <p>局部炽焰器官数：以自身槽位为中心3×3范围内炽焰减冰霜的差值，可为负</p>
-     */
     private static final FormulaValue BLAZING_VISAGE_FORMULA_VALUE = new FormulaValue(
         context -> {
             int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
             return Component.literal(TooltipUtil.formatAttributeValue(
                 Math.max(0, 1.0F + (float) Math.floor(localFireOrganCount * 0.5))));
         },
-        context -> {
-            int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
-            return Component.empty()
-                .append(Component.literal("1"))
-                .append(TooltipUtil.formulaOperator("+"))
-                .append(Component.literal("floor("))
-                .append(Component.translatable("formula.who_am_i_core.local_fire_count"))
-                .append(Component.literal(String.valueOf(localFireOrganCount)))
-                .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("0.5)"));
-        }
+        context -> Component.empty()
+            .append(Component.literal("max(0," + TooltipUtil.NON_BREAKING_SPACE + "1"))
+            .append(TooltipUtil.formulaOperator("+"))
+            .append(Component.literal("floor("))
+            .append(WAICTooltipUtil.localFireOrganCountFormula(context))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.literal("0.5))"))
     );
 
-    /**
-     * 炽面甲 — 命中回血随局部炽焰器官数量缩放
-     */
     public static final OrganTooltipConsumer BLAZING_VISAGE_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.split(
-            // simple 单段含 1 个 %s 在 line 0
             Map.of(0, List.of(BLAZING_VISAGE_FORMULA_VALUE)),
-            // detailed 含动态 %s 在 line 2
             Map.of(2, List.of(BLAZING_VISAGE_FORMULA_VALUE))
         ))
         .build();
@@ -543,19 +557,15 @@ public class WAICTooltipManager {
      */
     private static final FormulaValue DREAD_SPINE_DURATION_FORMULA_VALUE = new FormulaValue(
         context -> {
-            int iceCount = OrganUtil.getIceOrganCount(context);
-            return Component.literal(String.valueOf(Math.max(0, 40 + iceCount * 10)));
+            int iceOrganCount = OrganUtil.getIceOrganCount(context);
+            return Component.literal(String.valueOf(Math.max(0, 40 + iceOrganCount * 10)));
         },
-        context -> {
-            int iceCount = OrganUtil.getIceOrganCount(context);
-            return Component.empty()
-                .append(Component.literal("40"))
-                .append(TooltipUtil.formulaOperator("+"))
-                .append(Component.translatable("formula.who_am_i_core.ice_count"))
-                .append(Component.literal(String.valueOf(iceCount)))
-                .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("10"));
-        }
+        context -> Component.empty()
+            .append(Component.literal("max(0," + TooltipUtil.NON_BREAKING_SPACE + "40"))
+            .append(TooltipUtil.formulaOperator("+"))
+            .append(WAICTooltipUtil.globalIceOrganCountFormula(context))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.literal("10)"))
     );
 
     /**
@@ -570,15 +580,13 @@ public class WAICTooltipManager {
         context -> {
             int localIceOrganCount = OrganUtil.getLocalIceOrganCount(context);
             return Component.empty()
-                .append(Component.translatable("formula.who_am_i_core.local_ice_count"))
-                .append(Component.literal(String.valueOf(localIceOrganCount)))
+                .append(WAICTooltipUtil.localIceOrganCountFormula(context))
                 .append(TooltipUtil.formulaOperator("≤"))
                 .append(Component.literal("0"))
                 .append(TooltipUtil.formulaOperator("?"))
                 .append(Component.literal("1"))
                 .append(TooltipUtil.formulaOperator(":"))
                 .append(Component.literal("floor(("))
-                .append(Component.translatable("formula.who_am_i_core.local_ice_count"))
                 .append(Component.literal(String.valueOf(localIceOrganCount)))
                 .append(TooltipUtil.formulaOperator("-"))
                 .append(Component.literal("1)"))
@@ -773,50 +781,34 @@ public class WAICTooltipManager {
      */
     public static final OrganTooltipConsumer VOID_CRYSTAL_SPINE_TOOLTIP = OrganTooltip.builder()
         .dynamicActiveSkill(slotContext -> DynamicValues.same(Map.of(
-            // simple 和 detailed 都是单 %s，都在 line 0
             0, List.of(VOID_CRYSTAL_SPINE_FORMULA_VALUE)
         )))
         .build();
 
-    /**
-     * 巨兽回路伤害公式：20 + 炽焰器官数 × 1% × 最大生命
-     */
     private static final FormulaValue MONSTROSITY_CIRCUIT_FORMULA_VALUE = new FormulaValue(
         context -> {
             int fireOrganCount = OrganUtil.getFireOrganCount(context);
             return Component.literal(TooltipUtil.formatAttributeValue(
-                Math.max(0, 20 + fireOrganCount * 0.01F * context.entity().getMaxHealth())));
+                Math.max(0, 20 + fireOrganCount * 0.05F * context.entity().getMaxHealth())));
         },
-        context -> {
-            int fireOrganCount = OrganUtil.getFireOrganCount(context);
-            return Component.empty()
-                .append(Component.literal("20"))
-                .append(TooltipUtil.formulaOperator("+"))
-                .append(Component.translatable("formula.who_am_i_core.fire_count"))
-                .append(Component.literal(String.valueOf(fireOrganCount)))
-                .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("1%"))
-                .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.translatable("formula.who_am_i_core.max_health"))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(context.entity().getMaxHealth())));
-        }
+        context -> Component.empty()
+            .append(Component.literal("20"))
+            .append(TooltipUtil.formulaOperator("+"))
+            .append(WAICTooltipUtil.globalFireOrganCountFormula(context))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.translatable("formula.who_am_i_core.max_health"))
+            .append(Component.literal(TooltipUtil.formatAttributeValue(context.entity().getMaxHealth())))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.literal("5%"))
     );
 
-    /**
-     * 巨兽回路 — 伤害随炽焰器官数量和自身最大生命值缩放
-     */
     public static final OrganTooltipConsumer MONSTROSITY_CIRCUIT_TOOLTIP = OrganTooltip.builder()
         .dynamicActiveSkill(slotContext -> DynamicValues.split(
-            // simple 单段含 1 个 %s 在 line 0
             Map.of(0, List.of(MONSTROSITY_CIRCUIT_FORMULA_VALUE)),
-            // detailed 含动态 %s 在 line 1
             Map.of(1, List.of(MONSTROSITY_CIRCUIT_FORMULA_VALUE))
         ))
         .build();
 
-    /**
-     * 巨兽熔炉骇人之恶等级公式：巨兽器官数（amplifier = count - 1，等级 = amplifier + 1 = count）
-     */
     private static final FormulaValue MONSTROSITY_FURNACE_LEVEL_FORMULA_VALUE = new FormulaValue(
         context -> {
             int monstrosityCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MONSTROSITY);
@@ -861,35 +853,13 @@ public class WAICTooltipManager {
         buildDragonBreathSacDamageFormulaValue(DragonBreathCastingTask.BreathType.LIGHTNING_BREATH, WAICItemTagManager.LIGHTNING_DRAGON);
 
     /**
-     * 火龙吐息袋计入器官数公式：min(火龙器官数, 10)
-     */
-    private static final FormulaValue FIRE_DRAGON_BREATH_SAC_COUNT_FORMULA_VALUE =
-        buildDragonBreathSacFormulaValue(WAICItemTagManager.FIRE_DRAGON);
-
-    /**
-     * 冰龙吐息袋计入器官数公式：min(冰龙器官数, 10)
-     */
-    private static final FormulaValue ICE_DRAGON_BREATH_SAC_COUNT_FORMULA_VALUE =
-        buildDragonBreathSacFormulaValue(WAICItemTagManager.ICE_DRAGON);
-
-    /**
-     * 电龙吐息袋计入器官数公式：min(电龙器官数, 10)
-     */
-    private static final FormulaValue LIGHTNING_DRAGON_BREATH_SAC_COUNT_FORMULA_VALUE =
-        buildDragonBreathSacFormulaValue(WAICItemTagManager.LIGHTNING_DRAGON);
-
-    /**
      * 火龙吐息袋 — 伤害随火龙器官数量缩放，计入器官数上限 10
      */
     public static final OrganTooltipConsumer FIRE_DRAGON_BREATH_SAC_TOOLTIP = OrganTooltip.builder()
         .dynamicActiveSkill(slotContext -> DynamicValues.split(
             // simple 单段含 1 个 %s 在 line 0：伤害
             Map.of(0, List.of(FIRE_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE)),
-            // detailed line 1 含伤害 %s，line 2 含器官数 %s
-            Map.of(
-                1, List.of(FIRE_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE),
-                2, List.of(FIRE_DRAGON_BREATH_SAC_COUNT_FORMULA_VALUE)
-            )
+            Map.of(1, List.of(FIRE_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE))
         ))
         .build();
 
@@ -900,11 +870,7 @@ public class WAICTooltipManager {
         .dynamicActiveSkill(slotContext -> DynamicValues.split(
             // simple 单段含 1 个 %s 在 line 0：伤害
             Map.of(0, List.of(ICE_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE)),
-            // detailed line 1 含伤害 %s，line 2 含器官数 %s
-            Map.of(
-                1, List.of(ICE_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE),
-                2, List.of(ICE_DRAGON_BREATH_SAC_COUNT_FORMULA_VALUE)
-            )
+            Map.of(1, List.of(ICE_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE))
         ))
         .build();
 
@@ -915,33 +881,9 @@ public class WAICTooltipManager {
         .dynamicActiveSkill(slotContext -> DynamicValues.split(
             // simple 单段含 1 个 %s 在 line 0：伤害
             Map.of(0, List.of(LIGHTNING_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE)),
-            // detailed line 1 含伤害 %s，line 2 含器官数 %s
-            Map.of(
-                1, List.of(LIGHTNING_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE),
-                2, List.of(LIGHTNING_DRAGON_BREATH_SAC_COUNT_FORMULA_VALUE)
-            )
+            Map.of(1, List.of(LIGHTNING_DRAGON_BREATH_SAC_DAMAGE_FORMULA_VALUE))
         ))
         .build();
-
-    /**
-     * 构建龙吐息袋计入器官数 FormulaValue，公式为 min(对应龙器官数, 10)
-     */
-    private static FormulaValue buildDragonBreathSacFormulaValue(TagKey<Item> dragonTag) {
-        return new FormulaValue(
-            context -> {
-                int count = ChestCavityUtil.getOrganCountWithSelf(context, dragonTag);
-                return Component.literal(String.valueOf(Math.min(10, count)));
-            },
-            context -> {
-                int count = ChestCavityUtil.getOrganCountWithSelf(context, dragonTag);
-                return Component.empty()
-                    .append(Component.literal("min(10," + TooltipUtil.NON_BREAKING_SPACE))
-                    .append(TooltipUtil.tagOrganCountName(dragonTag))
-                    .append(Component.literal(String.valueOf(count)))
-                    .append(Component.literal(")"));
-            }
-        );
-    }
 
     /**
      * 构建龙吐息袋伤害 FormulaValue
@@ -1323,13 +1265,156 @@ public class WAICTooltipManager {
         }
     );
 
-    /**
-     * 利维坦鳃 — 咆哮范围与伤害随利维坦器官数量缩放，水中释放时获得加成
-     */
     public static final OrganTooltipConsumer LEVIATHAN_GILL_TOOLTIP = OrganTooltip.builder()
         .dynamicActiveSkill(slotContext -> DynamicValues.split(
             Map.of(0, List.of(LEVIATHAN_GILL_RADIUS_FORMULA_VALUE, LEVIATHAN_GILL_DAMAGE_FORMULA_VALUE)),
             Map.of(1, List.of(LEVIATHAN_GILL_RADIUS_FORMULA_VALUE, LEVIATHAN_GILL_DAMAGE_FORMULA_VALUE))
         ))
+        .build();
+
+    private static final FormulaValue MONSTROSITY_CORE_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int fireOrganCount = OrganUtil.getFireOrganCount(context);
+            return Component.literal(TooltipUtil.formatAttributeValue(Math.max(0, fireOrganCount * 0.1F)));
+        },
+        context -> Component.empty()
+            .append(Component.literal("max(0," + TooltipUtil.NON_BREAKING_SPACE))
+            .append(WAICTooltipUtil.globalFireOrganCountFormula(context))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.literal("0.1)"))
+    );
+
+    public static final OrganTooltipConsumer MONSTROSITY_CORE_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            1, List.of(MONSTROSITY_CORE_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue ICE_SHARD_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int iceOrganCount = OrganUtil.getIceOrganCount(context);
+            return Component.literal(TooltipUtil.formatAttributeValue(iceOrganCount * 0.05));
+        },
+        context -> Component.empty()
+            .append(WAICTooltipUtil.globalIceOrganCountFormula(context))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.literal("0.05"))
+    );
+
+    public static final OrganTooltipConsumer ICE_SHARD_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(ICE_SHARD_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue FROSTBURN_SOUL_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int iceOrganCount = OrganUtil.getIceOrganCount(context);
+            return Component.literal(TooltipUtil.formatAttributeValue(iceOrganCount * 0.15));
+        },
+        context -> Component.empty()
+            .append(WAICTooltipUtil.globalIceOrganCountFormula(context))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.literal("0.15"))
+    );
+
+    public static final OrganTooltipConsumer FROSTBURN_SOUL_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(FROSTBURN_SOUL_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue DREAD_PHYLACTERY_HEALTH_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int iceOrganCount = OrganUtil.getIceOrganCount(context);
+            return Component.literal(TooltipUtil.formatAttributeValue(iceOrganCount * 0.25));
+        },
+        context -> Component.empty()
+            .append(WAICTooltipUtil.globalIceOrganCountFormula(context))
+            .append(TooltipUtil.formulaOperator("×"))
+            .append(Component.literal("0.25"))
+    );
+
+    public static final OrganTooltipConsumer DREAD_PHYLACTERY_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            Map.of(),
+            Map.of(0, List.of(DREAD_PHYLACTERY_HEALTH_FORMULA_VALUE))
+        ))
+        .build();
+
+    private static final FormulaValue UNDYING_EMBER_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int fireOrganCount = OrganUtil.getFireOrganCount(context);
+            return Component.literal(TooltipUtil.formatAttributeValue(fireOrganCount));
+        },
+        WAICTooltipUtil::globalFireOrganCountFormula
+    );
+
+    public static final OrganTooltipConsumer UNDYING_EMBER_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(UNDYING_EMBER_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue IGNITED_RIB_PLATING_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int localFireOrganCount = OrganUtil.getLocalFireOrganCount(context);
+            return Component.literal((localFireOrganCount >= 0 ? "+" : "") + TooltipUtil.formatAttributeValue(localFireOrganCount));
+        },
+        WAICTooltipUtil::localFireOrganCountFormula
+    );
+
+    public static final OrganTooltipConsumer IGNITED_RIB_PLATING_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(IGNITED_RIB_PLATING_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue TACTICAL_DISK_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
+            return Component.literal(TooltipUtil.formatAttributeValue(2 + Math.floor(Math.sqrt(mechanicalCount * 2))));
+        },
+        context -> {
+            int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
+            return Component.empty()
+                .append(Component.literal("2"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(Component.literal("floor(√("))
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.MECHANICAL))
+                .append(Component.literal(String.valueOf(mechanicalCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("2))"));
+        }
+    );
+
+    public static final OrganTooltipConsumer TACTICAL_DISK_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(TACTICAL_DISK_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue COMPUTE_CHIP_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
+            return Component.literal(TooltipUtil.formatAttributeValue(1.5 + Math.floor(Math.sqrt(mechanicalCount * 2))));
+        },
+        context -> {
+            int mechanicalCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.MECHANICAL);
+            return Component.empty()
+                .append(Component.literal("1.5"))
+                .append(TooltipUtil.formulaOperator("+"))
+                .append(Component.literal("floor(√("))
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.MECHANICAL))
+                .append(Component.literal(String.valueOf(mechanicalCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("2))"));
+        }
+    );
+
+    public static final OrganTooltipConsumer COMPUTE_CHIP_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(COMPUTE_CHIP_FORMULA_VALUE)
+        )))
         .build();
 }

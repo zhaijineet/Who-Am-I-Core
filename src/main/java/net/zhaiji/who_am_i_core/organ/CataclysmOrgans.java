@@ -188,6 +188,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 5)
             .modifier(CataclysmOrganUtil::undyingEmberModifier)
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.UNDYING_EMBER_TOOLTIP)
             .build()
     );
 
@@ -198,6 +199,7 @@ public class CataclysmOrgans {
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
             .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.IGNITED_RIB_PLATING_TOOLTIP)
             .build()
     );
 
@@ -221,6 +223,7 @@ public class CataclysmOrgans {
             .added(CataclysmOrganUtil::monstrosityCoreAdded)
             .removed(CataclysmOrganUtil::monstrosityCoreRemoved)
             .tick(CataclysmOrganUtil::monstrosityCoreTick)
+            .tooltip(WAICTooltipManager.MONSTROSITY_CORE_TOOLTIP)
             .build()
     );
 
@@ -255,6 +258,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.HEALTH, 2))
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.TACTICAL_DISK_TOOLTIP)
             .build()
     );
 
@@ -283,6 +287,7 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .modifier(CataclysmOrganUtil.ancientFactoryModifier(InitAttribute.NERVES, 1.5))
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.COMPUTE_CHIP_TOOLTIP)
             .build()
     );
 

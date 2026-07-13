@@ -55,8 +55,9 @@ public class StraightIntestineTask implements ISerializableTask {
 
     @Override
     public void onRemoved(LivingEntity entity) {
-        // 延迟结束，掉落物品
-        entity.spawnAtLocation(food);
+        if (delayTicks <= 0) {
+            entity.spawnAtLocation(food);
+        }
     }
 
     @Override

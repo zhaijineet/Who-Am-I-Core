@@ -96,17 +96,17 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
             if (cursedCount >= 1) {
                 // 虚弱：每5个器官等级+1
                 int weaknessAmp = (cursedCount - 1) / 5;
-                owner.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, weaknessAmp));
+                owner.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, weaknessAmp));
             }
             if (cursedCount >= 3) {
                 // 缓慢：每6个器官等级+1
                 int slownessAmp = (cursedCount - 3) / 6;
-                owner.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, slownessAmp));
+                owner.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, slownessAmp));
             }
             if (cursedCount >= 5) {
                 // 饥饿：每9个器官等级+1
                 int hungerAmp = (cursedCount - 5) / 9;
-                owner.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, hungerAmp));
+                owner.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, hungerAmp));
             }
         }
     }

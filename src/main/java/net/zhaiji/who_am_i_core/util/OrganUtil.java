@@ -33,12 +33,12 @@ public class OrganUtil {
     /**
      * 获取物品的总附魔等级
      */
-    private static int getTotalEnchantmentLevels(ItemStack stack) {
+    public static int getTotalEnchantmentLevels(ItemStack stack) {
         if (stack.isEmpty()) return 0;
         ItemEnchantments enchantments = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
         int total = 0;
-        for (Holder<Enchantment> ench : enchantments.keySet()) {
-            total += enchantments.getLevel(ench);
+        for (Holder<Enchantment> enchantment : enchantments.keySet()) {
+            total += enchantments.getLevel(enchantment);
         }
         return total;
     }
@@ -169,104 +169,59 @@ public class OrganUtil {
         return false;
     }
 
-    /**
-     * 获取槽位上下文对应的全局炽焰器官数量
-     * <p>
-     * 无王国时，冰霜器官会抵消炽焰器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
-     * index 为 -1 时按自身标签补偿。
-     * </p>
-     *
-     * @param context 槽位上下文
-     * @return 炽焰器官数量（可为负）
-     */
     public static int getFireOrganCount(ChestCavitySlotContext context) {
-        return getGlobalDualTagCount(context, WAICItemTagManager.FIRE, WAICItemTagManager.ICE);
+        return combineElementalOrganCounts(
+            context,
+            ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.FIRE),
+            ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.ICE)
+        );
     }
 
-    /**
-     * 获取槽位上下文对应的全局冰霜器官数量
-     * <p>
-     * 无王国时，炽焰器官会抵消冰霜器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
-     * index 为 -1 时按自身标签补偿。
-     * </p>
-     *
-     * @param context 槽位上下文
-     * @return 冰霜器官数量（可为负）
-     */
     public static int getIceOrganCount(ChestCavitySlotContext context) {
-        return getGlobalDualTagCount(context, WAICItemTagManager.ICE, WAICItemTagManager.FIRE);
+        return combineElementalOrganCounts(
+            context,
+            ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.ICE),
+            ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.FIRE)
+        );
     }
 
-    /**
-     * 统计全局主标签器官数，无王国时减去副标签器官数，有王国时加上副标签器官数；index 为 -1 时按自身标签补偿
-     */
-    private static int getGlobalDualTagCount(ChestCavitySlotContext context, TagKey<Item> primaryTag, TagKey<Item> secondaryTag) {
-        ChestCavityData data = context.data();
-        if (data == null) {
-            // data 为 null 时无法查胸腔，只看自身（按无王国抵消处理）
-            return (context.stack().is(primaryTag) ? 1 : 0) - (context.stack().is(secondaryTag) ? 1 : 0);
-        }
-        int primaryCount = data.getOrganCount(primaryTag);
-        int secondaryCount = data.getOrganCount(secondaryTag);
-        boolean hasMalkuth = data.hasOrgan(FDBossesOrgans.MALKUTH.get());
-        int count = hasMalkuth ? primaryCount + secondaryCount : primaryCount - secondaryCount;
-        if (context.index() < 0) {
-            if (context.stack().is(primaryTag)) count += 1;
-            if (hasMalkuth) {
-                if (context.stack().is(secondaryTag)) count += 1;
-            } else {
-                if (context.stack().is(secondaryTag)) count -= 1;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * 获取以指定槽位为中心的九宫格内局部炽焰器官数量
-     * <p>
-     * 无王国时，九宫格内冰霜器官会抵消炽焰器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
-     * index 为 -1 或 data 为 null 时只取自身是否为对应标签。
-     * </p>
-     *
-     * @param context 当前槽位上下文
-     * @return 九宫格内炽焰器官数量（可为负）
-     */
     public static int getLocalFireOrganCount(ChestCavitySlotContext context) {
-        return getLocalDualTagCount(context, WAICItemTagManager.FIRE, WAICItemTagManager.ICE);
+        return combineElementalOrganCounts(
+            context,
+            getLocalOrganCountWithSelf(context, WAICItemTagManager.FIRE),
+            getLocalOrganCountWithSelf(context, WAICItemTagManager.ICE)
+        );
     }
 
-    /**
-     * 获取以指定槽位为中心的九宫格内局部冰霜器官数量
-     * <p>
-     * 无王国时，九宫格内炽焰器官会抵消冰霜器官，差值可为负；有王国时冰火互相计入（双向计数，非负）。
-     * index 为 -1 或 data 为 null 时只取自身是否为对应标签。
-     * </p>
-     *
-     * @param context 当前槽位上下文
-     * @return 九宫格内冰霜器官数量（可为负）
-     */
     public static int getLocalIceOrganCount(ChestCavitySlotContext context) {
-        return getLocalDualTagCount(context, WAICItemTagManager.ICE, WAICItemTagManager.FIRE);
+        return combineElementalOrganCounts(
+            context,
+            getLocalOrganCountWithSelf(context, WAICItemTagManager.ICE),
+            getLocalOrganCountWithSelf(context, WAICItemTagManager.FIRE)
+        );
     }
 
-    /**
-     * 统计九宫格内主标签器官数，无王国时减去副标签器官数，有王国时加上副标签器官数
-     */
-    private static int getLocalDualTagCount(ChestCavitySlotContext context, TagKey<Item> primaryTag, TagKey<Item> secondaryTag) {
+    static int getLocalOrganCountWithSelf(ChestCavitySlotContext context, TagKey<Item> tag) {
         ChestCavityData data = context.data();
-        boolean hasMalkuth = data != null && data.hasOrgan(FDBossesOrgans.MALKUTH.get());
-        int center = context.index();
-        if (center < 0 || data == null) {
-            int self = (context.stack().is(primaryTag) ? 1 : 0) - (context.stack().is(secondaryTag) ? 1 : 0);
-            if (hasMalkuth) {
-                // 自身同时计入双标签
-                self = (context.stack().is(primaryTag) ? 1 : 0) + (context.stack().is(secondaryTag) ? 1 : 0);
-            }
-            return self;
+        if (data == null || context.index() < 0) {
+            return context.stack().is(tag) ? 1 : 0;
         }
-        int primaryInSlots = countTagInSlots(context, primaryTag);
-        int secondaryInSlots = countTagInSlots(context, secondaryTag);
-        return hasMalkuth ? primaryInSlots + secondaryInSlots : primaryInSlots - secondaryInSlots;
+        return countTagInSlots(context, tag);
+    }
+
+    static boolean usesAdditiveElementalOrganCounts(ChestCavitySlotContext context) {
+        ChestCavityData data = context.data();
+        return data != null && data.hasOrgan(FDBossesOrgans.MALKUTH.get());
+    }
+
+    private static int combineElementalOrganCounts(
+        ChestCavitySlotContext context,
+        int primaryOrganCount,
+        int secondaryOrganCount
+    ) {
+        return usesAdditiveElementalOrganCounts(context)
+               ? primaryOrganCount + secondaryOrganCount
+               : primaryOrganCount - secondaryOrganCount;
     }
 
     /**

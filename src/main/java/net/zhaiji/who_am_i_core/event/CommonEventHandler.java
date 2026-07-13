@@ -422,18 +422,22 @@ public class CommonEventHandler {
             extraDamage += entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE);
             finalMultiplier = entity.getAttributeValue(WAICAttribute.RANGED_DAMAGE_PERCENTAGE);
         }
-        // 九头蛇肋骨效果
-        if (!isSelfDamage) block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
-        // 导流肋骨护盾
-        if (!isSelfDamage) block += WAICOrganUtil.currentRibShield(entity, damage);
-        // 九头蛇肌肉效果
-        if (!isSelfDamage && attacker != null) extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
-        // 背叛效果
-        if (!isSelfDamage && attacker != null) extraDamage += WAICOrganUtil.treacheryAttack(attacker, entity);
-        // 尸王脊柱效果
-        if (!isSelfDamage) block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
-        // 风暴脊柱效果
-        if (!isSelfDamage) block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
+        if (!isSelfDamage && attacker != null) {
+            // 九头蛇肌肉效果
+            extraDamage += IceAndFireOrganUtil.hydraMuscleHurt(attacker, entity);
+            // 背叛效果
+            extraDamage += WAICOrganUtil.treacheryAttack(attacker, entity);
+        }
+        if (!isSelfDamage) {
+            // 九头蛇肋骨效果
+            block += IceAndFireOrganUtil.hydraRibHurt(entity, attacker);
+            // 导流肋骨护盾
+            block += WAICOrganUtil.currentRibShield(entity, damage);
+            // 尸王脊柱效果
+            block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
+            // 风暴脊柱效果
+            block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
+        }
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));
     }
@@ -450,9 +454,11 @@ public class CommonEventHandler {
                                 : source.getDirectEntity() instanceof LivingEntity directEntity
                                   ? directEntity
                                   : null;
-        if (attacker == null) return;
-        if (OrganUtil.isSelfDamage(entity, source)) return;
-        WAICOrganUtil.lustAttack(attacker, event.getNewDamage());
+        boolean isSelfDamage = OrganUtil.isSelfDamage(entity, source);
+        if (!isSelfDamage && attacker != null) {
+            // 色欲效果
+            WAICOrganUtil.lustAttack(attacker, event.getNewDamage());
+        }
     }
 
     /**
@@ -496,7 +502,8 @@ public class CommonEventHandler {
         // 猩红肝脏：以血炼法 — 猩红法术消耗血液增级
         if (data.hasOrgan(WAICOrgans.CRIMSON_LIVER.get())) {
             if (event.getSchoolType() == SchoolRegistry.BLOOD.get()) {
-                if (HumoursData.extractBlood(entity, 10, false) >= 10) {
+                if (HumoursData.extractBlood(entity, 10, true) >= 10) {
+                    HumoursData.extractBlood(entity, 10, false);
                     event.setSpellLevel(event.getSpellLevel() + 1);
                 }
             }

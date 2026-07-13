@@ -180,9 +180,7 @@ public class CataclysmOrganUtil {
         );
 
         // 转化为粘液（静态方法自动同步）
-        HumoursData.insertPhlegm(entity, absorbAmount, false);
-
-        return absorbAmount;
+        return HumoursData.insertPhlegm(entity, absorbAmount, false);
     }
 
     /**
@@ -202,13 +200,11 @@ public class CataclysmOrganUtil {
     // ==================== 焰魔器官 ====================
 
     /**
-     * 不灭薪火属性修饰符 - 全局炽焰器官数量的平方根的力量，冰火冲突时为负值减益
+     * 不灭薪火属性修饰符 - 炽焰器官数量直接作为力量加成，冰火冲突时为负值减益
      */
     public static void undyingEmberModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         int fireOrganCount = OrganUtil.getFireOrganCount(context);
-        // 提取符号 × 绝对值开方：正值→正力量（增益），负值→负力量（冰火冲突代价）
-        double strength = Math.signum(fireOrganCount) * Math.floor(Math.sqrt(Math.abs(fireOrganCount)));
-        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), strength));
+        modifiers.put(InitAttribute.STRENGTH, OrganAttributeUtil.createAddValueModifier(context.id(), fireOrganCount));
     }
 
     /**
@@ -272,7 +268,7 @@ public class CataclysmOrganUtil {
         if (entity.tickCount % 20 != 0) return;
         int fireOrganCount = OrganUtil.getFireOrganCount(context);
         if (fireOrganCount > 0) {
-            HumoursData.insertYellowBile(entity, fireOrganCount * 0.05F, false);
+            HumoursData.insertYellowBile(entity, fireOrganCount * 0.1F, false);
         }
     }
 
@@ -325,7 +321,7 @@ public class CataclysmOrganUtil {
         );
 
         int fireOrganCount = OrganUtil.getFireOrganCount(context);
-        float damage = Math.max(0, 20 + fireOrganCount * 0.01F * entity.getMaxHealth());
+        float damage = Math.max(0, 20 + fireOrganCount * 0.05F * entity.getMaxHealth());
 
         // AoE伤害：半径6.25格（对齐原版 EarthQuake(6.25D)）
         DamageSource damagesource = level.damageSources().mobAttack(entity);
