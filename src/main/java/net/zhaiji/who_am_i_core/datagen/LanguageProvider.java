@@ -2057,31 +2057,30 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     // ==================== AnvilCraft 余烬金属器官 ====================
 
     private void emberMetalOrgansEN() {
-        String effect0 = "Nullifies 25% of fire damage";
-        String effect1 = "Heals for the nullified amount";
+        String effect = "Each Ember Metal organ restores 0.5 HP per second while on fire or in a fire source";
 
         addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "Ember Metal Rib");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_RIB, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_RIB, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "Ember Metal Muscle");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_MUSCLE, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_MUSCLE, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "Ember Metal Spine");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPINE, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPINE, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "Ember Metal Appendix");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_APPENDIX, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_APPENDIX, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_HEART, "Ember Metal Heart");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_HEART, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_HEART, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_LUNG, "Ember Metal Lung");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LUNG, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LUNG, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_STOMACH, "Ember Metal Stomach");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_STOMACH, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_STOMACH, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_INTESTINE, "Ember Metal Intestine");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_INTESTINE, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_INTESTINE, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_KIDNEY, "Ember Metal Kidney");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_KIDNEY, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_KIDNEY, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_SPLEEN, "Ember Metal Spleen");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPLEEN, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPLEEN, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_LIVER, "Ember Metal Liver");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LIVER, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LIVER, effect);
     }
 
     // ==================== AnvilCraft 浮霜金属器官 ====================
@@ -2215,31 +2214,30 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
     // ==================== AnvilCraft 余烬金属器官 ====================
 
     private void emberMetalOrgansZH() {
-        String effect0 = "抵消25%的火焰伤害";
-        String effect1 = "回复抵消伤害等量的生命值";
+        String effect = "着火或身处火源中时，每个余烬金属器官每秒恢复0.5点生命值";
 
         addItem(AnvilCraftOrgans.EMBER_METAL_RIB, "余烬金属肋骨");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_RIB, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_RIB, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_MUSCLE, "余烬金属肌肉");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_MUSCLE, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_MUSCLE, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_SPINE, "余烬金属脊柱");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPINE, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPINE, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_APPENDIX, "余烬金属阑尾");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_APPENDIX, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_APPENDIX, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_HEART, "余烬金属心脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_HEART, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_HEART, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_LUNG, "余烬金属肺脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LUNG, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LUNG, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_STOMACH, "余烬金属胃");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_STOMACH, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_STOMACH, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_INTESTINE, "余烬金属肠子");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_INTESTINE, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_INTESTINE, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_KIDNEY, "余烬金属肾脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_KIDNEY, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_KIDNEY, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_SPLEEN, "余烬金属脾脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPLEEN, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_SPLEEN, effect);
         addItem(AnvilCraftOrgans.EMBER_METAL_LIVER, "余烬金属肝脏");
-        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LIVER, effect0, effect1);
+        addOrganPassiveEffect(AnvilCraftOrgans.EMBER_METAL_LIVER, effect);
     }
 
     // ==================== AnvilCraft 浮霜金属器官 ====================
@@ -2726,7 +2724,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IronSpellOrgans.DEAD_KING_RIB, "Dead King Rib");
         addOrganPassiveEffect(
             IronSpellOrgans.DEAD_KING_RIB,
-            "+10 max black bile"
+            "+50 max black bile"
         );
     }
 
@@ -2775,7 +2773,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IronSpellOrgans.DEAD_KING_RIB, "尸王肋骨");
         addOrganPassiveEffect(
             IronSpellOrgans.DEAD_KING_RIB,
-            "+10黑胆汁上限"
+            "+50黑胆汁上限"
         );
     }
 

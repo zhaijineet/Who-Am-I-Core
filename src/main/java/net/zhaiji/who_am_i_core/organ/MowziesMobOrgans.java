@@ -41,6 +41,7 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> CONTROL_ROD = WAICItem.ITEM.register(
         "control_rod",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.NERVES, 2)
             .tooltip(WAICTooltipManager.CONTROL_ROD_TOOLTIP)
             .build()
     );

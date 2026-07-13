@@ -55,18 +55,18 @@ public class IronSpellOrganUtil {
     }
 
     /**
-     * 尸王肋骨：器官安装时增加10点黑胆汁上限
+     * 尸王肋骨：器官安装时增加50点黑胆汁上限
      */
     public static void deadKingRibAdded(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        HumoursData.addMaxBlackBile(entity, 10);
+        HumoursData.addMaxBlackBile(entity, 50);
     }
 
     /**
-     * 尸王肋骨：器官移除时减少10点黑胆汁上限
+     * 尸王肋骨：器官移除时减少50点黑胆汁上限
      */
     public static void deadKingRibRemoved(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        HumoursData.addMaxBlackBile(entity, -10);
+        HumoursData.addMaxBlackBile(entity, -50);
     }
 }

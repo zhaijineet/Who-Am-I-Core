@@ -1,14 +1,20 @@
 package net.zhaiji.who_am_i_core.util;
 
 import com.google.common.collect.Multimap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.api.goal.GoalCombatContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
@@ -236,6 +242,27 @@ public class AnvilCraftOrganUtil {
     ) {
         transcendiumBaseModifier(context, modifiers, InitAttribute.STRENGTH, InitAttribute.SPEED);
     }
+
+    // ==================== 余烬金属器官 ====================
+
+    /**
+     * 判断实体是否身处火源环境（岩浆、火方块、已点燃营火、岩浆块、着火状态）
+     */
+    public static boolean isInFireSource(LivingEntity entity) {
+        if (entity.isInLava() || entity.isOnFire()) return true;
+        AABB box = entity.getBoundingBox();
+        BlockPos minPos = BlockPos.containing(box.minX, box.minY, box.minZ).below();
+        BlockPos maxPos = BlockPos.containing(box.maxX, box.maxY, box.maxZ);
+        for (BlockPos pos : BlockPos.betweenClosed(minPos, maxPos)) {
+            BlockState state = entity.level().getBlockState(pos);
+            if (state.is(BlockTags.FIRE)) return true;
+            if (state.is(BlockTags.CAMPFIRES) && state.getValue(CampfireBlock.LIT)) return true;
+            if (state.is(Blocks.MAGMA_BLOCK)) return true;
+        }
+        return false;
+    }
+
+    // ==================== 电磁炮 ====================
 
     /**
      * 电磁炮伤害乘数：(1 + 机械器官数 × 0.15)，超频时 ×2

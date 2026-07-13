@@ -777,8 +777,8 @@ public class WAICOrgans {
 
             .chestCavityOpen(WAICOrganUtil::hauntedBoneChestCavityOpen)
             .chestCavityClose(WAICOrganUtil::hauntedBoneChestCavityClose)
-            .addValueAttribute(InitAttribute.SPEED, 1)
-            .addValueAttribute(Attributes.LUCK, 1)
+            .addValueAttribute(InitAttribute.SPEED, 2)
+            .addValueAttribute(Attributes.LUCK, 2)
             .build()
     );
 
@@ -798,7 +798,7 @@ public class WAICOrgans {
         "straight_intestine",
         () -> Organ.builder()
 
-            .addValueAttribute(InitAttribute.NUTRITION, 1)
+            .addValueAttribute(InitAttribute.NUTRITION, 2)
             .build()
     );
 
@@ -923,6 +923,7 @@ public class WAICOrgans {
     public static final Supplier<Item> ENERGY_MODULE = WAICItem.ITEM.register(
         "energy_module",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.ENDURANCE, 2)
             .tick(WAICOrganUtil::energyModuleTick)
             .tooltip(
                 OrganTooltip.builder()

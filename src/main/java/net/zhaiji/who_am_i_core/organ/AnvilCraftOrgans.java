@@ -470,6 +470,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> RAILGUN = WAICItem.ITEM.register(
         "railgun",
         () -> Organ.builder()
+            .addValueAttribute(InitAttribute.SPEED, 3)
             .skill(WAICPlayerSkillUtil::railgun)
             .goalSkill(WAICGoalSkillUtil.railgunGoalSkill())
             .cooldown(context -> WAICOrganUtil.isOverloadMode(context.entity()) ? 10 : 20)

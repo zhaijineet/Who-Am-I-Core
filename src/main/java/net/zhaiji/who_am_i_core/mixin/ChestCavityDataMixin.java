@@ -14,6 +14,7 @@ import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
+import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -88,6 +89,11 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         double heal = getCurrentValue(WAICAttribute.HEAL);
         if (heal > 0) {
             owner.heal((float) heal);
+        }
+        // 余烬金属器官：身处火源环境，每个余烬器官每秒恢复0.5生命值
+        int emberCount = getOrganCount(WAICItemTagManager.EMBER);
+        if (emberCount > 0 && AnvilCraftOrganUtil.isInFireSource(owner)) {
+            owner.heal(0.5F * emberCount);
         }
         // 诅咒器官诅咒效果：每 40 tick 根据诅咒器官数量施加负面效果
         // 参考 AnvilCraft 原版 ICursed：虚弱(始终) / 缓慢(>8) / 饥饿(>64)

@@ -2,7 +2,7 @@
   "type": "irons_spellbooks:alchemist_cauldron_brew",
   "base_fluid": {
     "amount": 1000,
-    "id": "irons_spellbooks:ice_venom"
+    "id": "minecraft:water"
   },
   "byproduct": {
     "id": "who_am_i_core:straight_intestine"

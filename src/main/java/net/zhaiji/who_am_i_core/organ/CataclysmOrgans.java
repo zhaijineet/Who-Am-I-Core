@@ -316,6 +316,8 @@ public class CataclysmOrgans {
     public static final Supplier<Item> DEATH_LENS = WAICItem.ITEM.register(
         "death_lens",
         () -> Organ.builder()
+            .addValueAttribute(Attributes.BLOCK_INTERACTION_RANGE, 3)
+            .addValueAttribute(Attributes.ENTITY_INTERACTION_RANGE, 3)
             .skill(WAICPlayerSkillUtil::deathLens)
             .goalSkill(WAICGoalSkillUtil.deathLensGoalSkill())
             .cooldown(300)

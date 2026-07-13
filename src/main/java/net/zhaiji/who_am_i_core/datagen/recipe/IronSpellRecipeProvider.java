@@ -21,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.zhaiji.chestcavitybeyond.register.InitItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
@@ -43,7 +44,7 @@ public class IronSpellRecipeProvider extends RecipeProvider {
         coreOrganRecipes(recipeOutput);
         inkOrganRecipes(recipeOutput);
         mimicOrganRecipes(recipeOutput);
-        brewIceVenom(recipeOutput, InitItem.INTESTINE.get(), WAICOrgans.STRAIGHT_INTESTINE.get());
+        brewWater(recipeOutput, InitItem.INTESTINE.get(), WAICOrgans.STRAIGHT_INTESTINE.get());
         emeraldSkullRecipes(recipeOutput);
         woodenOrganRecipes(recipeOutput);
         brewCrimson(recipeOutput, InitItems.GARAGE_KIT.get(), WAICOrgans.FLESH_IDOL.get());
@@ -179,11 +180,11 @@ public class IronSpellRecipeProvider extends RecipeProvider {
     }
 
     /**
-     * 炼金锅浸泡配方：物品在冰霜毒液中浸泡转化
+     * 炼金锅浸泡配方：物品在水中浸泡转化
      */
-    private void brewIceVenom(RecipeOutput output, Item reagent, Item result) {
+    private void brewWater(RecipeOutput output, Item reagent, Item result) {
         BrewAlchemistCauldronRecipe.builder()
-            .withInput(FluidRegistry.ICE_VENOM_FLUID, 1000)
+            .withInput(new FluidStack(Fluids.WATER, 1000))
             .withReagent(reagent)
             .withByproduct(result)
             .saveSoak(output);
