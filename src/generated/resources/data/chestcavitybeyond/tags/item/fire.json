@@ -31,6 +31,24 @@
     "who_am_i_core:ember_metal_intestine",
     "who_am_i_core:ember_metal_kidney",
     "who_am_i_core:ember_metal_spleen",
-    "who_am_i_core:ember_metal_liver"
+    "who_am_i_core:ember_metal_liver",
+    "chestcavitybeyond:fireproof_heart",
+    "chestcavitybeyond:fireproof_lung",
+    "chestcavitybeyond:fireproof_spine",
+    "chestcavitybeyond:fireproof_stomach",
+    "chestcavitybeyond:fireproof_intestine",
+    "chestcavitybeyond:fireproof_kidney",
+    "chestcavitybeyond:fireproof_spleen",
+    "chestcavitybeyond:fireproof_liver",
+    "chestcavitybeyond:fireproof_appendix",
+    "chestcavitybeyond:fireproof_rib",
+    "chestcavitybeyond:fireproof_muscle",
+    "chestcavitybeyond:blaze_core",
+    "chestcavitybeyond:blaze_shell",
+    "chestcavitybeyond:active_blaze_rod",
+    "chestcavitybeyond:magma_cube_core",
+    "chestcavitybeyond:magma_stomach",
+    "chestcavitybeyond:ghast_stomach",
+    "chestcavitybeyond:gas_sac"
   ]
 }

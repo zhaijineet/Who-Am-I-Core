@@ -32,6 +32,7 @@ public class IronSpellOrgans {
         "primordial_flame",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 10)
             .build()
     );
 

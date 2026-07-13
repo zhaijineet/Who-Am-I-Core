@@ -159,6 +159,7 @@ public class AnvilCraftOrgans {
         "ember_metal_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -168,6 +169,7 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 5)
             .addValueAttribute(InitAttribute.SPEED, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -177,6 +179,7 @@ public class AnvilCraftOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 5)
             .addValueAttribute(InitAttribute.DEFENSE, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -185,6 +188,7 @@ public class AnvilCraftOrgans {
         "ember_metal_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -193,6 +197,7 @@ public class AnvilCraftOrgans {
         "ember_metal_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -203,6 +208,7 @@ public class AnvilCraftOrgans {
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 5)
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 5)
             .addValueAttribute(InitAttribute.ENDURANCE, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -211,6 +217,7 @@ public class AnvilCraftOrgans {
         "ember_metal_stomach",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -219,6 +226,7 @@ public class AnvilCraftOrgans {
         "ember_metal_intestine",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -227,6 +235,7 @@ public class AnvilCraftOrgans {
         "ember_metal_kidney",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -235,6 +244,7 @@ public class AnvilCraftOrgans {
         "ember_metal_spleen",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -243,6 +253,7 @@ public class AnvilCraftOrgans {
         "ember_metal_liver",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 3)
             .build()
     );
 
@@ -250,6 +261,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_HEART = WAICItem.ITEM.register(
         "frost_metal_heart",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalHeartModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -259,6 +271,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_LUNG = WAICItem.ITEM.register(
         "frost_metal_lung",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalLungModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -268,6 +281,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_SPINE = WAICItem.ITEM.register(
         "frost_metal_spine",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalSpineModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -277,6 +291,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_STOMACH = WAICItem.ITEM.register(
         "frost_metal_stomach",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalStomachModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -286,6 +301,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_INTESTINE = WAICItem.ITEM.register(
         "frost_metal_intestine",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalIntestineModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -295,6 +311,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_KIDNEY = WAICItem.ITEM.register(
         "frost_metal_kidney",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalKidneyModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -304,6 +321,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_SPLEEN = WAICItem.ITEM.register(
         "frost_metal_spleen",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalSpleenModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -313,6 +331,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_LIVER = WAICItem.ITEM.register(
         "frost_metal_liver",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalLiverModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -322,6 +341,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_APPENDIX = WAICItem.ITEM.register(
         "frost_metal_appendix",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalAppendixModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -331,6 +351,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_RIB = WAICItem.ITEM.register(
         "frost_metal_rib",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalRibModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()
@@ -340,6 +361,7 @@ public class AnvilCraftOrgans {
     public static final Supplier<Item> FROST_METAL_MUSCLE = WAICItem.ITEM.register(
         "frost_metal_muscle",
         () -> Organ.builder(EnchantableOrganItem::new)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 3)
             .modifier(AnvilCraftOrganUtil::frostMetalMuscleModifier)
             .tooltip(WAICTooltipManager.FROST_METAL_TOOLTIP)
             .build()

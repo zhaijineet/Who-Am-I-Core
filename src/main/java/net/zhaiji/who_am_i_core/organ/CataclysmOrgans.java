@@ -122,6 +122,7 @@ public class CataclysmOrgans {
         "phantom_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 5)
             .attack(CataclysmOrganUtil::phantomHeartAttack)
             .tooltip(WAICTooltipManager.PHANTOM_HEART_TOOLTIP)
             .build()
@@ -186,6 +187,7 @@ public class CataclysmOrgans {
         "undying_ember",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
             .modifier(CataclysmOrganUtil::undyingEmberModifier)
             .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.UNDYING_EMBER_TOOLTIP)
@@ -197,6 +199,7 @@ public class CataclysmOrgans {
         "ignited_rib_plating",
         () -> Organ.builder()
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
             .modifier(CataclysmOrganUtil::ignitedRibPlatingModifier)
             .refreshDynamicAttribute()
             .tooltip(WAICTooltipManager.IGNITED_RIB_PLATING_TOOLTIP)
@@ -208,6 +211,7 @@ public class CataclysmOrgans {
         "blazing_visage",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 4)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
             .attack(CataclysmOrganUtil::blazingVisageAttack)
             .tooltip(WAICTooltipManager.BLAZING_VISAGE_TOOLTIP)
             .build()
@@ -220,6 +224,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 7)
             .addValueAttribute(InitAttribute.DEFENSE, 4)
             .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 1)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
             .added(CataclysmOrganUtil::monstrosityCoreAdded)
             .removed(CataclysmOrganUtil::monstrosityCoreRemoved)
             .tick(CataclysmOrganUtil::monstrosityCoreTick)
@@ -234,6 +239,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NERVES, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 3)
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
             .skill(WAICPlayerSkillUtil::monstrosityCircuit)
             .goalSkill(WAICGoalSkillUtil.monstrosityCircuitGoalSkill())
             .cooldown(160)
@@ -248,6 +254,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DIGESTION, 4)
             .addValueAttribute(InitAttribute.NUTRITION, 2)
             .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
             .tooltip(WAICTooltipManager.MONSTROSITY_FURNACE_TOOLTIP)
             .build()
     );

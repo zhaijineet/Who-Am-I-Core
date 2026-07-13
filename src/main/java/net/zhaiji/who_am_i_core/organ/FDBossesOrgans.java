@@ -15,7 +15,7 @@ public class FDBossesOrgans {
         "fire_malkuth_warrior_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
-            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 2)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 4)
             .build()
     );
 
@@ -24,7 +24,7 @@ public class FDBossesOrgans {
         "ice_malkuth_warrior_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
-            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 2)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 4)
             .build()
     );
 
@@ -33,8 +33,8 @@ public class FDBossesOrgans {
         "malkuth",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
-            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
-            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 5)
+            .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 10)
+            .addValueAttribute(InitAttribute.FROST_RESISTANCE, 10)
             .build()
     );
 

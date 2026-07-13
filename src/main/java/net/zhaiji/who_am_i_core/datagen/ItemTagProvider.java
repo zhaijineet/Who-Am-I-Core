@@ -8,6 +8,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
+import net.zhaiji.chestcavitybeyond.register.InitItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
@@ -65,6 +66,33 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         frostMetalOrgansTags();
         transcendiumOrgansTags();
         fantasticalOrgansTags();
+        vanillaOrgansTags();
+    }
+
+    // ==================== CCB 原版器官冰火标签 ====================
+
+    private void vanillaOrgansTags() {
+        tag(WAICItemTagManager.FIRE).add(
+            InitItem.FIREPROOF_HEART.get(),
+            InitItem.FIREPROOF_LUNG.get(),
+            InitItem.FIREPROOF_SPINE.get(),
+            InitItem.FIREPROOF_STOMACH.get(),
+            InitItem.FIREPROOF_INTESTINE.get(),
+            InitItem.FIREPROOF_KIDNEY.get(),
+            InitItem.FIREPROOF_SPLEEN.get(),
+            InitItem.FIREPROOF_LIVER.get(),
+            InitItem.FIREPROOF_APPENDIX.get(),
+            InitItem.FIREPROOF_RIB.get(),
+            InitItem.FIREPROOF_MUSCLE.get(),
+            InitItem.BLAZE_CORE.get(),
+            InitItem.BLAZE_SHELL.get(),
+            InitItem.ACTIVE_BLAZE_ROD.get(),
+            InitItem.MAGMA_CUBE_CORE.get(),
+            InitItem.MAGMA_STOMACH.get(),
+            InitItem.GHAST_STOMACH.get(),
+            InitItem.GAS_SAC.get()
+        );
+        tag(WAICItemTagManager.ICE).add(InitItem.SNOW_CORE.get());
     }
 
     // ==================== Mowzie's Mobs 特殊器官 ====================
