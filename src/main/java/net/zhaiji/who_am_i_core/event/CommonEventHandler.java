@@ -422,6 +422,8 @@ public class CommonEventHandler {
             block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
             // 风暴脊柱效果
             block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
+            // 灵薄减伤
+            block += WAICOrganUtil.limboHurt(entity, damage);
         }
         // 应用格挡属性减伤（可为负）,以及加伤
         event.setNewDamage((float) (Math.max(0, damage - block + extraDamage) * finalMultiplier));

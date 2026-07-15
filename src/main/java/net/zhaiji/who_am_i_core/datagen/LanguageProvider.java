@@ -1205,9 +1205,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.LIMBO, "Limbo");
         addOrganPassiveEffect(
             WAICOrgans.LIMBO,
-            "Gain 1 XP/sec",
-            "Gain 3 XP/sec",
-            "Gain 5 XP/sec"
+            "10% damage reduction",
+            "10% damage reduction",
+            "10% damage reduction"
         );
         addItem(WAICOrgans.LUST, "Lust");
         addOrganPassiveEffect(
@@ -1273,9 +1273,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.LIMBO, "灵薄");
         addOrganPassiveEffect(
             WAICOrgans.LIMBO,
-            "每秒获得1点经验",
-            "每秒获得3点经验",
-            "每秒获得5点经验"
+            "受到伤害减少10%",
+            "受到伤害减少10%",
+            "受到伤害减少10%"
         );
         addItem(WAICOrgans.LUST, "色欲");
         addOrganPassiveEffect(

@@ -692,6 +692,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             WAICOrgans.TREACHERY.get()
         );
         tag(WAICItemTagManager.UNIQUE).add(
+            WAICOrgans.LIMBO.get(),
             WAICOrgans.LUST.get(),
             WAICOrgans.GLUTTONY.get(),
             WAICOrgans.HERESY.get(),

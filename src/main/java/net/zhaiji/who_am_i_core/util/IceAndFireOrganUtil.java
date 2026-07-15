@@ -25,7 +25,6 @@ import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
 import net.zhaiji.who_am_i_core.task.HydraLungBreathTask;
 
 public class IceAndFireOrganUtil {
-
     /**
      * 取消指定类型的吐息任务
      */

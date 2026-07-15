@@ -906,14 +906,13 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 灵薄 tick：每秒给予经验（叠加式 1/3/5）
+     * 灵薄减伤：每有一个九狱器官减少10%受到的伤害，最多30%
      */
-    public static void limboTick(ChestCavitySlotContext context) {
-        if (!(context.entity() instanceof ServerPlayer serverPlayer)) return;
-        // 每 20 tick（1秒）触发一次
-        if (serverPlayer.tickCount % 20 != 0) return;
-        int nineHellCount = getNineHellCount(context);
-        serverPlayer.giveExperiencePoints(nineHellCount * nineHellCount);
+    public static float limboHurt(LivingEntity entity, float damage) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!data.hasOrgan(WAICOrgans.LIMBO.get())) return 0;
+        int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
+        return damage * Math.min(nineHellCount, 3) * 0.1F;
     }
 
     /**
@@ -930,8 +929,7 @@ public class WAICOrganUtil {
         ChestCavityData data = ChestCavityUtil.getData(attacker);
         if (!data.hasOrgan(WAICOrgans.LUST.get())) return;
         int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
-        float healPercent = Math.min(nineHellCount, 3) * 0.1F;
-        float healAmount = damage * healPercent;
+        float healAmount = damage * Math.min(nineHellCount, 3) * 0.1F;
         if (healAmount > 0) {
             attacker.heal(healAmount);
         }

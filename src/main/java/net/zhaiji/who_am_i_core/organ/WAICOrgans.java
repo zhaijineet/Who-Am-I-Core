@@ -521,13 +521,12 @@ public class WAICOrgans {
             .build()
     );
 
-    // 灵薄（阑尾）— 属性 = 2 - N；效果：每秒获得经验
+    // 灵薄（阑尾）— 属性 = 2 - N；效果：减伤
     public static final Supplier<Item> LIMBO = WAICItem.ITEM.register(
         "limbo",
         () -> Organ.builder()
             .modifier(WAICOrganUtil::limboModifier)
             .refreshDynamicAttribute()
-            .tick(WAICOrganUtil::limboTick)
             .tooltip(WAICTooltipManager.NINE_HELL_TOOLTIP)
             .build()
     );

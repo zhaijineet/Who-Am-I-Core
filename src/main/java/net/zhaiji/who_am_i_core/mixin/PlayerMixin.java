@@ -39,7 +39,11 @@ public abstract class PlayerMixin extends LivingEntity {
     /**
      * 当玩家拥有猩红心脏且血液未满时，强制 isHurt() 返回 true
      */
-    @Inject(method = "isHurt", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "isHurt",
+        at = @At("HEAD"),
+        cancellable = true
+    )
     public void whoAmICore$isHurt(CallbackInfoReturnable<Boolean> cir) {
         Player player = whoAmICore$self();
         // 检查是否拥有猩红心脏且血液未满
@@ -51,7 +55,10 @@ public abstract class PlayerMixin extends LivingEntity {
     /**
      * 在 {@code experienceLevel} 字段实际更新完成后刷新经验之心属性。
      */
-    @Inject(method = "giveExperienceLevels(I)V", at = @At("RETURN"))
+    @Inject(
+        method = "giveExperienceLevels(I)V",
+        at = @At("RETURN")
+    )
     public void whoAmICore$giveExperienceLevels(int levels, CallbackInfo ci) {
         WAICOrganUtil.updateExperienceHeartAttribute(whoAmICore$self());
     }
