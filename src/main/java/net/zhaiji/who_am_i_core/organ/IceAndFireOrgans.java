@@ -501,6 +501,7 @@ public class IceAndFireOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 1.5)
             .addValueAttribute(InitAttribute.SCAVENGER_DIGESTION, 1)
+            .tooltip(WAICTooltipManager.HYDRA_STOMACH_TOOLTIP)
             .build()
     );
 
@@ -509,6 +510,7 @@ public class IceAndFireOrgans {
         "hydra_intestine",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 1.5)
+            .tooltip(WAICTooltipManager.HYDRA_INTESTINE_TOOLTIP)
             .build()
     );
 

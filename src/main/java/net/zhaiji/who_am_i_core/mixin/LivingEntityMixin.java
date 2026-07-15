@@ -13,7 +13,9 @@ import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.mixinapi.IMobEffectInstance;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
+import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
+import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -43,10 +45,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     /**
-     * 九头蛇胃将食物有害效果转化为中毒
-     * <p>
-     * 九头蛇肠子提高获得的负面效果时长为1.5倍
-     * </p>
+     * 九头蛇胃将食物有害效果转化为中毒，中毒时长乘以九头蛇器官总数
      */
     @Inject(
         method = "eat(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;",
@@ -56,8 +55,8 @@ public abstract class LivingEntityMixin extends Entity {
         if (level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(whoAmICore$self());
 
-        int hydraStomachCount = data.getOrganCount(IceAndFireOrgans.HYDRA_STOMACH.get());
-        if (hydraStomachCount <= 0) return;
+        if (!data.hasOrgan(IceAndFireOrgans.HYDRA_STOMACH.get())) return;
+        int hydraOrganCount = data.getOrganCount(WAICItemTagManager.HYDRA);
         int duration = 0;
         int amplifier = 0;
         for (FoodProperties.PossibleEffect effect : foodProperties.effects()) {
@@ -70,11 +69,10 @@ public abstract class LivingEntityMixin extends Entity {
                 }
             }
         }
-        int hydraIntestineCount = data.getOrganCount(IceAndFireOrgans.HYDRA_INTESTINE.get());
-        if (hydraIntestineCount > 0) {
-            duration = (int) (duration * (1 + (0.5 * hydraIntestineCount)));
+        if (data.hasOrgan(IceAndFireOrgans.HYDRA_INTESTINE.get())) {
+            duration = IceAndFireOrganUtil.applyIntestineMultiplier(duration, hydraOrganCount);
         }
-        duration *= hydraStomachCount;
+        duration *= hydraOrganCount;
         MobEffectInstance poison = getEffect(MobEffects.POISON);
         if (poison != null && !poison.isInfiniteDuration()) {
             duration += poison.getDuration();
@@ -86,7 +84,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     /**
-     * 九头蛇肠子提高获得的效果时长为1.5倍
+     * 九头蛇肠子提高获得的效果时长，延长倍率随九头蛇器官总数缩放
      */
     @ModifyArg(
         method = "addEatEffect",
@@ -97,10 +95,12 @@ public abstract class LivingEntityMixin extends Entity {
     )
     public MobEffectInstance whoAmICore$addEatEffect(MobEffectInstance effectInstance) {
         ChestCavityData data = ChestCavityUtil.getData(whoAmICore$self());
-        int hydraIntestineCount = data.getOrganCount(IceAndFireOrgans.HYDRA_INTESTINE.get());
-        if (hydraIntestineCount > 0) {
-            ((IMobEffectInstance) effectInstance).setDuration(duration -> (int) (duration * (1 + (0.5 * hydraIntestineCount))),
-                whoAmICore$self());
+        if (data.hasOrgan(IceAndFireOrgans.HYDRA_INTESTINE.get())) {
+            int hydraOrganCount = data.getOrganCount(WAICItemTagManager.HYDRA);
+            ((IMobEffectInstance) effectInstance).setDuration(
+                duration -> IceAndFireOrganUtil.applyIntestineMultiplier(duration, hydraOrganCount),
+                whoAmICore$self()
+            );
         }
         return effectInstance;
     }

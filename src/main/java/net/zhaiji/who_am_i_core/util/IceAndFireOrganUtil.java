@@ -6,6 +6,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -98,6 +100,16 @@ public class IceAndFireOrganUtil {
     }
 
     /**
+     * 九头蛇肠子对效果时长的延长倍率
+     *
+     * @param duration         原始时长
+     * @param hydraOrganCount  九头蛇器官总数
+     */
+    public static int applyIntestineMultiplier(int duration, int hydraOrganCount) {
+        return (int) (duration * (1 + (0.5 * hydraOrganCount)));
+    }
+
+    /**
      * 九头蛇脊柱复活效果
      *
      * @return 是否取消事件
@@ -106,23 +118,16 @@ public class IceAndFireOrganUtil {
         if (!data.hasOrgan(IceAndFireOrgans.HYDRA_SPINE.get())) return false;
         MobEffectInstance poisonEffect = entity.getEffect(MobEffects.POISON);
         if (poisonEffect == null || poisonEffect.getDuration() < 200) return false;
-        // 冷却中则不复活
         if (OrganSkillUtil.hasCooldown(entity, IceAndFireOrgans.HYDRA_SPINE.get())) return false;
-        // 回复生命：基础 5% + 代谢属性缩放
-        entity.setHealth(entity.getMaxHealth() * (0.05F + (float) (entity.getAttributeValue(InitAttribute.METABOLISM) * 0.005)));
+        entity.setHealth(entity.getMaxHealth() * (0.05F + (float) (entity.getAttributeValue(InitAttribute.METABOLISM) * 0.05)));
+        entity.level().playSound(null, entity.blockPosition(), SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
         int currentAmplifier = poisonEffect.getAmplifier();
-        // 移除旧中毒效果，添加新效果
-        // 必须先移除，否则当新效果结束后会恢复旧效果
         entity.removeEffect(MobEffects.POISON);
         entity.addEffect(new MobEffectInstance(
             MobEffects.POISON,
-            // 减半时间
             poisonEffect.getDuration() / 2,
-            // 提升中毒等级（最高5级）
-            // 如果等级本身大于5级，就保留原等级
             currentAmplifier < 4 ? currentAmplifier + 1 : currentAmplifier
         ));
-        // 设置 3 分钟冷却
         OrganSkillUtil.addCooldown(entity, IceAndFireOrgans.HYDRA_SPINE.get(), 3 * 60 * 20);
         return true;
     }
@@ -191,18 +196,12 @@ public class IceAndFireOrganUtil {
         return amplifier + 1;
     }
 
-    /**
-     * 九头蛇肋骨：从目标转移中毒效果到攻击者，抵消伤害
-     */
     public static float hydraRibHurt(LivingEntity target, LivingEntity attacker) {
         ChestCavityData data = ChestCavityUtil.getData(target);
         if (!data.hasOrgan(IceAndFireOrgans.HYDRA_RIB.get())) return 0;
         return transferPoison(target, attacker, 100);
     }
 
-    /**
-     * 九头蛇肌肉：从攻击者转移中毒效果到目标，造成额外伤害
-     */
     public static float hydraMuscleHurt(LivingEntity attacker, LivingEntity target) {
         ChestCavityData data = ChestCavityUtil.getData(attacker);
         if (!data.hasOrgan(IceAndFireOrgans.HYDRA_MUSCLE.get())) return 0;
@@ -210,10 +209,7 @@ public class IceAndFireOrganUtil {
     }
 
     /**
-     * 九头蛇心脏 tick - 中毒时获得再生效果
-     * <p>
-     * 每10tick检测一次，当实体未着火且持有中毒效果时，给予与中毒等级相同的再生效果
-     * </p>
+     * 九头蛇心脏 tick，中毒时获得再生效果
      */
     public static void hydraHeartTick(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
@@ -231,7 +227,7 @@ public class IceAndFireOrganUtil {
     }
 
     /**
-     * 九头蛇脾脏 tick - 低血量时将中毒转化为治疗
+     * 九头蛇脾脏 tick，低血量时将中毒转化为治疗
      */
     public static void hydraSpleenTick(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();

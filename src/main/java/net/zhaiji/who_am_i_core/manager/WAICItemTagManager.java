@@ -21,6 +21,8 @@ public class WAICItemTagManager {
     public static final TagKey<Item> ICE_DRAGON = register("ice_dragon", 0xFF55FFFF, 59);
     // 电龙
     public static final TagKey<Item> LIGHTNING_DRAGON = register("lightning_dragon", 0xFFE27CCC, 58);
+    // 九头蛇
+    public static final TagKey<Item> HYDRA = register("hydra", 0xFF4A8C3A, 57);
     // 电荷
     public static final TagKey<Item> CHARGE = register("charge", 0xFF00DFFF, 55);
     // 炽焰

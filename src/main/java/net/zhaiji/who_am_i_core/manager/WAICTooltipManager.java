@@ -493,7 +493,7 @@ public class WAICTooltipManager {
      */
     private static final FormulaValue HYDRA_SPINE_FORMULA_VALUE = new FormulaValue(
         context -> {
-            float healPercent = 0.05F + (float) (context.entity().getAttributeValue(InitAttribute.METABOLISM) * 0.005);
+            float healPercent = 0.05F + (float) (context.entity().getAttributeValue(InitAttribute.METABOLISM) * 0.05);
             return Component.literal(TooltipUtil.formatAttributeValue(context.entity().getMaxHealth() * healPercent));
         },
         context -> Component.empty()
@@ -505,7 +505,7 @@ public class WAICTooltipManager {
             .append(TooltipUtil.attributeName(InitAttribute.METABOLISM))
             .append(Component.literal(TooltipUtil.formatAttributeValue(context.entity().getAttributeValue(InitAttribute.METABOLISM))))
             .append(TooltipUtil.formulaOperator("×"))
-            .append(Component.literal("0.005)"))
+            .append(Component.literal("0.05)"))
     );
 
     /**
@@ -549,6 +549,58 @@ public class WAICTooltipManager {
             // detailed 含动态 %s 在 line 1
             Map.of(1, List.of(HYDRA_SPLEEN_FORMULA_VALUE))
         ))
+        .build();
+
+    /**
+     * 九头蛇胃中毒时长乘数公式：九头蛇器官数
+     */
+    private static final FormulaValue HYDRA_STOMACH_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int hydraOrganCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.HYDRA);
+            return Component.literal(String.valueOf(hydraOrganCount));
+        },
+        context -> {
+            int hydraOrganCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.HYDRA);
+            return Component.empty()
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.HYDRA))
+                .append(Component.literal(String.valueOf(hydraOrganCount)));
+        }
+    );
+
+    /**
+     * 九头蛇胃 — 中毒时长乘以九头蛇器官总数
+     */
+    public static final OrganTooltipConsumer HYDRA_STOMACH_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            1, List.of(HYDRA_STOMACH_FORMULA_VALUE)
+        )))
+        .build();
+
+    /**
+     * 九头蛇肠子效果延长倍率公式：九头蛇器官数 × 50%
+     */
+    private static final FormulaValue HYDRA_INTESTINE_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int hydraOrganCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.HYDRA);
+            return Component.literal(TooltipUtil.formatAttributeValue(hydraOrganCount * 50F) + "%");
+        },
+        context -> {
+            int hydraOrganCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.HYDRA);
+            return Component.empty()
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.HYDRA))
+                .append(Component.literal(String.valueOf(hydraOrganCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("50%"));
+        }
+    );
+
+    /**
+     * 九头蛇肠子 — 效果延长倍率随九头蛇器官总数缩放
+     */
+    public static final OrganTooltipConsumer HYDRA_INTESTINE_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(HYDRA_INTESTINE_FORMULA_VALUE)
+        )))
         .build();
 
     /**

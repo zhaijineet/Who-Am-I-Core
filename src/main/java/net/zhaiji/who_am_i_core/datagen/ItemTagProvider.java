@@ -825,6 +825,16 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
             IceAndFireOrgans.HYDRA_RIB.get(),
             IceAndFireOrgans.HYDRA_MUSCLE.get()
         );
+        tag(WAICItemTagManager.HYDRA).add(
+            IceAndFireOrgans.HYDRA_HEART.get(),
+            IceAndFireOrgans.HYDRA_LUNG.get(),
+            IceAndFireOrgans.HYDRA_SPINE.get(),
+            IceAndFireOrgans.HYDRA_STOMACH.get(),
+            IceAndFireOrgans.HYDRA_INTESTINE.get(),
+            IceAndFireOrgans.HYDRA_SPLEEN.get(),
+            IceAndFireOrgans.HYDRA_RIB.get(),
+            IceAndFireOrgans.HYDRA_MUSCLE.get()
+        );
         tag(ItemTagManager.HEART).add(IceAndFireOrgans.HYDRA_HEART.get());
         tag(WAICItemTagManager.UNIQUE).add(IceAndFireOrgans.HYDRA_HEART.get());
         tag(ItemTagManager.LUNG).add(IceAndFireOrgans.HYDRA_LUNG.get());

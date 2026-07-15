@@ -1707,20 +1707,19 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.HYDRA_HEART, "Hydra Heart");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_HEART,
-            "Immune to poison damage",
-            "Gains regeneration at the same level as current poison"
+            "Immune to poison damage and gains regeneration at the same level as current poison"
         );
         addOrganPassiveEffectSimple(
             IceAndFireOrgans.HYDRA_HEART,
-            "Immune to poison damage and converts it into regeneration"
+            "Immune to poison damage and gains regeneration"
         );
 
         addItem(IceAndFireOrgans.HYDRA_LUNG, "Hydra Lung");
         addOrganActiveSkill(
             IceAndFireOrgans.HYDRA_LUNG,
             "Consumes current poison to unleash venom breath",
-            "Breath duration equals log10 of original poison duration in ticks",
-            "Deals damage equal to poison amplifier plus one every 4 ticks",
+            "Breath duration equals the square root of original poison duration in ticks",
+            "Deals damage equal to poison level every 4 ticks",
             "Hit enemies receive the original poison effect"
         );
         addOrganActiveSkillSimple(
@@ -1732,7 +1731,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_SPINE,
             "Prevents death when holding at least 10 seconds of poison",
-            "Revives with %s HP, poison level +1 up to level V, duration halved",
+            "Revives with %s HP, poison level +1 up to level 5, duration halved",
             "Cooldown: 180s"
         );
 
@@ -1740,18 +1739,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_STOMACH,
             "Gains poison based on harmful food effects when eating",
-            "Poison duration equals harmful effects duration multiplied by stomach count"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_STOMACH,
-            "Gains poison from harmful food effects when eating"
+            "Poison duration equals harmful effects duration multiplied by %s"
         );
 
         addItem(IceAndFireOrgans.HYDRA_INTESTINE, "Hydra Intestine");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_INTESTINE,
-            "Increases food effect duration by 50 percent per organ",
-            "Each organ increases by 50 percent the duration of poison the Hydra Stomach gains from harmful food effects"
+            "Extends food effect duration by %s"
         );
 
         addItem(IceAndFireOrgans.HYDRA_SPLEEN, "Hydra Spleen");
@@ -1768,23 +1762,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.HYDRA_RIB, "Hydra Rib");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_RIB,
-            "When taking damage transfers up to 5 seconds of poison to the attacker",
-            "Damage reduction equals transferred poison level"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_RIB,
-            "Transfers poison to attackers when hit"
+            "When damaged consumes up to 5 seconds of poison to reduce damage, reduction equals poison level",
+            "Transfers consumed poison to the attacker if one exists"
         );
 
         addItem(IceAndFireOrgans.HYDRA_MUSCLE, "Hydra Muscle");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_MUSCLE,
-            "On attack transfers up to 5 seconds of poison to the target",
-            "Extra damage equals transferred poison level"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_MUSCLE,
-            "Transfers poison to target on attack"
+            "On attack consumes up to 5 seconds of poison and transfers it to the target",
+            "Bonus damage equals poison level"
         );
     }
 
@@ -1792,20 +1778,19 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.HYDRA_HEART, "九头蛇心脏");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_HEART,
-            "免疫中毒伤害",
-            "获得与中毒相同等级的再生效果"
+            "免疫中毒伤害并额外获得与中毒相同等级的再生效果"
         );
         addOrganPassiveEffectSimple(
             IceAndFireOrgans.HYDRA_HEART,
-            "免疫中毒伤害并将其转化为再生"
+            "免疫中毒伤害并额外获得再生"
         );
 
         addItem(IceAndFireOrgans.HYDRA_LUNG, "九头蛇肺脏");
         addOrganActiveSkill(
             IceAndFireOrgans.HYDRA_LUNG,
             "消耗当前中毒效果释放毒物吐息",
-            "吐息持续时长等于原始中毒时长的log10",
-            "每4 tick造成等于中毒等级加一的伤害",
+            "吐息持续时长等于原始中毒时长的平方根",
+            "每4tick造成等于中毒等级的伤害",
             "被击中的敌人获得原始中毒效果"
         );
         addOrganActiveSkillSimple(
@@ -1817,7 +1802,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_SPINE,
             "持有至少10秒中毒时可阻止死亡",
-            "复活时恢复%s点生命值，中毒等级+1且最高提升至V，持续时间减半",
+            "复活时恢复%s点生命值，中毒等级+1且最高提升至5，持续时间减半",
             "冷却时间：180秒"
         );
 
@@ -1825,18 +1810,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_STOMACH,
             "进食时根据食物的有害效果获取中毒",
-            "中毒时长等于有害效果时长乘以胃的数量"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_STOMACH,
-            "进食时根据有害食物效果获取中毒"
+            "中毒时长等于有害效果时长乘以%s"
         );
 
         addItem(IceAndFireOrgans.HYDRA_INTESTINE, "九头蛇肠子");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_INTESTINE,
-            "每个器官增加50%食物效果持续时长",
-            "每个器官提高50%九头蛇胃从食物有害效果中获取的中毒时长"
+            "使食物效果持续延长%s"
         );
 
         addItem(IceAndFireOrgans.HYDRA_SPLEEN, "九头蛇脾脏");
@@ -1853,23 +1833,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.HYDRA_RIB, "九头蛇肋骨");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_RIB,
-            "受伤时将最多5秒的中毒效果转移给攻击者",
-            "伤害减免等于转移的中毒等级"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_RIB,
-            "受伤时将中毒转移给攻击者"
+            "受伤时消耗最多5秒中毒以减免伤害，减免量等于中毒等级",
+            "若存在攻击者则将消耗的中毒转移给攻击者"
         );
 
         addItem(IceAndFireOrgans.HYDRA_MUSCLE, "九头蛇肌肉");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_MUSCLE,
-            "攻击时将最多5秒的中毒效果转移给目标",
-            "额外伤害等于转移的中毒等级"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_MUSCLE,
-            "攻击时将中毒转移给目标"
+            "攻击时消耗最多5秒中毒转移给目标",
+            "额外伤害等于中毒等级"
         );
     }
 
@@ -1883,6 +1855,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.FIRE_DRAGON, "Fire Dragon");
         add(WAICItemTagManager.ICE_DRAGON, "Ice Dragon");
         add(WAICItemTagManager.LIGHTNING_DRAGON, "Lightning Dragon");
+        add(WAICItemTagManager.HYDRA, "Hydra");
         add(WAICItemTagManager.CHARGE, "Charge");
         add(WAICItemTagManager.FIRE, "Fire");
         add(WAICItemTagManager.ICE, "Ice");
@@ -1918,6 +1891,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.FIRE_DRAGON, "火龙");
         add(WAICItemTagManager.ICE_DRAGON, "冰龙");
         add(WAICItemTagManager.LIGHTNING_DRAGON, "电龙");
+        add(WAICItemTagManager.HYDRA, "九头蛇");
         add(WAICItemTagManager.CHARGE, "电荷");
         add(WAICItemTagManager.FIRE, "炽焰");
         add(WAICItemTagManager.ICE, "冰霜");
