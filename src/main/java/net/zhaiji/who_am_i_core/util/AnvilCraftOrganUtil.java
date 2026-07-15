@@ -5,6 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -260,6 +263,66 @@ public class AnvilCraftOrganUtil {
             if (state.is(Blocks.MAGMA_BLOCK)) return true;
         }
         return false;
+    }
+
+    // ==================== 诅咒金器官 ====================
+
+    /**
+     * 更新单种诅咒惩罚效果
+     * <p>
+     * 等级降低时仅移除确认由诅咒金施加的效果（等级匹配且时长不超过诅咒金施加时长），保护外部更高等级或更长时长的同种来源
+     * </p>
+     *
+     * @param threshold 该效果的触发阈值
+     * @param step      每多少个器官提升1级
+     * @param duration  诅咒金施加的效果时长
+     */
+    private static void updateCursedEffect(
+        LivingEntity entity,
+        Holder<MobEffect> effect,
+        int oldCursedCount,
+        int newCursedCount,
+        int threshold,
+        int step,
+        int duration
+    ) {
+        int oldAmplifier = oldCursedCount >= threshold ? (oldCursedCount - threshold) / step : -1;
+        int newAmplifier = newCursedCount >= threshold ? (newCursedCount - threshold) / step : -1;
+        if (oldAmplifier > newAmplifier) {
+            MobEffectInstance currentEffect = entity.getEffect(effect);
+            if (currentEffect != null
+                && currentEffect.getAmplifier() == oldAmplifier
+                && currentEffect.getDuration() <= duration) {
+                entity.removeEffect(effect);
+            }
+        }
+        if (newAmplifier >= 0) {
+            entity.addEffect(new MobEffectInstance(effect, duration, newAmplifier, false, false));
+        }
+    }
+
+    /**
+     * 根据诅咒器官数量施加诅咒惩罚效果（饥饿/缓慢/虚弱），等级阶梯式递增
+     */
+    public static void addCursedGoldEffects(LivingEntity entity, int cursedCount, int duration) {
+        updateCursedEffect(entity, MobEffects.HUNGER, 0, cursedCount, 1, 2, duration);
+        updateCursedEffect(entity, MobEffects.MOVEMENT_SLOWDOWN, 0, cursedCount, 3, 3, duration);
+        updateCursedEffect(entity, MobEffects.WEAKNESS, 0, cursedCount, 5, 4, duration);
+    }
+
+    /**
+     * 器官变更时根据诅咒器官数量变化专项更新诅咒惩罚效果
+     * <p>
+     * 仅对等级降低的效果执行 removeEffect，且只移除诅咒金自身施加的效果，保护外部来源
+     * </p>
+     */
+    public static void applyCursedGoldEffects(LivingEntity entity, int cursedCount, ItemStack oldStack, ItemStack newStack, int duration) {
+        int oldCursedCount = cursedCount
+                             + (oldStack.is(WAICItemTagManager.CURSED) ? 1 : 0)
+                             - (newStack.is(WAICItemTagManager.CURSED) ? 1 : 0);
+        updateCursedEffect(entity, MobEffects.HUNGER, oldCursedCount, cursedCount, 1, 2, duration);
+        updateCursedEffect(entity, MobEffects.MOVEMENT_SLOWDOWN, oldCursedCount, cursedCount, 3, 3, duration);
+        updateCursedEffect(entity, MobEffects.WEAKNESS, oldCursedCount, cursedCount, 5, 4, duration);
     }
 
     // ==================== 电磁炮 ====================

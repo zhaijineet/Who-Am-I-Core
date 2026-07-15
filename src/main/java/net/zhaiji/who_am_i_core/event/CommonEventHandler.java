@@ -74,6 +74,7 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.ChestNovaTask;
 import net.zhaiji.who_am_i_core.task.StraightIntestineTask;
+import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
 import net.zhaiji.who_am_i_core.util.CompanionsOrganUtil;
 import net.zhaiji.who_am_i_core.util.IceAndFireOrganUtil;
@@ -315,6 +316,15 @@ public class CommonEventHandler {
 
         // 猩红心脏被动：血液容量 = 猩红器官数量 × 100
         WAICOrganUtil.crimsonHeartOrganChange(event.getData(), event.getEntity(), event.getOldStack(), event.getNewStack());
+
+        // 诅咒金器官增减时立即更新诅咒惩罚效果
+        ItemStack oldStack = event.getOldStack();
+        ItemStack newStack = event.getNewStack();
+        if (oldStack.is(WAICItemTagManager.CURSED) || newStack.is(WAICItemTagManager.CURSED)) {
+            LivingEntity entity = event.getEntity();
+            int cursedCount = event.getData().getOrganCount(WAICItemTagManager.CURSED);
+            AnvilCraftOrganUtil.applyCursedGoldEffects(entity, cursedCount, oldStack, newStack, 600);
+        }
     }
 
     /**

@@ -1049,29 +1049,29 @@ public class WAICTooltipManager {
         .build();
 
     /**
-     * 诅咒金虚弱等级公式：阈值 1，每 5 个 +1 级，floor((count - 1) ÷ 5) + 1，未达阈值显示灰色 /
+     * 诅咒金饥饿等级公式：阈值 1，每 2 个 +1 级，floor((count - 1) ÷ 2) + 1，未达阈值显示灰色 /
      */
-    private static final FormulaValue CURSED_GOLD_WEAKNESS_FORMULA_VALUE = buildCursedGoldStepFormulaValue(1, 5);
+    private static final FormulaValue CURSED_GOLD_HUNGER_FORMULA_VALUE = buildCursedGoldStepFormulaValue(1, 2);
 
     /**
-     * 诅咒金缓慢等级公式：阈值 3，每 6 个 +1 级，floor((count - 3) ÷ 6) + 1，未达阈值显示灰色 /
+     * 诅咒金缓慢等级公式：阈值 3，每 3 个 +1 级，floor((count - 3) ÷ 3) + 1，未达阈值显示灰色 /
      */
-    private static final FormulaValue CURSED_GOLD_SLOWNESS_FORMULA_VALUE = buildCursedGoldStepFormulaValue(3, 6);
+    private static final FormulaValue CURSED_GOLD_SLOWNESS_FORMULA_VALUE = buildCursedGoldStepFormulaValue(3, 3);
 
     /**
-     * 诅咒金饥饿等级公式：阈值 5，每 9 个 +1 级，floor((count - 5) ÷ 9) + 1，未达阈值显示灰色 /
+     * 诅咒金虚弱等级公式：阈值 5，每 4 个 +1 级，floor((count - 5) ÷ 4) + 1，未达阈值显示灰色 /
      */
-    private static final FormulaValue CURSED_GOLD_HUNGER_FORMULA_VALUE = buildCursedGoldStepFormulaValue(5, 9);
+    private static final FormulaValue CURSED_GOLD_WEAKNESS_FORMULA_VALUE = buildCursedGoldStepFormulaValue(5, 4);
 
     /**
-     * 诅咒金器官 — 虚弱/缓慢/饥饿等级随诅咒器官数量阶梯式递增（四个诅咒金器官共用）
+     * 诅咒金器官 — 饥饿/缓慢/虚弱等级随诅咒器官数量阶梯式递增（四个诅咒金器官共用）
      */
     public static final OrganTooltipConsumer CURSED_GOLD_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.same(
             Map.of(
-                1, List.of(CURSED_GOLD_WEAKNESS_FORMULA_VALUE),
+                1, List.of(CURSED_GOLD_HUNGER_FORMULA_VALUE),
                 2, List.of(CURSED_GOLD_SLOWNESS_FORMULA_VALUE),
-                3, List.of(CURSED_GOLD_HUNGER_FORMULA_VALUE)
+                3, List.of(CURSED_GOLD_WEAKNESS_FORMULA_VALUE)
             )
         ))
         .build();

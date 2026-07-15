@@ -153,7 +153,7 @@ public class MowziesMobOrgans {
     public static final Supplier<Item> BLUFF_CORE = WAICItem.ITEM.register(
         "bluff_core",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 1)
+            .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(InitAttribute.NERVES, 0.5)
             .skill(WAICPlayerSkillUtil::bluffCore)
             .goalSkill(WAICGoalSkillUtil.bluffCoreGoalSkill())

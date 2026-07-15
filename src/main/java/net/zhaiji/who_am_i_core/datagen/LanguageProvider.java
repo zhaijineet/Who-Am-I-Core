@@ -1649,8 +1649,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             IceAndFireOrgans.DREAD_PHYLACTERY,
             "Grants %s Health",
-            "On attack converts target Slowness into freeze damage and removes it",
-            "Damage equals remaining Slowness seconds multiplied by level plus one",
+            "On attack converts target Slowness into freeze damage",
+            "Damage equals remaining Slowness seconds multiplied by level",
             "Infinite Slowness results in lethal damage"
         );
         addOrganPassiveEffectSimple(
@@ -1683,8 +1683,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             IceAndFireOrgans.DREAD_PHYLACTERY,
             "提供%s点健康",
-            "攻击时将目标的缓慢效果转化为冰霜伤害并移除",
-            "伤害等于缓慢剩余秒数乘以缓慢等级加一",
+            "攻击时将目标身上的缓慢效果转化为冰霜伤害",
+            "伤害等于缓慢剩余秒数乘以缓慢等级",
             "无限时长的缓慢造成致命伤害"
         );
         addOrganPassiveEffectSimple(
@@ -1873,6 +1873,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.SCYLLA, "Scylla");
         add(WAICItemTagManager.REMNANT, "Remnant");
         add(WAICItemTagManager.LEVIATHAN, "Leviathan");
+        add(WAICItemTagManager.BLUFF, "Bluff");
 
         add("formula.who_am_i_core.max_health", "Max Health");
         add("formula.who_am_i_core.current_health_ratio", "Current Health Ratio");
@@ -1909,6 +1910,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.SCYLLA, "斯库拉");
         add(WAICItemTagManager.REMNANT, "遗魂");
         add(WAICItemTagManager.LEVIATHAN, "利维坦");
+        add(WAICItemTagManager.BLUFF, "泥峭");
 
         add("formula.who_am_i_core.max_health", "最大生命值");
         add("formula.who_am_i_core.current_health_ratio", "当前生命值比例");
@@ -2009,9 +2011,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void cursedGoldOrgansEN() {
         String effect0 = "Cursed organs in the chest impose stacking penalties";
-        String effect1 = "1 or more organs inflict Weakness, currently level %s";
+        String effect1 = "1 or more organs inflict Hunger, currently level %s";
         String effect2 = "3 or more organs inflict Slowness, currently level %s";
-        String effect3 = "5 or more organs inflict Hunger, currently level %s";
+        String effect3 = "5 or more organs inflict Weakness, currently level %s";
         String simple = "Cursed organs in the chest impose stacking debuffs";
 
         addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "Cursed Gold Heart");
@@ -2166,9 +2168,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void cursedGoldOrgansZH() {
         String effect0 = "胸腔中的诅咒器官会叠加惩罚效果";
-        String effect1 = "1个及以上施加虚弱，当前%s级";
+        String effect1 = "1个及以上施加饥饿，当前%s级";
         String effect2 = "3个及以上施加缓慢，当前%s级";
-        String effect3 = "5个及以上施加饥饿，当前%s级";
+        String effect3 = "5个及以上施加虚弱，当前%s级";
         String simple = "胸腔中诅咒器官叠加惩罚效果";
 
         addItem(AnvilCraftOrgans.CURSED_GOLD_HEART, "诅咒金心脏");

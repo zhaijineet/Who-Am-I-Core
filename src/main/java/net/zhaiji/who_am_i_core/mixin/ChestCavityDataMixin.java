@@ -4,8 +4,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
@@ -95,24 +93,11 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         if (emberCount > 0 && AnvilCraftOrganUtil.isInFireSource(owner)) {
             owner.heal(0.5F * emberCount);
         }
-        // 诅咒器官诅咒效果：每 40 tick 根据诅咒器官数量施加负面效果
-        // 参考 AnvilCraft 原版 ICursed：虚弱(始终) / 缓慢(>8) / 饥饿(>64)
-        if (tickCount % 40 == 0) {
+        // 诅咒器官诅咒效果：每 300 tick 根据诅咒器官数量施加负面效果（30秒持续）
+        if (tickCount % 300 == 0) {
             int cursedCount = getOrganCount(WAICItemTagManager.CURSED);
-            if (cursedCount >= 1) {
-                // 虚弱：每5个器官等级+1
-                int weaknessAmp = (cursedCount - 1) / 5;
-                owner.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, weaknessAmp));
-            }
-            if (cursedCount >= 3) {
-                // 缓慢：每6个器官等级+1
-                int slownessAmp = (cursedCount - 3) / 6;
-                owner.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, slownessAmp));
-            }
-            if (cursedCount >= 5) {
-                // 饥饿：每9个器官等级+1
-                int hungerAmp = (cursedCount - 5) / 9;
-                owner.addEffect(new MobEffectInstance(MobEffects.HUNGER, 200, hungerAmp));
+            if (cursedCount > 0) {
+                AnvilCraftOrganUtil.addCursedGoldEffects(owner, cursedCount, 600);
             }
         }
     }

@@ -464,8 +464,8 @@ public class IceAndFireOrgans {
         "ghost_fire",
         () -> Organ.builder()
             .addValueAttribute(NeoForgeMod.CREATIVE_FLIGHT, 1)
-            .totalMultipliedAttribute(InitAttribute.HEALTH, -0.8)
-            .totalMultipliedAttribute(InitAttribute.STRENGTH, -0.8)
+            .totalMultipliedAttribute(InitAttribute.HEALTH, -0.9)
+            .totalMultipliedAttribute(InitAttribute.STRENGTH, -0.9)
             .build()
     );
 
