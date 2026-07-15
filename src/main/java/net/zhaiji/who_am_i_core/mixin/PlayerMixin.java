@@ -2,6 +2,7 @@ package net.zhaiji.who_am_i_core.mixin;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -34,6 +35,16 @@ public abstract class PlayerMixin extends LivingEntity {
     @Unique
     private Player whoAmICore$self() {
         return (Player) (Object) this;
+    }
+
+    /**
+     * 拥有鬼火器官且处于创造飞行、非旁观状态时，进入穿墙模式
+     */
+    @Unique
+    private boolean isGhostFireState() {
+        return ChestCavityUtil.getData(whoAmICore$self()).hasOrgan(IceAndFireOrgans.GHOST_FIRE.get())
+               && getAbilities().flying
+               && !isSpectator();
     }
 
     /**
@@ -75,9 +86,21 @@ public abstract class PlayerMixin extends LivingEntity {
         )
     )
     public void whoAmICore$tick(CallbackInfo ci) {
-        if (ChestCavityUtil.getData(whoAmICore$self()).hasOrgan(IceAndFireOrgans.GHOST_FIRE.get()) && getAbilities().flying && !isSpectator()) {
+        if (isGhostFireState()) {
             noPhysics = true;
             setOnGround(false);
         }
+    }
+
+    /**
+     * 穿墙模式下忽略碰撞检测，避免原版姿态判定因碰撞箱放不进方块而强制将玩家压成趴下姿态
+     */
+    @Inject(
+        method = "canPlayerFitWithinBlocksAndEntitiesWhen(Lnet/minecraft/world/entity/Pose;)Z",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    public void whoAmICore$canPlayerFitWithinBlocksAndEntitiesWhen(Pose pose, CallbackInfoReturnable<Boolean> cir) {
+        if (isGhostFireState()) cir.setReturnValue(true);
     }
 }

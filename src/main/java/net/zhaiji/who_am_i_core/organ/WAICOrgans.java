@@ -16,6 +16,7 @@ import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
+import net.zhaiji.who_am_i_core.item.SwordBoneItem;
 import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
@@ -784,8 +785,7 @@ public class WAICOrgans {
     // 剑骨头
     public static final Supplier<Item> SWORD_BONE = WAICItem.ITEM.register(
         "sword_bone",
-        () -> Organ.builder()
-
+        () -> Organ.builder(SwordBoneItem::new)
             .properties(properties -> properties.attributes(SwordItem.createAttributes(Tiers.IRON, 3, -2.4F)))
             .addValueAttribute(InitAttribute.NERVES, 1.5)
             .addValueAttribute(InitAttribute.DEFENSE, 0.75)
