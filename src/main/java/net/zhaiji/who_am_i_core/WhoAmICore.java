@@ -13,6 +13,7 @@ import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICCreativeModeTab;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICEntity;
+import net.zhaiji.who_am_i_core.register.WAICFluid;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.register.WAICRecipe;
 
@@ -26,6 +27,8 @@ public class WhoAmICore {
 
         // 注册
         WAICItem.ITEM.register(modEventBus);
+        WAICFluid.FLUIDS.register(modEventBus);
+        WAICFluid.FLUID_TYPES.register(modEventBus);
         WAICCreativeModeTab.CREATIVE_MODE_TAB.register(modEventBus);
         WAICAttribute.ATTRIBUTE.register(modEventBus);
         WAICEntity.ENTITY.register(modEventBus);

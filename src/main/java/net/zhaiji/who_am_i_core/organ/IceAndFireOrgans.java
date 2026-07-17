@@ -567,7 +567,7 @@ public class IceAndFireOrgans {
         Organ.builder(IafItems.HYDRA_HEART.get())
             .addValueAttribute(InitAttribute.HEALTH, 1.5)
             .addValueAttribute(InitAttribute.METABOLISM, 10)
-            .tick(IceAndFireOrganUtil::hydraHeartTick)
+            .tooltip(WAICTooltipManager.HYDRA_HEART_TOOLTIP)
             .build();
     }
 }

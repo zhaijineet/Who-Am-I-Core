@@ -13,10 +13,12 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.zhaiji.chestcavitybeyond.manager.ItemTagManager;
 import net.zhaiji.chestcavitybeyond.register.InitItem;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.organ.AnvilCraftOrgans;
@@ -53,17 +55,17 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
         Ingredient addition = Ingredient.of(ModItems.ROYAL_STEEL_INGOT);
         Criterion<?> criterion = has(ModItems.ROYAL_STEEL_INGOT);
 
-        smithingTransform(output, template, InitItem.RIB.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_RIB.get(), criterion);
-        smithingTransform(output, template, InitItem.MUSCLE.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_MUSCLE.get(), criterion);
-        smithingTransform(output, template, InitItem.SPINE.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_SPINE.get(), criterion);
-        smithingTransform(output, template, InitItem.APPENDIX.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_APPENDIX.get(), criterion);
-        smithingTransform(output, template, InitItem.HEART.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_HEART.get(), criterion);
-        smithingTransform(output, template, InitItem.LUNG.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_LUNG.get(), criterion);
-        smithingTransform(output, template, InitItem.STOMACH.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_STOMACH.get(), criterion);
-        smithingTransform(output, template, InitItem.INTESTINE.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_INTESTINE.get(), criterion);
-        smithingTransform(output, template, InitItem.KIDNEY.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_KIDNEY.get(), criterion);
-        smithingTransform(output, template, InitItem.SPLEEN.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_SPLEEN.get(), criterion);
-        smithingTransform(output, template, InitItem.LIVER.get(), addition, AnvilCraftOrgans.ROYAL_STEEL_LIVER.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.RIB), addition, AnvilCraftOrgans.ROYAL_STEEL_RIB.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.MUSCLE), addition, AnvilCraftOrgans.ROYAL_STEEL_MUSCLE.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.SPINE), addition, AnvilCraftOrgans.ROYAL_STEEL_SPINE.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.APPENDIX), addition, AnvilCraftOrgans.ROYAL_STEEL_APPENDIX.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.HEART), addition, AnvilCraftOrgans.ROYAL_STEEL_HEART.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.LUNG), addition, AnvilCraftOrgans.ROYAL_STEEL_LUNG.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.STOMACH), addition, AnvilCraftOrgans.ROYAL_STEEL_STOMACH.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.INTESTINE), addition, AnvilCraftOrgans.ROYAL_STEEL_INTESTINE.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.KIDNEY), addition, AnvilCraftOrgans.ROYAL_STEEL_KIDNEY.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.SPLEEN), addition, AnvilCraftOrgans.ROYAL_STEEL_SPLEEN.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.LIVER), addition, AnvilCraftOrgans.ROYAL_STEEL_LIVER.get(), criterion);
     }
 
     // 诅咒金器官
@@ -72,10 +74,10 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
         Ingredient addition = Ingredient.of(ModItems.CURSED_GOLD_INGOT);
         Criterion<?> criterion = has(ModItems.CURSED_GOLD_INGOT);
 
-        smithingTransform(output, template, InitItem.HEART.get(), addition, AnvilCraftOrgans.CURSED_GOLD_HEART.get(), criterion);
-        smithingTransform(output, template, InitItem.LUNG.get(), addition, AnvilCraftOrgans.CURSED_GOLD_LUNG.get(), criterion);
-        smithingTransform(output, template, InitItem.LIVER.get(), addition, AnvilCraftOrgans.CURSED_GOLD_LIVER.get(), criterion);
-        smithingTransform(output, template, InitItem.INTESTINE.get(), addition, AnvilCraftOrgans.CURSED_GOLD_INTESTINE.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.HEART), addition, AnvilCraftOrgans.CURSED_GOLD_HEART.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.LUNG), addition, AnvilCraftOrgans.CURSED_GOLD_LUNG.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.LIVER), addition, AnvilCraftOrgans.CURSED_GOLD_LIVER.get(), criterion);
+        smithingTransform(output, template, Ingredient.of(ItemTagManager.INTESTINE), addition, AnvilCraftOrgans.CURSED_GOLD_INTESTINE.get(), criterion);
     }
 
     // 余烬金属器官
@@ -212,6 +214,62 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
             AnvilCraftOrgans.FROST_METAL_APPENDIX.get(),
             criterion
         );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_HEART.get(),
+            addition,
+            AnvilCraftOrgans.FROST_METAL_HEART.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_LUNG.get(),
+            addition,
+            AnvilCraftOrgans.FROST_METAL_LUNG.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_STOMACH.get(),
+            addition,
+            AnvilCraftOrgans.FROST_METAL_STOMACH.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_INTESTINE.get(),
+            addition,
+            AnvilCraftOrgans.FROST_METAL_INTESTINE.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_KIDNEY.get(),
+            addition,
+            AnvilCraftOrgans.FROST_METAL_KIDNEY.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_SPLEEN.get(),
+            addition,
+            AnvilCraftOrgans.FROST_METAL_SPLEEN.get(),
+            criterion
+        );
+        smithingTransform(
+            output,
+            template,
+            AnvilCraftOrgans.ROYAL_STEEL_LIVER.get(),
+            addition,
+            AnvilCraftOrgans.FROST_METAL_LIVER.get(),
+            criterion
+        );
     }
 
     // 超限合金器官
@@ -248,6 +306,62 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
             AnvilCraftOrgans.FROST_METAL_APPENDIX.get(),
             AnvilCraftOrgans.EMBER_METAL_APPENDIX.get(),
             AnvilCraftOrgans.TRANSCENDIUM_APPENDIX.get(),
+            criterion
+        );
+        twoToOneSmithing(
+            output,
+            ModItems.MULTIPHASE_TRANSCENDIUM,
+            AnvilCraftOrgans.FROST_METAL_HEART.get(),
+            AnvilCraftOrgans.EMBER_METAL_HEART.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_HEART.get(),
+            criterion
+        );
+        twoToOneSmithing(
+            output,
+            ModItems.MULTIPHASE_TRANSCENDIUM,
+            AnvilCraftOrgans.FROST_METAL_LUNG.get(),
+            AnvilCraftOrgans.EMBER_METAL_LUNG.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_LUNG.get(),
+            criterion
+        );
+        twoToOneSmithing(
+            output,
+            ModItems.MULTIPHASE_TRANSCENDIUM,
+            AnvilCraftOrgans.FROST_METAL_STOMACH.get(),
+            AnvilCraftOrgans.EMBER_METAL_STOMACH.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_STOMACH.get(),
+            criterion
+        );
+        twoToOneSmithing(
+            output,
+            ModItems.MULTIPHASE_TRANSCENDIUM,
+            AnvilCraftOrgans.FROST_METAL_INTESTINE.get(),
+            AnvilCraftOrgans.EMBER_METAL_INTESTINE.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_INTESTINE.get(),
+            criterion
+        );
+        twoToOneSmithing(
+            output,
+            ModItems.MULTIPHASE_TRANSCENDIUM,
+            AnvilCraftOrgans.FROST_METAL_KIDNEY.get(),
+            AnvilCraftOrgans.EMBER_METAL_KIDNEY.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_KIDNEY.get(),
+            criterion
+        );
+        twoToOneSmithing(
+            output,
+            ModItems.MULTIPHASE_TRANSCENDIUM,
+            AnvilCraftOrgans.FROST_METAL_SPLEEN.get(),
+            AnvilCraftOrgans.EMBER_METAL_SPLEEN.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_SPLEEN.get(),
+            criterion
+        );
+        twoToOneSmithing(
+            output,
+            ModItems.MULTIPHASE_TRANSCENDIUM,
+            AnvilCraftOrgans.FROST_METAL_LIVER.get(),
+            AnvilCraftOrgans.EMBER_METAL_LIVER.get(),
+            AnvilCraftOrgans.TRANSCENDIUM_LIVER.get(),
             criterion
         );
     }
@@ -302,9 +416,30 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
      * 构建原版 smithing_transform 配方，路径自动取结果物品注册名
      */
     private void smithingTransform(
-        RecipeOutput output, Ingredient template, Item base, Ingredient addition, Item result, Criterion<?> criterion
+        RecipeOutput output,
+        Ingredient template,
+        Item base,
+        Ingredient addition,
+        Item result,
+        Criterion<?> criterion
     ) {
         SmithingTransformRecipeBuilder.smithing(template, Ingredient.of(base), addition, RecipeCategory.MISC, result)
+            .unlocks(getHasName(result), criterion)
+            .save(output, WhoAmICore.of(getItemName(result)));
+    }
+
+    /**
+     * 构建原版 smithing_transform 配方（base 为 Ingredient），路径自动取结果物品注册名
+     */
+    private void smithingTransform(
+        RecipeOutput output,
+        Ingredient template,
+        Ingredient base,
+        Ingredient addition,
+        Item result,
+        Criterion<?> criterion
+    ) {
+        SmithingTransformRecipeBuilder.smithing(template, base, addition, RecipeCategory.MISC, result)
             .unlocks(getHasName(result), criterion)
             .save(output, WhoAmICore.of(getItemName(result)));
     }
@@ -342,12 +477,15 @@ public class AnvilCraftRecipeProvider extends RecipeProvider {
     private void lesionOrganRecipes(RecipeOutput output) {
         Criterion<?> criterion = has(ModItems.URANIUM_INGOT);
 
-        lesionTimeWarp(output, InitItem.HEART.get(), WAICOrgans.LESION_HEART.get(), criterion);
-        lesionTimeWarp(output, InitItem.MUSCLE.get(), WAICOrgans.LESION_MUSCLE.get(), criterion);
+        lesionTimeWarp(output, ItemTagManager.HEART, WAICOrgans.LESION_HEART.get(), criterion);
+        lesionTimeWarp(output, ItemTagManager.MUSCLE, WAICOrgans.LESION_MUSCLE.get(), criterion);
     }
 
     private void lesionTimeWarp(
-        RecipeOutput output, Item base, Item result, Criterion<?> criterion
+        RecipeOutput output,
+        TagKey<Item> base,
+        Item result,
+        Criterion<?> criterion
     ) {
         TimeWarpRecipe.builder()
             .requires(base)

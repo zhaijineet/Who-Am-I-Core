@@ -4,7 +4,7 @@
     "item": "anvilcraft:royal_steel_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:spine"
+    "tag": "chestcavitybeyond:organs/spine"
   },
   "result": {
     "count": 1,

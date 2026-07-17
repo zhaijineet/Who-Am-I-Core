@@ -4,7 +4,7 @@
     "item": "anvilcraft:royal_steel_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:rib"
+    "tag": "chestcavitybeyond:organs/rib"
   },
   "result": {
     "count": 1,

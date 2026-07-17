@@ -4,7 +4,7 @@
     "item": "anvilcraft:royal_steel_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:muscle"
+    "tag": "chestcavitybeyond:organs/muscle"
   },
   "result": {
     "count": 1,

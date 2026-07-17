@@ -4,7 +4,7 @@
     "item": "anvilcraft:royal_steel_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:lung"
+    "tag": "chestcavitybeyond:organs/lung"
   },
   "result": {
     "count": 1,

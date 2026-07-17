@@ -8,7 +8,7 @@
     "id": "who_am_i_core:crimson_intestine"
   },
   "input": {
-    "item": "chestcavitybeyond:intestine"
+    "tag": "chestcavitybeyond:organs/intestine"
   },
   "results": []
 }

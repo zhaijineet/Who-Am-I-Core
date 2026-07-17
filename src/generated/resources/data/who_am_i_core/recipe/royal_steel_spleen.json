@@ -4,7 +4,7 @@
     "item": "anvilcraft:royal_steel_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:spleen"
+    "tag": "chestcavitybeyond:organs/spleen"
   },
   "result": {
     "count": 1,

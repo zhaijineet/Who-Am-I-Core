@@ -93,11 +93,11 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         if (emberCount > 0 && AnvilCraftOrganUtil.isInFireSource(owner)) {
             owner.heal(0.5F * emberCount);
         }
-        // 诅咒器官诅咒效果：每 300 tick 根据诅咒器官数量施加负面效果（30秒持续）
-        if (tickCount % 300 == 0) {
+        // 诅咒器官诅咒效果：每 200 tick 根据诅咒器官数量施加负面效果（60秒持续）
+        if (tickCount % 200 == 0) {
             int cursedCount = getOrganCount(WAICItemTagManager.CURSED);
             if (cursedCount > 0) {
-                AnvilCraftOrganUtil.addCursedGoldEffects(owner, cursedCount, 600);
+                AnvilCraftOrganUtil.addCursedGoldEffects(owner, cursedCount, 1200);
             }
         }
     }

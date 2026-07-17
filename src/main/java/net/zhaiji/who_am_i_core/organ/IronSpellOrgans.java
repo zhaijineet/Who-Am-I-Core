@@ -1,5 +1,6 @@
 package net.zhaiji.who_am_i_core.organ;
 
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
@@ -16,6 +17,7 @@ public class IronSpellOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 1.5)
             .addValueAttribute(InitAttribute.DEFENSE, 0.75)
+            .addValueAttribute(AttributeRegistry.SPELL_POWER, 0.2)
             .build()
     );
 
@@ -24,6 +26,7 @@ public class IronSpellOrgans {
         "necromancer_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 1.5)
+            .addValueAttribute(AttributeRegistry.MAX_MANA, 20)
             .build()
     );
 

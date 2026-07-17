@@ -8,7 +8,7 @@
     "id": "who_am_i_core:ink_appendix"
   },
   "input": {
-    "item": "chestcavitybeyond:appendix"
+    "tag": "chestcavitybeyond:organs/appendix"
   },
   "results": []
 }

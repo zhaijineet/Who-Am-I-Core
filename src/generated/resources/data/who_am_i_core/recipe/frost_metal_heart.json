@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "anvilcraft:frost_metal_ingot"
+  },
+  "base": {
+    "item": "who_am_i_core:royal_steel_heart"
+  },
+  "result": {
+    "count": 1,
+    "id": "who_am_i_core:frost_metal_heart"
+  },
+  "template": {
+    "item": "anvilcraft:frost_metal_upgrade_smithing_template"
+  }
+}

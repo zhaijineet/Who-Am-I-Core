@@ -29,7 +29,6 @@
     "MobEffectInstanceMixin",
     "ModDispenserBehaviorMixin",
     "PlayerMixin",
-    "PoisonMobEffectMixin",
     "SandstormEntityMixin",
     "ServerPlayerMixin",
     "VillagerMixin"

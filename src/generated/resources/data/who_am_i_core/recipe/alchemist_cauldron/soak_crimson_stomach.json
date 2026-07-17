@@ -8,7 +8,7 @@
     "id": "who_am_i_core:crimson_stomach"
   },
   "input": {
-    "item": "chestcavitybeyond:stomach"
+    "tag": "chestcavitybeyond:organs/stomach"
   },
   "results": []
 }

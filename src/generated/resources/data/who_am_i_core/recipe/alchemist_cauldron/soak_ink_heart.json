@@ -8,7 +8,7 @@
     "id": "who_am_i_core:ink_heart"
   },
   "input": {
-    "item": "chestcavitybeyond:heart"
+    "tag": "chestcavitybeyond:organs/heart"
   },
   "results": []
 }

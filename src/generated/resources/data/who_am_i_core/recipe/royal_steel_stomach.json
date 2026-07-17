@@ -4,7 +4,7 @@
     "item": "anvilcraft:royal_steel_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:stomach"
+    "tag": "chestcavitybeyond:organs/stomach"
   },
   "result": {
     "count": 1,

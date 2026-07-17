@@ -4,7 +4,7 @@
     "item": "anvilcraft:cursed_gold_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:intestine"
+    "tag": "chestcavitybeyond:organs/intestine"
   },
   "result": {
     "count": 1,

@@ -4,7 +4,7 @@
     "item": "anvilcraft:cursed_gold_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:lung"
+    "tag": "chestcavitybeyond:organs/lung"
   },
   "result": {
     "count": 1,

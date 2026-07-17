@@ -8,7 +8,7 @@
     "id": "who_am_i_core:crimson_liver"
   },
   "input": {
-    "item": "chestcavitybeyond:liver"
+    "tag": "chestcavitybeyond:organs/liver"
   },
   "results": []
 }

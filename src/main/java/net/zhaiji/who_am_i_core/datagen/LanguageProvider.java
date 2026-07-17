@@ -6,6 +6,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
 import net.zhaiji.chestcavitybeyond.manager.AttributeDisplayManager;
 import net.zhaiji.who_am_i_core.WhoAmICore;
@@ -29,6 +30,7 @@ import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICCreativeModeTab;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
+import net.zhaiji.who_am_i_core.register.WAICFluid;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
@@ -54,6 +56,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "Lightning Dragon Blood Preparation");
         addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "Dragon Blood Preparation");
         addItem(WAICItem.EXISTENCE_DISPLACER, "Existence Displacer");
+
+        addFluidType(WAICFluid.FIRE_DRAGON_BLOOD_TYPE, "Fire Dragon Blood");
+        addFluidType(WAICFluid.ICE_DRAGON_BLOOD_TYPE, "Ice Dragon Blood");
+        addFluidType(WAICFluid.LIGHTNING_DRAGON_BLOOD_TYPE, "Lightning Dragon Blood");
 
         addAttribute(WAICAttribute.BLOCK, "Block");
         addAttribute(WAICAttribute.COUNTER_ATTACK, "Counter Attack");
@@ -261,6 +267,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION, "电龙血药剂");
         addItem(WAICItem.DRAGON_BLOOD_PREPARATION_GROUP, "龙血药剂组");
         addItem(WAICItem.EXISTENCE_DISPLACER, "存在置换器");
+
+        addFluidType(WAICFluid.FIRE_DRAGON_BLOOD_TYPE, "火龙血");
+        addFluidType(WAICFluid.ICE_DRAGON_BLOOD_TYPE, "冰龙血");
+        addFluidType(WAICFluid.LIGHTNING_DRAGON_BLOOD_TYPE, "电龙血");
 
         addAttribute(WAICAttribute.BLOCK, "格挡");
         addAttribute(WAICAttribute.COUNTER_ATTACK, "反击");
@@ -1707,11 +1717,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.HYDRA_HEART, "Hydra Heart");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_HEART,
-            "Immune to poison damage and gains regeneration at the same level as current poison"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_HEART,
-            "Immune to poison damage and gains regeneration"
+            "Upon taking poison damage, cancels it and heals %s of the damage taken as health"
         );
 
         addItem(IceAndFireOrgans.HYDRA_LUNG, "Hydra Lung");
@@ -1778,11 +1784,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.HYDRA_HEART, "九头蛇心脏");
         addOrganPassiveEffect(
             IceAndFireOrgans.HYDRA_HEART,
-            "免疫中毒伤害并额外获得与中毒相同等级的再生效果"
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.HYDRA_HEART,
-            "免疫中毒伤害并额外获得再生"
+            "受到中毒伤害时取消伤害，并将所受伤害的%s转化为生命值回复"
         );
 
         addItem(IceAndFireOrgans.HYDRA_LUNG, "九头蛇肺脏");
@@ -2930,6 +2932,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         for (int i = 0; i < lines.length; i++) {
             add(base + i, lines[i]);
         }
+    }
+
+    private void addFluidType(Supplier<FluidType> fluidType, String name) {
+        add(fluidType.get().getDescriptionId(), name);
     }
 
     private void addAttribute(Holder<Attribute> attribute, String value) {

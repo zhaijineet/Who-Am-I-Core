@@ -8,7 +8,7 @@
     "id": "who_am_i_core:crimson_kidney"
   },
   "input": {
-    "item": "chestcavitybeyond:kidney"
+    "tag": "chestcavitybeyond:organs/kidney"
   },
   "results": []
 }

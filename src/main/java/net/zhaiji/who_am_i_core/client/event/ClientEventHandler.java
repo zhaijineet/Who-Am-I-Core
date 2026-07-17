@@ -4,12 +4,14 @@ import net.minecraft.client.player.Input;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
@@ -23,7 +25,9 @@ import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.register.WAICEffect;
 import net.zhaiji.who_am_i_core.register.WAICEntity;
+import net.zhaiji.who_am_i_core.register.WAICFluid;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
+import io.redspace.ironsspellbooks.fluids.SimpleTintedClientFluidType;
 
 public class ClientEventHandler {
     /**
@@ -76,6 +80,16 @@ public class ClientEventHandler {
      */
     public static void handlerRegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(FrankensteinHeartTooltip.class, tooltip -> new ClientFrankensteinHeartTooltip(tooltip.contents()));
+    }
+
+    /**
+     * 注册龙血流体的客户端渲染扩展
+     */
+    public static void handlerRegisterClientExtensionsEvent(RegisterClientExtensionsEvent event) {
+        ResourceLocation milkStill = ResourceLocation.fromNamespaceAndPath("neoforge", "block/milk_still");
+        event.registerFluidType(new SimpleTintedClientFluidType(milkStill, 0xFFC81E0E), WAICFluid.FIRE_DRAGON_BLOOD_TYPE.get());
+        event.registerFluidType(new SimpleTintedClientFluidType(milkStill, 0xFF1E90C8), WAICFluid.ICE_DRAGON_BLOOD_TYPE.get());
+        event.registerFluidType(new SimpleTintedClientFluidType(milkStill, 0xFF9B30FF), WAICFluid.LIGHTNING_DRAGON_BLOOD_TYPE.get());
     }
 
 

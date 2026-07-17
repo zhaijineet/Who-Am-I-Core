@@ -489,6 +489,33 @@ public class WAICTooltipManager {
         .build();
 
     /**
+     * 九头蛇心脏回复比例公式：九头蛇器官数 × 10%
+     */
+    private static final FormulaValue HYDRA_HEART_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            int hydraOrganCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.HYDRA);
+            return Component.literal(TooltipUtil.formatAttributeValue(hydraOrganCount * 10F) + "%");
+        },
+        context -> {
+            int hydraOrganCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.HYDRA);
+            return Component.empty()
+                .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.HYDRA))
+                .append(Component.literal(String.valueOf(hydraOrganCount)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("10%"));
+        }
+    );
+
+    /**
+     * 九头蛇心脏 — 中毒伤害回复比例随九头蛇器官数量缩放
+     */
+    public static final OrganTooltipConsumer HYDRA_HEART_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(HYDRA_HEART_FORMULA_VALUE)
+        )))
+        .build();
+
+    /**
      * 九头蛇脊柱复活回血公式：最大生命 × (0.05 + 代谢 × 0.005)
      */
     private static final FormulaValue HYDRA_SPINE_FORMULA_VALUE = new FormulaValue(

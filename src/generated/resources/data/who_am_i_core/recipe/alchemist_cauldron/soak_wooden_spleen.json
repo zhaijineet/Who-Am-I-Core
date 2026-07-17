@@ -8,7 +8,7 @@
     "id": "who_am_i_core:wooden_spleen"
   },
   "input": {
-    "item": "chestcavitybeyond:spleen"
+    "tag": "chestcavitybeyond:organs/spleen"
   },
   "results": []
 }

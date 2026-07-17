@@ -1,0 +1,40 @@
+{
+  "type": "anvilcraft:two_to_one_smithing",
+  "inputs": [
+    {
+      "items": "who_am_i_core:frost_metal_stomach"
+    },
+    {
+      "items": "who_am_i_core:ember_metal_stomach"
+    }
+  ],
+  "material": {
+    "items": "anvilcraft:multiphase_transcendium"
+  },
+  "result": {
+    "item": {
+      "count": 1,
+      "id": "who_am_i_core:transcendium_stomach"
+    },
+    "modifiers": [
+      {
+        "type": "anvilcraft:merge_data",
+        "types": [
+          {
+            "type": "anvilcraft:item_enchantments",
+            "component": "minecraft:enchantments",
+            "input": 0
+          },
+          {
+            "type": "anvilcraft:item_enchantments",
+            "component": "minecraft:enchantments",
+            "input": 1
+          }
+        ]
+      }
+    ]
+  },
+  "template": {
+    "items": "anvilcraft:two_to_one_smithing_template"
+  }
+}

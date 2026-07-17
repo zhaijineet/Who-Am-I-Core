@@ -2,7 +2,7 @@
   "type": "anvilcraft:time_warp",
   "ingredients": [
     {
-      "items": "chestcavitybeyond:muscle"
+      "items": "#chestcavitybeyond:organs/muscle"
     },
     {
       "items": "anvilcraft:uranium_ingot"

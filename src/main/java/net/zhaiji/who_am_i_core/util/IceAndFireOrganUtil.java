@@ -208,21 +208,12 @@ public class IceAndFireOrganUtil {
     }
 
     /**
-     * 九头蛇心脏 tick，中毒时获得再生效果
+     * 九头蛇心脏受击，中毒伤害按九头蛇器官数比例转为治疗
      */
-    public static void hydraHeartTick(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        if (entity.isOnFire() || entity.tickCount % 10 != 0) return;
-        MobEffectInstance poison = entity.getEffect(MobEffects.POISON);
-        if (poison != null) {
-            entity.addEffect(
-                new MobEffectInstance(
-                    MobEffects.REGENERATION,
-                    20,
-                    poison.getAmplifier()
-                )
-            );
-        }
+    public static void hydraHeartIncomingDamage(LivingEntity entity, ChestCavityData data, float damageAmount) {
+        int hydraOrganCount = data.getOrganCount(WAICItemTagManager.HYDRA);
+        float healRatio = hydraOrganCount * 0.1F;
+        entity.heal(damageAmount * healRatio);
     }
 
     /**

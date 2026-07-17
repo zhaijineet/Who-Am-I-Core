@@ -4,7 +4,7 @@
     "item": "anvilcraft:royal_steel_ingot"
   },
   "base": {
-    "item": "chestcavitybeyond:appendix"
+    "tag": "chestcavitybeyond:organs/appendix"
   },
   "result": {
     "count": 1,

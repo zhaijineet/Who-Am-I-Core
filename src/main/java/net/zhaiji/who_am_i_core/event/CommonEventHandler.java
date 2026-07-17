@@ -31,7 +31,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -323,7 +322,7 @@ public class CommonEventHandler {
         if (oldStack.is(WAICItemTagManager.CURSED) || newStack.is(WAICItemTagManager.CURSED)) {
             LivingEntity entity = event.getEntity();
             int cursedCount = event.getData().getOrganCount(WAICItemTagManager.CURSED);
-            AnvilCraftOrganUtil.applyCursedGoldEffects(entity, cursedCount, oldStack, newStack, 600);
+            AnvilCraftOrganUtil.applyCursedGoldEffects(entity, cursedCount, oldStack, newStack, 1200);
         }
     }
 
@@ -356,8 +355,9 @@ public class CommonEventHandler {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide()) return;
         ChestCavityData data = ChestCavityUtil.getData(entity);
-        // 九头蛇心脏免疫中毒类型的伤害
-        if (data.hasOrgan(IceAndFireOrgans.HYDRA_HEART.get()) && event.getSource().is(NeoForgeMod.POISON_DAMAGE)) {
+        // 九头蛇心脏：中毒伤害按九头蛇器官数比例转为治疗并取消伤害
+        if (data.hasOrgan(IceAndFireOrgans.HYDRA_HEART.get()) && event.getSource().is(Tags.DamageTypes.IS_POISON)) {
+            IceAndFireOrganUtil.hydraHeartIncomingDamage(entity, data, event.getAmount());
             event.setCanceled(true);
             return;
         }

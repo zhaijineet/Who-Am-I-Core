@@ -8,7 +8,7 @@
     "id": "who_am_i_core:ink_rib"
   },
   "input": {
-    "item": "chestcavitybeyond:rib"
+    "tag": "chestcavitybeyond:organs/rib"
   },
   "results": []
 }
