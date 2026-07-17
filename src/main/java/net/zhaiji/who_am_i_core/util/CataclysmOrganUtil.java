@@ -26,8 +26,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -286,7 +284,13 @@ public class CataclysmOrganUtil {
         if (entity instanceof Player player) {
             player.getFoodData().eat(20, 0.5F);
             if (player.hasInfiniteMaterials()) return stack;
-            return ItemUtils.createFilledResult(stack, player, Items.BUCKET.getDefaultInstance());
+            ItemStack craftingRemaining = stack.getCraftingRemainingItem();
+            stack.consume(1, player);
+            if (craftingRemaining.isEmpty()) return stack;
+            if (!player.getInventory().add(craftingRemaining)) {
+                player.drop(craftingRemaining, false);
+            }
+            return stack;
         }
         ItemStack remaining = stack.getCraftingRemainingItem();
         stack.consume(1, entity);

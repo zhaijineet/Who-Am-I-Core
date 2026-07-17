@@ -945,23 +945,34 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 暴食食用效果 N≥2 时食用获得饥饿值×N的吸收生命值
+     * 暴食吸收生命值的核心实现，N≥2 时获得 nutrition×N 的吸收生命值
      */
-    public static void gluttonyEatEffect(LivingEntity entity, ChestCavityData data, ItemStack food) {
+    public static void gluttonyEatEffect(LivingEntity entity, ChestCavityData data, int nutrition) {
         if (!data.hasOrgan(WAICOrgans.GLUTTONY.get())) return;
 
         int nineHellCount = data.getOrganCount(WAICItemTagManager.NINE_HELL);
         if (nineHellCount < 2) return;
 
-        FoodProperties foodProperties = food.get(DataComponents.FOOD);
-        if (foodProperties == null) return;
-        int nutrition = foodProperties.nutrition();
-
         float absorptionToAdd = (float) nutrition * nineHellCount;
         if (absorptionToAdd > 0) {
-            float currentAbsorption = entity.getAbsorptionAmount();
-            entity.setAbsorptionAmount(currentAbsorption + absorptionToAdd);
+            entity.setAbsorptionAmount(entity.getAbsorptionAmount() + absorptionToAdd);
         }
+    }
+
+    /**
+     * 从食物 ItemStack 提取 nutrition 后委托核心实现，FOOD 组件为 null 时不触发
+     */
+    public static void gluttonyEatEffect(LivingEntity entity, ChestCavityData data, ItemStack food) {
+        FoodProperties foodProperties = food.get(DataComponents.FOOD);
+        if (foodProperties == null) return;
+        gluttonyEatEffect(entity, data, foodProperties.nutrition());
+    }
+
+    /**
+     * Mixin 入口：自行获取胸腔数据
+     */
+    public static void gluttonyEatEffect(LivingEntity entity, int nutrition) {
+        gluttonyEatEffect(entity, ChestCavityUtil.getData(entity), nutrition);
     }
 
     /**

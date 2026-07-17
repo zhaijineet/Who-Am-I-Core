@@ -1,0 +1,14 @@
+{
+  "type": "irons_spellbooks:alchemist_cauldron_brew",
+  "base_fluid": {
+    "amount": 250,
+    "id": "who_am_i_core:fire_dragon_blood"
+  },
+  "byproduct": {
+    "id": "who_am_i_core:fire_dragon_blood_preparation"
+  },
+  "input": {
+    "item": "fdbosses:lightning_core"
+  },
+  "results": []
+}

@@ -1,6 +1,7 @@
 package net.zhaiji.who_am_i_core.datagen.recipe;
 
 import com.github.L_Ender.cataclysm.init.ModItems;
+import com.finderfeed.fdbosses.init.BossItems;
 import com.github.tartaricacid.touhoulittlemaid.init.InitItems;
 import com.iafenvoy.iceandfire.registry.IafItems;
 import dev.dubhe.anvilcraft.init.block.ModFluids;
@@ -130,6 +131,40 @@ public class IronSpellRecipeProvider extends RecipeProvider {
             lightningName,
             "gauntlet_of_guard"
         );
+
+        // 任意核心浸泡任意龙血流体制成对应龙血药剂
+        Item[] cores = {
+            BossItems.LIGHTNING_CORE.get(),
+            BossItems.FIRE_AND_ICE_CORE.get(),
+            BossItems.JUSTICE_CORE.get()
+        };
+        for (Item core : cores) {
+            String coreName = BuiltInRegistries.ITEM.getKey(core).getPath();
+            brewDragonBloodPreparation(
+                output,
+                WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
+                core,
+                WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get(),
+                fireName,
+                coreName
+            );
+            brewDragonBloodPreparation(
+                output,
+                WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
+                core,
+                WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get(),
+                iceName,
+                coreName
+            );
+            brewDragonBloodPreparation(
+                output,
+                WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
+                core,
+                WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get(),
+                lightningName,
+                coreName
+            );
+        }
     }
 
     /**

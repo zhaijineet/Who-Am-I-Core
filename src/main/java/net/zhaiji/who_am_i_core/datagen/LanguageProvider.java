@@ -476,12 +476,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
             "Removes FOV modification",
-            "Grants Block equal to Strength ÷ 2",
-            "Cannot move for 3 seconds after attacking"
+            "Grants %s Block based on Defense",
+            "Cannot move or turn for 3 seconds after attacking"
         );
         addOrganPassiveEffectSimple(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
-            "Grants Block based on Strength ÷ 2, but restricts movement after attacking"
+            "Grants %s Block based on Defense, but restricts movement and turning after attacking"
         );
 
         addItem(MowziesMobOrgans.CHEST_NOVA, "Chest Nova");
@@ -518,12 +518,12 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addOrganPassiveEffect(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
             "移除FOV修改",
-            "根据力量÷2提供格挡",
-            "攻击后3秒内不能移动"
+            "根据防御提供%s点格挡",
+            "攻击后3秒内无法移动且无法转动视角"
         );
         addOrganPassiveEffectSimple(
             MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR,
-            "根据力量÷2提供格挡，但攻击后无法移动"
+            "根据防御提供%s点格挡，但攻击后无法移动且无法转动视角"
         );
 
         addItem(MowziesMobOrgans.CHEST_NOVA, "胸中新星");

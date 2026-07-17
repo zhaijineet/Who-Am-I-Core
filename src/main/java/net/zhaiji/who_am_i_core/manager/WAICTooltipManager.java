@@ -318,6 +318,33 @@ public class WAICTooltipManager {
         .build();
 
     /**
+     * 钢铁守护者护心镜格挡公式：floor(√防御)
+     */
+    private static final FormulaValue FERROUS_WROUGHTNAUT_HEART_MIRROR_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
+            return Component.literal(TooltipUtil.formatAttributeValue(
+                Math.floor(Math.sqrt(Math.max(0, defense)))
+            ));
+        },
+        context -> {
+            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
+            return Component.empty()
+                .append(Component.literal("floor(√"))
+                .append(TooltipUtil.attributeName(InitAttribute.DEFENSE))
+                .append(Component.literal(TooltipUtil.formatAttributeValue(defense)))
+                .append(Component.literal(")"));
+        }
+    );
+
+    public static final OrganTooltipConsumer FERROUS_WROUGHTNAUT_HEART_MIRROR_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
+            Map.of(0, List.of(FERROUS_WROUGHTNAUT_HEART_MIRROR_FORMULA_VALUE)),
+            Map.of(1, List.of(FERROUS_WROUGHTNAUT_HEART_MIRROR_FORMULA_VALUE))
+        ))
+        .build();
+
+    /**
      * 风暴脊柱吸收比例公式：(15 + 防御 × 0.5)%（自身防御属性 +1 需在 index==-1 时补加）
      */
     private static final FormulaValue STORM_SPINE_RATIO_FORMULA_VALUE = new FormulaValue(

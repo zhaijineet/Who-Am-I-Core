@@ -54,11 +54,11 @@ public class MowziesMobOrganUtil {
     }
 
     /**
-     * 钢铁守护者护心镜 - 属性修饰符：根据力量提供格挡（力量 / 2）
+     * 钢铁守护者护心镜 - 属性修饰符：根据防御开平方向下取整提供格挡
      */
     public static void ferrousWroughtnautHeartMirrorModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        double strength = context.entity().getAttributeValue(InitAttribute.STRENGTH);
-        double block = strength / 2;
+        double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
+        double block = Math.floor(Math.sqrt(Math.max(0, defense)));
         modifiers.put(WAICAttribute.BLOCK, OrganAttributeUtil.createAddValueModifier(context.id(), block));
     }
 

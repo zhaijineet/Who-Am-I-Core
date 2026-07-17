@@ -34,8 +34,11 @@ public class IronSpellOrgans {
     public static final Supplier<Item> PRIMORDIAL_FLAME = WAICItem.ITEM.register(
         "primordial_flame",
         () -> Organ.builder()
-            .addValueAttribute(InitAttribute.HEALTH, 5)
+            .addValueAttribute(InitAttribute.HEALTH, 10)
             .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 10)
+            .addValueAttribute(AttributeRegistry.SPELL_POWER, 0.2)
+            .addValueAttribute(AttributeRegistry.FIRE_SPELL_POWER, 0.5)
+            .addValueAttribute(AttributeRegistry.MAX_MANA, 500)
             .build()
     );
 

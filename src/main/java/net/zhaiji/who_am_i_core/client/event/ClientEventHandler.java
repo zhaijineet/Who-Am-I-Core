@@ -37,10 +37,8 @@ public class ClientEventHandler {
      * @param event FOV修饰符计算事件
      */
     public static void handlerComputeFovModifierEvent(ComputeFovModifierEvent event) {
-        Player player = event.getPlayer();
         // 检查玩家是否有护心镜器官
-        ChestCavityData data = ChestCavityUtil.getData(player);
-        if (data != null && data.hasOrgan(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get())) {
+        if (ChestCavityUtil.getData(event.getPlayer()).hasOrgan(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get())) {
             // 将 FOV 修饰系数设置为 1.0（正常），免疫所有 FOV 改变
             event.setNewFovModifier(1.0F);
         }
@@ -52,9 +50,8 @@ public class ClientEventHandler {
      * @param event 移动输入更新事件
      */
     public static void handlerMovementInputUpdateEvent(MovementInputUpdateEvent event) {
-        Player player = event.getEntity();
         // 只影响非乘坐情况
-        if (player.getCooldowns().isOnCooldown(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get()) && !event.getEntity()
+        if (event.getEntity().getCooldowns().isOnCooldown(MowziesMobOrgans.FERROUS_WROUGHTNAUT_HEART_MIRROR.get()) && !event.getEntity()
             .isPassenger()) {
             Input input = event.getInput();
             input.up = false;

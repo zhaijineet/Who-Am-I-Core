@@ -17,6 +17,7 @@
     "EnchantedCountIncreaseFunctionMixin",
     "EntityUmvuthanaFollowerToPlayerMixin",
     "EntityWroughtnautMixin",
+    "FoodDataMixin",
     "GeburahEntityMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
@@ -33,7 +34,9 @@
     "ServerPlayerMixin",
     "VillagerMixin"
   ],
-  "client": [],
+  "client": [
+    "EntityMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

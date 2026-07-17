@@ -20,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(Sandstorm_Entity.class)
 public abstract class SandstormEntityMixin extends Entity {
-
     public SandstormEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
