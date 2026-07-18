@@ -289,6 +289,7 @@ public class WAICOrgans {
                     .build()
             )
             .addValueAttribute(InitAttribute.DEFENSE, 1)
+            .addValueAttribute(AttributeRegistry.MAX_MANA, 25)
             .build()
     );
 
