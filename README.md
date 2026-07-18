@@ -6,11 +6,11 @@
 - **Mod ID**：`who_am_i_core`
 - **包名**：`net.zhaiji.who_am_i_core`
 - **Minecraft**：1.21.1
-- **NeoForge**：21.1.219
+- **NeoForge**：21.1.230
 - **ModDevGradle**：2.0.140
 - **Parchment Mappings**：2024.11.17
 - **Java**：21
-- **版本**：1.1.9
+- **版本**：1.1.10
 
 前置模组：**Chest Cavity Beyond**（胸腔：超越），本模组为 CCB 的 Addon，核心机制是为不提供胸腔的原版/其他 mod 的生物添加可植入胸腔的器官。
 
@@ -344,7 +344,6 @@ NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100�
 | AnvilCraft                  | 金属器官（浮霜/超限/诅咒金/余烬/皇家钢） | 986251        |
 | Touhou Little Maid          | 车万女仆                   | 355044        |
 | Companions                  | 同伴                     | 1300341       |
-| Spice of Life: Carrot       | 生活调味料                  | 277616        |
 
 库依赖（non-mod）：GeckoLib, Architectury API, Curios, Player Animator, Knight Lib, FD Lib, Uranus, Jupiter, Lionfish API
 

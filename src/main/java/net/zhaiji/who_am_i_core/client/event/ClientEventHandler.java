@@ -102,35 +102,37 @@ public class ClientEventHandler {
      * 此时所有注册表已完成，可以安全地获取物品实例
      */
     public static void handlerFMLClientSetupEvent(FMLClientSetupEvent event) {
-        ItemProperties.register(
-            WAICOrgans.FRANKENSTEIN_HEART.get(),
-            WhoAmICore.of("frankenstein_heart_active"),
-            (stack, level, entity, seed) -> {
-                if (entity instanceof LivingEntity living && OrganUtil.isInChest(living, stack)) {
-                    return (
-                               living.hasEffect(WAICEffect.FIRE_DRAGON_POWER)
-                               || living.hasEffect(WAICEffect.ICE_DRAGON_POWER)
-                               || living.hasEffect(WAICEffect.LIGHTNING_DRAGON_POWER)
-                           ) ? 1.0F : 0.0F;
+        event.enqueueWork(() -> {
+            ItemProperties.register(
+                WAICOrgans.FRANKENSTEIN_HEART.get(),
+                WhoAmICore.of("frankenstein_heart_active"),
+                (stack, level, entity, seed) -> {
+                    if (entity instanceof LivingEntity living && OrganUtil.isInChest(living, stack)) {
+                        return (
+                                   living.hasEffect(WAICEffect.FIRE_DRAGON_POWER)
+                                   || living.hasEffect(WAICEffect.ICE_DRAGON_POWER)
+                                   || living.hasEffect(WAICEffect.LIGHTNING_DRAGON_POWER)
+                               ) ? 1.0F : 0.0F;
+                    }
+                    return 0.0F;
                 }
-                return 0.0F;
-            }
-        );
+            );
 
-        ItemProperties.register(
-            WAICOrgans.FRANKENSTEIN_HEART.get(),
-            WhoAmICore.of("frankenstein_heart_super_active"),
-            (stack, level, entity, seed) -> {
-                if (entity instanceof LivingEntity living && OrganUtil.isInChest(living, stack)) {
-                    return
-                        living.hasEffect(WAICEffect.FIRE_DRAGON_POWER)
-                        && living.hasEffect(WAICEffect.ICE_DRAGON_POWER)
-                        && living.hasEffect(WAICEffect.LIGHTNING_DRAGON_POWER)
-                        || living.hasEffect(WAICEffect.DRAGON_POWER) ? 1.0F : 0.0F;
+            ItemProperties.register(
+                WAICOrgans.FRANKENSTEIN_HEART.get(),
+                WhoAmICore.of("frankenstein_heart_super_active"),
+                (stack, level, entity, seed) -> {
+                    if (entity instanceof LivingEntity living && OrganUtil.isInChest(living, stack)) {
+                        return
+                            living.hasEffect(WAICEffect.FIRE_DRAGON_POWER)
+                            && living.hasEffect(WAICEffect.ICE_DRAGON_POWER)
+                            && living.hasEffect(WAICEffect.LIGHTNING_DRAGON_POWER)
+                            || living.hasEffect(WAICEffect.DRAGON_POWER) ? 1.0F : 0.0F;
+                    }
+                    return 0.0F;
                 }
-                return 0.0F;
-            }
-        );
+            );
+        });
     }
 
 }

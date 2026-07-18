@@ -175,20 +175,19 @@ dependencies {
     // Curios
     implementation "curse.maven:curios-309927:6529130"
     // lionfish
-    implementation "curse.maven:lionfish-api-1001614:6168249"
+    implementation "curse.maven:lionfish-api-1001614:8345326"
     // architectury api
     implementation "curse.maven:architectury-api-419699:5786327"
     // FD lib
-    implementation "curse.maven:fdlib-1271749:7653105"
+    implementation "curse.maven:fdlib-1271749:7844741"
     // player animator
     implementation "curse.maven:playeranimator-658587:7389814"
     // knight lib
-    implementation "curse.maven:knight-lib-1105855:6942154"
+    implementation "curse.maven:knight-lib-1105855:8400701"
     // iron lib
     implementation "curse.maven:irons-lib-1492763:7907336"
     // anvil lib
     implementation("dev.anvilcraft.lib:anvillib-neoforge-1.21.1:1.4.0+build.188")
-    interfaceInjectionData("dev.anvilcraft.lib:anvillib-neoforge-1.21.1:1.4.0+build.188")
 
     api "com.tterrag.registrate:Registrate:MC1.21-1.3.0+62"
 
@@ -196,24 +195,21 @@ dependencies {
     implementation "curse.maven:chest-cavity-beyond-1427715:8439969"
     // implementation 'blank:chestcavitybeyond_neoforge_1.21.1:1.8.5'
     // 冰火传说
-    implementation "curse.maven:iceandfire-ce-1040076:7524985"
+    implementation "curse.maven:iceandfire-ce-1040076:8457180"
     // mowzie的生物
-    implementation "curse.maven:mowzies-mobs-250498:7727111"
+    implementation "curse.maven:mowzies-mobs-250498:7760267"
     // 灾变
-    implementation "curse.maven:lendercataclysm-551586:7691675"
+    implementation "curse.maven:lendercataclysm-551586:8364209"
     // 逆卡巴拉(FDBosses)
-    implementation "curse.maven:qliphoth-awakening-1271707:7653113"
+    implementation "curse.maven:qliphoth-awakening-1271707:8373639"
     // 铁魔法
     implementation "curse.maven:irons-spells-n-spellbooks-855414:7907341"
     // AnvilCraft
-    implementation("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.2+hotfix.1685") { transitive = false }
-    interfaceInjectionData("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.2+hotfix.1685") { transitive = false }
+    implementation("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.5") { transitive = false }
     // 车万女仆
     implementation "curse.maven:touhou-little-maid-355044:8061852"
     // 同伴！
-    implementation "curse.maven:companions-mod-1300341:7558671"
-    // 生活调味料：胡萝卜版
-    implementation "curse.maven:spice-of-life-carrot-edition-277616:7374098"
+    implementation "curse.maven:companions-mod-1300341:8305793"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

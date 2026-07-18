@@ -132,37 +132,38 @@ public class IronSpellRecipeProvider extends RecipeProvider {
             "gauntlet_of_guard"
         );
 
-        // 任意核心浸泡任意龙血流体制成对应龙血药剂
-        Item[] cores = {
+        // 任意核心或神圣灵魂碎片浸泡任意龙血流体制成对应龙血药剂
+        Item[] reagents = {
             BossItems.LIGHTNING_CORE.get(),
             BossItems.FIRE_AND_ICE_CORE.get(),
-            BossItems.JUSTICE_CORE.get()
+            BossItems.JUSTICE_CORE.get(),
+            ItemRegistry.DIVINE_SOULSHARD.get()
         };
-        for (Item core : cores) {
-            String coreName = BuiltInRegistries.ITEM.getKey(core).getPath();
+        for (Item reagent : reagents) {
+            String reagentName = BuiltInRegistries.ITEM.getKey(reagent).getPath();
             brewDragonBloodPreparation(
                 output,
                 WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
-                core,
+                reagent,
                 WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get(),
                 fireName,
-                coreName
+                reagentName
             );
             brewDragonBloodPreparation(
                 output,
                 WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
-                core,
+                reagent,
                 WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get(),
                 iceName,
-                coreName
+                reagentName
             );
             brewDragonBloodPreparation(
                 output,
                 WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
-                core,
+                reagent,
                 WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get(),
                 lightningName,
-                coreName
+                reagentName
             );
         }
     }
