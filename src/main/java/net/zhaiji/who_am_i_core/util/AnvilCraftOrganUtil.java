@@ -9,6 +9,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -361,7 +362,8 @@ public class AnvilCraftOrganUtil {
         float finalDamage = baseDamage * getRailgunDamageMultiplier(context);
 
         RailgunProjectileEntity projectile = RailgunProjectileEntity.create(entity.level(), entity, ammoStack, finalDamage);
-        projectile.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0, 4.0f, 1.0f);
+        float yaw = entity instanceof Mob mob ? mob.getYHeadRot() : entity.getYRot();
+        projectile.shootFromRotation(entity, entity.getXRot(), yaw, 0, 4.0f, 1.0f);
         entity.level().addFreshEntity(projectile);
 
         entity.level()
