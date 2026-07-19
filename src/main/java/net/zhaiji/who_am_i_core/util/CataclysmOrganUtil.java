@@ -271,7 +271,7 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 巨兽熔炉 — 饮用岩浆桶：恢复饥饿值与饱和度，固定增加 100 黄胆汁，获得骇人之恶（60秒，等级随巨兽器官数量，每个巨兽器官+1级）
+     * 巨兽熔炉 — 饮用岩浆桶或熔岩动力电池：恢复饥饿值与饱和度，固定增加 100 黄胆汁，获得骇人之恶（60秒，等级随巨兽器官数量，每个巨兽器官+1级）
      */
     public static ItemStack drinkLava(LivingEntity entity, ItemStack stack, UseCondition condition) {
         if (entity.isShiftKeyDown()) return stack;

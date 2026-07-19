@@ -1,0 +1,14 @@
+{
+  "type": "irons_spellbooks:alchemist_cauldron_empty",
+  "fluid": {
+    "amount": 250,
+    "id": "who_am_i_core:fire_dragon_blood"
+  },
+  "input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "count": 1,
+    "id": "iceandfire:fire_dragon_blood"
+  }
+}

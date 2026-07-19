@@ -2316,6 +2316,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.PHANTOM_HEART, "Phantom Heart");
         addOrganPassiveEffect(
             CataclysmOrgans.PHANTOM_HEART,
+            "Sprint attacks retain sprinting state on hit",
             "All damage dealt is increased by %s while sprinting"
         );
         addItem(CataclysmOrgans.PHANTOM_SHARD, "Phantom Shard");
@@ -2377,7 +2378,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "Monstrosity Furnace");
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_FURNACE,
-            "Allows drinking lava buckets",
+            "Allows drinking lava buckets or lava power cells",
             "Restores 20 hunger and 20 saturation and grants 100 yellow bile, grants Monstrous effect at level %s for 60 seconds"
         );
         addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "Allows drinking lava for yellow bile and level %s Monstrous buff lasting 60 seconds");
@@ -2489,6 +2490,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.PHANTOM_HEART, "咒魂心脏");
         addOrganPassiveEffect(
             CataclysmOrgans.PHANTOM_HEART,
+            "冲刺攻击命中后保留冲刺状态",
             "冲刺状态下所有造成的伤害增加%s"
         );
         addItem(CataclysmOrgans.PHANTOM_SHARD, "咒魂残片");
@@ -2550,7 +2552,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MONSTROSITY_FURNACE, "巨兽熔炉");
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_FURNACE,
-            "允许饮用岩浆桶",
+            "允许饮用岩浆桶或熔岩动力电池",
             "恢复20点饥饿值与20点饱和度并获得100黄胆汁，获得%s级骇人之恶效果，持续60秒"
         );
         addOrganPassiveEffectSimple(CataclysmOrgans.MONSTROSITY_FURNACE, "允许饮用岩浆获取黄胆汁和%s级骇人之恶效果，持续60秒");

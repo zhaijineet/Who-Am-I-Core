@@ -1,11 +1,12 @@
 package net.zhaiji.who_am_i_core.datagen.recipe;
 
-import com.github.L_Ender.cataclysm.init.ModItems;
 import com.finderfeed.fdbosses.init.BossItems;
+import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.tartaricacid.touhoulittlemaid.init.InitItems;
 import com.iafenvoy.iceandfire.registry.IafItems;
 import dev.dubhe.anvilcraft.init.block.ModFluids;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.BrewAlchemistCauldronRecipe;
+import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.EmptyAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.FillAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.registries.FluidRegistry;
 import io.redspace.ironsspellbooks.registries.ItemRegistry;
@@ -53,9 +54,38 @@ public class IronSpellRecipeProvider extends RecipeProvider {
 
     // 龙血药剂：龙血倒入锅形成流体，再用灾变掉落物浸泡制成药剂
     private void dragonBloodFluidRecipes(RecipeOutput output) {
-        fillDragonBlood(output, IafItems.FIRE_DRAGON_BLOOD.get(), WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(), "fire_dragon_blood");
-        fillDragonBlood(output, IafItems.ICE_DRAGON_BLOOD.get(), WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(), "ice_dragon_blood");
         fillDragonBlood(
+            output,
+            IafItems.FIRE_DRAGON_BLOOD.get(),
+            WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
+            "fire_dragon_blood"
+        );
+        fillDragonBlood(
+            output,
+            IafItems.ICE_DRAGON_BLOOD.get(),
+            WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
+            "ice_dragon_blood"
+        );
+        fillDragonBlood(
+            output,
+            IafItems.LIGHTNING_DRAGON_BLOOD.get(),
+            WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
+            "lightning_dragon_blood"
+        );
+
+        emptyDragonBlood(
+            output,
+            IafItems.FIRE_DRAGON_BLOOD.get(),
+            WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
+            "fire_dragon_blood"
+        );
+        emptyDragonBlood(
+            output,
+            IafItems.ICE_DRAGON_BLOOD.get(),
+            WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
+            "ice_dragon_blood"
+        );
+        emptyDragonBlood(
             output,
             IafItems.LIGHTNING_DRAGON_BLOOD.get(),
             WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
@@ -82,10 +112,10 @@ public class IronSpellRecipeProvider extends RecipeProvider {
         brewDragonBloodPreparation(
             output,
             WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
-            ModItems.ANCIENT_METAL_INGOT.get(),
+            ModItems.SANDSTORM_IN_A_BOTTLE.get(),
             WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get(),
             fireName,
-            "ancient_metal_ingot"
+            "sandstorm_in_a_bottle"
         );
 
         String iceName = BuiltInRegistries.ITEM.getKey(WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()).getPath();
@@ -177,6 +207,17 @@ public class IronSpellRecipeProvider extends RecipeProvider {
             .withReturnItem(Items.GLASS_BOTTLE)
             .withFluid(new FluidStack(dragonBloodFluid, 250))
             .save(output, WhoAmICore.of("alchemist_cauldron/fill_" + fluidName));
+    }
+
+    /**
+     * 炼金锅 Empty 配方：空玻璃瓶从锅中取 250mb 龙血流体 → 龙血瓶
+     */
+    private void emptyDragonBlood(RecipeOutput output, Item dragonBloodItem, Fluid dragonBloodFluid, String fluidName) {
+        new EmptyAlchemistCauldronRecipe.Builder()
+            .withInput(Items.GLASS_BOTTLE)
+            .withReturnItem(dragonBloodItem)
+            .withFluid(new FluidStack(dragonBloodFluid, 250))
+            .save(output, WhoAmICore.of("alchemist_cauldron/empty_" + fluidName));
     }
 
     /**

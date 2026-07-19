@@ -2,6 +2,7 @@ package net.zhaiji.who_am_i_core.event;
 
 import com.bobmowzie.mowziesmobs.server.item.ItemUmvuthanaMask;
 import com.bobmowzie.mowziesmobs.server.potion.EffectHandler;
+import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.tartaricacid.touhoulittlemaid.api.event.MaidAndItemTransformEvent;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.tartaricacid.touhoulittlemaid.init.InitEntities;
@@ -160,9 +161,9 @@ public class CommonEventHandler {
             .drinkAnimation()
             .build();
 
-        // 巨兽熔炉可以饮用岩浆
+        // 巨兽熔炉可以饮用岩浆桶和灾变熔岩动力电池
         UseCondition.builder()
-            .matchesItem(stack -> stack.is(Items.LAVA_BUCKET))
+            .matchesItem(stack -> stack.is(Items.LAVA_BUCKET) || stack.is(ModItems.LAVA_POWER_CELL.get()))
             .matchesEntity(entity -> ChestCavityUtil.getData(entity)
                                          .hasOrgan(CataclysmOrgans.MONSTROSITY_FURNACE.get()) && !entity.isShiftKeyDown())
             .onFinishUsingItem(CataclysmOrganUtil::drinkLava)

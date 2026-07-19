@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
+import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
 import net.zhaiji.who_am_i_core.organ.IceAndFireOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -102,5 +104,22 @@ public abstract class PlayerMixin extends LivingEntity {
     )
     public void whoAmICore$canPlayerFitWithinBlocksAndEntitiesWhen(Pose pose, CallbackInfoReturnable<Boolean> cir) {
         if (isGhostFireState()) cir.setReturnValue(true);
+    }
+
+    /**
+     * 拥有咒魂心脏时，冲刺攻击命中后保留冲刺状态，而非按原版清除
+     */
+    @Redirect(
+        method = "attack",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Player;setSprinting(Z)V"
+        )
+    )
+    public void whoAmICore$attack(Player player, boolean sprinting) {
+        if (!sprinting && ChestCavityUtil.getData(player).hasOrgan(CataclysmOrgans.PHANTOM_HEART.get())) {
+            return;
+        }
+        player.setSprinting(sprinting);
     }
 }

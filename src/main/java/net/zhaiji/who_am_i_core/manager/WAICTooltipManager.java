@@ -267,7 +267,7 @@ public class WAICTooltipManager {
      */
     public static final OrganTooltipConsumer PHANTOM_HEART_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
-            0, List.of(PHANTOM_HEART_FORMULA_VALUE)
+            1, List.of(PHANTOM_HEART_FORMULA_VALUE)
         )))
         .build();
 
