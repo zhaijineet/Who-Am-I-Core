@@ -697,10 +697,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "Fire Dragon Gem");
         addOrganPassiveEffect(
             IceAndFireOrgans.FIRE_DRAGON_GEM,
-            "Fire spell power increases with fire dragon organs in chest",
-            "Each fire dragon organ grants +5% fire spell power"
+            "Grants %s Fire Spell Power"
         );
-        addOrganPassiveEffectSimple(IceAndFireOrgans.FIRE_DRAGON_GEM, "Fire spell power scales with fire dragon organ count");
 
         addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "Fire Dragon Breath Sac");
         addOrganActiveSkill(
@@ -727,10 +725,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "Ice Dragon Gem");
         addOrganPassiveEffect(
             IceAndFireOrgans.ICE_DRAGON_GEM,
-            "Ice spell power increases with ice dragon organs in chest",
-            "Each ice dragon organ grants +5% ice spell power"
+            "Grants %s Ice Spell Power"
         );
-        addOrganPassiveEffectSimple(IceAndFireOrgans.ICE_DRAGON_GEM, "Ice spell power scales with ice dragon organ count");
 
         addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "Ice Dragon Breath Sac");
         addOrganActiveSkill(
@@ -777,15 +773,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "Lightning Dragon Gem");
         addOrganPassiveEffect(
             IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
-            "Lightning spell power increases with lightning dragon organs in chest",
-            "Each lightning dragon organ grants +5% lightning spell power",
+            "Grants %s Lightning Spell Power",
             lightningCharge,
             lightningChargeOverload
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
-            "Lightning spell power scales with lightning dragon organ count",
-            lightningChargeSimple
         );
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "Lightning Dragon Breath Sac");
@@ -828,10 +818,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.FIRE_DRAGON_GEM, "火龙宝玉");
         addOrganPassiveEffect(
             IceAndFireOrgans.FIRE_DRAGON_GEM,
-            "火焰法术强度随胸腔内火龙器官数量增加",
-            "每增加一个火龙器官提升5%火焰法术强度"
+            "提供%s火焰法术强度"
         );
-        addOrganPassiveEffectSimple(IceAndFireOrgans.FIRE_DRAGON_GEM, "火焰法术强度随火龙器官数量提升");
 
         addItem(IceAndFireOrgans.FIRE_DRAGON_BREATH_SAC, "火龙吐息袋");
         addOrganActiveSkill(
@@ -858,10 +846,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.ICE_DRAGON_GEM, "冰龙宝玉");
         addOrganPassiveEffect(
             IceAndFireOrgans.ICE_DRAGON_GEM,
-            "冰霜法术强度随胸腔内冰龙器官数量增加",
-            "每增加一个冰龙器官提升5%冰霜法术强度"
+            "提供%s冰霜法术强度"
         );
-        addOrganPassiveEffectSimple(IceAndFireOrgans.ICE_DRAGON_GEM, "冰霜法术强度随冰龙器官数量提升");
 
         addItem(IceAndFireOrgans.ICE_DRAGON_BREATH_SAC, "冰龙吐息袋");
         addOrganActiveSkill(
@@ -908,15 +894,9 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_GEM, "电龙宝玉");
         addOrganPassiveEffect(
             IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
-            "闪电法术强度随胸腔内电龙器官数量增加",
-            "每增加一个电龙器官提升5%闪电法术强度",
+            "提供%s闪电法术强度",
             lightningChargeZH,
             lightningChargeOverloadZH
-        );
-        addOrganPassiveEffectSimple(
-            IceAndFireOrgans.LIGHTNING_DRAGON_GEM,
-            "闪电法术强度随电龙器官数量提升",
-            lightningChargeSimpleZH
         );
 
         addItem(IceAndFireOrgans.LIGHTNING_DRAGON_BREATH_SAC, "电龙吐息袋");

@@ -29,13 +29,19 @@ public class WAICRecipeProvider extends RecipeProvider {
 
     @Override
     public void buildRecipes(RecipeOutput recipeOutput) {
-        // 弗兰肯斯坦心脏：心脏 + 巫毒针 + 动物心脏
+        // 弗兰肯斯坦心脏
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, WAICOrgans.FRANKENSTEIN_HEART.get())
-            .pattern("HNA")
-            .define('H', InitItem.HEART.get())
+            .pattern("DLE")
+            .pattern("GRC")
+            .pattern("END")
+            .define('D', CompanionsItems.DEMON_FLESH.get())
+            .define('E', IafItems.ECTOPLASM.get())
+            .define('L', ItemRegistry.LIGHTNING_BOTTLE.get())
+            .define('G', CompanionsItems.SOUL_GEM.get())
+            .define('R', InitItem.ROTTEN_HEART.get())
+            .define('C', CompanionsItems.CRYSTALLIZED_BLOOD.get())
             .define('N', CompanionsItems.NEEDLE.get())
-            .define('A', InitItem.ANIMAL_HEART.get())
-            .unlockedBy(getHasName(CompanionsItems.NEEDLE.get()), has(CompanionsItems.NEEDLE.get()))
+            .unlockedBy(getHasName(ItemRegistry.LIGHTNING_BOTTLE.get()), has(ItemRegistry.LIGHTNING_BOTTLE.get()))
             .save(recipeOutput);
 
         // 调色盘：四角奥术源质，中木板，上绿左蓝右黄下红

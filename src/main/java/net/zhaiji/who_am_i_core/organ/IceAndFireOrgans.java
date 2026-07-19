@@ -106,6 +106,7 @@ public class IceAndFireOrgans {
                 WAICItemTagManager.FIRE_DRAGON
             ))
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.FIRE_DRAGON_GEM_TOOLTIP)
             .build()
     );
 
@@ -231,6 +232,7 @@ public class IceAndFireOrgans {
                 WAICItemTagManager.ICE_DRAGON
             ))
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.ICE_DRAGON_GEM_TOOLTIP)
             .build()
     );
 
@@ -356,6 +358,7 @@ public class IceAndFireOrgans {
                 WAICItemTagManager.LIGHTNING_DRAGON
             ))
             .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.LIGHTNING_DRAGON_GEM_TOOLTIP)
             .tick(WAICOrganUtil::lightningDragonChargeTick)
             .build()
     );

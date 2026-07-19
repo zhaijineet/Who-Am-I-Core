@@ -1523,4 +1523,63 @@ public class WAICTooltipManager {
             0, List.of(COMPUTE_CHIP_FORMULA_VALUE)
         )))
         .build();
+
+    /**
+     * 构建龙宝玉法术强度 FormulaValue
+     * <p>加成 = 对应龙类器官数 × 1%</p>
+     *
+     * @param dragonTag 对应的龙类器官标签
+     */
+    private static FormulaValue buildDragonGemFormulaValue(TagKey<Item> dragonTag) {
+        return new FormulaValue(
+            context -> {
+                int count = ChestCavityUtil.getOrganCountWithSelf(context, dragonTag);
+                return Component.literal(count + "%");
+            },
+            context -> {
+                int count = ChestCavityUtil.getOrganCountWithSelf(context, dragonTag);
+                return Component.empty()
+                    .append(TooltipUtil.tagOrganCountName(dragonTag))
+                    .append(Component.literal(String.valueOf(count)))
+                    .append(TooltipUtil.formulaOperator("×"))
+                    .append(Component.literal("1%"));
+            }
+        );
+    }
+
+    private static final FormulaValue FIRE_DRAGON_GEM_FORMULA_VALUE =
+        buildDragonGemFormulaValue(WAICItemTagManager.FIRE_DRAGON);
+
+    /**
+     * 火龙宝玉 — 火焰法术强度随火龙器官数量缩放
+     */
+    public static final OrganTooltipConsumer FIRE_DRAGON_GEM_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(FIRE_DRAGON_GEM_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue ICE_DRAGON_GEM_FORMULA_VALUE =
+        buildDragonGemFormulaValue(WAICItemTagManager.ICE_DRAGON);
+
+    /**
+     * 冰龙宝玉 — 冰霜法术强度随冰龙器官数量缩放
+     */
+    public static final OrganTooltipConsumer ICE_DRAGON_GEM_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(ICE_DRAGON_GEM_FORMULA_VALUE)
+        )))
+        .build();
+
+    private static final FormulaValue LIGHTNING_DRAGON_GEM_FORMULA_VALUE =
+        buildDragonGemFormulaValue(WAICItemTagManager.LIGHTNING_DRAGON);
+
+    /**
+     * 电龙宝玉 — 闪电法术强度随电龙器官数量缩放
+     */
+    public static final OrganTooltipConsumer LIGHTNING_DRAGON_GEM_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(LIGHTNING_DRAGON_GEM_FORMULA_VALUE)
+        )))
+        .build();
 }

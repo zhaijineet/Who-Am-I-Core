@@ -2,18 +2,32 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "chestcavitybeyond:animal_heart"
+    "C": {
+      "item": "companions:crystallized_blood"
     },
-    "H": {
-      "item": "chestcavitybeyond:heart"
+    "D": {
+      "item": "companions:demon_flesh"
+    },
+    "E": {
+      "item": "iceandfire:ectoplasm"
+    },
+    "G": {
+      "item": "companions:soul_gem"
+    },
+    "L": {
+      "item": "irons_spellbooks:lightning_bottle"
     },
     "N": {
       "item": "companions:needle"
+    },
+    "R": {
+      "item": "chestcavitybeyond:rotten_heart"
     }
   },
   "pattern": [
-    "HNA"
+    "DLE",
+    "GRC",
+    "END"
   ],
   "result": {
     "count": 1,
