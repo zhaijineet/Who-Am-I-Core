@@ -592,7 +592,7 @@
   "organ.who_am_i_core.frostburn_soul.passive_effect.0": "Grants %s Health",
   "organ.who_am_i_core.geburah.passive_effect.0": "Attacks deal bonus damage equal to 3% of target max health per harmful effect on the target",
   "organ.who_am_i_core.ghost_fire.passive_effect.0": "Grants flight and noclip",
-  "organ.who_am_i_core.glowing_core.passive_effect.0": "Continuously grants Glowing and Night Vision",
+  "organ.who_am_i_core.glowing_core.passive_effect.0": "Continuously grants Night Vision",
   "organ.who_am_i_core.gluttony.passive_effect.0": "Eating speed doubled, each nine-hell organ grants 20 max absorption",
   "organ.who_am_i_core.gluttony.passive_effect.1": "Each meal grants absorption HP equal to hunger value × nine-hell count",
   "organ.who_am_i_core.gluttony.passive_effect.2": "Eat at any time ignoring hunger",
@@ -827,5 +827,16 @@
   "tooltip.who_am_i_core.dragon_blood.group_draw.1": "Shift-right-click to inject into other creatures",
   "tooltip.who_am_i_core.existence_displacer.0": "Hold right-click on a creature in sight to swap chest cavity organs",
   "tooltip.who_am_i_core.existence_displacer.1": "Hostile creatures and players require health below 30%, tamed and other creatures have no limit",
-  "tooltip.who_am_i_core.existence_displacer.2": "Both sides gain Darkness, Weakness, and Nausea for 3 seconds"
+  "tooltip.who_am_i_core.existence_displacer.2": "Both sides gain Darkness, Weakness, and Nausea for 3 seconds",
+  "who_am_i_core.configuration.existenceDisplacerParticleCount": "Existence Displacer Particle Count",
+  "who_am_i_core.configuration.existenceDisplacerParticleCount.tooltip": "Enchantment particles spawned per use tick by the Existence Displacer (0 to disable)",
+  "who_am_i_core.configuration.hudAnchor": "Humours HUD Anchor",
+  "who_am_i_core.configuration.hudAnchor.tooltip": "Screen corner where the Humours HUD is anchored",
+  "who_am_i_core.configuration.hudVisibility": "Humours HUD Visibility",
+  "who_am_i_core.configuration.hudVisibility.tooltip": "When to display the Humours HUD. ALWAYS = always show, HAS_HUMOURS = only show when player has any humour, NEVER = never show",
+  "who_am_i_core.configuration.hudX": "Humours HUD X Offset",
+  "who_am_i_core.configuration.hudX.tooltip": "X offset of the Humours HUD relative to the anchor corner",
+  "who_am_i_core.configuration.hudY": "Humours HUD Y Offset",
+  "who_am_i_core.configuration.hudY.tooltip": "Y offset of the Humours HUD relative to the anchor corner",
+  "who_am_i_core.configuration.title": "Who Am I Core Configuration"
 }

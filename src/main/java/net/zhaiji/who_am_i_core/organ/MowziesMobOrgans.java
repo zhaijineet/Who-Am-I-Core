@@ -188,6 +188,7 @@ public class MowziesMobOrgans {
             .addValueAttribute(InitAttribute.NERVES, 0.5)
             .tick(MowziesMobOrganUtil::glowingCoreTick)
             .added(MowziesMobOrganUtil::glowingCoreAdded)
+            .removed(MowziesMobOrganUtil::glowingCoreRemoved)
             .build()
     );
 

@@ -34,22 +34,33 @@ import java.util.List;
 
 public class MowziesMobOrganUtil {
     /**
-     * 荧光核心 tick：持续赋予发光与夜视
+     * 荧光核心 tick：持续赋予夜视
      */
     public static void glowingCoreTick(ChestCavitySlotContext context) {
         if (context.entity().tickCount % 300 != 0) return;
-        applyGlowingEffects(context.entity());
+        applyNightVisionEffect(context.entity());
     }
 
     /**
      * 荧光核心 added：植入时立即生效一次，避免玩家疑惑初始未触发
      */
     public static void glowingCoreAdded(ChestCavitySlotContext context) {
-        applyGlowingEffects(context.entity());
+        applyNightVisionEffect(context.entity());
     }
 
-    private static void applyGlowingEffects(LivingEntity entity) {
-        entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 0, false, false));
+    /**
+     * 荧光核心 removed：仅清除器官自身施加的夜视，保护外部来源
+     */
+    public static void glowingCoreRemoved(ChestCavitySlotContext context) {
+        MobEffectInstance nightVision = context.entity().getEffect(MobEffects.NIGHT_VISION);
+        if (nightVision != null
+            && nightVision.getAmplifier() == 0
+            && nightVision.getDuration() <= 600) {
+            context.entity().removeEffect(MobEffects.NIGHT_VISION);
+        }
+    }
+
+    private static void applyNightVisionEffect(LivingEntity entity) {
         entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 600, 0, false, false));
     }
 

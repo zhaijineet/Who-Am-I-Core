@@ -1,5 +1,17 @@
 # 更新日志 (Changelog)
 
+### 1.2.2
+
+- 电磁炮弹药管理重构为标签匹配，新增支持多种金属粒（含 AnvilCraft 与 Cataclysm 系列）
+- 荧光核心调整为仅赋予夜视，移除发光效果；器官摘除时清除自身施加的夜视
+- 客户端接入 NeoForge 配置界面，补充配置项中英文翻译
+
+---
+
+- Railgun ammo manager reworked to tag-based matching, added support for various metal nuggets (including AnvilCraft and Cataclysm series)
+- Glowing Core adjusted to grant only Night Vision, Glowing removed; clears its own Night Vision on organ removal
+- Client now integrates NeoForge configuration screen, added Chinese and English translations for config entries
+
 ### 1.2.1
 
 - 新增炼金锅龙血空取配方：空玻璃瓶可从锅中取出龙血流体制成龙血瓶（火/冰/电三系）

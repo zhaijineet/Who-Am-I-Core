@@ -34,6 +34,7 @@ import net.zhaiji.who_am_i_core.register.WAICFluid;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class LanguageProvider extends net.neoforged.neoforge.common.data.LanguageProvider {
@@ -256,6 +257,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add("tooltip.who_am_i_core.existence_displacer.0", "Hold right-click on a creature in sight to swap chest cavity organs");
         add("tooltip.who_am_i_core.existence_displacer.1", "Hostile creatures and players require health below 30%, tamed and other creatures have no limit");
         add("tooltip.who_am_i_core.existence_displacer.2", "Both sides gain Darkness, Weakness, and Nausea for 3 seconds");
+
+        addConfig("title", "Who Am I Core Configuration");
+        addConfig("hudX", "Humours HUD X Offset",
+            "X offset of the Humours HUD relative to the anchor corner");
+        addConfig("hudY", "Humours HUD Y Offset",
+            "Y offset of the Humours HUD relative to the anchor corner");
+        addConfig("hudAnchor", "Humours HUD Anchor",
+            "Screen corner where the Humours HUD is anchored");
+        addConfig("hudVisibility", "Humours HUD Visibility",
+            "When to display the Humours HUD. ALWAYS = always show, HAS_HUMOURS = only show when player has any humour, NEVER = never show");
+        addConfig("existenceDisplacerParticleCount", "Existence Displacer Particle Count",
+            "Enchantment particles spawned per use tick by the Existence Displacer (0 to disable)");
     }
 
     public void Chinese() {
@@ -509,7 +522,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(MowziesMobOrgans.GLOWING_CORE, "Glowing Core");
         addOrganPassiveEffect(
             MowziesMobOrgans.GLOWING_CORE,
-            "Continuously grants Glowing and Night Vision"
+            "Continuously grants Night Vision"
         );
     }
 
@@ -551,7 +564,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(MowziesMobOrgans.GLOWING_CORE, "荧光核心");
         addOrganPassiveEffect(
             MowziesMobOrgans.GLOWING_CORE,
-            "持续获得发光与夜视效果"
+            "持续获得夜视效果"
         );
     }
 
@@ -2875,6 +2888,18 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
             CompanionsOrgans.CAKE_LIVER,
             "甜蜜等级达到2时每秒消耗1级清除1个随机负面效果"
         );
+
+        addConfig("title", "我非我：核心配置");
+        addConfig("hudX", "四体液HUD X轴偏移",
+            "四体液HUD相对于锚点角落的X轴偏移量");
+        addConfig("hudY", "四体液HUD Y轴偏移",
+            "四体液HUD相对于锚点角落的Y轴偏移量");
+        addConfig("hudAnchor", "四体液HUD锚点",
+            "决定四体液HUD锚定到屏幕的哪个角落");
+        addConfig("hudVisibility", "四体液HUD显示条件",
+            "四体液HUD的显示条件：ALWAYS=始终显示，HAS_HUMOURS=仅当有任意体液时显示，NEVER=从不显示");
+        addConfig("existenceDisplacerParticleCount", "存在置换器粒子数量",
+            "存在置换器每个使用tick生成的附魔粒子数量，设为0可关闭");
     }
 
     private void addOrganDescription(Supplier<Item> item, String... lines) {
@@ -2937,6 +2962,17 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     private void addChestCavityTypeName(ChestCavityType type, String name) {
         add(WAICChestCavityTypeManager.getTranslationKey(type), name);
+    }
+
+    private void addConfig(String key, String name, @Nullable String tooltip) {
+        add(WhoAmICore.MOD_ID + ".configuration." + key, name);
+        if (tooltip != null) {
+            add(WhoAmICore.MOD_ID + ".configuration." + key + ".tooltip", tooltip);
+        }
+    }
+
+    private void addConfig(String key, String name) {
+        addConfig(key, name, null);
     }
 
     @Override

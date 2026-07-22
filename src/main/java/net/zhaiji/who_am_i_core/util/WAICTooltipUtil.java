@@ -148,12 +148,12 @@ public class WAICTooltipUtil {
         if (!TooltipUtil.isDetailedMode(keyContext)) return List.of();
         float multiplier = AnvilCraftOrganUtil.getRailgunDamageMultiplier(slotContext);
         List<Component> result = new ArrayList<>();
-        for (Map.Entry<Item, Float> entry : RailgunAmmoManager.getAmmoEntries()) {
-            float finalDamage = entry.getValue() * multiplier;
+        for (RailgunAmmoManager.AmmoEntry entry : RailgunAmmoManager.getAmmoList()) {
+            float finalDamage = entry.baseDamage() * multiplier;
             result.add(Component.literal(TooltipUtil.DEFAULT_PREFIX)
                 .append(Component.translatable(
                     RAILGUN_AMMO_TRANSLATION,
-                    entry.getKey().getDescription(),
+                    entry.displayItem().getDescription(),
                     TooltipUtil.formatAttributeValue(finalDamage)
                 )));
         }

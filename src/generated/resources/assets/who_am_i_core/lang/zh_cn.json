@@ -592,7 +592,7 @@
   "organ.who_am_i_core.frostburn_soul.passive_effect.0": "提供%s点健康",
   "organ.who_am_i_core.geburah.passive_effect.0": "攻击时对目标每个负面效果额外造成其最大生命值3%的伤害",
   "organ.who_am_i_core.ghost_fire.passive_effect.0": "获得飞行与穿墙能力",
-  "organ.who_am_i_core.glowing_core.passive_effect.0": "持续获得发光与夜视效果",
+  "organ.who_am_i_core.glowing_core.passive_effect.0": "持续获得夜视效果",
   "organ.who_am_i_core.gluttony.passive_effect.0": "食用速度翻倍，每个九狱器官提供20点最大吸收生命值上限",
   "organ.who_am_i_core.gluttony.passive_effect.1": "每次进食获得饥饿值×九狱器官数量的吸收生命值",
   "organ.who_am_i_core.gluttony.passive_effect.2": "无视饥饿值限制，随时可以进食",
@@ -827,5 +827,16 @@
   "tooltip.who_am_i_core.dragon_blood.group_draw.1": "潜行右键可对其他生物注射",
   "tooltip.who_am_i_core.existence_displacer.0": "长按右键对视线内的生物交换胸腔内的器官",
   "tooltip.who_am_i_core.existence_displacer.1": "敌对生物与玩家需血量低于30%，宠物与其他生物无限制",
-  "tooltip.who_am_i_core.existence_displacer.2": "交换后双方获得3秒黑暗、虚弱、反胃效果"
+  "tooltip.who_am_i_core.existence_displacer.2": "交换后双方获得3秒黑暗、虚弱、反胃效果",
+  "who_am_i_core.configuration.existenceDisplacerParticleCount": "存在置换器粒子数量",
+  "who_am_i_core.configuration.existenceDisplacerParticleCount.tooltip": "存在置换器每个使用tick生成的附魔粒子数量，设为0可关闭",
+  "who_am_i_core.configuration.hudAnchor": "四体液HUD锚点",
+  "who_am_i_core.configuration.hudAnchor.tooltip": "决定四体液HUD锚定到屏幕的哪个角落",
+  "who_am_i_core.configuration.hudVisibility": "四体液HUD显示条件",
+  "who_am_i_core.configuration.hudVisibility.tooltip": "四体液HUD的显示条件：ALWAYS=始终显示，HAS_HUMOURS=仅当有任意体液时显示，NEVER=从不显示",
+  "who_am_i_core.configuration.hudX": "四体液HUD X轴偏移",
+  "who_am_i_core.configuration.hudX.tooltip": "四体液HUD相对于锚点角落的X轴偏移量",
+  "who_am_i_core.configuration.hudY": "四体液HUD Y轴偏移",
+  "who_am_i_core.configuration.hudY.tooltip": "四体液HUD相对于锚点角落的Y轴偏移量",
+  "who_am_i_core.configuration.title": "我非我：核心配置"
 }
