@@ -10,7 +10,7 @@
 - **ModDevGradle**：2.0.140
 - **Parchment Mappings**：2024.11.17
 - **Java**：21
-- **版本**：1.2.2
+- **版本**：1.2.3
 
 前置模组：**Chest Cavity Beyond**（胸腔：超越），本模组为 CCB 的 Addon，核心机制是为不提供胸腔的原版/其他 mod 的生物添加可植入胸腔的器官。
 
@@ -27,7 +27,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 │   └── UseCondition.java     # 可使用条件 API。Builder 模式定义哪些物品可被使用及使用效果
 │
 ├── attachment/
-│   └── HumoursData.java         # 四体液学说数据（Attachment）：血液/黄胆汁/黑胆汁/粘液，各有当前值+上限
+│   └── HumoursData.java         # 四体液学说数据（Attachment）：仅保存血液/黄胆汁/黑胆汁/粘液当前值，上限由四个 MAX_* 属性提供
 │
 ├── client/
 │   ├── event/
@@ -100,7 +100,7 @@ src/main/java/net/zhaiji/who_am_i_core/
 │
 ├── register/
 │   ├── WAICAttachment.java    # Attachment 注册器（四体液 HUMOURS）
-│   ├── WAICAttribute.java     # 自定义属性注册器（BLOCK, COUNTER_ATTACK, HEAL, MELEE_DAMAGE, RANGED_DAMAGE, MAGIC_DAMAGE, 各种百分比属性, LOOTING, FORTUNE）
+│   ├── WAICAttribute.java     # 自定义属性注册器（BLOCK, COUNTER_ATTACK, HEAL, MELEE_DAMAGE, RANGED_DAMAGE, MAGIC_DAMAGE, 各种百分比属性, LOOTING, FORTUNE, MAX_BLOOD, MAX_YELLOW_BILE, MAX_BLACK_BILE, MAX_PHLEGM）
 │   ├── WAICCreativeModeTab.java  # 创造模式标签页
 │   ├── WAICEffect.java        # 药水效果注册器（4种龙之力）
 │   ├── WAICEntity.java        # 实体注册器（九头蛇毒物吐息）
@@ -190,6 +190,10 @@ src/main/java/net/zhaiji/who_am_i_core/
 - **MAGIC_DAMAGE** — 魔法伤害加值
 - **LOOTING** — 抢夺等级
 - **FORTUNE** — 时运等级
+- **MAX_BLOOD** — 血液最大值
+- **MAX_YELLOW_BILE** — 黄胆汁最大值
+- **MAX_BLACK_BILE** — 黑胆汁最大值
+- **MAX_PHLEGM** — 粘液最大值
 
 ### PercentageAttribute（百分比）
 - **MELEE_DAMAGE_PERCENTAGE** — 近战伤害最终倍率
@@ -228,13 +232,13 @@ src/main/java/net/zhaiji/who_am_i_core/
 
 ## 四体液系统（HumoursData）
 
-NeoForge Attachment 数据，每种体液有当前值和最大值（默认 100）：
+`HumoursData`是NeoForge Attachment，仅保存血液、黄胆汁、黑胆汁和粘液的当前值，不保存最大值。四种体液的最大值分别由`MAX_BLOOD`、`MAX_YELLOW_BILE`、`MAX_BLACK_BILE`和`MAX_PHLEGM`属性提供，默认值均为100：
 - **血液（Blood）** — 暂未大规模使用
 - **黄胆汁（Yellow Bile）** — 暂未大规模使用
 - **黑胆汁（Black Bile）** — 腐败魂灯（消耗增级）、尸王脊柱（吸收伤害）、尸王肋骨（+上限）
 - **粘液（Phlegm）** — 涛浪提灯（消耗增伤）、风暴脊柱（吸收伤害转粘液）、风暴肋骨（+上限）
 
-提供 `insertXxx`/`extractXxx` 便捷方法，支持 `simulate` 模式。NeoForge 自动客户端同步（StreamCodec）。
+提供`insertXxx`/`extractXxx`便捷方法，支持`simulate`模式；属性上限变化后会统一夹紧当前值并通过Attachment同步。NeoForge使用StreamCodec自动进行客户端同步。
 
 ---
 

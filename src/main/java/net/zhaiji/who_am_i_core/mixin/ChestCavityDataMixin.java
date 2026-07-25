@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySize;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
+import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.mixinapi.IChestCavityData;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
@@ -80,7 +81,6 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
         at = @At("HEAD")
     )
     public void whoAmICore$tick(CallbackInfo ci) {
-        if (owner == null) return;
         int tickCount = owner.tickCount;
         if (owner.level().isClientSide() || tickCount % 20 != 0) return;
         // 应用治愈属性效果，每秒回复治愈等量的生命值
@@ -124,6 +124,15 @@ public abstract class ChestCavityDataMixin implements IChestCavityData {
             int pickIndex = owner.level().getRandom().nextInt(candidates.size());
             dragonBloodFlags |= candidates.remove(pickIndex);
         }
+    }
+
+    @Inject(
+        method = "initAttributeModifier()V",
+        at = @At("RETURN")
+    )
+    public void whoAmICore$initAttributeModifier(CallbackInfo ci) {
+        if (owner.level().isClientSide()) return;
+        HumoursData.clampCurrentValues(owner);
     }
 
     @Override

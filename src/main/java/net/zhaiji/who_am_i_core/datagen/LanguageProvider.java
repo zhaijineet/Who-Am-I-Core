@@ -73,6 +73,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "Magic Damage Percentage");
         addAttribute(WAICAttribute.LOOTING, "Looting");
         addAttribute(WAICAttribute.FORTUNE, "Fortune");
+        addAttribute(WAICAttribute.MAX_BLOOD, "Max Blood");
+        addAttribute(WAICAttribute.MAX_YELLOW_BILE, "Max Yellow Bile");
+        addAttribute(WAICAttribute.MAX_BLACK_BILE, "Max Black Bile");
+        addAttribute(WAICAttribute.MAX_PHLEGM, "Max Phlegm");
 
         addChestCavityTypeName(WAICChestCavityTypeManager.FANTASTICAL, "Fantastical");
 
@@ -194,6 +198,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttributeValueEffect(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "Magic final multiplier: %s%%");
         addAttributeValueEffect(WAICAttribute.LOOTING, "Looting level: %s");
         addAttributeValueEffect(WAICAttribute.FORTUNE, "Fortune level: %s");
+        addAttributeValueEffect(WAICAttribute.MAX_BLOOD, "Maximum blood: %s");
+        addAttributeValueEffect(WAICAttribute.MAX_YELLOW_BILE, "Maximum yellow bile: %s");
+        addAttributeValueEffect(WAICAttribute.MAX_BLACK_BILE, "Maximum black bile: %s");
+        addAttributeValueEffect(WAICAttribute.MAX_PHLEGM, "Maximum phlegm: %s");
 
         add(WAICDamageTagManager.IS_MELEE, "Melee");
         addWAICTagTranslationsEN();
@@ -266,7 +274,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addConfig("hudAnchor", "Humours HUD Anchor",
             "Screen corner where the Humours HUD is anchored");
         addConfig("hudVisibility", "Humours HUD Visibility",
-            "When to display the Humours HUD. ALWAYS = always show, HAS_HUMOURS = only show when player has any humour, NEVER = never show");
+            "When to display the Humours HUD:\nALWAYS = always show\nHAS_HUMOURS = only show when player has any humour\nNEVER = never show");
+        addConfig("hudValueFormat", "Humours Value Format",
+            "Value display format:\nCURRENT_MAX = 50/100\nCURRENT_ONLY = 50\nPERCENTAGE = 50%");
+        addConfig("hudValuePosition", "Humours Value Position",
+            "Where to display humour values:\nCENTER = on top of each bar\nOUTSIDE = around HUD edges\nLIST_BELOW = listed below HUD");
+        addConfig("hudValueVisibility", "Humours Value Visibility",
+            "When to display humour values:\nALWAYS = always show\nHAS_VALUE = only show when that humour > 0\nNEVER = never show values");
+        addConfig("hudValueColorLabel", "Humours Value Color Label",
+            "Use humour colors instead of letter labels in LIST_BELOW mode.\ntrue = colored values\nfalse = letter prefix (B:/Y:/K:/P:)");
         addConfig("existenceDisplacerParticleCount", "Existence Displacer Particle Count",
             "Enchantment particles spawned per use tick by the Existence Displacer (0 to disable)");
     }
@@ -296,6 +312,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttribute(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "魔法伤害百分比");
         addAttribute(WAICAttribute.LOOTING, "抢夺");
         addAttribute(WAICAttribute.FORTUNE, "时运");
+        addAttribute(WAICAttribute.MAX_BLOOD, "最大血液值");
+        addAttribute(WAICAttribute.MAX_YELLOW_BILE, "最大黄胆汁值");
+        addAttribute(WAICAttribute.MAX_BLACK_BILE, "最大黑胆汁值");
+        addAttribute(WAICAttribute.MAX_PHLEGM, "最大粘液值");
 
         addChestCavityTypeName(WAICChestCavityTypeManager.FANTASTICAL, "幻想种");
 
@@ -417,6 +437,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addAttributeValueEffect(WAICAttribute.MAGIC_DAMAGE_PERCENTAGE, "魔法最终倍率：%s%%");
         addAttributeValueEffect(WAICAttribute.LOOTING, "抢夺等级：%s");
         addAttributeValueEffect(WAICAttribute.FORTUNE, "时运等级：%s");
+        addAttributeValueEffect(WAICAttribute.MAX_BLOOD, "最大血液值：%s");
+        addAttributeValueEffect(WAICAttribute.MAX_YELLOW_BILE, "最大黄胆汁值：%s");
+        addAttributeValueEffect(WAICAttribute.MAX_BLACK_BILE, "最大黑胆汁值：%s");
+        addAttributeValueEffect(WAICAttribute.MAX_PHLEGM, "最大粘液值：%s");
 
         add(WAICDamageTagManager.IS_MELEE, "近战");
         addWAICTagTranslationsZH();
@@ -1408,7 +1432,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_HEART, "Crimson Heart");
         addOrganPassiveEffect(
             WAICOrgans.CRIMSON_HEART,
-            "Each crimson organ in chest cavity grants +100 blood capacity",
             "Converts healing into stored blood at %s conversion rate"
         );
         addItem(WAICOrgans.CRIMSON_LUNG, "Crimson Lung");
@@ -1436,7 +1459,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(WAICOrgans.CRIMSON_HEART, "猩红心脏");
         addOrganPassiveEffect(
             WAICOrgans.CRIMSON_HEART,
-            "胸腔内每有一个猩红器官+100血液上限",
             "将治疗量以%s的转化率转化为血液存储"
         );
         addItem(WAICOrgans.CRIMSON_LUNG, "猩红肺脏");
@@ -1870,13 +1892,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.LEVIATHAN, "Leviathan");
         add(WAICItemTagManager.BLUFF, "Bluff");
 
-        add("formula.who_am_i_core.max_health", "Max Health");
         add("formula.who_am_i_core.current_health_ratio", "Current Health Ratio");
         add("formula.who_am_i_core.experience_level", "Experience Level");
         add("formula.who_am_i_core.total_enchantment_levels", "Total Enchantment Levels");
         add("formula.who_am_i_core.local_fire_count", "Local fire organs");
         add("formula.who_am_i_core.local_ice_count", "Local ice organs");
         add("formula.who_am_i_core.in_water", "In Water");
+        add("formula.who_am_i_core.current_phlegm", "Current Phlegm");
     }
 
     private void addWAICTagTranslationsZH() {
@@ -1907,13 +1929,13 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(WAICItemTagManager.LEVIATHAN, "利维坦");
         add(WAICItemTagManager.BLUFF, "泥峭");
 
-        add("formula.who_am_i_core.max_health", "最大生命值");
         add("formula.who_am_i_core.current_health_ratio", "当前生命值比例");
         add("formula.who_am_i_core.experience_level", "经验等级");
         add("formula.who_am_i_core.total_enchantment_levels", "附魔等级总和");
         add("formula.who_am_i_core.local_fire_count", "局部炽焰器官数量");
         add("formula.who_am_i_core.local_ice_count", "局部冰霜器官数量");
         add("formula.who_am_i_core.in_water", "在水中");
+        add("formula.who_am_i_core.current_phlegm", "当前粘液值");
     }
 
     // ==================== FDBosses 逆卡巴拉器官 ====================
@@ -2343,21 +2365,21 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 斯库拉系列
         addItem(CataclysmOrgans.TIDAL_LANTERN, "Tidal Lantern");
-        addOrganPassiveEffect(
+        addOrganActiveSkill(
             CataclysmOrgans.TIDAL_LANTERN,
-            "On attack consumes all current phlegm and adds equal damage",
-            "When 30 or more phlegm is consumed, summons 3 waves spreading forward for %s ticks"
+            "Consumes all phlegm for %s waves, each dealing %s damage"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.TIDAL_LANTERN, "Consumes phlegm on attack for bonus damage, at 30+ summons 3 waves spreading forward for %s ticks");
         addItem(CataclysmOrgans.STORM_SPINE, "Storm Spine");
         addOrganPassiveEffect(
             CataclysmOrgans.STORM_SPINE,
-            "On hit absorbs a portion of damage as phlegm and reduces damage accordingly",
-            "Absorbs %1$s of damage as phlegm and reduces equal damage, absorption cap is %2$s points, disabled when phlegm is full"
+            "Attacking or being attacked generates %s of damage dealt as phlegm"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.STORM_SPINE, "Absorbs %1$s of damage as phlegm on hit (cap %2$s points)");
         addItem(CataclysmOrgans.STORM_RIB, "Storm Rib");
-        addOrganPassiveEffect(CataclysmOrgans.STORM_RIB, "+10 phlegm capacity");
+        addOrganPassiveEffect(
+            CataclysmOrgans.STORM_RIB,
+            "Grants %s Defense based on max phlegm",
+            "Grants %s Swim Speed based on max phlegm"
+        );
 
         // 焰魔系列
         addItem(CataclysmOrgans.UNDYING_EMBER, "Undying Ember");
@@ -2378,7 +2400,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MONSTROSITY_CORE, "Monstrosity Core");
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_CORE,
-            "+100 yellow bile capacity",
             "Generates %s yellow bile per second"
         );
         addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "Monstrosity Circuit");
@@ -2517,21 +2538,21 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         // 斯库拉系列
         addItem(CataclysmOrgans.TIDAL_LANTERN, "涛浪提灯");
-        addOrganPassiveEffect(
+        addOrganActiveSkill(
             CataclysmOrgans.TIDAL_LANTERN,
-            "攻击时消耗所有当前粘液并增加等额伤害",
-            "消耗大于等于30的粘液时额外生成3道向前扩散并持续%stick的水浪"
+            "消耗所有粘液生成%s道水浪，每道造成%s点伤害"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.TIDAL_LANTERN, "攻击时消耗粘液增加伤害，大于等于30时生成3道向前扩散并持续%stick的水浪");
         addItem(CataclysmOrgans.STORM_SPINE, "风暴脊柱");
         addOrganPassiveEffect(
             CataclysmOrgans.STORM_SPINE,
-            "受伤时吸收部分伤害转化为粘液，同时减免等额伤害",
-            "吸收%1$s的伤害转化为粘液并减免等额伤害，吸收上限为%2$s点，粘液满时失效"
+            "攻击或被攻击时将伤害的%s转化为粘液"
         );
-        addOrganPassiveEffectSimple(CataclysmOrgans.STORM_SPINE, "受伤时吸收%1$s的伤害转化为粘液，吸收上限为%2$s点");
         addItem(CataclysmOrgans.STORM_RIB, "风暴肋骨");
-        addOrganPassiveEffect(CataclysmOrgans.STORM_RIB, "+10粘液上限");
+        addOrganPassiveEffect(
+            CataclysmOrgans.STORM_RIB,
+            "根据粘液上限提供%s点防御",
+            "根据粘液上限提供%s的游泳速度"
+        );
 
         // 焰魔系列
         addItem(CataclysmOrgans.UNDYING_EMBER, "不灭薪火");
@@ -2552,7 +2573,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.MONSTROSITY_CORE, "巨兽炉心");
         addOrganPassiveEffect(
             CataclysmOrgans.MONSTROSITY_CORE,
-            "+100黄胆汁上限",
             "每秒生成%s黄胆汁"
         );
         addItem(CataclysmOrgans.MONSTROSITY_CIRCUIT, "巨兽回路");
@@ -2695,10 +2715,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
 
         addItem(IronSpellOrgans.DEAD_KING_RIB, "Dead King Rib");
-        addOrganPassiveEffect(
-            IronSpellOrgans.DEAD_KING_RIB,
-            "+50 max black bile"
-        );
     }
 
     private void ironSpellOrgansZH() {
@@ -2744,10 +2760,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         );
 
         addItem(IronSpellOrgans.DEAD_KING_RIB, "尸王肋骨");
-        addOrganPassiveEffect(
-            IronSpellOrgans.DEAD_KING_RIB,
-            "+50黑胆汁上限"
-        );
     }
 
     // ==================== Companions 器官 ====================
@@ -2897,7 +2909,15 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addConfig("hudAnchor", "四体液HUD锚点",
             "决定四体液HUD锚定到屏幕的哪个角落");
         addConfig("hudVisibility", "四体液HUD显示条件",
-            "四体液HUD的显示条件：ALWAYS=始终显示，HAS_HUMOURS=仅当有任意体液时显示，NEVER=从不显示");
+            "四体液HUD的显示条件：\nALWAYS=始终显示\nHAS_HUMOURS=仅当有任意体液时显示\nNEVER=从不显示");
+        addConfig("hudValueFormat", "四体液数值格式",
+            "数值显示格式：\nCURRENT_MAX=当前值/最大值\nCURRENT_ONLY=仅当前值\nPERCENTAGE=百分比");
+        addConfig("hudValuePosition", "四体液数值位置",
+            "数值显示位置：\nCENTER=叠加在各菱形条中心\nOUTSIDE=显示在HUD四周外侧\nLIST_BELOW=在HUD下方逐行列出");
+        addConfig("hudValueVisibility", "四体液数值显示条件",
+            "数值显示条件：\nALWAYS=始终显示\nHAS_VALUE=仅当该体液值>0时显示\nNEVER=从不显示数值");
+        addConfig("hudValueColorLabel", "四体液数值颜色标签",
+            "在列表模式下用体液颜色代替字母标签：\ntrue=用颜色区分\nfalse=用字母前缀(B:/Y:/K:/P:)");
         addConfig("existenceDisplacerParticleCount", "存在置换器粒子数量",
             "存在置换器每个使用tick生成的附魔粒子数量，设为0可关闭");
     }

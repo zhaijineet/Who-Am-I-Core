@@ -1,5 +1,23 @@
 # 更新日志 (Changelog)
 
+### 1.2.3
+
+- 四体液最大值迁移至属性系统（MAX_BLOOD / MAX_YELLOW_BILE / MAX_BLACK_BILE / MAX_PHLEGM），各器官通过属性加值提供上限
+- 涛浪提灯重做为主动技能：消耗全部粘液（最低100）召唤扇形水浪，数量和伤害随粘液值缩放
+- 风暴脊柱重做：攻击或被攻击时按伤害比例产出粘液，倍率随斯库拉器官数缩放
+- 风暴肋骨新增动态属性缩放：防御和游泳速度随粘液上限增长
+- 四体液HUD新增数值显示，支持多种格式、位置和可见性配置
+- 木质器官全系新增+2防御
+
+---
+
+- Humours max values migrated to attribute system (MAX_BLOOD / MAX_YELLOW_BILE / MAX_BLACK_BILE / MAX_PHLEGM); organs now provide capacity via attribute bonuses
+- Tidal Lantern reworked into active skill: consumes all phlegm (minimum 100) to summon fan-shaped waves, count and damage scale with phlegm
+- Storm Spine reworked: attacking or being attacked generates phlegm proportional to damage, multiplier scales with Scylla organ count
+- Storm Rib now grants dynamic Defense and Swim Speed scaling with max phlegm
+- Humours HUD now displays numerical values with configurable format, position, and visibility
+- All Wooden organs now grant +2 Defense
+
 ### 1.2.2
 
 - 电磁炮弹药管理重构为标签匹配，新增支持多种金属粒（含 AnvilCraft 与 Cataclysm 系列）

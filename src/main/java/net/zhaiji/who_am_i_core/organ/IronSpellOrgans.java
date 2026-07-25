@@ -5,8 +5,8 @@ import net.minecraft.world.item.Item;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
-import net.zhaiji.who_am_i_core.util.IronSpellOrganUtil;
 
 import java.util.function.Supplier;
 
@@ -74,8 +74,7 @@ public class IronSpellOrgans {
         "dead_king_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 4)
-            .added(IronSpellOrganUtil::deadKingRibAdded)
-            .removed(IronSpellOrganUtil::deadKingRibRemoved)
+            .addValueAttribute(WAICAttribute.MAX_BLACK_BILE, 50)
             .build()
     );
 

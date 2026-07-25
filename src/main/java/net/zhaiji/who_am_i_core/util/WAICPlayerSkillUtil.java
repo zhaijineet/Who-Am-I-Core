@@ -96,6 +96,11 @@ public class WAICPlayerSkillUtil {
         return CataclysmOrganUtil.sandGlazeHeart(context);
     }
 
+    // 涛浪提灯 — 涛浪倾泻
+    public static boolean tidalLantern(ChestCavitySlotContext context) {
+        return CataclysmOrganUtil.tidalLantern(context);
+    }
+
     // 墨水阑尾 — 消耗墨水回复法力
     public static boolean inkAppendix(ChestCavitySlotContext context) {
         return WAICOrganUtil.inkAppendix(context);

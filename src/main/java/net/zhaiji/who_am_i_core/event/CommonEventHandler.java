@@ -187,6 +187,31 @@ public class CommonEventHandler {
         // 值 ≤ 0 时隐藏（适用于"需要 > 0 才生效"的属性）
         DoublePredicate HIDE_WHEN_NOT_POSITIVE = value -> value <= 0;
 
+        AttributeDisplayManager.register(
+            WAICAttribute.MAX_BLOOD, 40, entity -> Component.translatable(
+                AttributeDisplayManager.getValueEffectKey(WAICAttribute.MAX_BLOOD),
+                TooltipUtil.formatAttributeValue(entity.getAttributeValue(WAICAttribute.MAX_BLOOD))
+            )
+        );
+        AttributeDisplayManager.register(
+            WAICAttribute.MAX_YELLOW_BILE, 40, entity -> Component.translatable(
+                AttributeDisplayManager.getValueEffectKey(WAICAttribute.MAX_YELLOW_BILE),
+                TooltipUtil.formatAttributeValue(entity.getAttributeValue(WAICAttribute.MAX_YELLOW_BILE))
+            )
+        );
+        AttributeDisplayManager.register(
+            WAICAttribute.MAX_BLACK_BILE, 40, entity -> Component.translatable(
+                AttributeDisplayManager.getValueEffectKey(WAICAttribute.MAX_BLACK_BILE),
+                TooltipUtil.formatAttributeValue(entity.getAttributeValue(WAICAttribute.MAX_BLACK_BILE))
+            )
+        );
+        AttributeDisplayManager.register(
+            WAICAttribute.MAX_PHLEGM, 40, entity -> Component.translatable(
+                AttributeDisplayManager.getValueEffectKey(WAICAttribute.MAX_PHLEGM),
+                TooltipUtil.formatAttributeValue(entity.getAttributeValue(WAICAttribute.MAX_PHLEGM))
+            )
+        );
+
         // HEAL — 每秒回复等同属性值的生命值
         AttributeDisplayManager.register(
             WAICAttribute.HEAL, 40, HIDE_WHEN_NOT_POSITIVE, entity -> {
@@ -314,8 +339,7 @@ public class CommonEventHandler {
                 .ifPresent(task -> ((ChestNovaTask) task).onMaskRemoved(event.getIndex()));
         }
 
-        // 猩红心脏被动：血液容量 = 猩红器官数量 × 100
-        WAICOrganUtil.crimsonHeartOrganChange(event.getData(), event.getEntity(), event.getOldStack(), event.getNewStack());
+        HumoursData.clampCurrentValues(event.getEntity());
 
         // 诅咒金器官增减时立即更新诅咒惩罚效果
         ItemStack oldStack = event.getOldStack();
@@ -431,8 +455,6 @@ public class CommonEventHandler {
             block += WAICOrganUtil.currentRibShield(entity, damage);
             // 尸王脊柱效果
             block += IronSpellOrganUtil.deadKingSpineHurt(entity, damage);
-            // 风暴脊柱效果
-            block += CataclysmOrganUtil.stormSpineHurt(entity, damage);
             // 灵薄减伤
             block += WAICOrganUtil.limboHurt(entity, damage);
         }
@@ -456,6 +478,12 @@ public class CommonEventHandler {
         if (!isSelfDamage && attacker != null) {
             // 色欲效果
             WAICOrganUtil.lustAttack(attacker, event.getNewDamage());
+            // 风暴脊柱：攻击者产出粘液
+            CataclysmOrganUtil.stormSpinePhlegmGeneration(attacker, event.getNewDamage());
+        }
+        if (!isSelfDamage) {
+            // 风暴脊柱：被攻击者产出粘液
+            CataclysmOrganUtil.stormSpinePhlegmGeneration(entity, event.getNewDamage());
         }
     }
 

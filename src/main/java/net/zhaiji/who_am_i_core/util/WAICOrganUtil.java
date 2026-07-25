@@ -479,46 +479,13 @@ public class WAICOrganUtil {
     }
 
     /**
-     * 猩红心脏泣血：每次受到治疗时，将治疗量 ×5 转化为血液存储
+     * 猩红心脏泣血：每次受到治疗时，将治疗量转化为血液存储。
      */
     public static void crimsonHeartHeal(ChestCavitySlotContext context, LivingHealEvent event) {
         LivingEntity entity = context.entity();
-        if (HumoursData.get(entity).isBloodFull()) return;
+        if (HumoursData.isBloodFull(entity)) return;
         float amount = event.getAmount();
         HumoursData.insertBlood(entity, amount * (3.0F + (float) (entity.getAttributeValue(InitAttribute.METABOLISM) * 0.2)), false);
-    }
-
-    /**
-     * 猩红心脏被动：器官变化时更新血液容量
-     * <p>
-     * 血液容量增量 = 猩红器官数量 × 100
-     * 使用先减旧值再加新值的增量方式
-     * </p>
-     *
-     * @param data     胸腔数据
-     * @param entity   实体
-     * @param oldStack 变化前的器官
-     * @param newStack 变化后的器官
-     */
-    public static void crimsonHeartOrganChange(ChestCavityData data, LivingEntity entity, ItemStack oldStack, ItemStack newStack) {
-        boolean oldIsCrimson = oldStack.is(WAICItemTagManager.CRIMSON);
-        boolean newIsCrimson = newStack.is(WAICItemTagManager.CRIMSON);
-        if (!oldIsCrimson && !newIsCrimson) return;
-        // 变化后猩红器官数量（数据已更新）
-        int crimsonCountAfter = data.getOrganCount(WAICItemTagManager.CRIMSON);
-        // 变化前猩红器官数量 = 变化后 - 新增 + 移除
-        int crimsonCountBefore = crimsonCountAfter - (newIsCrimson ? 1 : 0) + (oldIsCrimson ? 1 : 0);
-        boolean oldIsHeart = oldStack.is(WAICOrgans.CRIMSON_HEART.get());
-        boolean newIsHeart = newStack.is(WAICOrgans.CRIMSON_HEART.get());
-        int heartCountAfter = data.getOrganCount(WAICOrgans.CRIMSON_HEART.get());
-        int heartCountBefore = heartCountAfter - (newIsHeart ? 1 : 0) + (oldIsHeart ? 1 : 0);
-        // 先减旧容量，再加新容量
-        int bonusBefore = heartCountBefore > 0 ? crimsonCountBefore * 100 : 0;
-        int bonusAfter = heartCountAfter > 0 ? crimsonCountAfter * 100 : 0;
-        int delta = bonusAfter - bonusBefore;
-        if (delta != 0) {
-            HumoursData.addMaxBlood(entity, delta);
-        }
     }
 
     /**

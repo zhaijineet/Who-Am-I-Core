@@ -2,11 +2,14 @@ package net.zhaiji.who_am_i_core.client.overlay;
 
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.config.WhoAmIClientConfig;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 
 public class HumoursOverlay {
     public static final ResourceLocation HUMOURS_HUD = WhoAmICore.of("humours_hud");
@@ -22,6 +25,11 @@ public class HumoursOverlay {
     private static final int BAR_V_YELLOW_BILE = 56;
     private static final int BAR_V_BLACK_BILE = 84;
     private static final int BAR_SIZE = 28;
+    // 各体液对应纹理主色
+    private static final int COLOR_BLOOD = 0xC02734;
+    private static final int COLOR_YELLOW_BILE = 0xFAD609;
+    private static final int COLOR_BLACK_BILE = 0x39323D;
+    private static final int COLOR_PHLEGM = 0x5399EA;
 
     /**
      * 渲染四体液 HUD
@@ -31,12 +39,10 @@ public class HumoursOverlay {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null || minecraft.options.hideGui) return;
 
-        HumoursData data = HumoursData.get(minecraft.player);
+        Player player = minecraft.player;
+        HumoursData data = HumoursData.get(player);
 
-        // 如果设置为"永不显示"，直接跳过渲染
         if (WhoAmIClientConfig.hudVisibility == HudVisibility.NEVER) return;
-
-        // 如果设置为"有体液时显示"，检查玩家当前是否持有任何体液
         if (WhoAmIClientConfig.hudVisibility == HudVisibility.HAS_HUMOURS && data.isAllHumourEmpty()) return;
 
         int screenWidth = minecraft.getWindow().getGuiScaledWidth();
@@ -63,14 +69,39 @@ public class HumoursOverlay {
             }
         }
 
+        float blood = data.getBlood();
+        float yellowBile = data.getYellowBile();
+        float blackBile = data.getBlackBile();
+        float phlegm = data.getPhlegm();
+        float maxBlood = (float) player.getAttributeValue(WAICAttribute.MAX_BLOOD);
+        float maxYellowBile = (float) player.getAttributeValue(WAICAttribute.MAX_YELLOW_BILE);
+        float maxBlackBile = (float) player.getAttributeValue(WAICAttribute.MAX_BLACK_BILE);
+        float maxPhlegm = (float) player.getAttributeValue(WAICAttribute.MAX_PHLEGM);
+
         // 绘制底层背景菱形
         guiGraphics.blit(TEXTURE, baseX, baseY, BG_U, BG_V, BG_SIZE, BG_SIZE);
 
-        // 绘制四个进度条（按比例裁剪，位置：血液左/黄胆汁上/黑胆汁右/粘液下）
-        renderBar(guiGraphics, baseX + 3, baseY + 19, data.getBloodRatio(), BAR_U, BAR_V_BLOOD);
-        renderBar(guiGraphics, baseX + 19, baseY + 3, data.getYellowBileRatio(), BAR_U, BAR_V_YELLOW_BILE);
-        renderBar(guiGraphics, baseX + 35, baseY + 19, data.getBlackBileRatio(), BAR_U, BAR_V_BLACK_BILE);
-        renderBar(guiGraphics, baseX + 19, baseY + 35, data.getPhlegmRatio(), BAR_U, BAR_V_PHLEGM);
+        // 绘制四个进度条（位置：血液左/黄胆汁上/黑胆汁右/粘液下）
+        renderBar(guiGraphics, baseX + 3, baseY + 19, safeRatio(blood, maxBlood), BAR_V_BLOOD);
+        renderBar(guiGraphics, baseX + 19, baseY + 3, safeRatio(yellowBile, maxYellowBile), BAR_V_YELLOW_BILE);
+        renderBar(guiGraphics, baseX + 35, baseY + 19, safeRatio(blackBile, maxBlackBile), BAR_V_BLACK_BILE);
+        renderBar(guiGraphics, baseX + 19, baseY + 35, safeRatio(phlegm, maxPhlegm), BAR_V_PHLEGM);
+
+        // 绘制数值
+        renderValues(
+            guiGraphics,
+            minecraft.font,
+            baseX,
+            baseY,
+            blood,
+            maxBlood,
+            yellowBile,
+            maxYellowBile,
+            blackBile,
+            maxBlackBile,
+            phlegm,
+            maxPhlegm
+        );
     }
 
     /**
@@ -81,28 +112,207 @@ public class HumoursOverlay {
         if (ratio <= 0) return 0;
         if (ratio >= 1) return 1;
         if (ratio <= 0.5F) {
-            // h² = ratio * S²/2  →  h/S = sqrt(ratio / 2)
             return (float) Math.sqrt(ratio / 2);
         } else {
-            // S²/2 - (S-h)² = ratio * S²/2  →  (S-h)/S = sqrt((1-ratio) / 2)
             return 1 - (float) Math.sqrt((1 - ratio) / 2);
         }
+    }
+
+    private static float safeRatio(float current, float maximum) {
+        return maximum <= 0 ? 0 : current / maximum;
     }
 
     /**
      * 渲染单个进度条菱形，根据面积比例从底部向上裁剪显示
      */
-    private static void renderBar(GuiGraphics guiGraphics, int baseX, int baseY, float ratio, int u, int v) {
+    private static void renderBar(GuiGraphics guiGraphics, int barX, int barY, float ratio, int v) {
         if (ratio <= 0) return;
         float heightRatio = areaRatioToHeightRatio(ratio);
         int visibleHeight = (int) Math.ceil(heightRatio * BAR_SIZE);
 
-        int clipTop = baseY + (BAR_SIZE - visibleHeight);
-        int clipBottom = baseY + BAR_SIZE;
+        int clipTop = barY + (BAR_SIZE - visibleHeight);
+        int clipBottom = barY + BAR_SIZE;
 
-        guiGraphics.enableScissor(baseX, clipTop, baseX + BAR_SIZE, clipBottom);
-        guiGraphics.blit(TEXTURE, baseX, baseY, u, v, BAR_SIZE, BAR_SIZE);
+        guiGraphics.enableScissor(barX, clipTop, barX + BAR_SIZE, clipBottom);
+        guiGraphics.blit(TEXTURE, barX, barY, BAR_U, v, BAR_SIZE, BAR_SIZE);
         guiGraphics.disableScissor();
+    }
+
+    private static void renderValues(
+        GuiGraphics guiGraphics,
+        Font font,
+        int baseX,
+        int baseY,
+        float blood,
+        float maxBlood,
+        float yellowBile,
+        float maxYellowBile,
+        float blackBile,
+        float maxBlackBile,
+        float phlegm,
+        float maxPhlegm
+    ) {
+        if (WhoAmIClientConfig.hudValueVisibility == HudValueVisibility.NEVER) return;
+
+        boolean showBlood = shouldShow(blood);
+        boolean showYellowBile = shouldShow(yellowBile);
+        boolean showBlackBile = shouldShow(blackBile);
+        boolean showPhlegm = shouldShow(phlegm);
+
+        String bloodText = formatValue(blood, maxBlood);
+        String yellowBileText = formatValue(yellowBile, maxYellowBile);
+        String blackBileText = formatValue(blackBile, maxBlackBile);
+        String phlegmText = formatValue(phlegm, maxPhlegm);
+
+        switch (WhoAmIClientConfig.hudValuePosition) {
+            case CENTER -> {
+                if (WhoAmIClientConfig.hudValueFormat == HudValueFormat.CURRENT_MAX) {
+                    guiGraphics.pose().pushPose();
+                    guiGraphics.pose().scale(0.75F, 0.75F, 1F);
+                    float inv = 1F / 0.75F;
+                    drawCentered(guiGraphics, font, Math.round((baseX + 17) * inv), Math.round((baseY + 33) * inv), bloodText, showBlood);
+                    drawCentered(guiGraphics, font, Math.round((baseX + 33) * inv), Math.round((baseY + 17) * inv), yellowBileText, showYellowBile);
+                    drawCentered(guiGraphics, font, Math.round((baseX + 49) * inv), Math.round((baseY + 33) * inv), blackBileText, showBlackBile);
+                    drawCentered(guiGraphics, font, Math.round((baseX + 33) * inv), Math.round((baseY + 49) * inv), phlegmText, showPhlegm);
+                    guiGraphics.pose().popPose();
+                } else {
+                    drawCentered(guiGraphics, font, baseX + 17, baseY + 33, bloodText, showBlood);
+                    drawCentered(guiGraphics, font, baseX + 33, baseY + 17, yellowBileText, showYellowBile);
+                    drawCentered(guiGraphics, font, baseX + 49, baseY + 33, blackBileText, showBlackBile);
+                    drawCentered(guiGraphics, font, baseX + 33, baseY + 49, phlegmText, showPhlegm);
+                }
+            }
+            case OUTSIDE -> {
+                drawRight(guiGraphics, font, baseX - 2, baseY + 33, bloodText, showBlood);
+                drawCentered(guiGraphics, font, baseX + 33, baseY - 2 - font.lineHeight / 2, yellowBileText, showYellowBile);
+                drawLeft(guiGraphics, font, baseX + BG_SIZE + 2, baseY + 33, blackBileText, showBlackBile);
+                drawCentered(guiGraphics, font, baseX + 33, baseY + BG_SIZE + 2 + font.lineHeight / 2, phlegmText, showPhlegm);
+            }
+            case LIST_BELOW -> {
+                int drawY = baseY + BG_SIZE + 2;
+                int totalWidth = calcHorizontalTotalWidth(font, bloodText, showBlood, yellowBileText, showYellowBile,
+                    blackBileText, showBlackBile, phlegmText, showPhlegm);
+                int drawX = baseX + BG_SIZE / 2 - totalWidth / 2;
+                drawX = drawHorizontalValue(guiGraphics, font, drawX, drawY, bloodText, showBlood, COLOR_BLOOD, "B");
+                drawX = drawHorizontalValue(guiGraphics, font, drawX, drawY, yellowBileText, showYellowBile, COLOR_YELLOW_BILE, "Y");
+                drawX = drawHorizontalValue(guiGraphics, font, drawX, drawY, blackBileText, showBlackBile, COLOR_BLACK_BILE, "K");
+                drawHorizontalValue(guiGraphics, font, drawX, drawY, phlegmText, showPhlegm, COLOR_PHLEGM, "P");
+            }
+        }
+    }
+
+    private static boolean shouldShow(float current) {
+        return WhoAmIClientConfig.hudValueVisibility != HudValueVisibility.HAS_VALUE || current > 0;
+    }
+
+    private static String formatValue(float current, float maximum) {
+        return switch (WhoAmIClientConfig.hudValueFormat) {
+            case CURRENT_MAX -> Math.round(current) + "/" + Math.round(maximum);
+            case CURRENT_ONLY -> String.valueOf(Math.round(current));
+            case PERCENTAGE -> maximum <= 0 ? "0%" : Math.round(current / maximum * 100) + "%";
+        };
+    }
+
+    private static void drawCentered(
+        GuiGraphics guiGraphics,
+        Font font,
+        int centerX,
+        int centerY,
+        String text,
+        boolean show
+    ) {
+        if (!show) return;
+        int textWidth = font.width(text);
+        guiGraphics.drawString(font, text, centerX - textWidth / 2, centerY - font.lineHeight / 2, 0xFFFFFF);
+    }
+
+    private static void drawRight(
+        GuiGraphics guiGraphics,
+        Font font,
+        int rightEdgeX,
+        int centerY,
+        String text,
+        boolean show
+    ) {
+        if (!show) return;
+        int textWidth = font.width(text);
+        guiGraphics.drawString(font, text, rightEdgeX - textWidth, centerY - font.lineHeight / 2, 0xFFFFFF);
+    }
+
+    private static void drawLeft(
+        GuiGraphics guiGraphics,
+        Font font,
+        int leftX,
+        int centerY,
+        String text,
+        boolean show
+    ) {
+        if (!show) return;
+        guiGraphics.drawString(font, text, leftX, centerY - font.lineHeight / 2, 0xFFFFFF);
+    }
+
+    private static int drawHorizontalValue(
+        GuiGraphics guiGraphics,
+        Font font,
+        int x,
+        int y,
+        String text,
+        boolean show,
+        int color,
+        String label
+    ) {
+        if (!show) return x;
+        if (WhoAmIClientConfig.hudValueColorLabel) {
+            guiGraphics.drawString(font, text, x, y, color);
+            return x + font.width(text) + 4;
+        } else {
+            String full = label + ": " + text;
+            guiGraphics.drawString(font, full, x, y, 0xFFFFFF);
+            return x + font.width(full) + 4;
+        }
+    }
+
+    private static int calcHorizontalTotalWidth(
+        Font font,
+        String bloodText,
+        boolean showBlood,
+        String yellowBileText,
+        boolean showYellowBile,
+        String blackBileText,
+        boolean showBlackBile,
+        String phlegmText,
+        boolean showPhlegm
+    ) {
+        int total = 0;
+        int count = 0;
+        if (showBlood) {
+            total += entryWidth(font, bloodText, "B");
+            count++;
+        }
+        if (showYellowBile) {
+            total += entryWidth(font, yellowBileText, "Y");
+            count++;
+        }
+        if (showBlackBile) {
+            total += entryWidth(font, blackBileText, "K");
+            count++;
+        }
+        if (showPhlegm) {
+            total += entryWidth(font, phlegmText, "P");
+            count++;
+        }
+        if (count > 1) {
+            total += (count - 1) * 4;
+        }
+        return total;
+    }
+
+    private static int entryWidth(Font font, String text, String label) {
+        if (WhoAmIClientConfig.hudValueColorLabel) {
+            return font.width(text);
+        } else {
+            return font.width(label + ": " + text);
+        }
     }
 
     public enum HudAnchor {
@@ -115,6 +325,24 @@ public class HumoursOverlay {
     public enum HudVisibility {
         ALWAYS,
         HAS_HUMOURS,
+        NEVER
+    }
+
+    public enum HudValueFormat {
+        CURRENT_MAX,
+        CURRENT_ONLY,
+        PERCENTAGE
+    }
+
+    public enum HudValuePosition {
+        CENTER,
+        OUTSIDE,
+        LIST_BELOW
+    }
+
+    public enum HudValueVisibility {
+        ALWAYS,
+        HAS_VALUE,
         NEVER
     }
 }

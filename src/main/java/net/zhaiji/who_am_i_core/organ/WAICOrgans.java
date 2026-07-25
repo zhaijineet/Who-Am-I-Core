@@ -18,6 +18,7 @@ import net.zhaiji.who_am_i_core.item.FrankensteinItem;
 import net.zhaiji.who_am_i_core.item.PaletteItem;
 import net.zhaiji.who_am_i_core.item.SwordBoneItem;
 import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
@@ -298,6 +299,7 @@ public class WAICOrgans {
         "wooden_heart",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -309,6 +311,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2.5)
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2.5)
             .addValueAttribute(InitAttribute.ENDURANCE, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -318,6 +321,7 @@ public class WAICOrgans {
         "wooden_stomach",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -327,6 +331,7 @@ public class WAICOrgans {
         "wooden_intestine",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -336,6 +341,7 @@ public class WAICOrgans {
         "wooden_kidney",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -345,6 +351,7 @@ public class WAICOrgans {
         "wooden_spleen",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -354,6 +361,7 @@ public class WAICOrgans {
         "wooden_liver",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -363,6 +371,7 @@ public class WAICOrgans {
         "wooden_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -373,6 +382,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 2.5)
             .addValueAttribute(InitAttribute.SPEED, 2.5)
+            .addValueAttribute(InitAttribute.DEFENSE, 2)
             .addValueAttribute(InitAttribute.PHOTOSYNTHESIS, 1)
             .build()
     );
@@ -840,6 +850,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .addValueAttribute(AttributeRegistry.BLOOD_SPELL_POWER, 1)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .heal(WAICOrganUtil::crimsonHeartHeal)
             .tooltip(WAICTooltipManager.CRIMSON_HEART_TOOLTIP)
             .build()
@@ -852,6 +863,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.BREATH_RECOVERY, 2)
             .addValueAttribute(InitAttribute.BREATH_CAPACITY, 2)
             .addValueAttribute(InitAttribute.ENDURANCE, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .build()
     );
 
@@ -860,6 +872,7 @@ public class WAICOrgans {
         "crimson_stomach",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DIGESTION, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .build()
     );
 
@@ -868,6 +881,7 @@ public class WAICOrgans {
         "crimson_intestine",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NUTRITION, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .build()
     );
 
@@ -876,6 +890,7 @@ public class WAICOrgans {
         "crimson_kidney",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.FILTRATION, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .build()
     );
 
@@ -884,6 +899,7 @@ public class WAICOrgans {
         "crimson_spleen",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.METABOLISM, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .build()
     );
 
@@ -892,6 +908,7 @@ public class WAICOrgans {
         "crimson_liver",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DETOXIFICATION, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .build()
     );
 
@@ -900,6 +917,7 @@ public class WAICOrgans {
         "crimson_appendix",
         () -> Organ.builder()
             .addValueAttribute(Attributes.LUCK, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .skill(WAICPlayerSkillUtil::crimsonAppendix)
             .goalSkill(WAICGoalSkillUtil.crimsonAppendixGoalSkill())
             .cooldown(30 * 20)
@@ -912,6 +930,7 @@ public class WAICOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.STRENGTH, 2)
             .addValueAttribute(InitAttribute.SPEED, 2)
+            .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .build()
     );
 

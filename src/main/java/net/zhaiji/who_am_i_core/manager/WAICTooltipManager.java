@@ -10,6 +10,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.CustomData;
@@ -22,11 +23,13 @@ import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.chestcavitybeyond.util.TooltipUtil;
 import net.zhaiji.who_am_i_core.organ.MowziesMobOrgans;
 import net.zhaiji.who_am_i_core.organ.WAICOrgans;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.DragonBreathCastingTask;
 import net.zhaiji.who_am_i_core.util.AnvilCraftOrganUtil;
 import net.zhaiji.who_am_i_core.util.OrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
+import net.zhaiji.who_am_i_core.attachment.HumoursData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -214,7 +217,7 @@ public class WAICTooltipManager {
      */
     public static final OrganTooltipConsumer CRIMSON_HEART_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
-            1, List.of(CRIMSON_HEART_FORMULA_VALUE)
+            0, List.of(CRIMSON_HEART_FORMULA_VALUE)
         )))
         .build();
 
@@ -345,92 +348,121 @@ public class WAICTooltipManager {
         .build();
 
     /**
-     * 风暴脊柱吸收比例公式：(15 + 防御 × 0.5)%（自身防御属性 +1 需在 index==-1 时补加）
+     * 风暴脊柱产粘液倍率公式：斯库拉器官数 × 20%
      */
-    private static final FormulaValue STORM_SPINE_RATIO_FORMULA_VALUE = new FormulaValue(
-        context -> {
-            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
-            if (context.index() == -1) defense += 1;
-            float ratio = (float) (defense * 0.005 + 0.15);
-            return Component.literal(String.format("%.1f", ratio * 100) + "%");
-        },
-        context -> {
-            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
-            if (context.index() == -1) defense += 1;
-            return Component.empty()
-                .append(Component.literal("(15"))
-                .append(TooltipUtil.formulaOperator("+"))
-                .append(TooltipUtil.attributeName(InitAttribute.DEFENSE))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(defense)))
-                .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("0.5)%"));
-        }
-    );
-
-    /**
-     * 风暴脊柱吸收上限公式：5 + 防御 × 0.5（自身防御属性 +1 需在 index==-1 时补加）
-     */
-    private static final FormulaValue STORM_SPINE_MAX_FORMULA_VALUE = new FormulaValue(
-        context -> {
-            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
-            if (context.index() == -1) defense += 1;
-            return Component.literal(TooltipUtil.formatAttributeValue(defense * 0.5 + 5.0));
-        },
-        context -> {
-            double defense = context.entity().getAttributeValue(InitAttribute.DEFENSE);
-            if (context.index() == -1) defense += 1;
-            return Component.empty()
-                .append(Component.literal("5"))
-                .append(TooltipUtil.formulaOperator("+"))
-                .append(TooltipUtil.attributeName(InitAttribute.DEFENSE))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(defense)))
-                .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("0.5"));
-        }
-    );
-
-    /**
-     * 风暴脊柱 — 吸收比例和上限随防御缩放
-     */
-    public static final OrganTooltipConsumer STORM_SPINE_TOOLTIP = OrganTooltip.builder()
-        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
-            // simple 单段含 2 个 %s 在 line 0
-            Map.of(0, List.of(STORM_SPINE_RATIO_FORMULA_VALUE, STORM_SPINE_MAX_FORMULA_VALUE)),
-            // detailed 含动态 %s 在 line 1
-            Map.of(1, List.of(STORM_SPINE_RATIO_FORMULA_VALUE, STORM_SPINE_MAX_FORMULA_VALUE))
-        ))
-        .build();
-
-    /**
-     * 涛浪提灯水浪持续公式：60 + 斯库拉器官数 × 20
-     */
-    private static final FormulaValue TIDAL_LANTERN_FORMULA_VALUE = new FormulaValue(
+    private static final FormulaValue STORM_SPINE_FORMULA_VALUE = new FormulaValue(
         context -> {
             int scyllaCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.SCYLLA);
-            return Component.literal(String.valueOf(60 + scyllaCount * 20));
+            return Component.literal(scyllaCount * 20 + "%");
         },
         context -> {
             int scyllaCount = ChestCavityUtil.getOrganCountWithSelf(context, WAICItemTagManager.SCYLLA);
             return Component.empty()
-                .append(Component.literal("60"))
-                .append(TooltipUtil.formulaOperator("+"))
                 .append(TooltipUtil.tagOrganCountName(WAICItemTagManager.SCYLLA))
                 .append(Component.literal(String.valueOf(scyllaCount)))
                 .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("20"));
+                .append(Component.literal("20%"));
         }
     );
 
     /**
-     * 涛浪提灯 — 水浪持续随斯库拉器官数量缩放
+     * 风暴脊柱 — 攻击/被攻击产出粘液，倍率随斯库拉器官数缩放
+     */
+    public static final OrganTooltipConsumer STORM_SPINE_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(STORM_SPINE_FORMULA_VALUE)
+        )))
+        .build();
+
+    /**
+     * 风暴肋骨防御加成公式：粘液上限 × 0.01
+     */
+    private static final FormulaValue STORM_RIB_DEFENSE_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
+            return Component.literal(TooltipUtil.formatAttributeValue(maxPhlegm * 0.01));
+        },
+        context -> {
+            double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
+            return Component.empty()
+                .append(TooltipUtil.attributeName(WAICAttribute.MAX_PHLEGM))
+                .append(Component.literal(TooltipUtil.formatAttributeValue(maxPhlegm)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("0.01"));
+        }
+    );
+
+    /**
+     * 风暴肋骨游泳速度加成公式：粘液上限 × 0.1%
+     */
+    private static final FormulaValue STORM_RIB_SWIM_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
+            return Component.literal(String.format("%.0f%%", maxPhlegm * 0.1));
+        },
+        context -> {
+            double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
+            return Component.empty()
+                .append(TooltipUtil.attributeName(WAICAttribute.MAX_PHLEGM))
+                .append(Component.literal(TooltipUtil.formatAttributeValue(maxPhlegm)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("0.1%"));
+        }
+    );
+
+    /**
+     * 风暴肋骨 — 防御和游泳速度随粘液上限缩放
+     */
+    public static final OrganTooltipConsumer STORM_RIB_TOOLTIP = OrganTooltip.builder()
+        .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(STORM_RIB_DEFENSE_FORMULA_VALUE),
+            1, List.of(STORM_RIB_SWIM_FORMULA_VALUE)
+        )))
+        .build();
+
+    /**
+     * 涛浪提灯水浪数量公式：floor(当前粘液 ÷ 100)
+     */
+    private static final FormulaValue TIDAL_LANTERN_WAVE_COUNT_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            float currentPhlegm = HumoursData.get(context.entity()).getPhlegm();
+            return Component.literal(String.valueOf((int) (currentPhlegm / 100)));
+        },
+        context -> {
+            float currentPhlegm = HumoursData.get(context.entity()).getPhlegm();
+            return Component.empty()
+                .append(Component.translatable("formula.who_am_i_core.current_phlegm"))
+                .append(Component.literal(TooltipUtil.formatAttributeValue(currentPhlegm)))
+                .append(TooltipUtil.formulaOperator("÷"))
+                .append(Component.literal("100"));
+        }
+    );
+
+    /**
+     * 涛浪提灯每道水浪伤害公式：当前粘液 × 0.1
+     */
+    private static final FormulaValue TIDAL_LANTERN_DAMAGE_FORMULA_VALUE = new FormulaValue(
+        context -> {
+            float currentPhlegm = HumoursData.get(context.entity()).getPhlegm();
+            return Component.literal(TooltipUtil.formatAttributeValue(currentPhlegm * 0.1F));
+        },
+        context -> {
+            float currentPhlegm = HumoursData.get(context.entity()).getPhlegm();
+            return Component.empty()
+                .append(Component.translatable("formula.who_am_i_core.current_phlegm"))
+                .append(Component.literal(TooltipUtil.formatAttributeValue(currentPhlegm)))
+                .append(TooltipUtil.formulaOperator("×"))
+                .append(Component.literal("0.1"));
+        }
+    );
+
+    /**
+     * 涛浪提灯 — 水浪数量和每道伤害随当前粘液值动态变化
      */
     public static final OrganTooltipConsumer TIDAL_LANTERN_TOOLTIP = OrganTooltip.builder()
-        .dynamicPassiveEffect(slotContext -> DynamicValues.split(
-            // simple 单段含 1 个 %s 在 line 0
-            Map.of(0, List.of(TIDAL_LANTERN_FORMULA_VALUE)),
-            // detailed 含动态 %s 在 line 1
-            Map.of(1, List.of(TIDAL_LANTERN_FORMULA_VALUE))
-        ))
+        .dynamicActiveSkill(slotContext -> DynamicValues.same(Map.of(
+            0, List.of(TIDAL_LANTERN_WAVE_COUNT_FORMULA_VALUE, TIDAL_LANTERN_DAMAGE_FORMULA_VALUE)
+        )))
         .build();
 
     /**
@@ -551,7 +583,7 @@ public class WAICTooltipManager {
             return Component.literal(TooltipUtil.formatAttributeValue(context.entity().getMaxHealth() * healPercent));
         },
         context -> Component.empty()
-            .append(Component.translatable("formula.who_am_i_core.max_health"))
+            .append(TooltipUtil.attributeName(Attributes.MAX_HEALTH))
             .append(Component.literal(TooltipUtil.formatAttributeValue(context.entity().getMaxHealth())))
             .append(TooltipUtil.formulaOperator("×"))
             .append(Component.literal("(0.05"))
@@ -902,7 +934,7 @@ public class WAICTooltipManager {
             .append(TooltipUtil.formulaOperator("+"))
             .append(WAICTooltipUtil.globalFireOrganCountFormula(context))
             .append(TooltipUtil.formulaOperator("×"))
-            .append(Component.translatable("formula.who_am_i_core.max_health"))
+            .append(TooltipUtil.attributeName(Attributes.MAX_HEALTH))
             .append(Component.literal(TooltipUtil.formatAttributeValue(context.entity().getMaxHealth())))
             .append(TooltipUtil.formulaOperator("×"))
             .append(Component.literal("5%"))
@@ -1392,7 +1424,7 @@ public class WAICTooltipManager {
 
     public static final OrganTooltipConsumer MONSTROSITY_CORE_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
-            1, List.of(MONSTROSITY_CORE_FORMULA_VALUE)
+            0, List.of(MONSTROSITY_CORE_FORMULA_VALUE)
         )))
         .build();
 

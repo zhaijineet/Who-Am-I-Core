@@ -6,6 +6,7 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 import net.zhaiji.chestcavitybeyond.api.capability.Organ;
 import net.zhaiji.chestcavitybeyond.register.InitAttribute;
 import net.zhaiji.who_am_i_core.manager.WAICTooltipManager;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.register.WAICItem;
 import net.zhaiji.who_am_i_core.util.CataclysmOrganUtil;
 import net.zhaiji.who_am_i_core.util.WAICGoalSkillUtil;
@@ -156,18 +157,21 @@ public class CataclysmOrgans {
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.HEALTH, 5)
             .addValueAttribute(InitAttribute.WATER_BREATH, 4)
-            .baseMultipliedAttribute(NeoForgeMod.SWIM_SPEED, 0.5)
-            .attack(CataclysmOrganUtil::tidalLanternAttack)
+            .addValueAttribute(WAICAttribute.MAX_PHLEGM, 100)
+            .skill(WAICPlayerSkillUtil::tidalLantern)
+            .goalSkill(WAICGoalSkillUtil.tidalLanternGoalSkill())
+            .cooldown(200)
             .tooltip(WAICTooltipManager.TIDAL_LANTERN_TOOLTIP)
             .build()
     );
 
-    // 风暴脊柱 - 减伤效果在全局事件处理
+    // 风暴脊柱
     public static final Supplier<Item> STORM_SPINE = WAICItem.ITEM.register(
         "storm_spine",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.NERVES, 4)
             .addValueAttribute(InitAttribute.DEFENSE, 2)
+            .addValueAttribute(WAICAttribute.MAX_PHLEGM, 100)
             .tooltip(WAICTooltipManager.STORM_SPINE_TOOLTIP)
             .build()
     );
@@ -177,8 +181,10 @@ public class CataclysmOrgans {
         "storm_rib",
         () -> Organ.builder()
             .addValueAttribute(InitAttribute.DEFENSE, 4)
-            .added(CataclysmOrganUtil::stormRibAdded)
-            .removed(CataclysmOrganUtil::stormRibRemoved)
+            .addValueAttribute(WAICAttribute.MAX_PHLEGM, 100)
+            .modifier(CataclysmOrganUtil::stormRibModifier)
+            .refreshDynamicAttribute()
+            .tooltip(WAICTooltipManager.STORM_RIB_TOOLTIP)
             .build()
     );
 
@@ -225,8 +231,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 4)
             .addValueAttribute(Attributes.ARMOR_TOUGHNESS, 1)
             .addValueAttribute(InitAttribute.FIRE_RESISTANCE, 5)
-            .added(CataclysmOrganUtil::monstrosityCoreAdded)
-            .removed(CataclysmOrganUtil::monstrosityCoreRemoved)
+            .addValueAttribute(WAICAttribute.MAX_YELLOW_BILE, 100)
             .tick(CataclysmOrganUtil::monstrosityCoreTick)
             .tooltip(WAICTooltipManager.MONSTROSITY_CORE_TOOLTIP)
             .build()

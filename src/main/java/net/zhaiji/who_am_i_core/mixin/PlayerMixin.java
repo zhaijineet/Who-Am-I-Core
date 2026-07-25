@@ -60,7 +60,7 @@ public abstract class PlayerMixin extends LivingEntity {
     public void whoAmICore$isHurt(CallbackInfoReturnable<Boolean> cir) {
         Player player = whoAmICore$self();
         // 检查是否拥有猩红心脏且血液未满
-        if (ChestCavityUtil.getData(player).hasOrgan(WAICOrgans.CRIMSON_HEART.get()) && !HumoursData.get(player).isBloodFull()) {
+        if (ChestCavityUtil.getData(player).hasOrgan(WAICOrgans.CRIMSON_HEART.get()) && !HumoursData.isBloodFull(player)) {
             cir.setReturnValue(true);
         }
     }

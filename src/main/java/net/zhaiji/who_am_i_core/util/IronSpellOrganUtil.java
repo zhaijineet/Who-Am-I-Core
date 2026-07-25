@@ -3,7 +3,6 @@ package net.zhaiji.who_am_i_core.util;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.attachment.ChestCavityData;
 import net.zhaiji.chestcavitybeyond.util.ChestCavityUtil;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
@@ -52,21 +51,5 @@ public class IronSpellOrganUtil {
             HumoursData.extractBlackBile(entity, toAbsorb, false);
         }
         return toAbsorb;
-    }
-
-    /**
-     * 尸王肋骨：器官安装时增加50点黑胆汁上限
-     */
-    public static void deadKingRibAdded(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        HumoursData.addMaxBlackBile(entity, 50);
-    }
-
-    /**
-     * 尸王肋骨：器官移除时减少50点黑胆汁上限
-     */
-    public static void deadKingRibRemoved(ChestCavitySlotContext context) {
-        LivingEntity entity = context.entity();
-        HumoursData.addMaxBlackBile(entity, -50);
     }
 }

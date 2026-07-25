@@ -131,6 +131,13 @@ public class WAICGoalSkillUtil {
         ).build();
     }
 
+    // 涛浪提灯 — 涛浪倾泻
+    public static GoalSkillMetadata tidalLanternGoalSkill() {
+        return GoalSkillMetadata.aoeAttack(
+            (goalContext, slotContext) -> CataclysmOrganUtil.tidalLantern(slotContext)
+        ).canUse((mob, skillEntry) -> HumoursData.get(mob).getPhlegm() >= 100).build();
+    }
+
     // 墨水阑尾 — 消耗墨水回复法力
     public static GoalSkillMetadata inkAppendixGoalSkill() {
         return GoalSkillMetadata.recovery(

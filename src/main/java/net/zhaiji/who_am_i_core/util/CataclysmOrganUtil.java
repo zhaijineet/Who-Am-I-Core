@@ -30,6 +30,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.zhaiji.chestcavitybeyond.api.ChestCavitySlotContext;
 import net.zhaiji.chestcavitybeyond.api.function.OrganModifierConsumer;
@@ -43,6 +44,7 @@ import net.zhaiji.who_am_i_core.api.UseCondition;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.manager.WAICItemTagManager;
 import net.zhaiji.who_am_i_core.organ.CataclysmOrgans;
+import net.zhaiji.who_am_i_core.register.WAICAttribute;
 import net.zhaiji.who_am_i_core.task.DeathLensTask;
 import net.zhaiji.who_am_i_core.task.MechanicalStarTask;
 
@@ -108,91 +110,68 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 涛浪提灯攻击回调
-     * 1. 消耗所有当前粘液，增加等额伤害
-     * 2. 消耗的粘液 >= 30 时，额外召唤水浪
+     * 涛浪提灯主动技能：涛浪倾泻
+     * 消耗所有粘液（最低100），向前方扇形召唤水浪
+     * 水浪数量 = floor(消耗粘液 ÷ 100)，每道伤害 = 消耗粘液 × 0.1
      */
-    public static void tidalLanternAttack(
-        ChestCavitySlotContext context,
-        LivingEntity target,
-        DamageSource source,
-        DamageContainer damageContainer
-    ) {
+    public static boolean tidalLantern(ChestCavitySlotContext context) {
         LivingEntity entity = context.entity();
-        // 排除自伤
-        if (OrganUtil.isSelfDamage(target, source)) return;
+        float currentPhlegm = HumoursData.get(entity).getPhlegm();
+        if (currentPhlegm < 100) return false;
 
-        float extracted = HumoursData.extractPhlegm(entity, HumoursData.get(entity).getPhlegm(), false);
-        if (extracted <= 0) return;
-
-        // 伤害修改
-        float currentDamage = damageContainer.getNewDamage();
-        damageContainer.setNewDamage(currentDamage + extracted);
+        float consumed = HumoursData.extractPhlegm(entity, currentPhlegm, false);
+        if (consumed < 100) return false;
 
         Level level = entity.level();
+        if (level.isClientSide()) return true;
 
-        // 水浪召唤
-        if (!level.isClientSide()) {
-            if (extracted >= 30) {
-                float yRot = entity.getYRot();
-                double spawnX = entity.getX();
-                double spawnY = entity.getY();
-                double spawnZ = entity.getZ();
+        int waveCount = (int) (consumed / 100);
+        float waveDamage = consumed * 0.1F;
 
-                int waveDuration = 60 + context.data().getOrganCount(WAICItemTagManager.SCYLLA) * 20;
+        float yRot = entity.getYRot();
+        double spawnX = entity.getX();
+        double spawnY = entity.getY();
+        double spawnZ = entity.getZ();
 
-                // 召唤3波水浪，以攻击者朝向为中心，扇形分布
-                float[] angles = {
-                    -30.0F,
-                    0.0F,
-                    30.0F
-                };
-                for (float angleOffset : angles) {
-                    Wave_Entity wave = new Wave_Entity(level, entity, waveDuration, extracted);
-                    float waveYRot = yRot + angleOffset;
-                    wave.setPos(spawnX, spawnY, spawnZ);
-                    wave.setYRot(waveYRot);
-                    wave.setState(1);
-                    level.addFreshEntity(wave);
-                }
-            }
+        // 扇形分布，30°间隔，以朝向为中心
+        float totalSpread = (waveCount - 1) * 30.0F;
+        float startAngle = -totalSpread / 2.0F;
+
+        for (int i = 0; i < waveCount; i++) {
+            float angleOffset = startAngle + i * 30.0F;
+            Wave_Entity wave = new Wave_Entity(level, entity, 80, waveDamage);
+            float waveYRot = yRot + angleOffset;
+            wave.setPos(spawnX, spawnY, spawnZ);
+            wave.setYRot(waveYRot);
+            wave.setState(1);
+            level.addFreshEntity(wave);
+        }
+
+        return true;
+    }
+
+    /**
+     * 风暴脊柱粘液产出（在事件中调用）
+     * 攻击或被攻击时产出 伤害 × 20% × 斯库拉器官数 的粘液
+     */
+    public static void stormSpinePhlegmGeneration(LivingEntity entity, float damage) {
+        ChestCavityData data = ChestCavityUtil.getData(entity);
+        if (!data.hasOrgan(CataclysmOrgans.STORM_SPINE.get())) return;
+        int scyllaCount = data.getOrganCount(WAICItemTagManager.SCYLLA);
+        float phlegmAmount = damage * 0.2F * scyllaCount;
+        if (phlegmAmount > 0) {
+            HumoursData.insertPhlegm(entity, phlegmAmount, false);
         }
     }
 
     /**
-     * 风暴脊柱减伤技能（唯一效果，通过 CommonEventHandler 全局事件调用）
-     * 吸收伤害（比例与上限随防御属性缩放）转化为粘液，粘液满时失效
-     *
-     * @return 吸收的伤害值，应加入 block
+     * 风暴肋骨属性修饰符 — 根据粘液上限提供防御和游泳速度加成
+     * 防御 = 粘液上限 × 0.01，游泳速度 = 粘液上限 × 0.001（乘算基础）
      */
-    public static float stormSpineHurt(LivingEntity entity, float damage) {
-        ChestCavityData data = ChestCavityUtil.getData(entity);
-        if (!data.hasOrgan(CataclysmOrgans.STORM_SPINE.get())) return 0;
-
-        // 粘液达到上限时失效
-        if (HumoursData.get(entity).isPhlegmFull()) return 0;
-
-        float absorbAmount = Math.min(
-            damage * (0.15F + (float) (entity.getAttributeValue(InitAttribute.DEFENSE) * 0.005)),
-            5.0F + (float) (entity.getAttributeValue(InitAttribute.DEFENSE) * 0.5)
-        );
-
-        // 转化为粘液（静态方法自动同步）
-        return HumoursData.insertPhlegm(entity, absorbAmount, false);
-    }
-
-    /**
-     * 风暴肋骨安装回调：增加10点粘液上限
-     */
-    public static void stormRibAdded(ChestCavitySlotContext context) {
-        HumoursData.addMaxPhlegm(context.entity(), 10);
-    }
-
-    /**
-     * 风暴肋骨移除回调：减少10点粘液上限
-     */
-    public static void stormRibRemoved(ChestCavitySlotContext context) {
-        HumoursData.addMaxPhlegm(context.entity(), -10);
+    public static void stormRibModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
+        modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), maxPhlegm * 0.01));
+        modifiers.put(NeoForgeMod.SWIM_SPEED, OrganAttributeUtil.createMultipliedBaseModifier(context.id(), maxPhlegm * 0.001));
     }
 
     // ==================== 焰魔器官 ====================
@@ -242,20 +221,6 @@ public class CataclysmOrganUtil {
     }
 
     // ==================== 下界合金巨兽器官 ====================
-
-    /**
-     * 巨兽炉心安装回调：增加100点黄胆汁上限
-     */
-    public static void monstrosityCoreAdded(ChestCavitySlotContext context) {
-        HumoursData.addMaxYellowBile(context.entity(), 100);
-    }
-
-    /**
-     * 巨兽炉心移除回调：减少100点黄胆汁上限
-     */
-    public static void monstrosityCoreRemoved(ChestCavitySlotContext context) {
-        HumoursData.addMaxYellowBile(context.entity(), -100);
-    }
 
     /**
      * 巨兽炉心tick回调：每20 tick将炽焰器官数量转化为黄胆汁
