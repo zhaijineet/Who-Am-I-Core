@@ -1,5 +1,17 @@
 # 更新日志 (Changelog)
 
+### 1.2.4
+
+- 风暴肋骨移除防御动态加成，仅保留游泳速度随粘液上限缩放
+- 缩短封印石板、死亡透镜、虚空晶脊、沙釉心脏、血肉偶像、猩红阑尾、传导链节的主动技能冷却
+- 四体液HUD下方列表布局改为以图标中心分列左右两组
+
+---
+
+- Storm Rib no longer grants dynamic Defense, only Swim Speed scaling with max phlegm remains
+- Shortened active skill cooldowns for Sealing Stone Slab, Death Lens, Void Crystal Spine, Sand Glaze Heart, Flesh Idol, Crimson Appendix and Conductive Spine
+- Humours HUD list-below layout now splits into left and right groups around the icon center
+
 ### 1.2.3
 
 - 四体液最大值迁移至属性系统（MAX_BLOOD / MAX_YELLOW_BILE / MAX_BLACK_BILE / MAX_PHLEGM），各器官通过属性加值提供上限

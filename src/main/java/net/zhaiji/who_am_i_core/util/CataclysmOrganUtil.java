@@ -165,12 +165,11 @@ public class CataclysmOrganUtil {
     }
 
     /**
-     * 风暴肋骨属性修饰符 — 根据粘液上限提供防御和游泳速度加成
-     * 防御 = 粘液上限 × 0.01，游泳速度 = 粘液上限 × 0.001（乘算基础）
+     * 风暴肋骨属性修饰符 — 根据粘液上限提供游泳速度加成
+     * 游泳速度 = 粘液上限 × 0.001（乘算基础）
      */
     public static void stormRibModifier(ChestCavitySlotContext context, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
-        modifiers.put(InitAttribute.DEFENSE, OrganAttributeUtil.createAddValueModifier(context.id(), maxPhlegm * 0.01));
         modifiers.put(NeoForgeMod.SWIM_SPEED, OrganAttributeUtil.createMultipliedBaseModifier(context.id(), maxPhlegm * 0.001));
     }
 

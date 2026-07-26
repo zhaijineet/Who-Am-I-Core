@@ -2377,7 +2377,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.STORM_RIB, "Storm Rib");
         addOrganPassiveEffect(
             CataclysmOrgans.STORM_RIB,
-            "Grants %s Defense based on max phlegm",
             "Grants %s Swim Speed based on max phlegm"
         );
 
@@ -2550,7 +2549,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addItem(CataclysmOrgans.STORM_RIB, "风暴肋骨");
         addOrganPassiveEffect(
             CataclysmOrgans.STORM_RIB,
-            "根据粘液上限提供%s点防御",
             "根据粘液上限提供%s的游泳速度"
         );
 

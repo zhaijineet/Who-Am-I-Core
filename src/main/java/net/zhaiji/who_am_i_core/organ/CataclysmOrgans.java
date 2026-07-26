@@ -146,7 +146,7 @@ public class CataclysmOrgans {
             .addValueAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0)
             .skill(WAICPlayerSkillUtil::sealingStoneSlab)
             .goalSkill(WAICGoalSkillUtil.sealingStoneSlabGoalSkill())
-            .cooldown(300)
+            .cooldown(200)
             .tooltip(WAICTooltipManager.SEALING_STONE_SLAB_TOOLTIP)
             .build()
     );
@@ -325,7 +325,7 @@ public class CataclysmOrgans {
             .addValueAttribute(Attributes.ENTITY_INTERACTION_RANGE, 3)
             .skill(WAICPlayerSkillUtil::deathLens)
             .goalSkill(WAICGoalSkillUtil.deathLensGoalSkill())
-            .cooldown(300)
+            .cooldown(200)
             .tooltip(WAICTooltipManager.DEATH_LENS_TOOLTIP)
             .build()
     );
@@ -347,7 +347,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 3)
             .skill(WAICPlayerSkillUtil::voidCrystalSpine)
             .goalSkill(WAICGoalSkillUtil.voidCrystalSpineGoalSkill())
-            .cooldown(300)
+            .cooldown(200)
             .tooltip(WAICTooltipManager.VOID_CRYSTAL_SPINE_TOOLTIP)
             .build()
     );
@@ -360,7 +360,7 @@ public class CataclysmOrgans {
             .addValueAttribute(InitAttribute.NERVES, 2)
             .skill(WAICPlayerSkillUtil::sandGlazeHeart)
             .goalSkill(WAICGoalSkillUtil.sandGlazeHeartGoalSkill())
-            .cooldown(400)
+            .cooldown(300)
             .attack(CataclysmOrganUtil::sandGlazeHeartAttack)
             .tooltip(WAICTooltipManager.SAND_GLAZE_HEART_TOOLTIP)
             .build()

@@ -375,24 +375,6 @@ public class WAICTooltipManager {
         .build();
 
     /**
-     * 风暴肋骨防御加成公式：粘液上限 × 0.01
-     */
-    private static final FormulaValue STORM_RIB_DEFENSE_FORMULA_VALUE = new FormulaValue(
-        context -> {
-            double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
-            return Component.literal(TooltipUtil.formatAttributeValue(maxPhlegm * 0.01));
-        },
-        context -> {
-            double maxPhlegm = context.entity().getAttributeValue(WAICAttribute.MAX_PHLEGM);
-            return Component.empty()
-                .append(TooltipUtil.attributeName(WAICAttribute.MAX_PHLEGM))
-                .append(Component.literal(TooltipUtil.formatAttributeValue(maxPhlegm)))
-                .append(TooltipUtil.formulaOperator("×"))
-                .append(Component.literal("0.01"));
-        }
-    );
-
-    /**
      * 风暴肋骨游泳速度加成公式：粘液上限 × 0.1%
      */
     private static final FormulaValue STORM_RIB_SWIM_FORMULA_VALUE = new FormulaValue(
@@ -411,12 +393,11 @@ public class WAICTooltipManager {
     );
 
     /**
-     * 风暴肋骨 — 防御和游泳速度随粘液上限缩放
+     * 风暴肋骨 — 游泳速度随粘液上限缩放
      */
     public static final OrganTooltipConsumer STORM_RIB_TOOLTIP = OrganTooltip.builder()
         .dynamicPassiveEffect(slotContext -> DynamicValues.same(Map.of(
-            0, List.of(STORM_RIB_DEFENSE_FORMULA_VALUE),
-            1, List.of(STORM_RIB_SWIM_FORMULA_VALUE)
+            0, List.of(STORM_RIB_SWIM_FORMULA_VALUE)
         )))
         .build();
 

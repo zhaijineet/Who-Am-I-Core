@@ -190,9 +190,19 @@ public class HumoursOverlay {
             }
             case LIST_BELOW -> {
                 int drawY = baseY + BG_SIZE + 2;
-                int totalWidth = calcHorizontalTotalWidth(font, bloodText, showBlood, yellowBileText, showYellowBile,
-                    blackBileText, showBlackBile, phlegmText, showPhlegm);
-                int drawX = baseX + BG_SIZE / 2 - totalWidth / 2;
+                int centerX = baseX + BG_SIZE / 2;
+                int leftGroupWidth = calcGroupWidth(font, bloodText, showBlood, "B", yellowBileText, showYellowBile, "Y");
+                int rightGroupWidth = calcGroupWidth(font, blackBileText, showBlackBile, "K", phlegmText, showPhlegm, "P");
+                boolean hasLeft = showBlood || showYellowBile;
+                boolean hasRight = showBlackBile || showPhlegm;
+
+                int drawX;
+                if (hasLeft && hasRight) {
+                    drawX = centerX - leftGroupWidth - 2;
+                } else {
+                    drawX = centerX - (leftGroupWidth + rightGroupWidth) / 2;
+                }
+
                 drawX = drawHorizontalValue(guiGraphics, font, drawX, drawY, bloodText, showBlood, COLOR_BLOOD, "B");
                 drawX = drawHorizontalValue(guiGraphics, font, drawX, drawY, yellowBileText, showYellowBile, COLOR_YELLOW_BILE, "Y");
                 drawX = drawHorizontalValue(guiGraphics, font, drawX, drawY, blackBileText, showBlackBile, COLOR_BLACK_BILE, "K");
@@ -272,39 +282,29 @@ public class HumoursOverlay {
         }
     }
 
-    private static int calcHorizontalTotalWidth(
+    private static int calcGroupWidth(
         Font font,
-        String bloodText,
-        boolean showBlood,
-        String yellowBileText,
-        boolean showYellowBile,
-        String blackBileText,
-        boolean showBlackBile,
-        String phlegmText,
-        boolean showPhlegm
+        String text1,
+        boolean show1,
+        String label1,
+        String text2,
+        boolean show2,
+        String label2
     ) {
-        int total = 0;
+        int width = 0;
         int count = 0;
-        if (showBlood) {
-            total += entryWidth(font, bloodText, "B");
+        if (show1) {
+            width += entryWidth(font, text1, label1);
             count++;
         }
-        if (showYellowBile) {
-            total += entryWidth(font, yellowBileText, "Y");
+        if (show2) {
+            width += entryWidth(font, text2, label2);
             count++;
         }
-        if (showBlackBile) {
-            total += entryWidth(font, blackBileText, "K");
-            count++;
+        if (count == 2) {
+            width += 4;
         }
-        if (showPhlegm) {
-            total += entryWidth(font, phlegmText, "P");
-            count++;
-        }
-        if (count > 1) {
-            total += (count - 1) * 4;
-        }
-        return total;
+        return width;
     }
 
     private static int entryWidth(Font font, String text, String label) {

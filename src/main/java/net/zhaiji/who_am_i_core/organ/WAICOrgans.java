@@ -840,7 +840,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.HEALTH, 2)
             .skill(WAICPlayerSkillUtil::fleshIdol)
             .goalSkill(WAICGoalSkillUtil.fleshIdolGoalSkill())
-            .cooldown(20 * 20)
+            .cooldown(5 * 20)
             .build()
     );
 
@@ -920,7 +920,7 @@ public class WAICOrgans {
             .addValueAttribute(WAICAttribute.MAX_BLOOD, 50)
             .skill(WAICPlayerSkillUtil::crimsonAppendix)
             .goalSkill(WAICGoalSkillUtil.crimsonAppendixGoalSkill())
-            .cooldown(30 * 20)
+            .cooldown(5 * 20)
             .build()
     );
 
@@ -988,7 +988,7 @@ public class WAICOrgans {
             .addValueAttribute(InitAttribute.DEFENSE, 1)
             .skill(WAICPlayerSkillUtil::conductiveSpine)
             .goalSkill(WAICGoalSkillUtil.conductiveSpineGoalSkill())
-            .cooldown(20 * 20)
+            .cooldown(15 * 20)
             .build()
     );
 
