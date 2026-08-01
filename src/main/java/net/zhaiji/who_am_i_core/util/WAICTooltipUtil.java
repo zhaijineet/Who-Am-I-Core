@@ -25,12 +25,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 public class WAICTooltipUtil {
     // 电磁炮弹药列表
     public static final String RAILGUN_AMMO_TRANSLATION = "organ." + WhoAmICore.MOD_ID + ".railgun.ammo";
+
+    /**
+     * 配置枚举值的翻译组件，键格式为 modid.configuration.配置键.枚举小写名
+     */
+    public static Component configEnumTranslation(String configKey, Enum<?> value) {
+        return Component.translatable(WhoAmICore.MOD_ID + ".configuration." + configKey + "." + value.name().toLowerCase(Locale.ROOT));
+    }
 
     /**
      * 全部染料物品有序列表，用于 detailed 模式遍历显示

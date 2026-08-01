@@ -274,17 +274,34 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addConfig("hudAnchor", "Humours HUD Anchor",
             "Screen corner where the Humours HUD is anchored");
         addConfig("hudVisibility", "Humours HUD Visibility",
-            "When to display the Humours HUD:\nALWAYS = always show\nHAS_HUMOURS = only show when player has any humour\nNEVER = never show");
+            "When to display the Humours HUD:\nAlways = always show\nHas Humours = only show when player has any humour\nNever = never show");
         addConfig("hudValueFormat", "Humours Value Format",
-            "Value display format:\nCURRENT_MAX = 50/100\nCURRENT_ONLY = 50\nPERCENTAGE = 50%");
+            "Value display format:\nCurrent / Max = 50/100\nCurrent Only = 50\nPercentage = 50%");
         addConfig("hudValuePosition", "Humours Value Position",
-            "Where to display humour values:\nCENTER = on top of each bar\nOUTSIDE = around HUD edges\nLIST_BELOW = listed below HUD");
+            "Where to display humour values:\nCenter = on top of each bar\nOutside = around HUD edges\nList Below = listed below HUD");
         addConfig("hudValueVisibility", "Humours Value Visibility",
-            "When to display humour values:\nALWAYS = always show\nHAS_VALUE = only show when that humour > 0\nNEVER = never show values");
+            "When to display humour values:\nAlways = always show\nHas Value = only show when that humour > 0\nNever = never show values");
         addConfig("hudValueColorLabel", "Humours Value Color Label",
-            "Use humour colors instead of letter labels in LIST_BELOW mode.\ntrue = colored values\nfalse = letter prefix (B:/Y:/K:/P:)");
+            "Use humour colors instead of letter labels in List Below mode.\ntrue = colored values\nfalse = letter prefix (B:/Y:/K:/P:)");
         addConfig("existenceDisplacerParticleCount", "Existence Displacer Particle Count",
             "Enchantment particles spawned per use tick by the Existence Displacer (0 to disable)");
+
+        addConfig("hudAnchor.bottom_left", "Bottom Left");
+        addConfig("hudAnchor.bottom_right", "Bottom Right");
+        addConfig("hudAnchor.top_left", "Top Left");
+        addConfig("hudAnchor.top_right", "Top Right");
+        addConfig("hudVisibility.always", "Always");
+        addConfig("hudVisibility.has_humours", "Has Humours");
+        addConfig("hudVisibility.never", "Never");
+        addConfig("hudValueFormat.current_max", "Current / Max");
+        addConfig("hudValueFormat.current_only", "Current Only");
+        addConfig("hudValueFormat.percentage", "Percentage");
+        addConfig("hudValuePosition.center", "Center");
+        addConfig("hudValuePosition.outside", "Outside");
+        addConfig("hudValuePosition.list_below", "List Below");
+        addConfig("hudValueVisibility.always", "Always");
+        addConfig("hudValueVisibility.has_value", "Has Value");
+        addConfig("hudValueVisibility.never", "Never");
     }
 
     public void Chinese() {
@@ -2907,17 +2924,34 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         addConfig("hudAnchor", "四体液HUD锚点",
             "决定四体液HUD锚定到屏幕的哪个角落");
         addConfig("hudVisibility", "四体液HUD显示条件",
-            "四体液HUD的显示条件：\nALWAYS=始终显示\nHAS_HUMOURS=仅当有任意体液时显示\nNEVER=从不显示");
+            "四体液HUD的显示条件：\n始终显示=一直显示\n拥有体液时=仅当有任意体液时显示\n从不显示=不显示HUD");
         addConfig("hudValueFormat", "四体液数值格式",
-            "数值显示格式：\nCURRENT_MAX=当前值/最大值\nCURRENT_ONLY=仅当前值\nPERCENTAGE=百分比");
+            "数值显示格式：\n当前值/最大值=50/100\n仅当前值=50\n百分比=50%");
         addConfig("hudValuePosition", "四体液数值位置",
-            "数值显示位置：\nCENTER=叠加在各菱形条中心\nOUTSIDE=显示在HUD四周外侧\nLIST_BELOW=在HUD下方逐行列出");
+            "数值显示位置：\n条内居中=叠加在各菱形条中心\nHUD外侧=显示在HUD四周外侧\n下方列表=在HUD下方逐行列出");
         addConfig("hudValueVisibility", "四体液数值显示条件",
-            "数值显示条件：\nALWAYS=始终显示\nHAS_VALUE=仅当该体液值>0时显示\nNEVER=从不显示数值");
+            "数值显示条件：\n始终显示=一直显示数值\n数值大于0时=仅当该体液值>0时显示\n从不显示=不显示数值");
         addConfig("hudValueColorLabel", "四体液数值颜色标签",
-            "在列表模式下用体液颜色代替字母标签：\ntrue=用颜色区分\nfalse=用字母前缀(B:/Y:/K:/P:)");
+            "在下方列表模式下用体液颜色代替字母标签：\ntrue=用颜色区分\nfalse=用字母前缀(B:/Y:/K:/P:)");
         addConfig("existenceDisplacerParticleCount", "存在置换器粒子数量",
             "存在置换器每个使用tick生成的附魔粒子数量，设为0可关闭");
+
+        addConfig("hudAnchor.bottom_left", "左下");
+        addConfig("hudAnchor.bottom_right", "右下");
+        addConfig("hudAnchor.top_left", "左上");
+        addConfig("hudAnchor.top_right", "右上");
+        addConfig("hudVisibility.always", "始终显示");
+        addConfig("hudVisibility.has_humours", "拥有体液时");
+        addConfig("hudVisibility.never", "从不显示");
+        addConfig("hudValueFormat.current_max", "当前值/最大值");
+        addConfig("hudValueFormat.current_only", "仅当前值");
+        addConfig("hudValueFormat.percentage", "百分比");
+        addConfig("hudValuePosition.center", "条内居中");
+        addConfig("hudValuePosition.outside", "HUD外侧");
+        addConfig("hudValuePosition.list_below", "下方列表");
+        addConfig("hudValueVisibility.always", "始终显示");
+        addConfig("hudValueVisibility.has_value", "数值大于0时");
+        addConfig("hudValueVisibility.never", "从不显示");
     }
 
     private void addOrganDescription(Supplier<Item> item, String... lines) {

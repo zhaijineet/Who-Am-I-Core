@@ -1,5 +1,17 @@
 # 更新日志 (Changelog)
 
+### 1.2.5
+
+- 剑骨头现被视作剑类武器：可附魔横扫之刃，并能快速破坏蜘蛛网等剑类方块
+- 诅咒金器官的饥饿、缓慢、虚弱惩罚效果现在会显示状态图标
+- 四体液HUD相关配置的选项现显示本地化名称
+
+---
+
+- Sword Bone is now treated as a sword: can be enchanted with Sweeping Edge and quickly breaks sword-efficient blocks like cobwebs
+- Cursed Gold organ penalties (Hunger, Slowness, Weakness) now show status icons
+- Humours HUD config options now display localized names
+
 ### 1.2.4
 
 - 风暴肋骨移除防御动态加成，仅保留游泳速度随粘液上限缩放

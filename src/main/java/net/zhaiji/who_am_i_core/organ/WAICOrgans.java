@@ -801,7 +801,10 @@ public class WAICOrgans {
     public static final Supplier<Item> SWORD_BONE = WAICItem.ITEM.register(
         "sword_bone",
         () -> Organ.builder(SwordBoneItem::new)
-            .properties(properties -> properties.attributes(SwordItem.createAttributes(Tiers.IRON, 3, -2.4F)))
+            .properties(properties -> properties
+                .attributes(SwordItem.createAttributes(Tiers.IRON, 3, -2.4F))
+                .component(DataComponents.TOOL, SwordItem.createToolProperties())
+            )
             .addValueAttribute(InitAttribute.NERVES, 1.5)
             .addValueAttribute(InitAttribute.DEFENSE, 0.75)
             .build()

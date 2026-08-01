@@ -4,12 +4,15 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.common.TranslatableEnum;
 import net.zhaiji.who_am_i_core.WhoAmICore;
 import net.zhaiji.who_am_i_core.attachment.HumoursData;
 import net.zhaiji.who_am_i_core.config.WhoAmIClientConfig;
 import net.zhaiji.who_am_i_core.register.WAICAttribute;
+import net.zhaiji.who_am_i_core.util.WAICTooltipUtil;
 
 public class HumoursOverlay {
     public static final ResourceLocation HUMOURS_HUD = WhoAmICore.of("humours_hud");
@@ -42,17 +45,18 @@ public class HumoursOverlay {
         Player player = minecraft.player;
         HumoursData data = HumoursData.get(player);
 
-        if (WhoAmIClientConfig.hudVisibility == HudVisibility.NEVER) return;
-        if (WhoAmIClientConfig.hudVisibility == HudVisibility.HAS_HUMOURS && data.isAllHumourEmpty()) return;
+        HudVisibility hudVisibility = WhoAmIClientConfig.HUD_VISIBILITY.get();
+        if (hudVisibility == HudVisibility.NEVER) return;
+        if (hudVisibility == HudVisibility.HAS_HUMOURS && data.isAllHumourEmpty()) return;
 
         int screenWidth = minecraft.getWindow().getGuiScaledWidth();
         int screenHeight = minecraft.getWindow().getGuiScaledHeight();
-        int x = WhoAmIClientConfig.hudX;
-        int y = WhoAmIClientConfig.hudY;
+        int x = WhoAmIClientConfig.HUD_X.get();
+        int y = WhoAmIClientConfig.HUD_Y.get();
         int baseX = x;
         int baseY = screenHeight - BG_SIZE + y;
 
-        switch (WhoAmIClientConfig.hudAnchor) {
+        switch (WhoAmIClientConfig.HUD_ANCHOR.get()) {
             case TOP_LEFT -> {
                 baseY = y;
             }
@@ -152,7 +156,7 @@ public class HumoursOverlay {
         float phlegm,
         float maxPhlegm
     ) {
-        if (WhoAmIClientConfig.hudValueVisibility == HudValueVisibility.NEVER) return;
+        if (WhoAmIClientConfig.HUD_VALUE_VISIBILITY.get() == HudValueVisibility.NEVER) return;
 
         boolean showBlood = shouldShow(blood);
         boolean showYellowBile = shouldShow(yellowBile);
@@ -164,15 +168,29 @@ public class HumoursOverlay {
         String blackBileText = formatValue(blackBile, maxBlackBile);
         String phlegmText = formatValue(phlegm, maxPhlegm);
 
-        switch (WhoAmIClientConfig.hudValuePosition) {
+        switch (WhoAmIClientConfig.HUD_VALUE_POSITION.get()) {
             case CENTER -> {
-                if (WhoAmIClientConfig.hudValueFormat == HudValueFormat.CURRENT_MAX) {
+                if (WhoAmIClientConfig.HUD_VALUE_FORMAT.get() == HudValueFormat.CURRENT_MAX) {
                     guiGraphics.pose().pushPose();
                     guiGraphics.pose().scale(0.75F, 0.75F, 1F);
                     float inv = 1F / 0.75F;
                     drawCentered(guiGraphics, font, Math.round((baseX + 17) * inv), Math.round((baseY + 33) * inv), bloodText, showBlood);
-                    drawCentered(guiGraphics, font, Math.round((baseX + 33) * inv), Math.round((baseY + 17) * inv), yellowBileText, showYellowBile);
-                    drawCentered(guiGraphics, font, Math.round((baseX + 49) * inv), Math.round((baseY + 33) * inv), blackBileText, showBlackBile);
+                    drawCentered(
+                        guiGraphics,
+                        font,
+                        Math.round((baseX + 33) * inv),
+                        Math.round((baseY + 17) * inv),
+                        yellowBileText,
+                        showYellowBile
+                    );
+                    drawCentered(
+                        guiGraphics,
+                        font,
+                        Math.round((baseX + 49) * inv),
+                        Math.round((baseY + 33) * inv),
+                        blackBileText,
+                        showBlackBile
+                    );
                     drawCentered(guiGraphics, font, Math.round((baseX + 33) * inv), Math.round((baseY + 49) * inv), phlegmText, showPhlegm);
                     guiGraphics.pose().popPose();
                 } else {
@@ -212,11 +230,11 @@ public class HumoursOverlay {
     }
 
     private static boolean shouldShow(float current) {
-        return WhoAmIClientConfig.hudValueVisibility != HudValueVisibility.HAS_VALUE || current > 0;
+        return WhoAmIClientConfig.HUD_VALUE_VISIBILITY.get() != HudValueVisibility.HAS_VALUE || current > 0;
     }
 
     private static String formatValue(float current, float maximum) {
-        return switch (WhoAmIClientConfig.hudValueFormat) {
+        return switch (WhoAmIClientConfig.HUD_VALUE_FORMAT.get()) {
             case CURRENT_MAX -> Math.round(current) + "/" + Math.round(maximum);
             case CURRENT_ONLY -> String.valueOf(Math.round(current));
             case PERCENTAGE -> maximum <= 0 ? "0%" : Math.round(current / maximum * 100) + "%";
@@ -272,7 +290,7 @@ public class HumoursOverlay {
         String label
     ) {
         if (!show) return x;
-        if (WhoAmIClientConfig.hudValueColorLabel) {
+        if (WhoAmIClientConfig.HUD_VALUE_COLOR_LABEL.get()) {
             guiGraphics.drawString(font, text, x, y, color);
             return x + font.width(text) + 4;
         } else {
@@ -308,41 +326,66 @@ public class HumoursOverlay {
     }
 
     private static int entryWidth(Font font, String text, String label) {
-        if (WhoAmIClientConfig.hudValueColorLabel) {
+        if (WhoAmIClientConfig.HUD_VALUE_COLOR_LABEL.get()) {
             return font.width(text);
         } else {
             return font.width(label + ": " + text);
         }
     }
 
-    public enum HudAnchor {
+    public enum HudAnchor implements TranslatableEnum {
         BOTTOM_LEFT,
         BOTTOM_RIGHT,
         TOP_LEFT,
-        TOP_RIGHT
+        TOP_RIGHT;
+
+        @Override
+        public Component getTranslatedName() {
+            return WAICTooltipUtil.configEnumTranslation("hudAnchor", this);
+        }
     }
 
-    public enum HudVisibility {
+    public enum HudVisibility implements TranslatableEnum {
         ALWAYS,
         HAS_HUMOURS,
-        NEVER
+        NEVER;
+
+        @Override
+        public Component getTranslatedName() {
+            return WAICTooltipUtil.configEnumTranslation("hudVisibility", this);
+        }
     }
 
-    public enum HudValueFormat {
+    public enum HudValueFormat implements TranslatableEnum {
         CURRENT_MAX,
         CURRENT_ONLY,
-        PERCENTAGE
+        PERCENTAGE;
+
+        @Override
+        public Component getTranslatedName() {
+            return WAICTooltipUtil.configEnumTranslation("hudValueFormat", this);
+        }
     }
 
-    public enum HudValuePosition {
+    public enum HudValuePosition implements TranslatableEnum {
         CENTER,
         OUTSIDE,
-        LIST_BELOW
+        LIST_BELOW;
+
+        @Override
+        public Component getTranslatedName() {
+            return WAICTooltipUtil.configEnumTranslation("hudValuePosition", this);
+        }
     }
 
-    public enum HudValueVisibility {
+    public enum HudValueVisibility implements TranslatableEnum {
         ALWAYS,
         HAS_VALUE,
-        NEVER
+        NEVER;
+
+        @Override
+        public Component getTranslatedName() {
+            return WAICTooltipUtil.configEnumTranslation("hudValueVisibility", this);
+        }
     }
 }

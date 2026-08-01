@@ -157,7 +157,8 @@ public class ExistenceDisplacerItem extends Item {
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (level.isClientSide()) {
-            for (int i = 0; i < WhoAmIClientConfig.existenceDisplacerParticleCount; i++) {
+            int particleCount = WhoAmIClientConfig.EXISTENCE_DISPLACER_PARTICLE_COUNT.get();
+            for (int i = 0; i < particleCount; i++) {
                 level.addParticle(
                     ParticleTypes.ENCHANT,
                     livingEntity.getX() + (level.random.nextDouble() - 0.5) * 10.0,

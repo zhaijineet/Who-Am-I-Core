@@ -374,6 +374,7 @@ public class ItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(ItemTagManager.BONE).add(WAICOrgans.SWORD_BONE.get());
         tag(ItemTags.SWORD_ENCHANTABLE).add(WAICOrgans.SWORD_BONE.get());
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).add(WAICOrgans.SWORD_BONE.get());
+        tag(ItemTags.SWORDS).add(WAICOrgans.SWORD_BONE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.STRAIGHT_INTESTINE.get());
         tag(WAICItemTagManager.UNIQUE).add(WAICOrgans.STRAIGHT_INTESTINE.get());
         tag(ItemTagManager.SPECIAL).add(WAICOrgans.SQUASH.get());

@@ -298,7 +298,7 @@ public class AnvilCraftOrganUtil {
             }
         }
         if (newAmplifier >= 0) {
-            entity.addEffect(new MobEffectInstance(effect, duration, newAmplifier, false, false));
+            entity.addEffect(new MobEffectInstance(effect, duration, newAmplifier, false, false, true));
         }
     }
 
