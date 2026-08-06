@@ -1,5 +1,23 @@
 # 更新日志 (Changelog)
 
+### 1.2.6
+
+- 神圣灵魂碎片现仅能浸泡火龙血制成火龙血药剂
+- 闪电核心与正义核心现仅产出电龙血药剂，冰火核心不再产出电龙血药剂
+- 风暴精华新增可浸泡电龙血制成电龙血药剂
+- 新增遗忘酊剂可浸泡冰龙血制成冰龙血药剂
+- 新增远古遗金可浸泡火龙血、冰龙血制成对应龙血药剂
+- 铁魔法前置更新至 3.16.2
+
+---
+
+- Divine Soulshard can now only be soaked in fire dragon blood to craft Fire Dragon Blood Preparation
+- Lightning Core and Justice Core now only craft Lightning Dragon Blood Preparation, and Fire and Ice Core no longer crafts Lightning Dragon Blood Preparation
+- Essence of the Storm can now be soaked in lightning dragon blood to craft Lightning Dragon Blood Preparation
+- Added Tincture of Forgetfulness, soakable in ice dragon blood to craft Ice Dragon Blood Preparation
+- Added Relic Gold, soakable in fire or ice dragon blood to craft the corresponding preparations
+- Iron's Spells 'n Spellbooks prerequisite updated to 3.16.2
+
 ### 1.2.5
 
 - 剑骨头现被视作剑类武器：可附魔横扫之刃，并能快速破坏蜘蛛网等剑类方块

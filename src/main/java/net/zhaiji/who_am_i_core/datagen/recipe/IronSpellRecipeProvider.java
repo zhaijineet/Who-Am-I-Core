@@ -5,6 +5,7 @@ import com.github.L_Ender.cataclysm.init.ModItems;
 import com.github.tartaricacid.touhoulittlemaid.init.InitItems;
 import com.iafenvoy.iceandfire.registry.IafItems;
 import dev.dubhe.anvilcraft.init.block.ModFluids;
+import dev.xylonity.companions.registry.CompanionsItems;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.BrewAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.EmptyAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.FillAlchemistCauldronRecipe;
@@ -52,7 +53,7 @@ public class IronSpellRecipeProvider extends RecipeProvider {
         dragonBloodFluidRecipes(recipeOutput);
     }
 
-    // 龙血药剂：龙血倒入锅形成流体，再用灾变掉落物浸泡制成药剂
+    // 龙血药剂：龙血倒入锅形成流体，再用对应试剂浸泡制成药剂
     private void dragonBloodFluidRecipes(RecipeOutput output) {
         fillDragonBlood(
             output,
@@ -92,110 +93,110 @@ public class IronSpellRecipeProvider extends RecipeProvider {
             "lightning_dragon_blood"
         );
 
-        String fireName = BuiltInRegistries.ITEM.getKey(WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()).getPath();
         brewDragonBloodPreparation(
             output,
             WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
             ModItems.MONSTROUS_HORN.get(),
-            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get(),
-            fireName,
-            "monstrous_horn"
+            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()
         );
         brewDragonBloodPreparation(
             output,
             WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
             ModItems.IGNITIUM_INGOT.get(),
-            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get(),
-            fireName,
-            "ignitium_ingot"
+            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()
         );
         brewDragonBloodPreparation(
             output,
             WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
             ModItems.SANDSTORM_IN_A_BOTTLE.get(),
-            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get(),
-            fireName,
-            "sandstorm_in_a_bottle"
+            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
+            BossItems.FIRE_AND_ICE_CORE.get(),
+            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
+            ItemRegistry.DIVINE_SOULSHARD.get(),
+            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
+            CompanionsItems.RELIC_GOLD.get(),
+            WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get()
         );
 
-        String iceName = BuiltInRegistries.ITEM.getKey(WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()).getPath();
         brewDragonBloodPreparation(
             output,
             WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
             ModItems.TIDAL_CLAWS.get(),
-            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get(),
-            iceName,
-            "tidal_claws"
+            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()
         );
         brewDragonBloodPreparation(
             output,
             WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
             ModItems.CURSIUM_INGOT.get(),
-            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get(),
-            iceName,
-            "cursium_ingot"
+            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()
         );
         brewDragonBloodPreparation(
             output,
             WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
             ModItems.ESSENCE_OF_THE_STORM.get(),
-            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get(),
-            iceName,
-            "essence_of_the_storm"
+            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
+            BossItems.FIRE_AND_ICE_CORE.get(),
+            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
+            ItemRegistry.TINCTURE_OF_FORGETFULNESS.get(),
+            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
+            CompanionsItems.RELIC_GOLD.get(),
+            WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get()
         );
 
-        String lightningName = BuiltInRegistries.ITEM.getKey(WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get()).getPath();
         brewDragonBloodPreparation(
             output,
             WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
             ModItems.WITHERITE_INGOT.get(),
-            WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get(),
-            lightningName,
-            "witherite_ingot"
+            WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get()
         );
         brewDragonBloodPreparation(
             output,
             WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
             ModItems.GAUNTLET_OF_GUARD.get(),
-            WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get(),
-            lightningName,
-            "gauntlet_of_guard"
+            WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get()
         );
-
-        // 任意核心或神圣灵魂碎片浸泡任意龙血流体制成对应龙血药剂
-        Item[] reagents = {
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
+            ModItems.ESSENCE_OF_THE_STORM.get(),
+            WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
             BossItems.LIGHTNING_CORE.get(),
-            BossItems.FIRE_AND_ICE_CORE.get(),
+            WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get()
+        );
+        brewDragonBloodPreparation(
+            output,
+            WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
             BossItems.JUSTICE_CORE.get(),
-            ItemRegistry.DIVINE_SOULSHARD.get()
-        };
-        for (Item reagent : reagents) {
-            String reagentName = BuiltInRegistries.ITEM.getKey(reagent).getPath();
-            brewDragonBloodPreparation(
-                output,
-                WAICFluid.FIRE_DRAGON_BLOOD_FLUID.get(),
-                reagent,
-                WAICItem.FIRE_DRAGON_BLOOD_PREPARATION.get(),
-                fireName,
-                reagentName
-            );
-            brewDragonBloodPreparation(
-                output,
-                WAICFluid.ICE_DRAGON_BLOOD_FLUID.get(),
-                reagent,
-                WAICItem.ICE_DRAGON_BLOOD_PREPARATION.get(),
-                iceName,
-                reagentName
-            );
-            brewDragonBloodPreparation(
-                output,
-                WAICFluid.LIGHTNING_DRAGON_BLOOD_FLUID.get(),
-                reagent,
-                WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get(),
-                lightningName,
-                reagentName
-            );
-        }
+            WAICItem.LIGHTNING_DRAGON_BLOOD_PREPARATION.get()
+        );
     }
 
     /**
@@ -221,16 +222,16 @@ public class IronSpellRecipeProvider extends RecipeProvider {
     }
 
     /**
-     * 炼金锅 Brew 浸泡配方：250mb 龙血流体 + 灾变掉落物 → 龙血药剂制备物
+     * 炼金锅 Brew 浸泡配方：250mb 龙血流体 + 试剂 → 龙血药剂制备物
      */
     private void brewDragonBloodPreparation(
         RecipeOutput output,
         Fluid dragonBloodFluid,
         Item reagent,
-        Item result,
-        String resultName,
-        String reagentName
+        Item result
     ) {
+        String resultName = BuiltInRegistries.ITEM.getKey(result).getPath();
+        String reagentName = BuiltInRegistries.ITEM.getKey(reagent).getPath();
         BrewAlchemistCauldronRecipe.builder()
             .withInput(new FluidStack(dragonBloodFluid, 250))
             .withReagent(reagent)

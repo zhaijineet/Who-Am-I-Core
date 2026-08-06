@@ -185,7 +185,7 @@ dependencies {
     // knight lib
     implementation "curse.maven:knight-lib-1105855:8400701"
     // iron lib
-    implementation "curse.maven:irons-lib-1492763:7907336"
+    implementation "curse.maven:irons-lib-1492763:8364894"
     // anvil lib
     implementation("dev.anvilcraft.lib:anvillib-neoforge-1.21.1:1.4.0+build.188")
 
@@ -203,7 +203,7 @@ dependencies {
     // 逆卡巴拉(FDBosses)
     implementation "curse.maven:qliphoth-awakening-1271707:8373639"
     // 铁魔法
-    implementation "curse.maven:irons-spells-n-spellbooks-855414:7907341"
+    implementation "curse.maven:irons-spells-n-spellbooks-855414:8364935"
     // AnvilCraft
     implementation("dev.dubhe:anvilcraft-neoforge-1.21.1:1.5.5") { transitive = false }
     // 车万女仆
