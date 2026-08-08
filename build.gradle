@@ -209,7 +209,7 @@ dependencies {
     // 车万女仆
     implementation "curse.maven:touhou-little-maid-355044:8061852"
     // 同伴！
-    implementation "curse.maven:companions-mod-1300341:8305793"
+    implementation "curse.maven:companions-mod-1300341:8598220"
     // 强力假人
     runtimeOnly "curse.maven:powerful-dummy-1276893:8232901"
 

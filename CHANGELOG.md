@@ -1,5 +1,13 @@
 # 更新日志 (Changelog)
 
+### 1.2.7
+
+- 暗影胸腔中的结晶之血替换为大精华
+
+---
+
+- Crystallized Blood in the Shade Chest Cavity replaced with Great Essence
+
 ### 1.2.6
 
 - 神圣灵魂碎片现仅能浸泡火龙血制成火龙血药剂

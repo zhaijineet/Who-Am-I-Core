@@ -1,7 +1,7 @@
 package net.zhaiji.who_am_i_core.manager;
 
 import dev.xylonity.companions.registry.CompanionsEntities;
-import dev.xylonity.companions.registry.CompanionsItems;
+import dev.xylonity.knightlib.registry.KnightLibItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.zhaiji.chestcavitybeyond.api.ChestCavityType;
@@ -107,8 +107,8 @@ public class CompanionsChestCavityTypeManager {
 
     // 暗影胸腔
     public static final ChestCavityType SHADE = register("shade")
-        .setSecondRow(4, CompanionsItems.CRYSTALLIZED_BLOOD.get())
-        .addValueBonuses(CompanionsItems.CRYSTALLIZED_BLOOD.get(), Map.of(
+        .setSecondRow(4, KnightLibItems.GREAT_ESSENCE.get())
+        .addValueBonuses(KnightLibItems.GREAT_ESSENCE.get(), Map.of(
             InitAttribute.HEALTH, 1.0,
             InitAttribute.NERVES, 1.0,
             InitAttribute.BREATH_CAPACITY, 1.0,
